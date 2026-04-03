@@ -1,8 +1,8 @@
 import { ImageResponse } from "next/og";
 
-async function loadAssets(): Promise<
+const loadAssets = async (): Promise<
   { name: string; data: Buffer; weight: 400 | 600; style: "normal" }[]
-> {
+> => {
   const [
     { base64Font: normal },
     { base64Font: mono },
@@ -33,14 +33,14 @@ async function loadAssets(): Promise<
       weight: 600 as const,
     },
   ];
-}
+};
 
-export async function GET(request: Request) {
+export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get("title");
   const description = searchParams.get("description");
 
-  const [fonts] = await Promise.all([loadAssets()]);
+  const fonts = await loadAssets();
 
   return new ImageResponse(
     <div
@@ -112,4 +112,4 @@ export async function GET(request: Request) {
       width: 1200,
     }
   );
-}
+};

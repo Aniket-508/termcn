@@ -18,13 +18,11 @@ export const revalidate = false;
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  return source.generateParams();
-}
+export const generateStaticParams = () => source.generateParams();
 
-export async function generateMetadata(props: {
+export const generateMetadata = async (props: {
   params: Promise<{ slug?: string[] }>;
-}) {
+}) => {
   const params = await props.params;
   const page = source.getPage(params.slug);
 
@@ -44,11 +42,9 @@ export async function generateMetadata(props: {
     path: page.url,
     title: doc.title,
   });
-}
+};
 
-export default async function Page(props: {
-  params: Promise<{ slug?: string[] }>;
-}) {
+const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
   const params = await props.params;
   const page = source.getPage(params.slug);
   if (!page) {
@@ -56,7 +52,7 @@ export default async function Page(props: {
   }
 
   const doc = page.data;
-  const MDX = doc.body;
+  const MdxContent = doc.body;
   const neighbours = await findNeighbour(source.pageTree, page.url);
 
   const { links } = doc as { links?: { doc?: string; api?: string } };
@@ -102,7 +98,7 @@ export default async function Page(props: {
             ) : null}
           </div>
           <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-            <MDX components={mdxComponents} />
+            <MdxContent components={mdxComponents} />
           </div>
         </div>
         <div className="mx-auto hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-0">
@@ -143,4 +139,6 @@ export default async function Page(props: {
       </div>
     </div>
   );
-}
+};
+
+export default Page;
