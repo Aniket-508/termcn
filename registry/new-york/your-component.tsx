@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 
 import { cn } from "@/lib/utils";
 
-export interface YourComponentProps extends HTMLAttributes<HTMLDivElement> {}
+export type YourComponentProps = HTMLAttributes<HTMLDivElement>;
 
 /**
  * 🚀 YOUR COMPONENT TEMPLATE
