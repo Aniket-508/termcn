@@ -1,4 +1,4 @@
-import va from "@vercel/analytics";
+import { track } from "@vercel/analytics";
 
 type EventName =
   | "copy_npm_command"
@@ -20,6 +20,6 @@ export interface Event {
   properties?: Record<string, string | number | boolean | null>;
 }
 
-export function trackEvent(input: Event): void {
-  va.track(input.name, input.properties);
-}
+export const trackEvent = (input: Event): void => {
+  track(input.name, input.properties);
+};

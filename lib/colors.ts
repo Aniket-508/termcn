@@ -18,20 +18,32 @@ export interface ColorPalette {
   colors: ColorItem[];
 }
 
-export function getColorFormat(color: Color) {
-  return {
-    className: `bg-${color.name}-100`,
-    hex: color.hex,
-    hsl: color.hsl,
-    oklch: color.oklch,
-    rgb: color.rgb,
-    var: `--color-${color.name}-${color.scale}`,
-  };
-}
+export const getColorFormat = (color: Color) => ({
+  className: `bg-${color.name}-100`,
+  hex: color.hex,
+  hsl: color.hsl,
+  oklch: color.oklch,
+  rgb: color.rgb,
+  var: `--color-${color.name}-${color.scale}`,
+});
 
 export type ColorFormat = keyof ReturnType<typeof getColorFormat>;
 
-export function getColors(): ColorPalette[] {
+const toLinear = (number: number): number => {
+  const base = number / 255;
+  return base <= 0.040_45 ? base / 12.92 : ((base + 0.055) / 1.055) ** 2.4;
+};
+
+const getForegroundFromBackground = (rgb: string) => {
+  const [r, g, b] = rgb.split(" ").map(Number);
+
+  const luminance =
+    0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+
+  return luminance > 0.179 ? "#000" : "#fff";
+};
+
+export const getColors = (): ColorPalette[] => {
   const tailwindColors = Object.entries(colors)
     .map(([name, color]) => {
       if (!Array.isArray(color)) {
@@ -66,20 +78,6 @@ export function getColors(): ColorPalette[] {
     .filter((item): item is ColorPalette => item !== null);
 
   return tailwindColors;
-}
+};
 
 export type Color = ReturnType<typeof getColors>[number]["colors"][number];
-
-function getForegroundFromBackground(rgb: string) {
-  const [r, g, b] = rgb.split(" ").map(Number);
-
-  function toLinear(number: number): number {
-    const base = number / 255;
-    return base <= 0.040_45 ? base / 12.92 : ((base + 0.055) / 1.055) ** 2.4;
-  }
-
-  const luminance =
-    0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
-
-  return luminance > 0.179 ? "#000" : "#fff";
-}
