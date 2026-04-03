@@ -6,14 +6,14 @@ export const META_THEME_COLORS = {
   light: "#ffffff",
 };
 
-export function useMetaColor() {
+export const useMetaColor = () => {
   const { resolvedTheme } = useTheme();
 
   const metaColor = React.useMemo(
     () =>
-      resolvedTheme !== "dark"
-        ? META_THEME_COLORS.light
-        : META_THEME_COLORS.dark,
+      resolvedTheme === "dark"
+        ? META_THEME_COLORS.dark
+        : META_THEME_COLORS.light,
     [resolvedTheme]
   );
 
@@ -27,4 +27,4 @@ export function useMetaColor() {
     metaColor,
     setMetaColor,
   };
-}
+};

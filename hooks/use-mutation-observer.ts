@@ -1,14 +1,16 @@
 import * as React from "react";
 
+const DEFAULT_MUTATION_OBSERVER_OPTIONS: MutationObserverInit = {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true,
+};
+
 export const useMutationObserver = (
   ref: React.RefObject<HTMLElement | null>,
   callback: MutationCallback,
-  options: MutationObserverInit = {
-    attributes: true,
-    characterData: true,
-    childList: true,
-    subtree: true,
-  }
+  options: MutationObserverInit = DEFAULT_MUTATION_OBSERVER_OPTIONS
 ) => {
   React.useEffect(() => {
     if (ref.current) {

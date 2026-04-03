@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useIsMac() {
+export const useIsMac = () => {
   const [isMac, setIsMac] = useState(true);
 
   useEffect(() => {
@@ -8,4 +8,4 @@ export function useIsMac() {
   }, []);
 
   return isMac;
-}
+};

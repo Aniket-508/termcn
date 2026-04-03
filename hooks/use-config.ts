@@ -13,6 +13,4 @@ const configAtom = atomWithStorage<Config>("config", {
   style: "new-york-v4",
 });
 
-export function useConfig() {
-  return useAtom(configAtom);
-}
+export const useConfig = () => useAtom(configAtom);
