@@ -1,0 +1,19 @@
+{
+  "name": "termcn/ui",
+  "homepage": "https://termcn.vercel.app",
+  "items": [
+    {
+      "name": "your-component",
+      "type": "registry:ui",
+      "title": "Your Component",
+      "description": "A placeholder registry component. Replace with your own UI block.",
+      "files": [
+        {
+          "path": "registry/new-york/your-component.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/your-component.tsx"
+        }
+      ]
+    }
+  ]
+}

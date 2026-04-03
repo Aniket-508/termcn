@@ -1,0 +1,35 @@
+# termcn
+
+> A shadcn-compatible component registry built with Next.js.
+
+## What is this?
+
+termcn is a project for publishing custom UI components that consumers can install with the shadcn CLI (`npx shadcn add`). It includes documentation, a landing page, and a build step that emits registry JSON.
+
+## How it works
+
+1. Edit components under `registry/new-york/`
+2. List them in `registry.json`
+3. Run `pnpm registry:build`
+4. Deploy; share `https://your-site.com/r/<item>.json` URLs
+
+## Installation (for consumers)
+
+```bash
+npx shadcn@latest add https://your-site.com/r/your-component.json
+```
+
+## Links
+
+- Documentation: https://termcn.vercel.app/docs
+- GitHub: https://github.com/termcn/termcn
+- shadcn registry format: https://ui.shadcn.com/docs/registry
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Fumadocs
+- shadcn CLI / registry format

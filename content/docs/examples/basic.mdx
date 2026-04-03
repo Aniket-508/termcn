@@ -1,0 +1,22 @@
+---
+title: Basic Usage
+description: Basic usage of the YourComponent template.
+---
+
+
+## About
+
+This is the default state of the template component. When you fork this repository, you should replace `YourComponent` with your actual component implementation.
+
+
+`YourComponent` displays a placeholder message.
+
+import { YourComponent } from "@/registry/new-york/your-component"
+
+export const yourComponentCode = `import { YourComponent } from "@/components/ui/your-component"
+
+export function MyComponent() {
+  return <YourComponent />
+}`
+
+<CodeBlock __ts__={yourComponentCode} preview={<YourComponent />} />

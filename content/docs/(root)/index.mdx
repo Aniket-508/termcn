@@ -1,0 +1,64 @@
+---
+title: Introduction
+description: termcn — publish shadcn-compatible components from your own registry.
+---
+
+**termcn** helps you run a custom [shadcn-style registry](https://ui.shadcn.com/docs/registry): you own the component source, and users install with `npx shadcn add`.
+
+## What You Get
+
+- **Simple layout** — Components in `registry/new-york/` plus `registry.json`
+- **Documentation** — Fumadocs
+- **CLI compatible** — Standard registry JSON under `public/r/`
+- **Deploy ready** — Next.js app + static registry artifacts
+
+## How It Works
+
+1. Edit your component at `registry/new-york/your-component.tsx`
+2. Update `registry.json` with names and file paths
+3. Run `pnpm registry:build`
+
+Deploy the site; share install URLs:
+
+```bash
+npx shadcn@latest add https://your-site.com/r/your-component.json
+```
+
+## FAQ
+
+<Accordion type="multiple">
+
+<AccordionItem value="faq-1">
+<AccordionTrigger>
+Why copy/paste instead of npm packages?
+</AccordionTrigger>
+<AccordionContent>
+
+The shadcn workflow favors **owning** the code in your app so you can change primitives, styling, and behavior without waiting on package releases.
+
+</AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="faq-2">
+<AccordionTrigger>
+Which frameworks are supported?
+</AccordionTrigger>
+<AccordionContent>
+
+Any React setup the shadcn CLI supports (Next.js, Vite, etc.), per [upstream docs](https://ui.shadcn.com/docs).
+
+</AccordionContent>
+</AccordionItem>
+
+<AccordionItem value="faq-3">
+<AccordionTrigger>
+Can I publish multiple components?
+</AccordionTrigger>
+<AccordionContent>
+
+Yes. Add more files under `registry/new-york/` and register each item in `registry.json`.
+
+</AccordionContent>
+</AccordionItem>
+
+</Accordion>
