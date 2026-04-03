@@ -1,13 +1,13 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next";
 
-import { siteConfig, siteKeywords } from "@/lib/config"
+import { siteConfig, siteKeywords } from "@/lib/config";
 
 export interface CreatePageMetadataOptions {
-  description: string
-  noIndex?: boolean
-  ogType?: "article" | "website"
-  path: string
-  title: string
+  description: string;
+  noIndex?: boolean;
+  ogType?: "article" | "website";
+  path: string;
+  title: string;
 }
 
 /**
@@ -16,13 +16,13 @@ export interface CreatePageMetadataOptions {
 export function createPageMetadata(
   options: CreatePageMetadataOptions
 ): Metadata {
-  const { description, noIndex, ogType = "website", path, title } = options
-  const pathname = path.startsWith("/") ? path : `/${path}`
-  const ogImageUrl = `/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`
+  const { description, noIndex, ogType = "website", path, title } = options;
+  const pathname = path.startsWith("/") ? path : `/${path}`;
+  const ogImageUrl = `/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
   const pageUrl =
     pathname === "/"
       ? siteConfig.url
-      : `${siteConfig.url.replace(/\/$/, "")}${pathname}`
+      : `${siteConfig.url.replace(/\/$/, "")}${pathname}`;
 
   return {
     alternates: {
@@ -51,7 +51,7 @@ export function createPageMetadata(
           },
         }
       : {}),
-  }
+  };
 }
 
 const defaultOgImage = {
@@ -59,7 +59,7 @@ const defaultOgImage = {
   height: 630,
   url: siteConfig.ogImage,
   width: 1200,
-}
+};
 
 export const baseMetadata: Metadata = {
   applicationName: siteConfig.name,
@@ -95,4 +95,4 @@ export const baseMetadata: Metadata = {
     images: [siteConfig.ogImage],
     title: siteConfig.name,
   },
-}
+};

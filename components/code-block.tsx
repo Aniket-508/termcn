@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { CodeIcon } from "lucide-react"
-import * as React from "react"
+import { CodeIcon } from "lucide-react";
+import * as React from "react";
 
-import { CopyButton } from "@/components/copy-button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useConfig } from "@/hooks/use-config"
+import { CopyButton } from "@/components/copy-button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useConfig } from "@/hooks/use-config";
 
 interface CodeBlockProps extends React.ComponentProps<"pre"> {
-  __npm__?: string
-  __yarn__?: string
-  __pnpm__?: string
-  __bun__?: string
-  __ts__?: string
-  preview?: React.ReactNode
+  __npm__?: string;
+  __yarn__?: string;
+  __pnpm__?: string;
+  __bun__?: string;
+  __ts__?: string;
+  preview?: React.ReactNode;
 }
 
 export function CodeBlock({
@@ -24,47 +24,50 @@ export function CodeBlock({
   __ts__,
   preview,
 }: CodeBlockProps) {
-  const [config, setConfig] = useConfig()
+  const [config, setConfig] = useConfig();
   const [highlightedCode, setHighlightedCode] = React.useState<string | null>(
     null
-  )
+  );
 
-  const isCommandMode = Boolean(__npm__ || __yarn__ || __pnpm__ || __bun__)
-  const isCodeMode = Boolean(__ts__)
+  const isCommandMode = Boolean(__npm__ || __yarn__ || __pnpm__ || __bun__);
+  const isCodeMode = Boolean(__ts__);
 
   React.useEffect(() => {
-    if (!__ts__) return
+    if (!__ts__) {
+      return;
+    }
     async function highlight() {
-      const { codeToHtml } = await import("shiki")
+      const { codeToHtml } = await import("shiki");
       const html = await codeToHtml(__ts__!, {
+        defaultColor: false,
         lang: "tsx",
         themes: {
           dark: "github-dark",
           light: "github-light",
         },
-        defaultColor: false,
-      })
-      setHighlightedCode(html)
+      });
+      setHighlightedCode(html);
     }
-    highlight()
-  }, [__ts__])
+    highlight();
+  }, [__ts__]);
 
-  const packageManager = config.packageManager || "pnpm"
-  const commandTabs = React.useMemo(() => {
-    return {
-      pnpm: __pnpm__,
-      npm: __npm__,
-      yarn: __yarn__,
+  const packageManager = config.packageManager || "pnpm";
+  const commandTabs = React.useMemo(
+    () => ({
       bun: __bun__,
-    }
-  }, [__npm__, __pnpm__, __yarn__, __bun__])
+      npm: __npm__,
+      pnpm: __pnpm__,
+      yarn: __yarn__,
+    }),
+    [__npm__, __pnpm__, __yarn__, __bun__]
+  );
 
   const copyValue = React.useMemo(() => {
     if (isCommandMode) {
-      return commandTabs[packageManager] || ""
+      return commandTabs[packageManager] || "";
     }
-    return __ts__ || ""
-  }, [isCommandMode, commandTabs, packageManager, __ts__])
+    return __ts__ || "";
+  }, [isCommandMode, commandTabs, packageManager, __ts__]);
 
   // Command mode: pnpm/npm/yarn/bun tabs
   if (isCommandMode) {
@@ -77,7 +80,7 @@ export function CodeBlock({
             setConfig({
               ...config,
               packageManager: value as "pnpm" | "npm" | "yarn" | "bun",
-            })
+            });
           }}
         >
           <div className="border-border/50 flex items-center gap-2 border-b px-3 py-1">
@@ -113,7 +116,7 @@ export function CodeBlock({
           className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
         />
       </div>
-    )
+    );
   }
 
   // Code mode with optional preview: Preview/Code tabs
@@ -153,7 +156,7 @@ export function CodeBlock({
           className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
         />
       </div>
-    )
+    );
   }
 
   // Code mode without preview: just show code
@@ -174,18 +177,18 @@ export function CodeBlock({
           className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
         />
       </div>
-    )
+    );
   }
 
-  return null
+  return null;
 }
 
 function CodeContent({
   code,
   highlightedCode,
 }: {
-  code: string
-  highlightedCode: string | null
+  code: string;
+  highlightedCode: string | null;
 }) {
   if (highlightedCode) {
     return (
@@ -193,11 +196,11 @@ function CodeContent({
         className="max-h-[400px] overflow-auto text-sm [&_pre]:bg-transparent! [&_code]:block [&_span]:text-(--shiki-light) dark:[&_span]:text-(--shiki-dark)"
         dangerouslySetInnerHTML={{ __html: highlightedCode }}
       />
-    )
+    );
   }
   return (
     <pre>
       <code className="relative font-mono text-sm leading-none">{code}</code>
     </pre>
-  )
+  );
 }

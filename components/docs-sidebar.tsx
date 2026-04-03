@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   Sidebar,
@@ -15,14 +15,14 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
-import { type DocsConfig } from "@/lib/docs"
+} from "@/components/ui/sidebar";
+import type { DocsConfig } from "@/lib/docs";
 
 export function DocsSidebar({
   tree,
   ...props
 }: React.ComponentProps<typeof Sidebar> & { tree: DocsConfig["sidebarNav"] }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <Sidebar
@@ -39,41 +39,39 @@ export function DocsSidebar({
             </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu className="gap-0.5">
-                {item.items.map((item) => {
-                  return (
-                    <SidebarMenuItem key={item.href}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={item.href === pathname}
-                        className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
-                      >
-                        <Link href={item.href ?? ""}>{item.title}</Link>
-                      </SidebarMenuButton>
-                      {item.items?.length ? (
-                        <SidebarMenuSub>
-                          {item.items.map((item) => (
-                            <SidebarMenuSubItem key={item.title}>
-                              <SidebarMenuSubButton
-                                asChild
-                                isActive={item.href === pathname}
-                                className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
-                              >
-                                <Link href={item.href ?? ""}>{item.title}</Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
-                        </SidebarMenuSub>
-                      ) : null}
-                    </SidebarMenuItem>
-                  )
-                })}
+                {item.items.map((item) => (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={item.href === pathname}
+                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
+                    >
+                      <Link href={item.href ?? ""}>{item.title}</Link>
+                    </SidebarMenuButton>
+                    {item.items?.length ? (
+                      <SidebarMenuSub>
+                        {item.items.map((item) => (
+                          <SidebarMenuSubItem key={item.title}>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={item.href === pathname}
+                              className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
+                            >
+                              <Link href={item.href ?? ""}>{item.title}</Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    ) : null}
+                  </SidebarMenuItem>
+                ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
       </SidebarContent>
     </Sidebar>
-  )
+  );
 
   // return (
   //   <Sidebar

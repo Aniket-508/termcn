@@ -1,17 +1,17 @@
-import { PackageIcon } from "lucide-react"
-import Link from "next/link"
+import { PackageIcon } from "lucide-react";
+import Link from "next/link";
 
-import { CommandMenu } from "@/components/command-menu"
-import { GitHubLink } from "@/components/github-link"
-import { MainNav } from "@/components/main-nav"
-import { MobileNav } from "@/components/mobile-nav"
-import { ModeSwitcher } from "@/components/mode-switcher"
-import { Button } from "@/components/ui/button"
-import { siteConfig } from "@/lib/config"
-import { source } from "@/lib/source"
+import { CommandMenu } from "@/components/command-menu";
+import { GitHubLink } from "@/components/github-link";
+import { MainNav } from "@/components/main-nav";
+import { MobileNav } from "@/components/mobile-nav";
+import { ModeSwitcher } from "@/components/mode-switcher";
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/config";
+import { source } from "@/lib/source";
 
 export function SiteHeader() {
-  const pageTree = source.pageTree
+  const { pageTree } = source;
 
   return (
     <header className="bg-background sticky top-0 z-50 w-full">
@@ -44,5 +44,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }

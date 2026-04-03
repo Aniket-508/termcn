@@ -2,39 +2,40 @@ import {
   IconArrowLeft,
   IconArrowRight,
   IconArrowUpRight,
-} from "@tabler/icons-react"
-import { findNeighbour } from "fumadocs-core/page-tree"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { DocsTableOfContents } from "@/components/docs-toc"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { source } from "@/lib/source"
-import { mdxComponents } from "@/mdx-components"
-import { createPageMetadata } from "@/seo/metadata"
+} from "@tabler/icons-react";
+import { findNeighbour } from "fumadocs-core/page-tree";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
-export const revalidate = false
-export const dynamic = "force-static"
-export const dynamicParams = false
+import { DocsTableOfContents } from "@/components/docs-toc";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { source } from "@/lib/source";
+import { mdxComponents } from "@/mdx-components";
+import { createPageMetadata } from "@/seo/metadata";
+
+export const revalidate = false;
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return source.generateParams()
+  return source.generateParams();
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug?: string[] }>
+  params: Promise<{ slug?: string[] }>;
 }) {
-  const params = await props.params
-  const page = source.getPage(params.slug)
+  const params = await props.params;
+  const page = source.getPage(params.slug);
 
   if (!page) {
-    notFound()
+    notFound();
   }
 
-  const doc = page.data
+  const doc = page.data;
 
   if (!doc.title || !doc.description) {
-    notFound()
+    notFound();
   }
 
   return createPageMetadata({
@@ -42,23 +43,23 @@ export async function generateMetadata(props: {
     ogType: "article",
     path: page.url,
     title: doc.title,
-  })
+  });
 }
 
 export default async function Page(props: {
-  params: Promise<{ slug?: string[] }>
+  params: Promise<{ slug?: string[] }>;
 }) {
-  const params = await props.params
-  const page = source.getPage(params.slug)
+  const params = await props.params;
+  const page = source.getPage(params.slug);
   if (!page) {
-    notFound()
+    notFound();
   }
 
-  const doc = page.data
-  const MDX = doc.body
-  const neighbours = await findNeighbour(source.pageTree, page.url)
+  const doc = page.data;
+  const MDX = doc.body;
+  const neighbours = await findNeighbour(source.pageTree, page.url);
 
-  const links = (doc as { links?: { doc?: string; api?: string } }).links
+  const { links } = doc as { links?: { doc?: string; api?: string } };
 
   return (
     <div
@@ -141,5 +142,5 @@ export default async function Page(props: {
         ) : null}
       </div>
     </div>
-  )
+  );
 }

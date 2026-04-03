@@ -1,45 +1,45 @@
 export interface NavItem {
-  title: string
-  href?: string
-  disabled?: boolean
-  external?: boolean
-  label?: string
+  title: string;
+  href?: string;
+  disabled?: boolean;
+  external?: boolean;
+  label?: string;
 }
 
 export interface NavItemWithChildren extends NavItem {
-  items: NavItemWithChildren[]
+  items: NavItemWithChildren[];
 }
 
 export interface DocsConfig {
-  sidebarNav: NavItemWithChildren[]
+  sidebarNav: NavItemWithChildren[];
 }
 
 export const docsConfig: DocsConfig = {
   sidebarNav: [
     {
-      title: "Getting Started",
       items: [
         {
-          title: "Introduction",
           href: "/docs",
           items: [],
+          title: "Introduction",
         },
         {
-          title: "Installation",
           href: "/docs/installation",
           items: [],
+          title: "Installation",
         },
       ],
+      title: "Getting Started",
     },
     {
-      title: "Examples",
       items: [
         {
-          title: "Basic Usage",
           href: "/docs/examples/basic",
           items: [],
+          title: "Basic Usage",
         },
       ],
+      title: "Examples",
     },
   ],
-}
+};

@@ -27,5 +27,5 @@ export const THEMES = [
     name: "Scaled",
     value: "scaled",
   },
-]
-export type Theme = (typeof THEMES)[number]
+];
+export type Theme = (typeof THEMES)[number];

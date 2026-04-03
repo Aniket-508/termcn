@@ -1,7 +1,7 @@
-import { ArrowRightIcon } from "lucide-react"
-import Link from "next/link"
+import { ArrowRightIcon } from "lucide-react";
+import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
 
 export function Announcement() {
   return (
@@ -11,5 +11,5 @@ export function Announcement() {
         termcn — shadcn-compatible registry <ArrowRightIcon />
       </Link>
     </Badge>
-  )
+  );
 }

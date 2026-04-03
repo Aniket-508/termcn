@@ -1,24 +1,24 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next";
 
-import { ActiveThemeProvider } from "@/components/active-theme"
-import { Analytics } from "@/components/analytics"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/sonner"
-import { META_THEME_COLORS } from "@/lib/config"
-import { fontVariables } from "@/lib/fonts"
-import { cn } from "@/lib/utils"
-import { JsonLdScripts } from "@/seo/json-ld"
-import { baseMetadata } from "@/seo/metadata"
+import { ActiveThemeProvider } from "@/components/active-theme";
+import { Analytics } from "@/components/analytics";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { META_THEME_COLORS } from "@/lib/config";
+import { fontVariables } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+import { JsonLdScripts } from "@/seo/json-ld";
+import { baseMetadata } from "@/seo/metadata";
 
-import "@/styles/globals.css"
+import "@/styles/globals.css";
 
-export const metadata: Metadata = baseMetadata
+export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -54,5 +54,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { CopyButton } from "@/components/copy-button"
+import { CopyButton } from "@/components/copy-button";
 
 interface CommandBoxProps {
-  command: string
+  command: string;
 }
 
 export function CommandBox({ command }: CommandBoxProps) {
@@ -20,5 +20,5 @@ export function CommandBox({ command }: CommandBoxProps) {
         />
       </div>
     </div>
-  )
+  );
 }

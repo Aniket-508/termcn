@@ -1,4 +1,4 @@
-import { ImageResponse } from "next/og"
+import { ImageResponse } from "next/og";
 
 async function loadAssets(): Promise<
   { name: string; data: Buffer; weight: 400 | 600; style: "normal" }[]
@@ -11,36 +11,36 @@ async function loadAssets(): Promise<
     import("./geist-regular-otf.json").then((mod) => mod.default || mod),
     import("./geistmono-regular-otf.json").then((mod) => mod.default || mod),
     import("./geist-semibold-otf.json").then((mod) => mod.default || mod),
-  ])
+  ]);
 
   return [
     {
-      name: "Geist",
       data: Buffer.from(normal, "base64"),
-      weight: 400 as const,
-      style: "normal" as const,
-    },
-    {
-      name: "Geist Mono",
-      data: Buffer.from(mono, "base64"),
-      weight: 400 as const,
-      style: "normal" as const,
-    },
-    {
       name: "Geist",
-      data: Buffer.from(semibold, "base64"),
-      weight: 600 as const,
       style: "normal" as const,
+      weight: 400 as const,
     },
-  ]
+    {
+      data: Buffer.from(mono, "base64"),
+      name: "Geist Mono",
+      style: "normal" as const,
+      weight: 400 as const,
+    },
+    {
+      data: Buffer.from(semibold, "base64"),
+      name: "Geist",
+      style: "normal" as const,
+      weight: 600 as const,
+    },
+  ];
 }
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const title = searchParams.get("title")
-  const description = searchParams.get("description")
+  const { searchParams } = new URL(request.url);
+  const title = searchParams.get("title");
+  const description = searchParams.get("description");
 
-  const [fonts] = await Promise.all([loadAssets()])
+  const [fonts] = await Promise.all([loadAssets()]);
 
   return new ImageResponse(
     <div
@@ -87,10 +87,10 @@ export async function GET(request: Request) {
         <div
           tw="tracking-tight flex-grow-1 flex flex-col justify-center leading-[1.1]"
           style={{
-            textWrap: "balance",
-            fontWeight: 600,
             fontSize: title && title.length > 20 ? 64 : 80,
+            fontWeight: 600,
             letterSpacing: "-0.04em",
+            textWrap: "balance",
           }}
         >
           {title}
@@ -107,9 +107,9 @@ export async function GET(request: Request) {
       </div>
     </div>,
     {
-      width: 1200,
-      height: 628,
       fonts,
+      height: 628,
+      width: 1200,
     }
-  )
+  );
 }

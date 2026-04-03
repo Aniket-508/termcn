@@ -1,4 +1,4 @@
-import va from "@vercel/analytics"
+import va from "@vercel/analytics";
 
 type EventName =
   | "copy_npm_command"
@@ -13,13 +13,13 @@ type EventName =
   | "copy_chart_theme"
   | "copy_chart_data"
   | "copy_color"
-  | "set_layout"
+  | "set_layout";
 
-export type Event = {
-  name: EventName
-  properties?: Record<string, string | number | boolean | null>
+export interface Event {
+  name: EventName;
+  properties?: Record<string, string | number | boolean | null>;
 }
 
 export function trackEvent(input: Event): void {
-  va.track(input.name, input.properties)
+  va.track(input.name, input.properties);
 }

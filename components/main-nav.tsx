@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function MainNav({
   items,
   className,
   ...props
 }: React.ComponentProps<"nav"> & {
-  items: { href: string; label: string }[]
+  items: { href: string; label: string }[];
 }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav className={cn("items-center gap-0.5", className)} {...props}>
@@ -28,5 +28,5 @@ export function MainNav({
         </Button>
       ))}
     </nav>
-  )
+  );
 }

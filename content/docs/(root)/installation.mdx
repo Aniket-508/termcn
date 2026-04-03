@@ -20,11 +20,11 @@ pnpm install
 Replace the placeholder at `registry/new-york/your-component.tsx`:
 
 ```tsx
-import { forwardRef, HTMLAttributes } from "react"
-import { cn } from "@/lib/utils"
+import { forwardRef, HTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
 
 export interface MyButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "outline"
+  variant?: "default" | "outline";
 }
 
 const MyButton = forwardRef<HTMLButtonElement, MyButtonProps>(
@@ -40,13 +40,13 @@ const MyButton = forwardRef<HTMLButtonElement, MyButtonProps>(
         )}
         {...props}
       />
-    )
+    );
   }
-)
+);
 
-MyButton.displayName = "MyButton"
+MyButton.displayName = "MyButton";
 
-export { MyButton }
+export { MyButton };
 ```
 
 ### 4. Update registry.json
@@ -95,9 +95,9 @@ npx shadcn@latest add https://example.com/r/my-button.json
 Then use it:
 
 ```tsx
-import { MyButton } from "@/components/ui/my-button"
+import { MyButton } from "@/components/ui/my-button";
 
 export function Demo() {
-  return <MyButton variant="outline">Click me</MyButton>
+  return <MyButton variant="outline">Click me</MyButton>;
 }
 ```

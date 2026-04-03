@@ -1,28 +1,28 @@
-import { createMDX } from "fumadocs-mdx/next"
+import { createMDX } from "fumadocs-mdx/next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   devIndicators: false,
-  typescript: {
-    ignoreBuildErrors: true,
+  images: {
+    remotePatterns: [
+      {
+        hostname: "avatars.githubusercontent.com",
+        protocol: "https",
+      },
+      {
+        hostname: "images.unsplash.com",
+        protocol: "https",
+      },
+    ],
   },
   outputFileTracingIncludes: {
     "/*": ["./registry/**/*"],
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-    ],
+  typescript: {
+    ignoreBuildErrors: true,
   },
-}
+};
 
-const withMDX = createMDX({})
+const withMDX = createMDX({});
 
-export default withMDX(nextConfig)
+export default withMDX(nextConfig);

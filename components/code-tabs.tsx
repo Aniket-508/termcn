@@ -1,16 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { Tabs } from "@/components/ui/tabs"
-import { useConfig } from "@/hooks/use-config"
+import { Tabs } from "@/components/ui/tabs";
+import { useConfig } from "@/hooks/use-config";
 
 export function CodeTabs({ children }: React.ComponentProps<typeof Tabs>) {
-  const [config, setConfig] = useConfig()
+  const [config, setConfig] = useConfig();
 
-  const installationType = React.useMemo(() => {
-    return config.installationType || "cli"
-  }, [config])
+  const installationType = React.useMemo(
+    () => config.installationType || "cli",
+    [config]
+  );
 
   return (
     <Tabs
@@ -22,5 +23,5 @@ export function CodeTabs({ children }: React.ComponentProps<typeof Tabs>) {
     >
       {children}
     </Tabs>
-  )
+  );
 }

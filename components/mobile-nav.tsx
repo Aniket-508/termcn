@@ -1,45 +1,46 @@
-"use client"
+"use client";
 
-import Link, { LinkProps } from "next/link"
-import { useRouter } from "next/navigation"
-import * as React from "react"
+import type { LinkProps } from "next/link";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import * as React from "react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { showMcpDocs } from "@/lib/flags"
-import { source } from "@/lib/source"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/popover";
+import { showMcpDocs } from "@/lib/flags";
+import type { source } from "@/lib/source";
+import { cn } from "@/lib/utils";
 
 const TOP_LEVEL_SECTIONS = [
-  { name: "Get Started", href: "/docs" },
+  { href: "/docs", name: "Get Started" },
   {
-    name: "Components",
     href: "/docs/components",
+    name: "Components",
   },
   {
-    name: "Registry",
     href: "/docs/registry",
+    name: "Registry",
   },
   {
-    name: "MCP Server",
     href: "/docs/mcp",
+    name: "MCP Server",
   },
-]
+];
 
 export function MobileNav({
   tree,
   items,
   className,
 }: {
-  tree: typeof source.pageTree
-  items: { href: string; label: string }[]
-  className?: string
+  tree: typeof source.pageTree;
+  items: { href: string; label: string }[];
+  className?: string;
 }) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -103,13 +104,13 @@ export function MobileNav({
             <div className="flex flex-col gap-3">
               {TOP_LEVEL_SECTIONS.map(({ name, href }) => {
                 if (!showMcpDocs && href.includes("/mcp")) {
-                  return null
+                  return null;
                 }
                 return (
                   <MobileLink key={name} href={href} onOpenChange={setOpen}>
                     {name}
                   </MobileLink>
-                )
+                );
               })}
             </div>
           </div>
@@ -125,7 +126,7 @@ export function MobileNav({
                       {group.children.map((item) => {
                         if (item.type === "page") {
                           if (!showMcpDocs && item.url.includes("/mcp")) {
-                            return null
+                            return null;
                           }
                           return (
                             <MobileLink
@@ -135,21 +136,21 @@ export function MobileNav({
                             >
                               {item.name}
                             </MobileLink>
-                          )
+                          );
                         }
-                        return null
+                        return null;
                       })}
                     </div>
                   </div>
-                )
+                );
               }
-              return null
+              return null;
             })}
           </div>
         </div>
       </PopoverContent>
     </Popover>
-  )
+  );
 }
 
 function MobileLink({
@@ -159,22 +160,22 @@ function MobileLink({
   children,
   ...props
 }: LinkProps & {
-  onOpenChange?: (open: boolean) => void
-  children: React.ReactNode
-  className?: string
+  onOpenChange?: (open: boolean) => void;
+  children: React.ReactNode;
+  className?: string;
 }) {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Link
       href={href}
       onClick={() => {
-        router.push(href.toString())
-        onOpenChange?.(false)
+        router.push(href.toString());
+        onOpenChange?.(false);
       }}
       className={cn("text-2xl font-medium", className)}
       {...props}
     >
       {children}
     </Link>
-  )
+  );
 }

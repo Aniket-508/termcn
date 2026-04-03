@@ -1,26 +1,26 @@
-import { ArrowRightIcon } from "lucide-react"
-import type { Metadata } from "next"
-import Link from "next/link"
+import { ArrowRightIcon } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
 
-import { CommandBox } from "@/components/command-box"
-import { Button } from "@/components/ui/button"
-import { siteConfig } from "@/lib/config"
-import { YourComponent } from "@/registry/new-york/your-component"
-import { createPageMetadata } from "@/seo/metadata"
+import { CommandBox } from "@/components/command-box";
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/config";
+import { YourComponent } from "@/registry/new-york/your-component";
+import { createPageMetadata } from "@/seo/metadata";
 
-const title = siteConfig.name
-const description = siteConfig.description
+const title = siteConfig.name;
+const { description } = siteConfig;
 
-const installCommand = `npx shadcn@latest add ${siteConfig.url}/r/your-component.json`
+const installCommand = `npx shadcn@latest add ${siteConfig.url}/r/your-component.json`;
 
-export const dynamic = "force-static"
-export const revalidate = false
+export const dynamic = "force-static";
+export const revalidate = false;
 
 export const metadata: Metadata = createPageMetadata({
   description,
   path: "/",
   title,
-})
+});
 
 export default function IndexPage() {
   return (
@@ -55,5 +55,5 @@ export default function IndexPage() {
         <YourComponent className="w-full max-w-md" />
       </div>
     </section>
-  )
+  );
 }

@@ -1,12 +1,13 @@
-import { siteConfig, siteKeywords } from "@/lib/config"
+import { siteConfig, siteKeywords } from "@/lib/config";
 
 function JsonLdScript({ data }: { data: Record<string, unknown> }) {
   return (
     <script
+      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
       type="application/ld+json"
     />
-  )
+  );
 }
 
 export function WebsiteJsonLd() {
@@ -17,8 +18,8 @@ export function WebsiteJsonLd() {
     inLanguage: "en-US",
     name: siteConfig.name,
     url: siteConfig.url,
-  }
-  return <JsonLdScript data={data} />
+  };
+  return <JsonLdScript data={data} />;
 }
 
 export function SoftwareSourceCodeJsonLd() {
@@ -40,8 +41,8 @@ export function SoftwareSourceCodeJsonLd() {
     programmingLanguage: ["TypeScript", "React", "Next.js"],
     runtimePlatform: "Node.js",
     url: siteConfig.url,
-  }
-  return <JsonLdScript data={data} />
+  };
+  return <JsonLdScript data={data} />;
 }
 
 export function OrganizationJsonLd() {
@@ -51,8 +52,8 @@ export function OrganizationJsonLd() {
     name: siteConfig.name,
     sameAs: [siteConfig.links.github],
     url: siteConfig.url,
-  }
-  return <JsonLdScript data={data} />
+  };
+  return <JsonLdScript data={data} />;
 }
 
 export function FAQJsonLd() {
@@ -71,7 +72,7 @@ export function FAQJsonLd() {
         "Yes. The project is intended to be forked or cloned; source is available on GitHub under an open license.",
       question: `Is ${siteConfig.name} open source?`,
     },
-  ]
+  ];
 
   const data = {
     "@context": "https://schema.org",
@@ -84,29 +85,29 @@ export function FAQJsonLd() {
       },
       name: faq.question,
     })),
-  }
-  return <JsonLdScript data={data} />
+  };
+  return <JsonLdScript data={data} />;
 }
 
 export function BreadcrumbJsonLd({
   items,
 }: {
-  items: { name: string; path: string }[]
+  items: { name: string; path: string }[];
 }) {
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => {
-      const pathname = item.path.startsWith("/") ? item.path : `/${item.path}`
+      const pathname = item.path.startsWith("/") ? item.path : `/${item.path}`;
       return {
         "@type": "ListItem",
         item: `${siteConfig.url.replace(/\/$/, "")}${pathname}`,
         name: item.name,
         position: index + 1,
-      }
+      };
     }),
-  }
-  return <JsonLdScript data={data} />
+  };
+  return <JsonLdScript data={data} />;
 }
 
 export function JsonLdScripts() {
@@ -117,5 +118,5 @@ export function JsonLdScripts() {
       <OrganizationJsonLd />
       <FAQJsonLd />
     </>
-  )
+  );
 }
