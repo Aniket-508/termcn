@@ -13,9 +13,9 @@ export interface CreatePageMetadataOptions {
 /**
  * Per-route metadata (merges with root `baseMetadata` from the App Router).
  */
-export function createPageMetadata(
+export const createPageMetadata = (
   options: CreatePageMetadataOptions
-): Metadata {
+): Metadata => {
   const { description, noIndex, ogType = "website", path, title } = options;
   const pathname = path.startsWith("/") ? path : `/${path}`;
   const ogImageUrl = `/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
@@ -52,7 +52,7 @@ export function createPageMetadata(
         }
       : {}),
   };
-}
+};
 
 const defaultOgImage = {
   alt: siteConfig.name,

@@ -1,16 +1,14 @@
 import { siteConfig, siteKeywords } from "@/lib/config";
 
-function JsonLdScript({ data }: { data: Record<string, unknown> }) {
-  return (
-    <script
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-      type="application/ld+json"
-    />
-  );
-}
+const JsonLdScript = ({ data }: { data: Record<string, unknown> }) => (
+  <script
+    // eslint-disable-next-line react/no-danger
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    type="application/ld+json"
+  />
+);
 
-export function WebsiteJsonLd() {
+export const WebsiteJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -20,9 +18,9 @@ export function WebsiteJsonLd() {
     url: siteConfig.url,
   };
   return <JsonLdScript data={data} />;
-}
+};
 
-export function SoftwareSourceCodeJsonLd() {
+export const SoftwareSourceCodeJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
@@ -43,9 +41,9 @@ export function SoftwareSourceCodeJsonLd() {
     url: siteConfig.url,
   };
   return <JsonLdScript data={data} />;
-}
+};
 
-export function OrganizationJsonLd() {
+export const OrganizationJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -54,9 +52,9 @@ export function OrganizationJsonLd() {
     url: siteConfig.url,
   };
   return <JsonLdScript data={data} />;
-}
+};
 
-export function FAQJsonLd() {
+export const FAQJsonLd = () => {
   const faqs = [
     {
       answer: siteConfig.description,
@@ -87,13 +85,13 @@ export function FAQJsonLd() {
     })),
   };
   return <JsonLdScript data={data} />;
-}
+};
 
-export function BreadcrumbJsonLd({
+export const BreadcrumbJsonLd = ({
   items,
 }: {
   items: { name: string; path: string }[];
-}) {
+}) => {
   const data = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -108,15 +106,13 @@ export function BreadcrumbJsonLd({
     }),
   };
   return <JsonLdScript data={data} />;
-}
+};
 
-export function JsonLdScripts() {
-  return (
-    <>
-      <WebsiteJsonLd />
-      <SoftwareSourceCodeJsonLd />
-      <OrganizationJsonLd />
-      <FAQJsonLd />
-    </>
-  );
-}
+export const JsonLdScripts = () => (
+  <>
+    <WebsiteJsonLd />
+    <SoftwareSourceCodeJsonLd />
+    <OrganizationJsonLd />
+    <FAQJsonLd />
+  </>
+);
