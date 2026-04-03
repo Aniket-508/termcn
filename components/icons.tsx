@@ -1,6 +1,6 @@
 import { FileCodeIcon, FileIcon, FileJsonIcon } from "lucide-react";
 
-export function getIconForLanguageExtension(language: string) {
+export const getIconForLanguageExtension = (language: string) => {
   switch (language) {
     case "json": {
       return <FileJsonIcon className="size-4" />;
@@ -19,4 +19,4 @@ export function getIconForLanguageExtension(language: string) {
       return <FileIcon className="size-4" />;
     }
   }
-}
+};

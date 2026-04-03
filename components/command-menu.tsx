@@ -32,7 +32,58 @@ import { showMcpDocs } from "@/lib/flags";
 import type { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
 
-export function CommandMenu({
+const CommandMenuKbd = ({
+  className,
+  ...props
+}: React.ComponentProps<"kbd">) => (
+  <kbd
+    className={cn(
+      "bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&_svg:not([class*='size-'])]:size-3",
+      className
+    )}
+    {...props}
+  />
+);
+
+const CommandMenuItem = ({
+  children,
+  className,
+  onHighlight,
+  ...props
+}: React.ComponentProps<typeof CommandItem> & {
+  onHighlight?: () => void;
+  "data-selected"?: string;
+  "aria-selected"?: string;
+}) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  useMutationObserver(ref, (mutations) => {
+    for (const mutation of mutations) {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "aria-selected" &&
+        ref.current?.getAttribute("aria-selected") === "true"
+      ) {
+        onHighlight?.();
+      }
+    }
+  });
+
+  return (
+    <CommandItem
+      ref={ref}
+      className={cn(
+        "data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-medium",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </CommandItem>
+  );
+};
+
+export const CommandMenu = ({
   tree,
   blocks,
   navItems,
@@ -41,7 +92,7 @@ export function CommandMenu({
   tree: typeof source.pageTree;
   blocks?: { name: string; description: string; categories: string[] }[];
   navItems?: { href: string; label: string }[];
-}) {
+}) => {
   const router = useRouter();
   const isMac = useIsMac();
   const [config] = useConfig();
@@ -81,6 +132,19 @@ export function CommandMenu({
     command();
   }, []);
 
+  const handleOpenClick = React.useCallback(() => setOpen(true), []);
+
+  const handleFilter = React.useCallback(
+    (value: string, search: string, keywords?: string[]) => {
+      const extendValue = `${value} ${keywords?.join(" ") || ""}`;
+      if (extendValue.toLowerCase().includes(search.toLowerCase())) {
+        return 1;
+      }
+      return 0;
+    },
+    []
+  );
+
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
@@ -94,7 +158,7 @@ export function CommandMenu({
         }
 
         e.preventDefault();
-        setOpen((open) => !open);
+        setOpen((prev) => !prev);
       }
 
       if (e.key === "c" && (e.metaKey || e.ctrlKey)) {
@@ -128,7 +192,7 @@ export function CommandMenu({
           className={cn(
             "bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
           )}
-          onClick={() => setOpen(true)}
+          onClick={handleOpenClick}
           {...props}
         >
           <span className="hidden lg:inline-flex">Search documentation...</span>
@@ -149,13 +213,7 @@ export function CommandMenu({
         </DialogHeader>
         <Command
           className="**:data-[slot=command-input-wrapper]:bg-input/50 **:data-[slot=command-input-wrapper]:border-input rounded-none bg-transparent **:data-[slot=command-input]:!h-9 **:data-[slot=command-input]:py-0 **:data-[slot=command-input-wrapper]:mb-0 **:data-[slot=command-input-wrapper]:!h-9 **:data-[slot=command-input-wrapper]:rounded-md **:data-[slot=command-input-wrapper]:border"
-          filter={(value, search, keywords) => {
-            const extendValue = `${value} ${keywords?.join(" ") || ""}`;
-            if (extendValue.toLowerCase().includes(search.toLowerCase())) {
-              return 1;
-            }
-            return 0;
-          }}
+          filter={handleFilter}
         >
           <CommandInput placeholder="Search documentation..." />
           <CommandList className="no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5">
@@ -172,13 +230,13 @@ export function CommandMenu({
                     key={item.href}
                     value={`Navigation ${item.label}`}
                     keywords={["nav", "navigation", item.label.toLowerCase()]}
+                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
                     onHighlight={() => {
                       setSelectedType("page");
                       setCopyPayload("");
                     }}
-                    onSelect={() => {
-                      runCommand(() => router.push(item.href));
-                    }}
+                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
+                    onSelect={() => runCommand(() => router.push(item.href))}
                   >
                     <IconArrowRight />
                     {item.label}
@@ -210,12 +268,14 @@ export function CommandMenu({
                               : ""
                           }
                           keywords={isComponent ? ["component"] : undefined}
+                          // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
                           onHighlight={() =>
                             handlePageHighlight(isComponent, item)
                           }
-                          onSelect={() => {
-                            runCommand(() => router.push(item.url));
-                          }}
+                          // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
+                          onSelect={() =>
+                            runCommand(() => router.push(item.url))
+                          }
                         >
                           {isComponent ? (
                             <div className="border-muted-foreground aspect-square size-4 rounded-full border border-dashed" />
@@ -239,22 +299,22 @@ export function CommandMenu({
                   <CommandMenuItem
                     key={block.name}
                     value={block.name}
-                    onHighlight={() => {
-                      handleBlockHighlight(block);
-                    }}
+                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
+                    onHighlight={() => handleBlockHighlight(block)}
                     keywords={[
                       "block",
                       block.name,
                       block.description,
                       ...block.categories,
                     ]}
-                    onSelect={() => {
+                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
+                    onSelect={() =>
                       runCommand(() =>
                         router.push(
                           `/blocks/${block.categories[0]}#${block.name}`
                         )
-                      );
-                    }}
+                      )
+                    }
                   >
                     <SquareDashedIcon />
                     {block.description}
@@ -290,54 +350,4 @@ export function CommandMenu({
       </DialogContent>
     </Dialog>
   );
-}
-
-function CommandMenuItem({
-  children,
-  className,
-  onHighlight,
-  ...props
-}: React.ComponentProps<typeof CommandItem> & {
-  onHighlight?: () => void;
-  "data-selected"?: string;
-  "aria-selected"?: string;
-}) {
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  useMutationObserver(ref, (mutations) => {
-    mutations.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.attributeName === "aria-selected" &&
-        ref.current?.getAttribute("aria-selected") === "true"
-      ) {
-        onHighlight?.();
-      }
-    });
-  });
-
-  return (
-    <CommandItem
-      ref={ref}
-      className={cn(
-        "data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-medium",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </CommandItem>
-  );
-}
-
-function CommandMenuKbd({ className, ...props }: React.ComponentProps<"kbd">) {
-  return (
-    <kbd
-      className={cn(
-        "bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&_svg:not([class*='size-'])]:size-3",
-        className
-      )}
-      {...props}
-    />
-  );
-}
+};

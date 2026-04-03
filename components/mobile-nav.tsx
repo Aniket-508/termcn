@@ -31,7 +31,36 @@ const TOP_LEVEL_SECTIONS = [
   },
 ];
 
-export function MobileNav({
+const MobileLink = ({
+  href,
+  onOpenChange,
+  className,
+  children,
+  ...props
+}: LinkProps & {
+  onOpenChange?: (open: boolean) => void;
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  const router = useRouter();
+  const handleClick = React.useCallback(() => {
+    router.push(href.toString());
+    onOpenChange?.(false);
+  }, [router, href, onOpenChange]);
+
+  return (
+    <Link
+      href={href}
+      onClick={handleClick}
+      className={cn("text-2xl font-medium", className)}
+      {...props}
+    >
+      {children}
+    </Link>
+  );
+};
+
+export const MobileNav = ({
   tree,
   items,
   className,
@@ -39,7 +68,7 @@ export function MobileNav({
   tree: typeof source.pageTree;
   items: { href: string; label: string }[];
   className?: string;
-}) {
+}) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -90,8 +119,12 @@ export function MobileNav({
               <MobileLink href="/" onOpenChange={setOpen}>
                 Home
               </MobileLink>
-              {items.map((item, index) => (
-                <MobileLink key={index} href={item.href} onOpenChange={setOpen}>
+              {items.map((item) => (
+                <MobileLink
+                  key={item.href}
+                  href={item.href}
+                  onOpenChange={setOpen}
+                >
                   {item.label}
                 </MobileLink>
               ))}
@@ -115,10 +148,10 @@ export function MobileNav({
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            {tree?.children?.map((group, index) => {
+            {tree?.children?.map((group) => {
               if (group.type === "folder") {
                 return (
-                  <div key={index} className="flex flex-col gap-4">
+                  <div key={group.$id} className="flex flex-col gap-4">
                     <div className="text-muted-foreground text-sm font-medium">
                       {group.name}
                     </div>
@@ -130,7 +163,7 @@ export function MobileNav({
                           }
                           return (
                             <MobileLink
-                              key={`${item.url}-${index}`}
+                              key={`${item.url}-${group.$id}`}
                               href={item.url}
                               onOpenChange={setOpen}
                             >
@@ -151,31 +184,4 @@ export function MobileNav({
       </PopoverContent>
     </Popover>
   );
-}
-
-function MobileLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  ...props
-}: LinkProps & {
-  onOpenChange?: (open: boolean) => void;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const router = useRouter();
-  return (
-    <Link
-      href={href}
-      onClick={() => {
-        router.push(href.toString());
-        onOpenChange?.(false);
-      }}
-      className={cn("text-2xl font-medium", className)}
-      {...props}
-    >
-      {children}
-    </Link>
-  );
-}
+};

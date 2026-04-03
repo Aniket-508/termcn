@@ -13,14 +13,14 @@ import type { Event } from "@/lib/events";
 import { trackEvent } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
-export function copyToClipboardWithMeta(value: string, event?: Event) {
+export const copyToClipboardWithMeta = (value: string, event?: Event) => {
   navigator.clipboard.writeText(value);
   if (event) {
     trackEvent(event);
   }
-}
+};
 
-export function CopyButton({
+export const CopyButton = ({
   value,
   className,
   variant = "ghost",
@@ -31,12 +31,27 @@ export function CopyButton({
   value: string;
   src?: string;
   event?: Event["name"];
-}) {
+}) => {
   const [hasCopied, setHasCopied] = React.useState(false);
 
   React.useEffect(() => {
     setTimeout(() => setHasCopied(false), 1000);
   }, []);
+
+  const handleCopy = React.useCallback(() => {
+    copyToClipboardWithMeta(
+      value,
+      event
+        ? {
+            name: event,
+            properties: {
+              code: value,
+            },
+          }
+        : undefined
+    );
+    setHasCopied(true);
+  }, [value, event]);
 
   return (
     <Tooltip>
@@ -51,20 +66,7 @@ export function CopyButton({
               : "bg-code absolute top-3 right-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
             className
           )}
-          onClick={() => {
-            copyToClipboardWithMeta(
-              value,
-              event
-                ? {
-                    name: event,
-                    properties: {
-                      code: value,
-                    },
-                  }
-                : undefined
-            );
-            setHasCopied(true);
-          }}
+          onClick={handleCopy}
           {...props}
         >
           <span className="sr-only">Copy</span>
@@ -81,4 +83,4 @@ export function CopyButton({
       </TooltipContent>
     </Tooltip>
   );
-}
+};

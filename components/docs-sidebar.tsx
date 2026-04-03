@@ -18,10 +18,12 @@ import {
 } from "@/components/ui/sidebar";
 import type { DocsConfig } from "@/lib/docs";
 
-export function DocsSidebar({
+export const DocsSidebar = ({
   tree,
   ...props
-}: React.ComponentProps<typeof Sidebar> & { tree: DocsConfig["sidebarNav"] }) {
+}: React.ComponentProps<typeof Sidebar> & {
+  tree: DocsConfig["sidebarNav"];
+}) => {
   const pathname = usePathname();
 
   return (
@@ -32,32 +34,34 @@ export function DocsSidebar({
     >
       <SidebarContent className="no-scrollbar px-2 pb-12">
         <div className="h-(--top-spacing) shrink-0" />
-        {tree.map((item) => (
-          <SidebarGroup key={item.title}>
+        {tree.map((group) => (
+          <SidebarGroup key={group.title}>
             <SidebarGroupLabel className="text-muted-foreground font-medium">
-              {item.title}
+              {group.title}
             </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu className="gap-0.5">
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.href}>
+                {group.items.map((navItem) => (
+                  <SidebarMenuItem key={navItem.href}>
                     <SidebarMenuButton
                       asChild
-                      isActive={item.href === pathname}
+                      isActive={navItem.href === pathname}
                       className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
                     >
-                      <Link href={item.href ?? ""}>{item.title}</Link>
+                      <Link href={navItem.href ?? ""}>{navItem.title}</Link>
                     </SidebarMenuButton>
-                    {item.items?.length ? (
+                    {navItem.items?.length ? (
                       <SidebarMenuSub>
-                        {item.items.map((item) => (
-                          <SidebarMenuSubItem key={item.title}>
+                        {navItem.items.map((subItem) => (
+                          <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton
                               asChild
-                              isActive={item.href === pathname}
+                              isActive={subItem.href === pathname}
                               className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
                             >
-                              <Link href={item.href ?? ""}>{item.title}</Link>
+                              <Link href={subItem.href ?? ""}>
+                                {subItem.title}
+                              </Link>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
@@ -112,4 +116,4 @@ export function DocsSidebar({
   //     </SidebarContent>
   //   </Sidebar>
   // )
-}
+};

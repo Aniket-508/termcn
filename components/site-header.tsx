@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
 import { source } from "@/lib/source";
 
-export function SiteHeader() {
+export const SiteHeader = () => {
   const { pageTree } = source;
 
   return (
@@ -45,4 +45,4 @@ export function SiteHeader() {
       </div>
     </header>
   );
-}
+};

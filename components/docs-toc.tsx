@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
-function useActiveItem(itemIds: string[]) {
+const useActiveItem = (itemIds: string[]) => {
   const [activeId, setActiveId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -45,9 +45,9 @@ function useActiveItem(itemIds: string[]) {
   }, [itemIds]);
 
   return activeId;
-}
+};
 
-export function DocsTableOfContents({
+export const DocsTableOfContents = ({
   toc,
   variant = "list",
   className,
@@ -59,8 +59,9 @@ export function DocsTableOfContents({
   }[];
   variant?: "dropdown" | "list";
   className?: string;
-}) {
+}) => {
   const [open, setOpen] = React.useState(false);
+  const handleClose = React.useCallback(() => setOpen(false), []);
   const itemIds = React.useMemo(
     () => toc.map((item) => item.url.replace("#", "")),
     [toc]
@@ -91,9 +92,7 @@ export function DocsTableOfContents({
             <DropdownMenuItem
               key={item.url}
               asChild
-              onClick={() => {
-                setOpen(false);
-              }}
+              onClick={handleClose}
               data-depth={item.depth}
               className="data-[depth=3]:pl-6 data-[depth=4]:pl-8"
             >
@@ -123,4 +122,4 @@ export function DocsTableOfContents({
       ))}
     </div>
   );
-}
+};

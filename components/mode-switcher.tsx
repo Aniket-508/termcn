@@ -6,7 +6,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { useMetaColor } from "@/hooks/use-meta-color";
 
-export function ModeSwitcher() {
+export const ModeSwitcher = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const { setMetaColor, metaColor } = useMetaColor();
 
@@ -48,4 +48,4 @@ export function ModeSwitcher() {
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
-}
+};

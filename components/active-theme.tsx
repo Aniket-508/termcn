@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const DEFAULT_THEME = "default";
 
@@ -12,37 +12,42 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ActiveThemeProvider({
+export const ActiveThemeProvider = ({
   children,
   initialTheme,
 }: {
   children: ReactNode;
   initialTheme?: string;
-}) {
+}) => {
   const [activeTheme, setActiveTheme] = useState<string>(
     () => initialTheme || DEFAULT_THEME
   );
 
   useEffect(() => {
-    [...document.body.classList]
-      .filter((className) => className.startsWith("theme-"))
-      .forEach((className) => {
-        document.body.classList.remove(className);
-      });
+    for (const cls of [...document.body.classList].filter((c) =>
+      c.startsWith("theme-")
+    )) {
+      document.body.classList.remove(cls);
+    }
     document.body.classList.add(`theme-${activeTheme}`);
     if (activeTheme.endsWith("-scaled")) {
       document.body.classList.add("theme-scaled");
     }
   }, [activeTheme]);
 
+  const contextValue = useMemo(
+    () => ({ activeTheme, setActiveTheme }),
+    [activeTheme]
+  );
+
   return (
-    <ThemeContext.Provider value={{ activeTheme, setActiveTheme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );
-}
+};
 
-export function useThemeConfig() {
+export const useThemeConfig = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error(
@@ -50,4 +55,4 @@ export function useThemeConfig() {
     );
   }
   return context;
-}
+};
