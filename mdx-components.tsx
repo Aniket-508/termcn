@@ -71,14 +71,16 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
+  Step: ({ className, children, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
         "font-heading mt-8 scroll-m-32 text-xl font-medium tracking-tight",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </h3>
   ),
   Steps: ({ ...props }) => (
     <div
@@ -128,11 +130,13 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  a: ({ className, ...props }: React.ComponentProps<"a">) => (
+  a: ({ className, children, ...props }: React.ComponentProps<"a">) => (
     <a
       className={cn("font-medium underline underline-offset-4", className)}
       {...props}
-    />
+    >
+      {children}
+    </a>
   ),
   blockquote: ({ className, ...props }: React.ComponentProps<"blockquote">) => (
     <blockquote
@@ -217,65 +221,77 @@ export const mdxComponents = {
   figure: ({ className, ...props }: React.ComponentProps<"figure">) => (
     <figure className={cn(className)} {...props} />
   ),
-  h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
+  h1: ({ className, children, ...props }: React.ComponentProps<"h1">) => (
     <h1
       className={cn(
         "font-heading mt-2 scroll-m-28 text-3xl font-bold tracking-tight",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </h1>
   ),
-  h2: ({ className, ...props }: React.ComponentProps<"h2">) => (
+  h2: ({ className, children, ...props }: React.ComponentProps<"h2">) => (
     <h2
-      id={props.children
+      id={children
         ?.toString()
-        .replaceAll(/ /g, "-")
-        .replaceAll(/'/g, "")
-        .replaceAll(/\?/g, "")
+        .replaceAll(" ", "-")
+        .replaceAll("'", "")
+        .replaceAll("?", "")
         .toLowerCase()}
       className={cn(
         "font-heading mt-8 scroll-m-28 text-xl font-medium tracking-tight first:mt-0 lg:mt-8 [&+p]:!mt-4 *:[code]:text-xl",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </h2>
   ),
-  h3: ({ className, ...props }: React.ComponentProps<"h3">) => (
+  h3: ({ className, children, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
         "font-heading mt-8 scroll-m-28 text-lg font-medium tracking-tight *:[code]:text-xl",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </h3>
   ),
-  h4: ({ className, ...props }: React.ComponentProps<"h4">) => (
+  h4: ({ className, children, ...props }: React.ComponentProps<"h4">) => (
     <h4
       className={cn(
         "font-heading mt-8 scroll-m-28 text-base font-medium tracking-tight",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </h4>
   ),
-  h5: ({ className, ...props }: React.ComponentProps<"h5">) => (
+  h5: ({ className, children, ...props }: React.ComponentProps<"h5">) => (
     <h5
       className={cn(
         "mt-8 scroll-m-28 text-base font-medium tracking-tight",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </h5>
   ),
-  h6: ({ className, ...props }: React.ComponentProps<"h6">) => (
+  h6: ({ className, children, ...props }: React.ComponentProps<"h6">) => (
     <h6
       className={cn(
         "mt-8 scroll-m-28 text-base font-medium tracking-tight",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </h6>
   ),
   hr: ({ ...props }: React.ComponentProps<"hr">) => (
     <hr className="my-4 md:my-8" {...props} />
