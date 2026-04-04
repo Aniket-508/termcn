@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect } from "react";
 
 const DEFAULT_MUTATION_OBSERVER_OPTIONS: MutationObserverInit = {
   attributes: true,
@@ -12,7 +12,7 @@ export const useMutationObserver = (
   callback: MutationCallback,
   options: MutationObserverInit = DEFAULT_MUTATION_OBSERVER_OPTIONS
 ) => {
-  React.useEffect(() => {
+  useEffect(() => {
     if (ref.current) {
       const observer = new MutationObserver(callback);
       observer.observe(ref.current, options);

@@ -1,6 +1,6 @@
 import { IconBrandGithub } from "@tabler/icons-react";
 import Link from "next/link";
-import * as React from "react";
+import { Suspense } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -26,9 +26,9 @@ export const GitHubLink = () => (
   <Button asChild size="sm" variant="ghost" className="h-8 shadow-none">
     <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
       <IconBrandGithub className="size-4" />
-      <React.Suspense fallback={<Skeleton className="h-4" />}>
+      <Suspense fallback={<Skeleton className="h-4" />}>
         <StarsCount />
-      </React.Suspense>
+      </Suspense>
     </Link>
   </Button>
 );

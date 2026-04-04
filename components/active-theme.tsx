@@ -1,6 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const DEFAULT_THEME = "default";
@@ -16,7 +15,7 @@ export const ActiveThemeProvider = ({
   children,
   initialTheme,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   initialTheme?: string;
 }) => {
   const [activeTheme, setActiveTheme] = useState<string>(

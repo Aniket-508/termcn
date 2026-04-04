@@ -4,7 +4,7 @@ import type { DialogProps } from "@radix-ui/react-dialog";
 import { IconArrowRight } from "@tabler/icons-react";
 import { CornerDownLeftIcon, SquareDashedIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { copyToClipboardWithMeta } from "@/components/copy-button";
 import { Button } from "@/components/ui/button";
@@ -55,7 +55,7 @@ const CommandMenuItem = ({
   "data-selected"?: string;
   "aria-selected"?: string;
 }) => {
-  const ref = React.useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useMutationObserver(ref, (mutations) => {
     for (const mutation of mutations) {
@@ -96,14 +96,14 @@ export const CommandMenu = ({
   const router = useRouter();
   const isMac = useIsMac();
   const [config] = useConfig();
-  const [open, setOpen] = React.useState(false);
-  const [selectedType, setSelectedType] = React.useState<
+  const [open, setOpen] = useState(false);
+  const [selectedType, setSelectedType] = useState<
     "page" | "component" | "block" | null
   >(null);
-  const [copyPayload, setCopyPayload] = React.useState("");
+  const [copyPayload, setCopyPayload] = useState("");
   const packageManager = config.packageManager || "pnpm";
 
-  const handlePageHighlight = React.useCallback(
+  const handlePageHighlight = useCallback(
     (isComponent: boolean, item: { url: string; name?: React.ReactNode }) => {
       if (isComponent) {
         const componentName = item.url.split("/").pop();
@@ -119,7 +119,7 @@ export const CommandMenu = ({
     [packageManager]
   );
 
-  const handleBlockHighlight = React.useCallback(
+  const handleBlockHighlight = useCallback(
     (block: { name: string; description: string; categories: string[] }) => {
       setSelectedType("block");
       setCopyPayload(`${packageManager} dlx shadcn@latest add ${block.name}`);
@@ -127,14 +127,14 @@ export const CommandMenu = ({
     [packageManager]
   );
 
-  const runCommand = React.useCallback((command: () => unknown) => {
+  const runCommand = useCallback((command: () => unknown) => {
     setOpen(false);
     command();
   }, []);
 
-  const handleOpenClick = React.useCallback(() => setOpen(true), []);
+  const handleOpenClick = useCallback(() => setOpen(true), []);
 
-  const handleFilter = React.useCallback(
+  const handleFilter = useCallback(
     (value: string, search: string, keywords?: string[]) => {
       const extendValue = `${value} ${keywords?.join(" ") || ""}`;
       if (extendValue.toLowerCase().includes(search.toLowerCase())) {
@@ -145,7 +145,7 @@ export const CommandMenu = ({
     []
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
         if (

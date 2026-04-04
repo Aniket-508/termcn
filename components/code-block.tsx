@@ -1,7 +1,7 @@
 "use client";
 
 import { CodeIcon } from "lucide-react";
-import * as React from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { CopyButton } from "@/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -48,14 +48,12 @@ export const CodeBlock = ({
   preview,
 }: CodeBlockProps) => {
   const [config, setConfig] = useConfig();
-  const [highlightedCode, setHighlightedCode] = React.useState<string | null>(
-    null
-  );
+  const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
 
   const isCommandMode = Boolean(__npm__ || __yarn__ || __pnpm__ || __bun__);
   const isCodeMode = Boolean(__ts__);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!__ts__) {
       return;
     }
@@ -76,7 +74,7 @@ export const CodeBlock = ({
 
   const packageManager = config.packageManager || "pnpm";
 
-  const handlePackageManagerChange = React.useCallback(
+  const handlePackageManagerChange = useCallback(
     (value: string) => {
       setConfig({
         ...config,
@@ -86,7 +84,7 @@ export const CodeBlock = ({
     [config, setConfig]
   );
 
-  const commandTabs = React.useMemo(
+  const commandTabs = useMemo(
     () => ({
       bun: __bun__,
       npm: __npm__,
@@ -96,7 +94,7 @@ export const CodeBlock = ({
     [__npm__, __pnpm__, __yarn__, __bun__]
   );
 
-  const copyValue = React.useMemo(() => {
+  const copyValue = useMemo(() => {
     if (isCommandMode) {
       return commandTabs[packageManager] || "";
     }

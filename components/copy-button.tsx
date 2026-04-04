@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon, CopyIcon } from "lucide-react";
-import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -32,13 +32,13 @@ export const CopyButton = ({
   src?: string;
   event?: Event["name"];
 }) => {
-  const [hasCopied, setHasCopied] = React.useState(false);
+  const [hasCopied, setHasCopied] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(() => setHasCopied(false), 1000);
   }, []);
 
-  const handleCopy = React.useCallback(() => {
+  const handleCopy = useCallback(() => {
     copyToClipboardWithMeta(
       value,
       event

@@ -1,7 +1,7 @@
 "use client";
 
 import { IconMenu3 } from "@tabler/icons-react";
-import * as React from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,9 +13,9 @@ import {
 import { cn } from "@/lib/utils";
 
 const useActiveItem = (itemIds: string[]) => {
-  const [activeId, setActiveId] = React.useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -60,9 +60,9 @@ export const DocsTableOfContents = ({
   variant?: "dropdown" | "list";
   className?: string;
 }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = React.useCallback(() => setOpen(false), []);
-  const itemIds = React.useMemo(
+  const [open, setOpen] = useState(false);
+  const handleClose = useCallback(() => setOpen(false), []);
+  const itemIds = useMemo(
     () => toc.map((item) => item.url.replace("#", "")),
     [toc]
   );

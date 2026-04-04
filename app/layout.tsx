@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { ActiveThemeProvider } from "@/components/active-theme";
 import { Analytics } from "@/components/analytics";
-import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { META_THEME_COLORS } from "@/lib/config";
@@ -51,7 +50,6 @@ const RootLayout = ({
       <ThemeProvider>
         <ActiveThemeProvider>
           {children}
-          <TailwindIndicator />
           <Toaster position="top-center" />
           <Analytics />
         </ActiveThemeProvider>

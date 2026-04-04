@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import * as React from "react";
+import { useCallback, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useMetaColor } from "@/hooks/use-meta-color";
@@ -10,11 +10,11 @@ export const ModeSwitcher = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const { setMetaColor, metaColor } = useMetaColor();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMetaColor(metaColor);
   }, [metaColor, setMetaColor]);
 
-  const toggleTheme = React.useCallback(() => {
+  const toggleTheme = useCallback(() => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }, [resolvedTheme, setTheme]);
 

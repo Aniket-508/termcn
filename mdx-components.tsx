@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import * as React from "react";
 
 import { Callout } from "@/components/callout";
 import { CodeBlock } from "@/components/code-block";

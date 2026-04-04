@@ -3,7 +3,7 @@
 import type { LinkProps } from "next/link";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import * as React from "react";
+import { useCallback, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -43,7 +43,7 @@ const MobileLink = ({
   className?: string;
 }) => {
   const router = useRouter();
-  const handleClick = React.useCallback(() => {
+  const handleClick = useCallback(() => {
     router.push(href.toString());
     onOpenChange?.(false);
   }, [router, href, onOpenChange]);
@@ -69,7 +69,7 @@ export const MobileNav = ({
   items: { href: string; label: string }[];
   className?: string;
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useCallback, useMemo } from "react";
 
 import { Tabs } from "@/components/ui/tabs";
 import { useConfig } from "@/hooks/use-config";
@@ -8,12 +8,12 @@ import { useConfig } from "@/hooks/use-config";
 export const CodeTabs = ({ children }: React.ComponentProps<typeof Tabs>) => {
   const [config, setConfig] = useConfig();
 
-  const installationType = React.useMemo(
+  const installationType = useMemo(
     () => config.installationType || "cli",
     [config]
   );
 
-  const handleValueChange = React.useCallback(
+  const handleValueChange = useCallback(
     (value: string) =>
       setConfig({ ...config, installationType: value as "cli" | "manual" }),
     [config, setConfig]

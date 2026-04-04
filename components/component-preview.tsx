@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Text } from "ink";
-import * as React from "react";
+import { Component as ReactComponent, useEffect, useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
 
@@ -189,7 +189,7 @@ const PreviewPlaceholder = ({
   );
 };
 
-class PreviewErrorBoundary extends React.Component<
+class PreviewErrorBoundary extends ReactComponent<
   { children: React.ReactNode; componentName: string },
   { hasError: boolean; message?: string }
 > {
@@ -570,12 +570,10 @@ const DemoElement = ({
 };
 
 export const ComponentPreview = ({ name }: { name: string }) => {
-  const [Component, setComponent] = React.useState<React.ElementType | null>(
-    null
-  );
-  const [error, setError] = React.useState<string>();
+  const [Component, setComponent] = useState<React.ElementType | null>(null);
+  const [error, setError] = useState<string>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const loader = registry[name];
     if (!loader) {
       setError(`No registry entry for "${name}"`);
