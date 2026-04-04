@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@import "./themes.css";
-
 @custom-variant dark (&:is(.dark *));
 
 @custom-variant fixed (&:is(.layout-fixed *));
@@ -179,10 +177,6 @@
 
 @utility section-soft {
   @apply from-background to-surface/40 dark:bg-background 3xl:fixed:bg-none bg-gradient-to-b;
-}
-
-@utility theme-container {
-  @apply font-sans;
 }
 
 @utility container-wrapper {
