@@ -16,38 +16,38 @@ export const highContrastTheme = createTheme({
     style: "bold",
   },
   colors: {
+    // 8.6:1 on #000 — exceeds AA
+    accent: "#00FFFF",
+    accentForeground: "#000000",
+    background: "#000000",
+    border: "#FFFFFF",
+    // 5.1:1 on #000 — meets AA; uses symbol + color
+    error: "#FF4444",
+    errorForeground: "#FFFFFF",
+    // 19.1:1 — visually distinct for focus
+    focusRing: "#FFFF00",
+    // 21:1 — exceeds AAA
+    foreground: "#FFFFFF",
+    // 7.5:1 on #000 — exceeds AA
+    info: "#00CCFF",
+    infoForeground: "#000000",
+    muted: "#1A1A1A",
+    // 10.4:1 on #1A1A1A — exceeds AAA
+    mutedForeground: "#CCCCCC",
     // 21:1 on #000 — exceeds AAA
     primary: "#FFFFFF",
     primaryForeground: "#000000",
     // 19.1:1 on #000 — exceeds AAA
     secondary: "#FFFF00",
     secondaryForeground: "#000000",
-    // 8.6:1 on #000 — exceeds AA
-    accent: "#00FFFF",
-    accentForeground: "#000000",
+    selection: "#FFFFFF",
+    selectionForeground: "#000000",
     // 15.3:1 on #000 — exceeds AAA
     success: "#00FF00",
     successForeground: "#000000",
     // 19.1:1 on #000 — exceeds AAA
     warning: "#FFFF00",
     warningForeground: "#000000",
-    // 5.1:1 on #000 — meets AA; uses symbol + color
-    error: "#FF4444",
-    errorForeground: "#FFFFFF",
-    // 7.5:1 on #000 — exceeds AA
-    info: "#00CCFF",
-    infoForeground: "#000000",
-    background: "#000000",
-    // 21:1 — exceeds AAA
-    foreground: "#FFFFFF",
-    muted: "#1A1A1A",
-    // 10.4:1 on #1A1A1A — exceeds AAA
-    mutedForeground: "#CCCCCC",
-    border: "#FFFFFF",
-    // 19.1:1 — visually distinct for focus
-    focusRing: "#FFFF00",
-    selection: "#FFFFFF",
-    selectionForeground: "#000000",
   },
   name: "high-contrast",
 });
@@ -65,38 +65,38 @@ export const highContrastLightTheme = createTheme({
     style: "bold",
   },
   colors: {
+    // 8.6:1 on #FFF — exceeds AA
+    accent: "#004499",
+    accentForeground: "#FFFFFF",
+    background: "#FFFFFF",
+    border: "#000000",
+    // 5.9:1 on #FFF — meets AA
+    error: "#CC0000",
+    errorForeground: "#FFFFFF",
+    // 8.6:1 on #FFF — meets AA with shape cue
+    focusRing: "#0000CC",
+    // 21:1 — exceeds AAA
+    foreground: "#000000",
+    // 8.6:1 on #FFF — exceeds AA
+    info: "#004499",
+    infoForeground: "#FFFFFF",
+    muted: "#F0F0F0",
+    // 9.7:1 on #F0F0F0 — exceeds AAA
+    mutedForeground: "#444444",
     // 21:1 on #FFF — exceeds AAA
     primary: "#000000",
     primaryForeground: "#FFFFFF",
     // 6.1:1 on #FFF — meets AA
     secondary: "#6600CC",
     secondaryForeground: "#FFFFFF",
-    // 8.6:1 on #FFF — exceeds AA
-    accent: "#004499",
-    accentForeground: "#FFFFFF",
+    selection: "#000000",
+    selectionForeground: "#FFFFFF",
     // 7.4:1 on #FFF — exceeds AA
     success: "#006600",
     successForeground: "#FFFFFF",
     // 5.7:1 on #FFF — meets AA
     warning: "#884400",
     warningForeground: "#FFFFFF",
-    // 5.9:1 on #FFF — meets AA
-    error: "#CC0000",
-    errorForeground: "#FFFFFF",
-    // 8.6:1 on #FFF — exceeds AA
-    info: "#004499",
-    infoForeground: "#FFFFFF",
-    background: "#FFFFFF",
-    // 21:1 — exceeds AAA
-    foreground: "#000000",
-    muted: "#F0F0F0",
-    // 9.7:1 on #F0F0F0 — exceeds AAA
-    mutedForeground: "#444444",
-    border: "#000000",
-    // 8.6:1 on #FFF — meets AA with shape cue
-    focusRing: "#0000CC",
-    selection: "#000000",
-    selectionForeground: "#FFFFFF",
   },
   name: "high-contrast-light",
 });

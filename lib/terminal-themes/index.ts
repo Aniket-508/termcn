@@ -4,12 +4,12 @@ import { draculaTheme } from "@/lib/terminal-themes/dracula";
 import {
   highContrastLightTheme,
   highContrastTheme,
-} from "@/lib/terminal-themes/highContrast";
+} from "@/lib/terminal-themes/high-contrast";
 import { monokaiTheme } from "@/lib/terminal-themes/monokai";
 import { nordTheme } from "@/lib/terminal-themes/nord";
-import { oneDarkTheme } from "@/lib/terminal-themes/oneDark";
+import { oneDarkTheme } from "@/lib/terminal-themes/one-dark";
 import { solarizedTheme } from "@/lib/terminal-themes/solarized";
-import { tokyoNightTheme } from "@/lib/terminal-themes/tokyoNight";
+import { tokyoNightTheme } from "@/lib/terminal-themes/tokyo-night";
 
 export const terminalThemeOptions = [
   { label: "Default", value: "default" },
