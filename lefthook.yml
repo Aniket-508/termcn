@@ -1,6 +1,6 @@
 pre-commit:
   jobs:
-    - run: pnpm dlx ultracite fix
+    - run: pnpm fix
       glob:
         - "**/*.js"
         - "**/*.jsx"
