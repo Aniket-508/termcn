@@ -1480,8 +1480,8 @@
       "description": "High contrast themes for dark and light terminal backgrounds.",
       "files": [
         {
-          "path": "registry/themes/highContrast.ts",
-          "target": "lib/terminal-themes/highContrast.ts",
+          "path": "registry/themes/high-contrast.ts",
+          "target": "lib/terminal-themes/high-contrast.ts",
           "type": "registry:file"
         }
       ],
@@ -1525,8 +1525,8 @@
       "description": "A One Dark theme for terminal components.",
       "files": [
         {
-          "path": "registry/themes/oneDark.ts",
-          "target": "lib/terminal-themes/oneDark.ts",
+          "path": "registry/themes/one-dark.ts",
+          "target": "lib/terminal-themes/one-dark.ts",
           "type": "registry:file"
         }
       ],
@@ -1568,8 +1568,8 @@
       "description": "Tokyo Night colors for terminal interfaces.",
       "files": [
         {
-          "path": "registry/themes/tokyoNight.ts",
-          "target": "lib/terminal-themes/tokyoNight.ts",
+          "path": "registry/themes/tokyo-night.ts",
+          "target": "lib/terminal-themes/tokyo-night.ts",
           "type": "registry:file"
         }
       ],
