@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/stopwatch.json
 import { Stopwatch } from "@/components/ui/stopwatch";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Stopwatch {...demoProps} />;
+  return <Stopwatch autoStart showLaps color="green" />;
 }
 ```
 
@@ -40,11 +36,31 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type      | Default     | Description |
-| ----------- | --------- | ----------- | ----------- |
-| `autoStart` | `boolean` | `false`     | -           |
-| `color`     | `string`  | `undefined` | -           |
-| `showLaps`  | `boolean` | `true`      | -           |
+| Prop        | Type      | Default     | Description                               |
+| ----------- | --------- | ----------- | ----------------------------------------- |
+| `autoStart` | `boolean` | `false`     | Start the stopwatch immediately on mount  |
+| `color`     | `string`  | `undefined` | Custom color for the elapsed time display |
+| `showLaps`  | `boolean` | `true`      | Whether to display the lap times list     |
+
+## Examples
+
+### Auto-starting stopwatch
+
+```tsx
+<Stopwatch autoStart />
+```
+
+### Without lap tracking
+
+```tsx
+<Stopwatch showLaps={false} />
+```
+
+### Custom color
+
+```tsx
+<Stopwatch color="cyan" autoStart showLaps />
+```
 
 ## Registry Files
 

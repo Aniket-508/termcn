@@ -19,7 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/badge.json
 import { Badge } from "@/components/ui/badge";
 
 export function Example() {
-  <Badge variant="success">Active</Badge>;
+  return <Badge variant="success">Active</Badge>;
 }
 ```
 
@@ -31,15 +31,48 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                            | Default     | Description                                   |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------- |
-| `children`    | `string`                                                                                        | `required`  | -                                             |
-| `variant`     | `BadgeVariant`                                                                                  | `"default"` | -                                             |
-| `color`       | `string`                                                                                        | `undefined` | -                                             |
-| `bold`        | `boolean`                                                                                       | `false`     | -                                             |
-| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the badge. Default: true |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style. Default: 'round'                |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                |
+| Prop          | Type                                                                                            | Default     | Description                               |
+| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
+| `children`    | `string`                                                                                        | `required`  | Text content displayed inside the badge   |
+| `variant`     | `BadgeVariant`                                                                                  | `"default"` | Visual style variant for the badge color  |
+| `color`       | `string`                                                                                        | `undefined` | Custom color override for text and border |
+| `bold`        | `boolean`                                                                                       | `false`     | Whether to render text in bold            |
+| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the badge            |
+| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style for the badge outline        |
+| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding inside the border      |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Badge>Default</Badge>
+```
+
+### Status Variants
+
+```tsx
+<Badge variant="success">Passing</Badge>
+<Badge variant="error">Failed</Badge>
+<Badge variant="warning">Pending</Badge>
+<Badge variant="info">Note</Badge>
+```
+
+### Bold Without Border
+
+```tsx
+<Badge bold bordered={false}>
+  Inline Label
+</Badge>
+```
+
+### Custom Border Style
+
+```tsx
+<Badge variant="info" borderStyle="double" paddingX={2}>
+  Important
+</Badge>
+```
 
 ## Registry Files
 

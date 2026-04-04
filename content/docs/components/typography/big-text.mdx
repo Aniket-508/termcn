@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/big-text.json
 import { BigText } from "@/components/ui/big-text";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <BigText {...demoProps} />;
+  return <BigText>HELLO</BigText>;
 }
 ```
 
@@ -35,11 +31,31 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type          | Default     | Description |
-| ---------- | ------------- | ----------- | ----------- |
-| `children` | `string`      | `required`  | -           |
-| `color`    | `string`      | `undefined` | -           |
-| `font`     | `BigTextFont` | `"block"`   | -           |
+| Prop       | Type          | Default     | Description                                          |
+| ---------- | ------------- | ----------- | ---------------------------------------------------- |
+| `children` | `string`      | `required`  | Text string to render as large ASCII art             |
+| `color`    | `string`      | `undefined` | Color override for the rendered characters           |
+| `font`     | `BigTextFont` | `"block"`   | Font style: `"block"` (solid) or `"simple"` (shaded) |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<BigText>HELLO</BigText>
+```
+
+### With Custom Color
+
+```tsx
+<BigText color="#ff6b6b">ERROR</BigText>
+```
+
+### Simple Font
+
+```tsx
+<BigText font="simple">DONE</BigText>
+```
 
 ## Registry Files
 

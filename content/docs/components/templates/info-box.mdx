@@ -19,11 +19,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/info-box.json
 import { InfoBox } from "@/components/ui/info-box";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <InfoBox {...demoProps} />;
+  return (
+    <InfoBox borderStyle="round" width={40}>
+      <InfoBox.Header icon="📦" label="my-package" version="v2.4.1" />
+      <InfoBox.Row label="License" value="MIT" />
+      <InfoBox.Row label="Engine" value="node" valueDetail=">=18.0.0" />
+      <InfoBox.TreeRow label="Platform" value="darwin-arm64" />
+    </InfoBox>
+  );
 }
 ```
 
@@ -35,13 +38,82 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                        | Default     | Description |
-| ------------- | ------------------------------------------- | ----------- | ----------- |
-| `borderStyle` | `"single" \| "round" \| "double" \| "bold"` | `"single"`  | -           |
-| `borderColor` | `string`                                    | `undefined` | -           |
-| `padding`     | `[number, number]`                          | `[0`        | -           |
-| `width`       | `number \| "full"`                          | `undefined` | -           |
-| `children`    | `ReactNode`                                 | `required`  | -           |
+### InfoBox
+
+| Prop          | Type                                        | Default     | Description                                       |
+| ------------- | ------------------------------------------- | ----------- | ------------------------------------------------- |
+| `borderStyle` | `"single" \| "round" \| "double" \| "bold"` | `"single"`  | Border style for the outer box.                   |
+| `borderColor` | `string`                                    | `undefined` | Border color; defaults to theme border color.     |
+| `padding`     | `[number, number]`                          | `[0, 1]`    | Vertical and horizontal padding `[y, x]`.         |
+| `width`       | `number \| "full"`                          | `undefined` | Fixed width, or `"full"` to fill available space. |
+| `children`    | `ReactNode`                                 | `required`  | Header, Row, and TreeRow sub-components.          |
+
+### InfoBox.Header
+
+| Prop           | Type     | Default     | Description                             |
+| -------------- | -------- | ----------- | --------------------------------------- |
+| `icon`         | `string` | `undefined` | Emoji or symbol shown before the label. |
+| `iconColor`    | `string` | `"green"`   | Color applied to the icon.              |
+| `label`        | `string` | `required`  | Primary header text, rendered bold.     |
+| `description`  | `string` | `undefined` | Dimmed text shown after the label.      |
+| `version`      | `string` | `undefined` | Version badge displayed at the end.     |
+| `versionColor` | `string` | `"cyan"`    | Color of the version text.              |
+
+### InfoBox.Row
+
+| Prop          | Type      | Default     | Description                                 |
+| ------------- | --------- | ----------- | ------------------------------------------- |
+| `label`       | `string`  | `required`  | Key/label on the left side.                 |
+| `value`       | `string`  | `undefined` | Value text displayed after the label.       |
+| `valueDetail` | `string`  | `undefined` | Secondary detail appended after the value.  |
+| `valueColor`  | `string`  | `undefined` | Color for the value detail text.            |
+| `bold`        | `boolean` | `false`     | Render the value in bold.                   |
+| `tree`        | `boolean` | `false`     | Prefix the label with a `└` tree connector. |
+| `color`       | `string`  | `undefined` | Color override for both label and value.    |
+
+### InfoBox.TreeRow
+
+Same props as `InfoBox.Row` except `tree` is always `true`.
+
+## Examples
+
+### Simple info panel
+
+```tsx
+<InfoBox>
+  <InfoBox.Header label="System Info" />
+  <InfoBox.Row label="OS" value="macOS 15.2" />
+  <InfoBox.Row label="CPU" value="Apple M3 Pro" />
+  <InfoBox.Row label="Memory" value="36 GB" />
+</InfoBox>
+```
+
+### With tree rows and full width
+
+```tsx
+<InfoBox borderStyle="double" width="full">
+  <InfoBox.Header icon="⚙" label="Config" description="active profile" />
+  <InfoBox.Row label="Environment" value="production" bold />
+  <InfoBox.TreeRow label="Region" value="us-east-1" />
+  <InfoBox.TreeRow label="Replicas" value="3" />
+</InfoBox>
+```
+
+### Custom styling
+
+```tsx
+<InfoBox borderStyle="bold" borderColor="yellow" padding={[1, 2]}>
+  <InfoBox.Header
+    icon="🔒"
+    iconColor="red"
+    label="Security Audit"
+    version="v1.0"
+    versionColor="green"
+  />
+  <InfoBox.Row label="Vulnerabilities" value="0" valueDetail="(clean)" />
+  <InfoBox.Row label="Last scan" value="2 minutes ago" />
+</InfoBox>
+```
 
 ## Registry Files
 

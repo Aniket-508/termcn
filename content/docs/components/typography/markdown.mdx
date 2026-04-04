@@ -19,11 +19,9 @@ npx shadcn@latest add https://termcn.vercel.app/r/markdown.json
 import { Markdown } from "@/components/ui/markdown";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Markdown {...demoProps} />;
+  return (
+    <Markdown>{`# Welcome\n\nThis is **bold** and *italic* text.`}</Markdown>
+  );
 }
 ```
 
@@ -36,10 +34,36 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type     | Default     | Description                 |
-| ---------- | -------- | ----------- | --------------------------- |
-| `children` | `string` | `required`  | -                           |
-| `width`    | `number` | `undefined` | Max width for text wrapping |
+| Prop       | Type     | Default     | Description                         |
+| ---------- | -------- | ----------- | ----------------------------------- |
+| `children` | `string` | `required`  | Markdown string to parse and render |
+| `width`    | `number` | `undefined` | Max width for text wrapping         |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Markdown>
+  {`# Hello World\n\nA paragraph with **bold** and *italic* text.`}
+</Markdown>
+```
+
+### Lists and Blockquotes
+
+```tsx
+<Markdown>
+  {`> Important note\n\n- First item\n- Second item\n- Third item`}
+</Markdown>
+```
+
+### With Width Constraint
+
+```tsx
+<Markdown width={60}>
+  {`## Heading\n\nThis long paragraph will wrap at 60 characters to keep output readable in narrow terminals.`}
+</Markdown>
+```
 
 ## Registry Files
 

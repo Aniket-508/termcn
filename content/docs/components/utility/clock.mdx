@@ -19,11 +19,9 @@ npx shadcn@latest add https://termcn.vercel.app/r/clock.json
 import { Clock } from "@/components/ui/clock";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Clock {...demoProps} />;
+  return (
+    <Clock format="12h" showSeconds showDate timezone="America/New_York" />
+  );
 }
 ```
 
@@ -39,14 +37,34 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type             | Default     | Description |
-| ------------- | ---------------- | ----------- | ----------- |
-| `format`      | `"12h" \| "24h"` | `"24h"`     | -           |
-| `showSeconds` | `boolean`        | `true`      | -           |
-| `showDate`    | `boolean`        | `false`     | -           |
-| `timezone`    | `string`         | `undefined` | -           |
-| `color`       | `string`         | `undefined` | -           |
-| `size`        | `"sm" \| "lg"`   | `"sm"`      | -           |
+| Prop          | Type             | Default     | Description                                      |
+| ------------- | ---------------- | ----------- | ------------------------------------------------ |
+| `format`      | `"12h" \| "24h"` | `"24h"`     | Time format to use                               |
+| `showSeconds` | `boolean`        | `true`      | Whether to display seconds                       |
+| `showDate`    | `boolean`        | `false`     | Show the current date above the time             |
+| `timezone`    | `string`         | `undefined` | IANA timezone string (e.g. `"America/New_York"`) |
+| `color`       | `string`         | `undefined` | Custom color for the time display                |
+| `size`        | `"sm" \| "lg"`   | `"sm"`      | Display size; `"lg"` uses box-drawing digit art  |
+
+## Examples
+
+### 24-hour clock without seconds
+
+```tsx
+<Clock format="24h" showSeconds={false} />
+```
+
+### Large display with date
+
+```tsx
+<Clock size="lg" showDate format="12h" />
+```
+
+### Timezone-specific clock
+
+```tsx
+<Clock timezone="Asia/Tokyo" format="24h" color="cyan" />
+```
 
 ## Registry Files
 

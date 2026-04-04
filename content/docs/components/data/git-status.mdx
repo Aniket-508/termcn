@@ -19,11 +19,9 @@ npx shadcn@latest add https://termcn.vercel.app/r/git-status.json
 import { GitStatus } from "@/components/ui/git-status";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <GitStatus {...demoProps} />;
+  return (
+    <GitStatus branch="main" staged={2} modified={5} ahead={1} behind={0} />
+  );
 }
 ```
 
@@ -35,13 +33,33 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type     | Default    | Description |
-| ---------- | -------- | ---------- | ----------- |
-| `branch`   | `string` | `required` | -           |
-| `staged`   | `number` | `0`        | -           |
-| `modified` | `number` | `0`        | -           |
-| `ahead`    | `number` | `0`        | -           |
-| `behind`   | `number` | `0`        | -           |
+| Prop       | Type     | Default    | Description                         |
+| ---------- | -------- | ---------- | ----------------------------------- |
+| `branch`   | `string` | `required` | Current branch name                 |
+| `staged`   | `number` | `0`        | Number of staged files              |
+| `modified` | `number` | `0`        | Number of modified (unstaged) files |
+| `ahead`    | `number` | `0`        | Number of commits ahead of remote   |
+| `behind`   | `number` | `0`        | Number of commits behind remote     |
+
+## Examples
+
+### Clean working tree
+
+```tsx
+<GitStatus branch="main" />
+```
+
+### Feature branch with changes
+
+```tsx
+<GitStatus branch="feat/new-ui" staged={4} modified={1} ahead={3} />
+```
+
+### Behind remote
+
+```tsx
+<GitStatus branch="develop" behind={7} modified={2} />
+```
 
 ## Registry Files
 

@@ -19,11 +19,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/streaming-text.json
 import { StreamingText } from "@/components/ui/streaming-text";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <StreamingText {...demoProps} />;
+  return (
+    <StreamingText
+      text="The answer to life, the universe, and everything is 42."
+      animate
+      speed={25}
+      onComplete={(text) => console.log("done:", text)}
+    />
+  );
 }
 ```
 
@@ -35,15 +38,44 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                            | Default     | Description                                                  |
-| ------------- | ------------------------------- | ----------- | ------------------------------------------------------------ |
-| `text`        | `string`                        | `undefined` | Current accumulated string to display (controlled mode)      |
-| `stream`      | `AsyncIterable&lt;string&gt;`   | `undefined` | AsyncIterable&lt;string&gt; source; manages state internally |
-| `cursor`      | `boolean`                       | `true`      | Show blinking ▌ cursor at end while streaming                |
-| `animate`     | `boolean`                       | `false`     | Simulate typing animation for pre-buffered text              |
-| `speed`       | `number`                        | `30`        | Typing animation speed in ms per character (default 30)      |
-| `onComplete`  | `(fullText: string) =&gt; void` | `undefined` | Called with full text when streaming/animation completes     |
-| `cursorColor` | `string`                        | `undefined` | Color for the cursor                                         |
+| Prop          | Type                         | Default     | Description                                                      |
+| ------------- | ---------------------------- | ----------- | ---------------------------------------------------------------- |
+| `text`        | `string`                     | `undefined` | Pre-buffered string to display (controlled mode).                |
+| `stream`      | `AsyncIterable<string>`      | `undefined` | Async iterable source; the component manages state internally.   |
+| `cursor`      | `boolean`                    | `true`      | Show a blinking `▌` cursor at the end while streaming.           |
+| `animate`     | `boolean`                    | `false`     | Simulate a typing animation for pre-buffered `text`.             |
+| `speed`       | `number`                     | `30`        | Typing speed in milliseconds per character when `animate` is on. |
+| `onComplete`  | `(fullText: string) => void` | `undefined` | Called with the full text once streaming or animation finishes.  |
+| `cursorColor` | `string`                     | `undefined` | Override color for the blinking cursor.                          |
+
+## Examples
+
+### Static text with typing animation
+
+```tsx
+<StreamingText text="Installing dependencies..." animate speed={20} />
+```
+
+### Controlled text without cursor
+
+```tsx
+<StreamingText text="Build succeeded in 3.2s" cursor={false} />
+```
+
+### Async stream source
+
+```tsx
+<StreamingText
+  stream={fetchStream("/api/chat")}
+  onComplete={(text) => console.log("response:", text)}
+/>
+```
+
+### Custom cursor color
+
+```tsx
+<StreamingText text="Processing..." animate cursorColor="cyan" />
+```
 
 ## Registry Files
 

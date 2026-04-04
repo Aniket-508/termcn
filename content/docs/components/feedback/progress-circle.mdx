@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/progress-circle.json
 import { ProgressCircle } from "@/components/ui/progress-circle";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <ProgressCircle {...demoProps} />;
+  return <ProgressCircle value={75} size="sm" label="Memory" showPercent />;
 }
 ```
 
@@ -35,13 +31,45 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                 | Default     | Description |
-| ------------- | -------------------- | ----------- | ----------- |
-| `value`       | `number`             | `required`  | -           |
-| `size`        | `ProgressCircleSize` | `"sm"`      | -           |
-| `color`       | `string`             | `undefined` | -           |
-| `label`       | `string`             | `undefined` | -           |
-| `showPercent` | `boolean`            | `false`     | -           |
+| Prop          | Type                 | Default     | Description                           |
+| ------------- | -------------------- | ----------- | ------------------------------------- |
+| `value`       | `number`             | `required`  | Progress value from 0 to 100          |
+| `size`        | `ProgressCircleSize` | `"sm"`      | Display size: "sm", "md", or "lg"     |
+| `color`       | `string`             | `undefined` | Override the indicator color          |
+| `label`       | `string`             | `undefined` | Text label displayed below the circle |
+| `showPercent` | `boolean`            | `false`     | Show percentage text                  |
+
+## Examples
+
+### Small (Default)
+
+```tsx
+<ProgressCircle value={60} />
+```
+
+### Medium with Label
+
+```tsx
+<ProgressCircle value={45} size="md" label="CPU" />
+```
+
+### Large with Percentage
+
+```tsx
+<ProgressCircle value={88} size="lg" showPercent />
+```
+
+### Custom Color
+
+```tsx
+<ProgressCircle
+  value={100}
+  size="sm"
+  color="#22c55e"
+  label="Done"
+  showPercent
+/>
+```
 
 ## Registry Files
 

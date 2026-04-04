@@ -19,11 +19,16 @@ npx shadcn@latest add https://termcn.vercel.app/r/radio-group.json
 import { RadioGroup } from "@/components/ui/radio-group";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <RadioGroup {...demoProps} />;
+  return (
+    <RadioGroup
+      options={[
+        { value: "sm", label: "Small" },
+        { value: "md", label: "Medium" },
+        { value: "lg", label: "Large" },
+      ]}
+      onChange={(value) => console.log("Selected:", value)}
+    />
+  );
 }
 ```
 
@@ -39,7 +44,51 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop       | Type                 | Default     | Description                                         |
+| ---------- | -------------------- | ----------- | --------------------------------------------------- |
+| `options`  | `RadioOption<T>[]`   | `required`  | Array of `{ value, label, hint?, disabled? }` items |
+| `value`    | `T`                  | `undefined` | Controlled selected value                           |
+| `onChange` | `(value: T) => void` | `undefined` | Callback fired when the selected option changes     |
+| `name`     | `string`             | `undefined` | Logical group name (for identification)             |
+| `cursor`   | `string`             | `"›"`       | Character used for the active-row cursor            |
+
+## Examples
+
+### With Hints
+
+```tsx
+<RadioGroup
+  options={[
+    { value: "free", label: "Free", hint: "$0/mo" },
+    { value: "pro", label: "Pro", hint: "$10/mo" },
+    { value: "enterprise", label: "Enterprise", hint: "Custom" },
+  ]}
+/>
+```
+
+### With Disabled Options
+
+```tsx
+<RadioGroup
+  options={[
+    { value: "light", label: "Light" },
+    { value: "dark", label: "Dark" },
+    { value: "system", label: "System", disabled: true },
+  ]}
+/>
+```
+
+### Custom Cursor
+
+```tsx
+<RadioGroup
+  options={[
+    { value: "yes", label: "Yes" },
+    { value: "no", label: "No" },
+  ]}
+  cursor="→"
+/>
+```
 
 ## Registry Files
 

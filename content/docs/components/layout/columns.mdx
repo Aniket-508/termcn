@@ -19,11 +19,12 @@ npx shadcn@latest add https://termcn.vercel.app/r/columns.json
 import { Columns } from "@/components/ui/columns";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Columns {...demoProps} />;
+  return (
+    <Columns gap={2} align="center">
+      <Text>Left</Text>
+      <Text>Right</Text>
+    </Columns>
+  );
 }
 ```
 
@@ -35,11 +36,42 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type                            | Default    | Description |
-| ---------- | ------------------------------- | ---------- | ----------- |
-| `children` | `ReactNode`                     | `required` | -           |
-| `gap`      | `number`                        | `0`        | -           |
-| `align`    | `"top" \| "center" \| "bottom"` | `"top"`    | -           |
+| Prop       | Type                            | Default  | Description                                        |
+| ---------- | ------------------------------- | -------- | -------------------------------------------------- |
+| `children` | `ReactNode`                     | required | Each child is placed in its own equal-width column |
+| `gap`      | `number`                        | `0`      | Spacing between columns                            |
+| `align`    | `"top" \| "center" \| "bottom"` | `"top"`  | Vertical alignment of content within columns       |
+
+## Examples
+
+### Two columns with gap
+
+```tsx
+<Columns gap={4}>
+  <Text>Column A</Text>
+  <Text>Column B</Text>
+</Columns>
+```
+
+### Three columns, bottom-aligned
+
+```tsx
+<Columns gap={2} align="bottom">
+  <Text>Short</Text>
+  <Text>{"Tall\ncontent\nhere"}</Text>
+  <Text>Short</Text>
+</Columns>
+```
+
+### Center-aligned columns
+
+```tsx
+<Columns align="center">
+  <Text>Left</Text>
+  <Text>Middle</Text>
+  <Text>Right</Text>
+</Columns>
+```
 
 ## Registry Files
 

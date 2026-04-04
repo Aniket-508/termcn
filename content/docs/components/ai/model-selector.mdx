@@ -19,11 +19,21 @@ npx shadcn@latest add https://termcn.vercel.app/r/model-selector.json
 import { ModelSelector } from "@/components/ui/model-selector";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <ModelSelector {...demoProps} />;
+  return (
+    <ModelSelector
+      models={[
+        { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI", context: 128000 },
+        {
+          id: "claude-3-5-sonnet",
+          name: "Claude 3.5 Sonnet",
+          provider: "Anthropic",
+          context: 200000,
+        },
+      ]}
+      selected="gpt-4o"
+      onSelect={(id) => console.log("selected", id)}
+    />
+  );
 }
 ```
 
@@ -39,14 +49,74 @@ export function Example() {
 
 ## Props
 
-| Prop              | Type                      | Default    | Description |
-| ----------------- | ------------------------- | ---------- | ----------- |
-| `models`          | `ModelOption[]`           | `required` | -           |
-| `selected`        | `string`                  | `required` | -           |
-| `onSelect`        | `(id: string) =&gt; void` | `required` | -           |
-| `showContext`     | `boolean`                 | `true`     | -           |
-| `showProvider`    | `boolean`                 | `true`     | -           |
-| `groupByProvider` | `boolean`                 | `false`    | -           |
+| Prop              | Type                   | Default    | Description                                                                               |
+| ----------------- | ---------------------- | ---------- | ----------------------------------------------------------------------------------------- |
+| `models`          | `ModelOption[]`        | `required` | Array of models. Each has `id`, `name`, `provider`, and optional `context` (token count). |
+| `selected`        | `string`               | `required` | The `id` of the currently selected model.                                                 |
+| `onSelect`        | `(id: string) => void` | `required` | Called with the model `id` when the user presses Enter.                                   |
+| `showContext`     | `boolean`              | `true`     | Display the context-window size next to each model.                                       |
+| `showProvider`    | `boolean`              | `true`     | Display the provider name next to each model.                                             |
+| `groupByProvider` | `boolean`              | `false`    | Group models under provider headings.                                                     |
+
+## Examples
+
+### Minimal list without context
+
+```tsx
+<ModelSelector
+  models={[
+    { id: "gpt-4o-mini", name: "GPT-4o Mini", provider: "OpenAI" },
+    { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI" },
+  ]}
+  selected="gpt-4o-mini"
+  onSelect={(id) => console.log(id)}
+  showContext={false}
+/>
+```
+
+### Grouped by provider
+
+```tsx
+<ModelSelector
+  models={[
+    { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI", context: 128000 },
+    {
+      id: "claude-3-5-sonnet",
+      name: "Claude 3.5 Sonnet",
+      provider: "Anthropic",
+      context: 200000,
+    },
+    {
+      id: "claude-3-opus",
+      name: "Claude 3 Opus",
+      provider: "Anthropic",
+      context: 200000,
+    },
+  ]}
+  selected="claude-3-5-sonnet"
+  onSelect={(id) => console.log(id)}
+  groupByProvider
+/>
+```
+
+### Provider hidden
+
+```tsx
+<ModelSelector
+  models={[
+    { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI", context: 128000 },
+    {
+      id: "gpt-4-turbo",
+      name: "GPT-4 Turbo",
+      provider: "OpenAI",
+      context: 128000,
+    },
+  ]}
+  selected="gpt-4o"
+  onSelect={(id) => console.log(id)}
+  showProvider={false}
+/>
+```
 
 ## Registry Files
 

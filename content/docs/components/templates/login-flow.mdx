@@ -19,11 +19,21 @@ npx shadcn@latest add https://termcn.vercel.app/r/login-flow.json
 import { LoginFlow } from "@/components/ui/login-flow";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <LoginFlow {...demoProps} />;
+  return (
+    <LoginFlow title="Acme CLI" padding={2}>
+      <LoginFlow.Announcement icon="🎉">
+        Version 3.0 is now available!
+      </LoginFlow.Announcement>
+      <LoginFlow.Description>
+        Sign in to access your workspace.
+      </LoginFlow.Description>
+      <LoginFlow.Select
+        label="Choose a login method:"
+        options={["GitHub", "Google SSO", "Email & Password"]}
+        onSelect={(index) => console.log("selected", index)}
+      />
+    </LoginFlow>
+  );
 }
 ```
 
@@ -40,14 +50,96 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type                         | Default     | Description |
-| ------------ | ---------------------------- | ----------- | ----------- |
-| `title`      | `string`                     | `undefined` | -           |
-| `titleFont`  | `BigTextFont`                | `"block"`   | -           |
-| `titleColor` | `string`                     | `undefined` | -           |
-| `padding`    | `number`                     | `2`         | -           |
-| `onSelect`   | `(index: number) =&gt; void` | `undefined` | -           |
-| `children`   | `ReactNode`                  | `required`  | -           |
+### LoginFlow
+
+| Prop         | Type                      | Default     | Description                                           |
+| ------------ | ------------------------- | ----------- | ----------------------------------------------------- |
+| `title`      | `string`                  | `undefined` | Large ASCII art title rendered via BigText.           |
+| `titleFont`  | `BigTextFont`             | `"block"`   | Font variant for the title.                           |
+| `titleColor` | `string`                  | `undefined` | Title color; defaults to theme primary.               |
+| `padding`    | `number`                  | `2`         | Left padding applied to the entire layout.            |
+| `onSelect`   | `(index: number) => void` | `undefined` | Callback when a selection is made.                    |
+| `children`   | `ReactNode`               | `required`  | Announcement, Description, and Select sub-components. |
+
+### LoginFlow.Announcement
+
+| Prop          | Type                                        | Default     | Description                                  |
+| ------------- | ------------------------------------------- | ----------- | -------------------------------------------- |
+| `icon`        | `string`                                    | `"*"`       | Icon character displayed before the message. |
+| `iconColor`   | `string`                                    | `undefined` | Icon color; defaults to theme primary.       |
+| `borderStyle` | `"single" \| "round" \| "double" \| "bold"` | `"single"`  | Border style for the announcement banner.    |
+| `borderColor` | `string`                                    | `undefined` | Border color; defaults to theme border.      |
+| `children`    | `ReactNode`                                 | `required`  | Announcement body text.                      |
+
+### LoginFlow.Description
+
+| Prop       | Type        | Default     | Description               |
+| ---------- | ----------- | ----------- | ------------------------- |
+| `bold`     | `boolean`   | `false`     | Render the text in bold.  |
+| `dim`      | `boolean`   | `false`     | Dim the text color.       |
+| `color`    | `string`    | `undefined` | Text color override.      |
+| `children` | `ReactNode` | `required`  | Description text content. |
+
+### LoginFlow.Select
+
+| Prop           | Type                      | Default     | Description                                 |
+| -------------- | ------------------------- | ----------- | ------------------------------------------- |
+| `label`        | `string`                  | `undefined` | Prompt text shown above the options list.   |
+| `labelBold`    | `boolean`                 | `false`     | Render the label in bold.                   |
+| `options`      | `string[]`                | `required`  | List of selectable option labels.           |
+| `activeIndex`  | `number`                  | `undefined` | Controlled active index.                    |
+| `defaultIndex` | `number`                  | `0`         | Initial active index (uncontrolled).        |
+| `cursor`       | `string`                  | `"›"`       | Cursor character next to the active option. |
+| `cursorColor`  | `string`                  | `"cyan"`    | Color of the cursor character.              |
+| `activeColor`  | `string`                  | `"cyan"`    | Color applied to the active option label.   |
+| `onSelect`     | `(index: number) => void` | `required`  | Callback fired when an option is confirmed. |
+| `keyboardNav`  | `boolean`                 | `true`      | Enable arrow-key and number-key navigation. |
+
+## Examples
+
+### Minimal login prompt
+
+```tsx
+<LoginFlow title="Auth">
+  <LoginFlow.Select
+    options={["Sign in", "Create account"]}
+    onSelect={(i) => navigate(i === 0 ? "/login" : "/register")}
+  />
+</LoginFlow>
+```
+
+### With announcement and description
+
+```tsx
+<LoginFlow title="DevHub" titleColor="green">
+  <LoginFlow.Announcement icon="📢" borderStyle="round">
+    Scheduled maintenance on Sunday 2am–4am UTC.
+  </LoginFlow.Announcement>
+  <LoginFlow.Description dim>
+    Select an authentication provider to continue.
+  </LoginFlow.Description>
+  <LoginFlow.Select
+    label="Providers"
+    labelBold
+    options={["GitHub", "GitLab", "Bitbucket"]}
+    onSelect={(i) => auth(i)}
+  />
+</LoginFlow>
+```
+
+### Custom cursor styling
+
+```tsx
+<LoginFlow>
+  <LoginFlow.Select
+    options={["Development", "Staging", "Production"]}
+    cursor="→"
+    cursorColor="yellow"
+    activeColor="yellow"
+    onSelect={(i) => setEnv(i)}
+  />
+</LoginFlow>
+```
 
 ## Registry Files
 

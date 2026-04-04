@@ -19,11 +19,16 @@ npx shadcn@latest add https://termcn.vercel.app/r/grid.json
 import { Grid } from "@/components/ui/grid";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Grid {...demoProps} />;
+  return (
+    <Grid columns={3} gap={1}>
+      <Text>A</Text>
+      <Text>B</Text>
+      <Text>C</Text>
+      <Text>D</Text>
+      <Text>E</Text>
+      <Text>F</Text>
+    </Grid>
+  );
 }
 ```
 
@@ -35,11 +40,49 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type        | Default    | Description |
-| ---------- | ----------- | ---------- | ----------- |
-| `columns`  | `number`    | `required` | -           |
-| `gap`      | `number`    | `0`        | -           |
-| `children` | `ReactNode` | `required` | -           |
+| Prop       | Type        | Default  | Description                               |
+| ---------- | ----------- | -------- | ----------------------------------------- |
+| `columns`  | `number`    | required | Number of columns per row                 |
+| `gap`      | `number`    | `0`      | Spacing between rows and columns          |
+| `children` | `ReactNode` | required | Items to distribute across the grid cells |
+
+## Examples
+
+### 2-column grid
+
+```tsx
+<Grid columns={2}>
+  <Text>Cell 1</Text>
+  <Text>Cell 2</Text>
+  <Text>Cell 3</Text>
+  <Text>Cell 4</Text>
+</Grid>
+```
+
+### 4-column grid with gap
+
+```tsx
+<Grid columns={4} gap={2}>
+  <Text>1</Text>
+  <Text>2</Text>
+  <Text>3</Text>
+  <Text>4</Text>
+  <Text>5</Text>
+  <Text>6</Text>
+  <Text>7</Text>
+  <Text>8</Text>
+</Grid>
+```
+
+### Single-column layout
+
+```tsx
+<Grid columns={1} gap={1}>
+  <Text>Row 1</Text>
+  <Text>Row 2</Text>
+  <Text>Row 3</Text>
+</Grid>
+```
 
 ## Registry Files
 

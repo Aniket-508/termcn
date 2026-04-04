@@ -17,13 +17,22 @@ npx shadcn@latest add https://termcn.vercel.app/r/form.json
 
 ```tsx
 import { Form } from "@/components/ui/form";
+import { FormField } from "@/components/ui/form-field";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Form {...demoProps} />;
+  return (
+    <Form
+      initialValues={{ name: "", email: "" }}
+      fields={[
+        { name: "name", validate: (v) => (v ? null : "Name is required") },
+        { name: "email", validate: (v) => (v ? null : "Email is required") },
+      ]}
+      onSubmit={(values) => console.log("Submitted:", values)}
+    >
+      <Text>Name and email form (Ctrl+S to submit)</Text>
+    </Form>
+  );
 }
 ```
 
@@ -39,12 +48,44 @@ export function Example() {
 
 ## Props
 
-| Prop            | Type                                                 | Default        | Description |
-| --------------- | ---------------------------------------------------- | -------------- | ----------- |
-| `onSubmit`      | `(values: Record&lt;string, unknown&gt;) =&gt; void` | `required`     | -           |
-| `initialValues` | `Record&lt;string, unknown&gt;`                      | `&#123;&#125;` | -           |
-| `fields`        | `FormField[]`                                        | `[]`           | -           |
-| `children`      | `ReactNode`                                          | `required`     | -           |
+| Prop            | Type                                        | Default    | Description                                      |
+| --------------- | ------------------------------------------- | ---------- | ------------------------------------------------ |
+| `onSubmit`      | `(values: Record<string, unknown>) => void` | `required` | Callback fired with all field values on submit   |
+| `initialValues` | `Record<string, unknown>`                   | `{}`       | Initial values for the form fields               |
+| `fields`        | `FormField[]`                               | `[]`       | Field definitions with optional validation rules |
+| `children`      | `ReactNode`                                 | `required` | Form content, typically `FormField` components   |
+
+## Examples
+
+### With Validation
+
+```tsx
+<Form
+  fields={[
+    {
+      name: "port",
+      validate: (v) => {
+        const n = Number(v);
+        return n >= 1 && n <= 65535 ? null : "Invalid port number";
+      },
+    },
+  ]}
+  onSubmit={(values) => startServer(Number(values.port))}
+>
+  <Text>Enter a port number</Text>
+</Form>
+```
+
+### Simple Form Without Validation
+
+```tsx
+<Form
+  initialValues={{ query: "" }}
+  onSubmit={(values) => search(String(values.query))}
+>
+  <Text>Search query form</Text>
+</Form>
+```
 
 ## Registry Files
 

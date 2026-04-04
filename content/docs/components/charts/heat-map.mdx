@@ -19,11 +19,18 @@ npx shadcn@latest add https://termcn.vercel.app/r/heat-map.json
 import { HeatMap } from "@/components/ui/heat-map";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <HeatMap {...demoProps} />;
+  return (
+    <HeatMap
+      data={[
+        [1, 4, 7, 2],
+        [3, 8, 5, 1],
+        [6, 2, 9, 4],
+      ]}
+      rowLabels={["Mon", "Tue", "Wed"]}
+      colLabels={["Q1", "Q2", "Q3", "Q4"]}
+      showValues
+    />
+  );
 }
 ```
 
@@ -35,14 +42,58 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type         | Default               | Description |
-| ------------ | ------------ | --------------------- | ----------- |
-| `data`       | `number[][]` | `required`            | -           |
-| `rowLabels`  | `string[]`   | `undefined`           | -           |
-| `colLabels`  | `string[]`   | `undefined`           | -           |
-| `colorScale` | `string[]`   | `DEFAULT_COLOR_SCALE` | -           |
-| `cellWidth`  | `number`     | `5`                   | -           |
-| `showValues` | `boolean`    | `false`               | -           |
+| Prop         | Type         | Default               | Description                             |
+| ------------ | ------------ | --------------------- | --------------------------------------- |
+| `data`       | `number[][]` | `required`            | 2D array of numeric values for the grid |
+| `rowLabels`  | `string[]`   | `undefined`           | Labels displayed along the left axis    |
+| `colLabels`  | `string[]`   | `undefined`           | Labels displayed along the top axis     |
+| `colorScale` | `string[]`   | `DEFAULT_COLOR_SCALE` | Array of hex colors from low to high    |
+| `cellWidth`  | `number`     | `5`                   | Width of each cell in characters        |
+| `showValues` | `boolean`    | `false`               | Show numeric values inside cells        |
+
+## Examples
+
+### Minimal Grid Without Labels
+
+```tsx
+<HeatMap
+  data={[
+    [0, 3, 6],
+    [2, 5, 8],
+    [4, 7, 10],
+  ]}
+/>
+```
+
+### Custom Color Scale
+
+```tsx
+<HeatMap
+  data={[
+    [10, 30, 50],
+    [20, 60, 80],
+    [40, 70, 100],
+  ]}
+  rowLabels={["Low", "Mid", "High"]}
+  colLabels={["A", "B", "C"]}
+  colorScale={["#1e3a5f", "#2980b9", "#f39c12", "#e74c3c"]}
+  showValues
+/>
+```
+
+### Wide Cells
+
+```tsx
+<HeatMap
+  data={[
+    [5, 15, 25],
+    [10, 20, 30],
+  ]}
+  cellWidth={8}
+  colLabels={["Jan", "Feb", "Mar"]}
+  showValues
+/>
+```
 
 ## Registry Files
 

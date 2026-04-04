@@ -17,13 +17,21 @@ npx shadcn@latest add https://termcn.vercel.app/r/drawer.json
 
 ```tsx
 import { Drawer } from "@/components/ui/drawer";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Drawer {...demoProps} />;
+  return (
+    <Drawer
+      isOpen={true}
+      edge="right"
+      title="Details"
+      width={40}
+      onClose={() => console.log("closed")}
+    >
+      <Text>Name: my-project</Text>
+      <Text>Status: active</Text>
+    </Drawer>
+  );
 }
 ```
 
@@ -39,15 +47,45 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type            | Default     | Description |
-| ---------- | --------------- | ----------- | ----------- |
-| `isOpen`   | `boolean`       | `false`     | -           |
-| `edge`     | `DrawerEdge`    | `"right"`   | -           |
-| `title`    | `string`        | `undefined` | -           |
-| `children` | `ReactNode`     | `required`  | -           |
-| `onClose`  | `() =&gt; void` | `undefined` | -           |
-| `width`    | `number`        | `40`        | -           |
-| `height`   | `number`        | `10`        | -           |
+| Prop       | Type                                     | Default     | Description                                             |
+| ---------- | ---------------------------------------- | ----------- | ------------------------------------------------------- |
+| `isOpen`   | `boolean`                                | `false`     | Whether the drawer is visible                           |
+| `edge`     | `"left" \| "right" \| "top" \| "bottom"` | `"right"`   | Which edge the drawer slides in from                    |
+| `title`    | `string`                                 | `undefined` | Title displayed in the drawer header                    |
+| `children` | `ReactNode`                              | `required`  | Content rendered inside the drawer body                 |
+| `onClose`  | `() => void`                             | `undefined` | Callback fired when Esc is pressed                      |
+| `width`    | `number`                                 | `40`        | Width of the drawer when edge is `"left"` or `"right"`  |
+| `height`   | `number`                                 | `10`        | Height of the drawer when edge is `"top"` or `"bottom"` |
+
+## Examples
+
+### Left Edge
+
+```tsx
+<Drawer isOpen={true} edge="left" title="Navigation" width={30}>
+  <Text>Home</Text>
+  <Text>Settings</Text>
+  <Text>Help</Text>
+</Drawer>
+```
+
+### Bottom Edge
+
+```tsx
+<Drawer isOpen={true} edge="bottom" title="Logs" height={8}>
+  <Text>[INFO] Server started on port 3000</Text>
+  <Text>[INFO] Connected to database</Text>
+</Drawer>
+```
+
+### Without Title
+
+```tsx
+<Drawer isOpen={true} edge="right" width={35} onClose={() => close()}>
+  <Text bold>Quick Actions</Text>
+  <Text>Press Enter to select</Text>
+</Drawer>
+```
 
 ## Registry Files
 

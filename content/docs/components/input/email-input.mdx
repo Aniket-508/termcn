@@ -19,11 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/email-input.json
 import { EmailInput } from "@/components/ui/email-input";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <EmailInput {...demoProps} />;
+  return (
+    <EmailInput
+      label="Email"
+      placeholder="you@example.com"
+      onSubmit={(value) => console.log("Submitted:", value)}
+    />
+  );
 }
 ```
 
@@ -40,17 +42,40 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                         | Default             | Description |
-| ------------- | ---------------------------- | ------------------- | ----------- |
-| `value`       | `string`                     | `undefined`         | -           |
-| `onChange`    | `(value: string) =&gt; void` | `undefined`         | -           |
-| `onSubmit`    | `(value: string) =&gt; void` | `undefined`         | -           |
-| `label`       | `string`                     | `undefined`         | -           |
-| `placeholder` | `string`                     | `"you@example.com"` | -           |
-| `autoFocus`   | `boolean`                    | `false`             | -           |
-| `id`          | `string`                     | `undefined`         | -           |
-| `width`       | `number`                     | `40`                | -           |
-| `suggestions` | `string[]`                   | `["gmail.com"`      | -           |
+| Prop          | Type                      | Default                                                    | Description                                     |
+| ------------- | ------------------------- | ---------------------------------------------------------- | ----------------------------------------------- |
+| `value`       | `string`                  | `undefined`                                                | Controlled input value                          |
+| `onChange`    | `(value: string) => void` | `undefined`                                                | Called when the input value changes             |
+| `onSubmit`    | `(value: string) => void` | `undefined`                                                | Called when Enter is pressed with a valid email |
+| `label`       | `string`                  | `undefined`                                                | Label text displayed above the input            |
+| `placeholder` | `string`                  | `"you@example.com"`                                        | Placeholder shown when the input is empty       |
+| `autoFocus`   | `boolean`                 | `false`                                                    | Whether to focus the input on mount             |
+| `id`          | `string`                  | `undefined`                                                | Unique identifier for focus management          |
+| `width`       | `number`                  | `40`                                                       | Width of the input box in columns               |
+| `suggestions` | `string[]`                | `["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]` | Domain suggestions shown after typing `@`       |
+
+## Examples
+
+### With Label and Custom Width
+
+```tsx
+<EmailInput label="Work Email" width={50} placeholder="name@company.com" />
+```
+
+### Controlled Value
+
+```tsx
+<EmailInput value={email} onChange={setEmail} onSubmit={(val) => signup(val)} />
+```
+
+### Custom Domain Suggestions
+
+```tsx
+<EmailInput
+  label="Corporate Email"
+  suggestions={["acme.com", "acme.org", "acme.io"]}
+/>
+```
 
 ## Registry Files
 

@@ -19,11 +19,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/toast.json
 import { Toast } from "@/components/ui/toast";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Toast {...demoProps} />;
+  return (
+    <Toast
+      variant="success"
+      message="Settings saved successfully."
+      duration={5000}
+      onDismiss={() => console.log("toast closed")}
+    />
+  );
 }
 ```
 
@@ -39,13 +42,33 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type            | Default     | Description |
-| ----------- | --------------- | ----------- | ----------- |
-| `message`   | `string`        | `required`  | -           |
-| `variant`   | `ToastVariant`  | `"info"`    | -           |
-| `duration`  | `number`        | `3000`      | -           |
-| `onDismiss` | `() =&gt; void` | `undefined` | -           |
-| `icon`      | `string`        | `undefined` | -           |
+| Prop        | Type           | Default     | Description                                      |
+| ----------- | -------------- | ----------- | ------------------------------------------------ |
+| `message`   | `string`       | `required`  | Text content of the toast                        |
+| `variant`   | `ToastVariant` | `"info"`    | Visual style variant                             |
+| `duration`  | `number`       | `3000`      | Auto-dismiss delay in milliseconds               |
+| `onDismiss` | `() => void`   | `undefined` | Callback fired when the toast is dismissed       |
+| `icon`      | `string`       | `undefined` | Custom icon character, overrides variant default |
+
+## Examples
+
+### Info Toast
+
+```tsx
+<Toast message="New version available." />
+```
+
+### Error with Longer Duration
+
+```tsx
+<Toast variant="error" message="Deploy failed. Check logs." duration={8000} />
+```
+
+### Warning with Custom Icon
+
+```tsx
+<Toast variant="warning" message="API rate limit at 80%." icon="🔥" />
+```
 
 ## Registry Files
 

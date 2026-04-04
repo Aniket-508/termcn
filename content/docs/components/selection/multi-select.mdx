@@ -19,10 +19,16 @@ npx shadcn@latest add https://termcn.vercel.app/r/multi-select.json
 import { MultiSelect } from "@/components/ui/multi-select";
 
 export function Example() {
-  <MultiSelect
-    options={["alpha", "beta", "gamma"]}
-    value={["alpha", "gamma"]}
-  />;
+  return (
+    <MultiSelect
+      options={[
+        { value: "react", label: "React" },
+        { value: "vue", label: "Vue" },
+        { value: "svelte", label: "Svelte" },
+      ]}
+      onChange={(values) => console.log("Selected:", values)}
+    />
+  );
 }
 ```
 
@@ -38,7 +44,57 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop        | Type                     | Default     | Description                                         |
+| ----------- | ------------------------ | ----------- | --------------------------------------------------- |
+| `options`   | `MultiSelectOption<T>[]` | `required`  | Array of `{ value, label, hint?, disabled? }` items |
+| `value`     | `T[]`                    | `undefined` | Controlled array of selected values                 |
+| `onChange`  | `(values: T[]) => void`  | `undefined` | Callback fired when selection changes               |
+| `onSubmit`  | `(values: T[]) => void`  | `undefined` | Callback fired on Enter to confirm selection        |
+| `cursor`    | `string`                 | `"›"`       | Character used for the active-row cursor            |
+| `checkmark` | `string`                 | `"◉"`       | Character used to indicate a selected option        |
+| `height`    | `number`                 | `undefined` | Visible row count; enables scrolling when set       |
+
+## Examples
+
+### With Hints and Disabled Options
+
+```tsx
+<MultiSelect
+  options={[
+    { value: "node", label: "Node.js", hint: "LTS" },
+    { value: "deno", label: "Deno", hint: "v2" },
+    { value: "bun", label: "Bun", disabled: true },
+  ]}
+/>
+```
+
+### Scrollable List
+
+```tsx
+<MultiSelect
+  options={[
+    { value: "a", label: "Alpha" },
+    { value: "b", label: "Beta" },
+    { value: "c", label: "Gamma" },
+    { value: "d", label: "Delta" },
+    { value: "e", label: "Epsilon" },
+  ]}
+  height={3}
+/>
+```
+
+### Custom Cursor and Checkmark
+
+```tsx
+<MultiSelect
+  options={[
+    { value: "ts", label: "TypeScript" },
+    { value: "js", label: "JavaScript" },
+  ]}
+  cursor="→"
+  checkmark="✓"
+/>
+```
 
 ## Registry Files
 

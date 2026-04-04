@@ -19,11 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/center.json
 import { Center } from "@/components/ui/center";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Center {...demoProps} />;
+  return (
+    <Center>
+      <Text>Centered content</Text>
+    </Center>
+  );
 }
 ```
 
@@ -35,10 +35,36 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type                                   | Default    | Description |
-| ---------- | -------------------------------------- | ---------- | ----------- |
-| `children` | `ReactNode`                            | `required` | -           |
-| `axis`     | `"both" \| "horizontal" \| "vertical"` | `"both"`   | -           |
+| Prop       | Type                                   | Default  | Description                             |
+| ---------- | -------------------------------------- | -------- | --------------------------------------- |
+| `children` | `ReactNode`                            | required | Content to center within the container  |
+| `axis`     | `"both" \| "horizontal" \| "vertical"` | `"both"` | Axis along which to center the children |
+
+## Examples
+
+### Center on both axes (default)
+
+```tsx
+<Center>
+  <Text>Centered everywhere</Text>
+</Center>
+```
+
+### Horizontal centering only
+
+```tsx
+<Center axis="horizontal">
+  <Text>Horizontally centered</Text>
+</Center>
+```
+
+### Vertical centering only
+
+```tsx
+<Center axis="vertical">
+  <Text>Vertically centered</Text>
+</Center>
+```
 
 ## Registry Files
 

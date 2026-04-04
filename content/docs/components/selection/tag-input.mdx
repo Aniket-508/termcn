@@ -19,11 +19,12 @@ npx shadcn@latest add https://termcn.vercel.app/r/tag-input.json
 import { TagInput } from "@/components/ui/tag-input";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <TagInput {...demoProps} />;
+  return (
+    <TagInput
+      placeholder="Add a tag…"
+      onChange={(tags) => console.log("Tags:", tags)}
+    />
+  );
 }
 ```
 
@@ -39,13 +40,33 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                          | Default                   | Description |
-| ------------- | ----------------------------- | ------------------------- | ----------- |
-| `value`       | `string[]`                    | `undefined`               | -           |
-| `onChange`    | `(tags: string[]) =&gt; void` | `undefined`               | -           |
-| `placeholder` | `string`                      | `"Type and press Enter…"` | -           |
-| `maxTags`     | `number`                      | `undefined`               | -           |
-| `delimiter`   | `string`                      | `undefined`               | -           |
+| Prop          | Type                       | Default                   | Description                                      |
+| ------------- | -------------------------- | ------------------------- | ------------------------------------------------ |
+| `value`       | `string[]`                 | `undefined`               | Controlled array of tag strings                  |
+| `onChange`    | `(tags: string[]) => void` | `undefined`               | Callback fired when tags are added or removed    |
+| `placeholder` | `string`                   | `"Type and press Enter…"` | Placeholder text shown when the input is empty   |
+| `maxTags`     | `number`                   | `undefined`               | Maximum number of tags allowed                   |
+| `delimiter`   | `string`                   | `undefined`               | Character used to split input into multiple tags |
+
+## Examples
+
+### With Max Tags
+
+```tsx
+<TagInput placeholder="Add up to 3 skills…" maxTags={3} />
+```
+
+### Controlled Tags
+
+```tsx
+<TagInput value={["react", "typescript"]} onChange={(tags) => setTags(tags)} />
+```
+
+### Custom Placeholder
+
+```tsx
+<TagInput placeholder="Enter email addresses…" />
+```
 
 ## Registry Files
 

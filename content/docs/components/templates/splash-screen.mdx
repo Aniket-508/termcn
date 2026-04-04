@@ -17,13 +17,17 @@ npx shadcn@latest add https://termcn.vercel.app/r/splash-screen.json
 
 ```tsx
 import { SplashScreen } from "@/components/ui/splash-screen";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <SplashScreen {...demoProps} />;
+  return (
+    <SplashScreen
+      title="MyCLI"
+      subtitle="The modern developer toolkit"
+      author={{ name: "Jane Doe", href: "https://example.com" }}
+      statusLine={<Text color="green">● Ready on port 3000</Text>}
+    />
+  );
 }
 ```
 
@@ -39,19 +43,63 @@ export function Example() {
 
 ## Props
 
-| Prop            | Type                                        | Default     | Description |
-| --------------- | ------------------------------------------- | ----------- | ----------- |
-| `title`         | `string`                                    | `required`  | -           |
-| `font`          | `FigletFont`                                | `"block"`   | -           |
-| `titleColor`    | `string`                                    | `undefined` | -           |
-| `titleColorAlt` | `string`                                    | `undefined` | -           |
-| `bold`          | `boolean`                                   | `undefined` | -           |
-| `subtitle`      | `string`                                    | `undefined` | -           |
-| `subtitleDim`   | `boolean`                                   | `true`      | -           |
-| `author`        | `&#123; name: string; href?: string &#125;` | `undefined` | -           |
-| `statusLine`    | `ReactNode`                                 | `undefined` | -           |
-| `padding`       | `number`                                    | `2`         | -           |
-| `align`         | `"left" \| "center"`                        | `undefined` | -           |
+| Prop            | Type                              | Default     | Description                                                   |
+| --------------- | --------------------------------- | ----------- | ------------------------------------------------------------- |
+| `title`         | `string`                          | `required`  | Text rendered as large ASCII art.                             |
+| `font`          | `FigletFont`                      | `"block"`   | Font used for the ASCII title (`"block"` or `"simple"`).      |
+| `titleColor`    | `string`                          | `undefined` | Primary title color; defaults to theme primary.               |
+| `titleColorAlt` | `string`                          | `undefined` | Alternate row color for a striped depth effect on the title.  |
+| `bold`          | `boolean`                         | `true`      | Render the title text in bold.                                |
+| `subtitle`      | `string`                          | `undefined` | Tagline shown below the title.                                |
+| `subtitleDim`   | `boolean`                         | `true`      | Dim the subtitle text.                                        |
+| `author`        | `{ name: string; href?: string }` | `undefined` | Author credit line; `href` creates a clickable terminal link. |
+| `statusLine`    | `ReactNode`                       | `undefined` | Custom status content rendered below the author line.         |
+| `padding`       | `number`                          | `2`         | Left padding for the entire splash layout.                    |
+| `align`         | `"left" \| "center"`              | `undefined` | Horizontal alignment of the content.                          |
+
+## Examples
+
+### Minimal splash
+
+```tsx
+<SplashScreen title="Hello" subtitle="Welcome to the app" />
+```
+
+### With alternating title colors
+
+```tsx
+<SplashScreen
+  title="Deploy"
+  titleColor="#00ff88"
+  titleColorAlt="#0088ff"
+  subtitle="Ship with confidence"
+/>
+```
+
+### Author credit with link
+
+```tsx
+<SplashScreen
+  title="Toolbox"
+  font="simple"
+  author={{ name: "Acme Corp", href: "https://acme.dev" }}
+  subtitle="v4.2.0"
+  subtitleDim={false}
+/>
+```
+
+### Custom status line
+
+```tsx
+<SplashScreen
+  title="Server"
+  statusLine={
+    <Text>
+      <Text color="green">✓</Text> Listening on <Text bold>:8080</Text>
+    </Text>
+  }
+/>
+```
 
 ## Registry Files
 

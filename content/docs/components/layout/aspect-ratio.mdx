@@ -19,11 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/aspect-ratio.json
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <AspectRatio {...demoProps} />;
+  return (
+    <AspectRatio ratio={16 / 9} width={60}>
+      <Text>Widescreen content</Text>
+    </AspectRatio>
+  );
 }
 ```
 
@@ -35,11 +35,37 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type        | Default    | Description |
-| ---------- | ----------- | ---------- | ----------- |
-| `children` | `ReactNode` | `required` | -           |
-| `ratio`    | `number`    | `16 / 9`   | -           |
-| `width`    | `number`    | `80`       | -           |
+| Prop       | Type        | Default  | Description                                          |
+| ---------- | ----------- | -------- | ---------------------------------------------------- |
+| `children` | `ReactNode` | required | Content to render inside the aspect ratio container  |
+| `ratio`    | `number`    | `16 / 9` | Width-to-height ratio (e.g. `4 / 3`, `1` for square) |
+| `width`    | `number`    | `80`     | Container width in columns                           |
+
+## Examples
+
+### Square aspect ratio
+
+```tsx
+<AspectRatio ratio={1} width={40}>
+  <Text>Square</Text>
+</AspectRatio>
+```
+
+### 4:3 ratio with custom width
+
+```tsx
+<AspectRatio ratio={4 / 3} width={60}>
+  <Text>Classic 4:3</Text>
+</AspectRatio>
+```
+
+### Widescreen (default)
+
+```tsx
+<AspectRatio width={80}>
+  <Text>16:9 content at full width</Text>
+</AspectRatio>
+```
 
 ## Registry Files
 

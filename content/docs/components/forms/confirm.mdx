@@ -19,11 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/confirm.json
 import { Confirm } from "@/components/ui/confirm";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Confirm {...demoProps} />;
+  return (
+    <Confirm
+      message="Are you sure you want to continue?"
+      onConfirm={() => console.log("Confirmed")}
+      onCancel={() => console.log("Cancelled")}
+    />
+  );
 }
 ```
 
@@ -39,15 +41,51 @@ export function Example() {
 
 ## Props
 
-| Prop           | Type                    | Default     | Description |
-| -------------- | ----------------------- | ----------- | ----------- |
-| `message`      | `string`                | `required`  | -           |
-| `onConfirm`    | `() =&gt; void`         | `undefined` | -           |
-| `onCancel`     | `() =&gt; void`         | `undefined` | -           |
-| `confirmLabel` | `string`                | `"Yes"`     | -           |
-| `cancelLabel`  | `string`                | `"No"`      | -           |
-| `defaultValue` | `boolean`               | `false`     | -           |
-| `variant`      | `"default" \| "danger"` | `"default"` | -           |
+| Prop           | Type                    | Default     | Description                                          |
+| -------------- | ----------------------- | ----------- | ---------------------------------------------------- |
+| `message`      | `string`                | `required`  | The question or prompt displayed to the user         |
+| `onConfirm`    | `() => void`            | `undefined` | Callback fired when the user confirms                |
+| `onCancel`     | `() => void`            | `undefined` | Callback fired when the user cancels                 |
+| `confirmLabel` | `string`                | `"Yes"`     | Label for the confirm option                         |
+| `cancelLabel`  | `string`                | `"No"`      | Label for the cancel option                          |
+| `defaultValue` | `boolean`               | `false`     | Whether the confirm option is initially selected     |
+| `variant`      | `"default" \| "danger"` | `"default"` | Visual variant; `"danger"` highlights confirm in red |
+
+## Examples
+
+### Danger Variant
+
+```tsx
+<Confirm
+  message="Delete all files? This cannot be undone."
+  variant="danger"
+  onConfirm={() => deleteFiles()}
+  onCancel={() => console.log("Aborted")}
+/>
+```
+
+### Custom Labels
+
+```tsx
+<Confirm
+  message="Save changes before exiting?"
+  confirmLabel="Save"
+  cancelLabel="Discard"
+  defaultValue={true}
+  onConfirm={() => saveAndExit()}
+  onCancel={() => exit()}
+/>
+```
+
+### Default Selection on Confirm
+
+```tsx
+<Confirm
+  message="Enable dark mode?"
+  defaultValue={true}
+  onConfirm={() => setDarkMode(true)}
+/>
+```
 
 ## Registry Files
 

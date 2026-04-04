@@ -17,13 +17,19 @@ npx shadcn@latest add https://termcn.vercel.app/r/pagination.json
 
 ```tsx
 import { Pagination } from "@/components/ui/pagination";
+import { useState } from "react";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
+  const [page, setPage] = useState(1);
 
-  return <Pagination {...demoProps} />;
+  return (
+    <Pagination
+      total={10}
+      current={page}
+      onChange={(p) => setPage(p)}
+      siblings={1}
+    />
+  );
 }
 ```
 
@@ -39,13 +45,33 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type                        | Default     | Description |
-| ----------- | --------------------------- | ----------- | ----------- |
-| `total`     | `number`                    | `required`  | -           |
-| `current`   | `number`                    | `required`  | -           |
-| `onChange`  | `(page: number) =&gt; void` | `undefined` | -           |
-| `showEdges` | `boolean`                   | `true`      | -           |
-| `siblings`  | `number`                    | `1`         | -           |
+| Prop        | Type                     | Default     | Description                                                 |
+| ----------- | ------------------------ | ----------- | ----------------------------------------------------------- |
+| `total`     | `number`                 | `required`  | Total number of pages                                       |
+| `current`   | `number`                 | `required`  | Currently active page number (1-indexed)                    |
+| `onChange`  | `(page: number) => void` | `undefined` | Callback fired with the new page number on navigation       |
+| `showEdges` | `boolean`                | `true`      | Whether to always show the first and last page numbers      |
+| `siblings`  | `number`                 | `1`         | Number of sibling pages to show on each side of the current |
+
+## Examples
+
+### Few pages (no ellipsis)
+
+```tsx
+<Pagination total={5} current={3} onChange={(p) => setPage(p)} />
+```
+
+### Many pages with wider siblings
+
+```tsx
+<Pagination total={50} current={25} siblings={2} onChange={(p) => setPage(p)} />
+```
+
+### Uncontrolled (no onChange)
+
+```tsx
+<Pagination total={20} current={1} />
+```
 
 ## Registry Files
 

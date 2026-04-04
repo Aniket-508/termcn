@@ -19,11 +19,35 @@ npx shadcn@latest add https://termcn.vercel.app/r/usage-monitor.json
 import { UsageMonitor } from "@/components/ui/usage-monitor";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <UsageMonitor {...demoProps} />;
+  return (
+    <UsageMonitor refreshInterval={2000}>
+      <UsageMonitor.Header title="API Usage Dashboard" />
+      <UsageMonitor.Tags items={["Pro Plan", "Billing: Monthly", "US-East"]} />
+      <UsageMonitor.Section icon="📊" title="Requests">
+        <UsageMonitor.Metric
+          label="API Calls"
+          value={8420}
+          max={10000}
+          percent={84.2}
+          status="yellow"
+          format="number"
+        />
+      </UsageMonitor.Section>
+      <UsageMonitor.Stats>
+        <UsageMonitor.StatRow label="Avg Latency" value="142ms" />
+        <UsageMonitor.StatRow
+          label="Error Rate"
+          value="0.3%"
+          valueColor="green"
+        />
+      </UsageMonitor.Stats>
+      <UsageMonitor.StatusBar
+        clock
+        sessionLabel="dashboard"
+        exitHint="q to quit"
+      />
+    </UsageMonitor>
+  );
 }
 ```
 
@@ -39,11 +63,171 @@ export function Example() {
 
 ## Props
 
-| Prop              | Type        | Default    | Description |
-| ----------------- | ----------- | ---------- | ----------- |
-| `refreshInterval` | `number`    | `1000`     | -           |
-| `separatorChar`   | `string`    | `"─"`      | -           |
-| `children`        | `ReactNode` | `required` | -           |
+### UsageMonitor
+
+| Prop              | Type        | Default    | Description                                       |
+| ----------------- | ----------- | ---------- | ------------------------------------------------- |
+| `refreshInterval` | `number`    | `1000`     | Re-render interval in milliseconds for live data. |
+| `separatorChar`   | `string`    | `"─"`      | Character used for section dividers.              |
+| `children`        | `ReactNode` | `required` | Dashboard sub-components.                         |
+
+### UsageMonitor.Header
+
+| Prop             | Type     | Default     | Description                            |
+| ---------------- | -------- | ----------- | -------------------------------------- |
+| `title`          | `string` | `required`  | Dashboard title shown in the header.   |
+| `titleColor`     | `string` | `"cyan"`    | Color of the title text.               |
+| `decorator`      | `string` | `"◆ ✦ ◆ ✦"` | Decorative symbols flanking the title. |
+| `separatorChar`  | `string` | `"═"`       | Character for the header underline.    |
+| `separatorColor` | `string` | `undefined` | Color for the separator line.          |
+
+### UsageMonitor.Tags
+
+| Prop             | Type       | Default    | Description                              |
+| ---------------- | ---------- | ---------- | ---------------------------------------- |
+| `items`          | `string[]` | `required` | Tag labels displayed in brackets.        |
+| `bracketColor`   | `string`   | `"cyan"`   | Color of the surrounding `[ ]` brackets. |
+| `separatorColor` | `string`   | `"cyan"`   | Color of the `\|` between tags.          |
+
+### UsageMonitor.Section
+
+| Prop       | Type        | Default     | Description                               |
+| ---------- | ----------- | ----------- | ----------------------------------------- |
+| `icon`     | `string`    | `undefined` | Emoji or symbol before the section title. |
+| `title`    | `string`    | `undefined` | Section heading text.                     |
+| `subtitle` | `string`    | `undefined` | Dimmed text below the heading.            |
+| `children` | `ReactNode` | `required`  | Metric and stat sub-components.           |
+
+### UsageMonitor.Metric
+
+| Prop           | Type                                                            | Default     | Description                                        |
+| -------------- | --------------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| `icon`         | `string`                                                        | `undefined` | Emoji or symbol before the label.                  |
+| `label`        | `string`                                                        | `required`  | Metric name in the left column.                    |
+| `value`        | `number`                                                        | `required`  | Current numeric value.                             |
+| `max`          | `number`                                                        | `required`  | Maximum/total for the metric.                      |
+| `percent`      | `number`                                                        | `required`  | Percentage for bar fill (0–100).                   |
+| `status`       | `"green" \| "yellow" \| "red" \| "blue"`                        | `required`  | Status dot color indicating health.                |
+| `format`       | `"number" \| "currency" \| "duration" \| "percent" \| "custom"` | `required`  | How to format the value/max display.               |
+| `formatFn`     | `(v: number, max: number) => string`                            | `undefined` | Custom formatter (used when format is `"custom"`). |
+| `barWidth`     | `number`                                                        | `22`        | Width of the progress bar in characters.           |
+| `barFillChar`  | `string`                                                        | `"█"`       | Character for filled bar segments.                 |
+| `barEmptyChar` | `string`                                                        | `"░"`       | Character for empty bar segments.                  |
+| `barColor`     | `string`                                                        | `"white"`   | Color of the progress bar.                         |
+| `maxDim`       | `boolean`                                                       | `false`     | Dim the max value text.                            |
+| `showMax`      | `boolean`                                                       | `true`      | Show the `/ max` suffix.                           |
+
+### UsageMonitor.DistributionMetric
+
+| Prop       | Type                                                   | Default     | Description                                        |
+| ---------- | ------------------------------------------------------ | ----------- | -------------------------------------------------- |
+| `icon`     | `string`                                               | `undefined` | Emoji or symbol before the label.                  |
+| `label`    | `string`                                               | `required`  | Metric name in the left column.                    |
+| `segments` | `{ label: string; percent: number; color?: string }[]` | `required`  | Distribution segments with labels and percentages. |
+| `barWidth` | `number`                                               | `22`        | Width of the segmented bar in characters.          |
+
+### UsageMonitor.Stats
+
+| Prop       | Type        | Default    | Description                     |
+| ---------- | ----------- | ---------- | ------------------------------- |
+| `children` | `ReactNode` | `required` | One or more `StatRow` elements. |
+
+### UsageMonitor.StatRow
+
+| Prop          | Type     | Default     | Description                               |
+| ------------- | -------- | ----------- | ----------------------------------------- |
+| `icon`        | `string` | `undefined` | Emoji or symbol before the label.         |
+| `label`       | `string` | `required`  | Stat label in the left column.            |
+| `value`       | `string` | `required`  | Display value.                            |
+| `valueSuffix` | `string` | `undefined` | Additional text appended after the value. |
+| `valueColor`  | `string` | `"white"`   | Color of the value text.                  |
+
+### UsageMonitor.Predictions
+
+| Prop       | Type        | Default    | Description                        |
+| ---------- | ----------- | ---------- | ---------------------------------- |
+| `children` | `ReactNode` | `required` | One or more `Prediction` elements. |
+
+### UsageMonitor.Prediction
+
+| Prop         | Type     | Default    | Description                     |
+| ------------ | -------- | ---------- | ------------------------------- |
+| `label`      | `string` | `required` | Prediction label text.          |
+| `value`      | `string` | `required` | Predicted value or date string. |
+| `valueColor` | `string` | `"yellow"` | Color of the prediction value.  |
+
+### UsageMonitor.StatusBar
+
+| Prop           | Type                           | Default     | Description                            |
+| -------------- | ------------------------------ | ----------- | -------------------------------------- |
+| `clock`        | `boolean`                      | `false`     | Show a live clock.                     |
+| `clockColor`   | `string`                       | `"cyan"`    | Color of the clock text.               |
+| `sessionLabel` | `string`                       | `undefined` | Label for the current session.         |
+| `sessionColor` | `string`                       | `"green"`   | Color of the session label.            |
+| `exitHint`     | `string`                       | `undefined` | Dimmed hint text (e.g. `"q to quit"`). |
+| `statusDot`    | `"green" \| "yellow" \| "red"` | `"green"`   | Colored status indicator dot.          |
+| `separator`    | `string`                       | `" \| "`    | Separator between status bar items.    |
+
+## Examples
+
+### Simple metric dashboard
+
+```tsx
+<UsageMonitor>
+  <UsageMonitor.Header title="Storage" />
+  <UsageMonitor.Section title="Disk Usage">
+    <UsageMonitor.Metric
+      label="Used"
+      value={75}
+      max={100}
+      percent={75}
+      status="yellow"
+      format="percent"
+    />
+  </UsageMonitor.Section>
+</UsageMonitor>
+```
+
+### Stats with predictions
+
+```tsx
+<UsageMonitor>
+  <UsageMonitor.Stats>
+    <UsageMonitor.StatRow icon="🔥" label="Burn Rate" value="$12.50/day" />
+    <UsageMonitor.StatRow
+      icon="📈"
+      label="Growth"
+      value="+15%"
+      valueColor="green"
+    />
+  </UsageMonitor.Stats>
+  <UsageMonitor.Predictions>
+    <UsageMonitor.Prediction label="Budget exhaustion" value="April 28" />
+    <UsageMonitor.Prediction
+      label="Rate limit hit"
+      value="~3 days"
+      valueColor="red"
+    />
+  </UsageMonitor.Predictions>
+</UsageMonitor>
+```
+
+### Distribution bar
+
+```tsx
+<UsageMonitor>
+  <UsageMonitor.Section title="Traffic">
+    <UsageMonitor.DistributionMetric
+      label="By Region"
+      segments={[
+        { label: "US", percent: 55, color: "cyan" },
+        { label: "EU", percent: 30, color: "green" },
+        { label: "APAC", percent: 15, color: "yellow" },
+      ]}
+    />
+  </UsageMonitor.Section>
+</UsageMonitor>
+```
 
 ## Registry Files
 

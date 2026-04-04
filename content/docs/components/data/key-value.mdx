@@ -19,11 +19,15 @@ npx shadcn@latest add https://termcn.vercel.app/r/key-value.json
 import { KeyValue } from "@/components/ui/key-value";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <KeyValue {...demoProps} />;
+  return (
+    <KeyValue
+      items={[
+        { key: "Name", value: "my-app" },
+        { key: "Version", value: "2.1.0" },
+        { key: "License", value: "MIT" },
+      ]}
+    />
+  );
 }
 ```
 
@@ -35,13 +39,63 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type             | Default     | Description |
-| ------------ | ---------------- | ----------- | ----------- |
-| `items`      | `KeyValueItem[]` | `required`  | -           |
-| `keyWidth`   | `number`         | `undefined` | -           |
-| `separator`  | `string`         | `":"`       | -           |
-| `keyColor`   | `string`         | `undefined` | -           |
-| `valueColor` | `string`         | `undefined` | -           |
+| Prop         | Type             | Default     | Description                                                 |
+| ------------ | ---------------- | ----------- | ----------------------------------------------------------- |
+| `items`      | `KeyValueItem[]` | `required`  | Array of key-value pairs to display                         |
+| `keyWidth`   | `number`         | `undefined` | Fixed width for the key column (auto-calculated if omitted) |
+| `separator`  | `string`         | `":"`       | Separator character between key and value                   |
+| `keyColor`   | `string`         | `undefined` | Override color for key labels                               |
+| `valueColor` | `string`         | `undefined` | Override color for value text                               |
+
+### KeyValueItem
+
+| Prop    | Type        | Description                            |
+| ------- | ----------- | -------------------------------------- |
+| `key`   | `string`    | The label for this entry               |
+| `value` | `ReactNode` | The value to display                   |
+| `color` | `string`    | Override color for this specific value |
+
+## Examples
+
+### Custom separator and colors
+
+```tsx
+<KeyValue
+  separator="="
+  keyColor="cyan"
+  valueColor="white"
+  items={[
+    { key: "HOST", value: "0.0.0.0" },
+    { key: "PORT", value: "8080" },
+    { key: "ENV", value: "production" },
+  ]}
+/>
+```
+
+### Per-item colors
+
+```tsx
+<KeyValue
+  items={[
+    { key: "Status", value: "Healthy", color: "green" },
+    { key: "CPU", value: "78%", color: "yellow" },
+    { key: "Errors", value: "3", color: "red" },
+  ]}
+/>
+```
+
+### Fixed key width
+
+```tsx
+<KeyValue
+  keyWidth={20}
+  items={[
+    { key: "OS", value: "macOS 15.2" },
+    { key: "Architecture", value: "arm64" },
+    { key: "Node Version", value: "v22.0.0" },
+  ]}
+/>
+```
 
 ## Registry Files
 

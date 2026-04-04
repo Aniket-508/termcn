@@ -19,7 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/checkbox.json
 import { Checkbox } from "@/components/ui/checkbox";
 
 export function Example() {
-  <Checkbox checked label="Enable telemetry" />;
+  return (
+    <Checkbox
+      checked
+      label="Enable telemetry"
+      onChange={(checked) => console.log("Checked:", checked)}
+    />
+  );
 }
 ```
 
@@ -36,17 +42,37 @@ export function Example() {
 
 ## Props
 
-| Prop                | Type                            | Default     | Description                                      |
-| ------------------- | ------------------------------- | ----------- | ------------------------------------------------ |
-| `checked`           | `boolean`                       | `undefined` | -                                                |
-| `onChange`          | `(checked: boolean) =&gt; void` | `undefined` | -                                                |
-| `label`             | `string`                        | `undefined` | -                                                |
-| `indeterminate`     | `boolean`                       | `false`     | -                                                |
-| `disabled`          | `boolean`                       | `false`     | -                                                |
-| `id`                | `string`                        | `undefined` | -                                                |
-| `checkedIcon`       | `string`                        | `"■"`       | Character shown when checked. Default: '■'       |
-| `uncheckedIcon`     | `string`                        | `"□"`       | Character shown when unchecked. Default: '□'     |
-| `indeterminateIcon` | `string`                        | `"▪"`       | Character shown when indeterminate. Default: '▪' |
+| Prop                | Type                         | Default     | Description                                   |
+| ------------------- | ---------------------------- | ----------- | --------------------------------------------- |
+| `checked`           | `boolean`                    | `undefined` | Whether the checkbox is checked               |
+| `onChange`          | `(checked: boolean) => void` | `undefined` | Callback fired when the checked state changes |
+| `label`             | `string`                     | `undefined` | Text label displayed next to the checkbox     |
+| `indeterminate`     | `boolean`                    | `false`     | Show an indeterminate (partial) state icon    |
+| `disabled`          | `boolean`                    | `false`     | Prevent interaction and dim the checkbox      |
+| `id`                | `string`                     | `undefined` | Focus identifier for `useFocus`               |
+| `checkedIcon`       | `string`                     | `"■"`       | Character shown when checked                  |
+| `uncheckedIcon`     | `string`                     | `"□"`       | Character shown when unchecked                |
+| `indeterminateIcon` | `string`                     | `"▪"`       | Character shown when indeterminate            |
+
+## Examples
+
+### Disabled Checkbox
+
+```tsx
+<Checkbox label="Locked option" disabled />
+```
+
+### Indeterminate State
+
+```tsx
+<Checkbox label="Select all" indeterminate />
+```
+
+### Custom Icons
+
+```tsx
+<Checkbox label="Accept terms" checkedIcon="✓" uncheckedIcon="✗" />
+```
 
 ## Registry Files
 

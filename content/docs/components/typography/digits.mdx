@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/digits.json
 import { Digits } from "@/components/ui/digits";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Digits {...demoProps} />;
+  return <Digits value="12:30" />;
 }
 ```
 
@@ -35,11 +31,37 @@ export function Example() {
 
 ## Props
 
-| Prop    | Type               | Default     | Description |
-| ------- | ------------------ | ----------- | ----------- |
-| `value` | `string \| number` | `required`  | -           |
-| `color` | `string`           | `undefined` | -           |
-| `size`  | `DigitSize`        | `"md"`      | -           |
+| Prop    | Type               | Default     | Description                                        |
+| ------- | ------------------ | ----------- | -------------------------------------------------- |
+| `value` | `string \| number` | `required`  | Numeric value or string to render as large digits  |
+| `color` | `string`           | `undefined` | Color override for the digit characters            |
+| `size`  | `DigitSize`        | `"md"`      | Digit size: `"sm"` (plain text), `"md"`, or `"lg"` |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Digits value={42} />
+```
+
+### Large Digits
+
+```tsx
+<Digits value="09:45" size="lg" />
+```
+
+### Small Inline Digits
+
+```tsx
+<Digits value={100} size="sm" />
+```
+
+### With Custom Color
+
+```tsx
+<Digits value="3.14" color="#61afef" />
+```
 
 ## Registry Files
 

@@ -19,11 +19,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/text-area.json
 import { TextArea } from "@/components/ui/text-area";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <TextArea {...demoProps} />;
+  return (
+    <TextArea
+      label="Description"
+      placeholder="Enter a description..."
+      rows={4}
+      onSubmit={(value) => console.log("Submitted:", value)}
+    />
+  );
 }
 ```
 
@@ -40,18 +43,44 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                            | Default     | Description                                       |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| `value`       | `string`                                                                                        | `undefined` | -                                                 |
-| `onChange`    | `(value: string) =&gt; void`                                                                    | `undefined` | -                                                 |
-| `onSubmit`    | `(value: string) =&gt; void`                                                                    | `undefined` | -                                                 |
-| `placeholder` | `string`                                                                                        | `""`        | -                                                 |
-| `rows`        | `number`                                                                                        | `4`         | -                                                 |
-| `label`       | `string`                                                                                        | `undefined` | -                                                 |
-| `id`          | `string`                                                                                        | `undefined` | -                                                 |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style. Default: 'round'                    |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                    |
-| `cursor`      | `string`                                                                                        | `"█"`       | Cursor character shown when focused. Default: '█' |
+| Prop          | Type                                                                                         | Default     | Description                               |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
+| `value`       | `string`                                                                                     | `undefined` | Controlled text value                     |
+| `onChange`    | `(value: string) => void`                                                                    | `undefined` | Called when the text changes              |
+| `onSubmit`    | `(value: string) => void`                                                                    | `undefined` | Called on Ctrl+Enter                      |
+| `placeholder` | `string`                                                                                     | `""`        | Placeholder shown when the input is empty |
+| `rows`        | `number`                                                                                     | `4`         | Number of visible text rows               |
+| `label`       | `string`                                                                                     | `undefined` | Label text displayed above the input      |
+| `id`          | `string`                                                                                     | `undefined` | Unique identifier for focus management    |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style for the input box            |
+| `paddingX`    | `number`                                                                                     | `1`         | Horizontal padding inside the border      |
+| `cursor`      | `string`                                                                                     | `"█"`       | Cursor character shown when focused       |
+
+## Examples
+
+### Compact Two-Row Input
+
+```tsx
+<TextArea label="Note" rows={2} placeholder="Quick note..." />
+```
+
+### Large Editor
+
+```tsx
+<TextArea label="Commit Message" rows={8} borderStyle="single" />
+```
+
+### Controlled Value
+
+```tsx
+<TextArea
+  label="Bio"
+  value={bio}
+  onChange={setBio}
+  rows={5}
+  placeholder="Tell us about yourself..."
+/>
+```
 
 ## Registry Files
 

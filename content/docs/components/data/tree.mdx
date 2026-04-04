@@ -19,11 +19,24 @@ npx shadcn@latest add https://termcn.vercel.app/r/tree.json
 import { Tree } from "@/components/ui/tree";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Tree {...demoProps} />;
+  return (
+    <Tree
+      defaultExpanded={["src"]}
+      nodes={[
+        {
+          key: "src",
+          label: "src",
+          children: [
+            { key: "index", label: "index.ts" },
+            { key: "utils", label: "utils.ts" },
+          ],
+        },
+        { key: "pkg", label: "package.json" },
+        { key: "readme", label: "README.md" },
+      ]}
+      onSelect={(node) => console.log(node.key)}
+    />
+  );
 }
 ```
 
@@ -39,14 +52,83 @@ export function Example() {
 
 ## Props
 
-| Prop              | Type                          | Default     | Description                                                         |
-| ----------------- | ----------------------------- | ----------- | ------------------------------------------------------------------- |
-| `nodes`           | `TreeNode[]`                  | `required`  | -                                                                   |
-| `onSelect`        | `(node: TreeNode) =&gt; void` | `undefined` | -                                                                   |
-| `defaultExpanded` | `string[]`                    | `[]`        | -                                                                   |
-| `expandedIcon`    | `string`                      | `"▼"`       | Icon shown for expanded branch nodes. Default: '▼'                  |
-| `collapsedIcon`   | `string`                      | `"▶"`       | Icon shown for collapsed branch nodes. Default: '▶'                 |
-| `leafIcon`        | `string`                      | `"•"`       | Default icon for leaf nodes (overridden by node.icon). Default: '•' |
+| Prop              | Type                       | Default     | Description                                             |
+| ----------------- | -------------------------- | ----------- | ------------------------------------------------------- |
+| `nodes`           | `TreeNode[]`               | `required`  | Array of tree nodes to display                          |
+| `onSelect`        | `(node: TreeNode) => void` | `undefined` | Callback fired when a node is selected                  |
+| `defaultExpanded` | `string[]`                 | `[]`        | Keys of nodes expanded on initial render                |
+| `expandedIcon`    | `string`                   | `"▼"`       | Icon shown for expanded branch nodes                    |
+| `collapsedIcon`   | `string`                   | `"▶"`       | Icon shown for collapsed branch nodes                   |
+| `leafIcon`        | `string`                   | `"•"`       | Default icon for leaf nodes (overridden by `node.icon`) |
+
+### TreeNode
+
+| Prop       | Type         | Description                      |
+| ---------- | ------------ | -------------------------------- |
+| `key`      | `string`     | Unique identifier for the node   |
+| `label`    | `string`     | Display text for the node        |
+| `children` | `TreeNode[]` | Optional nested child nodes      |
+| `icon`     | `string`     | Override icon for this leaf node |
+
+## Examples
+
+### Custom icons
+
+```tsx
+<Tree
+  expandedIcon="📂"
+  collapsedIcon="📁"
+  leafIcon="📄"
+  defaultExpanded={["docs"]}
+  nodes={[
+    {
+      key: "docs",
+      label: "docs",
+      children: [
+        { key: "guide", label: "guide.md" },
+        { key: "api", label: "api.md" },
+      ],
+    },
+  ]}
+/>
+```
+
+### Deeply nested tree
+
+```tsx
+<Tree
+  defaultExpanded={["root", "components"]}
+  nodes={[
+    {
+      key: "root",
+      label: "app",
+      children: [
+        {
+          key: "components",
+          label: "components",
+          children: [
+            { key: "btn", label: "Button.tsx" },
+            { key: "input", label: "Input.tsx" },
+          ],
+        },
+        { key: "layout", label: "layout.tsx" },
+      ],
+    },
+  ]}
+/>
+```
+
+### Leaf nodes with custom icons
+
+```tsx
+<Tree
+  nodes={[
+    { key: "1", label: "Tests passing", icon: "✔" },
+    { key: "2", label: "Build warning", icon: "⚠" },
+    { key: "3", label: "Deploy failed", icon: "✘" },
+  ]}
+/>
+```
 
 ## Registry Files
 

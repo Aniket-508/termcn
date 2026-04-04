@@ -19,11 +19,22 @@ npx shadcn@latest add https://termcn.vercel.app/r/scroll-view.json
 import { ScrollView } from "@/components/ui/scroll-view";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <ScrollView {...demoProps} />;
+  return (
+    <ScrollView height={10}>
+      <Text>Line 1</Text>
+      <Text>Line 2</Text>
+      <Text>Line 3</Text>
+      <Text>Line 4</Text>
+      <Text>Line 5</Text>
+      <Text>Line 6</Text>
+      <Text>Line 7</Text>
+      <Text>Line 8</Text>
+      <Text>Line 9</Text>
+      <Text>Line 10</Text>
+      <Text>Line 11</Text>
+      <Text>Line 12</Text>
+    </ScrollView>
+  );
 }
 ```
 
@@ -35,12 +46,45 @@ export function Example() {
 
 ## Props
 
-| Prop             | Type        | Default    | Description |
-| ---------------- | ----------- | ---------- | ----------- |
-| `height`         | `number`    | `required` | -           |
-| `children`       | `ReactNode` | `required` | -           |
-| `showScrollbar`  | `boolean`   | `true`     | -           |
-| `scrollbarColor` | `string`    | `"gray"`   | -           |
+| Prop             | Type        | Default  | Description                            |
+| ---------------- | ----------- | -------- | -------------------------------------- |
+| `height`         | `number`    | required | Visible viewport height in rows        |
+| `children`       | `ReactNode` | required | Scrollable content                     |
+| `showScrollbar`  | `boolean`   | `true`   | Whether to display the scrollbar track |
+| `scrollbarColor` | `string`    | `"gray"` | Color of the scrollbar indicator       |
+
+## Examples
+
+### Basic scrollable list
+
+```tsx
+<ScrollView height={5}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+  <Text>Item 3</Text>
+  <Text>Item 4</Text>
+  <Text>Item 5</Text>
+  <Text>Item 6</Text>
+  <Text>Item 7</Text>
+  <Text>Item 8</Text>
+</ScrollView>
+```
+
+### Hidden scrollbar
+
+```tsx
+<ScrollView height={8} showScrollbar={false}>
+  <Text>Content without a visible scrollbar</Text>
+</ScrollView>
+```
+
+### Custom scrollbar color
+
+```tsx
+<ScrollView height={6} scrollbarColor="cyan">
+  <Text>Scrollable content with a cyan scrollbar</Text>
+</ScrollView>
+```
 
 ## Registry Files
 

@@ -21,11 +21,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/path-input.json
 import { PathInput } from "@/components/ui/path-input";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <PathInput {...demoProps} />;
+  return (
+    <PathInput
+      label="Project Directory"
+      placeholder="/home/user/projects"
+      onSubmit={(path) => console.log("Selected:", path)}
+    />
+  );
 }
 ```
 
@@ -43,18 +45,38 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                         | Default     | Description                                                        |
-| ------------- | ---------------------------- | ----------- | ------------------------------------------------------------------ |
-| `value`       | `string`                     | `undefined` | -                                                                  |
-| `onChange`    | `(value: string) =&gt; void` | `undefined` | -                                                                  |
-| `onSubmit`    | `(value: string) =&gt; void` | `undefined` | -                                                                  |
-| `label`       | `string`                     | `undefined` | -                                                                  |
-| `placeholder` | `string`                     | `"/"`       | -                                                                  |
-| `autoFocus`   | `boolean`                    | `false`     | -                                                                  |
-| `id`          | `string`                     | `undefined` | -                                                                  |
-| `width`       | `number`                     | `40`        | -                                                                  |
-| `filter`      | `string`                     | `undefined` | Filter to only show files/dirs matching this extension, e.g. '.ts' |
-| `dirsOnly`    | `boolean`                    | `false`     | Show only directories                                              |
+| Prop          | Type                      | Default     | Description                               |
+| ------------- | ------------------------- | ----------- | ----------------------------------------- |
+| `value`       | `string`                  | `undefined` | Controlled path value                     |
+| `onChange`    | `(value: string) => void` | `undefined` | Called when the path value changes        |
+| `onSubmit`    | `(value: string) => void` | `undefined` | Called when Enter is pressed              |
+| `label`       | `string`                  | `undefined` | Label text displayed above the input      |
+| `placeholder` | `string`                  | `"/"`       | Placeholder shown when the input is empty |
+| `autoFocus`   | `boolean`                 | `false`     | Whether to focus the input on mount       |
+| `id`          | `string`                  | `undefined` | Unique identifier for focus management    |
+| `width`       | `number`                  | `40`        | Width of the input box in columns         |
+| `filter`      | `string`                  | `undefined` | File extension filter, e.g. `".ts"`       |
+| `dirsOnly`    | `boolean`                 | `false`     | Only show directories in completions      |
+
+## Examples
+
+### Directories Only
+
+```tsx
+<PathInput label="Output Directory" dirsOnly placeholder="/var/output" />
+```
+
+### Filter by Extension
+
+```tsx
+<PathInput label="Config File" filter=".json" placeholder="/etc/config.json" />
+```
+
+### Custom Width
+
+```tsx
+<PathInput label="Log File" width={60} autoFocus />
+```
 
 ## Registry Files
 

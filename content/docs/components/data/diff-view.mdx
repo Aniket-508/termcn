@@ -19,11 +19,15 @@ npx shadcn@latest add https://termcn.vercel.app/r/diff-view.json
 import { DiffView } from "@/components/ui/diff-view";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <DiffView {...demoProps} />;
+  return (
+    <DiffView
+      filename="config.ts"
+      oldText={"const port = 3000;\nconst host = 'localhost';"}
+      newText={
+        "const port = 8080;\nconst host = 'localhost';\nconst debug = true;"
+      }
+    />
+  );
 }
 ```
 
@@ -35,15 +39,50 @@ export function Example() {
 
 ## Props
 
-| Prop              | Type       | Default     | Description |
-| ----------------- | ---------- | ----------- | ----------- |
-| `oldText`         | `string`   | `required`  | -           |
-| `newText`         | `string`   | `required`  | -           |
-| `filename`        | `string`   | `undefined` | -           |
-| `language`        | `string`   | `undefined` | -           |
-| `mode`            | `DiffMode` | `"unified"` | -           |
-| `context`         | `number`   | `3`         | -           |
-| `showLineNumbers` | `boolean`  | `false`     | -           |
+| Prop              | Type                               | Default     | Description                                |
+| ----------------- | ---------------------------------- | ----------- | ------------------------------------------ |
+| `oldText`         | `string`                           | `required`  | Original text content to diff against      |
+| `newText`         | `string`                           | `required`  | Updated text content                       |
+| `filename`        | `string`                           | `undefined` | Optional filename displayed as a header    |
+| `language`        | `string`                           | `undefined` | Language hint for the content              |
+| `mode`            | `"unified" \| "split" \| "inline"` | `"unified"` | Diff display mode                          |
+| `context`         | `number`                           | `3`         | Number of context lines around each change |
+| `showLineNumbers` | `boolean`                          | `false`     | Show line numbers in the gutter            |
+
+## Examples
+
+### Split mode with line numbers
+
+```tsx
+<DiffView
+  mode="split"
+  showLineNumbers
+  oldText={"function add(a, b) {\n  return a + b;\n}"}
+  newText={"function add(a: number, b: number): number {\n  return a + b;\n}"}
+/>
+```
+
+### Inline mode
+
+```tsx
+<DiffView
+  mode="inline"
+  filename="README.md"
+  oldText={"# My Project\nA simple tool."}
+  newText={"# My Project\nA powerful CLI tool.\n\n## Features\n- Fast"}
+/>
+```
+
+### With extra context lines
+
+```tsx
+<DiffView
+  context={5}
+  showLineNumbers
+  oldText={"line 1\nline 2\nline 3\nold line\nline 5"}
+  newText={"line 1\nline 2\nline 3\nnew line\nline 5"}
+/>
+```
 
 ## Registry Files
 

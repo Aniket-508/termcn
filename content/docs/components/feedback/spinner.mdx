@@ -19,7 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/spinner.json
 import { Spinner } from "@/components/ui/spinner";
 
 export function Example() {
-  <Spinner label="Loading components" />;
+  return <Spinner style="dots" label="Loading components" />;
 }
 ```
 
@@ -35,13 +35,39 @@ export function Example() {
 
 ## Props
 
-| Prop     | Type           | Default     | Description                                                   |
-| -------- | -------------- | ----------- | ------------------------------------------------------------- |
-| `style`  | `SpinnerStyle` | `undefined` | -                                                             |
-| `label`  | `string`       | `undefined` | -                                                             |
-| `color`  | `string`       | `undefined` | -                                                             |
-| `fps`    | `number`       | `12`        | -                                                             |
-| `frames` | `string[]`     | `undefined` | Custom animation frames (overrides style). Default: undefined |
+| Prop     | Type           | Default     | Description                              |
+| -------- | -------------- | ----------- | ---------------------------------------- |
+| `style`  | `SpinnerStyle` | `"dots"`    | Animation style preset                   |
+| `label`  | `string`       | `undefined` | Text displayed next to the spinner       |
+| `color`  | `string`       | `undefined` | Override the spinner color               |
+| `fps`    | `number`       | `12`        | Animation speed in frames per second     |
+| `frames` | `string[]`     | `undefined` | Custom animation frames, overrides style |
+
+## Examples
+
+### With Label
+
+```tsx
+<Spinner label="Installing dependencies" />
+```
+
+### Different Styles
+
+```tsx
+<Spinner style="earth" label="Deploying" />
+```
+
+### Custom Speed and Color
+
+```tsx
+<Spinner style="arc" fps={6} color="#f59e0b" label="Compiling" />
+```
+
+### Custom Frames
+
+```tsx
+<Spinner frames={["🌑", "🌒", "🌓", "🌔", "🌕"]} label="Processing" />
+```
 
 ## Registry Files
 

@@ -17,13 +17,19 @@ npx shadcn@latest add https://termcn.vercel.app/r/popover.json
 
 ```tsx
 import { Popover } from "@/components/ui/popover";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Popover {...demoProps} />;
+  return (
+    <Popover
+      isOpen={true}
+      title="Info"
+      trigger={<Text bold>[?] Help</Text>}
+      onClose={() => console.log("closed")}
+    >
+      <Text>Press Enter to confirm, Esc to cancel.</Text>
+    </Popover>
+  );
 }
 ```
 
@@ -39,13 +45,54 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type            | Default     | Description |
-| ---------- | --------------- | ----------- | ----------- |
-| `trigger`  | `ReactNode`     | `required`  | -           |
-| `children` | `ReactNode`     | `required`  | -           |
-| `isOpen`   | `boolean`       | `false`     | -           |
-| `onClose`  | `() =&gt; void` | `undefined` | -           |
-| `title`    | `string`        | `undefined` | -           |
+| Prop       | Type         | Default     | Description                                        |
+| ---------- | ------------ | ----------- | -------------------------------------------------- |
+| `trigger`  | `ReactNode`  | `required`  | Element that anchors the popover                   |
+| `children` | `ReactNode`  | `required`  | Content rendered inside the popover body           |
+| `isOpen`   | `boolean`    | `false`     | Whether the popover is visible                     |
+| `onClose`  | `() => void` | `undefined` | Callback fired when Esc is pressed                 |
+| `title`    | `string`     | `undefined` | Optional title displayed at the top of the popover |
+
+## Examples
+
+### Simple Popover
+
+```tsx
+<Popover isOpen={true} trigger={<Text>⚙ Settings</Text>}>
+  <Text>Theme: dark</Text>
+  <Text>Language: en</Text>
+</Popover>
+```
+
+### With Title and Close Handler
+
+```tsx
+<Popover
+  isOpen={true}
+  title="Actions"
+  trigger={<Text bold>Menu</Text>}
+  onClose={() => setOpen(false)}
+>
+  <Text>Copy</Text>
+  <Text>Paste</Text>
+  <Text>Delete</Text>
+</Popover>
+```
+
+### Contextual Help
+
+```tsx
+<Popover
+  isOpen={showHelp}
+  title="Keyboard Shortcuts"
+  trigger={<Text color="blue">[?]</Text>}
+  onClose={() => setShowHelp(false)}
+>
+  <Text>Tab — Next field</Text>
+  <Text>Enter — Submit</Text>
+  <Text>Esc — Cancel</Text>
+</Popover>
+```
 
 ## Registry Files
 

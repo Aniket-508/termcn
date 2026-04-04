@@ -19,11 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/stack.json
 import { Stack } from "@/components/ui/stack";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Stack {...demoProps} />;
+  return (
+    <Stack direction="vertical" gap={1}>
+      <Text>First</Text>
+      <Text>Second</Text>
+      <Text>Third</Text>
+    </Stack>
+  );
 }
 ```
 
@@ -35,15 +37,61 @@ export function Example() {
 
 ## Props
 
-| Prop             | Type                                                                             | Default      | Description |
-| ---------------- | -------------------------------------------------------------------------------- | ------------ | ----------- |
-| `direction`      | `"vertical" \| "horizontal"`                                                     | `"vertical"` | -           |
-| `gap`            | `number`                                                                         | `0`          | -           |
-| `children`       | `ReactNode`                                                                      | `required`   | -           |
-| `width`          | `number \| string`                                                               | `undefined`  | -           |
-| `height`         | `number \| string`                                                               | `undefined`  | -           |
-| `alignItems`     | `"flex-start" \| "center" \| "flex-end"`                                         | `undefined`  | -           |
-| `justifyContent` | `\| "flex-start" \| "center" \| "flex-end" \| "space-between" \| "space-around"` | `undefined`  | -           |
+| Prop             | Type                                                                          | Default      | Description                                           |
+| ---------------- | ----------------------------------------------------------------------------- | ------------ | ----------------------------------------------------- |
+| `direction`      | `"vertical" \| "horizontal"`                                                  | `"vertical"` | Layout axis; maps to `column` or `row` flex direction |
+| `gap`            | `number`                                                                      | `0`          | Spacing between children                              |
+| `children`       | `ReactNode`                                                                   | required     | Items to stack                                        |
+| `width`          | `number \| string`                                                            | `undefined`  | Container width                                       |
+| `height`         | `number \| string`                                                            | `undefined`  | Container height                                      |
+| `alignItems`     | `"flex-start" \| "center" \| "flex-end"`                                      | `undefined`  | Cross-axis alignment of children                      |
+| `justifyContent` | `"flex-start" \| "center" \| "flex-end" \| "space-between" \| "space-around"` | `undefined`  | Main-axis distribution of children                    |
+
+## Examples
+
+### Vertical stack with gap
+
+```tsx
+<Stack gap={1}>
+  <Text>Line 1</Text>
+  <Text>Line 2</Text>
+  <Text>Line 3</Text>
+</Stack>
+```
+
+### Horizontal stack
+
+```tsx
+<Stack direction="horizontal" gap={2}>
+  <Text>A</Text>
+  <Text>B</Text>
+  <Text>C</Text>
+</Stack>
+```
+
+### Centered horizontal stack
+
+```tsx
+<Stack
+  direction="horizontal"
+  gap={2}
+  alignItems="center"
+  justifyContent="center"
+>
+  <Text>Left</Text>
+  <Text>Center</Text>
+  <Text>Right</Text>
+</Stack>
+```
+
+### Fixed-size stack with space-between
+
+```tsx
+<Stack direction="horizontal" width={60} justifyContent="space-between">
+  <Text>Start</Text>
+  <Text>End</Text>
+</Stack>
+```
 
 ## Registry Files
 

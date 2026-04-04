@@ -17,13 +17,32 @@ npx shadcn@latest add https://termcn.vercel.app/r/wizard.json
 
 ```tsx
 import { Wizard } from "@/components/ui/wizard";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Wizard {...demoProps} />;
+  return (
+    <Wizard
+      steps={[
+        {
+          key: "account",
+          title: "Account",
+          content: <Text>Enter your username and password</Text>,
+        },
+        {
+          key: "profile",
+          title: "Profile",
+          content: <Text>Set up your profile details</Text>,
+        },
+        {
+          key: "confirm",
+          title: "Confirm",
+          content: <Text>Review and confirm your settings</Text>,
+        },
+      ]}
+      onComplete={(keys) => console.log("Completed steps:", keys)}
+      onCancel={() => console.log("Wizard cancelled")}
+    />
+  );
 }
 ```
 
@@ -39,12 +58,69 @@ export function Example() {
 
 ## Props
 
-| Prop           | Type                                    | Default     | Description |
-| -------------- | --------------------------------------- | ----------- | ----------- |
-| `steps`        | `WizardStep[]`                          | `required`  | -           |
-| `onComplete`   | `(completedSteps: string[]) =&gt; void` | `undefined` | -           |
-| `onCancel`     | `() =&gt; void`                         | `undefined` | -           |
-| `showProgress` | `boolean`                               | `true`      | -           |
+| Prop           | Type                                 | Default     | Description                                            |
+| -------------- | ------------------------------------ | ----------- | ------------------------------------------------------ |
+| `steps`        | `WizardStep[]`                       | `required`  | Array of step definitions with key, title, and content |
+| `onComplete`   | `(completedSteps: string[]) => void` | `undefined` | Callback fired with all step keys when the wizard ends |
+| `onCancel`     | `() => void`                         | `undefined` | Callback fired when the user presses Escape to cancel  |
+| `showProgress` | `boolean`                            | `true`      | Whether to display the step progress indicator         |
+
+## Examples
+
+### With Step Validation
+
+```tsx
+<Wizard
+  steps={[
+    {
+      key: "name",
+      title: "Name",
+      content: <Text>Enter your name</Text>,
+      validate: () => (nameValue ? true : "Name is required"),
+    },
+    {
+      key: "done",
+      title: "Done",
+      content: <Text>All set!</Text>,
+    },
+  ]}
+  onComplete={(keys) => finish(keys)}
+/>
+```
+
+### Hidden Progress Bar
+
+```tsx
+<Wizard
+  showProgress={false}
+  steps={[
+    { key: "step1", title: "Step 1", content: <Text>First step</Text> },
+    { key: "step2", title: "Step 2", content: <Text>Second step</Text> },
+  ]}
+  onComplete={() => console.log("Done")}
+/>
+```
+
+### Two-Step Setup
+
+```tsx
+<Wizard
+  steps={[
+    {
+      key: "install",
+      title: "Install",
+      content: <Text>Installing dependencies...</Text>,
+    },
+    {
+      key: "config",
+      title: "Configure",
+      content: <Text>Set your preferences</Text>,
+    },
+  ]}
+  onComplete={() => launchApp()}
+  onCancel={() => process.exit(0)}
+/>
+```
 
 ## Registry Files
 

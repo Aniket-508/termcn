@@ -19,11 +19,20 @@ npx shadcn@latest add https://termcn.vercel.app/r/data-grid.json
 import { DataGrid } from "@/components/ui/data-grid";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <DataGrid {...demoProps} />;
+  return (
+    <DataGrid
+      data={[
+        { name: "Alice", role: "Engineer", status: "Active" },
+        { name: "Bob", role: "Designer", status: "Away" },
+        { name: "Carol", role: "PM", status: "Active" },
+      ]}
+      columns={[
+        { key: "name", header: "Name", width: 12 },
+        { key: "role", header: "Role", width: 12 },
+        { key: "status", header: "Status", width: 10 },
+      ]}
+    />
+  );
 }
 ```
 
@@ -39,7 +48,89 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop                | Type                                           | Default     | Description                                      |
+| ------------------- | ---------------------------------------------- | ----------- | ------------------------------------------------ |
+| `data`              | `T[]`                                          | `required`  | Array of row objects to display                  |
+| `columns`           | `DataGridColumn<T>[]`                          | `required`  | Column definitions with key, header, width, etc. |
+| `pageSize`          | `number`                                       | `10`        | Number of rows per page                          |
+| `onRowSelect`       | `(row: T) => void`                             | `undefined` | Callback fired when a row is selected            |
+| `onCellEdit`        | `(row: T, key: string, value: string) => void` | `undefined` | Callback fired on cell edit                      |
+| `borderColor`       | `string`                                       | `undefined` | Override border color (uses theme default)       |
+| `borderStyle`       | `"single" \| "double" \| "round" \| "bold"`    | `"single"`  | Border style for the grid container              |
+| `showRowNumbers`    | `boolean`                                      | `false`     | Display row numbers in a leading column          |
+| `filterPlaceholder` | `string`                                       | `undefined` | Placeholder text for the filter input            |
+
+### DataGridColumn
+
+| Prop         | Type                                 | Default     | Description                              |
+| ------------ | ------------------------------------ | ----------- | ---------------------------------------- |
+| `key`        | `keyof T & string`                   | `required`  | Data field to display in this column     |
+| `header`     | `string`                             | `required`  | Column header label                      |
+| `width`      | `number`                             | `undefined` | Fixed column width in characters         |
+| `align`      | `"left" \| "right" \| "center"`      | `"left"`    | Text alignment within the column         |
+| `render`     | `(value: unknown, row: T) => string` | `undefined` | Custom cell renderer                     |
+| `filterable` | `boolean`                            | `undefined` | Whether the column is included in filter |
+| `sortable`   | `boolean`                            | `undefined` | Whether the column is sortable           |
+
+## Examples
+
+### With row numbers and pagination
+
+```tsx
+<DataGrid
+  data={Array.from({ length: 25 }, (_, i) => ({
+    id: i + 1,
+    task: `Task ${i + 1}`,
+    priority: i % 3 === 0 ? "High" : "Normal",
+  }))}
+  columns={[
+    { key: "id", header: "ID", width: 5, align: "right" },
+    { key: "task", header: "Task", width: 16 },
+    { key: "priority", header: "Priority", width: 10 },
+  ]}
+  showRowNumbers
+  pageSize={5}
+/>
+```
+
+### Custom render function
+
+```tsx
+<DataGrid
+  data={[
+    { file: "index.ts", size: 2048, modified: "2025-01-15" },
+    { file: "utils.ts", size: 512, modified: "2025-01-10" },
+  ]}
+  columns={[
+    { key: "file", header: "File", width: 14 },
+    {
+      key: "size",
+      header: "Size",
+      width: 10,
+      align: "right",
+      render: (v) => `${((v as number) / 1024).toFixed(1)} KB`,
+    },
+    { key: "modified", header: "Modified", width: 12 },
+  ]}
+/>
+```
+
+### With row select handler
+
+```tsx
+<DataGrid
+  data={[
+    { name: "prod-api", region: "us-east-1", status: "running" },
+    { name: "staging-api", region: "eu-west-1", status: "stopped" },
+  ]}
+  columns={[
+    { key: "name", header: "Service", width: 14 },
+    { key: "region", header: "Region", width: 12 },
+    { key: "status", header: "Status", width: 10 },
+  ]}
+  onRowSelect={(row) => console.log(row.name)}
+/>
+```
 
 ## Registry Files
 

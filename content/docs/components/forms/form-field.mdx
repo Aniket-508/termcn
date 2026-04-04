@@ -17,13 +17,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/form-field.json
 
 ```tsx
 import { FormField } from "@/components/ui/form-field";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <FormField {...demoProps} />;
+  return (
+    <FormField label="Username" hint="Must be unique" required>
+      <Text>my-input-here</Text>
+    </FormField>
+  );
 }
 ```
 
@@ -39,16 +40,49 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type        | Default     | Description                                                    |
-| ------------ | ----------- | ----------- | -------------------------------------------------------------- |
-| `label`      | `string`    | `required`  | -                                                              |
-| `children`   | `ReactNode` | `required`  | -                                                              |
-| `error`      | `string`    | `undefined` | -                                                              |
-| `hint`       | `string`    | `undefined` | -                                                              |
-| `required`   | `boolean`   | `undefined` | -                                                              |
-| `gap`        | `number`    | `0`         | Gap between label, input, and hint/error. Default: 0           |
-| `errorIcon`  | `string`    | `"✗"`       | Icon shown before error message. Default: '✗'                  |
-| `labelColor` | `string`    | `undefined` | Color override for the label. Default: theme.colors.foreground |
+| Prop         | Type        | Default     | Description                                       |
+| ------------ | ----------- | ----------- | ------------------------------------------------- |
+| `label`      | `string`    | `required`  | Text label displayed above the input              |
+| `children`   | `ReactNode` | `required`  | The input element rendered inside the field       |
+| `error`      | `string`    | `undefined` | Error message displayed below the input           |
+| `hint`       | `string`    | `undefined` | Hint text shown below the input when no error     |
+| `required`   | `boolean`   | `undefined` | Appends a red asterisk to the label when true     |
+| `gap`        | `number`    | `0`         | Vertical gap between label, input, and hint/error |
+| `errorIcon`  | `string`    | `"✗"`       | Icon shown before the error message               |
+| `labelColor` | `string`    | `undefined` | Color override for the label text                 |
+
+## Examples
+
+### With Error
+
+```tsx
+<FormField label="Email" error="Invalid email address" required>
+  <Text>bad-email</Text>
+</FormField>
+```
+
+### With Hint
+
+```tsx
+<FormField label="API Key" hint="Found in your dashboard settings">
+  <Text>sk-***</Text>
+</FormField>
+```
+
+### Custom Label Color and Error Icon
+
+```tsx
+<FormField
+  label="Password"
+  labelColor="#ff9900"
+  errorIcon="⚠"
+  error="Too short"
+  required
+  gap={1}
+>
+  <Text>***</Text>
+</FormField>
+```
 
 ## Registry Files
 

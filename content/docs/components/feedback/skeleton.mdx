@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/skeleton.json
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Skeleton {...demoProps} />;
+  return <Skeleton width={30} height={3} />;
 }
 ```
 
@@ -39,11 +35,31 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type      | Default | Description |
-| ---------- | --------- | ------- | ----------- |
-| `width`    | `number`  | `20`    | -           |
-| `height`   | `number`  | `1`     | -           |
-| `animated` | `boolean` | `true`  | -           |
+| Prop       | Type      | Default | Description                        |
+| ---------- | --------- | ------- | ---------------------------------- |
+| `width`    | `number`  | `20`    | Character width of the placeholder |
+| `height`   | `number`  | `1`     | Number of rows                     |
+| `animated` | `boolean` | `true`  | Enable shimmer animation           |
+
+## Examples
+
+### Single Line
+
+```tsx
+<Skeleton width={24} />
+```
+
+### Multi-Line Block
+
+```tsx
+<Skeleton width={40} height={4} />
+```
+
+### Static (No Animation)
+
+```tsx
+<Skeleton width={20} height={2} animated={false} />
+```
 
 ## Registry Files
 

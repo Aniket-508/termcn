@@ -19,11 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/spacer.json
 import { Spacer } from "@/components/ui/spacer";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Spacer {...demoProps} />;
+  return (
+    <Box flexDirection="row">
+      <Text>Left</Text>
+      <Spacer />
+      <Text>Right</Text>
+    </Box>
+  );
 }
 ```
 
@@ -35,10 +37,42 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type                         | Default        | Description |
-| ----------- | ---------------------------- | -------------- | ----------- |
-| `size`      | `number`                     | `undefined`    | -           |
-| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | -           |
+| Prop        | Type                         | Default        | Description                                                  |
+| ----------- | ---------------------------- | -------------- | ------------------------------------------------------------ |
+| `size`      | `number`                     | `undefined`    | Fixed size in columns or rows; omit to fill available space  |
+| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Axis along which the spacer expands when `size` is specified |
+
+## Examples
+
+### Flexible spacer (pushes items apart)
+
+```tsx
+<Box flexDirection="row">
+  <Text>Logo</Text>
+  <Spacer />
+  <Text>Menu</Text>
+</Box>
+```
+
+### Fixed horizontal space
+
+```tsx
+<Box flexDirection="row">
+  <Text>A</Text>
+  <Spacer size={4} />
+  <Text>B</Text>
+</Box>
+```
+
+### Fixed vertical space
+
+```tsx
+<Box flexDirection="column">
+  <Text>Header</Text>
+  <Spacer size={2} direction="vertical" />
+  <Text>Body</Text>
+</Box>
+```
 
 ## Registry Files
 

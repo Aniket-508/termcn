@@ -19,11 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/code.json
 import { Code } from "@/components/ui/code";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Code {...demoProps} />;
+  return (
+    <Code language="typescript">
+      {`const greeting = "Hello, world!";\nconsole.log(greeting);`}
+    </Code>
+  );
 }
 ```
 
@@ -35,20 +35,55 @@ export function Example() {
 
 ## Props
 
-| Prop                  | Type                                                                                            | Default     | Description                                                              |
-| --------------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------ |
-| `children`            | `string`                                                                                        | `required`  | -                                                                        |
-| `language`            | `string`                                                                                        | `undefined` | -                                                                        |
-| `inline`              | `boolean`                                                                                       | `false`     | -                                                                        |
-| `borderStyle`         | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style. Default: 'single'                                          |
-| `showLineNumbers`     | `boolean`                                                                                       | `true`      | Whether to show line numbers. Default: true                              |
-| `lineNumberSeparator` | `string`                                                                                        | `"│ "`      | Line number separator string. Default: '│ '                              |
-| `keywordColor`        | `string`                                                                                        | `undefined` | Override color for keyword tokens. Default: theme.colors.accent          |
-| `stringColor`         | `string`                                                                                        | `undefined` | Override color for string tokens. Default: theme.colors.success          |
-| `numberColor`         | `string`                                                                                        | `undefined` | Override color for number tokens. Default: theme.colors.warning          |
-| `commentColor`        | `string`                                                                                        | `undefined` | Override color for comment tokens. Default: theme.colors.mutedForeground |
-| `operatorColor`       | `string`                                                                                        | `undefined` | Override color for operator tokens. Default: theme.colors.info           |
-| `plainColor`          | `string`                                                                                        | `undefined` | Override color for plain tokens. Default: theme.colors.foreground        |
+| Prop                  | Type                                                                                            | Default     | Description                                         |
+| --------------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| `children`            | `string`                                                                                        | `required`  | Source code string to display                       |
+| `language`            | `string`                                                                                        | `undefined` | Language label shown in the top-right corner        |
+| `inline`              | `boolean`                                                                                       | `false`     | Render as an inline code snippet instead of a block |
+| `borderStyle`         | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style for the code block frame               |
+| `showLineNumbers`     | `boolean`                                                                                       | `true`      | Whether to show line numbers in the gutter          |
+| `lineNumberSeparator` | `string`                                                                                        | `"│ "`      | Separator string between line numbers and code      |
+| `keywordColor`        | `string`                                                                                        | `undefined` | Override color for keyword tokens                   |
+| `stringColor`         | `string`                                                                                        | `undefined` | Override color for string literal tokens            |
+| `numberColor`         | `string`                                                                                        | `undefined` | Override color for number tokens                    |
+| `commentColor`        | `string`                                                                                        | `undefined` | Override color for comment tokens                   |
+| `operatorColor`       | `string`                                                                                        | `undefined` | Override color for operator tokens                  |
+| `plainColor`          | `string`                                                                                        | `undefined` | Override color for plain/identifier tokens          |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Code language="javascript">{`const x = 42;`}</Code>
+```
+
+### Inline Code
+
+```tsx
+<Code inline>{`npm install ink`}</Code>
+```
+
+### Without Line Numbers
+
+```tsx
+<Code language="python" showLineNumbers={false}>
+  {`def greet(name):\n    return f"Hello, {name}"`}
+</Code>
+```
+
+### Custom Token Colors
+
+```tsx
+<Code
+  language="typescript"
+  keywordColor="#c678dd"
+  stringColor="#98c379"
+  numberColor="#d19a66"
+>
+  {`const count = 10;\nconst msg = "done";`}
+</Code>
+```
 
 ## Registry Files
 

@@ -19,11 +19,22 @@ npx shadcn@latest add https://termcn.vercel.app/r/file-change.json
 import { FileChange } from "@/components/ui/file-change";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <FileChange {...demoProps} />;
+  return (
+    <FileChange
+      changes={[
+        { path: "src/utils.ts", type: "modify", diff: "-old line\n+new line" },
+        {
+          path: "src/helpers.ts",
+          type: "create",
+          content: "export const add = (a, b) => a + b;",
+        },
+        { path: "src/legacy.ts", type: "delete" },
+      ]}
+      onAccept={(path) => console.log("accepted", path)}
+      onReject={(path) => console.log("rejected", path)}
+      onAcceptAll={() => console.log("accepted all")}
+    />
+  );
 }
 ```
 
@@ -39,12 +50,56 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                        | Default     | Description |
-| ------------- | --------------------------- | ----------- | ----------- |
-| `changes`     | `FileChangeItem[]`          | `required`  | -           |
-| `onAccept`    | `(path: string) =&gt; void` | `undefined` | -           |
-| `onReject`    | `(path: string) =&gt; void` | `undefined` | -           |
-| `onAcceptAll` | `() =&gt; void`             | `undefined` | -           |
+| Prop          | Type                     | Default     | Description                                                                                   |
+| ------------- | ------------------------ | ----------- | --------------------------------------------------------------------------------------------- |
+| `changes`     | `FileChangeItem[]`       | `required`  | Array of file changes to review. Each item has `path`, `type`, optional `diff` and `content`. |
+| `onAccept`    | `(path: string) => void` | `undefined` | Called when a single file is accepted with `y`.                                               |
+| `onReject`    | `(path: string) => void` | `undefined` | Called when a single file is rejected with `n`.                                               |
+| `onAcceptAll` | `() => void`             | `undefined` | Called when all files are bulk-accepted with `a`.                                             |
+
+## Examples
+
+### Single modified file
+
+```tsx
+<FileChange
+  changes={[{ path: "README.md", type: "modify", diff: "-old\n+new" }]}
+  onAccept={(p) => console.log("accepted", p)}
+  onReject={(p) => console.log("rejected", p)}
+/>
+```
+
+### Mixed change types
+
+```tsx
+<FileChange
+  changes={[
+    { path: "src/index.ts", type: "modify" },
+    {
+      path: "src/new-feature.ts",
+      type: "create",
+      content: "export function feature() {}",
+    },
+    { path: "src/deprecated.ts", type: "delete" },
+  ]}
+  onAcceptAll={() => console.log("all accepted")}
+/>
+```
+
+### New file with content preview
+
+```tsx
+<FileChange
+  changes={[
+    {
+      path: "src/config.ts",
+      type: "create",
+      content:
+        "export const config = {\n  apiUrl: 'https://api.example.com',\n};",
+    },
+  ]}
+/>
+```
 
 ## Registry Files
 

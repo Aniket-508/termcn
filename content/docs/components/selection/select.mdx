@@ -19,7 +19,17 @@ npx shadcn@latest add https://termcn.vercel.app/r/select.json
 import { Select } from "@/components/ui/select";
 
 export function Example() {
-  <Select options={["alpha", "beta", "gamma"]} value="beta" />;
+  return (
+    <Select
+      label="Choose a framework"
+      options={[
+        { value: "next", label: "Next.js" },
+        { value: "remix", label: "Remix" },
+        { value: "astro", label: "Astro" },
+      ]}
+      onChange={(value) => console.log("Selected:", value)}
+    />
+  );
 }
 ```
 
@@ -35,7 +45,57 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop          | Type                 | Default     | Description                                         |
+| ------------- | -------------------- | ----------- | --------------------------------------------------- |
+| `options`     | `SelectOption<T>[]`  | `required`  | Array of `{ value, label, hint?, disabled? }` items |
+| `value`       | `T`                  | `undefined` | Controlled selected value                           |
+| `onChange`    | `(value: T) => void` | `undefined` | Callback fired when the selected option changes     |
+| `onSubmit`    | `(value: T) => void` | `undefined` | Callback fired on Enter to confirm selection        |
+| `label`       | `string`             | `undefined` | Heading text displayed above the list               |
+| `cursor`      | `string`             | `"›"`       | Character used for the active-row cursor            |
+| `cursorColor` | `string`             | `undefined` | Override color for the cursor and active row        |
+
+## Examples
+
+### With Hints and Disabled Options
+
+```tsx
+<Select
+  label="Region"
+  options={[
+    { value: "us-east", label: "US East", hint: "Virginia" },
+    { value: "eu-west", label: "EU West", hint: "Ireland" },
+    { value: "ap-south", label: "AP South", hint: "Mumbai", disabled: true },
+  ]}
+/>
+```
+
+### Custom Cursor Color
+
+```tsx
+<Select
+  options={[
+    { value: "info", label: "Info" },
+    { value: "warn", label: "Warning" },
+    { value: "error", label: "Error" },
+  ]}
+  cursor="→"
+  cursorColor="#f59e0b"
+/>
+```
+
+### Controlled Value
+
+```tsx
+<Select
+  options={[
+    { value: "asc", label: "Ascending" },
+    { value: "desc", label: "Descending" },
+  ]}
+  value="asc"
+  onChange={(value) => setSortOrder(value)}
+/>
+```
 
 ## Registry Files
 

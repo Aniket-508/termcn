@@ -17,13 +17,25 @@ npx shadcn@latest add https://termcn.vercel.app/r/dialog.json
 
 ```tsx
 import { Dialog } from "@/components/ui/dialog";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Dialog {...demoProps} />;
+  return (
+    <Dialog
+      isOpen={true}
+      title="Delete project"
+      variant="danger"
+      confirmLabel="Delete"
+      cancelLabel="Keep"
+      onConfirm={() => console.log("deleted")}
+      onCancel={() => console.log("cancelled")}
+    >
+      <Text>
+        Are you sure you want to delete this project? This action cannot be
+        undone.
+      </Text>
+    </Dialog>
+  );
 }
 ```
 
@@ -39,16 +51,61 @@ export function Example() {
 
 ## Props
 
-| Prop           | Type                    | Default     | Description |
-| -------------- | ----------------------- | ----------- | ----------- |
-| `title`        | `string`                | `undefined` | -           |
-| `children`     | `ReactNode`             | `required`  | -           |
-| `confirmLabel` | `string`                | `"OK"`      | -           |
-| `cancelLabel`  | `string`                | `"Cancel"`  | -           |
-| `onConfirm`    | `() =&gt; void`         | `undefined` | -           |
-| `onCancel`     | `() =&gt; void`         | `undefined` | -           |
-| `variant`      | `"default" \| "danger"` | `"default"` | -           |
-| `isOpen`       | `boolean`               | `false`     | -           |
+| Prop           | Type                    | Default     | Description                                         |
+| -------------- | ----------------------- | ----------- | --------------------------------------------------- |
+| `title`        | `string`                | `undefined` | Title displayed at the top of the dialog            |
+| `children`     | `ReactNode`             | `required`  | Content rendered inside the dialog body             |
+| `confirmLabel` | `string`                | `"OK"`      | Label for the confirm button                        |
+| `cancelLabel`  | `string`                | `"Cancel"`  | Label for the cancel button                         |
+| `onConfirm`    | `() => void`            | `undefined` | Callback fired when the confirm button is activated |
+| `onCancel`     | `() => void`            | `undefined` | Callback fired when cancel is pressed or Esc is hit |
+| `variant`      | `"default" \| "danger"` | `"default"` | Visual variant; `"danger"` uses error colors        |
+| `isOpen`       | `boolean`               | `false`     | Whether the dialog is visible and accepting input   |
+
+## Examples
+
+### Default Confirmation
+
+```tsx
+<Dialog
+  isOpen={true}
+  title="Save changes?"
+  onConfirm={() => save()}
+  onCancel={() => discard()}
+>
+  <Text>You have unsaved changes. Would you like to save them?</Text>
+</Dialog>
+```
+
+### Danger Variant
+
+```tsx
+<Dialog
+  isOpen={true}
+  title="Remove file"
+  variant="danger"
+  confirmLabel="Remove"
+  onConfirm={() => removeFile()}
+  onCancel={() => cancel()}
+>
+  <Text>This will permanently delete config.json.</Text>
+</Dialog>
+```
+
+### Custom Button Labels
+
+```tsx
+<Dialog
+  isOpen={true}
+  title="Overwrite existing?"
+  confirmLabel="Yes, overwrite"
+  cancelLabel="No, skip"
+  onConfirm={() => overwrite()}
+  onCancel={() => skip()}
+>
+  <Text>A file with this name already exists in the directory.</Text>
+</Dialog>
+```
 
 ## Registry Files
 

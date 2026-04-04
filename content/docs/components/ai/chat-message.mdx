@@ -19,11 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/chat-message.json
 import { ChatMessage } from "@/components/ui/chat-message";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <ChatMessage {...demoProps} />;
+  return (
+    <ChatMessage sender="assistant" name="Claude" timestamp={new Date()}>
+      Here is the refactored version of your function.
+    </ChatMessage>
+  );
 }
 ```
 
@@ -39,14 +39,49 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type        | Default     | Description                              |
-| ----------- | ----------- | ----------- | ---------------------------------------- |
-| `sender`    | `ChatRole`  | `required`  | Chat author label (not a DOM ARIA role). |
-| `name`      | `string`    | `undefined` | -                                        |
-| `timestamp` | `Date`      | `undefined` | -                                        |
-| `streaming` | `boolean`   | `false`     | -                                        |
-| `collapsed` | `boolean`   | `undefined` | -                                        |
-| `children`  | `ReactNode` | `undefined` | -                                        |
+| Prop        | Type        | Default     | Description                                                                    |
+| ----------- | ----------- | ----------- | ------------------------------------------------------------------------------ |
+| `sender`    | `ChatRole`  | `required`  | Role of the message author: `"user"`, `"assistant"`, `"system"`, or `"error"`. |
+| `name`      | `string`    | `undefined` | Display name shown in the header; falls back to the sender role label.         |
+| `timestamp` | `Date`      | `undefined` | Timestamp rendered next to the name in `HH:MM` format.                         |
+| `streaming` | `boolean`   | `false`     | Shows an animated dot indicator while the response is being streamed.          |
+| `collapsed` | `boolean`   | `undefined` | Start the message collapsed; press Enter or Space to toggle.                   |
+| `children`  | `ReactNode` | `undefined` | Message body content.                                                          |
+
+## Examples
+
+### Assistant reply
+
+```tsx
+<ChatMessage sender="assistant">
+  The tests are passing now. I fixed the off-by-one error in the loop.
+</ChatMessage>
+```
+
+### Streaming state
+
+```tsx
+<ChatMessage sender="assistant" name="Claude" streaming>
+  Generating response...
+</ChatMessage>
+```
+
+### Error message
+
+```tsx
+<ChatMessage sender="error" timestamp={new Date()}>
+  Rate limit exceeded. Please try again in 30 seconds.
+</ChatMessage>
+```
+
+### Collapsed system message
+
+```tsx
+<ChatMessage sender="system" collapsed>
+  You are a helpful coding assistant. Follow the user instructions carefully and
+  produce clean, well-tested code.
+</ChatMessage>
+```
 
 ## Registry Files
 

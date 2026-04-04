@@ -19,11 +19,15 @@ npx shadcn@latest add https://termcn.vercel.app/r/number-input.json
 import { NumberInput } from "@/components/ui/number-input";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <NumberInput {...demoProps} />;
+  return (
+    <NumberInput
+      label="Quantity"
+      min={0}
+      max={100}
+      step={1}
+      onChange={(value) => console.log("Value:", value)}
+    />
+  );
 }
 ```
 
@@ -40,22 +44,47 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                            | Default     | Description                                                          |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------- |
-| `value`       | `number`                                                                                        | `undefined` | -                                                                    |
-| `onChange`    | `(value: number) =&gt; void`                                                                    | `undefined` | -                                                                    |
-| `onSubmit`    | `(value: number) =&gt; void`                                                                    | `undefined` | -                                                                    |
-| `min`         | `number`                                                                                        | `undefined` | -                                                                    |
-| `max`         | `number`                                                                                        | `undefined` | -                                                                    |
-| `step`        | `number`                                                                                        | `1`         | -                                                                    |
-| `placeholder` | `string`                                                                                        | `""`        | -                                                                    |
-| `label`       | `string`                                                                                        | `undefined` | -                                                                    |
-| `id`          | `string`                                                                                        | `undefined` | -                                                                    |
-| `format`      | `(n: number) =&gt; string`                                                                      | `undefined` | -                                                                    |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style. Default: 'round'                                       |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                                       |
-| `cursor`      | `string`                                                                                        | `"█"`       | Cursor character shown when focused. Default: '█'                    |
-| `stepHint`    | `string`                                                                                        | `undefined` | Step hint format. Default: '↑ +&#123;step&#125; ↓ -&#123;step&#125;' |
+| Prop          | Type                                                                                         | Default                  | Description                                    |
+| ------------- | -------------------------------------------------------------------------------------------- | ------------------------ | ---------------------------------------------- |
+| `value`       | `number`                                                                                     | `undefined`              | Controlled numeric value                       |
+| `onChange`    | `(value: number) => void`                                                                    | `undefined`              | Called when the value changes                  |
+| `onSubmit`    | `(value: number) => void`                                                                    | `undefined`              | Called when Enter is pressed                   |
+| `min`         | `number`                                                                                     | `undefined`              | Minimum allowed value                          |
+| `max`         | `number`                                                                                     | `undefined`              | Maximum allowed value                          |
+| `step`        | `number`                                                                                     | `1`                      | Increment/decrement step for arrow keys        |
+| `placeholder` | `string`                                                                                     | `""`                     | Placeholder shown when no value is set         |
+| `label`       | `string`                                                                                     | `undefined`              | Label text displayed above the input           |
+| `id`          | `string`                                                                                     | `undefined`              | Unique identifier for focus management         |
+| `format`      | `(n: number) => string`                                                                      | `undefined`              | Custom formatter for the displayed value       |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`                | Border style for the input box                 |
+| `paddingX`    | `number`                                                                                     | `1`                      | Horizontal padding inside the border           |
+| `cursor`      | `string`                                                                                     | `"█"`                    | Cursor character shown when focused            |
+| `stepHint`    | `string`                                                                                     | `"↑ +{step}  ↓ -{step}"` | Hint text shown next to the input when focused |
+
+## Examples
+
+### With Min/Max Bounds
+
+```tsx
+<NumberInput label="Age" min={0} max={150} step={1} placeholder="Enter age" />
+```
+
+### Custom Step and Format
+
+```tsx
+<NumberInput
+  label="Price"
+  step={0.5}
+  min={0}
+  format={(n) => `$${n.toFixed(2)}`}
+/>
+```
+
+### With Custom Border Style
+
+```tsx
+<NumberInput label="Count" step={5} borderStyle="double" />
+```
 
 ## Registry Files
 

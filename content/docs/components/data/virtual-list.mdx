@@ -17,13 +17,24 @@ npx shadcn@latest add https://termcn.vercel.app/r/virtual-list.json
 
 ```tsx
 import { VirtualList } from "@/components/ui/virtual-list";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
+  const items = Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`);
 
-  return <VirtualList {...demoProps} />;
+  return (
+    <VirtualList
+      items={items}
+      height={10}
+      renderItem={(item, index, isActive) => (
+        <Text bold={isActive} color={isActive ? "blue" : undefined}>
+          {isActive ? "› " : "  "}
+          {item}
+        </Text>
+      )}
+      onSelect={(item, index) => console.log(`Selected: ${item}`)}
+    />
+  );
 }
 ```
 
@@ -40,7 +51,57 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop         | Type                                                       | Default     | Description                                        |
+| ------------ | ---------------------------------------------------------- | ----------- | -------------------------------------------------- |
+| `items`      | `T[]`                                                      | `required`  | Array of items to render in the list               |
+| `renderItem` | `(item: T, index: number, isActive: boolean) => ReactNode` | `required`  | Render function called for each visible item       |
+| `height`     | `number`                                                   | `required`  | Number of visible rows in the viewport             |
+| `onSelect`   | `(item: T, index: number) => void`                         | `undefined` | Callback fired when an item is selected with Enter |
+| `cursor`     | `string`                                                   | `undefined` | Cursor character for the active item               |
+| `overscan`   | `number`                                                   | `2`         | Extra rows rendered above and below the viewport   |
+
+## Examples
+
+### Large dataset with scrollbar
+
+```tsx
+<VirtualList
+  items={Array.from({ length: 10000 }, (_, i) => ({
+    id: i,
+    label: `Log entry #${i}`,
+  }))}
+  height={15}
+  renderItem={(item, _idx, isActive) => (
+    <Text inverse={isActive}> {item.label} </Text>
+  )}
+/>
+```
+
+### Custom overscan
+
+```tsx
+<VirtualList
+  items={["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta"]}
+  height={3}
+  overscan={1}
+  renderItem={(item, _idx, isActive) => (
+    <Text color={isActive ? "green" : undefined}>{item}</Text>
+  )}
+/>
+```
+
+### With select handler
+
+```tsx
+<VirtualList
+  items={["Create file", "Delete file", "Rename file", "Copy file"]}
+  height={4}
+  onSelect={(item) => console.log(`Action: ${item}`)}
+  renderItem={(item, _idx, isActive) => (
+    <Text bold={isActive}>{isActive ? `› ${item}` : `  ${item}`}</Text>
+  )}
+/>
+```
 
 ## Registry Files
 

@@ -17,13 +17,17 @@ npx shadcn@latest add https://termcn.vercel.app/r/chat-thread.json
 
 ```tsx
 import { ChatThread } from "@/components/ui/chat-thread";
+import { ChatMessage } from "@/components/ui/chat-message";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <ChatThread {...demoProps} />;
+  return (
+    <ChatThread maxHeight={20}>
+      <ChatMessage sender="user">How do I center a div?</ChatMessage>
+      <ChatMessage sender="assistant">
+        Use flexbox: display flex, justify-content center, align-items center.
+      </ChatMessage>
+    </ChatThread>
+  );
 }
 ```
 
@@ -39,11 +43,34 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type        | Default     | Description |
-| ------------ | ----------- | ----------- | ----------- |
-| `maxHeight`  | `number`    | `undefined` | -           |
-| `autoScroll` | `boolean`   | `true`      | -           |
-| `children`   | `ReactNode` | `undefined` | -           |
+| Prop         | Type        | Default     | Description                                                     |
+| ------------ | ----------- | ----------- | --------------------------------------------------------------- |
+| `maxHeight`  | `number`    | `undefined` | Maximum visible height in rows; overflowing content is clipped. |
+| `autoScroll` | `boolean`   | `true`      | Keep the latest messages visible at the bottom.                 |
+| `children`   | `ReactNode` | `undefined` | ChatMessage components to render inside the thread.             |
+
+## Examples
+
+### Fixed-height thread
+
+```tsx
+<ChatThread maxHeight={15}>
+  <ChatMessage sender="user">Summarize this file.</ChatMessage>
+  <ChatMessage sender="assistant">
+    This module exports a single React component that renders a data table.
+  </ChatMessage>
+</ChatThread>
+```
+
+### Full-height thread
+
+```tsx
+<ChatThread>
+  <ChatMessage sender="system">You are a helpful assistant.</ChatMessage>
+  <ChatMessage sender="user">Hello!</ChatMessage>
+  <ChatMessage sender="assistant">Hi! How can I help you today?</ChatMessage>
+</ChatThread>
+```
 
 ## Registry Files
 

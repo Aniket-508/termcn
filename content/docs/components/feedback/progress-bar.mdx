@@ -19,7 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/progress-bar.json
 import { ProgressBar } from "@/components/ui/progress-bar";
 
 export function Example() {
-  <ProgressBar value={42} max={100} label="Uploading" />;
+  return <ProgressBar value={42} total={100} label="Uploading" />;
 }
 ```
 
@@ -31,15 +31,43 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                        | Default     | Description |
-| ------------- | ------------------------------------------------------------------------------------------- | ----------- | ----------- |
-| `value`       | `number; // 0–100 total?: number; // if set, value is current, total is max width?: number` | `required`  | -           |
-| `showPercent` | `boolean`                                                                                   | `true`      | -           |
-| `showEta`     | `boolean`                                                                                   | `false`     | -           |
-| `fillChar`    | `string`                                                                                    | `"█"`       | -           |
-| `emptyChar`   | `string`                                                                                    | `"░"`       | -           |
-| `color`       | `string`                                                                                    | `undefined` | -           |
-| `label`       | `string`                                                                                    | `undefined` | -           |
+| Prop          | Type      | Default     | Description                                                  |
+| ------------- | --------- | ----------- | ------------------------------------------------------------ |
+| `value`       | `number`  | `required`  | Progress value (0-100, or current if `total` is set)         |
+| `total`       | `number`  | `undefined` | Maximum value; when set, `value` is treated as current count |
+| `width`       | `number`  | `30`        | Character width of the bar                                   |
+| `showPercent` | `boolean` | `true`      | Show percentage label next to the bar                        |
+| `showEta`     | `boolean` | `false`     | Reserved for estimated time remaining                        |
+| `fillChar`    | `string`  | `"█"`       | Character used for the filled portion                        |
+| `emptyChar`   | `string`  | `"░"`       | Character used for the empty portion                         |
+| `color`       | `string`  | `undefined` | Override the bar color                                       |
+| `label`       | `string`  | `undefined` | Text label displayed above the bar                           |
+
+## Examples
+
+### Basic Percentage
+
+```tsx
+<ProgressBar value={65} />
+```
+
+### With Value and Total
+
+```tsx
+<ProgressBar value={37} total={50} label="Files processed" />
+```
+
+### Custom Characters and Color
+
+```tsx
+<ProgressBar value={80} fillChar="=" emptyChar="-" color="#22c55e" />
+```
+
+### Without Percentage
+
+```tsx
+<ProgressBar value={50} showPercent={false} width={40} />
+```
 
 ## Registry Files
 

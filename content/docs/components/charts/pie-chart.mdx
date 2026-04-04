@@ -19,11 +19,17 @@ npx shadcn@latest add https://termcn.vercel.app/r/pie-chart.json
 import { PieChart } from "@/components/ui/pie-chart";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <PieChart {...demoProps} />;
+  return (
+    <PieChart
+      data={[
+        { label: "TypeScript", value: 45 },
+        { label: "Rust", value: 25 },
+        { label: "Go", value: 20 },
+        { label: "Python", value: 10 },
+      ]}
+      radius={6}
+    />
+  );
 }
 ```
 
@@ -35,12 +41,56 @@ export function Example() {
 
 ## Props
 
-| Prop              | Type             | Default    | Description |
-| ----------------- | ---------------- | ---------- | ----------- |
-| `data`            | `PieChartItem[]` | `required` | -           |
-| `radius`          | `number`         | `5`        | -           |
-| `showLegend`      | `boolean`        | `true`     | -           |
-| `showPercentages` | `boolean`        | `true`     | -           |
+| Prop              | Type             | Default    | Description                          |
+| ----------------- | ---------------- | ---------- | ------------------------------------ |
+| `data`            | `PieChartItem[]` | `required` | Array of labeled slices with values  |
+| `radius`          | `number`         | `5`        | Radius of the pie in character rows  |
+| `showLegend`      | `boolean`        | `true`     | Show the color legend beside the pie |
+| `showPercentages` | `boolean`        | `true`     | Show percentage values in the legend |
+
+## Examples
+
+### Custom Slice Colors
+
+```tsx
+<PieChart
+  data={[
+    { label: "Pass", value: 87, color: "#16a34a" },
+    { label: "Fail", value: 8, color: "#dc2626" },
+    { label: "Skip", value: 5, color: "#d97706" },
+  ]}
+  radius={5}
+/>
+```
+
+### Without Legend
+
+```tsx
+<PieChart
+  data={[
+    { label: "A", value: 40 },
+    { label: "B", value: 35 },
+    { label: "C", value: 25 },
+  ]}
+  showLegend={false}
+  radius={4}
+/>
+```
+
+### Large Chart Without Percentages
+
+```tsx
+<PieChart
+  data={[
+    { label: "React", value: 50 },
+    { label: "Vue", value: 30 },
+    { label: "Svelte", value: 15 },
+    { label: "Angular", value: 5 },
+  ]}
+  radius={8}
+  showPercentages={false}
+/>
+```
 
 ## Registry Files
 

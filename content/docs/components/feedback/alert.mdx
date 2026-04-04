@@ -19,9 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/alert.json
 import { Alert } from "@/components/ui/alert";
 
 export function Example() {
-  <Alert variant="success" title="Build complete">
-    Everything is ready to ship.
-  </Alert>;
+  return (
+    <Alert variant="success" title="Build complete">
+      Everything is ready to ship.
+    </Alert>
+  );
 }
 ```
 
@@ -33,17 +35,49 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                            | Default     | Description                                   |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------- |
-| `variant`     | `AlertVariant`                                                                                  | `"info"`    | -                                             |
-| `title`       | `string`                                                                                        | `undefined` | -                                             |
-| `children`    | `ReactNode`                                                                                     | `undefined` | -                                             |
-| `icon`        | `string`                                                                                        | `undefined` | -                                             |
-| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the alert. Default: true |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` | Border style. Default: theme.border.style     |
-| `color`       | `string`                                                                                        | `undefined` | Override the border/icon color                |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                |
-| `paddingY`    | `number`                                                                                        | `0`         | Vertical padding. Default: 0                  |
+| Prop          | Type                                                                                            | Default     | Description                                      |
+| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------ |
+| `variant`     | `AlertVariant`                                                                                  | `"info"`    | Visual style variant                             |
+| `title`       | `string`                                                                                        | `undefined` | Bold heading displayed next to icon              |
+| `children`    | `ReactNode`                                                                                     | `undefined` | Body content rendered below the title            |
+| `icon`        | `string`                                                                                        | `undefined` | Custom icon character, overrides variant default |
+| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the alert                   |
+| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` | Border style, defaults to theme setting          |
+| `color`       | `string`                                                                                        | `undefined` | Override the border and icon color               |
+| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding inside the box                |
+| `paddingY`    | `number`                                                                                        | `0`         | Vertical padding inside the box                  |
+
+## Examples
+
+### Info Alert (Default)
+
+```tsx
+<Alert title="Note">Run migrations before starting the server.</Alert>
+```
+
+### Error Alert
+
+```tsx
+<Alert variant="error" title="Build failed">
+  TypeScript found 3 errors in src/index.ts.
+</Alert>
+```
+
+### Without Border
+
+```tsx
+<Alert variant="warning" title="Deprecation" bordered={false}>
+  This API will be removed in v3.0.
+</Alert>
+```
+
+### Custom Icon and Color
+
+```tsx
+<Alert variant="success" icon="🚀" color="#a78bfa" title="Deployed">
+  Production deploy finished in 42s.
+</Alert>
+```
 
 ## Registry Files
 

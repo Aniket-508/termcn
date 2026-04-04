@@ -17,13 +17,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/panel.json
 
 ```tsx
 import { Panel } from "@/components/ui/panel";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Panel {...demoProps} />;
+  return (
+    <Panel title="System Status" borderStyle="round" width={40}>
+      <Text>All services operational</Text>
+    </Panel>
+  );
 }
 ```
 
@@ -35,18 +36,49 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                            | Default     | Description                                   |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------- |
-| `title`       | `string`                                                                                        | `undefined` | -                                             |
-| `titleColor`  | `string`                                                                                        | `undefined` | -                                             |
-| `borderColor` | `string`                                                                                        | `undefined` | -                                             |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` | -                                             |
-| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the panel. Default: true |
-| `width`       | `number`                                                                                        | `undefined` | -                                             |
-| `height`      | `number`                                                                                        | `undefined` | -                                             |
-| `paddingX`    | `number`                                                                                        | `1`         | -                                             |
-| `paddingY`    | `number`                                                                                        | `0`         | -                                             |
-| `children`    | `ReactNode`                                                                                     | `undefined` | -                                             |
+| Prop          | Type                                                                                         | Default     | Description                               |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
+| `title`       | `string`                                                                                     | `undefined` | Title displayed at the top of the panel   |
+| `titleColor`  | `string`                                                                                     | `undefined` | Custom color for the title text           |
+| `borderColor` | `string`                                                                                     | `undefined` | Custom border color                       |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` | Border drawing style                      |
+| `bordered`    | `boolean`                                                                                    | `true`      | Whether to show a border around the panel |
+| `width`       | `number`                                                                                     | `undefined` | Fixed width in columns                    |
+| `height`      | `number`                                                                                     | `undefined` | Fixed height in rows                      |
+| `paddingX`    | `number`                                                                                     | `1`         | Horizontal padding inside the panel       |
+| `paddingY`    | `number`                                                                                     | `0`         | Vertical padding inside the panel         |
+| `children`    | `ReactNode`                                                                                  | `undefined` | Content rendered inside the panel         |
+
+## Examples
+
+### Borderless panel
+
+```tsx
+<Panel title="Notes" bordered={false}>
+  <Text>No border, just a title and content.</Text>
+</Panel>
+```
+
+### Double border with custom colors
+
+```tsx
+<Panel
+  title="Warnings"
+  borderStyle="double"
+  borderColor="yellow"
+  titleColor="yellow"
+>
+  <Text>3 warnings detected</Text>
+</Panel>
+```
+
+### Fixed dimensions with padding
+
+```tsx
+<Panel title="Preview" width={60} height={10} paddingX={2} paddingY={1}>
+  <Text>Padded content area</Text>
+</Panel>
+```
 
 ## Registry Files
 

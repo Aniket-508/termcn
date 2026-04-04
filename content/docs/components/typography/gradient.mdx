@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/gradient.json
 import { Gradient } from "@/components/ui/gradient";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Gradient {...demoProps} />;
+  return <Gradient colors={["#ff6b6b", "#4ecdc4"]}>Hello Gradient</Gradient>;
 }
 ```
 
@@ -35,11 +31,35 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type       | Default    | Description |
-| ---------- | ---------- | ---------- | ----------- |
-| `children` | `string`   | `required` | -           |
-| `colors`   | `string[]` | `required` | -           |
-| `bold`     | `boolean`  | `false`    | -           |
+| Prop       | Type       | Default    | Description                               |
+| ---------- | ---------- | ---------- | ----------------------------------------- |
+| `children` | `string`   | `required` | Text string to apply the gradient to      |
+| `colors`   | `string[]` | `required` | Array of hex color stops for the gradient |
+| `bold`     | `boolean`  | `false`    | Whether to render the text in bold        |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Gradient colors={["#ee5a24", "#f9ca24"]}>Sunset Text</Gradient>
+```
+
+### Three-Color Gradient
+
+```tsx
+<Gradient colors={["#7f8c8d", "#2ecc71", "#3498db"]}>
+  Multi-stop gradient
+</Gradient>
+```
+
+### Bold Gradient
+
+```tsx
+<Gradient colors={["#6c5ce7", "#fd79a8"]} bold>
+  Bold Gradient
+</Gradient>
+```
 
 ## Registry Files
 

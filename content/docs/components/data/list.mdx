@@ -19,11 +19,16 @@ npx shadcn@latest add https://termcn.vercel.app/r/list.json
 import { List } from "@/components/ui/list";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <List {...demoProps} />;
+  return (
+    <List
+      items={[
+        { key: "ts", label: "TypeScript", description: "Typed JavaScript" },
+        { key: "rs", label: "Rust", description: "Systems language" },
+        { key: "go", label: "Go", description: "Cloud-native language" },
+      ]}
+      onSelect={(item) => console.log(item.key)}
+    />
+  );
 }
 ```
 
@@ -39,13 +44,66 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type                          | Default     | Description |
-| ------------ | ----------------------------- | ----------- | ----------- |
-| `items`      | `ListItem[]`                  | `required`  | -           |
-| `onSelect`   | `(item: ListItem) =&gt; void` | `undefined` | -           |
-| `filterable` | `boolean`                     | `false`     | -           |
-| `height`     | `number`                      | `10`        | -           |
-| `cursor`     | `string`                      | `"›"`       | -           |
+| Prop         | Type                       | Default     | Description                                  |
+| ------------ | -------------------------- | ----------- | -------------------------------------------- |
+| `items`      | `ListItem[]`               | `required`  | Array of items to display in the list        |
+| `onSelect`   | `(item: ListItem) => void` | `undefined` | Callback fired when an item is selected      |
+| `filterable` | `boolean`                  | `false`     | Enable type-to-filter functionality          |
+| `height`     | `number`                   | `10`        | Maximum number of visible rows               |
+| `cursor`     | `string`                   | `"›"`       | Character used for the active item indicator |
+
+### ListItem
+
+| Prop          | Type     | Description                       |
+| ------------- | -------- | --------------------------------- |
+| `key`         | `string` | Unique identifier for the item    |
+| `label`       | `string` | Display text for the item         |
+| `description` | `string` | Optional secondary text           |
+| `color`       | `string` | Override color for the item label |
+
+## Examples
+
+### With filtering enabled
+
+```tsx
+<List
+  filterable
+  items={[
+    { key: "1", label: "package.json" },
+    { key: "2", label: "tsconfig.json" },
+    { key: "3", label: "README.md" },
+    { key: "4", label: ".gitignore" },
+  ]}
+/>
+```
+
+### Custom cursor and limited height
+
+```tsx
+<List
+  cursor="→"
+  height={3}
+  items={[
+    { key: "a", label: "Alpha" },
+    { key: "b", label: "Beta" },
+    { key: "c", label: "Gamma" },
+    { key: "d", label: "Delta" },
+    { key: "e", label: "Epsilon" },
+  ]}
+/>
+```
+
+### Colored items
+
+```tsx
+<List
+  items={[
+    { key: "pass", label: "Tests Passed", color: "green" },
+    { key: "warn", label: "Warnings", color: "yellow" },
+    { key: "fail", label: "Failures", color: "red" },
+  ]}
+/>
+```
 
 ## Registry Files
 

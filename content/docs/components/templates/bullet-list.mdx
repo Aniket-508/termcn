@@ -19,11 +19,19 @@ npx shadcn@latest add https://termcn.vercel.app/r/bullet-list.json
 import { BulletList } from "@/components/ui/bullet-list";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <BulletList {...demoProps} />;
+  return (
+    <BulletList>
+      <BulletList.Item label="Install dependencies" bold>
+        <BulletList.Sub>
+          <BulletList.TreeItem label="ink@5.1.0" />
+          <BulletList.TreeItem label="react@18.3.0" />
+        </BulletList.Sub>
+      </BulletList.Item>
+      <BulletList.Item label="Configure project" />
+      <BulletList.CheckItem label="Write tests" done />
+      <BulletList.CheckItem label="Deploy to production" />
+    </BulletList>
+  );
 }
 ```
 
@@ -35,7 +43,78 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+### BulletList
+
+| Prop       | Type        | Default    | Description                      |
+| ---------- | ----------- | ---------- | -------------------------------- |
+| `children` | `ReactNode` | `required` | List items and nested sub-lists. |
+
+### BulletList.Item
+
+| Prop       | Type        | Default     | Description                                         |
+| ---------- | ----------- | ----------- | --------------------------------------------------- |
+| `label`    | `string`    | `required`  | Text displayed next to the bullet marker.           |
+| `bold`     | `boolean`   | `false`     | Render the label in bold.                           |
+| `color`    | `string`    | `undefined` | Color for both the bullet and the label text.       |
+| `children` | `ReactNode` | `undefined` | Nested content, typically a `BulletList.Sub` block. |
+
+### BulletList.Sub
+
+| Prop       | Type        | Default    | Description                                   |
+| ---------- | ----------- | ---------- | --------------------------------------------- |
+| `children` | `ReactNode` | `required` | Indented child items (TreeItem or CheckItem). |
+
+### BulletList.TreeItem
+
+| Prop    | Type     | Default     | Description                              |
+| ------- | -------- | ----------- | ---------------------------------------- |
+| `label` | `string` | `required`  | Text shown after the `└` tree connector. |
+| `color` | `string` | `undefined` | Color override for the label text.       |
+
+### BulletList.CheckItem
+
+| Prop    | Type      | Default     | Description                                         |
+| ------- | --------- | ----------- | --------------------------------------------------- |
+| `label` | `string`  | `required`  | Text shown next to the checkbox indicator.          |
+| `done`  | `boolean` | `false`     | Checked state; `■` when done, `□` when pending.     |
+| `color` | `string`  | `undefined` | Color override; defaults to success/muted by state. |
+
+## Examples
+
+### Simple list
+
+```tsx
+<BulletList>
+  <BulletList.Item label="First item" />
+  <BulletList.Item label="Second item" />
+  <BulletList.Item label="Third item" />
+</BulletList>
+```
+
+### Nested tree items
+
+```tsx
+<BulletList>
+  <BulletList.Item label="src/" bold color="cyan">
+    <BulletList.Sub>
+      <BulletList.TreeItem label="index.ts" />
+      <BulletList.TreeItem label="utils.ts" />
+      <BulletList.TreeItem label="config.ts" color="yellow" />
+    </BulletList.Sub>
+  </BulletList.Item>
+</BulletList>
+```
+
+### Checklist
+
+```tsx
+<BulletList>
+  <BulletList.CheckItem label="Initialize repository" done />
+  <BulletList.CheckItem label="Add CI pipeline" done />
+  <BulletList.CheckItem label="Write documentation" />
+  <BulletList.CheckItem label="Publish to npm" />
+</BulletList>
+```
 
 ## Registry Files
 

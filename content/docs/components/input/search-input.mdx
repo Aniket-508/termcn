@@ -19,11 +19,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/search-input.json
 import { SearchInput } from "@/components/ui/search-input";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <SearchInput {...demoProps} />;
+  return (
+    <SearchInput
+      label="Search Packages"
+      options={["react", "vue", "svelte", "angular", "solid"]}
+      placeholder="Search..."
+      onSelect={(item) => console.log("Selected:", item)}
+    />
+  );
 }
 ```
 
@@ -41,7 +44,57 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop           | Type                                                                                         | Default       | Description                                 |
+| -------------- | -------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------- |
+| `options`      | `T[]`                                                                                        | `undefined`   | List of items to search through             |
+| `getValue`     | `(item: T) => string`                                                                        | `undefined`   | Extracts a searchable string from each item |
+| `value`        | `string`                                                                                     | `undefined`   | Controlled search query                     |
+| `onChange`     | `(query: string) => void`                                                                    | `undefined`   | Called when the search query changes        |
+| `onSelect`     | `(item: T) => void`                                                                          | `undefined`   | Called when a result is selected with Enter |
+| `placeholder`  | `string`                                                                                     | `"Search..."` | Placeholder shown when the input is empty   |
+| `label`        | `string`                                                                                     | `undefined`   | Label text displayed above the input        |
+| `maxResults`   | `number`                                                                                     | `5`           | Maximum number of results to display        |
+| `id`           | `string`                                                                                     | `undefined`   | Unique identifier for focus management      |
+| `borderStyle`  | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`     | Border style for the input box              |
+| `paddingX`     | `number`                                                                                     | `1`           | Horizontal padding inside the border        |
+| `cursor`       | `string`                                                                                     | `"█"`         | Cursor character shown when focused         |
+| `searchIcon`   | `string`                                                                                     | `"🔍 "`       | Icon shown before the search input          |
+| `resultCursor` | `string`                                                                                     | `"› "`        | Cursor shown before the selected result     |
+
+## Examples
+
+### Simple String Search
+
+```tsx
+<SearchInput
+  label="Pick a Color"
+  options={["red", "green", "blue", "yellow", "purple"]}
+  onSelect={(color) => applyColor(color)}
+/>
+```
+
+### Object Search with getValue
+
+```tsx
+<SearchInput
+  label="Find User"
+  options={users}
+  getValue={(user) => user.name}
+  onSelect={(user) => openProfile(user.id)}
+  maxResults={3}
+/>
+```
+
+### Custom Icons
+
+```tsx
+<SearchInput
+  options={commands}
+  searchIcon="⌘ "
+  resultCursor="→ "
+  placeholder="Type a command..."
+/>
+```
 
 ## Registry Files
 

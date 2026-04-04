@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/link.json
 import { Link } from "@/components/ui/link";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Link {...demoProps} />;
+  return <Link href="https://github.com">GitHub</Link>;
 }
 ```
 
@@ -35,12 +31,36 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type        | Default     | Description |
-| ---------- | ----------- | ----------- | ----------- |
-| `children` | `ReactNode` | `required`  | -           |
-| `href`     | `string`    | `required`  | -           |
-| `color`    | `string`    | `undefined` | -           |
-| `showHref` | `boolean`   | `false`     | -           |
+| Prop       | Type        | Default     | Description                                |
+| ---------- | ----------- | ----------- | ------------------------------------------ |
+| `children` | `ReactNode` | `required`  | Display text for the link                  |
+| `href`     | `string`    | `required`  | URL the link points to                     |
+| `color`    | `string`    | `undefined` | Color override for the link text           |
+| `showHref` | `boolean`   | `false`     | Show the URL in parentheses after the text |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Link href="https://example.com">Visit Example</Link>
+```
+
+### With Visible URL
+
+```tsx
+<Link href="https://docs.example.com/api" showHref>
+  API Docs
+</Link>
+```
+
+### Custom Color
+
+```tsx
+<Link href="https://github.com" color="#e74c3c">
+  GitHub
+</Link>
+```
 
 ## Registry Files
 

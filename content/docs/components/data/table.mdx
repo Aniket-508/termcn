@@ -19,11 +19,20 @@ npx shadcn@latest add https://termcn.vercel.app/r/table.json
 import { Table } from "@/components/ui/table";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Table {...demoProps} />;
+  return (
+    <Table
+      data={[
+        { name: "api-server", cpu: "24%", memory: "512 MB" },
+        { name: "worker", cpu: "58%", memory: "1.2 GB" },
+        { name: "scheduler", cpu: "12%", memory: "256 MB" },
+      ]}
+      columns={[
+        { key: "name", header: "Service" },
+        { key: "cpu", header: "CPU", align: "right" },
+        { key: "memory", header: "Memory", align: "right" },
+      ]}
+    />
+  );
 }
 ```
 
@@ -39,7 +48,81 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop               | Type                                                                                            | Default     | Description                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------- |
+| `data`             | `T[]`                                                                                           | `required`  | Array of row objects to display                 |
+| `columns`          | `Column<T>[]`                                                                                   | `required`  | Column definitions with key, header, and layout |
+| `sortable`         | `boolean`                                                                                       | `false`     | Enable keyboard-driven column sorting           |
+| `selectable`       | `boolean`                                                                                       | `false`     | Enable row selection with Enter key             |
+| `onSelect`         | `(row: T) => void`                                                                              | `undefined` | Callback fired when a row is selected           |
+| `maxRows`          | `number`                                                                                        | `20`        | Maximum number of visible rows                  |
+| `borderColor`      | `string`                                                                                        | `undefined` | Override border color (uses theme default)      |
+| `borderStyle`      | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style for the table frame                |
+| `columnSeparator`  | `string`                                                                                        | `" │ "`     | String used to separate columns                 |
+| `rowSeparatorChar` | `string`                                                                                        | `"─"`       | Character used for the header/body divider      |
+
+### Column
+
+| Prop     | Type                            | Default     | Description                      |
+| -------- | ------------------------------- | ----------- | -------------------------------- |
+| `key`    | `keyof T & string`              | `required`  | Data field to display            |
+| `header` | `string`                        | `required`  | Column header label              |
+| `width`  | `number`                        | `undefined` | Fixed column width in characters |
+| `align`  | `"left" \| "right" \| "center"` | `"left"`    | Text alignment within the column |
+
+## Examples
+
+### Sortable table
+
+```tsx
+<Table
+  sortable
+  data={[
+    { name: "Alice", score: "95" },
+    { name: "Bob", score: "87" },
+    { name: "Carol", score: "92" },
+  ]}
+  columns={[
+    { key: "name", header: "Name", width: 12 },
+    { key: "score", header: "Score", width: 8, align: "right" },
+  ]}
+/>
+```
+
+### Selectable rows
+
+```tsx
+<Table
+  selectable
+  onSelect={(row) => console.log("Selected:", row.name)}
+  data={[
+    { name: "prod.env", size: "1.2 KB", modified: "Jan 15" },
+    { name: "dev.env", size: "0.8 KB", modified: "Jan 10" },
+  ]}
+  columns={[
+    { key: "name", header: "File" },
+    { key: "size", header: "Size", align: "right" },
+    { key: "modified", header: "Modified" },
+  ]}
+/>
+```
+
+### Custom border style
+
+```tsx
+<Table
+  borderStyle="double"
+  data={[
+    { code: "200", meaning: "OK" },
+    { code: "404", meaning: "Not Found" },
+    { code: "500", meaning: "Internal Server Error" },
+  ]}
+  columns={[
+    { key: "code", header: "Code", width: 6 },
+    { key: "meaning", header: "Meaning", width: 24 },
+  ]}
+/>
+```
 
 ## Registry Files
 

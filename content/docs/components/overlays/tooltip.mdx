@@ -17,13 +17,18 @@ npx shadcn@latest add https://termcn.vercel.app/r/tooltip.json
 
 ```tsx
 import { Tooltip } from "@/components/ui/tooltip";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Tooltip {...demoProps} />;
+  return (
+    <Tooltip
+      content="Save your current progress"
+      position="top"
+      isVisible={true}
+    >
+      <Text bold>[S] Save</Text>
+    </Tooltip>
+  );
 }
 ```
 
@@ -35,19 +40,59 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                            | Default     | Description                                                          |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------- |
-| `children`    | `ReactNode`                                                                                     | `required`  | -                                                                    |
-| `content`     | `string`                                                                                        | `required`  | -                                                                    |
-| `position`    | `"top" \| "bottom" \| "left" \| "right"`                                                        | `"top"`     | -                                                                    |
-| `isVisible`   | `boolean`                                                                                       | `false`     | -                                                                    |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style of the tooltip box. Default: 'single'                   |
-| `borderColor` | `string`                                                                                        | `undefined` | Border/arrow color. Default: theme.colors.border                     |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding of the tooltip box. Default: 1                    |
-| `paddingY`    | `number`                                                                                        | `0`         | Vertical padding of the tooltip box. Default: 0                      |
-| `gap`         | `number`                                                                                        | `1`         | Gap between tooltip and trigger for left/right positions. Default: 1 |
-| `arrowDown`   | `string`                                                                                        | `"↓"`       | Arrow shown below tooltip (top position). Default: '↓'               |
-| `arrowUp`     | `string`                                                                                        | `"↑"`       | Arrow shown above tooltip (bottom position). Default: '↑'            |
+| Prop          | Type                                                                                         | Default     | Description                                               |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------- |
+| `children`    | `ReactNode`                                                                                  | `required`  | Trigger element the tooltip is attached to                |
+| `content`     | `string`                                                                                     | `required`  | Text displayed inside the tooltip                         |
+| `position`    | `"top" \| "bottom" \| "left" \| "right"`                                                     | `"top"`     | Where the tooltip appears relative to the trigger         |
+| `isVisible`   | `boolean`                                                                                    | `false`     | Whether the tooltip is currently shown                    |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style of the tooltip box                           |
+| `borderColor` | `string`                                                                                     | `undefined` | Border and arrow color; defaults to `theme.colors.border` |
+| `paddingX`    | `number`                                                                                     | `1`         | Horizontal padding inside the tooltip box                 |
+| `paddingY`    | `number`                                                                                     | `0`         | Vertical padding inside the tooltip box                   |
+| `gap`         | `number`                                                                                     | `1`         | Space between tooltip and trigger (left/right only)       |
+| `arrowDown`   | `string`                                                                                     | `"↓"`       | Arrow character shown below tooltip (top position)        |
+| `arrowUp`     | `string`                                                                                     | `"↑"`       | Arrow character shown above tooltip (bottom position)     |
+
+## Examples
+
+### Bottom Position
+
+```tsx
+<Tooltip content="Delete this item" position="bottom" isVisible={true}>
+  <Text color="red">[X] Remove</Text>
+</Tooltip>
+```
+
+### Left Position with Custom Gap
+
+```tsx
+<Tooltip content="Go back" position="left" isVisible={true} gap={2}>
+  <Text>[←] Back</Text>
+</Tooltip>
+```
+
+### Round Border Style
+
+```tsx
+<Tooltip
+  content="Refresh the list"
+  position="top"
+  isVisible={true}
+  borderStyle="round"
+  borderColor="cyan"
+>
+  <Text>[R] Refresh</Text>
+</Tooltip>
+```
+
+### Custom Arrows
+
+```tsx
+<Tooltip content="Next page" position="top" isVisible={true} arrowDown="▼">
+  <Text>[→] Next</Text>
+</Tooltip>
+```
 
 ## Registry Files
 

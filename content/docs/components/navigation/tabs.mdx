@@ -17,13 +17,32 @@ npx shadcn@latest add https://termcn.vercel.app/r/tabs.json
 
 ```tsx
 import { Tabs } from "@/components/ui/tabs";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Tabs {...demoProps} />;
+  return (
+    <Tabs
+      defaultTab="general"
+      tabs={[
+        {
+          key: "general",
+          label: "General",
+          content: <Text>General settings.</Text>,
+        },
+        {
+          key: "appearance",
+          label: "Appearance",
+          content: <Text>Theme configuration.</Text>,
+        },
+        {
+          key: "keybindings",
+          label: "Keybindings",
+          content: <Text>Shortcut mappings.</Text>,
+        },
+      ]}
+      onTabChange={(key) => console.log(key)}
+    />
+  );
 }
 ```
 
@@ -39,18 +58,74 @@ export function Example() {
 
 ## Props
 
-| Prop             | Type                                                                                            | Default     | Description                                          |
-| ---------------- | ----------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
-| `tabs`           | `Tab[]`                                                                                         | `required`  | -                                                    |
-| `defaultTab`     | `string`                                                                                        | `undefined` | -                                                    |
-| `activeTab`      | `string`                                                                                        | `undefined` | -                                                    |
-| `onTabChange`    | `(key: string) =&gt; void`                                                                      | `undefined` | -                                                    |
-| `borderColor`    | `string`                                                                                        | `undefined` | -                                                    |
-| `borderStyle`    | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style of the content panel. Default: 'single' |
-| `separator`      | `string`                                                                                        | `" │ "`     | Separator between tab labels. Default: ' │ '         |
-| `tabBarPaddingX` | `number`                                                                                        | `2`         | Horizontal padding of the tab bar. Default: 2        |
-| `paddingX`       | `number`                                                                                        | `1`         | Horizontal padding of the content panel. Default: 1  |
-| `paddingY`       | `number`                                                                                        | `0`         | Vertical padding of the content panel. Default: 0    |
+| Prop             | Type                                                                                         | Default     | Description                                         |
+| ---------------- | -------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| `tabs`           | `Tab[]`                                                                                      | `required`  | Array of tab definitions with labels and content    |
+| `defaultTab`     | `string`                                                                                     | `undefined` | Key of the initially active tab (uncontrolled mode) |
+| `activeTab`      | `string`                                                                                     | `undefined` | Key of the active tab (controlled mode)             |
+| `onTabChange`    | `(key: string) => void`                                                                      | `undefined` | Callback fired with the new tab key on switch       |
+| `borderColor`    | `string`                                                                                     | `undefined` | Custom border color for the content panel           |
+| `borderStyle`    | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style of the content panel                   |
+| `separator`      | `string`                                                                                     | `" │ "`     | Separator character between tab labels              |
+| `tabBarPaddingX` | `number`                                                                                     | `2`         | Horizontal padding of the tab bar                   |
+| `paddingX`       | `number`                                                                                     | `1`         | Horizontal padding of the content panel             |
+| `paddingY`       | `number`                                                                                     | `0`         | Vertical padding of the content panel               |
+
+### Tab
+
+| Prop      | Type        | Default    | Description                              |
+| --------- | ----------- | ---------- | ---------------------------------------- |
+| `key`     | `string`    | `required` | Unique identifier for the tab            |
+| `label`   | `string`    | `required` | Display text shown in the tab bar        |
+| `content` | `ReactNode` | `required` | Content rendered when this tab is active |
+
+## Examples
+
+### Round border style
+
+```tsx
+<Tabs
+  borderStyle="round"
+  tabs={[
+    {
+      key: "output",
+      label: "Output",
+      content: <Text>Build output here.</Text>,
+    },
+    { key: "errors", label: "Errors", content: <Text>No errors found.</Text> },
+  ]}
+/>
+```
+
+### Custom separator and padding
+
+```tsx
+<Tabs
+  separator=" | "
+  tabBarPaddingX={1}
+  paddingX={2}
+  paddingY={1}
+  tabs={[
+    { key: "info", label: "Info", content: <Text>Information panel.</Text> },
+    { key: "debug", label: "Debug", content: <Text>Debug output.</Text> },
+  ]}
+/>
+```
+
+### Controlled tabs
+
+```tsx
+<Tabs
+  activeTab={currentTab}
+  onTabChange={(key) => setCurrentTab(key)}
+  borderStyle="double"
+  tabs={[
+    { key: "stdin", label: "stdin", content: <Text>Standard input.</Text> },
+    { key: "stdout", label: "stdout", content: <Text>Standard output.</Text> },
+    { key: "stderr", label: "stderr", content: <Text>Standard error.</Text> },
+  ]}
+/>
+```
 
 ## Registry Files
 

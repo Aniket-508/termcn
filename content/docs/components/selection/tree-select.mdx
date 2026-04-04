@@ -19,11 +19,23 @@ npx shadcn@latest add https://termcn.vercel.app/r/tree-select.json
 import { TreeSelect } from "@/components/ui/tree-select";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <TreeSelect {...demoProps} />;
+  return (
+    <TreeSelect
+      label="Select a file"
+      nodes={[
+        {
+          value: "src",
+          label: "src",
+          children: [
+            { value: "index.ts", label: "index.ts" },
+            { value: "utils.ts", label: "utils.ts" },
+          ],
+        },
+        { value: "README.md", label: "README.md" },
+      ]}
+      onChange={(value) => console.log("Selected:", value)}
+    />
+  );
 }
 ```
 
@@ -39,7 +51,72 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop                | Type                  | Default     | Description                                                          |
+| ------------------- | --------------------- | ----------- | -------------------------------------------------------------------- |
+| `nodes`             | `TreeSelectNode<T>[]` | `required`  | Hierarchical array of `{ value, label, children?, disabled? }` nodes |
+| `value`             | `T`                   | `undefined` | Controlled selected value                                            |
+| `onChange`          | `(value: T) => void`  | `undefined` | Callback fired when a node is selected                               |
+| `onSubmit`          | `(value: T) => void`  | `undefined` | Callback fired on Enter to confirm selection                         |
+| `label`             | `string`              | `undefined` | Heading text displayed above the tree                                |
+| `expandedByDefault` | `boolean`             | `false`     | Expand all parent nodes on initial render                            |
+
+## Examples
+
+### Expanded by Default
+
+```tsx
+<TreeSelect
+  label="Project"
+  expandedByDefault
+  nodes={[
+    {
+      value: "components",
+      label: "components",
+      children: [
+        { value: "Button.tsx", label: "Button.tsx" },
+        { value: "Input.tsx", label: "Input.tsx" },
+      ],
+    },
+    {
+      value: "hooks",
+      label: "hooks",
+      children: [{ value: "useTheme.ts", label: "useTheme.ts" }],
+    },
+  ]}
+/>
+```
+
+### With Disabled Nodes
+
+```tsx
+<TreeSelect
+  label="Packages"
+  nodes={[
+    {
+      value: "core",
+      label: "core",
+      children: [
+        { value: "runtime", label: "runtime" },
+        { value: "compiler", label: "compiler", disabled: true },
+      ],
+    },
+    { value: "cli", label: "cli" },
+  ]}
+/>
+```
+
+### Flat List (No Nesting)
+
+```tsx
+<TreeSelect
+  label="Pick a tool"
+  nodes={[
+    { value: "eslint", label: "ESLint" },
+    { value: "prettier", label: "Prettier" },
+    { value: "oxlint", label: "Oxlint" },
+  ]}
+/>
+```
 
 ## Registry Files
 

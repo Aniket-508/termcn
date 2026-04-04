@@ -21,11 +21,14 @@ npx shadcn@latest add https://termcn.vercel.app/r/directory-tree.json
 import { DirectoryTree } from "@/components/ui/directory-tree";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <DirectoryTree {...demoProps} />;
+  return (
+    <DirectoryTree
+      rootPath="/home/user/project"
+      maxDepth={3}
+      label="Project Files"
+      onSelect={(path) => console.log("Selected:", path)}
+    />
+  );
 }
 ```
 
@@ -42,13 +45,38 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type                        | Default         | Description                                         |
-| ------------ | --------------------------- | --------------- | --------------------------------------------------- |
-| `rootPath`   | `string`                    | `process.cwd()` | Root path to display. Default: process.cwd()        |
-| `onSelect`   | `(path: string) =&gt; void` | `undefined`     | -                                                   |
-| `maxDepth`   | `number`                    | `2`             | Max depth to show initially. Default: 2             |
-| `showHidden` | `boolean`                   | `false`         | Show hidden files (starting with .). Default: false |
-| `label`      | `string`                    | `undefined`     | -                                                   |
+| Prop         | Type                     | Default         | Description                               |
+| ------------ | ------------------------ | --------------- | ----------------------------------------- |
+| `rootPath`   | `string`                 | `process.cwd()` | Root directory path to display            |
+| `onSelect`   | `(path: string) => void` | `undefined`     | Callback fired when a file is selected    |
+| `maxDepth`   | `number`                 | `2`             | Maximum directory depth to show initially |
+| `showHidden` | `boolean`                | `false`         | Whether to show hidden files (dotfiles)   |
+| `label`      | `string`                 | `undefined`     | Label displayed above the tree            |
+
+## Examples
+
+### Show hidden files
+
+```tsx
+<DirectoryTree rootPath="/home/user/project" showHidden maxDepth={2} />
+```
+
+### With custom label and shallow depth
+
+```tsx
+<DirectoryTree rootPath="/etc" maxDepth={1} label="System Config" />
+```
+
+### File select handler
+
+```tsx
+<DirectoryTree
+  rootPath="."
+  onSelect={(filePath) => {
+    process.stdout.write(`Opening ${filePath}\n`);
+  }}
+/>
+```
 
 ## Registry Files
 

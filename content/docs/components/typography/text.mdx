@@ -19,11 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/text.json
 import { Text } from "@/components/ui/text";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Text {...demoProps} />;
+  return (
+    <Text bold color="#61afef">
+      Hello, terminal!
+    </Text>
+  );
 }
 ```
 
@@ -35,18 +35,50 @@ export function Example() {
 
 ## Props
 
-| Prop              | Type                                                                     | Default     | Description |
-| ----------------- | ------------------------------------------------------------------------ | ----------- | ----------- |
-| `children`        | `ReactNode`                                                              | `undefined` | -           |
-| `bold`            | `boolean`                                                                | `undefined` | -           |
-| `italic`          | `boolean`                                                                | `undefined` | -           |
-| `underline`       | `boolean`                                                                | `undefined` | -           |
-| `strikethrough`   | `boolean`                                                                | `undefined` | -           |
-| `dim`             | `boolean`                                                                | `undefined` | -           |
-| `inverse`         | `boolean`                                                                | `undefined` | -           |
-| `color`           | `string`                                                                 | `undefined` | -           |
-| `backgroundColor` | `string`                                                                 | `undefined` | -           |
-| `wrap`            | `"wrap" \| "end" \| "truncate" \| "truncate-start" \| "truncate-middle"` | `undefined` | -           |
+| Prop              | Type                                                                     | Default     | Description                           |
+| ----------------- | ------------------------------------------------------------------------ | ----------- | ------------------------------------- |
+| `children`        | `ReactNode`                                                              | `undefined` | Text content to display               |
+| `bold`            | `boolean`                                                                | `undefined` | Render text in bold weight            |
+| `italic`          | `boolean`                                                                | `undefined` | Render text in italic style           |
+| `underline`       | `boolean`                                                                | `undefined` | Add underline decoration              |
+| `strikethrough`   | `boolean`                                                                | `undefined` | Add strikethrough decoration          |
+| `dim`             | `boolean`                                                                | `undefined` | Dim the text color                    |
+| `inverse`         | `boolean`                                                                | `undefined` | Swap foreground and background colors |
+| `color`           | `string`                                                                 | `undefined` | Foreground color for the text         |
+| `backgroundColor` | `string`                                                                 | `undefined` | Background color behind the text      |
+| `wrap`            | `"wrap" \| "end" \| "truncate" \| "truncate-start" \| "truncate-middle"` | `undefined` | Text wrapping and truncation strategy |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Text>Plain text output</Text>
+```
+
+### Bold and Italic
+
+```tsx
+<Text bold italic>
+  Emphasized text
+</Text>
+```
+
+### Colored Text
+
+```tsx
+<Text color="#e74c3c" backgroundColor="#2d3436">
+  Red on dark
+</Text>
+```
+
+### Dim and Strikethrough
+
+```tsx
+<Text dim strikethrough>
+  Deprecated option
+</Text>
+```
 
 ## Registry Files
 

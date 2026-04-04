@@ -19,11 +19,17 @@ npx shadcn@latest add https://termcn.vercel.app/r/help.json
 import { Help } from "@/components/ui/help";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Help {...demoProps} />;
+  return (
+    <Help
+      title="Keyboard Shortcuts"
+      keymap={{
+        q: "Quit",
+        h: "Help",
+        j: "Move down",
+        k: "Move up",
+      }}
+    />
+  );
 }
 ```
 
@@ -35,11 +41,38 @@ export function Example() {
 
 ## Props
 
-| Prop      | Type                           | Default     | Description |
-| --------- | ------------------------------ | ----------- | ----------- |
-| `keymap`  | `Record&lt;string, string&gt;` | `required`  | -           |
-| `title`   | `string`                       | `undefined` | -           |
-| `compact` | `boolean`                      | `false`     | -           |
+| Prop      | Type                     | Default     | Description                                              |
+| --------- | ------------------------ | ----------- | -------------------------------------------------------- |
+| `keymap`  | `Record<string, string>` | `required`  | Map of key labels to their action descriptions           |
+| `title`   | `string`                 | `undefined` | Optional title shown at the top of the help panel        |
+| `compact` | `boolean`                | `false`     | Render as a single inline row instead of a bordered list |
+
+## Examples
+
+### Compact inline help
+
+```tsx
+<Help compact keymap={{ q: "Quit", "?": "Help", "/": "Search" }} />
+```
+
+### With title
+
+```tsx
+<Help
+  title="Editor"
+  keymap={{
+    "ctrl+s": "Save",
+    "ctrl+z": "Undo",
+    "ctrl+y": "Redo",
+  }}
+/>
+```
+
+### Minimal keymap
+
+```tsx
+<Help keymap={{ Enter: "Confirm", Esc: "Cancel" }} />
+```
 
 ## Registry Files
 

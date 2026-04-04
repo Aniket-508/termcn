@@ -17,13 +17,47 @@ npx shadcn@latest add https://termcn.vercel.app/r/command-palette.json
 
 ```tsx
 import { CommandPalette } from "@/components/ui/command-palette";
+import { useState } from "react";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
+  const [open, setOpen] = useState(true);
 
-  return <CommandPalette {...demoProps} />;
+  return (
+    <CommandPalette
+      isOpen={open}
+      onClose={() => setOpen(false)}
+      placeholder="Type a command..."
+      commands={[
+        {
+          id: "new-file",
+          label: "New File",
+          shortcut: "⌘N",
+          group: "File",
+          onSelect: () => {},
+        },
+        {
+          id: "open-file",
+          label: "Open File",
+          shortcut: "⌘O",
+          group: "File",
+          onSelect: () => {},
+        },
+        {
+          id: "toggle-theme",
+          label: "Toggle Theme",
+          group: "View",
+          onSelect: () => {},
+        },
+        {
+          id: "run-build",
+          label: "Run Build",
+          shortcut: "⌘B",
+          group: "Tasks",
+          onSelect: () => {},
+        },
+      ]}
+    />
+  );
 }
 ```
 
@@ -40,13 +74,87 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type            | Default               | Description                 |
-| ------------- | --------------- | --------------------- | --------------------------- |
-| `commands`    | `Command[]`     | `required`            | -                           |
-| `isOpen`      | `boolean`       | `required`            | Whether palette is open     |
-| `onClose`     | `() =&gt; void` | `required`            | -                           |
-| `placeholder` | `string`        | `"Type a command..."` | -                           |
-| `maxItems`    | `number`        | `8`                   | Max items shown. Default: 8 |
+| Prop          | Type         | Default               | Description                                     |
+| ------------- | ------------ | --------------------- | ----------------------------------------------- |
+| `commands`    | `Command[]`  | `required`            | Array of command items available in the palette |
+| `isOpen`      | `boolean`    | `required`            | Whether the palette is open and visible         |
+| `onClose`     | `() => void` | `required`            | Callback fired when the palette is dismissed    |
+| `placeholder` | `string`     | `"Type a command..."` | Placeholder text shown when the search is empty |
+| `maxItems`    | `number`     | `8`                   | Maximum number of filtered results to display   |
+
+### Command
+
+| Prop          | Type         | Default     | Description                                      |
+| ------------- | ------------ | ----------- | ------------------------------------------------ |
+| `id`          | `string`     | `required`  | Unique identifier for the command                |
+| `label`       | `string`     | `required`  | Display text for the command                     |
+| `description` | `string`     | `undefined` | Optional description shown next to the label     |
+| `shortcut`    | `string`     | `undefined` | Keyboard shortcut hint displayed on the right    |
+| `onSelect`    | `() => void` | `required`  | Callback fired when the command is executed      |
+| `group`       | `string`     | `undefined` | Group heading to organize commands into sections |
+
+## Examples
+
+### Minimal command list
+
+```tsx
+<CommandPalette
+  isOpen={true}
+  onClose={() => setOpen(false)}
+  commands={[
+    { id: "save", label: "Save", onSelect: () => save() },
+    { id: "quit", label: "Quit", onSelect: () => quit() },
+  ]}
+/>
+```
+
+### With descriptions and groups
+
+```tsx
+<CommandPalette
+  isOpen={true}
+  onClose={() => setOpen(false)}
+  maxItems={5}
+  commands={[
+    {
+      id: "fmt",
+      label: "Format Document",
+      description: "Prettier",
+      group: "Editor",
+      onSelect: () => {},
+    },
+    {
+      id: "lint",
+      label: "Run Linter",
+      description: "ESLint",
+      group: "Editor",
+      onSelect: () => {},
+    },
+    {
+      id: "deploy",
+      label: "Deploy",
+      group: "Actions",
+      shortcut: "⌘D",
+      onSelect: () => {},
+    },
+  ]}
+/>
+```
+
+### Custom placeholder
+
+```tsx
+<CommandPalette
+  isOpen={true}
+  onClose={() => {}}
+  placeholder="Search actions..."
+  maxItems={4}
+  commands={[
+    { id: "a", label: "Action A", onSelect: () => {} },
+    { id: "b", label: "Action B", onSelect: () => {} },
+  ]}
+/>
+```
 
 ## Registry Files
 

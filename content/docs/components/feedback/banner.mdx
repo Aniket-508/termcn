@@ -19,7 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/banner.json
 import { Banner } from "@/components/ui/banner";
 
 export function Example() {
-  <Banner variant="info">Deployment completed successfully.</Banner>;
+  return (
+    <Banner variant="info" title="Update">
+      A new version is available. Run npx update to upgrade.
+    </Banner>
+  );
 }
 ```
 
@@ -31,17 +35,47 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type            | Default     | Description                                    |
-| ------------- | --------------- | ----------- | ---------------------------------------------- |
-| `children`    | `ReactNode`     | `required`  | -                                              |
-| `variant`     | `BannerVariant` | `"info"`    | -                                              |
-| `icon`        | `string`        | `undefined` | -                                              |
-| `title`       | `string`        | `undefined` | -                                              |
-| `dismissible` | `boolean`       | `false`     | -                                              |
-| `onDismiss`   | `() =&gt; void` | `undefined` | -                                              |
-| `color`       | `string`        | `undefined` | Override the variant color                     |
-| `accentChar`  | `string`        | `"┃"`       | Left accent bar character. Default: '┃'        |
-| `gap`         | `number`        | `1`         | Gap between accent bar and content. Default: 1 |
+| Prop          | Type            | Default     | Description                                      |
+| ------------- | --------------- | ----------- | ------------------------------------------------ |
+| `children`    | `ReactNode`     | `required`  | Banner message content                           |
+| `variant`     | `BannerVariant` | `"info"`    | Visual style variant                             |
+| `icon`        | `string`        | `undefined` | Custom icon character, overrides variant default |
+| `title`       | `string`        | `undefined` | Bold label displayed before the message          |
+| `dismissible` | `boolean`       | `false`     | Allow dismissing with Escape key                 |
+| `onDismiss`   | `() => void`    | `undefined` | Callback fired on dismiss                        |
+| `color`       | `string`        | `undefined` | Override the variant color                       |
+| `accentChar`  | `string`        | `"┃"`       | Left accent bar character                        |
+| `gap`         | `number`        | `1`         | Gap between accent bar and content               |
+
+## Examples
+
+### Success Banner
+
+```tsx
+<Banner variant="success" title="Deployed">
+  All services are live.
+</Banner>
+```
+
+### Dismissible Warning
+
+```tsx
+<Banner
+  variant="warning"
+  dismissible
+  onDismiss={() => console.log("dismissed")}
+>
+  Disk usage is above 90%.
+</Banner>
+```
+
+### Error with Custom Icon
+
+```tsx
+<Banner variant="error" icon="💥" title="Crash">
+  Worker process exited with code 1.
+</Banner>
+```
 
 ## Registry Files
 

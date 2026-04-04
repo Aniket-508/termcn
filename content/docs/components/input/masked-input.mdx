@@ -19,11 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/masked-input.json
 import { MaskedInput } from "@/components/ui/masked-input";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <MaskedInput {...demoProps} />;
+  return (
+    <MaskedInput
+      mask="(###) ###-####"
+      label="Phone Number"
+      placeholder="(555) 123-4567"
+    />
+  );
 }
 ```
 
@@ -40,15 +42,49 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                                        | Default     | Description |
-| ------------- | ----------------------------------------------------------------------------------------------------------- | ----------- | ----------- |
-| `mask`        | `string; // e.g. '(###) ###-####' value?: string; // raw digits only onChange?: (value: string) =&gt; void` | `required`  | -           |
-| `onSubmit`    | `(value: string) =&gt; void`                                                                                | `undefined` | -           |
-| `label`       | `string`                                                                                                    | `undefined` | -           |
-| `placeholder` | `string`                                                                                                    | `undefined` | -           |
-| `autoFocus`   | `boolean`                                                                                                   | `false`     | -           |
-| `id`          | `string`                                                                                                    | `undefined` | -           |
-| `width`       | `number`                                                                                                    | `40`        | -           |
+| Prop          | Type                      | Default      | Description                                          |
+| ------------- | ------------------------- | ------------ | ---------------------------------------------------- |
+| `mask`        | `string`                  | **required** | Format mask where `#` represents a digit placeholder |
+| `value`       | `string`                  | `undefined`  | Controlled raw digit string (unformatted)            |
+| `onChange`    | `(value: string) => void` | `undefined`  | Called with the raw digit string on change           |
+| `onSubmit`    | `(value: string) => void` | `undefined`  | Called with the raw digit string on Enter            |
+| `label`       | `string`                  | `undefined`  | Label text displayed above the input                 |
+| `placeholder` | `string`                  | `undefined`  | Placeholder shown when the input is empty            |
+| `autoFocus`   | `boolean`                 | `false`      | Whether to focus the input on mount                  |
+| `id`          | `string`                  | `undefined`  | Unique identifier for focus management               |
+| `width`       | `number`                  | `40`         | Width of the input box in columns                    |
+
+## Examples
+
+### Phone Number
+
+```tsx
+<MaskedInput mask="(###) ###-####" label="Phone" placeholder="(555) 123-4567" />
+```
+
+### Date Input
+
+```tsx
+<MaskedInput mask="##/##/####" label="Date of Birth" placeholder="MM/DD/YYYY" />
+```
+
+### Credit Card
+
+```tsx
+<MaskedInput mask="####-####-####-####" label="Card Number" width={30} />
+```
+
+### Controlled Value
+
+```tsx
+<MaskedInput
+  mask="###-##-####"
+  label="SSN"
+  value={ssn}
+  onChange={setSsn}
+  onSubmit={(val) => verify(val)}
+/>
+```
 
 ## Registry Files
 

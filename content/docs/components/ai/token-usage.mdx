@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/token-usage.json
 import { TokenUsage } from "@/components/ui/token-usage";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <TokenUsage {...demoProps} />;
+  return <TokenUsage prompt={2450} completion={890} model="gpt-4o" showCost />;
 }
 ```
 
@@ -35,12 +31,64 @@ export function Example() {
 
 ## Props
 
-| Prop         | Type      | Default     | Description |
-| ------------ | --------- | ----------- | ----------- |
-| `prompt`     | `number`  | `required`  | -           |
-| `completion` | `number`  | `required`  | -           |
-| `model`      | `string`  | `undefined` | -           |
-| `showCost`   | `boolean` | `false`     | -           |
+### TokenUsage
+
+| Prop         | Type      | Default     | Description                                                                   |
+| ------------ | --------- | ----------- | ----------------------------------------------------------------------------- |
+| `prompt`     | `number`  | `required`  | Number of input/prompt tokens used.                                           |
+| `completion` | `number`  | `required`  | Number of output/completion tokens generated.                                 |
+| `model`      | `string`  | `undefined` | Model name used for cost estimation (e.g. `"gpt-4o"`, `"claude-3-5-sonnet"`). |
+| `showCost`   | `boolean` | `false`     | Display an estimated cost based on the model's per-token pricing.             |
+
+### ContextMeter
+
+| Prop          | Type      | Default     | Description                                         |
+| ------------- | --------- | ----------- | --------------------------------------------------- |
+| `used`        | `number`  | `required`  | Number of tokens currently used.                    |
+| `limit`       | `number`  | `required`  | Maximum context window size in tokens.              |
+| `label`       | `string`  | `undefined` | Optional label shown before the progress bar.       |
+| `showPercent` | `boolean` | `true`      | Display the usage percentage next to the bar.       |
+| `warnAt`      | `number`  | `75`        | Percentage threshold at which the bar turns yellow. |
+| `criticalAt`  | `number`  | `90`        | Percentage threshold at which the bar turns red.    |
+| `width`       | `number`  | `20`        | Width of the progress bar in characters.            |
+
+## Examples
+
+### Basic token count
+
+```tsx
+<TokenUsage prompt={1500} completion={420} />
+```
+
+### With model and cost
+
+```tsx
+<TokenUsage
+  prompt={12000}
+  completion={3400}
+  model="claude-3-5-sonnet"
+  showCost
+/>
+```
+
+### Context meter
+
+```tsx
+<ContextMeter used={95000} limit={128000} label="Context" />
+```
+
+### Context meter at critical level
+
+```tsx
+<ContextMeter
+  used={185000}
+  limit={200000}
+  label="Window"
+  warnAt={70}
+  criticalAt={85}
+  width={30}
+/>
+```
 
 ## Registry Files
 

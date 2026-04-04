@@ -19,7 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/text-input.json
 import { TextInput } from "@/components/ui/text-input";
 
 export function Example() {
-  <TextInput label="Project name" value="termcn" />;
+  return (
+    <TextInput
+      label="Project Name"
+      placeholder="my-project"
+      onSubmit={(value) => console.log("Name:", value)}
+    />
+  );
 }
 ```
 
@@ -36,22 +42,52 @@ export function Example() {
 
 ## Props
 
-| Prop          | Type                                                                                            | Default     | Description                                       |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| `value`       | `string`                                                                                        | `undefined` | -                                                 |
-| `onChange`    | `(value: string) =&gt; void`                                                                    | `undefined` | -                                                 |
-| `onSubmit`    | `(value: string) =&gt; void`                                                                    | `undefined` | -                                                 |
-| `placeholder` | `string`                                                                                        | `""`        | -                                                 |
-| `mask`        | `string`                                                                                        | `undefined` | -                                                 |
-| `validate`    | `(value: string) =&gt; string \| null`                                                          | `undefined` | -                                                 |
-| `width`       | `number`                                                                                        | `40`        | -                                                 |
-| `label`       | `string`                                                                                        | `undefined` | -                                                 |
-| `autoFocus`   | `boolean`                                                                                       | `false`     | -                                                 |
-| `id`          | `string`                                                                                        | `undefined` | -                                                 |
-| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the input. Default: true     |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style. Default: 'round'                    |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                    |
-| `cursor`      | `string`                                                                                        | `"█"`       | Cursor character shown when focused. Default: '█' |
+| Prop          | Type                                                                                         | Default     | Description                                         |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| `value`       | `string`                                                                                     | `undefined` | Controlled input value                              |
+| `onChange`    | `(value: string) => void`                                                                    | `undefined` | Called when the input value changes                 |
+| `onSubmit`    | `(value: string) => void`                                                                    | `undefined` | Called when Enter is pressed (after validation)     |
+| `placeholder` | `string`                                                                                     | `""`        | Placeholder shown when the input is empty           |
+| `mask`        | `string`                                                                                     | `undefined` | Character to mask input display (e.g. `"*"`)        |
+| `validate`    | `(value: string) => string \| null`                                                          | `undefined` | Validation function; return an error string or null |
+| `width`       | `number`                                                                                     | `40`        | Width of the input box in columns                   |
+| `label`       | `string`                                                                                     | `undefined` | Label text displayed above the input                |
+| `autoFocus`   | `boolean`                                                                                    | `false`     | Whether to focus the input on mount                 |
+| `id`          | `string`                                                                                     | `undefined` | Unique identifier for focus management              |
+| `bordered`    | `boolean`                                                                                    | `true`      | Whether to show a border around the input           |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style for the input box                      |
+| `paddingX`    | `number`                                                                                     | `1`         | Horizontal padding inside the border                |
+| `cursor`      | `string`                                                                                     | `"█"`       | Cursor character shown when focused                 |
+
+## Examples
+
+### With Validation
+
+```tsx
+<TextInput
+  label="Username"
+  placeholder="Enter username"
+  validate={(val) => (val.length < 3 ? "Must be at least 3 characters" : null)}
+/>
+```
+
+### Borderless Input
+
+```tsx
+<TextInput label="Search" bordered={false} placeholder="Type here..." />
+```
+
+### Masked Input
+
+```tsx
+<TextInput label="Token" mask="•" placeholder="Paste your token" width={50} />
+```
+
+### Custom Border Style
+
+```tsx
+<TextInput label="Name" borderStyle="double" placeholder="Enter your name" />
+```
 
 ## Registry Files
 

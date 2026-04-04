@@ -17,13 +17,19 @@ npx shadcn@latest add https://termcn.vercel.app/r/modal.json
 
 ```tsx
 import { Modal } from "@/components/ui/modal";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Modal {...demoProps} />;
+  return (
+    <Modal
+      open={true}
+      onClose={() => console.log("closed")}
+      title="Welcome"
+      width={50}
+    >
+      <Text>This is a modal dialog. Press Esc to close it.</Text>
+    </Modal>
+  );
 }
 ```
 
@@ -39,19 +45,58 @@ export function Example() {
 
 ## Props
 
-| Prop               | Type                                                                                            | Default                | Description                                                                                    |
-| ------------------ | ----------------------------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- |
-| `open`             | `boolean`                                                                                       | `required`             | -                                                                                              |
-| `onClose`          | `() =&gt; void`                                                                                 | `required`             | -                                                                                              |
-| `title`            | `string`                                                                                        | `undefined`            | -                                                                                              |
-| `width`            | `number`                                                                                        | `60`                   | -                                                                                              |
-| `children`         | `ReactNode`                                                                                     | `undefined`            | -                                                                                              |
-| `borderStyle`      | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`              | Border style. Default: 'round'                                                                 |
-| `borderColor`      | `string`                                                                                        | `undefined`            | Border color. Default: theme.colors.primary                                                    |
-| `paddingX`         | `number`                                                                                        | `1`                    | Horizontal padding. Default: 1                                                                 |
-| `paddingY`         | `number`                                                                                        | `0`                    | Vertical padding. Default: 0                                                                   |
-| `titleBorderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`             | Title bar border style. Default: 'single'                                                      |
-| `closeHint`        | `string \| false`                                                                               | `"Press Esc to close"` | Close hint text. Set to false to hide, or a string to customize. Default: 'Press Esc to close' |
+| Prop               | Type                                                                                         | Default                | Description                                           |
+| ------------------ | -------------------------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------- |
+| `open`             | `boolean`                                                                                    | `required`             | Whether the modal is visible and trapping input       |
+| `onClose`          | `() => void`                                                                                 | `required`             | Callback fired when Esc is pressed                    |
+| `title`            | `string`                                                                                     | `undefined`            | Title displayed in a bordered header bar              |
+| `width`            | `number`                                                                                     | `60`                   | Width of the modal container                          |
+| `children`         | `ReactNode`                                                                                  | `undefined`            | Content rendered inside the modal body                |
+| `borderStyle`      | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`              | Border style of the outer modal frame                 |
+| `borderColor`      | `string`                                                                                     | `undefined`            | Border color; defaults to `theme.colors.primary`      |
+| `paddingX`         | `number`                                                                                     | `1`                    | Horizontal padding inside the modal                   |
+| `paddingY`         | `number`                                                                                     | `0`                    | Vertical padding inside the modal                     |
+| `titleBorderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`             | Border style of the title bar                         |
+| `closeHint`        | `string \| false`                                                                            | `"Press Esc to close"` | Hint text shown at the bottom; set to `false` to hide |
+
+## Examples
+
+### With Custom Border
+
+```tsx
+<Modal
+  open={true}
+  onClose={() => close()}
+  title="Settings"
+  borderStyle="double"
+  width={50}
+>
+  <Text>Configure your preferences below.</Text>
+</Modal>
+```
+
+### Hidden Close Hint
+
+```tsx
+<Modal open={true} onClose={() => close()} title="Processing" closeHint={false}>
+  <Text>Please wait while the operation completes...</Text>
+</Modal>
+```
+
+### Custom Close Hint and Title Style
+
+```tsx
+<Modal
+  open={true}
+  onClose={() => close()}
+  title="Help"
+  titleBorderStyle="round"
+  closeHint="Press Esc to go back"
+  width={45}
+>
+  <Text>Use arrow keys to navigate, Enter to select.</Text>
+</Modal>
+```
 
 ## Registry Files
 

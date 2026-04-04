@@ -19,11 +19,7 @@ npx shadcn@latest add https://termcn.vercel.app/r/tag.json
 import { Tag } from "@/components/ui/tag";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Tag {...demoProps} />;
+  return <Tag>typescript</Tag>;
 }
 ```
 
@@ -35,12 +31,38 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type            | Default     | Description |
-| ---------- | --------------- | ----------- | ----------- |
-| `children` | `ReactNode`     | `required`  | -           |
-| `onRemove` | `() =&gt; void` | `undefined` | -           |
-| `color`    | `string`        | `undefined` | -           |
-| `variant`  | `TagVariant`    | `"default"` | -           |
+| Prop       | Type         | Default     | Description                                |
+| ---------- | ------------ | ----------- | ------------------------------------------ |
+| `children` | `ReactNode`  | `required`  | Content displayed inside the tag           |
+| `onRemove` | `() => void` | `undefined` | Callback when remove button is clicked     |
+| `color`    | `string`     | `undefined` | Color override for the tag text and border |
+| `variant`  | `TagVariant` | `"default"` | Visual style: `"default"` or `"outline"`   |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Tag>react</Tag>
+```
+
+### Outline Variant
+
+```tsx
+<Tag variant="outline">draft</Tag>
+```
+
+### With Remove Handler
+
+```tsx
+<Tag onRemove={() => console.log("removed")}>removable</Tag>
+```
+
+### Custom Color
+
+```tsx
+<Tag color="#e74c3c">urgent</Tag>
+```
 
 ## Registry Files
 

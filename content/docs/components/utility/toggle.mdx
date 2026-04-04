@@ -17,13 +17,12 @@ npx shadcn@latest add https://termcn.vercel.app/r/toggle.json
 
 ```tsx
 import { Toggle } from "@/components/ui/toggle";
+import { useState } from "react";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
+  const [enabled, setEnabled] = useState(false);
 
-  return <Toggle {...demoProps} />;
+  return <Toggle checked={enabled} onChange={setEnabled} label="Dark mode" />;
 }
 ```
 
@@ -40,19 +39,51 @@ export function Example() {
 
 ## Props
 
-| Prop            | Type                                                                                            | Default     | Description                             |
-| --------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------- |
-| `checked`       | `boolean`                                                                                       | `undefined` | -                                       |
-| `onChange`      | `(checked: boolean) =&gt; void`                                                                 | `undefined` | -                                       |
-| `label`         | `string`                                                                                        | `undefined` | -                                       |
-| `onLabel`       | `string`                                                                                        | `"ON"`      | -                                       |
-| `offLabel`      | `string`                                                                                        | `"OFF"`     | -                                       |
-| `id`            | `string`                                                                                        | `undefined` | -                                       |
-| `disabled`      | `boolean`                                                                                       | `false`     | -                                       |
-| `checkedIcon`   | `string`                                                                                        | `"●"`       | Icon shown when checked. Default: '●'   |
-| `uncheckedIcon` | `string`                                                                                        | `"○"`       | Icon shown when unchecked. Default: '○' |
-| `borderStyle`   | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style. Default: 'round'          |
-| `paddingX`      | `number`                                                                                        | `1`         | Horizontal padding. Default: 1          |
+| Prop            | Type                                                                                         | Default     | Description                                  |
+| --------------- | -------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------- |
+| `checked`       | `boolean`                                                                                    | `undefined` | Controlled checked state                     |
+| `onChange`      | `(checked: boolean) => void`                                                                 | `undefined` | Callback fired when the toggle value changes |
+| `label`         | `string`                                                                                     | `undefined` | Text label displayed next to the toggle      |
+| `onLabel`       | `string`                                                                                     | `"ON"`      | Text shown inside the toggle when checked    |
+| `offLabel`      | `string`                                                                                     | `"OFF"`     | Text shown inside the toggle when unchecked  |
+| `id`            | `string`                                                                                     | `undefined` | Focus ID for keyboard navigation             |
+| `disabled`      | `boolean`                                                                                    | `false`     | Disable interaction                          |
+| `checkedIcon`   | `string`                                                                                     | `"●"`       | Icon shown when checked                      |
+| `uncheckedIcon` | `string`                                                                                     | `"○"`       | Icon shown when unchecked                    |
+| `borderStyle`   | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border drawing style for the toggle track    |
+| `paddingX`      | `number`                                                                                     | `1`         | Horizontal padding inside the toggle         |
+
+## Examples
+
+### Uncontrolled toggle
+
+```tsx
+<Toggle label="Notifications" />
+```
+
+### Custom labels and icons
+
+```tsx
+<Toggle
+  label="Sound"
+  onLabel="Yes"
+  offLabel="No"
+  checkedIcon="✔"
+  uncheckedIcon="✘"
+/>
+```
+
+### Disabled state
+
+```tsx
+<Toggle label="Premium feature" disabled checked />
+```
+
+### Bold border style
+
+```tsx
+<Toggle label="Verbose logging" borderStyle="bold" />
+```
 
 ## Registry Files
 

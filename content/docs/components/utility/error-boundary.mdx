@@ -17,13 +17,17 @@ npx shadcn@latest add https://termcn.vercel.app/r/error-boundary.json
 
 ```tsx
 import { ErrorBoundary } from "@/components/ui/error-boundary";
+import { Text } from "ink";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <ErrorBoundary {...demoProps} />;
+  return (
+    <ErrorBoundary
+      title="Application Error"
+      onError={(error, info) => console.error(error, info.componentStack)}
+    >
+      <Text>Your app content here</Text>
+    </ErrorBoundary>
+  );
 }
 ```
 
@@ -35,12 +39,41 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type                                                                    | Default     | Description |
-| ---------- | ----------------------------------------------------------------------- | ----------- | ----------- |
-| `children` | `ReactNode`                                                             | `required`  | -           |
-| `fallback` | `ReactNode`                                                             | `undefined` | -           |
-| `onError`  | `(error: Error, info: &#123; componentStack: string &#125;) =&gt; void` | `undefined` | -           |
-| `title`    | `string`                                                                | `undefined` | -           |
+| Prop       | Type                                                       | Default     | Description                                         |
+| ---------- | ---------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| `children` | `ReactNode`                                                | `required`  | The component tree to wrap with error protection    |
+| `fallback` | `ReactNode`                                                | `undefined` | Custom fallback UI rendered when an error is caught |
+| `onError`  | `(error: Error, info: { componentStack: string }) => void` | `undefined` | Callback fired when an error is caught              |
+| `title`    | `string`                                                   | `"Error"`   | Heading displayed in the default error panel        |
+
+## Examples
+
+### Basic wrapper
+
+```tsx
+<ErrorBoundary>
+  <MyComponent />
+</ErrorBoundary>
+```
+
+### Custom fallback UI
+
+```tsx
+<ErrorBoundary fallback={<Text color="red">Something went wrong.</Text>}>
+  <RiskyComponent />
+</ErrorBoundary>
+```
+
+### With error logging and title
+
+```tsx
+<ErrorBoundary
+  title="Plugin Crash"
+  onError={(error) => logger.error("Plugin failed", error)}
+>
+  <PluginHost />
+</ErrorBoundary>
+```
 
 ## Registry Files
 

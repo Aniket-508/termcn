@@ -19,11 +19,27 @@ npx shadcn@latest add https://termcn.vercel.app/r/multi-progress.json
 import { MultiProgress } from "@/components/ui/multi-progress";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <MultiProgress {...demoProps} />;
+  return (
+    <MultiProgress
+      items={[
+        {
+          id: "api",
+          label: "API Server",
+          value: 80,
+          total: 100,
+          status: "running",
+        },
+        { id: "db", label: "Database", value: 100, total: 100, status: "done" },
+        {
+          id: "cache",
+          label: "Redis",
+          value: 30,
+          total: 100,
+          status: "running",
+        },
+      ]}
+    />
+  );
 }
 ```
 
@@ -35,9 +51,75 @@ export function Example() {
 
 ## Props
 
-| Prop    | Type                  | Default    | Description |
-| ------- | --------------------- | ---------- | ----------- |
-| `items` | `MultiProgressItem[]` | `required` | -           |
+| Prop          | Type                  | Default    | Description                                              |
+| ------------- | --------------------- | ---------- | -------------------------------------------------------- |
+| `items`       | `MultiProgressItem[]` | `required` | Array of progress items to display                       |
+| `barWidth`    | `number`              | `20`       | Character width of each progress bar                     |
+| `labelWidth`  | `number`              | `20`       | Max character width for labels (truncated with ellipsis) |
+| `compact`     | `boolean`             | `false`    | Single-line layout per item                              |
+| `showPercent` | `boolean`             | `true`     | Show percentage next to the bar                          |
+
+### MultiProgressItem
+
+| Prop         | Type                  | Default     | Description                                      |
+| ------------ | --------------------- | ----------- | ------------------------------------------------ |
+| `id`         | `string`              | `required`  | Unique key for the item                          |
+| `label`      | `string`              | `required`  | Display label                                    |
+| `value`      | `number`              | `required`  | Current progress value                           |
+| `total`      | `number`              | `required`  | Maximum progress value                           |
+| `status`     | `MultiProgressStatus` | `undefined` | Status: "pending", "running", "done", or "error" |
+| `statusText` | `string`              | `undefined` | Extra text shown after the label                 |
+
+## Examples
+
+### Compact Mode
+
+```tsx
+<MultiProgress
+  compact
+  items={[
+    { id: "1", label: "eslint", value: 50, total: 100, status: "running" },
+    { id: "2", label: "tsc", value: 100, total: 100, status: "done" },
+  ]}
+/>
+```
+
+### Custom Bar Width
+
+```tsx
+<MultiProgress
+  barWidth={40}
+  labelWidth={15}
+  items={[
+    {
+      id: "pkg",
+      label: "Installing",
+      value: 65,
+      total: 100,
+      statusText: "65 of 100 packages",
+    },
+  ]}
+/>
+```
+
+### With Error Status
+
+```tsx
+<MultiProgress
+  items={[
+    { id: "a", label: "Build", value: 100, total: 100, status: "done" },
+    {
+      id: "b",
+      label: "Test",
+      value: 12,
+      total: 48,
+      status: "error",
+      statusText: "FAIL",
+    },
+    { id: "c", label: "Deploy", value: 0, total: 100, status: "pending" },
+  ]}
+/>
+```
 
 ## Registry Files
 

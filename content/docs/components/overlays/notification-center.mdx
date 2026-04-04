@@ -17,13 +17,26 @@ npx shadcn@latest add https://termcn.vercel.app/r/notification-center.json
 
 ```tsx
 import { NotificationCenter } from "@/components/ui/notification-center";
+import { useNotifications } from "@/hooks/use-notifications";
+import { useEffect } from "react";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
+  const { notify } = useNotifications();
 
-  return <NotificationCenter {...demoProps} />;
+  useEffect(() => {
+    notify({
+      title: "Build complete",
+      body: "All checks passed",
+      variant: "success",
+    });
+    notify({
+      title: "Low disk space",
+      body: "Only 2 GB remaining",
+      variant: "warning",
+    });
+  }, []);
+
+  return <NotificationCenter maxVisible={5} width={40} />;
 }
 ```
 
@@ -40,7 +53,41 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop         | Type     | Default | Description                                   |
+| ------------ | -------- | ------- | --------------------------------------------- |
+| `maxVisible` | `number` | `5`     | Maximum number of notifications shown at once |
+| `width`      | `number` | `40`    | Width of the notification panel in columns    |
+
+## Examples
+
+### Narrow Panel
+
+```tsx
+<NotificationCenter maxVisible={3} width={30} />
+```
+
+### Full-Width Panel
+
+```tsx
+<NotificationCenter maxVisible={10} width={80} />
+```
+
+### Using the Hook to Push Notifications
+
+```tsx
+const { notify, dismiss, clear } = useNotifications();
+
+notify({ title: "Deployed", variant: "success" });
+notify({
+  title: "Error",
+  body: "Connection refused",
+  variant: "error",
+  persistent: true,
+});
+
+dismiss(notificationId);
+clear();
+```
 
 ## Registry Files
 

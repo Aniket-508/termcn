@@ -19,11 +19,17 @@ npx shadcn@latest add https://termcn.vercel.app/r/checkbox-group.json
 import { CheckboxGroup } from "@/components/ui/checkbox-group";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <CheckboxGroup {...demoProps} />;
+  return (
+    <CheckboxGroup
+      label="Select toppings"
+      options={[
+        { value: "cheese", label: "Extra Cheese" },
+        { value: "pepperoni", label: "Pepperoni" },
+        { value: "mushrooms", label: "Mushrooms" },
+      ]}
+      onChange={(values) => console.log("Selected:", values)}
+    />
+  );
 }
 ```
 
@@ -40,14 +46,60 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type                            | Default     | Description |
-| ---------- | ------------------------------- | ----------- | ----------- |
-| `label`    | `string`                        | `undefined` | -           |
-| `options`  | `CheckboxGroupOption[]`         | `required`  | -           |
-| `value`    | `string[]`                      | `undefined` | -           |
-| `onChange` | `(values: string[]) =&gt; void` | `undefined` | -           |
-| `min`      | `number`                        | `undefined` | -           |
-| `max`      | `number`                        | `undefined` | -           |
+| Prop       | Type                         | Default     | Description                                         |
+| ---------- | ---------------------------- | ----------- | --------------------------------------------------- |
+| `label`    | `string`                     | `undefined` | Heading text displayed above the group              |
+| `options`  | `CheckboxGroupOption[]`      | `required`  | Array of `{ value, label, disabled? }` option items |
+| `value`    | `string[]`                   | `undefined` | Controlled array of selected values                 |
+| `onChange` | `(values: string[]) => void` | `undefined` | Callback fired when selection changes               |
+| `min`      | `number`                     | `undefined` | Minimum number of options that must be selected     |
+| `max`      | `number`                     | `undefined` | Maximum number of options that can be selected      |
+
+## Examples
+
+### With Min/Max Constraints
+
+```tsx
+<CheckboxGroup
+  label="Pick 1–3 colors"
+  options={[
+    { value: "red", label: "Red" },
+    { value: "green", label: "Green" },
+    { value: "blue", label: "Blue" },
+    { value: "yellow", label: "Yellow" },
+  ]}
+  min={1}
+  max={3}
+/>
+```
+
+### With Disabled Options
+
+```tsx
+<CheckboxGroup
+  label="Features"
+  options={[
+    { value: "auth", label: "Authentication" },
+    { value: "api", label: "API Access" },
+    { value: "admin", label: "Admin Panel", disabled: true },
+  ]}
+/>
+```
+
+### Controlled Selection
+
+```tsx
+<CheckboxGroup
+  label="Notifications"
+  options={[
+    { value: "email", label: "Email" },
+    { value: "sms", label: "SMS" },
+    { value: "push", label: "Push" },
+  ]}
+  value={["email", "push"]}
+  onChange={(values) => console.log(values)}
+/>
+```
 
 ## Registry Files
 

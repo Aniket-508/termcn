@@ -19,11 +19,11 @@ npx shadcn@latest add https://termcn.vercel.app/r/box.json
 import { Box } from "@/components/ui/box";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Box {...demoProps} />;
+  return (
+    <Box border borderVariant="focus" padding={1}>
+      <Text>Focused container</Text>
+    </Box>
+  );
 }
 ```
 
@@ -35,7 +35,47 @@ export function Example() {
 
 ## Props
 
-No props table was generated for this file. Inspect the source for the latest API.
+| Prop            | Type                                                                   | Default     | Description                                                               |
+| --------------- | ---------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `border`        | `boolean`                                                              | `undefined` | When true, renders a border around the box using the theme's border style |
+| `borderVariant` | `"default" \| "muted" \| "focus" \| "success" \| "error" \| "warning"` | `"default"` | Semantic border color variant resolved from the current theme             |
+| `borderColor`   | `string`                                                               | `undefined` | Explicit border color that overrides `borderVariant`                      |
+| `children`      | `ReactNode`                                                            | `undefined` | Content to render inside the box                                          |
+| `...props`      | `InkBoxProps`                                                          | —           | All standard Ink `Box` props (padding, margin, flexDirection, etc.)       |
+
+## Examples
+
+### Bordered box with default variant
+
+```tsx
+<Box border padding={1}>
+  <Text>Default border</Text>
+</Box>
+```
+
+### Success variant
+
+```tsx
+<Box border borderVariant="success" padding={1}>
+  <Text>Operation completed</Text>
+</Box>
+```
+
+### Error variant with custom padding
+
+```tsx
+<Box border borderVariant="error" paddingX={2} paddingY={1}>
+  <Text>Something went wrong</Text>
+</Box>
+```
+
+### Custom border color
+
+```tsx
+<Box border borderColor="#ff69b4" padding={1}>
+  <Text>Custom pink border</Text>
+</Box>
+```
 
 ## Registry Files
 

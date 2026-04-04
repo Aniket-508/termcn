@@ -19,11 +19,19 @@ npx shadcn@latest add https://termcn.vercel.app/r/json.json
 import { JSONView } from "@/components/ui/json";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <JSONView {...demoProps} />;
+  return (
+    <JSONView
+      label="package.json"
+      data={{
+        name: "my-cli",
+        version: "1.0.0",
+        dependencies: {
+          ink: "^5.0.0",
+          react: "^18.0.0",
+        },
+      }}
+    />
+  );
 }
 ```
 
@@ -39,12 +47,48 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type      | Default     | Description                                   |
-| ----------- | --------- | ----------- | --------------------------------------------- |
-| `data`      | `unknown` | `required`  | -                                             |
-| `indent`    | `number`  | `2`         | Initial indent spaces. Default: 2             |
-| `collapsed` | `boolean` | `false`     | Whether nodes start collapsed. Default: false |
-| `label`     | `string`  | `undefined` | -                                             |
+| Prop        | Type      | Default     | Description                                  |
+| ----------- | --------- | ----------- | -------------------------------------------- |
+| `data`      | `unknown` | `required`  | The JSON-serializable data to display        |
+| `indent`    | `number`  | `2`         | Number of spaces per indentation level       |
+| `collapsed` | `boolean` | `false`     | Whether all nodes start in a collapsed state |
+| `label`     | `string`  | `undefined` | Label displayed above the JSON tree          |
+
+## Examples
+
+### Collapsed by default
+
+```tsx
+<JSONView
+  collapsed
+  data={{
+    users: [
+      { name: "Alice", age: 30 },
+      { name: "Bob", age: 25 },
+    ],
+    meta: { total: 2 },
+  }}
+/>
+```
+
+### Custom indentation
+
+```tsx
+<JSONView indent={4} data={["react", "ink", "chalk", "yoga-layout"]} />
+```
+
+### Simple key-value data
+
+```tsx
+<JSONView
+  label="Environment"
+  data={{
+    NODE_ENV: "production",
+    PORT: 3000,
+    DEBUG: false,
+  }}
+/>
+```
 
 ## Registry Files
 

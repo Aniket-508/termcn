@@ -19,11 +19,30 @@ npx shadcn@latest add https://termcn.vercel.app/r/log.json
 import { Log } from "@/components/ui/log";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Log {...demoProps} />;
+  return (
+    <Log
+      entries={[
+        {
+          level: "info",
+          message: "Server started on port 3000",
+          timestamp: new Date(),
+        },
+        {
+          level: "warn",
+          message: "Deprecated API call detected",
+          timestamp: new Date(),
+        },
+        {
+          level: "error",
+          message: "Failed to connect to database",
+          timestamp: new Date(),
+        },
+      ]}
+      height={10}
+      showTimestamp
+      follow
+    />
+  );
 }
 ```
 
@@ -39,13 +58,41 @@ export function Example() {
 
 ## Props
 
-| Prop            | Type         | Default     | Description |
-| --------------- | ------------ | ----------- | ----------- |
-| `entries`       | `LogEntry[]` | `required`  | -           |
-| `height`        | `number`     | `10`        | -           |
-| `showTimestamp` | `boolean`    | `true`      | -           |
-| `filter`        | `string`     | `undefined` | -           |
-| `follow`        | `boolean`    | `undefined` | -           |
+| Prop            | Type         | Default     | Description                                                            |
+| --------------- | ------------ | ----------- | ---------------------------------------------------------------------- |
+| `entries`       | `LogEntry[]` | `required`  | Array of log entries with `level`, `message`, and optional `timestamp` |
+| `height`        | `number`     | `10`        | Visible height in rows                                                 |
+| `showTimestamp` | `boolean`    | `true`      | Show the timestamp column for entries that have one                    |
+| `filter`        | `string`     | `undefined` | Filter entries by message or level substring match                     |
+| `follow`        | `boolean`    | `false`     | Auto-scroll to the latest entry as new ones arrive                     |
+
+## Examples
+
+### Compact log without timestamps
+
+```tsx
+<Log
+  entries={[
+    { level: "info", message: "Build started" },
+    { level: "info", message: "Compiling 42 files..." },
+    { level: "debug", message: "Cache hit for module A" },
+  ]}
+  showTimestamp={false}
+  height={5}
+/>
+```
+
+### Filtered error view
+
+```tsx
+<Log entries={logs} filter="error" height={8} />
+```
+
+### Follow mode for live output
+
+```tsx
+<Log entries={streamingLogs} follow height={15} />
+```
 
 ## Registry Files
 

@@ -21,11 +21,15 @@ npx shadcn@latest add https://termcn.vercel.app/r/embedded-terminal.json
 import { EmbeddedTerminal } from "@/components/ui/embedded-terminal";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <EmbeddedTerminal {...demoProps} />;
+  return (
+    <EmbeddedTerminal
+      command="bash"
+      args={["-c", "echo Hello world"]}
+      width={80}
+      height={24}
+      onExit={(code) => console.log(`Exited with ${code}`)}
+    />
+  );
 }
 ```
 
@@ -37,14 +41,39 @@ export function Example() {
 
 ## Props
 
-| Prop      | Type                        | Default     | Description |
-| --------- | --------------------------- | ----------- | ----------- |
-| `command` | `string`                    | `required`  | -           |
-| `args`    | `string[]`                  | `[]`        | -           |
-| `cwd`     | `string`                    | `undefined` | -           |
-| `width`   | `number`                    | `80`        | -           |
-| `height`  | `number`                    | `24`        | -           |
-| `onExit`  | `(code: number) =&gt; void` | `undefined` | -           |
+| Prop      | Type                     | Default     | Description                                           |
+| --------- | ------------------------ | ----------- | ----------------------------------------------------- |
+| `command` | `string`                 | `required`  | The shell command or binary to spawn                  |
+| `args`    | `string[]`               | `[]`        | Arguments passed to the command                       |
+| `cwd`     | `string`                 | `undefined` | Working directory for the spawned process             |
+| `width`   | `number`                 | `80`        | Terminal width in columns                             |
+| `height`  | `number`                 | `24`        | Terminal height in rows                               |
+| `onExit`  | `(code: number) => void` | `undefined` | Callback invoked when the process exits with its code |
+
+## Examples
+
+### Run a shell command
+
+```tsx
+<EmbeddedTerminal command="ls" args={["-la", "/tmp"]} width={100} />
+```
+
+### Interactive shell session
+
+```tsx
+<EmbeddedTerminal command="bash" height={30} />
+```
+
+### Custom working directory with exit handler
+
+```tsx
+<EmbeddedTerminal
+  command="npm"
+  args={["test"]}
+  cwd="/home/user/project"
+  onExit={(code) => console.log(`Tests finished: ${code}`)}
+/>
+```
 
 ## Registry Files
 

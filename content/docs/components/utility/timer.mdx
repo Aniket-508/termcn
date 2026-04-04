@@ -19,11 +19,15 @@ npx shadcn@latest add https://termcn.vercel.app/r/timer.json
 import { Timer } from "@/components/ui/timer";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Timer {...demoProps} />;
+  return (
+    <Timer
+      duration={300}
+      format="ms"
+      label="Pomodoro"
+      autoStart
+      onComplete={() => console.log("Time is up!")}
+    />
+  );
 }
 ```
 
@@ -40,13 +44,39 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type                                            | Default     | Description |
-| ----------- | ----------------------------------------------- | ----------- | ----------- |
-| `duration`  | `number; // seconds onComplete?: () =&gt; void` | `required`  | -           |
-| `autoStart` | `boolean`                                       | `false`     | -           |
-| `format`    | `"hms" \| "ms" \| "s"`                          | `"hms"`     | -           |
-| `color`     | `string`                                        | `undefined` | -           |
-| `label`     | `string`                                        | `undefined` | -           |
+| Prop         | Type                   | Default     | Description                                      |
+| ------------ | ---------------------- | ----------- | ------------------------------------------------ |
+| `duration`   | `number`               | `required`  | Countdown duration in seconds                    |
+| `onComplete` | `() => void`           | `undefined` | Callback invoked when the countdown reaches zero |
+| `autoStart`  | `boolean`              | `false`     | Start counting down immediately on mount         |
+| `format`     | `"hms" \| "ms" \| "s"` | `"hms"`     | Time display format                              |
+| `color`      | `string`               | `undefined` | Custom color for the time display                |
+| `label`      | `string`               | `undefined` | Label shown above the timer                      |
+
+## Examples
+
+### Simple 60-second timer
+
+```tsx
+<Timer duration={60} autoStart />
+```
+
+### Minutes and seconds format with label
+
+```tsx
+<Timer duration={120} format="ms" label="Break time" />
+```
+
+### Seconds-only format with completion callback
+
+```tsx
+<Timer
+  duration={10}
+  format="s"
+  color="red"
+  onComplete={() => process.exit(0)}
+/>
+```
 
 ## Registry Files
 

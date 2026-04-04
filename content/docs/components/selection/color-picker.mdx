@@ -19,11 +19,13 @@ npx shadcn@latest add https://termcn.vercel.app/r/color-picker.json
 import { ColorPicker } from "@/components/ui/color-picker";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <ColorPicker {...demoProps} />;
+  return (
+    <ColorPicker
+      label="Pick a color"
+      onChange={(color) => console.log("Selected:", color)}
+      onSubmit={(color) => console.log("Confirmed:", color)}
+    />
+  );
 }
 ```
 
@@ -40,15 +42,38 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type                         | Default           | Description |
-| ----------- | ---------------------------- | ----------------- | ----------- |
-| `value`     | `string`                     | `undefined`       | -           |
-| `onChange`  | `(color: string) =&gt; void` | `undefined`       | -           |
-| `onSubmit`  | `(color: string) =&gt; void` | `undefined`       | -           |
-| `label`     | `string`                     | `undefined`       | -           |
-| `palette`   | `string[]`                   | `DEFAULT_PALETTE` | -           |
-| `autoFocus` | `boolean`                    | `false`           | -           |
-| `id`        | `string`                     | `undefined`       | -           |
+| Prop        | Type                      | Default           | Description                                    |
+| ----------- | ------------------------- | ----------------- | ---------------------------------------------- |
+| `value`     | `string`                  | `undefined`       | Controlled hex color value                     |
+| `onChange`  | `(color: string) => void` | `undefined`       | Callback fired when a color is picked          |
+| `onSubmit`  | `(color: string) => void` | `undefined`       | Callback fired when the selection is confirmed |
+| `label`     | `string`                  | `undefined`       | Heading text displayed above the picker        |
+| `palette`   | `string[]`                | `DEFAULT_PALETTE` | Array of hex colors shown in the palette grid  |
+| `autoFocus` | `boolean`                 | `false`           | Automatically focus the picker on mount        |
+| `id`        | `string`                  | `undefined`       | Focus identifier for `useFocus`                |
+
+## Examples
+
+### Custom Palette
+
+```tsx
+<ColorPicker
+  label="Brand colors"
+  palette={["#1e40af", "#059669", "#d97706", "#dc2626", "#7c3aed", "#0891b2"]}
+/>
+```
+
+### Controlled Value
+
+```tsx
+<ColorPicker value="#ff6600" onChange={(color) => setColor(color)} />
+```
+
+### Auto-Focused
+
+```tsx
+<ColorPicker label="Background" autoFocus />
+```
 
 ## Registry Files
 

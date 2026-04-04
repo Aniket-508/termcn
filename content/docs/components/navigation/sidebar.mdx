@@ -19,11 +19,28 @@ npx shadcn@latest add https://termcn.vercel.app/r/sidebar.json
 import { Sidebar } from "@/components/ui/sidebar";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Sidebar {...demoProps} />;
+  return (
+    <Sidebar
+      title="Explorer"
+      activeKey="inbox"
+      width={24}
+      items={[
+        { key: "inbox", label: "Inbox", icon: "📥", badge: 3 },
+        { key: "drafts", label: "Drafts", icon: "📝" },
+        {
+          key: "projects",
+          label: "Projects",
+          icon: "📁",
+          children: [
+            { key: "proj-a", label: "Alpha" },
+            { key: "proj-b", label: "Beta" },
+          ],
+        },
+        { key: "settings", label: "Settings", icon: "⚙" },
+      ]}
+      onSelect={(key) => console.log(key)}
+    />
+  );
 }
 ```
 
@@ -39,14 +56,78 @@ export function Example() {
 
 ## Props
 
-| Prop        | Type                       | Default     | Description |
-| ----------- | -------------------------- | ----------- | ----------- |
-| `items`     | `SidebarItem[]`            | `required`  | -           |
-| `activeKey` | `string`                   | `undefined` | -           |
-| `onSelect`  | `(key: string) =&gt; void` | `undefined` | -           |
-| `collapsed` | `boolean`                  | `false`     | -           |
-| `width`     | `number`                   | `20`        | -           |
-| `title`     | `string`                   | `undefined` | -           |
+| Prop        | Type                    | Default     | Description                                                  |
+| ----------- | ----------------------- | ----------- | ------------------------------------------------------------ |
+| `items`     | `SidebarItem[]`         | `required`  | Array of navigation items to display                         |
+| `activeKey` | `string`                | `undefined` | Key of the currently active item, highlighted in the sidebar |
+| `onSelect`  | `(key: string) => void` | `undefined` | Callback fired with the selected item's key                  |
+| `collapsed` | `boolean`               | `false`     | When true, renders a narrow icon-only sidebar                |
+| `width`     | `number`                | `20`        | Width of the sidebar in columns                              |
+| `title`     | `string`                | `undefined` | Title displayed at the top of the sidebar                    |
+
+### SidebarItem
+
+| Prop       | Type               | Default     | Description                                       |
+| ---------- | ------------------ | ----------- | ------------------------------------------------- |
+| `key`      | `string`           | `required`  | Unique identifier for the item                    |
+| `label`    | `string`           | `required`  | Display text for the navigation item              |
+| `icon`     | `string`           | `undefined` | Icon character shown before the label             |
+| `badge`    | `string \| number` | `undefined` | Badge value displayed after the label             |
+| `children` | `SidebarItem[]`    | `undefined` | Nested items revealed when the parent is expanded |
+
+## Examples
+
+### Collapsed sidebar
+
+```tsx
+<Sidebar
+  collapsed
+  activeKey="home"
+  items={[
+    { key: "home", label: "Home", icon: "🏠" },
+    { key: "search", label: "Search", icon: "🔍" },
+    { key: "settings", label: "Settings", icon: "⚙" },
+  ]}
+/>
+```
+
+### Flat list without nesting
+
+```tsx
+<Sidebar
+  title="Navigation"
+  width={22}
+  items={[
+    { key: "dashboard", label: "Dashboard" },
+    { key: "analytics", label: "Analytics", badge: "new" },
+    { key: "users", label: "Users", badge: 42 },
+  ]}
+  onSelect={(key) => console.log(key)}
+/>
+```
+
+### Nested items with badges
+
+```tsx
+<Sidebar
+  title="Mail"
+  activeKey="important"
+  items={[
+    { key: "inbox", label: "Inbox", icon: "📥", badge: 12 },
+    {
+      key: "labels",
+      label: "Labels",
+      icon: "🏷",
+      children: [
+        { key: "important", label: "Important", badge: 3 },
+        { key: "work", label: "Work" },
+      ],
+    },
+    { key: "trash", label: "Trash", icon: "🗑" },
+  ]}
+  onSelect={(key) => console.log(key)}
+/>
+```
 
 ## Registry Files
 

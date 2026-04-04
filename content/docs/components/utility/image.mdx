@@ -21,11 +21,9 @@ npx shadcn@latest add https://termcn.vercel.app/r/image.json
 import { Image } from "@/components/ui/image";
 
 export function Example() {
-  const demoProps = {
-    // See the live preview for a working example.
-  };
-
-  return <Image {...demoProps} />;
+  return (
+    <Image src="./screenshot.png" width={40} alt="Application screenshot" />
+  );
 }
 ```
 
@@ -37,13 +35,33 @@ export function Example() {
 
 ## Props
 
-| Prop       | Type            | Default     | Description |
-| ---------- | --------------- | ----------- | ----------- |
-| `src`      | `string`        | `required`  | -           |
-| `width`    | `number`        | `20`        | -           |
-| `height`   | `number`        | `undefined` | -           |
-| `protocol` | `ImageProtocol` | `"auto"`    | -           |
-| `alt`      | `string`        | `undefined` | -           |
+| Prop       | Type            | Default     | Description                                                       |
+| ---------- | --------------- | ----------- | ----------------------------------------------------------------- |
+| `src`      | `string`        | `required`  | File path to the image                                            |
+| `width`    | `number`        | `20`        | Display width in terminal columns                                 |
+| `height`   | `number`        | `undefined` | Display height in terminal rows                                   |
+| `protocol` | `ImageProtocol` | `"auto"`    | Rendering protocol: `"auto"`, `"iterm2"`, `"kitty"`, or `"ascii"` |
+| `alt`      | `string`        | `undefined` | Alt text shown below the image and in the ASCII fallback          |
+
+## Examples
+
+### ASCII fallback
+
+```tsx
+<Image src="./logo.png" protocol="ascii" alt="Company logo" />
+```
+
+### Custom dimensions
+
+```tsx
+<Image src="./banner.png" width={60} height={15} />
+```
+
+### Force Kitty protocol
+
+```tsx
+<Image src="./photo.jpg" protocol="kitty" width={30} alt="Profile photo" />
+```
 
 ## Registry Files
 
