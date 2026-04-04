@@ -1,4 +1,3 @@
-import { PackageIcon } from "lucide-react";
 import Link from "next/link";
 
 import { CommandMenu } from "@/components/command-menu";
@@ -9,6 +8,8 @@ import { ModeSwitcher } from "@/components/mode-switcher";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
 import { source } from "@/lib/source";
+
+import { LogoMark } from "./logo";
 
 export const SiteHeader = () => {
   const { pageTree } = source;
@@ -29,7 +30,7 @@ export const SiteHeader = () => {
             className="hidden size-8 lg:flex"
           >
             <Link href="/">
-              <PackageIcon className="size-5" />
+              <LogoMark className="size-5" />
               <span className="sr-only">{siteConfig.name}</span>
             </Link>
           </Button>
