@@ -1,19 +1,1885 @@
 {
-  "name": "termcn/ui",
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
   "homepage": "https://termcn.vercel.app",
   "items": [
     {
-      "name": "your-component",
-      "type": "registry:ui",
-      "title": "Your Component",
-      "description": "A placeholder registry component. Replace with your own UI block.",
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Alert box with success/error/warning/info variants",
       "files": [
         {
-          "path": "registry/new-york/your-component.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/your-component.tsx"
+          "path": "registry/ui/alert.tsx",
+          "type": "registry:ui"
         }
-      ]
+      ],
+      "name": "alert",
+      "title": "Alert",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Full-screen TUI layout with header, tip bar, full-width input, scrollable content, and hints footer",
+      "files": [
+        {
+          "path": "registry/ui/app-shell.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "app-shell",
+      "registryDependencies": ["info-box", "bullet-list", "theme-provider"],
+      "title": "App Shell",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Constrains children to a given aspect ratio",
+      "files": [
+        {
+          "path": "registry/ui/aspect-ratio.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "aspect-ratio",
+      "title": "Aspect Ratio",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "Semantic status indicator badge (success/error/warning/info)",
+      "files": [
+        {
+          "path": "registry/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "badge",
+      "title": "Badge",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Full-width announcement banner",
+      "files": [
+        {
+          "path": "registry/ui/banner.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "banner",
+      "title": "Banner",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["charts"],
+      "dependencies": ["ink"],
+      "description": "Horizontal and vertical bar chart with labels",
+      "files": [
+        {
+          "path": "registry/ui/bar-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "bar-chart",
+      "title": "Bar Chart",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "Figlet-style large ASCII art text",
+      "files": [
+        {
+          "path": "registry/ui/big-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "big-text",
+      "title": "Big Text",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Enhanced flexbox container with theme-aware borders",
+      "files": [
+        {
+          "path": "registry/ui/box.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "box",
+      "title": "Box",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["navigation"],
+      "dependencies": ["ink"],
+      "description": "Breadcrumb navigation trail",
+      "files": [
+        {
+          "path": "registry/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "breadcrumb",
+      "registryDependencies": ["theme-provider"],
+      "title": "Breadcrumb",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Nested structured content with ●/└/□ bullet prefixes",
+      "files": [
+        {
+          "path": "registry/ui/bullet-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "bullet-list",
+      "title": "Bullet List",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Card with header, body, and footer slots",
+      "files": [
+        {
+          "path": "registry/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "card",
+      "title": "Card",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Centers children horizontally and vertically",
+      "files": [
+        {
+          "path": "registry/ui/center.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "center",
+      "title": "Center",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Chat message bubble with role label, streaming indicator, and collapsible content",
+      "files": [
+        {
+          "path": "registry/ui/chat-message.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "chat-message",
+      "registryDependencies": ["use-input"],
+      "title": "Chat Message",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Scrollable container for stacking ChatMessage components in a conversation thread",
+      "files": [
+        {
+          "path": "registry/ui/chat-thread.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "chat-thread",
+      "registryDependencies": ["chat-message"],
+      "title": "Chat Thread",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Checkbox with indeterminate state",
+      "files": [
+        {
+          "path": "registry/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "checkbox",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Checkbox",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Checkbox group with min/max selection",
+      "files": [
+        {
+          "path": "registry/ui/checkbox-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "checkbox-group",
+      "registryDependencies": ["checkbox", "theme-provider"],
+      "title": "Checkbox Group",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Copy-to-clipboard button with success feedback",
+      "files": [
+        {
+          "path": "registry/ui/clipboard.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "clipboard",
+      "registryDependencies": ["theme-provider", "use-clipboard"],
+      "title": "Clipboard",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Real-time clock display with 12h/24h and date",
+      "files": [
+        {
+          "path": "registry/ui/clock.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "clock",
+      "registryDependencies": ["theme-provider"],
+      "title": "Clock",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "Syntax-highlighted code block (50+ languages)",
+      "files": [
+        {
+          "path": "registry/ui/code.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "code",
+      "title": "Code",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Color picker with palette, hex, and RGB input",
+      "files": [
+        {
+          "path": "registry/ui/color-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "color-picker",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Color Picker",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Multi-column layout with configurable widths",
+      "files": [
+        {
+          "path": "registry/ui/columns.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "columns",
+      "title": "Columns",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["navigation"],
+      "dependencies": ["ink", "mnemonist"],
+      "description": "VS Code–style command palette with fuzzy search",
+      "files": [
+        {
+          "path": "registry/ui/command-palette.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "command-palette",
+      "registryDependencies": ["theme-provider"],
+      "title": "Command Palette",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["forms"],
+      "dependencies": ["ink"],
+      "description": "Yes/No confirmation prompt",
+      "files": [
+        {
+          "path": "registry/ui/confirm.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "confirm",
+      "registryDependencies": ["use-input"],
+      "title": "Confirm",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Advanced data grid with sorting, filtering, pagination, and cell editing",
+      "files": [
+        {
+          "path": "registry/ui/data-grid.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "data-grid",
+      "registryDependencies": ["theme-provider"],
+      "title": "Data Grid",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["forms"],
+      "dependencies": ["ink"],
+      "description": "Calendar date picker with keyboard navigation",
+      "files": [
+        {
+          "path": "registry/ui/date-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "date-picker",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Date Picker",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Term–description definition list",
+      "files": [
+        {
+          "path": "registry/ui/definition.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "definition",
+      "title": "Definition",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["overlays"],
+      "dependencies": ["ink"],
+      "description": "Confirmation dialog with OK/Cancel actions",
+      "files": [
+        {
+          "path": "registry/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "dialog",
+      "registryDependencies": ["theme-provider"],
+      "title": "Dialog",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Unified, split, and inline diff viewer with LCS-based diff algorithm and line numbers",
+      "files": [
+        {
+          "path": "registry/ui/diff-view.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "diff-view",
+      "title": "Diff View",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "Box-drawing character numerals",
+      "files": [
+        {
+          "path": "registry/ui/digits.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "digits",
+      "title": "Digits",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink", "glob"],
+      "description": "Filesystem browser with expand/collapse",
+      "files": [
+        {
+          "path": "registry/ui/directory-tree.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "directory-tree",
+      "registryDependencies": ["theme-provider"],
+      "title": "Directory Tree",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Horizontal or vertical divider / rule",
+      "files": [
+        {
+          "path": "registry/ui/divider.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "divider",
+      "title": "Divider",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["overlays"],
+      "dependencies": ["ink"],
+      "description": "Slide-in panel from any edge",
+      "files": [
+        {
+          "path": "registry/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "drawer",
+      "registryDependencies": ["theme-provider"],
+      "title": "Drawer",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink"],
+      "description": "Email input with validation and domain suggestions",
+      "files": [
+        {
+          "path": "registry/ui/email-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "email-input",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Email Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Embedded PTY terminal panel (requires node-pty peer)",
+      "files": [
+        {
+          "path": "registry/ui/embedded-terminal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "embedded-terminal",
+      "title": "Embedded Terminal",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "React error boundary with graceful terminal display",
+      "files": [
+        {
+          "path": "registry/ui/error-boundary.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "error-boundary",
+      "title": "Error Boundary",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Interactive file-change review list with diff expansion, per-file accept/reject actions, and accept-all shortcut",
+      "files": [
+        {
+          "path": "registry/ui/file-change.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "file-change",
+      "registryDependencies": ["use-input"],
+      "title": "File Change",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["forms"],
+      "dependencies": ["ink", "glob"],
+      "description": "Interactive file browser and picker",
+      "files": [
+        {
+          "path": "registry/ui/file-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "file-picker",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "File Picker",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["forms"],
+      "dependencies": ["ink"],
+      "description": "Form container with validation, Ctrl+S submit, and dirty tracking",
+      "files": [
+        {
+          "path": "registry/ui/form.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "form",
+      "registryDependencies": ["theme-provider"],
+      "title": "Form",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["forms"],
+      "dependencies": ["ink"],
+      "description": "Form field wrapper with label, hint, and error",
+      "files": [
+        {
+          "path": "registry/ui/form-field.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "form-field",
+      "registryDependencies": ["form"],
+      "title": "Form Field",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["charts"],
+      "dependencies": ["ink"],
+      "description": "Arc/speedometer gauge meter",
+      "files": [
+        {
+          "path": "registry/ui/gauge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "gauge",
+      "title": "Gauge",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Git status display (branch, staged, modified, ahead/behind)",
+      "files": [
+        {
+          "path": "registry/ui/git-status.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "git-status",
+      "title": "Git Status",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "Color gradient text",
+      "files": [
+        {
+          "path": "registry/ui/gradient.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "gradient",
+      "title": "Gradient",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Rows × columns grid layout",
+      "files": [
+        {
+          "path": "registry/ui/grid.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "grid",
+      "title": "Grid",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "h1–h4 styled headings with optional figlet ASCII art",
+      "files": [
+        {
+          "path": "registry/ui/heading.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "heading",
+      "title": "Heading",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["charts"],
+      "dependencies": ["ink"],
+      "description": "Grid heatmap with color intensity scale",
+      "files": [
+        {
+          "path": "registry/ui/heat-map.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "heat-map",
+      "title": "Heat Map",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Auto-generated help panel from a keymap",
+      "files": [
+        {
+          "path": "registry/ui/help.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "help",
+      "title": "Help",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Figlet banner + tagline + aligned Options/Commands help sections",
+      "files": [
+        {
+          "path": "registry/ui/help-screen.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "help-screen",
+      "registryDependencies": ["big-text"],
+      "title": "Help Screen",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Image renderer with iTerm2/Kitty protocol and ASCII fallback",
+      "files": [
+        {
+          "path": "registry/ui/image.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "image",
+      "title": "Image",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Bordered info panel with header, key-value rows, and tree-prefix rows",
+      "files": [
+        {
+          "path": "registry/ui/info-box.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "info-box",
+      "title": "Info Box",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Pretty-printed JSON with collapsible nodes",
+      "files": [
+        {
+          "path": "registry/ui/json.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "json",
+      "registryDependencies": ["theme-provider"],
+      "title": "JSON",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Aligned key–value pairs",
+      "files": [
+        {
+          "path": "registry/ui/key-value.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "key-value",
+      "title": "Key Value",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Formatted keyboard shortcut reference table",
+      "files": [
+        {
+          "path": "registry/ui/keyboard-shortcuts.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "keyboard-shortcuts",
+      "title": "Keyboard Shortcuts",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["charts"],
+      "dependencies": ["ink"],
+      "description": "ASCII line chart with axes and multi-series support",
+      "files": [
+        {
+          "path": "registry/ui/line-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "line-chart",
+      "title": "Line Chart",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "OSC 8 clickable hyperlink",
+      "files": [
+        {
+          "path": "registry/ui/link.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "link",
+      "title": "Link",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Navigable list with optional filtering",
+      "files": [
+        {
+          "path": "registry/ui/list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "list",
+      "registryDependencies": ["theme-provider"],
+      "title": "List",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Scrolling log viewer with severity levels and filtering",
+      "files": [
+        {
+          "path": "registry/ui/log.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "log",
+      "registryDependencies": ["theme-provider"],
+      "title": "Log",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Full-page onboarding/login screen with announcement banner, big ASCII title, description, and numbered select",
+      "files": [
+        {
+          "path": "registry/ui/login-flow.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "login-flow",
+      "registryDependencies": ["big-text", "theme-provider"],
+      "title": "Login Flow",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink", "marked"],
+      "description": "Full markdown renderer for terminal",
+      "files": [
+        {
+          "path": "registry/ui/markdown.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "markdown",
+      "title": "Markdown",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink"],
+      "description": "Masked input for phone, date, credit card formats",
+      "files": [
+        {
+          "path": "registry/ui/masked-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "masked-input",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Masked Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["navigation"],
+      "dependencies": ["ink"],
+      "description": "Dropdown menu with nested submenus",
+      "files": [
+        {
+          "path": "registry/ui/menu.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "menu",
+      "registryDependencies": ["theme-provider"],
+      "title": "Menu",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["overlays"],
+      "dependencies": ["ink"],
+      "description": "Focus-trapped overlay modal, close with Esc",
+      "files": [
+        {
+          "path": "registry/ui/modal.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "modal",
+      "registryDependencies": ["theme-provider"],
+      "title": "Modal",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Keyboard-navigable list for selecting an AI model, with optional provider grouping and context-window display",
+      "files": [
+        {
+          "path": "registry/ui/model-selector.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "model-selector",
+      "registryDependencies": ["use-input"],
+      "title": "Model Selector",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Parallel progress display for package managers, build pipelines, and deploy tools",
+      "files": [
+        {
+          "path": "registry/ui/multi-progress.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "multi-progress",
+      "title": "Multi Progress",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Multi-select list with checkboxes and select-all",
+      "files": [
+        {
+          "path": "registry/ui/multi-select.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "multi-select",
+      "registryDependencies": ["theme-provider"],
+      "title": "Multi Select",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["overlays"],
+      "dependencies": ["ink"],
+      "description": "Persistent queue-based notification panel with useNotifications hook",
+      "files": [
+        {
+          "path": "registry/ui/notification-center.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/ui/notification-badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "notification-center",
+      "registryDependencies": ["theme-provider", "use-notifications"],
+      "title": "Notification Center",
+      "type": "registry:block"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink"],
+      "description": "Numeric input with increment/decrement and bounds",
+      "files": [
+        {
+          "path": "registry/ui/number-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "number-input",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Number Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["navigation"],
+      "dependencies": ["ink"],
+      "description": "Page navigation with prev/next and jump",
+      "files": [
+        {
+          "path": "registry/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "pagination",
+      "registryDependencies": ["theme-provider"],
+      "title": "Pagination",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Titled bordered panel",
+      "files": [
+        {
+          "path": "registry/ui/panel.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "panel",
+      "title": "Panel",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink"],
+      "description": "Password input with masked characters and reveal toggle",
+      "files": [
+        {
+          "path": "registry/ui/password-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "password-input",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Password Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink", "glob"],
+      "description": "Filesystem path input with tab autocomplete",
+      "files": [
+        {
+          "path": "registry/ui/path-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "path-input",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Path Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["charts"],
+      "dependencies": ["ink"],
+      "description": "Unicode block pie chart with legend",
+      "files": [
+        {
+          "path": "registry/ui/pie-chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "pie-chart",
+      "title": "Pie Chart",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["overlays"],
+      "dependencies": ["ink"],
+      "description": "Positioned popover with arbitrary content",
+      "files": [
+        {
+          "path": "registry/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "popover",
+      "registryDependencies": ["theme-provider"],
+      "title": "Popover",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Determinate progress bar with percent and value/total display",
+      "files": [
+        {
+          "path": "registry/ui/progress-bar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "progress-bar",
+      "title": "Progress Bar",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Circular progress indicator using Unicode braille",
+      "files": [
+        {
+          "path": "registry/ui/progress-circle.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "progress-circle",
+      "title": "Progress Circle",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Unicode block QR code generator",
+      "files": [
+        {
+          "path": "registry/ui/qr-code.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "qr-code",
+      "title": "QR Code",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Mutually exclusive radio button group",
+      "files": [
+        {
+          "path": "registry/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "radio-group",
+      "registryDependencies": ["theme-provider"],
+      "title": "Radio Group",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Scrollable container with scrollbar",
+      "files": [
+        {
+          "path": "registry/ui/scroll-view.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "scroll-view",
+      "title": "Scroll View",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink", "mnemonist"],
+      "description": "Fuzzy search input with autocomplete",
+      "files": [
+        {
+          "path": "registry/ui/search-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "search-input",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Search Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Single-select dropdown with arrow-key navigation",
+      "files": [
+        {
+          "path": "registry/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "select",
+      "registryDependencies": ["theme-provider"],
+      "title": "Select",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "@clack-style step flow with ◇/◆/│ visual language, badge, info steps, and multi-select",
+      "files": [
+        {
+          "path": "registry/ui/setup-flow.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "setup-flow",
+      "registryDependencies": ["big-text", "use-animation", "theme-provider"],
+      "title": "Setup Flow",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["navigation"],
+      "dependencies": ["ink"],
+      "description": "Collapsible navigation sidebar panel",
+      "files": [
+        {
+          "path": "registry/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "sidebar",
+      "registryDependencies": ["theme-provider"],
+      "title": "Sidebar",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Shimmer loading placeholder",
+      "files": [
+        {
+          "path": "registry/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "skeleton",
+      "registryDependencies": ["use-animation"],
+      "title": "Skeleton",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Flexible space between flex children",
+      "files": [
+        {
+          "path": "registry/ui/spacer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "spacer",
+      "title": "Spacer",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["charts"],
+      "dependencies": ["ink"],
+      "description": "Inline Unicode braille sparkline chart",
+      "files": [
+        {
+          "path": "registry/ui/sparkline.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "sparkline",
+      "title": "Sparkline",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Animated spinner with 12+ styles",
+      "files": [
+        {
+          "path": "registry/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "spinner",
+      "registryDependencies": ["theme-provider"],
+      "title": "Spinner",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Styled startup banner with big ASCII art title, subtitle, author credit, and status line",
+      "files": [
+        {
+          "path": "registry/ui/splash-screen.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "splash-screen",
+      "registryDependencies": ["big-text"],
+      "title": "Splash Screen",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["layout"],
+      "dependencies": ["ink"],
+      "description": "Vertical/horizontal stack with gap",
+      "files": [
+        {
+          "path": "registry/ui/stack.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "stack",
+      "title": "Stack",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Inline status message with icon and color",
+      "files": [
+        {
+          "path": "registry/ui/status-message.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "status-message",
+      "title": "Status Message",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Count-up stopwatch with laps and reset",
+      "files": [
+        {
+          "path": "registry/ui/stopwatch.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "stopwatch",
+      "registryDependencies": ["use-input", "theme-provider"],
+      "title": "Stopwatch",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Token-by-token streaming text with blinking cursor and optional typing animation",
+      "files": [
+        {
+          "path": "registry/ui/streaming-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "streaming-text",
+      "title": "Streaming Text",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["navigation"],
+      "dependencies": ["ink"],
+      "description": "Tab bar wired to content panels",
+      "files": [
+        {
+          "path": "registry/ui/tabbed-content.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tabbed-content",
+      "registryDependencies": ["tabs", "theme-provider"],
+      "title": "Tabbed Content",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Sortable, selectable, paginated data table",
+      "files": [
+        {
+          "path": "registry/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "table",
+      "registryDependencies": ["theme-provider"],
+      "title": "Table",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["navigation"],
+      "dependencies": ["ink"],
+      "description": "Tab bar with left/right arrow and tab-key navigation",
+      "files": [
+        {
+          "path": "registry/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tabs",
+      "registryDependencies": ["theme-provider"],
+      "title": "Tabs",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "Removable chip/tag",
+      "files": [
+        {
+          "path": "registry/ui/tag.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tag",
+      "title": "Tag",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Add and remove tags inline",
+      "files": [
+        {
+          "path": "registry/ui/tag-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tag-input",
+      "registryDependencies": ["theme-provider"],
+      "title": "Tag Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["typography"],
+      "dependencies": ["ink"],
+      "description": "Rich inline text with bold, italic, color, dim formatting",
+      "files": [
+        {
+          "path": "registry/ui/text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "text",
+      "title": "Text",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink"],
+      "description": "Multi-line text editor with word wrap",
+      "files": [
+        {
+          "path": "registry/ui/text-area.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "text-area",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Text Area",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["input"],
+      "dependencies": ["ink"],
+      "description": "Single-line text input with placeholder, validation, mask",
+      "files": [
+        {
+          "path": "registry/ui/text-input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "text-input",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Text Input",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["themes"],
+      "description": "A Catppuccin theme for rich terminal UI previews.",
+      "files": [
+        {
+          "path": "registry/themes/catppuccin.ts",
+          "target": "lib/terminal-themes/catppuccin.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-catppuccin",
+      "registryDependencies": ["theme-provider"],
+      "title": "Catppuccin",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["themes"],
+      "description": "The default termcn terminal theme.",
+      "files": [
+        {
+          "path": "registry/themes/default.ts",
+          "target": "lib/terminal-themes/default.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-default",
+      "registryDependencies": ["theme-provider"],
+      "title": "Default",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["themes"],
+      "description": "A purple-heavy Dracula theme for Ink components.",
+      "files": [
+        {
+          "path": "registry/themes/dracula.ts",
+          "target": "lib/terminal-themes/dracula.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-dracula",
+      "registryDependencies": ["theme-provider"],
+      "title": "Dracula",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["themes"],
+      "description": "High contrast themes for dark and light terminal backgrounds.",
+      "files": [
+        {
+          "path": "registry/themes/highContrast.ts",
+          "target": "lib/terminal-themes/highContrast.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-high-contrast",
+      "registryDependencies": ["theme-provider"],
+      "title": "High Contrast",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["themes"],
+      "description": "A classic Monokai-inspired theme for terminal apps.",
+      "files": [
+        {
+          "path": "registry/themes/monokai.ts",
+          "target": "lib/terminal-themes/monokai.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-monokai",
+      "registryDependencies": ["theme-provider"],
+      "title": "Monokai",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["themes"],
+      "description": "A cool Nord palette tuned for terminal contrast.",
+      "files": [
+        {
+          "path": "registry/themes/nord.ts",
+          "target": "lib/terminal-themes/nord.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-nord",
+      "registryDependencies": ["theme-provider"],
+      "title": "Nord",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["themes"],
+      "description": "A One Dark theme for terminal components.",
+      "files": [
+        {
+          "path": "registry/themes/oneDark.ts",
+          "target": "lib/terminal-themes/oneDark.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-one-dark",
+      "registryDependencies": ["theme-provider"],
+      "title": "One Dark",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["core"],
+      "description": "Terminal theme provider, design tokens, and theme helpers.",
+      "files": [
+        {
+          "path": "registry/ui/theme-provider.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "theme-provider",
+      "title": "Theme Provider",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["themes"],
+      "description": "A Solarized theme for terminal components.",
+      "files": [
+        {
+          "path": "registry/themes/solarized.ts",
+          "target": "lib/terminal-themes/solarized.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-solarized",
+      "registryDependencies": ["theme-provider"],
+      "title": "Solarized",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["themes"],
+      "description": "Tokyo Night colors for terminal interfaces.",
+      "files": [
+        {
+          "path": "registry/themes/tokyoNight.ts",
+          "target": "lib/terminal-themes/tokyoNight.ts",
+          "type": "registry:file"
+        }
+      ],
+      "name": "theme-tokyo-night",
+      "registryDependencies": ["theme-provider"],
+      "title": "Tokyo Night",
+      "type": "registry:file"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Collapsible block for displaying extended thinking / reasoning content from an AI model",
+      "files": [
+        {
+          "path": "registry/ui/thinking-block.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "thinking-block",
+      "registryDependencies": ["use-input"],
+      "title": "Thinking Block",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["forms"],
+      "dependencies": ["ink"],
+      "description": "Time picker with hour/minute/second spinners",
+      "files": [
+        {
+          "path": "registry/ui/time-picker.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "time-picker",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Time Picker",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Countdown timer with pause/resume and auto-start",
+      "files": [
+        {
+          "path": "registry/ui/timer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "timer",
+      "registryDependencies": ["use-input", "theme-provider"],
+      "title": "Timer",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["feedback"],
+      "dependencies": ["ink"],
+      "description": "Auto-dismissing toast notification",
+      "files": [
+        {
+          "path": "registry/ui/toast.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "toast",
+      "registryDependencies": ["use-interval"],
+      "title": "Toast",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["utility"],
+      "dependencies": ["ink"],
+      "description": "Toggle/switch component with on/off labels",
+      "files": [
+        {
+          "path": "registry/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "toggle",
+      "registryDependencies": ["use-focus", "theme-provider"],
+      "title": "Toggle",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Compact token counter showing prompt and completion usage with optional cost estimate; also exports ContextMeter for visualising context window fill",
+      "files": [
+        {
+          "path": "registry/ui/token-usage.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "token-usage",
+      "title": "Token Usage",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Interactive approval prompt for AI tool calls with risk-level badge, args display, and auto-deny timeout",
+      "files": [
+        {
+          "path": "registry/ui/tool-approval.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tool-approval",
+      "registryDependencies": ["use-input"],
+      "title": "Tool Approval",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Displays an AI tool invocation with status indicator, args, result, and elapsed time",
+      "files": [
+        {
+          "path": "registry/ui/tool-call.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tool-call",
+      "registryDependencies": ["use-input", "use-animation"],
+      "title": "Tool Call",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["overlays"],
+      "dependencies": ["ink"],
+      "description": "Contextual tooltip on focus or hover",
+      "files": [
+        {
+          "path": "registry/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tooltip",
+      "title": "Tooltip",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink"],
+      "description": "Expandable/collapsible tree view",
+      "files": [
+        {
+          "path": "registry/ui/tree.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tree",
+      "registryDependencies": ["theme-provider"],
+      "title": "Tree",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["selection"],
+      "dependencies": ["ink"],
+      "description": "Hierarchical tree selection",
+      "files": [
+        {
+          "path": "registry/ui/tree-select.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "tree-select",
+      "registryDependencies": ["theme-provider"],
+      "title": "Tree Select",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Real-time dashboard with diamond header, progress metrics, burn rate, predictions, and status bar",
+      "files": [
+        {
+          "path": "registry/ui/usage-monitor.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "usage-monitor",
+      "registryDependencies": ["theme-provider"],
+      "title": "Usage Monitor",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["core"],
+      "description": "Frame-based animation helper for Ink components.",
+      "files": [
+        {
+          "path": "registry/hooks/use-animation.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-animation",
+      "title": "Use Animation",
+      "type": "registry:hook"
+    },
+    {
+      "categories": ["core"],
+      "description": "Clipboard hook with browser and terminal fallbacks.",
+      "files": [
+        {
+          "path": "registry/hooks/use-clipboard.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-clipboard",
+      "title": "Use Clipboard",
+      "type": "registry:hook"
+    },
+    {
+      "categories": ["core"],
+      "dependencies": ["ink"],
+      "description": "Focus helper wrapping Ink's useFocus.",
+      "files": [
+        {
+          "path": "registry/hooks/use-focus.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-focus",
+      "title": "Use Focus",
+      "type": "registry:hook"
+    },
+    {
+      "categories": ["core"],
+      "dependencies": ["ink"],
+      "description": "Keyboard input hook wrapping Ink's useInput.",
+      "files": [
+        {
+          "path": "registry/hooks/use-input.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-input",
+      "title": "Use Input",
+      "type": "registry:hook"
+    },
+    {
+      "categories": ["core"],
+      "description": "React-safe interval helper.",
+      "files": [
+        {
+          "path": "registry/hooks/use-interval.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-interval",
+      "title": "Use Interval",
+      "type": "registry:hook"
+    },
+    {
+      "categories": ["core"],
+      "description": "Notifications state and context helpers.",
+      "files": [
+        {
+          "path": "registry/hooks/use-notifications.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-notifications",
+      "title": "Use Notifications",
+      "type": "registry:hook"
+    },
+    {
+      "categories": ["data"],
+      "dependencies": ["ink", "mnemonist"],
+      "description": "Virtualized list for 10k+ items",
+      "files": [
+        {
+          "path": "registry/ui/virtual-list.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "virtual-list",
+      "registryDependencies": ["theme-provider"],
+      "title": "Virtual List",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["templates"],
+      "dependencies": ["ink"],
+      "description": "Two-panel welcome dashboard with titled border, logo, greeting, and sections",
+      "files": [
+        {
+          "path": "registry/ui/welcome-screen.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "welcome-screen",
+      "title": "Welcome Screen",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["forms"],
+      "dependencies": ["ink"],
+      "description": "Multi-step wizard with per-step validation",
+      "files": [
+        {
+          "path": "registry/ui/wizard.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "wizard",
+      "registryDependencies": ["use-input"],
+      "title": "Wizard",
+      "type": "registry:ui"
     }
-  ]
+  ],
+  "name": "termcn/ui"
 }
