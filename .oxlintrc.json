@@ -49,7 +49,10 @@
       }
     },
     {
-      "files": ["components/component-preview.tsx"],
+      "files": [
+        "components/component-preview.tsx",
+        "components/docs/previews/shared.tsx"
+      ],
       "rules": {
         "complexity": "off"
       }
