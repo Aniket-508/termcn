@@ -4,5 +4,55 @@
     "./node_modules/ultracite/config/oxlint/core/.oxlintrc.json",
     "./node_modules/ultracite/config/oxlint/react/.oxlintrc.json",
     "./node_modules/ultracite/config/oxlint/next/.oxlintrc.json"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "registry/ui/**/*.tsx",
+        "registry/hooks/**/*.ts",
+        "registry/themes/**/*.ts",
+        "lib/terminal-themes/**/*.ts",
+        "hooks/**/*.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "complexity": "off",
+        "default-case": "off",
+        "func-style": "off",
+        "no-bitwise": "off",
+        "no-lonely-if": "off",
+        "no-negated-condition": "off",
+        "no-new-func": "off",
+        "no-nested-ternary": "off",
+        "no-shadow": "off",
+        "no-unused-expressions": "off",
+        "no-use-before-define": "off",
+        "prefer-destructuring": "off",
+        "promise/prefer-await-to-callbacks": "off",
+        "react-perf/jsx-no-new-function-as-prop": "off",
+        "react/jsx-no-constructed-context-values": "off",
+        "react/jsx-no-useless-fragment": "off",
+        "react/no-array-index-key": "off",
+        "react/no-clone-element": "off",
+        "react/no-react-children": "off",
+        "react/no-set-state": "off",
+        "react/style-prop-object": "off",
+        "sort-keys": "off",
+        "unicorn/consistent-function-scoping": "off",
+        "unicorn/filename-case": "off",
+        "unicorn/no-array-for-each": "off",
+        "unicorn/no-array-reduce": "off",
+        "unicorn/no-immediate-mutation": "off",
+        "unicorn/no-lonely-if": "off",
+        "unicorn/no-nested-ternary": "off",
+        "unicorn/prefer-ternary": "off"
+      }
+    },
+    {
+      "files": ["components/component-preview.tsx"],
+      "rules": {
+        "complexity": "off"
+      }
+    }
   ]
 }

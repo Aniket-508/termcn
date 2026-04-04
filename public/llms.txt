@@ -1,22 +1,22 @@
 # termcn
 
-> A shadcn-compatible component registry built with Next.js.
+> A shadcn-compatible terminal UI registry built with Next.js.
 
 ## What is this?
 
-termcn is a project for publishing custom UI components that consumers can install with the shadcn CLI (`npx shadcn add`). It includes documentation, a landing page, and a build step that emits registry JSON.
+termcn publishes terminal UI components and themes that consumers can install with the shadcn CLI (`npx shadcn add`). It includes static documentation, live browser terminal previews, and a build step that emits registry JSON.
 
 ## How it works
 
-1. Edit components under `registry/new-york/`
+1. Add or update registry source files under `registry/ui/`, `registry/hooks/`, or `registry/themes/`
 2. List them in `registry.json`
 3. Run `pnpm registry:build`
-4. Deploy; share `https://your-site.com/r/<item>.json` URLs
+4. Deploy; share `https://termcn.vercel.app/r/<item>.json` URLs
 
 ## Installation (for consumers)
 
 ```bash
-npx shadcn@latest add https://your-site.com/r/your-component.json
+npx shadcn@latest add https://termcn.vercel.app/r/badge.json
 ```
 
 ## Links

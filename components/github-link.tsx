@@ -8,7 +8,6 @@ import { siteConfig } from "@/lib/config";
 
 export const StarsCount = async () => {
   const repoPath = siteConfig.links.github.replace("https://github.com/", "");
-  // Cache for 1 day (86400 seconds)
   const data = await fetch(`https://api.github.com/repos/${repoPath}`, {
     next: { revalidate: 86_400 },
   });

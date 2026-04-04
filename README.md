@@ -1,64 +1,51 @@
 # termcn
 
-A Next.js app and registry for publishing **shadcn-compatible** UI blocks. It ships with docs, a landing page, and a workflow to build and deploy your component registry.
+A Next.js-powered shadcn-compatible registry for Ink terminal UI components.
 
 ## Features
 
-- **Registry-ready** — Manifest + `pnpm registry:build` output under `public/r/`
-- **Documentation** — Fumadocs-powered docs
-- **CLI install** — Consumers use `npx shadcn@latest add <registry-url>`
+- 113 Ink-based terminal components exposed through the shadcn registry format
+- Registry source organized by type under `registry/ui`, `registry/hooks`, and `registry/themes`
+- Static Fumadocs pages with client-side `ink-web` + `xterm.js` previews
+- Bundled terminal theme provider and installable theme files
 
 ## Quick Start
 
-1. Clone or fork the repo and install:
-
 ```bash
 pnpm install
+pnpm dev
 ```
 
-2. Replace the placeholder at `registry/new-york/your-component.tsx`.
-
-3. Update [`registry.json`](registry.json) with your component entries.
-
-4. Build the registry:
+Build the registry output:
 
 ```bash
 pnpm registry:build
 ```
 
-5. Run the app:
+## Install a Component
 
 ```bash
-pnpm dev
-```
-
-6. Deploy and share your registry URL.
-
-## Usage
-
-After deploy, install a published item with:
-
-```bash
-npx shadcn@latest add https://your-domain.com/r/your-component.json
+npx shadcn@latest add https://termcn.vercel.app/r/badge.json
 ```
 
 ## Project Structure
 
-```
+```text
 ├── registry/
-│   └── new-york/           # Registry source components
-│       └── your-component.tsx
-├── registry.json           # Registry manifest
-├── content/docs/           # Documentation (MDX)
+│   ├── hooks/              # registry hook items
+│   ├── themes/             # installable theme files
+│   └── ui/                 # registry UI components
+├── content/docs/           # generated component + theme docs
+├── components/docs/        # browser preview components
 ├── app/                    # Next.js app
-└── public/r/               # Built registry (generated)
+└── public/r/               # built registry JSON output
 ```
 
 ## Scripts
 
-- `pnpm dev` — Development server
-- `pnpm build` — Production build (runs registry build first)
-- `pnpm registry:build` — Emit JSON under `public/r/`
+- `pnpm dev` starts the docs app locally.
+- `pnpm registry:build` emits JSON under `public/r/`.
+- `pnpm build` runs the registry build and the Next.js production build.
 
 ## License
 

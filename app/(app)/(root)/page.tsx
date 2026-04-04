@@ -3,15 +3,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { CommandBox } from "@/components/command-box";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
-import { YourComponent } from "@/registry/new-york/your-component";
 import { createPageMetadata } from "@/seo/metadata";
 
 const title = siteConfig.name;
 const { description } = siteConfig;
 
-const installCommand = `npx shadcn@latest add ${siteConfig.url}/r/your-component.json`;
+const installCommand = `npx shadcn@latest add ${siteConfig.url}/r/badge.json`;
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -45,14 +45,20 @@ export default function IndexPage() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/docs/examples/basic">View Examples</Link>
+              <Link href="/docs/components/typography/badge">
+                Browse Components
+              </Link>
             </Button>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col items-center gap-6">
-        <YourComponent className="w-full max-w-md" />
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Badge variant="secondary">113 Components</Badge>
+          <Badge variant="secondary">Live xterm Previews</Badge>
+          <Badge variant="secondary">Shadcn Registry</Badge>
+        </div>
       </div>
     </section>
   );
