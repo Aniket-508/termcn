@@ -123,12 +123,14 @@ export const ContextMeter = function ContextMeter({
   const filled = Math.round((percent / 100) * width);
   const empty = width - filled;
 
-  const barColor =
-    percent >= criticalAt
-      ? (theme.colors.error ?? "red")
-      : percent >= warnAt
-        ? (theme.colors.warning ?? "yellow")
-        : (theme.colors.success ?? "green");
+  let barColor: string;
+  if (percent >= criticalAt) {
+    barColor = theme.colors.error ?? "red";
+  } else if (percent >= warnAt) {
+    barColor = theme.colors.warning ?? "yellow";
+  } else {
+    barColor = theme.colors.success ?? "green";
+  }
 
   const bar = "█".repeat(filled) + "░".repeat(empty);
 

@@ -24,6 +24,7 @@ export const Definition = function Definition({
     <Box flexDirection="column">
       {items.map((item, idx) => (
         <Box
+          // eslint-disable-next-line react/no-array-index-key
           key={idx}
           flexDirection="column"
           marginBottom={idx < items.length - 1 ? 1 : 0}

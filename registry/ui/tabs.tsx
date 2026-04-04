@@ -58,15 +58,19 @@ export const Tabs = function Tabs({
 
   const resolvedBorderColor = borderColor ?? theme.colors.border;
 
-  function switchTab(nextKey: string | undefined) {
+  const switchTab = (nextKey: string | undefined) => {
     if (!nextKey || nextKey === activeKey) {
       return;
     }
     // Clear the entire screen before switching so Ink redraws from a clean
     // slate — prevents old lines from a taller tab persisting as ghost content.
     stdout.write("\u001B[2J\u001B[H");
-    onTabChange ? onTabChange(nextKey) : setInternalTab(nextKey);
-  }
+    if (onTabChange) {
+      onTabChange(nextKey);
+    } else {
+      setInternalTab(nextKey);
+    }
+  };
 
   useInput((input, key) => {
     if (key.leftArrow || (key.shift && key.tab)) {

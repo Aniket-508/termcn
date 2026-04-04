@@ -61,6 +61,7 @@ export const StatusMessage = function StatusMessage({
   return (
     <Box gap={1} flexDirection="row">
       {variant === "loading" ? (
+        // eslint-disable-next-line react/style-prop-object -- Ink Spinner uses string style prop
         <Spinner style="dots" color={variantColor} />
       ) : (
         <Text color={variantColor}>

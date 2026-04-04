@@ -24,10 +24,7 @@ export interface MaskedInputProps {
  * exists a literal at some position j < pos such that every character strictly
  * between j and pos is '#'.  e.g. ')' at position 4 in '(###) ###-####'.
  */
-const isClosingLiteral = function isClosingLiteral(
-  mask: string,
-  pos: number
-): boolean {
+const isClosingLiteral = (mask: string, pos: number): boolean => {
   for (let j = pos - 1; j >= 0; j -= 1) {
     if (mask[j] === "#") {
       continue;
@@ -42,7 +39,7 @@ const isClosingLiteral = function isClosingLiteral(
  * Apply a mask to raw digits. '#' in the mask is a digit placeholder.
  * Returns the formatted display string.
  */
-const applyMask = function applyMask(raw: string, mask: string): string {
+const applyMask = (raw: string, mask: string): string => {
   let rawIdx = 0;
   let result = "";
 
@@ -50,7 +47,6 @@ const applyMask = function applyMask(raw: string, mask: string): string {
     const maskChar = mask[i];
 
     if (rawIdx >= raw.length) {
-      // All digits placed; include at most one closing literal then stop.
       if (maskChar !== "#" && isClosingLiteral(mask, i)) {
         result += maskChar;
       }
@@ -60,23 +56,18 @@ const applyMask = function applyMask(raw: string, mask: string): string {
     if (maskChar === "#") {
       result += raw[rawIdx];
       rawIdx += 1;
-    } else {
-      // Only include a literal when there is still a '#' ahead to fill;
-      // this prevents masks with no placeholders from emitting their literals.
-      if (mask.includes("#", i + 1)) {
-        result += maskChar;
-      }
+    } else if (mask.includes("#", i + 1)) {
+      result += maskChar;
     }
   }
 
   return result;
 };
 
-const maxDigits = function maxDigits(mask: string): number {
-  return [...mask].filter((c) => c === "#").length;
-};
+const maxDigits = (mask: string): number =>
+  [...mask].filter((c) => c === "#").length;
 
-export const MaskedInput = function MaskedInput({
+export const MaskedInput = ({
   mask,
   value: controlledValue,
   onChange,
@@ -86,7 +77,7 @@ export const MaskedInput = function MaskedInput({
   autoFocus = false,
   id,
   width = 40,
-}: MaskedInputProps) {
+}: MaskedInputProps) => {
   const [internalValue, setInternalValue] = useState("");
   const theme = useTheme();
   const { isFocused } = useFocus({ autoFocus, id });
@@ -106,7 +97,11 @@ export const MaskedInput = function MaskedInput({
 
     if (key.backspace || key.delete) {
       const newVal = raw.slice(0, -1);
-      onChange ? onChange(newVal) : setInternalValue(newVal);
+      if (onChange) {
+        onChange(newVal);
+      } else {
+        setInternalValue(newVal);
+      }
       return;
     }
 
@@ -114,18 +109,24 @@ export const MaskedInput = function MaskedInput({
       return;
     }
 
-    // Only accept digits
     if (/^\d$/.test(input) && raw.length < max) {
       const newVal = raw + input;
-      onChange ? onChange(newVal) : setInternalValue(newVal);
+      if (onChange) {
+        onChange(newVal);
+      } else {
+        setInternalValue(newVal);
+      }
     }
   });
 
   const display = raw.length > 0 ? applyMask(raw, mask) : "";
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
 
-  // Build a "ghost" mask showing remaining slots
   const remainingMask = mask.slice(display.length);
+
+  const displayPlaceholder = placeholder ? (
+    <Text color={theme.colors.mutedForeground}>{placeholder}</Text>
+  ) : null;
 
   return (
     <Box flexDirection="column">
@@ -138,9 +139,9 @@ export const MaskedInput = function MaskedInput({
       >
         {display.length > 0 ? (
           <Text color={theme.colors.foreground}>{display}</Text>
-        ) : placeholder ? (
-          <Text color={theme.colors.mutedForeground}>{placeholder}</Text>
-        ) : null}
+        ) : (
+          displayPlaceholder
+        )}
         {isFocused && display.length < mask.length && (
           <Text color={theme.colors.focusRing}>█</Text>
         )}

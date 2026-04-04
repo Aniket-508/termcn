@@ -101,11 +101,14 @@ export const StreamingText = function StreamingText({
     return () => clearInterval(id);
   }, [controlledText, animate, speed, stream]);
 
-  const displayText = stream
-    ? internalText
-    : animate && controlledText
-      ? controlledText.slice(0, animatedIndex)
-      : (controlledText ?? "");
+  let displayText: string;
+  if (stream) {
+    displayText = internalText;
+  } else if (animate && controlledText) {
+    displayText = controlledText.slice(0, animatedIndex);
+  } else {
+    displayText = controlledText ?? "";
+  }
 
   const showCursor = cursor && isStreaming && cursorVisible;
   const resolvedCursorColor = cursorColor ?? theme.colors.primary;

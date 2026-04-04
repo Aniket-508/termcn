@@ -48,6 +48,40 @@ const ShortcutRow = function ShortcutRow({
   );
 };
 
+const ShortcutGrid = function ShortcutGrid({
+  items,
+  columns,
+  theme,
+}: {
+  items: Shortcut[];
+  columns: number;
+  theme: ReturnType<typeof useTheme>;
+}) {
+  const rows: Shortcut[][] = [];
+  for (let i = 0; i < items.length; i += columns) {
+    rows.push(items.slice(i, i + columns));
+  }
+
+  return (
+    <Box flexDirection="column" gap={0}>
+      {rows.map((row, ri) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <Box key={ri} gap={3}>
+          {row.map((s, ci) => (
+            <ShortcutRow
+              // eslint-disable-next-line react/no-array-index-key
+              key={ci}
+              shortcut={s}
+              keyColor={theme.colors.primary}
+              descColor={theme.colors.foreground}
+            />
+          ))}
+        </Box>
+      ))}
+    </Box>
+  );
+};
+
 export const KeyboardShortcuts = function KeyboardShortcuts({
   shortcuts,
   columns = 1,
@@ -86,6 +120,7 @@ export const KeyboardShortcuts = function KeyboardShortcuts({
             ) : (
               items.map((s, i) => (
                 <ShortcutRow
+                  // eslint-disable-next-line react/no-array-index-key
                   key={i}
                   shortcut={s}
                   keyColor={theme.colors.primary}
@@ -111,6 +146,7 @@ export const KeyboardShortcuts = function KeyboardShortcuts({
       ) : (
         shortcuts.map((s, i) => (
           <ShortcutRow
+            // eslint-disable-next-line react/no-array-index-key
             key={i}
             shortcut={s}
             keyColor={theme.colors.primary}
@@ -118,38 +154,6 @@ export const KeyboardShortcuts = function KeyboardShortcuts({
           />
         ))
       )}
-    </Box>
-  );
-};
-
-const ShortcutGrid = function ShortcutGrid({
-  items,
-  columns,
-  theme,
-}: {
-  items: Shortcut[];
-  columns: number;
-  theme: ReturnType<typeof useTheme>;
-}) {
-  const rows: Shortcut[][] = [];
-  for (let i = 0; i < items.length; i += columns) {
-    rows.push(items.slice(i, i + columns));
-  }
-
-  return (
-    <Box flexDirection="column" gap={0}>
-      {rows.map((row, ri) => (
-        <Box key={ri} gap={3}>
-          {row.map((s, ci) => (
-            <ShortcutRow
-              key={ci}
-              shortcut={s}
-              keyColor={theme.colors.primary}
-              descColor={theme.colors.foreground}
-            />
-          ))}
-        </Box>
-      ))}
     </Box>
   );
 };

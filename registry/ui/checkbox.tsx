@@ -20,7 +20,7 @@ export interface CheckboxProps {
   indeterminateIcon?: string;
 }
 
-export const Checkbox = function Checkbox({
+export const Checkbox = ({
   checked: controlledChecked,
   onChange,
   label,
@@ -30,7 +30,7 @@ export const Checkbox = function Checkbox({
   checkedIcon = "■",
   uncheckedIcon = "□",
   indeterminateIcon = "▪",
-}: CheckboxProps) {
+}: CheckboxProps) => {
   const [internalChecked, setInternalChecked] = useState(false);
   const theme = useTheme();
   const { isFocused } = useFocus({ id });
@@ -43,20 +43,19 @@ export const Checkbox = function Checkbox({
     }
     if (input === " ") {
       const next = !checked;
-      onChange ? onChange(next) : setInternalChecked(next);
+      if (onChange) {
+        onChange(next);
+      } else {
+        setInternalChecked(next);
+      }
     }
   });
 
-  const icon = indeterminate
-    ? indeterminateIcon
-    : checked
-      ? checkedIcon
-      : uncheckedIcon;
-  const iconColor = disabled
-    ? theme.colors.mutedForeground
-    : checked || indeterminate
-      ? theme.colors.primary
-      : theme.colors.border;
+  const checkedIcon_ = checked ? checkedIcon : uncheckedIcon;
+  const icon = indeterminate ? indeterminateIcon : checkedIcon_;
+  const activeColor =
+    checked || indeterminate ? theme.colors.primary : theme.colors.border;
+  const iconColor = disabled ? theme.colors.mutedForeground : activeColor;
 
   return (
     <Box gap={1}>

@@ -18,7 +18,7 @@ interface InlineSegment {
   url?: string;
 }
 
-const parseInline = function parseInline(line: string): InlineSegment[] {
+const parseInline = (line: string): InlineSegment[] => {
   const segments: InlineSegment[] = [];
   // Regex matches: **bold**, *italic*, `code`, [text](url)
   const re = /(\*\*(.+?)\*\*|\*(.+?)\*|`(.+?)`|\[(.+?)\]\((.+?)\))/g;
@@ -30,7 +30,7 @@ const parseInline = function parseInline(line: string): InlineSegment[] {
       segments.push({ text: line.slice(last, match.index) });
     }
 
-    const full = match[0];
+    const [full] = match;
     if (full.startsWith("**")) {
       segments.push({ bold: true, text: match[2] });
     } else if (full.startsWith("*")) {
@@ -51,11 +51,7 @@ const parseInline = function parseInline(line: string): InlineSegment[] {
   return segments;
 };
 
-const InlineLine = function InlineLine({
-  segments,
-}: {
-  segments: InlineSegment[];
-}) {
+const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
   const theme = useTheme();
 
   return (
@@ -63,6 +59,7 @@ const InlineLine = function InlineLine({
       {segments.map((seg, i) => {
         if (seg.code) {
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Text key={i} color={theme.colors.accent}>
               {seg.text}
             </Text>
@@ -70,6 +67,7 @@ const InlineLine = function InlineLine({
         }
         if (seg.link) {
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Box key={i}>
               <Text underline color={theme.colors.info}>
                 {seg.text}
@@ -82,6 +80,7 @@ const InlineLine = function InlineLine({
           );
         }
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Text key={i} bold={seg.bold} italic={seg.italic}>
             {seg.text}
           </Text>
@@ -91,7 +90,8 @@ const InlineLine = function InlineLine({
   );
 };
 
-export const Markdown = function Markdown({ children, width }: MarkdownProps) {
+// eslint-disable-next-line complexity
+export const Markdown = ({ children, width }: MarkdownProps) => {
   const theme = useTheme();
   const lines = children.split("\n");
 

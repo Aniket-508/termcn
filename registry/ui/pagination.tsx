@@ -21,10 +21,7 @@ const buildPages = function buildPages(
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 
-  const pages: (number | "...")[] = [];
-
-  // Always include first page
-  pages.push(1);
+  const pages: (number | "...")[] = [1];
 
   const leftSibling = Math.max(2, current - siblings);
   const rightSibling = Math.min(total - 1, current + siblings);
@@ -58,7 +55,7 @@ export const Pagination = function Pagination({
   const [internalPage, setInternalPage] = useState(current);
   const activePage = current ?? internalPage;
 
-  function goTo(page: number) {
+  const goTo = (page: number) => {
     const clamped = Math.min(Math.max(1, page), total);
     if (clamped === activePage) {
       return;
@@ -68,7 +65,7 @@ export const Pagination = function Pagination({
     } else {
       setInternalPage(clamped);
     }
-  }
+  };
 
   useInput((_input, key) => {
     if (key.leftArrow) {
@@ -98,6 +95,7 @@ export const Pagination = function Pagination({
       {pages.map((p, idx) => {
         if (p === "...") {
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Text key={`ellipsis-${idx}`} color={theme.colors.mutedForeground}>
               …
             </Text>

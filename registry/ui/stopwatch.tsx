@@ -11,15 +11,41 @@ export interface StopwatchProps {
   showLaps?: boolean;
 }
 
-const formatElapsed = function formatElapsed(ms: number): string {
+const pad = (n: number, len = 2) => String(n).padStart(len, "0");
+
+const formatElapsed = (ms: number): string => {
   const totalSeconds = Math.floor(ms / 1000);
   const h = Math.floor(totalSeconds / 3600);
   const m = Math.floor((totalSeconds % 3600) / 60);
   const s = totalSeconds % 60;
   const centis = Math.floor((ms % 1000) / 10);
 
-  const pad = (n: number, len = 2) => String(n).padStart(len, "0");
   return `${pad(h)}:${pad(m)}:${pad(s)}.${pad(centis)}`;
+};
+
+const getStatus = (running: boolean, elapsed: number): string => {
+  if (running) {
+    return "Running";
+  }
+  if (elapsed === 0) {
+    return "Ready";
+  }
+  return "Stopped";
+};
+
+const getStatusColor = (
+  running: boolean,
+  elapsed: number,
+  resolvedColor: string,
+  theme: ReturnType<typeof useTheme>
+): string => {
+  if (running) {
+    return resolvedColor;
+  }
+  if (elapsed === 0) {
+    return theme.colors.mutedForeground;
+  }
+  return theme.colors.warning;
 };
 
 export const Stopwatch = function Stopwatch({
@@ -62,12 +88,8 @@ export const Stopwatch = function Stopwatch({
     }
   });
 
-  const status = running ? "Running" : elapsed === 0 ? "Ready" : "Stopped";
-  const statusColor = running
-    ? resolvedColor
-    : elapsed === 0
-      ? theme.colors.mutedForeground
-      : theme.colors.warning;
+  const status = getStatus(running, elapsed);
+  const statusColor = getStatusColor(running, elapsed, resolvedColor, theme);
 
   return (
     <Box flexDirection="column" gap={0}>
@@ -86,8 +108,10 @@ export const Stopwatch = function Stopwatch({
             Laps:
           </Text>
           {laps.map((lapTime, i) => {
-            const split = i === 0 ? lapTime : lapTime - laps[i - 1]!;
+            const prevLap = laps[i - 1] ?? 0;
+            const split = i === 0 ? lapTime : lapTime - prevLap;
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Box key={i} gap={2}>
                 <Text color={theme.colors.mutedForeground}>
                   #{String(i + 1).padStart(2, "0")}

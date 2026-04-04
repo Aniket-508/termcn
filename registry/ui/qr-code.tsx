@@ -1,5 +1,6 @@
 /* eslint-disable unicorn/number-literal-case -- oxfmt/pnpm fix lowercases a-f in hex; values follow ISO/IEC 18004 */
 /* oxlint-disable unicorn/number-literal-case */
+/* eslint-disable no-bitwise -- bitwise ops are fundamental to QR code encoding (GF(256), Reed-Solomon, bit packing) */
 
 import { Box, Text } from "ink";
 import React from "react";
@@ -41,7 +42,7 @@ const gfMul = function gfMul(a: number, b: number): number {
   if (a === 0 || b === 0) {
     return 0;
   }
-  return GF_EXP[(GF_LOG[a] + GF_LOG[b]) % 255]!;
+  return GF_EXP[(GF_LOG[a] + GF_LOG[b]) % 255] ?? 0;
 };
 
 const gfPoly = function gfPoly(degree: number): Uint8Array {
@@ -94,11 +95,11 @@ const encodeData = function encodeData(text: string): Uint8Array {
 
   const bits: number[] = [];
 
-  function pushBits(value: number, count: number) {
+  const pushBits = (value: number, count: number) => {
     for (let i = count - 1; i >= 0; i -= 1) {
       bits.push((value >> i) & 1);
     }
-  }
+  };
 
   if (isNumeric) {
     // mode indicator
@@ -108,7 +109,13 @@ const encodeData = function encodeData(text: string): Uint8Array {
     for (let i = 0; i < text.length; i += 3) {
       const group = text.slice(i, i + 3);
       const val = Number.parseInt(group, 10);
-      pushBits(val, group.length === 3 ? 10 : group.length === 2 ? 7 : 4);
+      let bitCount = 4;
+      if (group.length === 3) {
+        bitCount = 10;
+      } else if (group.length === 2) {
+        bitCount = 7;
+      }
+      pushBits(val, bitCount);
     }
   } else if (isAlphanumeric) {
     pushBits(0b0010, 4);
@@ -117,7 +124,8 @@ const encodeData = function encodeData(text: string): Uint8Array {
     for (let i = 0; i < text.length; i += 2) {
       if (i + 1 < text.length) {
         const v =
-          ALNUM_CHARS.indexOf(text[i]) * 45 + ALNUM_CHARS.indexOf(text[i + 1]!);
+          ALNUM_CHARS.indexOf(text[i]) * 45 +
+          ALNUM_CHARS.indexOf(text[i + 1] ?? "");
         pushBits(v, 11);
       } else {
         pushBits(ALNUM_CHARS.indexOf(text[i]), 6);
@@ -148,7 +156,7 @@ const encodeData = function encodeData(text: string): Uint8Array {
   const padBytes = [0xec, 0x11];
   let padIdx = 0;
   while (bits.length < DATA_CODEWORDS * 8) {
-    const b = padBytes[(padIdx += 1 % 2)]!;
+    const b = padBytes[(padIdx += 1 % 2)] ?? 0;
     pushBits(b, 8);
   }
 
@@ -208,7 +216,10 @@ const placeTimingPatterns = function placeTimingPatterns(matrix: Matrix) {
 
 // Dark module
 const placeDarkModule = function placeDarkModule(matrix: Matrix) {
-  matrix[SIZE - 8]![8] = true;
+  const row = matrix[SIZE - 8];
+  if (row) {
+    row[8] = true;
+  }
 };
 
 // Track which modules are "function" (reserved/fixed)
@@ -222,7 +233,10 @@ const buildFunctionMask = function buildFunctionMask(
     for (let dr = 0; dr < h; dr += 1) {
       for (let dc = 0; dc < w; dc += 1) {
         if (r + dr >= 0 && r + dr < SIZE && c + dc >= 0 && c + dc < SIZE) {
-          mask[r + dr]![c + dc] = true;
+          const maskRow = mask[r + dr];
+          if (maskRow) {
+            maskRow[c + dc] = true;
+          }
         }
       }
     }
@@ -302,9 +316,15 @@ const placeFormatInfo = function placeFormatInfo(
     [8, 1],
     [8, 0],
   ];
-  positions.forEach(([r, c], i) => {
-    matrix[r!]![c!] = bits15[i] === 1;
-  });
+  for (let i = 0; i < positions.length; i += 1) {
+    const pos = positions[i];
+    if (pos) {
+      const matrixRow = matrix[pos[0]];
+      if (matrixRow) {
+        matrixRow[pos[1]] = (bits15[i] ?? 0) === 1;
+      }
+    }
+  }
 
   // Place around top-right and bottom-left finders
   const positions2 = [
@@ -317,9 +337,15 @@ const placeFormatInfo = function placeFormatInfo(
     [8, SIZE - 7],
     [8, SIZE - 8],
   ];
-  positions2.forEach(([r, c], i) => {
-    matrix[r!]![c!] = bits15[i] === 1;
-  });
+  for (let i = 0; i < positions2.length; i += 1) {
+    const pos = positions2[i];
+    if (pos) {
+      const matrixRow = matrix[pos[0]];
+      if (matrixRow) {
+        matrixRow[pos[1]] = (bits15[i] ?? 0) === 1;
+      }
+    }
+  }
 
   const positions3 = [
     [SIZE - 7, 8],
@@ -330,9 +356,15 @@ const placeFormatInfo = function placeFormatInfo(
     [SIZE - 2, 8],
     [SIZE - 1, 8],
   ];
-  positions3.forEach(([r, c], i) => {
-    matrix[r!]![c!] = bits15[8 + i] === 1;
-  });
+  for (let i = 0; i < positions3.length; i += 1) {
+    const pos = positions3[i];
+    if (pos) {
+      const matrixRow = matrix[pos[0]];
+      if (matrixRow) {
+        matrixRow[pos[1]] = (bits15[8 + i] ?? 0) === 1;
+      }
+    }
+  }
 };
 
 // Data placement (zigzag)
@@ -409,6 +441,9 @@ const applyMask = function applyMask(
           invert = (((r + c) % 2) + ((r * c) % 3)) % 2 === 0;
           break;
         }
+        default: {
+          break;
+        }
       }
       if (invert) {
         matrix[r][c] = !matrix[r][c];
@@ -426,7 +461,7 @@ const scorePenalty = function scorePenalty(matrix: Matrix): number {
     for (const isRow of [true, false]) {
       let run = 1;
       for (let i = 1; i < SIZE; i += 1) {
-        const prev = isRow ? matrix[r][i - 1] : matrix[i - 1]![r];
+        const prev = isRow ? matrix[r]?.[i - 1] : matrix[i - 1]?.[r];
         const cur = isRow ? matrix[r][i] : matrix[i][r];
         if (cur === prev) {
           run += 1;
@@ -447,9 +482,9 @@ const scorePenalty = function scorePenalty(matrix: Matrix): number {
     for (let c = 0; c < SIZE - 1; c += 1) {
       const v = matrix[r][c];
       if (
-        v === matrix[r][c + 1] &&
-        v === matrix[r + 1]![c] &&
-        v === matrix[r + 1]![c + 1]
+        v === matrix[r]?.[c + 1] &&
+        v === matrix[r + 1]?.[c] &&
+        v === matrix[r + 1]?.[c + 1]
       ) {
         penalty += 3;
       }
@@ -499,7 +534,7 @@ const generateQR = function generateQR(text: string): Matrix {
     }
   }
 
-  return bestMatrix!;
+  return bestMatrix ?? makeMatrix();
 };
 
 // ---------------------------------------------------------------------------
@@ -509,6 +544,7 @@ const generateQR = function generateQR(text: string): Matrix {
 // modules of white border
 const QUIET_ZONE = 2;
 
+// eslint-disable-next-line complexity
 export const QRCode = function QRCode({
   value,
   size = "md",
@@ -539,7 +575,7 @@ export const QRCode = function QRCode({
     );
     if (r >= QUIET_ZONE && r < SIZE + QUIET_ZONE) {
       for (let c = 0; c < SIZE; c += 1) {
-        row[c + QUIET_ZONE] = matrix[r - QUIET_ZONE]![c] ?? false;
+        row[c + QUIET_ZONE] = matrix[r - QUIET_ZONE]?.[c] ?? false;
       }
     }
     qzMatrix.push(row);

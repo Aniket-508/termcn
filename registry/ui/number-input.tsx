@@ -50,14 +50,13 @@ export const NumberInput = function NumberInput({
   stepHint,
 }: NumberInputProps) {
   const [internalValue, setInternalValue] = useState<number | undefined>();
-  // Buffer holds raw digit string while user is typing
   const [buffer, setBuffer] = useState<string>("");
   const theme = useTheme();
   const { isFocused } = useFocus({ id });
 
   const value = controlledValue ?? internalValue;
 
-  function clamp(n: number): number {
+  const clamp = (n: number): number => {
     let result = n;
     if (min !== undefined) {
       result = Math.max(min, result);
@@ -66,14 +65,23 @@ export const NumberInput = function NumberInput({
       result = Math.min(max, result);
     }
     return result;
-  }
+  };
 
-  function commitValue(n: number) {
+  const applyValue = (clamped: number) => {
+    if (onChange) {
+      onChange(clamped);
+    } else {
+      setInternalValue(clamped);
+    }
+  };
+
+  const commitValue = (n: number) => {
     const clamped = clamp(n);
-    onChange ? onChange(clamped) : setInternalValue(clamped);
+    applyValue(clamped);
     setBuffer(String(clamped));
-  }
+  };
 
+  // eslint-disable-next-line complexity
   useInput((input, key) => {
     if (!isFocused) {
       return;
@@ -92,7 +100,7 @@ export const NumberInput = function NumberInput({
     }
 
     if (key.return) {
-      const parsed = buffer !== "" ? Number.parseFloat(buffer) : value;
+      const parsed = buffer === "" ? value : Number.parseFloat(buffer);
       if (parsed !== undefined && !Number.isNaN(parsed)) {
         const clamped = clamp(parsed);
         onSubmit?.(clamped);
@@ -104,12 +112,11 @@ export const NumberInput = function NumberInput({
       const newBuffer = buffer.slice(0, -1);
       setBuffer(newBuffer);
       if (newBuffer === "" || newBuffer === "-") {
-        // Leave value as-is until valid
         return;
       }
       const parsed = Number.parseFloat(newBuffer);
       if (!Number.isNaN(parsed)) {
-        onChange ? onChange(clamp(parsed)) : setInternalValue(clamp(parsed));
+        applyValue(clamp(parsed));
       }
       return;
     }
@@ -118,9 +125,7 @@ export const NumberInput = function NumberInput({
       return;
     }
 
-    // Allow digits, one leading minus, and one decimal point
     if (input && /^[\d.-]$/.test(input)) {
-      // Prevent multiple dots or minus not at start
       if (input === "-" && buffer.length > 0) {
         return;
       }
@@ -132,14 +137,13 @@ export const NumberInput = function NumberInput({
       setBuffer(newBuffer);
       const parsed = Number.parseFloat(newBuffer);
       if (!Number.isNaN(parsed)) {
-        onChange ? onChange(clamp(parsed)) : setInternalValue(clamp(parsed));
+        applyValue(clamp(parsed));
       }
     }
   });
 
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
 
-  // Display: prefer buffer while focused (so partial input like "-" shows), else formatted value
   let displayValue = "";
   if (isFocused && buffer !== "") {
     displayValue = buffer;

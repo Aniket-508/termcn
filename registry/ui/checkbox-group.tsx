@@ -19,14 +19,14 @@ export interface CheckboxGroupProps {
   max?: number;
 }
 
-export const CheckboxGroup = function CheckboxGroup({
+export const CheckboxGroup = ({
   label,
   options,
   value: controlledValue,
   onChange,
   min,
   max,
-}: CheckboxGroupProps) {
+}: CheckboxGroupProps) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [internalSelected, setInternalSelected] = useState<string[]>([]);
@@ -91,34 +91,34 @@ export const CheckboxGroup = function CheckboxGroup({
         const isSelected = selected.includes(opt.value);
         const icon = isSelected ? "◉" : "○";
 
+        let iconColor: string;
+        if (opt.disabled) {
+          iconColor = theme.colors.mutedForeground;
+        } else if (isSelected) {
+          iconColor = theme.colors.primary;
+        } else {
+          iconColor = theme.colors.foreground;
+        }
+
+        let optLabelColor: string;
+        if (opt.disabled) {
+          optLabelColor = theme.colors.mutedForeground;
+        } else if (isActive) {
+          optLabelColor = theme.colors.primary;
+        } else {
+          optLabelColor = theme.colors.foreground;
+        }
+
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={idx} gap={1}>
             <Text color={isActive ? theme.colors.primary : undefined}>
               {isActive ? "›" : " "}
             </Text>
-            <Text
-              color={
-                opt.disabled
-                  ? theme.colors.mutedForeground
-                  : isSelected
-                    ? theme.colors.primary
-                    : theme.colors.foreground
-              }
-              dimColor={opt.disabled}
-            >
+            <Text color={iconColor} dimColor={opt.disabled}>
               {icon}
             </Text>
-            <Text
-              color={
-                opt.disabled
-                  ? theme.colors.mutedForeground
-                  : isActive
-                    ? theme.colors.primary
-                    : theme.colors.foreground
-              }
-              bold={isActive}
-              dimColor={opt.disabled}
-            >
+            <Text color={optLabelColor} bold={isActive} dimColor={opt.disabled}>
               {opt.label}
             </Text>
           </Box>

@@ -14,13 +14,13 @@ export interface VirtualListProps<T> {
   overscan?: number;
 }
 
-export function VirtualList<T>({
+export const VirtualList = <T,>({
   items,
   renderItem,
   height,
   onSelect,
   overscan = 2,
-}: VirtualListProps<T>) {
+}: VirtualListProps<T>) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowStart, setWindowStart] = useState(0);
@@ -96,6 +96,7 @@ export function VirtualList<T>({
         <Box flexDirection="column" marginLeft={1}>
           {scrollbar.map((char, i) => (
             <Text
+              // eslint-disable-next-line react/no-array-index-key
               key={i}
               color={
                 char === "█"
@@ -110,4 +111,4 @@ export function VirtualList<T>({
       )}
     </Box>
   );
-}
+};

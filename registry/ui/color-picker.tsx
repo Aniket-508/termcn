@@ -36,7 +36,7 @@ export interface ColorPickerProps {
   id?: string;
 }
 
-export const ColorPicker = function ColorPicker({
+export const ColorPicker = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -44,7 +44,7 @@ export const ColorPicker = function ColorPicker({
   palette = DEFAULT_PALETTE,
   autoFocus = false,
   id,
-}: ColorPickerProps) {
+}: ColorPickerProps) => {
   const theme = useTheme();
   const { isFocused } = useFocus({ autoFocus, id });
   const [paletteRow, setPaletteRow] = useState(0);
@@ -58,9 +58,13 @@ export const ColorPicker = function ColorPicker({
     palette[paletteRow * COLS + paletteCol] ?? palette[0] ?? "#000000";
   const currentColor = controlledValue ?? internalValue;
 
-  function applyColor(color: string) {
-    onChange ? onChange(color) : setInternalValue(color);
-  }
+  const applyColor = (color: string) => {
+    if (onChange) {
+      onChange(color);
+    } else {
+      setInternalValue(color);
+    }
+  };
 
   useInput((input, key) => {
     if (!isFocused) {
@@ -85,19 +89,16 @@ export const ColorPicker = function ColorPicker({
         applyColor(currentPaletteColor);
         onSubmit?.(currentPaletteColor);
       }
-    } else {
-      // hex mode
-      if (key.backspace || key.delete) {
-        setHexInput((h) => h.slice(0, -1));
-      } else if (key.return) {
-        const hex = hexInput.startsWith("#") ? hexInput : `#${hexInput}`;
-        if (/^#[0-9a-fA-F]{6}$/.test(hex)) {
-          applyColor(hex);
-          onSubmit?.(hex);
-        }
-      } else if (/^[0-9a-fA-F#]$/.test(input) && hexInput.length < 7) {
-        setHexInput((h) => h + input);
+    } else if (key.backspace || key.delete) {
+      setHexInput((h) => h.slice(0, -1));
+    } else if (key.return) {
+      const hex = hexInput.startsWith("#") ? hexInput : `#${hexInput}`;
+      if (/^#[0-9a-fA-F]{6}$/.test(hex)) {
+        applyColor(hex);
+        onSubmit?.(hex);
       }
+    } else if (/^[0-9a-fA-F#]$/.test(input) && hexInput.length < 7) {
+      setHexInput((h) => h + input);
     }
   });
 
@@ -109,19 +110,19 @@ export const ColorPicker = function ColorPicker({
       <Box flexDirection="column">
         {Array.from({ length: rows }, (_, r) => (
           <Box key={r}>
-            {Array.from({ length: COLS }, (_, c) => {
+            {Array.from({ length: COLS }, (_c, c) => {
               const idx = r * COLS + c;
               if (idx >= palette.length) {
                 return null;
               }
-              const color = palette[idx];
+              const paletteColor = palette[idx];
               const isActive =
                 mode === "palette" && r === paletteRow && c === paletteCol;
               return (
                 <Box key={c} marginRight={isActive ? 0 : 0}>
                   <Text
-                    backgroundColor={color}
-                    color={isActive ? "#ffffff" : color}
+                    backgroundColor={paletteColor}
+                    color={isActive ? "#ffffff" : paletteColor}
                     bold={isActive}
                   >
                     {isActive ? "[]" : "  "}

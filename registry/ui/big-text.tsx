@@ -347,6 +347,7 @@ export const BigText = function BigText({
               .map((pixel) => (pixel ? onChar : offChar))
               .join("");
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Text key={charIdx} color={resolvedColor}>
                 {`${rowStr} `}
               </Text>

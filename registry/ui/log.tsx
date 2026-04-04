@@ -96,7 +96,16 @@ export const Log = function Log({
         {visible.map((entry, i) => {
           const levelColor = LEVEL_COLORS[entry.level];
           const levelLabel = LEVEL_LABELS[entry.level];
+          let messageColor: string;
+          if (entry.level === "error") {
+            messageColor = "red";
+          } else if (entry.level === "warn") {
+            messageColor = "yellow";
+          } else {
+            messageColor = theme.colors.foreground;
+          }
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Box key={i} gap={1}>
               {showTimestamp && entry.timestamp && (
                 <Text color={theme.colors.mutedForeground} dimColor>
@@ -106,17 +115,7 @@ export const Log = function Log({
               <Text color={levelColor} bold>
                 {levelLabel}
               </Text>
-              <Text
-                color={
-                  entry.level === "error"
-                    ? "red"
-                    : entry.level === "warn"
-                      ? "yellow"
-                      : theme.colors.foreground
-                }
-              >
-                {entry.message}
-              </Text>
+              <Text color={messageColor}>{entry.message}</Text>
             </Box>
           );
         })}

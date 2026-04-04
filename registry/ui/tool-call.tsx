@@ -33,7 +33,7 @@ export const ToolCall = function ToolCall({
   const frame = useAnimation(12);
 
   const spinnerFrames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
-  const spinnerIcon = spinnerFrames[frame % spinnerFrames.length]!;
+  const spinnerIcon = spinnerFrames[frame % spinnerFrames.length] ?? "⠋";
 
   useEffect(() => {
     if (status !== "running") {
@@ -66,32 +66,35 @@ export const ToolCall = function ToolCall({
       case "error": {
         return <Text color={theme.colors.error ?? "red"}>✗</Text>;
       }
+      default: {
+        break;
+      }
     }
   };
 
-  const durationText =
-    duration !== undefined
-      ? `${duration}ms`
-      : status === "running"
-        ? `${elapsed}ms`
-        : null;
+  let durationText: string | null;
+  if (duration === undefined) {
+    durationText = status === "running" ? `${elapsed}ms` : null;
+  } else {
+    durationText = `${duration}ms`;
+  }
+
+  let nameColor: string;
+  if (status === "error") {
+    nameColor = theme.colors.error ?? "red";
+  } else if (status === "success") {
+    nameColor = theme.colors.success ?? "green";
+  } else if (status === "running") {
+    nameColor = theme.colors.primary;
+  } else {
+    nameColor = theme.colors.mutedForeground;
+  }
 
   return (
     <Box flexDirection="column">
       <Box gap={1}>
         {statusIcon()}
-        <Text
-          color={
-            status === "error"
-              ? (theme.colors.error ?? "red")
-              : status === "success"
-                ? (theme.colors.success ?? "green")
-                : status === "running"
-                  ? theme.colors.primary
-                  : theme.colors.mutedForeground
-          }
-          bold={status !== "pending"}
-        >
+        <Text color={nameColor} bold={status !== "pending"}>
           {name}
         </Text>
         {durationText && (

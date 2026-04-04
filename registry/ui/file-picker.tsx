@@ -32,11 +32,11 @@ interface FileEntry {
   isDir: boolean;
 }
 
-const readDir = function readDir(
+const readDir = (
   dir: string,
   extensions?: string[],
   dirsOnly?: boolean
-): FileEntry[] {
+): FileEntry[] => {
   try {
     const entries = readdirSync(dir).filter((e) => !e.startsWith("."));
     const result: FileEntry[] = [];
@@ -79,7 +79,7 @@ const readDir = function readDir(
   }
 };
 
-export const FilePicker = function FilePicker({
+export const FilePicker = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -91,7 +91,7 @@ export const FilePicker = function FilePicker({
   id,
   width = 50,
   maxVisible = 8,
-}: FilePickerProps) {
+}: FilePickerProps) => {
   const theme = useTheme();
   const { isFocused } = useFocus({ autoFocus, id });
   const [currentDir, setCurrentDir] = useState(resolve(startDir));
@@ -101,7 +101,6 @@ export const FilePicker = function FilePicker({
   const selected = controlledValue ?? internalValue;
   const entries = readDir(currentDir, extensions, dirsOnly);
 
-  // Add ".." parent navigation
   const parentEntry: FileEntry = {
     isDir: true,
     name: "..",
@@ -130,13 +129,21 @@ export const FilePicker = function FilePicker({
         setCurrentDir(entry.path);
         setCursor(0);
       } else {
-        onChange ? onChange(entry.path) : setInternalValue(entry.path);
+        if (onChange) {
+          onChange(entry.path);
+        } else {
+          setInternalValue(entry.path);
+        }
         onSubmit?.(entry.path);
       }
     } else if (input === " ") {
       const entry = allEntries[cursor];
       if (entry && !entry.isDir) {
-        onChange ? onChange(entry.path) : setInternalValue(entry.path);
+        if (onChange) {
+          onChange(entry.path);
+        } else {
+          setInternalValue(entry.path);
+        }
       }
     } else if (key.escape) {
       setCurrentDir((d) => resolve(d, ".."));
@@ -172,18 +179,19 @@ export const FilePicker = function FilePicker({
           const isCursor = absIdx === cursor;
           const isSelected = entry.path === selected;
 
+          let entryColor: string;
+          if (entry.isDir) {
+            entryColor = theme.colors.primary;
+          } else if (isSelected) {
+            entryColor = theme.colors.accent;
+          } else {
+            entryColor = theme.colors.foreground;
+          }
+
           return (
             <Box key={entry.path} paddingX={1}>
               <Text
-                color={
-                  isCursor
-                    ? theme.colors.selectionForeground
-                    : entry.isDir
-                      ? theme.colors.primary
-                      : isSelected
-                        ? theme.colors.accent
-                        : theme.colors.foreground
-                }
+                color={isCursor ? theme.colors.selectionForeground : entryColor}
                 backgroundColor={isCursor ? theme.colors.selection : undefined}
                 bold={entry.isDir}
               >

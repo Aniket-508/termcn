@@ -52,9 +52,13 @@ export const PasswordInput = function PasswordInput({
 
   const value = controlledValue ?? internalValue;
 
-  function setValue(newVal: string) {
-    onChange ? onChange(newVal) : setInternalValue(newVal);
-  }
+  const setValue = (newVal: string) => {
+    if (onChange) {
+      onChange(newVal);
+    } else {
+      setInternalValue(newVal);
+    }
+  };
 
   useInput((input, key) => {
     if (!isFocused) {

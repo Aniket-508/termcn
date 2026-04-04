@@ -21,7 +21,7 @@ export interface MultiSelectProps<T = string> {
   height?: number;
 }
 
-export function MultiSelect<T = string>({
+export const MultiSelect = <T = string>({
   options,
   value: controlledValue,
   onChange,
@@ -29,7 +29,7 @@ export function MultiSelect<T = string>({
   cursor = "›",
   checkmark = "◉",
   height,
-}: MultiSelectProps<T>) {
+}: MultiSelectProps<T>) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [internalSelected, setInternalSelected] = useState<T[]>([]);
@@ -99,34 +99,34 @@ export function MultiSelect<T = string>({
         const isSelected = selected.includes(opt.value);
         const icon = isSelected ? checkmark : "○";
 
+        let iconColor: string;
+        if (opt.disabled) {
+          iconColor = theme.colors.mutedForeground;
+        } else if (isSelected) {
+          iconColor = theme.colors.primary;
+        } else {
+          iconColor = theme.colors.foreground;
+        }
+
+        let labelColor: string;
+        if (opt.disabled) {
+          labelColor = theme.colors.mutedForeground;
+        } else if (isActive) {
+          labelColor = theme.colors.primary;
+        } else {
+          labelColor = theme.colors.foreground;
+        }
+
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={idx} gap={1}>
             <Text color={isActive ? theme.colors.primary : undefined}>
               {isActive ? cursor : " "}
             </Text>
-            <Text
-              color={
-                opt.disabled
-                  ? theme.colors.mutedForeground
-                  : isSelected
-                    ? theme.colors.primary
-                    : theme.colors.foreground
-              }
-              dimColor={opt.disabled}
-            >
+            <Text color={iconColor} dimColor={opt.disabled}>
               {icon}
             </Text>
-            <Text
-              color={
-                opt.disabled
-                  ? theme.colors.mutedForeground
-                  : isActive
-                    ? theme.colors.primary
-                    : theme.colors.foreground
-              }
-              bold={isActive}
-              dimColor={opt.disabled}
-            >
+            <Text color={labelColor} bold={isActive} dimColor={opt.disabled}>
               {opt.label}
             </Text>
             {opt.hint && (
@@ -139,4 +139,4 @@ export function MultiSelect<T = string>({
       })}
     </Box>
   );
-}
+};

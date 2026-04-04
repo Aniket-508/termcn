@@ -27,13 +27,13 @@ interface FlatNode<T> {
   hasChildren: boolean;
 }
 
-function flatten<T>(
+const flatten = <T,>(
   nodes: TreeSelectNode<T>[],
   depth: number,
   expanded: Set<string>,
   pathPrefix: string,
   expandedByDefault: boolean
-): FlatNode<T>[] {
+): FlatNode<T>[] => {
   const result: FlatNode<T>[] = [];
 
   for (let i = 0; i < nodes.length; i += 1) {
@@ -49,7 +49,7 @@ function flatten<T>(
       if (isExpanded) {
         result.push(
           ...flatten(
-            node.children!,
+            node.children ?? [],
             depth + 1,
             expanded,
             path,
@@ -61,16 +61,34 @@ function flatten<T>(
   }
 
   return result;
-}
+};
 
-export function TreeSelect<T = string>({
+const getNodeColor = (
+  disabled: boolean | undefined,
+  isCursor: boolean,
+  isSelected: boolean,
+  theme: ReturnType<typeof useTheme>
+): string => {
+  if (disabled) {
+    return theme.colors.mutedForeground;
+  }
+  if (isCursor) {
+    return theme.colors.primary;
+  }
+  if (isSelected) {
+    return theme.colors.accent;
+  }
+  return theme.colors.foreground;
+};
+
+export const TreeSelect = <T = string>({
   nodes,
   value: controlledValue,
   onChange,
   onSubmit,
   label,
   expandedByDefault = false,
-}: TreeSelectProps<T>) {
+}: TreeSelectProps<T>) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [cursor, setCursor] = useState(0);
@@ -151,18 +169,18 @@ export function TreeSelect<T = string>({
           icon = "· ";
         }
 
+        const color = getNodeColor(
+          item.node.disabled,
+          isCursor,
+          isSelected,
+          theme
+        );
+
         return (
-          <Box key={item.path + idx}>
+          // eslint-disable-next-line react/no-array-index-key
+          <Box key={`${item.path}-${idx}`}>
             <Text
-              color={
-                item.node.disabled
-                  ? theme.colors.mutedForeground
-                  : isCursor
-                    ? theme.colors.primary
-                    : isSelected
-                      ? theme.colors.accent
-                      : theme.colors.foreground
-              }
+              color={color}
               bold={isCursor || isSelected}
               dimColor={item.node.disabled}
               backgroundColor={isCursor ? theme.colors.selection : undefined}
@@ -176,4 +194,4 @@ export function TreeSelect<T = string>({
       })}
     </Box>
   );
-}
+};

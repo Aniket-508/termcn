@@ -22,64 +22,7 @@ export interface SplashScreenProps {
   align?: "left" | "center";
 }
 
-export const SplashScreen = function SplashScreen({
-  title,
-  font = "block",
-  titleColor,
-  titleColorAlt,
-  bold: _bold = true,
-  subtitle,
-  subtitleDim = true,
-  author,
-  statusLine,
-  padding = 2,
-}: SplashScreenProps) {
-  const theme = useTheme();
-  const resolvedTitleColor = titleColor ?? theme.colors.primary;
-
-  // Build OSC 8 hyperlink for author if href is provided
-  const authorNode = author
-    ? author.href
-      ? `\u001B]8;;${author.href}\u001B\\${author.name}\u001B]8;;\u001B\\`
-      : author.name
-    : null;
-
-  return (
-    <Box flexDirection="column" paddingLeft={padding}>
-      {/* BigText alternates between titleColor and titleColorAlt for rows */}
-      {titleColorAlt ? (
-        <AltColorBigText
-          text={title}
-          font={font}
-          color={resolvedTitleColor}
-          colorAlt={titleColorAlt}
-        />
-      ) : (
-        <BigText font={font} color={resolvedTitleColor}>
-          {title}
-        </BigText>
-      )}
-
-      {subtitle && (
-        <Box marginTop={1}>
-          <Text dimColor={subtitleDim}>{subtitle}</Text>
-        </Box>
-      )}
-
-      {authorNode && (
-        <Box marginTop={1}>
-          <Text dimColor>{"Made with ♥ by "}</Text>
-          <Text>{authorNode}</Text>
-        </Box>
-      )}
-
-      {statusLine && <Box marginTop={1}>{statusLine}</Box>}
-    </Box>
-  );
-};
-
-// Renders BigText with alternating row colors for depth effect
-const AltColorBigText = function AltColorBigText({
+const AltColorBigText = ({
   text,
   font,
   color,
@@ -89,7 +32,7 @@ const AltColorBigText = function AltColorBigText({
   font: FigletFont;
   color: string;
   colorAlt: string;
-}) {
+}) => {
   const onChar = font === "block" ? "█" : "▓";
   const offChar = " ";
 
@@ -301,6 +244,7 @@ const AltColorBigText = function AltColorBigText({
       {Array.from({ length: rows }, (_, rowIdx) => {
         const rowColor = rowIdx % 2 === 0 ? color : colorAlt;
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={rowIdx} flexDirection="row">
             {chars.map((ch, charIdx) => {
               const upper = ch.toUpperCase();
@@ -310,6 +254,7 @@ const AltColorBigText = function AltColorBigText({
                 .map((pixel) => (pixel ? onChar : offChar))
                 .join("");
               return (
+                // eslint-disable-next-line react/no-array-index-key
                 <Text key={charIdx} color={rowColor}>
                   {`${rowStr} `}
                 </Text>
@@ -318,6 +263,59 @@ const AltColorBigText = function AltColorBigText({
           </Box>
         );
       })}
+    </Box>
+  );
+};
+
+export const SplashScreen = ({
+  title,
+  font = "block",
+  titleColor,
+  titleColorAlt,
+  bold: _bold = true,
+  subtitle,
+  subtitleDim = true,
+  author,
+  statusLine,
+  padding = 2,
+}: SplashScreenProps) => {
+  const theme = useTheme();
+  const resolvedTitleColor = titleColor ?? theme.colors.primary;
+
+  const authorHref = author?.href
+    ? `\u001B]8;;${author.href}\u001B\\${author.name}\u001B]8;;\u001B\\`
+    : null;
+  const authorNode = author ? (authorHref ?? author.name) : null;
+
+  return (
+    <Box flexDirection="column" paddingLeft={padding}>
+      {titleColorAlt ? (
+        <AltColorBigText
+          text={title}
+          font={font}
+          color={resolvedTitleColor}
+          colorAlt={titleColorAlt}
+        />
+      ) : (
+        <BigText font={font} color={resolvedTitleColor}>
+          {title}
+        </BigText>
+      )}
+
+      {subtitle && (
+        <Box marginTop={1}>
+          <Text dimColor={subtitleDim}>{subtitle}</Text>
+        </Box>
+      )}
+
+      {authorNode && (
+        <Box marginTop={1}>
+          <Text dimColor>{"Made with ♥ by "}</Text>
+          <Text>{authorNode}</Text>
+        </Box>
+      )}
+
+      {statusLine && <Box marginTop={1}>{statusLine}</Box>}
     </Box>
   );
 };

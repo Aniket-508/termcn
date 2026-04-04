@@ -62,6 +62,7 @@ const LoginFlowRoot = function LoginFlowRoot({
           {title.includes("\n") ? (
             <Box flexDirection="column">
               {title.split("\n").map((line, i) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <BigText key={i} font={titleFont} color={resolvedColor}>
                   {line}
                 </BigText>
@@ -170,6 +171,7 @@ const LoginFlowSelect = function LoginFlowSelect({
       {options.map((opt, i) => {
         const isActive = i === activeIdx;
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={i} flexDirection="row">
             <Text color={isActive ? cursorColor : undefined}>
               {isActive ? `${cursor} ` : "  "}

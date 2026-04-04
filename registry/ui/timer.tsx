@@ -15,33 +15,30 @@ export interface TimerProps {
   label?: string;
 }
 
-const formatTime = function formatTime(
-  seconds: number,
-  format: "hms" | "ms" | "s"
-): string {
+const padNum = (n: number) => String(n).padStart(2, "0");
+
+const formatTime = (seconds: number, format: "hms" | "ms" | "s"): string => {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
   const s = seconds % 60;
-
-  const pad = (n: number) => String(n).padStart(2, "0");
 
   if (format === "s") {
     return `${seconds}s`;
   }
   if (format === "ms") {
-    return `${pad(m)}:${pad(s)}`;
+    return `${padNum(m)}:${padNum(s)}`;
   }
-  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+  return `${padNum(h)}:${padNum(m)}:${padNum(s)}`;
 };
 
-export const Timer = function Timer({
+export const Timer = ({
   duration,
   onComplete,
   autoStart = false,
   format = "hms",
   color,
   label,
-}: TimerProps) {
+}: TimerProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 
@@ -75,12 +72,12 @@ export const Timer = function Timer({
     }
   });
 
-  const status = completed ? "Done!" : running ? "Running" : "Paused";
-  const statusColor = completed
-    ? theme.colors.success
-    : running
-      ? resolvedColor
-      : theme.colors.mutedForeground;
+  const runningStatus = running ? "Running" : "Paused";
+  const status = completed ? "Done!" : runningStatus;
+  const runningStatusColor = running
+    ? resolvedColor
+    : theme.colors.mutedForeground;
+  const statusColor = completed ? theme.colors.success : runningStatusColor;
 
   return (
     <Box flexDirection="column" gap={0}>

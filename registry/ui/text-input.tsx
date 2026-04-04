@@ -33,7 +33,7 @@ export interface TextInputProps {
   cursor?: string;
 }
 
-export const TextInput = function TextInput({
+export const TextInput = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -48,7 +48,7 @@ export const TextInput = function TextInput({
   borderStyle = "round",
   paddingX = 1,
   cursor = "█",
-}: TextInputProps) {
+}: TextInputProps) => {
   const [internalValue, setInternalValue] = useState("");
   const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
@@ -74,7 +74,11 @@ export const TextInput = function TextInput({
 
     if (key.backspace || key.delete) {
       const newVal = value.slice(0, -1);
-      onChange ? onChange(newVal) : setInternalValue(newVal);
+      if (onChange) {
+        onChange(newVal);
+      } else {
+        setInternalValue(newVal);
+      }
       return;
     }
 
@@ -86,15 +90,22 @@ export const TextInput = function TextInput({
     }
 
     const newVal = value + input;
-    onChange ? onChange(newVal) : setInternalValue(newVal);
+    if (onChange) {
+      onChange(newVal);
+    } else {
+      setInternalValue(newVal);
+    }
   });
 
   const displayValue = mask ? mask.repeat(value.length) : value;
-  const borderColor = error
-    ? theme.colors.error
-    : isFocused
-      ? theme.colors.focusRing
-      : theme.colors.border;
+  let borderColor: string;
+  if (error) {
+    borderColor = theme.colors.error;
+  } else if (isFocused) {
+    borderColor = theme.colors.focusRing;
+  } else {
+    borderColor = theme.colors.border;
+  }
 
   const inputContent = (
     <>

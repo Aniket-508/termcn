@@ -26,16 +26,19 @@ export interface MultiProgressProps {
   showPercent?: boolean;
 }
 
-export const MultiProgress = function MultiProgress({
+const truncate = (s: string, n: number): string =>
+  s.length > n ? `${s.slice(0, n - 1)}…` : s.padEnd(n);
+
+export const MultiProgress = ({
   items,
   barWidth = 20,
   labelWidth = 20,
   compact = false,
   showPercent = true,
-}: MultiProgressProps) {
+}: MultiProgressProps) => {
   const theme = useTheme();
 
-  function statusColor(status: MultiProgressStatus | undefined): string {
+  const statusColor = (status: MultiProgressStatus | undefined): string => {
     switch (status) {
       case "done": {
         return theme.colors.success;
@@ -48,21 +51,16 @@ export const MultiProgress = function MultiProgress({
       }
       default: {
         return theme.colors.primary;
-        // 'running'
       }
     }
-  }
+  };
 
-  function renderBar(item: MultiProgressItem): string {
+  const renderBar = (item: MultiProgressItem): string => {
     const pct = item.total > 0 ? Math.min(1, item.value / item.total) : 0;
     const filled = Math.round(pct * barWidth);
     const empty = barWidth - filled;
     return `${"█".repeat(filled)}${"░".repeat(empty)}`;
-  }
-
-  function truncate(s: string, n: number): string {
-    return s.length > n ? `${s.slice(0, n - 1)}…` : s.padEnd(n);
-  }
+  };
 
   return (
     <Box flexDirection="column">

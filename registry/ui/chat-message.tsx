@@ -17,14 +17,17 @@ export interface ChatMessageProps {
   children?: ReactNode;
 }
 
-export const ChatMessage = function ChatMessage({
+const formatTime = (date: Date): string =>
+  date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+export const ChatMessage = ({
   sender,
   name,
   timestamp,
   streaming = false,
   collapsed: initialCollapsed = false,
   children,
-}: ChatMessageProps) {
+}: ChatMessageProps) => {
   const theme = useTheme();
   const [isCollapsed, setIsCollapsed] = useState(initialCollapsed);
   const [dotFrame, setDotFrame] = useState(0);
@@ -64,6 +67,31 @@ export const ChatMessage = function ChatMessage({
   const childrenText = typeof children === "string" ? children : "";
   const firstLine = childrenText.split("\n")[0] ?? "";
 
+  const renderContent = () => {
+    if (streaming) {
+      return (
+        <Box>
+          {children || (
+            <Text color={color} dimColor>
+              {dots}
+            </Text>
+          )}
+        </Box>
+      );
+    }
+    if (isCollapsed) {
+      return (
+        <Box>
+          <Text dimColor>
+            {firstLine.slice(0, 60)}
+            {firstLine.length > 60 || childrenText.includes("\n") ? "..." : ""}
+          </Text>
+        </Box>
+      );
+    }
+    return <Box>{children}</Box>;
+  };
+
   return (
     <Box flexDirection="column" marginBottom={1}>
       {/* Header row */}
@@ -84,30 +112,7 @@ export const ChatMessage = function ChatMessage({
       </Box>
 
       {/* Content */}
-      {streaming ? (
-        <Box>
-          {children ? (
-            <>{children}</>
-          ) : (
-            <Text color={color} dimColor>
-              {dots}
-            </Text>
-          )}
-        </Box>
-      ) : isCollapsed ? (
-        <Box>
-          <Text dimColor>
-            {firstLine.slice(0, 60)}
-            {firstLine.length > 60 || childrenText.includes("\n") ? "..." : ""}
-          </Text>
-        </Box>
-      ) : (
-        <Box>{children}</Box>
-      )}
+      {renderContent()}
     </Box>
   );
-};
-
-const formatTime = function formatTime(date: Date): string {
-  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 };

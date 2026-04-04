@@ -34,9 +34,13 @@ export const TabbedContent = function TabbedContent({
   const activeId = controlledTab ?? internalTab;
   const activeIndex = tabs.findIndex((t) => t.id === activeId);
 
-  function switchTab(id: string) {
-    onChange ? onChange(id) : setInternalTab(id);
-  }
+  const switchTab = (id: string) => {
+    if (onChange) {
+      onChange(id);
+    } else {
+      setInternalTab(id);
+    }
+  };
 
   useInput((_input, key) => {
     if (key.leftArrow || (key.shift && key.tab)) {
@@ -60,25 +64,23 @@ export const TabbedContent = function TabbedContent({
 
   const activeTab = tabs.find((t) => t.id === activeId);
 
-  function renderTabBar() {
+  const renderTabBar = () => {
     if (tabBarStyle === "box") {
       return (
         <Box borderStyle="single" borderColor={theme.colors.border}>
           {tabs.map((tab, idx) => {
             const isActive = tab.id === activeId;
+            let textColor: string;
+            if (tab.disabled) {
+              textColor = theme.colors.mutedForeground;
+            } else if (isActive) {
+              textColor = theme.colors.primary;
+            } else {
+              textColor = theme.colors.foreground;
+            }
             return (
               <Box key={tab.id} paddingX={1}>
-                <Text
-                  color={
-                    tab.disabled
-                      ? theme.colors.mutedForeground
-                      : isActive
-                        ? theme.colors.primary
-                        : theme.colors.foreground
-                  }
-                  bold={isActive}
-                  dimColor={tab.disabled}
-                >
+                <Text color={textColor} bold={isActive} dimColor={tab.disabled}>
                   {isActive ? "[" : " "}
                   {tab.label}
                   {isActive ? "]" : " "}
@@ -98,16 +100,18 @@ export const TabbedContent = function TabbedContent({
         <Box gap={2}>
           {tabs.map((tab) => {
             const isActive = tab.id === activeId;
+            let textColor: string;
+            if (tab.disabled) {
+              textColor = theme.colors.mutedForeground;
+            } else if (isActive) {
+              textColor = theme.colors.primary;
+            } else {
+              textColor = theme.colors.mutedForeground;
+            }
             return (
               <Text
                 key={tab.id}
-                color={
-                  tab.disabled
-                    ? theme.colors.mutedForeground
-                    : isActive
-                      ? theme.colors.primary
-                      : theme.colors.mutedForeground
-                }
+                color={textColor}
                 bold={isActive}
                 dimColor={tab.disabled}
               >
@@ -124,16 +128,18 @@ export const TabbedContent = function TabbedContent({
       <Box>
         {tabs.map((tab, idx) => {
           const isActive = tab.id === activeId;
+          let textColor: string;
+          if (tab.disabled) {
+            textColor = theme.colors.mutedForeground;
+          } else if (isActive) {
+            textColor = theme.colors.primary;
+          } else {
+            textColor = theme.colors.foreground;
+          }
           return (
             <Box key={tab.id}>
               <Text
-                color={
-                  tab.disabled
-                    ? theme.colors.mutedForeground
-                    : isActive
-                      ? theme.colors.primary
-                      : theme.colors.foreground
-                }
+                color={textColor}
                 bold={isActive}
                 underline={isActive}
                 dimColor={tab.disabled}
@@ -148,7 +154,7 @@ export const TabbedContent = function TabbedContent({
         })}
       </Box>
     );
-  }
+  };
 
   return (
     <Box flexDirection="column">

@@ -57,7 +57,7 @@ const pad = function pad(
   return `${s} `.repeat(diff);
 };
 
-export function Table<
+export const Table = <
   T extends Record<string, unknown> = Record<string, unknown>,
 >({
   data,
@@ -70,7 +70,7 @@ export function Table<
   borderStyle = "round",
   columnSeparator = " │ ",
   rowSeparatorChar = "─",
-}: TableProps<T>) {
+}: TableProps<T>) => {
   const theme = useTheme();
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
@@ -119,10 +119,10 @@ export function Table<
   });
 
   const colWidths = columns.map((col) => {
-    const dataMax = data.reduce(
-      (max, row) => Math.max(max, String(row[col.key] ?? "").length),
-      0
-    );
+    let dataMax = 0;
+    for (const row of data) {
+      dataMax = Math.max(dataMax, String(row[col.key] ?? "").length);
+    }
     return col.width ?? Math.max(col.header.length, dataMax) + 2;
   });
 
@@ -159,6 +159,7 @@ export function Table<
           )
           .join(columnSeparator);
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={rowIdx} paddingX={1}>
             <Text
               color={
@@ -182,4 +183,4 @@ export function Table<
       )}
     </Box>
   );
-}
+};

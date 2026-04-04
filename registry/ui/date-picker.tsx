@@ -39,6 +39,20 @@ const clamp = function clamp(val: number, min: number, max: number): number {
   return Math.min(Math.max(val, min), max);
 };
 
+const buildDate = (m: number, d: number, y: number): Date => new Date(y, m, d);
+
+const getNextField = (
+  f: "month" | "day" | "year"
+): "month" | "day" | "year" => {
+  if (f === "month") {
+    return "day";
+  }
+  if (f === "day") {
+    return "year";
+  }
+  return "month";
+};
+
 export const DatePicker = function DatePicker({
   value: controlledValue,
   onChange,
@@ -60,11 +74,7 @@ export const DatePicker = function DatePicker({
   const [year, setYear] = useState(initial.getFullYear());
   const [field, setField] = useState<"month" | "day" | "year">("month");
 
-  function buildDate(m: number, d: number, y: number): Date {
-    return new Date(y, m, d);
-  }
-
-  function notify(m: number, d: number, y: number) {
+  const notify = (m: number, d: number, y: number) => {
     const date = buildDate(m, d, y);
     if (minDate && date < minDate) {
       return;
@@ -73,7 +83,7 @@ export const DatePicker = function DatePicker({
       return;
     }
     onChange?.(date);
-  }
+  };
 
   useInput((input, key) => {
     if (!isFocused) {
@@ -81,7 +91,7 @@ export const DatePicker = function DatePicker({
     }
 
     if (key.tab) {
-      setField((f) => (f === "month" ? "day" : f === "day" ? "year" : "month"));
+      setField((f) => getNextField(f));
       return;
     }
 
@@ -136,15 +146,11 @@ export const DatePicker = function DatePicker({
     }
   });
 
-  function fieldColor(f: typeof field): string {
-    return field === f && isFocused
-      ? theme.colors.primary
-      : theme.colors.foreground;
-  }
+  const fieldColor = (f: typeof field): string =>
+    field === f && isFocused ? theme.colors.primary : theme.colors.foreground;
 
-  function fieldBg(f: typeof field): string | undefined {
-    return field === f && isFocused ? theme.colors.selection : undefined;
-  }
+  const fieldBg = (f: typeof field): string | undefined =>
+    field === f && isFocused ? theme.colors.selection : undefined;
 
   return (
     <Box flexDirection="column">

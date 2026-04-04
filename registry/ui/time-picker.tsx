@@ -42,7 +42,7 @@ export const TimePicker = function TimePicker({
   const maxHours = format === 12 ? 12 : 23;
   const minHours = format === 12 ? 1 : 0;
 
-  function notify(h: number, m: number, ap: "AM" | "PM") {
+  const notify = (h: number, m: number, ap: "AM" | "PM") => {
     let actualHours = h;
     if (format === 12) {
       if (ap === "AM" && h === 12) {
@@ -52,18 +52,25 @@ export const TimePicker = function TimePicker({
       }
     }
     onChange?.({ hours: actualHours, minutes: m });
-  }
+  };
 
-  useInput((input, key) => {
+  // eslint-disable-next-line complexity
+  useInput((_input, key) => {
     if (!isFocused) {
       return;
     }
 
     if (key.tab) {
       if (format === 12) {
-        setField((f) =>
-          f === "hours" ? "minutes" : f === "minutes" ? "ampm" : "hours"
-        );
+        setField((f) => {
+          if (f === "hours") {
+            return "minutes";
+          }
+          if (f === "minutes") {
+            return "ampm";
+          }
+          return "hours";
+        });
       } else {
         setField((f) => (f === "hours" ? "minutes" : "hours"));
       }
@@ -114,24 +121,22 @@ export const TimePicker = function TimePicker({
     }
   });
 
-  function fieldColor(f: typeof field): string {
-    return field === f && isFocused
-      ? theme.colors.primary
-      : theme.colors.foreground;
-  }
+  const fieldColor = (f: typeof field): string =>
+    field === f && isFocused ? theme.colors.primary : theme.colors.foreground;
 
-  function fieldBg(f: typeof field): string | undefined {
-    return field === f && isFocused ? theme.colors.selection : undefined;
-  }
+  const fieldBg = (f: typeof field): string | undefined =>
+    field === f && isFocused ? theme.colors.selection : undefined;
 
-  const displayHours =
-    format === 12
-      ? hours === 0
-        ? 12
-        : hours > 12
-          ? hours - 12
-          : hours
-      : hours;
+  let displayHours: number;
+  if (format !== 12) {
+    displayHours = hours;
+  } else if (hours === 0) {
+    displayHours = 12;
+  } else if (hours > 12) {
+    displayHours = hours - 12;
+  } else {
+    displayHours = hours;
+  }
 
   return (
     <Box flexDirection="column">

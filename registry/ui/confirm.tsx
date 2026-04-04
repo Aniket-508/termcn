@@ -66,14 +66,14 @@ export const Confirm = function Confirm({
           )}
         </Box>
         <Box gap={1}>
-          {!selected ? (
-            <Text bold>
-              {"› "}
+          {selected ? (
+            <Text color={theme.colors.mutedForeground}>
+              {"  "}
               {cancelLabel}
             </Text>
           ) : (
-            <Text color={theme.colors.mutedForeground}>
-              {"  "}
+            <Text bold>
+              {"› "}
               {cancelLabel}
             </Text>
           )}

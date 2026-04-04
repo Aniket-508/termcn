@@ -28,12 +28,51 @@ const TYPE_ICON: Record<FileChangeType, string> = {
   modify: "M",
 };
 
-export const FileChange = function FileChange({
+/**
+ * Parse a unified diff string into old and new text arrays for DiffView.
+ * Handles simple unified diff format.
+ */
+const parseDiff = (
+  diff: string
+): {
+  oldText: string;
+  newText: string;
+} => {
+  const lines = diff.split("\n");
+  const oldLines: string[] = [];
+  const newLines: string[] = [];
+
+  for (const line of lines) {
+    if (
+      line.startsWith("---") ||
+      line.startsWith("+++") ||
+      line.startsWith("@@")
+    ) {
+      continue;
+    }
+    if (line.startsWith("-")) {
+      oldLines.push(line.slice(1));
+    } else if (line.startsWith("+")) {
+      newLines.push(line.slice(1));
+    } else if (line.startsWith(" ")) {
+      const content = line.slice(1);
+      oldLines.push(content);
+      newLines.push(content);
+    } else {
+      oldLines.push(line);
+      newLines.push(line);
+    }
+  }
+
+  return { newText: newLines.join("\n"), oldText: oldLines.join("\n") };
+};
+
+export const FileChange = ({
   changes,
   onAccept,
   onReject,
   onAcceptAll,
-}: FileChangeProps) {
+}: FileChangeProps) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPaths, setExpandedPaths] = useState<Set<string>>(new Set());
@@ -99,6 +138,9 @@ export const FileChange = function FileChange({
       case "modify": {
         return theme.colors.warning ?? "yellow";
       }
+      default: {
+        return theme.colors.mutedForeground;
+      }
     }
   };
 
@@ -157,22 +199,24 @@ export const FileChange = function FileChange({
             {/* Expanded diff view */}
             {isExpanded && (
               <Box paddingLeft={2} marginTop={1}>
-                {item.diff && diffParts ? (
+                {item.diff && diffParts && (
                   <DiffView
                     oldText={diffParts.oldText}
                     newText={diffParts.newText}
                     filename={item.path}
                     showLineNumbers
                   />
-                ) : item.content ? (
+                )}
+                {!(item.diff && diffParts) && item.content && (
                   <Box flexDirection="column">
                     {item.content.split("\n").map((line, li) => (
+                      // eslint-disable-next-line react/no-array-index-key
                       <Text key={li} color={theme.colors.success ?? "green"}>
                         +{line}
                       </Text>
                     ))}
                   </Box>
-                ) : null}
+                )}
               </Box>
             )}
           </Box>
@@ -180,41 +224,4 @@ export const FileChange = function FileChange({
       })}
     </Box>
   );
-};
-
-/**
- * Parse a unified diff string into old and new text arrays for DiffView.
- * Handles simple unified diff format.
- */
-const parseDiff = function parseDiff(diff: string): {
-  oldText: string;
-  newText: string;
-} {
-  const lines = diff.split("\n");
-  const oldLines: string[] = [];
-  const newLines: string[] = [];
-
-  for (const line of lines) {
-    if (
-      line.startsWith("---") ||
-      line.startsWith("+++") ||
-      line.startsWith("@@")
-    ) {
-      continue;
-    }
-    if (line.startsWith("-")) {
-      oldLines.push(line.slice(1));
-    } else if (line.startsWith("+")) {
-      newLines.push(line.slice(1));
-    } else if (line.startsWith(" ")) {
-      const content = line.slice(1);
-      oldLines.push(content);
-      newLines.push(content);
-    } else {
-      oldLines.push(line);
-      newLines.push(line);
-    }
-  }
-
-  return { newText: newLines.join("\n"), oldText: oldLines.join("\n") };
 };

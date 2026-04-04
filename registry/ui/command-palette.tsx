@@ -139,7 +139,7 @@ export const CommandPalette = function CommandPalette({
     if (!groups.has(g)) {
       groups.set(g, []);
     }
-    groups.get(g)!.push(cmd);
+    groups.get(g)?.push(cmd);
   }
 
   let flatIdx = 0;

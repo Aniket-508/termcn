@@ -34,7 +34,7 @@ export interface SearchInputProps<T = string> {
   resultCursor?: string;
 }
 
-export function SearchInput<T = string>({
+export const SearchInput = <T = string>({
   options,
   getValue,
   value: controlledValue,
@@ -49,7 +49,7 @@ export function SearchInput<T = string>({
   cursor = "█",
   searchIcon = "🔍 ",
   resultCursor = "› ",
-}: SearchInputProps<T>) {
+}: SearchInputProps<T>) => {
   const [internalValue, setInternalValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showResults, setShowResults] = useState(false);
@@ -68,9 +68,13 @@ export function SearchInput<T = string>({
     [getValue]
   );
 
-  function setQuery(newQuery: string) {
-    onChange ? onChange(newQuery) : setInternalValue(newQuery);
-  }
+  const setQuery = (newQuery: string) => {
+    if (onChange) {
+      onChange(newQuery);
+    } else {
+      setInternalValue(newQuery);
+    }
+  };
 
   const filteredResults = useMemo(() => {
     if (!options || options.length === 0) {
@@ -170,6 +174,7 @@ export function SearchInput<T = string>({
           {filteredResults.map((item, idx) => {
             const isSelected = idx === selectedIndex;
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Box key={idx} flexDirection="row">
                 <Text
                   color={
@@ -196,4 +201,4 @@ export function SearchInput<T = string>({
       )}
     </Box>
   );
-}
+};

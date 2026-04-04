@@ -101,6 +101,7 @@ export const Digits = function Digits({
             const rowStr =
               segments[rowIdx] ?? " ".repeat(size === "lg" ? 5 : 3);
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Text key={charIdx} color={resolvedColor}>
                 {rowStr}{" "}
               </Text>

@@ -24,9 +24,9 @@ export const Breadcrumb = function Breadcrumb({
   const theme = useTheme();
 
   const activeIndex =
-    activeKey !== undefined
-      ? items.findIndex((i) => i.key === activeKey)
-      : items.length - 1;
+    activeKey === undefined
+      ? items.length - 1
+      : items.findIndex((i) => i.key === activeKey);
 
   useInput((_input, key) => {
     if (key.leftArrow && activeIndex > 0) {

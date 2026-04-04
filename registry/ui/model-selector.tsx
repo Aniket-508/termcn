@@ -30,6 +30,63 @@ const formatContext = function formatContext(ctx: number): string {
   return `${ctx} ctx`;
 };
 
+interface ModelRowProps {
+  model: ModelOption;
+  isActive: boolean;
+  isSelected: boolean;
+  showContext: boolean;
+  showProvider: boolean;
+  theme: ReturnType<typeof useTheme>;
+}
+
+const getModelColor = (
+  isSelected: boolean,
+  isActive: boolean,
+  theme: ReturnType<typeof useTheme>
+): string => {
+  if (isSelected) {
+    return theme.colors.success ?? "green";
+  }
+  if (isActive) {
+    return theme.colors.primary;
+  }
+  return theme.colors.foreground;
+};
+
+const ModelRow = function ModelRow({
+  model,
+  isActive,
+  isSelected,
+  showContext,
+  showProvider,
+  theme,
+}: ModelRowProps) {
+  return (
+    <Box gap={1}>
+      <Text color={isActive ? theme.colors.primary : undefined}>
+        {isActive ? "›" : " "}
+      </Text>
+      <Text
+        bold={isActive || isSelected}
+        color={getModelColor(isSelected, isActive, theme)}
+      >
+        {model.name}
+      </Text>
+      {isSelected && <Text color={theme.colors.success ?? "green"}>✓</Text>}
+      {showProvider && (
+        <Text dimColor color={theme.colors.mutedForeground}>
+          {model.provider}
+        </Text>
+      )}
+      {showContext && model.context !== undefined && (
+        <Text dimColor color={theme.colors.mutedForeground}>
+          {formatContext(model.context)}
+        </Text>
+      )}
+    </Box>
+  );
+};
+
 export const ModelSelector = function ModelSelector({
   models,
   selected,
@@ -61,12 +118,12 @@ export const ModelSelector = function ModelSelector({
     const providerGroups: Record<string, ModelOption[]> = {
       /* noop */
     };
-    models.forEach((m) => {
+    for (const m of models) {
       if (!providerGroups[m.provider]) {
         providerGroups[m.provider] = [];
       }
-      providerGroups[m.provider]!.push(m);
-    });
+      providerGroups[m.provider]?.push(m);
+    }
 
     return (
       <Box flexDirection="column">
@@ -114,55 +171,6 @@ export const ModelSelector = function ModelSelector({
           />
         );
       })}
-    </Box>
-  );
-};
-
-interface ModelRowProps {
-  model: ModelOption;
-  isActive: boolean;
-  isSelected: boolean;
-  showContext: boolean;
-  showProvider: boolean;
-  theme: ReturnType<typeof useTheme>;
-}
-
-const ModelRow = function ModelRow({
-  model,
-  isActive,
-  isSelected,
-  showContext,
-  showProvider,
-  theme,
-}: ModelRowProps) {
-  return (
-    <Box gap={1}>
-      <Text color={isActive ? theme.colors.primary : undefined}>
-        {isActive ? "›" : " "}
-      </Text>
-      <Text
-        bold={isActive || isSelected}
-        color={
-          isSelected
-            ? (theme.colors.success ?? "green")
-            : isActive
-              ? theme.colors.primary
-              : theme.colors.foreground
-        }
-      >
-        {model.name}
-      </Text>
-      {isSelected && <Text color={theme.colors.success ?? "green"}>✓</Text>}
-      {showProvider && (
-        <Text dimColor color={theme.colors.mutedForeground}>
-          {model.provider}
-        </Text>
-      )}
-      {showContext && model.context !== undefined && (
-        <Text dimColor color={theme.colors.mutedForeground}>
-          {formatContext(model.context)}
-        </Text>
-      )}
     </Box>
   );
 };

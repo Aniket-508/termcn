@@ -26,6 +26,20 @@ const isValidEmail = function isValidEmail(email: string): boolean {
   return domain.includes(".");
 };
 
+const getBorderColor = (
+  error: string | null,
+  isFocused: boolean,
+  theme: ReturnType<typeof useTheme>
+): string => {
+  if (error) {
+    return theme.colors.error;
+  }
+  if (isFocused) {
+    return theme.colors.focusRing;
+  }
+  return theme.colors.border;
+};
+
 export const EmailInput = function EmailInput({
   value: controlledValue,
   onChange,
@@ -44,7 +58,15 @@ export const EmailInput = function EmailInput({
 
   const value = controlledValue ?? internalValue;
 
-  function getSuggestion(val: string): string | null {
+  const applyChange = (newVal: string) => {
+    if (onChange) {
+      onChange(newVal);
+    } else {
+      setInternalValue(newVal);
+    }
+  };
+
+  const getSuggestion = (val: string): string | null => {
     const atIdx = val.indexOf("@");
     if (atIdx === -1) {
       return null;
@@ -60,7 +82,7 @@ export const EmailInput = function EmailInput({
       return null;
     }
     return match.slice(afterAt.length);
-  }
+  };
 
   useInput((input, key) => {
     if (!isFocused) {
@@ -81,7 +103,7 @@ export const EmailInput = function EmailInput({
       const hint = getSuggestion(value);
       if (hint) {
         const newVal = value + hint;
-        onChange ? onChange(newVal) : setInternalValue(newVal);
+        applyChange(newVal);
       }
       return;
     }
@@ -89,7 +111,7 @@ export const EmailInput = function EmailInput({
     if (key.backspace || key.delete) {
       setError(null);
       const newVal = value.slice(0, -1);
-      onChange ? onChange(newVal) : setInternalValue(newVal);
+      applyChange(newVal);
       return;
     }
 
@@ -99,14 +121,10 @@ export const EmailInput = function EmailInput({
 
     setError(null);
     const newVal = value + input;
-    onChange ? onChange(newVal) : setInternalValue(newVal);
+    applyChange(newVal);
   });
 
-  const borderColor = error
-    ? theme.colors.error
-    : isFocused
-      ? theme.colors.focusRing
-      : theme.colors.border;
+  const borderColor = getBorderColor(error, isFocused, theme);
 
   const suggestion = getSuggestion(value);
 

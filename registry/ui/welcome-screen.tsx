@@ -48,7 +48,7 @@ const WelcomeScreenLeft = function WelcomeScreenLeft({
 }: {
   children: ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 };
 WelcomeScreenLeft.displayName = "WelcomeScreen.Left";
 
@@ -57,7 +57,7 @@ const WelcomeScreenRight = function WelcomeScreenRight({
 }: {
   children: ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 };
 WelcomeScreenRight.displayName = "WelcomeScreen.Right";
 
@@ -86,7 +86,10 @@ const WelcomeScreenLogo = function WelcomeScreenLogo({
       paddingY={1}
     >
       {typeof children === "string"
-        ? children.split("\n").map((line, i) => <Text key={i}>{line}</Text>)
+        ? children.split("\n").map((line, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Text key={i}>{line}</Text>
+          ))
         : children}
     </Box>
   );
@@ -108,6 +111,7 @@ const WelcomeScreenMeta = function WelcomeScreenMeta({
         paddingTop={1}
       >
         {items.map((item, i) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Text key={i} dimColor={dim} color={color}>
             {item}
           </Text>
@@ -124,6 +128,7 @@ const WelcomeScreenMeta = function WelcomeScreenMeta({
       paddingTop={1}
     >
       {items.map((item, i) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Text key={i} dimColor={dim} color={color}>
           {item}
           {i < items.length - 1 ? separator : ""}
@@ -163,6 +168,7 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
   const resolvedBorderColor = borderColor ?? theme.colors.border;
   const resolvedAppNameColor = appNameColor ?? theme.colors.primary;
 
+  // eslint-disable-next-line react/no-react-children
   const childArray = React.Children.toArray(children);
   const leftChildren = childArray.filter(
     (c) =>
@@ -177,14 +183,16 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
 
   const leftContent = leftChildren.flatMap((c) =>
     React.isValidElement(c)
-      ? React.Children.toArray(
+      ? // eslint-disable-next-line react/no-react-children
+        React.Children.toArray(
           (c.props as { children?: React.ReactNode }).children
         )
       : []
   );
   const rightContent = rightChildren.flatMap((c) =>
     React.isValidElement(c)
-      ? React.Children.toArray(
+      ? // eslint-disable-next-line react/no-react-children
+        React.Children.toArray(
           (c.props as { children?: React.ReactNode }).children
         )
       : []

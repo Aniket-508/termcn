@@ -22,6 +22,7 @@ interface DiffOp {
   line: string;
 }
 
+// eslint-disable-next-line complexity
 const computeDiff = function computeDiff(
   oldLines: string[],
   newLines: string[]
@@ -29,34 +30,34 @@ const computeDiff = function computeDiff(
   const m = oldLines.length;
   const n = newLines.length;
 
-  // Build LCS table
   const dp: number[][] = Array.from({ length: m + 1 }, () =>
     Array.from({ length: n + 1 }, () => 0)
   );
   for (let i = 1; i <= m; i += 1) {
     for (let j = 1; j <= n; j += 1) {
-      if (oldLines[i - 1] === newLines[j - 1]) {
-        dp[i][j] = dp[i - 1]![j - 1]! + 1;
-      } else {
-        dp[i][j] = Math.max(dp[i - 1]![j]!, dp[i][j - 1]!);
-      }
+      dp[i][j] =
+        oldLines[i - 1] === newLines[j - 1]
+          ? (dp[i - 1]?.[j - 1] ?? 0) + 1
+          : Math.max(dp[i - 1]?.[j] ?? 0, dp[i]?.[j - 1] ?? 0);
     }
   }
 
-  // Backtrack to produce diff ops
   const ops: DiffOp[] = [];
   let i = m;
   let j = n;
   while (i > 0 || j > 0) {
     if (i > 0 && j > 0 && oldLines[i - 1] === newLines[j - 1]) {
-      ops.unshift({ line: oldLines[i - 1]!, type: "equal" });
+      ops.unshift({ line: oldLines[i - 1] ?? "", type: "equal" });
       i -= 1;
       j -= 1;
-    } else if (j > 0 && (i === 0 || dp[i][j - 1]! >= dp[i - 1]![j]!)) {
-      ops.unshift({ line: newLines[j - 1]!, type: "insert" });
+    } else if (
+      j > 0 &&
+      (i === 0 || (dp[i]?.[j - 1] ?? 0) >= (dp[i - 1]?.[j] ?? 0))
+    ) {
+      ops.unshift({ line: newLines[j - 1] ?? "", type: "insert" });
       j -= 1;
     } else {
-      ops.unshift({ line: oldLines[i - 1]!, type: "delete" });
+      ops.unshift({ line: oldLines[i - 1] ?? "", type: "delete" });
       i -= 1;
     }
   }
@@ -71,12 +72,11 @@ interface Hunk {
 }
 
 const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
-  // Assign line numbers to ops
   let oldLine = 1;
   let newLine = 1;
   const numbered = ops.map((op) => {
-    const o = op.type !== "insert" ? oldLine : null;
-    const n = op.type !== "delete" ? newLine : null;
+    const o = op.type === "insert" ? null : oldLine;
+    const n = op.type === "delete" ? null : newLine;
     if (op.type !== "insert") {
       oldLine += 1;
     }
@@ -86,19 +86,17 @@ const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
     return { ...op, newLine: n, oldLine: o };
   });
 
-  // Find changed indices
   const changed = new Set<number>();
-  numbered.forEach((op, idx) => {
+  for (const [idx, op] of numbered.entries()) {
     if (op.type !== "equal") {
       changed.add(idx);
     }
-  });
+  }
 
   if (changed.size === 0) {
     return [];
   }
 
-  // Build context windows
   const included = new Set<number>();
   for (const idx of changed) {
     for (let d = -context; d <= context; d += 1) {
@@ -109,15 +107,14 @@ const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
     }
   }
 
-  // Group into contiguous hunks
   const indices = [...included].toSorted((a, b) => a - b);
   const hunks: Hunk[] = [];
   let start = 0;
   while (start < indices.length) {
     let end = start;
     while (end + 1 < indices.length) {
-      const nextIdx = indices[end + 1]!;
-      const curIdx = indices[end]!;
+      const nextIdx = indices[end + 1] ?? 0;
+      const curIdx = indices[end] ?? 0;
       if (nextIdx !== curIdx + 1) {
         break;
       }
@@ -131,65 +128,6 @@ const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
   }
 
   return hunks;
-};
-
-// ─── Component ────────────────────────────────────────────────────────────────
-
-export const DiffView = function DiffView({
-  oldText,
-  newText,
-  filename,
-  mode = "unified",
-  context = 3,
-  showLineNumbers = false,
-}: DiffViewProps) {
-  const theme = useTheme();
-
-  const oldLines = oldText.split("\n");
-  const newLines = newText.split("\n");
-  const ops = computeDiff(oldLines, newLines);
-  const hunks = buildHunks(ops, context);
-  const hasChanges = ops.some((op) => op.type !== "equal");
-
-  if (!hasChanges) {
-    return (
-      <Box flexDirection="column">
-        {filename && (
-          <Text bold color={theme.colors.foreground}>
-            {filename}
-          </Text>
-        )}
-        <Text dimColor color={theme.colors.mutedForeground}>
-          No differences
-        </Text>
-      </Box>
-    );
-  }
-
-  return (
-    <Box flexDirection="column">
-      {filename && (
-        <Text bold color={theme.colors.foreground}>
-          --- {filename}
-        </Text>
-      )}
-      {mode === "split" ? (
-        <SplitView
-          hunks={hunks}
-          showLineNumbers={showLineNumbers}
-          theme={theme}
-        />
-      ) : mode === "inline" ? (
-        <InlineView ops={ops} showLineNumbers={showLineNumbers} theme={theme} />
-      ) : (
-        <UnifiedView
-          hunks={hunks}
-          showLineNumbers={showLineNumbers}
-          theme={theme}
-        />
-      )}
-    </Box>
-  );
 };
 
 // ─── Unified view ─────────────────────────────────────────────────────────────
@@ -207,12 +145,11 @@ const UnifiedView = function UnifiedView({
 }: ViewProps) {
   const rows: React.ReactNode[] = [];
 
-  hunks.forEach((hunk, hi) => {
-    // Hunk header
+  for (const hunk of hunks) {
     const oldCount = hunk.ops.filter((op) => op.type !== "insert").length;
     const newCount = hunk.ops.filter((op) => op.type !== "delete").length;
     rows.push(
-      <Box key={`hunk-${hi}`}>
+      <Box key={`hunk-${hunk.oldStart}-${hunk.newStart}`}>
         <Text color="cyan" dimColor>
           @@ -{hunk.oldStart},{oldCount} +{hunk.newStart},{newCount} @@
         </Text>
@@ -222,16 +159,17 @@ const UnifiedView = function UnifiedView({
     let ol = hunk.oldStart;
     let nl = hunk.newStart;
 
-    hunk.ops.forEach((op, oi) => {
-      const key = `${hi}-${oi}`;
-      const currentOl = op.type !== "insert" ? ol : null;
-      const currentNl = op.type !== "delete" ? nl : null;
+    for (const op of hunk.ops) {
+      const currentOl = op.type === "insert" ? null : ol;
+      const currentNl = op.type === "delete" ? null : nl;
       if (op.type !== "insert") {
         ol += 1;
       }
       if (op.type !== "delete") {
         nl += 1;
       }
+
+      const key = `${op.type}-${currentOl ?? "x"}-${currentNl ?? "x"}`;
 
       if (op.type === "delete") {
         rows.push(
@@ -268,8 +206,8 @@ const UnifiedView = function UnifiedView({
           </Box>
         );
       }
-    });
-  });
+    }
+  }
 
   return <Box flexDirection="column">{rows}</Box>;
 };
@@ -283,11 +221,11 @@ const SplitView = function SplitView({
 }: ViewProps) {
   const rows: React.ReactNode[] = [];
 
-  hunks.forEach((hunk, hi) => {
+  for (const hunk of hunks) {
     const oldCount = hunk.ops.filter((op) => op.type !== "insert").length;
     const newCount = hunk.ops.filter((op) => op.type !== "delete").length;
     rows.push(
-      <Box key={`hunk-${hi}`}>
+      <Box key={`hunk-${hunk.oldStart}-${hunk.newStart}`}>
         <Text color="cyan" dimColor>
           @@ -{hunk.oldStart},{oldCount} +{hunk.newStart},{newCount} @@
         </Text>
@@ -297,17 +235,17 @@ const SplitView = function SplitView({
     let ol = hunk.oldStart;
     let nl = hunk.newStart;
 
-    // For split, show equal lines, then paired del/ins
-    hunk.ops.forEach((op, oi) => {
-      const key = `${hi}-${oi}`;
-      const currentOl = op.type !== "insert" ? ol : null;
-      const currentNl = op.type !== "delete" ? nl : null;
+    for (const op of hunk.ops) {
+      const currentOl = op.type === "insert" ? null : ol;
+      const currentNl = op.type === "delete" ? null : nl;
       if (op.type !== "insert") {
         ol += 1;
       }
       if (op.type !== "delete") {
         nl += 1;
       }
+
+      const key = `${op.type}-${currentOl ?? "x"}-${currentNl ?? "x"}`;
 
       if (op.type === "equal") {
         rows.push(
@@ -354,16 +292,13 @@ const SplitView = function SplitView({
           </Box>
         );
       }
-    });
-  });
+    }
+  }
 
   return <Box flexDirection="column">{rows}</Box>;
 };
 
 // ─── Inline view ──────────────────────────────────────────────────────────────
-// Shows the full file linearly: equal lines dimmed, deletions red, insertions
-// green — no hunk headers. Deletions and insertions appear in order so the
-// reader sees old→new in place without jumping around the diff.
 
 interface InlineViewProps {
   ops: DiffOp[];
@@ -380,9 +315,9 @@ const InlineView = function InlineView({
   let oldLine = 1;
   let newLine = 1;
 
-  ops.forEach((op, idx) => {
-    const currentOl = op.type !== "insert" ? oldLine : null;
-    const currentNl = op.type !== "delete" ? newLine : null;
+  for (const op of ops) {
+    const currentOl = op.type === "insert" ? null : oldLine;
+    const currentNl = op.type === "delete" ? null : newLine;
     if (op.type !== "insert") {
       oldLine += 1;
     }
@@ -390,9 +325,11 @@ const InlineView = function InlineView({
       newLine += 1;
     }
 
+    const key = `${op.type}-${currentOl ?? "x"}-${currentNl ?? "x"}`;
+
     if (op.type === "delete") {
       rows.push(
-        <Box key={idx} gap={1}>
+        <Box key={key} gap={1}>
           {showLineNumbers && (
             <Text color={theme.colors.mutedForeground} dimColor>
               {String(currentOl ?? "").padStart(4)} {"    "}
@@ -405,7 +342,7 @@ const InlineView = function InlineView({
       );
     } else if (op.type === "insert") {
       rows.push(
-        <Box key={idx} gap={1}>
+        <Box key={key} gap={1}>
           {showLineNumbers && (
             <Text color={theme.colors.mutedForeground} dimColor>
               {"    "} {String(currentNl ?? "").padStart(4)}
@@ -416,7 +353,7 @@ const InlineView = function InlineView({
       );
     } else {
       rows.push(
-        <Box key={idx} gap={1}>
+        <Box key={key} gap={1}>
           {showLineNumbers && (
             <Text color={theme.colors.mutedForeground} dimColor>
               {String(currentOl ?? "").padStart(4)}{" "}
@@ -427,7 +364,75 @@ const InlineView = function InlineView({
         </Box>
       );
     }
-  });
+  }
 
   return <Box flexDirection="column">{rows}</Box>;
+};
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
+export const DiffView = function DiffView({
+  oldText,
+  newText,
+  filename,
+  mode = "unified",
+  context = 3,
+  showLineNumbers = false,
+}: DiffViewProps) {
+  const theme = useTheme();
+
+  const oldLines = oldText.split("\n");
+  const newLines = newText.split("\n");
+  const ops = computeDiff(oldLines, newLines);
+  const hunks = buildHunks(ops, context);
+  const hasChanges = ops.some((op) => op.type !== "equal");
+
+  if (!hasChanges) {
+    return (
+      <Box flexDirection="column">
+        {filename && (
+          <Text bold color={theme.colors.foreground}>
+            {filename}
+          </Text>
+        )}
+        <Text dimColor color={theme.colors.mutedForeground}>
+          No differences
+        </Text>
+      </Box>
+    );
+  }
+
+  let content: React.ReactNode;
+  if (mode === "split") {
+    content = (
+      <SplitView
+        hunks={hunks}
+        showLineNumbers={showLineNumbers}
+        theme={theme}
+      />
+    );
+  } else if (mode === "inline") {
+    content = (
+      <InlineView ops={ops} showLineNumbers={showLineNumbers} theme={theme} />
+    );
+  } else {
+    content = (
+      <UnifiedView
+        hunks={hunks}
+        showLineNumbers={showLineNumbers}
+        theme={theme}
+      />
+    );
+  }
+
+  return (
+    <Box flexDirection="column">
+      {filename && (
+        <Text bold color={theme.colors.foreground}>
+          --- {filename}
+        </Text>
+      )}
+      {content}
+    </Box>
+  );
 };

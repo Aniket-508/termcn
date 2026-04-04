@@ -28,6 +28,10 @@ export interface TextAreaProps {
   cursor?: string;
 }
 
+const getLines = (v: string): string[] => v.split("\n");
+
+const joinLines = (lines: string[]): string => lines.join("\n");
+
 export const TextArea = function TextArea({
   value: controlledValue,
   onChange,
@@ -49,18 +53,15 @@ export const TextArea = function TextArea({
 
   const value = controlledValue ?? internalValue;
 
-  function setValue(newVal: string) {
-    onChange ? onChange(newVal) : setInternalValue(newVal);
-  }
+  const setValue = (newVal: string) => {
+    if (onChange) {
+      onChange(newVal);
+    } else {
+      setInternalValue(newVal);
+    }
+  };
 
-  function getLines(v: string): string[] {
-    return v.split("\n");
-  }
-
-  function joinLines(lines: string[]): string {
-    return lines.join("\n");
-  }
-
+  // eslint-disable-next-line complexity
   useInput((input, key) => {
     if (!isFocused) {
       return;
@@ -77,7 +78,6 @@ export const TextArea = function TextArea({
     if (key.return) {
       const totalLines = lines.length;
       if (totalLines >= rows && cursorLine === rows - 1) {
-        // At row limit on last visible row — do nothing
         return;
       }
       const currentLine = lines[cursorLine] ?? "";
@@ -102,7 +102,6 @@ export const TextArea = function TextArea({
     if (key.backspace || key.delete) {
       const currentLine = lines[cursorLine] ?? "";
       if (cursorCol > 0) {
-        // Delete character before cursor on same line
         const newLine =
           currentLine.slice(0, cursorCol - 1) + currentLine.slice(cursorCol);
         const newLines = [
@@ -113,7 +112,6 @@ export const TextArea = function TextArea({
         setValue(joinLines(newLines));
         setCursorCol(cursorCol - 1);
       } else if (cursorLine > 0) {
-        // Merge with previous line
         const prevLine = lines[cursorLine - 1] ?? "";
         const mergedLine = prevLine + currentLine;
         const newLines = [
@@ -210,7 +208,6 @@ export const TextArea = function TextArea({
   const lines = getLines(value);
   const visibleLines = lines.slice(scrollOffset, scrollOffset + rows);
 
-  // Pad to always show `rows` rows
   const paddedLines: string[] = [...visibleLines];
   while (paddedLines.length < rows) {
     paddedLines.push("");
@@ -233,6 +230,7 @@ export const TextArea = function TextArea({
 
           if (isEmpty && rowIdx === 0) {
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Box key={rowIdx} flexDirection="row">
                 <Text color={theme.colors.mutedForeground}>{placeholder}</Text>
                 {isFocused && (
@@ -246,6 +244,7 @@ export const TextArea = function TextArea({
             const before = line.slice(0, cursorCol);
             const after = line.slice(cursorCol);
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Box key={rowIdx} flexDirection="row">
                 <Text color={theme.colors.foreground}>{before}</Text>
                 <Text color={theme.colors.focusRing}>{cursor}</Text>
@@ -255,6 +254,7 @@ export const TextArea = function TextArea({
           }
 
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Box key={rowIdx}>
               <Text color={theme.colors.foreground}>{line}</Text>
             </Box>

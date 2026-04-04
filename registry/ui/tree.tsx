@@ -39,7 +39,11 @@ const flattenTree = function flattenTree(
     const hasChildren = Boolean(node.children && node.children.length > 0);
     result.push({ depth, hasChildren, node });
     if (hasChildren && expandedKeys.has(node.key)) {
-      const childFlat = flattenTree(node.children!, expandedKeys, depth + 1);
+      const childFlat = flattenTree(
+        node.children ?? [],
+        expandedKeys,
+        depth + 1
+      );
       result.push(...childFlat);
     }
   }
@@ -74,11 +78,7 @@ export const Tree = function Tree({
       setActiveIndex((i) => Math.min(flatNodes.length - 1, i + 1));
     } else if (key.rightArrow || _input === " ") {
       if (current?.hasChildren && !expandedKeys.has(current.node.key)) {
-        setExpandedKeys((prev) => {
-          const next = new Set(prev);
-          next.add(current.node.key);
-          return next;
-        });
+        setExpandedKeys((prev) => new Set([...prev, current.node.key]));
       }
     } else if (key.leftArrow) {
       if (current?.hasChildren && expandedKeys.has(current.node.key)) {
@@ -88,10 +88,8 @@ export const Tree = function Tree({
           return next;
         });
       }
-    } else if (key.return) {
-      if (current) {
-        onSelect?.(current.node);
-      }
+    } else if (key.return && current) {
+      onSelect?.(current.node);
     }
   });
 

@@ -21,7 +21,7 @@ export interface SelectProps<T = string> {
   cursorColor?: string;
 }
 
-export function Select<T = string>({
+export const Select = <T = string>({
   options,
   value: controlledValue,
   onChange,
@@ -29,7 +29,7 @@ export function Select<T = string>({
   label,
   cursor = "›",
   cursorColor,
-}: SelectProps<T>) {
+}: SelectProps<T>) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -68,19 +68,24 @@ export function Select<T = string>({
         const isActive = idx === activeIndex;
         const isSelected =
           controlledValue !== undefined && opt.value === controlledValue;
+
+        let optColor: string;
+        if (opt.disabled) {
+          optColor = theme.colors.mutedForeground;
+        } else if (isActive) {
+          optColor = resolvedCursorColor;
+        } else {
+          optColor = theme.colors.foreground;
+        }
+
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={idx} gap={1}>
             <Text color={isActive ? resolvedCursorColor : undefined}>
               {isActive ? cursor : " "}
             </Text>
             <Text
-              color={
-                opt.disabled
-                  ? theme.colors.mutedForeground
-                  : isActive
-                    ? resolvedCursorColor
-                    : theme.colors.foreground
-              }
+              color={optColor}
               bold={isActive || isSelected}
               dimColor={opt.disabled}
             >
@@ -96,4 +101,4 @@ export function Select<T = string>({
       })}
     </Box>
   );
-}
+};

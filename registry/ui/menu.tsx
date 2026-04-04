@@ -25,37 +25,37 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
   const [focusIndex, setFocusIndex] = useState(0);
   const [submenuStack, setSubmenuStack] = useState<MenuItem[][]>([]);
 
-  const activeItems = submenuStack.length > 0 ? submenuStack.at(-1)! : items;
+  const activeItems = submenuStack.at(-1) ?? items;
 
-  // Selectable items (non-separator, non-disabled)
   const selectableIndices = activeItems
     .map((item, idx) => ({ idx, item }))
     .filter(({ item }) => !item.separator && !item.disabled)
     .map(({ idx }) => idx);
 
-  function moveFocus(direction: 1 | -1) {
+  const moveFocus = (direction: 1 | -1) => {
     const currentPos = selectableIndices.indexOf(focusIndex);
     const nextPos = currentPos + direction;
     if (nextPos >= 0 && nextPos < selectableIndices.length) {
       setFocusIndex(selectableIndices[nextPos]);
     }
-  }
+  };
 
-  function openSubmenu(item: MenuItem) {
+  const openSubmenu = (item: MenuItem) => {
     if (item.children && item.children.length > 0) {
-      setSubmenuStack((prev) => [...prev, item.children!]);
+      const { children } = item;
+      setSubmenuStack((prev) => [...prev, children]);
       setFocusIndex(0);
     }
-  }
+  };
 
-  function closeSubmenu() {
+  const closeSubmenu = () => {
     if (submenuStack.length > 0) {
       setSubmenuStack((prev) => prev.slice(0, -1));
       setFocusIndex(0);
     }
-  }
+  };
 
-  function activateItem(item: MenuItem) {
+  const activateItem = (item: MenuItem) => {
     if (item.disabled || item.separator) {
       return;
     }
@@ -64,7 +64,7 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
     } else {
       onSelect?.(item);
     }
-  }
+  };
 
   useInput((_input, key) => {
     if (key.upArrow) {
@@ -117,6 +117,15 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
 
         const isFocused = idx === focusIndex;
 
+        let labelColor: string;
+        if (item.disabled) {
+          labelColor = theme.colors.mutedForeground;
+        } else if (isFocused) {
+          labelColor = theme.colors.primary;
+        } else {
+          labelColor = theme.colors.foreground;
+        }
+
         return (
           <Box key={item.key} justifyContent="space-between">
             <Box flexDirection="row" gap={1}>
@@ -135,13 +144,7 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
                 </Text>
               )}
               <Text
-                color={
-                  item.disabled
-                    ? theme.colors.mutedForeground
-                    : isFocused
-                      ? theme.colors.primary
-                      : theme.colors.foreground
-                }
+                color={labelColor}
                 bold={isFocused && !item.disabled}
                 dimColor={item.disabled}
               >

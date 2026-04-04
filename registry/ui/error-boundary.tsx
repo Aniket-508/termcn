@@ -29,6 +29,7 @@ export class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
+    // eslint-disable-next-line react/no-set-state
     this.setState({ componentStack: info.componentStack ?? "" });
     this.props.onError?.(error, { componentStack: info.componentStack ?? "" });
   }
@@ -37,56 +38,57 @@ export class ErrorBoundary extends Component<
     const { hasError, error, componentStack } = this.state;
     const { children, fallback, title = "Error" } = this.props;
 
-    if (!hasError) {
-      return <>{children}</>;
-    }
+    if (hasError) {
+      if (fallback) {
+        return fallback;
+      }
 
-    if (fallback) {
-      return <>{fallback}</>;
-    }
+      const message = error?.message ?? "An unknown error occurred";
+      const stackLines = componentStack
+        .split("\n")
+        .map((l) => l.trim())
+        .filter(Boolean)
+        .slice(0, 6);
 
-    const message = error?.message ?? "An unknown error occurred";
-    const stackLines = componentStack
-      .split("\n")
-      .map((l) => l.trim())
-      .filter(Boolean)
-      .slice(0, 6);
-
-    return (
-      <Box
-        flexDirection="column"
-        borderStyle="round"
-        borderColor="red"
-        paddingX={1}
-        paddingY={0}
-        gap={0}
-      >
-        <Text color="red" bold>
-          ✖ {title}
-        </Text>
-        <Box marginTop={1}>
-          <Text color="white" bold>
-            {message}
+      return (
+        <Box
+          flexDirection="column"
+          borderStyle="round"
+          borderColor="red"
+          paddingX={1}
+          paddingY={0}
+          gap={0}
+        >
+          <Text color="red" bold>
+            ✖ {title}
           </Text>
-        </Box>
-        {stackLines.length > 0 && (
-          <Box flexDirection="column" marginTop={1}>
-            <Text color="red" dimColor>
-              Stack trace:
+          <Box marginTop={1}>
+            <Text color="white" bold>
+              {message}
             </Text>
-            {stackLines.map((line, i) => (
-              <Text key={i} color="red" dimColor>
-                {line}
-              </Text>
-            ))}
           </Box>
-        )}
-        <Box marginTop={1}>
-          <Text color="red" dimColor>
-            The application encountered an unexpected error.
-          </Text>
+          {stackLines.length > 0 && (
+            <Box flexDirection="column" marginTop={1}>
+              <Text color="red" dimColor>
+                Stack trace:
+              </Text>
+              {stackLines.map((line, idx) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <Text key={idx} color="red" dimColor>
+                  {line}
+                </Text>
+              ))}
+            </Box>
+          )}
+          <Box marginTop={1}>
+            <Text color="red" dimColor>
+              The application encountered an unexpected error.
+            </Text>
+          </Box>
         </Box>
-      </Box>
-    );
+      );
+    }
+
+    return children;
   }
 }

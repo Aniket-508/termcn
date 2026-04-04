@@ -19,13 +19,27 @@ export interface RadioGroupProps<T = string> {
   cursor?: string;
 }
 
-export function RadioGroup<T = string>({
+const getOptionColor = (
+  disabled: boolean | undefined,
+  isHighlighted: boolean,
+  theme: ReturnType<typeof useTheme>
+): string => {
+  if (disabled) {
+    return theme.colors.mutedForeground;
+  }
+  if (isHighlighted) {
+    return theme.colors.primary;
+  }
+  return theme.colors.foreground;
+};
+
+export const RadioGroup = <T = string>({
   options,
   value: controlledValue,
   onChange,
   name: _name,
   cursor = "›",
-}: RadioGroupProps<T>) {
+}: RadioGroupProps<T>) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(() => {
     if (controlledValue === undefined) {
@@ -81,30 +95,19 @@ export function RadioGroup<T = string>({
         const icon = isSelected ? "◉" : "○";
 
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={idx} gap={1}>
             <Text color={isActive ? theme.colors.primary : undefined}>
               {isActive ? cursor : " "}
             </Text>
             <Text
-              color={
-                opt.disabled
-                  ? theme.colors.mutedForeground
-                  : isSelected
-                    ? theme.colors.primary
-                    : theme.colors.foreground
-              }
+              color={getOptionColor(opt.disabled, isSelected, theme)}
               dimColor={opt.disabled}
             >
               {icon}
             </Text>
             <Text
-              color={
-                opt.disabled
-                  ? theme.colors.mutedForeground
-                  : isActive
-                    ? theme.colors.primary
-                    : theme.colors.foreground
-              }
+              color={getOptionColor(opt.disabled, isActive, theme)}
               bold={isActive || isSelected}
               dimColor={opt.disabled}
             >
@@ -120,4 +123,4 @@ export function RadioGroup<T = string>({
       })}
     </Box>
   );
-}
+};

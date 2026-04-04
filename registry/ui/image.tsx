@@ -102,7 +102,7 @@ export const Image = function Image({
 }: ImageProps) {
   const theme = useTheme();
   const [, setRendered] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [renderError, setRenderError] = useState<string | null>(null);
 
   const resolvedProtocol = protocol === "auto" ? detectProtocol() : protocol;
   const filename = path.basename(src);
@@ -123,12 +123,12 @@ export const Image = function Image({
         setRendered(true);
       }
     } catch (error) {
-      setError(error instanceof Error ? error.message : String(error));
+      setRenderError(error instanceof Error ? error.message : String(error));
     }
   }, [src, resolvedProtocol, width, height]);
 
   // ASCII fallback: draw a placeholder box
-  if (resolvedProtocol === "ascii" || error) {
+  if (resolvedProtocol === "ascii" || renderError) {
     const boxWidth = width ?? 20;
     const topBottom = "─".repeat(boxWidth - 2);
     const empty = " ".repeat(boxWidth - 2);
@@ -151,6 +151,7 @@ export const Image = function Image({
     return (
       <Box flexDirection="column" gap={0}>
         {displayLines.map((line, i) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Text key={i} color={theme.colors.border}>
             {line}
           </Text>
@@ -161,7 +162,10 @@ export const Image = function Image({
           </Text>
         )}
         <Text color={theme.colors.mutedForeground} dimColor>
-          [{resolvedProtocol === "ascii" ? "ascii fallback" : `error: ${error}`}
+          [
+          {resolvedProtocol === "ascii"
+            ? "ascii fallback"
+            : `error: ${renderError}`}
           ] {ext}
         </Text>
       </Box>

@@ -21,11 +21,11 @@ export interface SidebarProps {
   title?: string;
 }
 
-const flattenItems = function flattenItems(
+const flattenItems = (
   items: SidebarItem[],
   expandedKeys: Set<string>,
   depth = 0
-): { item: SidebarItem; depth: number }[] {
+): { item: SidebarItem; depth: number }[] => {
   const result: { item: SidebarItem; depth: number }[] = [];
   for (const item of items) {
     result.push({ depth, item });
@@ -36,14 +36,14 @@ const flattenItems = function flattenItems(
   return result;
 };
 
-export const Sidebar = function Sidebar({
+export const Sidebar = ({
   items,
   activeKey,
   onSelect,
   collapsed = false,
   width = 20,
   title,
-}: SidebarProps) {
+}: SidebarProps) => {
   const theme = useTheme();
   const [focusIndex, setFocusIndex] = useState(0);
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(new Set());
@@ -51,7 +51,7 @@ export const Sidebar = function Sidebar({
   const effectiveWidth = collapsed ? 3 : width;
   const flatItems = flattenItems(items, expandedKeys);
 
-  function toggleExpand(key: string) {
+  const toggleExpand = (key: string) => {
     setExpandedKeys((prev) => {
       const next = new Set(prev);
       if (next.has(key)) {
@@ -61,7 +61,7 @@ export const Sidebar = function Sidebar({
       }
       return next;
     });
-  }
+  };
 
   useInput((_input, key) => {
     if (key.upArrow) {
@@ -119,22 +119,30 @@ export const Sidebar = function Sidebar({
         const isExpanded = expandedKeys.has(item.key);
 
         if (collapsed) {
+          let collapsedColor: string;
+          if (isActive) {
+            collapsedColor = theme.colors.primary;
+          } else if (isFocused) {
+            collapsedColor = theme.colors.foreground;
+          } else {
+            collapsedColor = theme.colors.mutedForeground;
+          }
           return (
             <Box key={item.key} paddingX={0}>
-              <Text
-                color={
-                  isActive
-                    ? theme.colors.primary
-                    : isFocused
-                      ? theme.colors.foreground
-                      : theme.colors.mutedForeground
-                }
-                bold={isActive}
-              >
+              <Text color={collapsedColor} bold={isActive}>
                 {item.icon ?? item.label.charAt(0)}
               </Text>
             </Box>
           );
+        }
+
+        let labelColor: string;
+        if (isActive) {
+          labelColor = theme.colors.primary;
+        } else if (isFocused) {
+          labelColor = theme.colors.foreground;
+        } else {
+          labelColor = theme.colors.mutedForeground;
         }
 
         return (
@@ -164,16 +172,7 @@ export const Sidebar = function Sidebar({
               </Text>
             )}
             {/* Label */}
-            <Text
-              color={
-                isActive
-                  ? theme.colors.primary
-                  : isFocused
-                    ? theme.colors.foreground
-                    : theme.colors.mutedForeground
-              }
-              bold={isActive || isFocused}
-            >
+            <Text color={labelColor} bold={isActive || isFocused}>
               {item.label}
             </Text>
             {/* Badge */}

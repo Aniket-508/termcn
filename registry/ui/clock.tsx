@@ -35,7 +35,7 @@ const renderBigText = function renderBigText(
 ): React.ReactElement {
   const rows: string[] = ["", "", "", "", ""];
   for (const ch of str) {
-    const segs = BIG_DIGITS[ch] ?? BIG_DIGITS[" "]!;
+    const segs = BIG_DIGITS[ch] ?? BIG_DIGITS[" "] ?? [];
     for (let r = 0; r < 5; r += 1) {
       rows[r] += segs[r];
     }
@@ -43,6 +43,7 @@ const renderBigText = function renderBigText(
   return (
     <Box flexDirection="column">
       {rows.map((row, i) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Text key={i} color={color}>
           {row}
         </Text>
@@ -50,6 +51,8 @@ const renderBigText = function renderBigText(
     </Box>
   );
 };
+
+const padNum = (n: number) => String(n).padStart(2, "0");
 
 const getTimeParts = function getTimeParts(
   format: "12h" | "24h",
@@ -70,10 +73,9 @@ const getTimeParts = function getTimeParts(
     hours = hours % 12 || 12;
   }
 
-  const pad = (n: number) => String(n).padStart(2, "0");
   const time = showSeconds
-    ? `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
-    : `${pad(hours)}:${pad(minutes)}`;
+    ? `${padNum(hours)}:${padNum(minutes)}:${padNum(seconds)}`
+    : `${padNum(hours)}:${padNum(minutes)}`;
 
   return { ampm, time };
 };

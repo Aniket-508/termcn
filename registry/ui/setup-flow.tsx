@@ -86,10 +86,12 @@ const SetupFlowRoot = function SetupFlowRoot({
           </BigText>
         </Box>
       )}
+      {/* eslint-disable-next-line react/no-react-children */}
       {React.Children.map(children, (child, i) => (
         <React.Fragment key={i}>
           {child}
           {/* Connector between steps */}
+          {/* eslint-disable-next-line react/no-react-children */}
           {i < React.Children.count(children) - 1 && (
             <Box paddingLeft={0}>
               <Text
@@ -184,7 +186,11 @@ const SetupFlowMultiSelect = function SetupFlowMultiSelect({
       const next = selectedValues.includes(val)
         ? selectedValues.filter((v) => v !== val)
         : [...selectedValues, val];
-      onChange ? onChange(next) : setInternalValues(next);
+      if (onChange) {
+        onChange(next);
+      } else {
+        setInternalValues(next);
+      }
     } else if (key.return) {
       onSubmit?.(selectedValues);
     }

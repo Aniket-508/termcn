@@ -14,20 +14,18 @@ export interface LineChartProps {
   showAxes?: boolean;
 }
 
-const getValue = function getValue(d: LineChartDataPoint): number {
-  return typeof d === "number" ? d : d.value;
-};
+const getValue = (d: LineChartDataPoint): number =>
+  typeof d === "number" ? d : d.value;
 
-const getLabel = function getLabel(d: LineChartDataPoint): string {
-  return typeof d === "number" ? "" : (d.label ?? "");
-};
+const getLabel = (d: LineChartDataPoint): string =>
+  typeof d === "number" ? "" : (d.label ?? "");
 
-const normalize = function normalize(
+const normalize = (
   value: number,
   min: number,
   max: number,
   rows: number
-): number {
+): number => {
   if (max === min) {
     return Math.floor(rows / 2);
   }
@@ -47,14 +45,14 @@ const AXIS_TICK_V = "┤";
 // unused but defined for completeness
 const _AXIS_TICK_H = "┬";
 
-export const LineChart = function LineChart({
+export const LineChart = ({
   data,
   width = 40,
   height = 10,
   title,
   color,
   showAxes = true,
-}: LineChartProps) {
+}: LineChartProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 
@@ -66,11 +64,9 @@ export const LineChart = function LineChart({
   const minVal = Math.min(...values);
   const maxVal = Math.max(...values);
 
-  // Reserve space for Y-axis if showing axes
   const yAxisWidth = showAxes ? String(Math.round(maxVal)).length + 2 : 0;
   const chartWidth = Math.max(4, width - yAxisWidth);
 
-  // Sample data to fit chartWidth columns
   const numPoints = data.length;
   const sampledIndices = Array.from({ length: chartWidth }, (_, i) =>
     Math.round((i / (chartWidth - 1)) * (numPoints - 1))
@@ -78,28 +74,23 @@ export const LineChart = function LineChart({
   const sampledValues = sampledIndices.map((si) => values[si] ?? 0);
   const sampledData = sampledIndices.map((si) => data[si]);
 
-  // Build a grid: height rows x chartWidth cols, default empty
   const grid: string[][] = Array.from({ length: height }, () =>
     Array.from({ length: chartWidth }, () => " ")
   );
 
-  // Plot points and connectors
   const normalizedRows = sampledValues.map(
     (v) => height - 1 - normalize(v, minVal, maxVal, height)
   );
 
   for (let col = 0; col < chartWidth; col += 1) {
     const row = normalizedRows[col];
-    // Draw plot point
     grid[row][col] = PLOT_CHAR;
 
-    // Draw connector to next point
     if (col < chartWidth - 1) {
-      const nextRow = normalizedRows[col + 1]!;
+      const nextRow = normalizedRows[col + 1] ?? row;
       if (nextRow === row) {
-        // flat — connector sits on same row, but plot char takes priority; skip middle
+        // flat — connector sits on same row, but plot char takes priority
       } else if (nextRow < row) {
-        // going up
         let r = row - 1;
         while (r > nextRow) {
           grid[r][col] = AXIS_V;
@@ -109,7 +100,6 @@ export const LineChart = function LineChart({
           grid[nextRow][col] = CONNECT_UP;
         }
       } else {
-        // going down
         let r = row + 1;
         while (r < nextRow) {
           grid[r][col] = AXIS_V;
@@ -122,11 +112,9 @@ export const LineChart = function LineChart({
     }
   }
 
-  // Y-axis labels
   const yLabels = Array.from({ length: height }, (_, i) => {
     const rowVal =
       minVal + ((height - 1 - i) / (height - 1)) * (maxVal - minVal);
-    // Only show label for top, mid, bottom rows
     if (i === 0 || i === Math.floor(height / 2) || i === height - 1) {
       return String(Math.round(rowVal));
     }
@@ -141,6 +129,7 @@ export const LineChart = function LineChart({
         </Text>
       )}
       {grid.map((row, rowIdx) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Box key={rowIdx} flexDirection="row">
           {showAxes && (
             <Text color={theme.colors.mutedForeground}>
@@ -152,6 +141,7 @@ export const LineChart = function LineChart({
             const isPlot = cell === PLOT_CHAR;
             return (
               <Text
+                // eslint-disable-next-line react/no-array-index-key
                 key={colIdx}
                 color={isPlot ? resolvedColor : theme.colors.mutedForeground}
               >
@@ -184,11 +174,13 @@ export const LineChart = function LineChart({
               idx === chartWidth - 1
             ) {
               return (
+                // eslint-disable-next-line react/no-array-index-key
                 <Text key={idx} color={theme.colors.mutedForeground}>
                   {lbl || String(idx)}
                 </Text>
               );
             }
+            // eslint-disable-next-line react/no-array-index-key
             return <Text key={idx}> </Text>;
           })}
         </Box>

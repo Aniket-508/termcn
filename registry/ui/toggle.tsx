@@ -54,7 +54,11 @@ export const Toggle = function Toggle({
     }
     if (input === " ") {
       const next = !checked;
-      onChange ? onChange(next) : setInternalChecked(next);
+      if (onChange) {
+        onChange(next);
+      } else {
+        setInternalChecked(next);
+      }
     }
   });
 

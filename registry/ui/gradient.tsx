@@ -87,6 +87,7 @@ export const Gradient = function Gradient({
   return (
     <Box flexDirection="row">
       {chars.map((item, idx) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Text key={idx} color={item.color} bold={bold}>
           {item.char}
         </Text>

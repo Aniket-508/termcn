@@ -116,6 +116,7 @@ export const HeatMap = function HeatMap({
         <Box flexDirection="row">
           {rowLabelWidth > 0 && <Text>{" ".repeat(rowLabelWidth + 1)}</Text>}
           {Array.from({ length: numCols }, (_, ci) => (
+            // eslint-disable-next-line react/no-array-index-key
             <Text key={ci} color={theme.colors.mutedForeground}>
               {padCenter(colLabels[ci] ?? String(ci), cellWidth)}
             </Text>
@@ -125,6 +126,7 @@ export const HeatMap = function HeatMap({
 
       {/* Data rows */}
       {data.map((row, ri) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Box key={ri} flexDirection="row">
           {/* Row label */}
           {rowLabels && (
@@ -142,6 +144,7 @@ export const HeatMap = function HeatMap({
               : shadeChar.repeat(cellWidth);
 
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Text key={ci} color={cellColor}>
                 {cellContent}
               </Text>
@@ -154,6 +157,7 @@ export const HeatMap = function HeatMap({
       <Box flexDirection="row" gap={1} marginTop={1}>
         <Text color={theme.colors.mutedForeground}>Low</Text>
         {colorScale.map((c, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Text key={idx} color={c}>
             █
           </Text>

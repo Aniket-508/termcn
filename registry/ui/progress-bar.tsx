@@ -32,9 +32,9 @@ export const ProgressBar = function ProgressBar({
   const resolvedColor = color ?? theme.colors.primary;
 
   const percent =
-    total !== undefined
-      ? Math.min(100, Math.round((value / total) * 100))
-      : Math.min(100, Math.round(value));
+    total === undefined
+      ? Math.min(100, Math.round(value))
+      : Math.min(100, Math.round((value / total) * 100));
   const filled = Math.round((percent / 100) * width);
   const empty = width - filled;
 

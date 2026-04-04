@@ -144,16 +144,19 @@ export const DirectoryTree = function DirectoryTree({
 
         const indent = "  ".repeat(entry.depth);
 
+        let entryColor: string;
+        if (isCursor) {
+          entryColor = theme.colors.selectionForeground;
+        } else if (entry.isDir) {
+          entryColor = theme.colors.primary;
+        } else {
+          entryColor = theme.colors.foreground;
+        }
+
         return (
-          <Box key={entry.path + idx}>
+          <Box key={entry.path}>
             <Text
-              color={
-                isCursor
-                  ? theme.colors.selectionForeground
-                  : entry.isDir
-                    ? theme.colors.primary
-                    : theme.colors.foreground
-              }
+              color={entryColor}
               backgroundColor={isCursor ? theme.colors.selection : undefined}
               bold={entry.isDir}
             >

@@ -85,14 +85,22 @@ const AppShellInput = function AppShellInput({
     }
     if (key.backspace || key.delete) {
       const next = value.slice(0, -1);
-      onChange ? onChange(next) : setInternalValue(next);
+      if (onChange) {
+        onChange(next);
+      } else {
+        setInternalValue(next);
+      }
       return;
     }
     if (key.escape || key.upArrow || key.downArrow || key.tab) {
       return;
     }
     const next = value + input;
-    onChange ? onChange(next) : setInternalValue(next);
+    if (onChange) {
+      onChange(next);
+    } else {
+      setInternalValue(next);
+    }
   });
 
   return (

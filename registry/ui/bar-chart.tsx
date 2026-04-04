@@ -21,28 +21,28 @@ export interface BarChartProps {
 const BAR_CHAR = "█";
 const EMPTY_CHAR = "░";
 
-const pad = function pad(str: string, length: number): string {
+const pad = (str: string, length: number): string => {
   if (str.length >= length) {
     return str.slice(0, length);
   }
   return `${str} `.repeat(length - str.length);
 };
 
-const padStart = function padStart(str: string, length: number): string {
+const padStart = (str: string, length: number): string => {
   if (str.length >= length) {
     return str.slice(0, length);
   }
   return " ".repeat(length - str.length) + str;
 };
 
-export const BarChart = function BarChart({
+export const BarChart = ({
   data,
   direction = "horizontal",
   width = 30,
   height = 10,
   showValues = true,
   title,
-}: BarChartProps) {
+}: BarChartProps) => {
   const theme = useTheme();
 
   if (data.length === 0) {
@@ -54,7 +54,6 @@ export const BarChart = function BarChart({
   if (direction === "horizontal") {
     const maxLabelLen = Math.max(...data.map((d) => d.label.length));
     const maxValLen = Math.max(...data.map((d) => String(d.value).length));
-    // label + space + bar + space + value
     const barWidth = width - maxLabelLen - maxValLen - 3;
 
     return (
@@ -74,6 +73,7 @@ export const BarChart = function BarChart({
           const resolvedColor = item.color ?? theme.colors.primary;
 
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Box key={idx} flexDirection="row" gap={1}>
               <Text color={theme.colors.foreground}>
                 {pad(item.label, maxLabelLen)}
@@ -114,6 +114,7 @@ export const BarChart = function BarChart({
       {rows.map((row, rowIdx) => {
         const threshold = ((height - 1 - rowIdx) / (height - 1)) * maxValue;
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={rowIdx} flexDirection="row">
             {row.map((cell, colIdx) => {
               const item = data[colIdx];
@@ -121,6 +122,7 @@ export const BarChart = function BarChart({
               const isFilled = item.value >= threshold;
               return (
                 <Text
+                  // eslint-disable-next-line react/no-array-index-key
                   key={colIdx}
                   color={isFilled ? resolvedColor : theme.colors.muted}
                 >
@@ -137,6 +139,7 @@ export const BarChart = function BarChart({
           {data.map((item, idx) => {
             const resolvedColor = item.color ?? theme.colors.primary;
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} color={resolvedColor}>
                 {pad(String(item.value), barW)}
               </Text>
@@ -147,6 +150,7 @@ export const BarChart = function BarChart({
       {/* Labels row */}
       <Box flexDirection="row">
         {data.map((item, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Text key={idx} color={theme.colors.mutedForeground}>
             {pad(item.label, barW)}
           </Text>

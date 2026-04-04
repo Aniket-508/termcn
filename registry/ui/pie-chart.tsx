@@ -46,16 +46,15 @@ const LEGEND_SQUARE = "■";
  * Each cell is tested to see which segment it belongs to,
  * then rendered with that segment's color using block chars.
  */
-const buildPieGrid = function buildPieGrid(
+const buildPieGrid = (
   data: PieChartItem[],
   radius: number
-): { char: string; color: string }[][] {
+): { char: string; color: string }[][] => {
   const total = data.reduce((s, d) => s + d.value, 0);
   if (total === 0) {
     return [];
   }
 
-  // Terminal cells are ~2x taller than wide, so scale x by 2
   const cols = radius * 4;
   const rows = radius * 2;
   const cx = cols / 2;
@@ -66,8 +65,7 @@ const buildPieGrid = function buildPieGrid(
     () => Array.from({ length: cols }, () => ({ char: " ", color: "" }))
   );
 
-  // Pre-compute cumulative angles for each segment
-  const angles: { start: number; end: number; color: string }[] = [];
+  const angles: { color: string; end: number; start: number }[] = [];
   let cumulative = 0;
   for (const item of data) {
     const slice = (item.value / total) * Math.PI * 2;
@@ -81,7 +79,6 @@ const buildPieGrid = function buildPieGrid(
 
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
-      // account for terminal aspect ratio
       const dx = (col - cx) / 2;
       const dy = row - cy;
       const dist = Math.hypot(dx, dy);
@@ -90,13 +87,11 @@ const buildPieGrid = function buildPieGrid(
         continue;
       }
 
-      // 0 at top
       let angle = Math.atan2(dy, dx) + Math.PI / 2;
       if (angle < 0) {
         angle += Math.PI * 2;
       }
 
-      // Find which segment this angle belongs to
       const seg =
         angles.find((a) => angle >= a.start && angle < a.end) ?? angles.at(-1);
       if (seg) {
@@ -108,12 +103,12 @@ const buildPieGrid = function buildPieGrid(
   return grid;
 };
 
-export const PieChart = function PieChart({
+export const PieChart = ({
   data,
   radius = 5,
   showLegend = true,
   showPercentages = true,
-}: PieChartProps) {
+}: PieChartProps) => {
   const theme = useTheme();
 
   if (data.length === 0) {
@@ -122,7 +117,6 @@ export const PieChart = function PieChart({
 
   const total = data.reduce((s, d) => s + d.value, 0);
 
-  // Assign colors
   const itemsWithColors = data.map((item, idx) => ({
     ...item,
     color:
@@ -138,11 +132,14 @@ export const PieChart = function PieChart({
       {/* Pie grid */}
       <Box flexDirection="column">
         {grid.map((row, rowIdx) => (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={rowIdx} flexDirection="row">
             {row.map((cell, colIdx) =>
               cell.char === " " ? (
+                // eslint-disable-next-line react/no-array-index-key
                 <Text key={colIdx}> </Text>
               ) : (
+                // eslint-disable-next-line react/no-array-index-key
                 <Text key={colIdx} color={cell.color || theme.colors.primary}>
                   {cell.char}
                 </Text>
@@ -159,6 +156,7 @@ export const PieChart = function PieChart({
             const pct =
               total > 0 ? ((item.value / total) * 100).toFixed(1) : "0.0";
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Box key={idx} flexDirection="row" gap={1}>
                 <Text color={item.color}>{LEGEND_SQUARE}</Text>
                 <Text color={theme.colors.foreground}>{item.label}</Text>

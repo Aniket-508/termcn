@@ -109,7 +109,11 @@ export const PathInput = function PathInput({
     if (key.tab) {
       if (completions.length > 0) {
         const selected = completions[completionIndex] ?? completions[0];
-        onChange ? onChange(selected) : setInternalValue(selected);
+        if (onChange) {
+          onChange(selected);
+        } else {
+          setInternalValue(selected);
+        }
         setCompletionIndex(0);
       }
       return;
@@ -128,7 +132,11 @@ export const PathInput = function PathInput({
     if (key.backspace || key.delete) {
       const newVal = value.slice(0, -1);
       setCompletionIndex(0);
-      onChange ? onChange(newVal) : setInternalValue(newVal);
+      if (onChange) {
+        onChange(newVal);
+      } else {
+        setInternalValue(newVal);
+      }
       return;
     }
 
@@ -138,7 +146,11 @@ export const PathInput = function PathInput({
 
     const newVal = value + input;
     setCompletionIndex(0);
-    onChange ? onChange(newVal) : setInternalValue(newVal);
+    if (onChange) {
+      onChange(newVal);
+    } else {
+      setInternalValue(newVal);
+    }
   });
 
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;

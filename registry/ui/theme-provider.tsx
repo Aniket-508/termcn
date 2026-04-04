@@ -224,19 +224,6 @@ export interface AutoThemeProviderProps {
   lightTheme: Theme;
 }
 
-export const AutoThemeProvider = ({
-  children,
-  darkTheme,
-  lightTheme,
-}: AutoThemeProviderProps) => {
-  const scheme = detectColorScheme();
-  return (
-    <ThemeProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
-      {children}
-    </ThemeProvider>
-  );
-};
-
 export const ThemeProvider = ({
   children,
   noUnicode,
@@ -249,22 +236,44 @@ export const ThemeProvider = ({
     setCurrentTheme(theme);
   }, [theme]);
 
+  const motionValue = React.useMemo(
+    () => ({ reduced: reducedMotion ?? isReducedMotion() }),
+    [reducedMotion]
+  );
+
+  const unicodeValue = React.useMemo(
+    () => ({
+      unicode: noUnicode === undefined ? !isNoUnicode() : !noUnicode,
+    }),
+    [noUnicode]
+  );
+
+  const themeValue = React.useMemo(
+    () => ({ setTheme: setCurrentTheme, theme: currentTheme }),
+    [currentTheme]
+  );
+
   return (
-    <MotionContext.Provider
-      value={{ reduced: reducedMotion ?? isReducedMotion() }}
-    >
-      <UnicodeContext.Provider
-        value={{
-          unicode: noUnicode === undefined ? !isNoUnicode() : !noUnicode,
-        }}
-      >
-        <ThemeContext.Provider
-          value={{ setTheme: setCurrentTheme, theme: currentTheme }}
-        >
+    <MotionContext.Provider value={motionValue}>
+      <UnicodeContext.Provider value={unicodeValue}>
+        <ThemeContext.Provider value={themeValue}>
           {children}
         </ThemeContext.Provider>
       </UnicodeContext.Provider>
     </MotionContext.Provider>
+  );
+};
+
+export const AutoThemeProvider = ({
+  children,
+  darkTheme,
+  lightTheme,
+}: AutoThemeProviderProps) => {
+  const scheme = detectColorScheme();
+  return (
+    <ThemeProvider theme={scheme === "dark" ? darkTheme : lightTheme}>
+      {children}
+    </ThemeProvider>
   );
 };
 

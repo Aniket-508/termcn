@@ -45,9 +45,11 @@ export const Skeleton = function Skeleton({
   return (
     <Box flexDirection="column">
       {rows.map((row, i) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Text key={i}>
           {[...row].map((char, j) => (
             <Text
+              // eslint-disable-next-line react/no-array-index-key
               key={j}
               color={
                 char === "█" ? theme.colors.mutedForeground : theme.colors.muted

@@ -35,18 +35,19 @@ const buildLines = function buildLines(
   const path = key === undefined ? pathPrefix : `${pathPrefix}.${key}`;
 
   if (Array.isArray(data)) {
-    const lines: JSONLine[] = [];
-    lines.push({
-      closeChar: "]",
-      collapsible: true,
-      depth,
-      isLast,
-      key,
-      openChar: "[",
-      path,
-      type: "open",
-    });
-    data.forEach((item, idx) => {
+    const lines: JSONLine[] = [
+      {
+        closeChar: "]",
+        collapsible: true,
+        depth,
+        isLast,
+        key,
+        openChar: "[",
+        path,
+        type: "open",
+      },
+    ];
+    for (const [idx, item] of data.entries()) {
       const childLines = buildLines(
         item,
         depth + 1,
@@ -55,7 +56,7 @@ const buildLines = function buildLines(
         path
       );
       lines.push(...childLines);
-    });
+    }
     lines.push({
       closeChar: "]",
       collapsible: false,
@@ -69,18 +70,19 @@ const buildLines = function buildLines(
 
   if (data !== null && typeof data === "object") {
     const entries = Object.entries(data as Record<string, unknown>);
-    const lines: JSONLine[] = [];
-    lines.push({
-      closeChar: "}",
-      collapsible: true,
-      depth,
-      isLast,
-      key,
-      openChar: "{",
-      path,
-      type: "open",
-    });
-    entries.forEach(([k, v], idx) => {
+    const lines: JSONLine[] = [
+      {
+        closeChar: "}",
+        collapsible: true,
+        depth,
+        isLast,
+        key,
+        openChar: "{",
+        path,
+        type: "open",
+      },
+    ];
+    for (const [idx, [k, v]] of entries.entries()) {
       const childLines = buildLines(
         v,
         depth + 1,
@@ -89,7 +91,7 @@ const buildLines = function buildLines(
         path
       );
       lines.push(...childLines);
-    });
+    }
     lines.push({
       closeChar: "}",
       collapsible: false,
@@ -136,11 +138,9 @@ export const JSONView = function JSONView({
         (line.path.startsWith(`${cp}_close`) && line.path !== `${cp}_close`)
     );
 
-    // For close lines, check if its own open path is collapsed (to still show close bracket)
     if (line.type === "close") {
       const openPath = line.path.replace("_close", "");
       if (collapsedOpenPaths.has(openPath)) {
-        // Skip close line when collapsed (we show ... instead)
         continue;
       }
     }
@@ -179,7 +179,7 @@ export const JSONView = function JSONView({
     }
   });
 
-  function renderValue(value: unknown): React.ReactNode {
+  const renderValue = (value: unknown): React.ReactNode => {
     if (value === null) {
       return <Text color={theme.colors.mutedForeground}>null</Text>;
     }
@@ -190,7 +190,7 @@ export const JSONView = function JSONView({
       return <Text color={theme.colors.warning}>{String(value)}</Text>;
     }
     return <Text color={theme.colors.foreground}>{String(value)}</Text>;
-  }
+  };
 
   return (
     <Box flexDirection="column">
@@ -208,6 +208,7 @@ export const JSONView = function JSONView({
             collapsedPaths.has(line.path) ||
             (collapsed && collapsedPaths.size === 0 && line.depth === 0);
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Box key={line.path + idx}>
               <Text
                 backgroundColor={isCursor ? theme.colors.selection : undefined}
@@ -240,6 +241,7 @@ export const JSONView = function JSONView({
 
         if (line.type === "close") {
           return (
+            // eslint-disable-next-line react/no-array-index-key
             <Box key={line.path + idx}>
               <Text
                 backgroundColor={isCursor ? theme.colors.selection : undefined}
@@ -254,6 +256,7 @@ export const JSONView = function JSONView({
 
         // primitive
         return (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={line.path + idx}>
             <Text
               backgroundColor={isCursor ? theme.colors.selection : undefined}

@@ -1,5 +1,11 @@
 import { Box, Text } from "ink";
-import React, { useState, useCallback, createContext, useContext } from "react";
+import {
+  useState,
+  useCallback,
+  useMemo,
+  createContext,
+  useContext,
+} from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
@@ -88,10 +94,13 @@ export const Form = function Form({
     }
   });
 
+  const contextValue = useMemo(
+    () => ({ errors, isDirty, setFieldError, setFieldValue, values }),
+    [errors, isDirty, setFieldError, setFieldValue, values]
+  );
+
   return (
-    <FormContext.Provider
-      value={{ errors, isDirty, setFieldError, setFieldValue, values }}
-    >
+    <FormContext.Provider value={contextValue}>
       <Box flexDirection="column" gap={1}>
         {children}
         <Text color={theme.colors.mutedForeground} dimColor>
