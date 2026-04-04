@@ -1,0 +1,56 @@
+---
+title: "Setup Flow"
+description: "@clack-style step flow with ◇/◆/│ visual language, badge, info steps, and multi-select"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="setup-flow" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/setup-flow.json
+```
+
+## Usage
+
+```tsx
+import { SetupFlow } from "@/components/ui/setup-flow";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <SetupFlow {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `big-text`
+- `use-animation`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop             | Type          | Default     | Description |
+| ---------------- | ------------- | ----------- | ----------- |
+| `title`          | `string`      | `undefined` | -           |
+| `titleFont`      | `BigTextFont` | `"block"`   | -           |
+| `titleColor`     | `string`      | `"#888888"` | -           |
+| `titleColorAlt`  | `string`      | `undefined` | -           |
+| `connectorChar`  | `string`      | `"│"`       | -           |
+| `connectorColor` | `string`      | `undefined` | -           |
+| `children`       | `ReactNode`   | `required`  | -           |
+
+## Registry Files
+
+- `components/ui/setup-flow.tsx`

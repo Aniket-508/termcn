@@ -1,0 +1,55 @@
+---
+title: "Dialog"
+description: "Confirmation dialog with OK/Cancel actions"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="dialog" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/dialog.json
+```
+
+## Usage
+
+```tsx
+import { Dialog } from "@/components/ui/dialog";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Dialog {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop           | Type                    | Default     | Description |
+| -------------- | ----------------------- | ----------- | ----------- |
+| `title`        | `string`                | `undefined` | -           |
+| `children`     | `ReactNode`             | `required`  | -           |
+| `confirmLabel` | `string`                | `"OK"`      | -           |
+| `cancelLabel`  | `string`                | `"Cancel"`  | -           |
+| `onConfirm`    | `() =&gt; void`         | `undefined` | -           |
+| `onCancel`     | `() =&gt; void`         | `undefined` | -           |
+| `variant`      | `"default" \| "danger"` | `"default"` | -           |
+| `isOpen`       | `boolean`               | `false`     | -           |
+
+## Registry Files
+
+- `components/ui/dialog.tsx`

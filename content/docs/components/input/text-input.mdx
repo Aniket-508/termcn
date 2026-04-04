@@ -1,0 +1,58 @@
+---
+title: "Text Input"
+description: "Single-line text input with placeholder, validation, mask"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="text-input" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/text-input.json
+```
+
+## Usage
+
+```tsx
+import { TextInput } from "@/components/ui/text-input";
+
+export function Example() {
+  <TextInput label="Project name" value="termcn" />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                                                                            | Default     | Description                                       |
+| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |
+| `value`       | `string`                                                                                        | `undefined` | -                                                 |
+| `onChange`    | `(value: string) =&gt; void`                                                                    | `undefined` | -                                                 |
+| `onSubmit`    | `(value: string) =&gt; void`                                                                    | `undefined` | -                                                 |
+| `placeholder` | `string`                                                                                        | `""`        | -                                                 |
+| `mask`        | `string`                                                                                        | `undefined` | -                                                 |
+| `validate`    | `(value: string) =&gt; string \| null`                                                          | `undefined` | -                                                 |
+| `width`       | `number`                                                                                        | `40`        | -                                                 |
+| `label`       | `string`                                                                                        | `undefined` | -                                                 |
+| `autoFocus`   | `boolean`                                                                                       | `false`     | -                                                 |
+| `id`          | `string`                                                                                        | `undefined` | -                                                 |
+| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the input. Default: true     |
+| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style. Default: 'round'                    |
+| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                    |
+| `cursor`      | `string`                                                                                        | `"█"`       | Cursor character shown when focused. Default: '█' |
+
+## Registry Files
+
+- `components/ui/text-input.tsx`

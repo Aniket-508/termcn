@@ -1,0 +1,47 @@
+---
+title: "Pie Chart"
+description: "Unicode block pie chart with legend"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="pie-chart" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/pie-chart.json
+```
+
+## Usage
+
+```tsx
+import { PieChart } from "@/components/ui/pie-chart";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <PieChart {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop              | Type             | Default    | Description |
+| ----------------- | ---------------- | ---------- | ----------- |
+| `data`            | `PieChartItem[]` | `required` | -           |
+| `radius`          | `number`         | `5`        | -           |
+| `showLegend`      | `boolean`        | `true`     | -           |
+| `showPercentages` | `boolean`        | `true`     | -           |
+
+## Registry Files
+
+- `components/ui/pie-chart.tsx`

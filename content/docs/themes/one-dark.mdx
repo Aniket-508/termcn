@@ -1,0 +1,30 @@
+---
+title: "One Dark"
+description: "A One Dark theme for terminal components."
+---
+
+<TerminalPreview defaultThemeKey="one-dark">
+  <ThemeShowcasePreview />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-one-dark.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { oneDarkTheme } from "@/lib/terminal-themes/oneDark";
+import { Badge } from "@/components/ui/badge";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={oneDarkTheme}>
+      <Badge variant="info">One Dark</Badge>
+    </ThemeProvider>
+  );
+}
+```

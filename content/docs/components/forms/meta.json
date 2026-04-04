@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "confirm",
+    "date-picker",
+    "file-picker",
+    "form",
+    "form-field",
+    "time-picker",
+    "wizard"
+  ],
+  "title": "Forms"
+}

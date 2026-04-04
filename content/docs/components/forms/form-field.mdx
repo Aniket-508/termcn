@@ -1,0 +1,55 @@
+---
+title: "Form Field"
+description: "Form field wrapper with label, hint, and error"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="form-field" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/form-field.json
+```
+
+## Usage
+
+```tsx
+import { FormField } from "@/components/ui/form-field";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <FormField {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `form`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type        | Default     | Description                                                    |
+| ------------ | ----------- | ----------- | -------------------------------------------------------------- |
+| `label`      | `string`    | `required`  | -                                                              |
+| `children`   | `ReactNode` | `required`  | -                                                              |
+| `error`      | `string`    | `undefined` | -                                                              |
+| `hint`       | `string`    | `undefined` | -                                                              |
+| `required`   | `boolean`   | `undefined` | -                                                              |
+| `gap`        | `number`    | `0`         | Gap between label, input, and hint/error. Default: 0           |
+| `errorIcon`  | `string`    | `"✗"`       | Icon shown before error message. Default: '✗'                  |
+| `labelColor` | `string`    | `undefined` | Color override for the label. Default: theme.colors.foreground |
+
+## Registry Files
+
+- `components/ui/form-field.tsx`

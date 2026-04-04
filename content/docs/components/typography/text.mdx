@@ -1,0 +1,53 @@
+---
+title: "Text"
+description: "Rich inline text with bold, italic, color, dim formatting"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="text" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/text.json
+```
+
+## Usage
+
+```tsx
+import { Text } from "@/components/ui/text";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Text {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop              | Type                                                                     | Default     | Description |
+| ----------------- | ------------------------------------------------------------------------ | ----------- | ----------- |
+| `children`        | `ReactNode`                                                              | `undefined` | -           |
+| `bold`            | `boolean`                                                                | `undefined` | -           |
+| `italic`          | `boolean`                                                                | `undefined` | -           |
+| `underline`       | `boolean`                                                                | `undefined` | -           |
+| `strikethrough`   | `boolean`                                                                | `undefined` | -           |
+| `dim`             | `boolean`                                                                | `undefined` | -           |
+| `inverse`         | `boolean`                                                                | `undefined` | -           |
+| `color`           | `string`                                                                 | `undefined` | -           |
+| `backgroundColor` | `string`                                                                 | `undefined` | -           |
+| `wrap`            | `"wrap" \| "end" \| "truncate" \| "truncate-start" \| "truncate-middle"` | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/text.tsx`

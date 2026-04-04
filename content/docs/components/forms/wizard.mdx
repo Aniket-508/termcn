@@ -1,0 +1,51 @@
+---
+title: "Wizard"
+description: "Multi-step wizard with per-step validation"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="wizard" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/wizard.json
+```
+
+## Usage
+
+```tsx
+import { Wizard } from "@/components/ui/wizard";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Wizard {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop           | Type                                    | Default     | Description |
+| -------------- | --------------------------------------- | ----------- | ----------- |
+| `steps`        | `WizardStep[]`                          | `required`  | -           |
+| `onComplete`   | `(completedSteps: string[]) =&gt; void` | `undefined` | -           |
+| `onCancel`     | `() =&gt; void`                         | `undefined` | -           |
+| `showProgress` | `boolean`                               | `true`      | -           |
+
+## Registry Files
+
+- `components/ui/wizard.tsx`

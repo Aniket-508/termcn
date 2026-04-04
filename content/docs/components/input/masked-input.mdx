@@ -1,0 +1,55 @@
+---
+title: "Masked Input"
+description: "Masked input for phone, date, credit card formats"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="masked-input" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/masked-input.json
+```
+
+## Usage
+
+```tsx
+import { MaskedInput } from "@/components/ui/masked-input";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <MaskedInput {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                                                                                        | Default     | Description |
+| ------------- | ----------------------------------------------------------------------------------------------------------- | ----------- | ----------- |
+| `mask`        | `string; // e.g. '(###) ###-####' value?: string; // raw digits only onChange?: (value: string) =&gt; void` | `required`  | -           |
+| `onSubmit`    | `(value: string) =&gt; void`                                                                                | `undefined` | -           |
+| `label`       | `string`                                                                                                    | `undefined` | -           |
+| `placeholder` | `string`                                                                                                    | `undefined` | -           |
+| `autoFocus`   | `boolean`                                                                                                   | `false`     | -           |
+| `id`          | `string`                                                                                                    | `undefined` | -           |
+| `width`       | `number`                                                                                                    | `40`        | -           |
+
+## Registry Files
+
+- `components/ui/masked-input.tsx`

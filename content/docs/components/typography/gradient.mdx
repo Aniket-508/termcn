@@ -1,0 +1,46 @@
+---
+title: "Gradient"
+description: "Color gradient text"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="gradient" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/gradient.json
+```
+
+## Usage
+
+```tsx
+import { Gradient } from "@/components/ui/gradient";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Gradient {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type       | Default    | Description |
+| ---------- | ---------- | ---------- | ----------- |
+| `children` | `string`   | `required` | -           |
+| `colors`   | `string[]` | `required` | -           |
+| `bold`     | `boolean`  | `false`    | -           |
+
+## Registry Files
+
+- `components/ui/gradient.tsx`

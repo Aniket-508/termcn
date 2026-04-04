@@ -1,0 +1,54 @@
+---
+title: "Checkbox Group"
+description: "Checkbox group with min/max selection"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="checkbox-group" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/checkbox-group.json
+```
+
+## Usage
+
+```tsx
+import { CheckboxGroup } from "@/components/ui/checkbox-group";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <CheckboxGroup {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `checkbox`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type                            | Default     | Description |
+| ---------- | ------------------------------- | ----------- | ----------- |
+| `label`    | `string`                        | `undefined` | -           |
+| `options`  | `CheckboxGroupOption[]`         | `required`  | -           |
+| `value`    | `string[]`                      | `undefined` | -           |
+| `onChange` | `(values: string[]) =&gt; void` | `undefined` | -           |
+| `min`      | `number`                        | `undefined` | -           |
+| `max`      | `number`                        | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/checkbox-group.tsx`

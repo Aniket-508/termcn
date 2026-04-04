@@ -1,0 +1,46 @@
+---
+title: "Status Message"
+description: "Inline status message with icon and color"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="status-message" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/status-message.json
+```
+
+## Usage
+
+```tsx
+import { StatusMessage } from "@/components/ui/status-message";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <StatusMessage {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type            | Default     | Description |
+| ---------- | --------------- | ----------- | ----------- |
+| `variant`  | `StatusVariant` | `"info"`    | -           |
+| `children` | `ReactNode`     | `required`  | -           |
+| `icon`     | `string`        | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/status-message.tsx`

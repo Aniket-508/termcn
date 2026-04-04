@@ -1,0 +1,48 @@
+---
+title: "Banner"
+description: "Full-width announcement banner"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="banner" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/banner.json
+```
+
+## Usage
+
+```tsx
+import { Banner } from "@/components/ui/banner";
+
+export function Example() {
+  <Banner variant="info">Deployment completed successfully.</Banner>;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type            | Default     | Description                                    |
+| ------------- | --------------- | ----------- | ---------------------------------------------- |
+| `children`    | `ReactNode`     | `required`  | -                                              |
+| `variant`     | `BannerVariant` | `"info"`    | -                                              |
+| `icon`        | `string`        | `undefined` | -                                              |
+| `title`       | `string`        | `undefined` | -                                              |
+| `dismissible` | `boolean`       | `false`     | -                                              |
+| `onDismiss`   | `() =&gt; void` | `undefined` | -                                              |
+| `color`       | `string`        | `undefined` | Override the variant color                     |
+| `accentChar`  | `string`        | `"┃"`       | Left accent bar character. Default: '┃'        |
+| `gap`         | `number`        | `1`         | Gap between accent bar and content. Default: 1 |
+
+## Registry Files
+
+- `components/ui/banner.tsx`

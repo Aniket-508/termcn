@@ -1,0 +1,50 @@
+---
+title: "Heading"
+description: "h1–h4 styled headings with optional figlet ASCII art"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="heading" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/heading.json
+```
+
+## Usage
+
+```tsx
+import { Heading } from "@/components/ui/heading";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Heading {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type           | Default     | Description                                              |
+| ----------- | -------------- | ----------- | -------------------------------------------------------- |
+| `level`     | `HeadingLevel` | `1`         | -                                                        |
+| `children`  | `ReactNode`    | `required`  | -                                                        |
+| `color`     | `string`       | `undefined` | -                                                        |
+| `prefix1`   | `string`       | `"██ "`     | Prefix symbol for level 1 headings. Default: '██ '       |
+| `prefix2`   | `string`       | `"▌ "`      | Prefix symbol for level 2 headings. Default: '▌ '        |
+| `prefix3`   | `string`       | `"› "`      | Prefix symbol for level 3 headings. Default: '› '        |
+| `uppercase` | `boolean`      | `true`      | Whether to uppercase level 1 heading text. Default: true |
+
+## Registry Files
+
+- `components/ui/heading.tsx`

@@ -1,0 +1,52 @@
+---
+title: "List"
+description: "Navigable list with optional filtering"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="list" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/list.json
+```
+
+## Usage
+
+```tsx
+import { List } from "@/components/ui/list";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <List {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type                          | Default     | Description |
+| ------------ | ----------------------------- | ----------- | ----------- |
+| `items`      | `ListItem[]`                  | `required`  | -           |
+| `onSelect`   | `(item: ListItem) =&gt; void` | `undefined` | -           |
+| `filterable` | `boolean`                     | `false`     | -           |
+| `height`     | `number`                      | `10`        | -           |
+| `cursor`     | `string`                      | `"›"`       | -           |
+
+## Registry Files
+
+- `components/ui/list.tsx`

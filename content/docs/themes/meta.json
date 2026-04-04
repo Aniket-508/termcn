@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "index",
+    "theme-provider",
+    "default",
+    "dracula",
+    "nord",
+    "catppuccin",
+    "monokai",
+    "solarized",
+    "tokyo-night",
+    "one-dark",
+    "high-contrast"
+  ],
+  "title": "Themes"
+}

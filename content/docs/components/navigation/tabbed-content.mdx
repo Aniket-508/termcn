@@ -1,0 +1,53 @@
+---
+title: "Tabbed Content"
+description: "Tab bar wired to content panels"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="tabbed-content" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/tabbed-content.json
+```
+
+## Usage
+
+```tsx
+import { TabbedContent } from "@/components/ui/tabbed-content";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <TabbedContent {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `tabs`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                | Default       | Description |
+| ------------- | ----------------------------------- | ------------- | ----------- |
+| `tabs`        | `TabbedContentTab[]`                | `required`    | -           |
+| `defaultTab`  | `string`                            | `undefined`   | -           |
+| `activeTab`   | `string`                            | `undefined`   | -           |
+| `onChange`    | `(id: string) =&gt; void`           | `undefined`   | -           |
+| `tabBarStyle` | `"underline" \| "box" \| "minimal"` | `"underline"` | -           |
+
+## Registry Files
+
+- `components/ui/tabbed-content.tsx`

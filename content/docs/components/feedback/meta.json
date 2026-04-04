@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "alert",
+    "banner",
+    "multi-progress",
+    "progress-bar",
+    "progress-circle",
+    "skeleton",
+    "spinner",
+    "status-message",
+    "toast"
+  ],
+  "title": "Feedback"
+}

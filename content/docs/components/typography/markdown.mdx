@@ -1,0 +1,46 @@
+---
+title: "Markdown"
+description: "Full markdown renderer for terminal"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="markdown" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/markdown.json
+```
+
+## Usage
+
+```tsx
+import { Markdown } from "@/components/ui/markdown";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Markdown {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+- `marked`
+
+## Props
+
+| Prop       | Type     | Default     | Description                 |
+| ---------- | -------- | ----------- | --------------------------- |
+| `children` | `string` | `required`  | -                           |
+| `width`    | `number` | `undefined` | Max width for text wrapping |
+
+## Registry Files
+
+- `components/ui/markdown.tsx`

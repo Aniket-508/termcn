@@ -1,0 +1,55 @@
+---
+title: "Tool Approval"
+description: "Interactive approval prompt for AI tool calls with risk-level badge, args display, and auto-deny timeout"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="tool-approval" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/tool-approval.json
+```
+
+## Usage
+
+```tsx
+import { ToolApproval } from "@/components/ui/tool-approval";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ToolApproval {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop            | Type                            | Default     | Description                  |
+| --------------- | ------------------------------- | ----------- | ---------------------------- |
+| `name`          | `string`                        | `required`  | -                            |
+| `description`   | `string`                        | `undefined` | -                            |
+| `args`          | `Record&lt;string, unknown&gt;` | `undefined` | -                            |
+| `risk`          | `RiskLevel`                     | `"low"`     | -                            |
+| `onApprove`     | `() =&gt; void`                 | `required`  | -                            |
+| `onDeny`        | `() =&gt; void`                 | `required`  | -                            |
+| `onAlwaysAllow` | `() =&gt; void`                 | `undefined` | -                            |
+| `timeout`       | `number`                        | `undefined` | Auto-deny timeout in seconds |
+
+## Registry Files
+
+- `components/ui/tool-approval.tsx`

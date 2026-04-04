@@ -1,0 +1,52 @@
+---
+title: "Pagination"
+description: "Page navigation with prev/next and jump"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="pagination" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/pagination.json
+```
+
+## Usage
+
+```tsx
+import { Pagination } from "@/components/ui/pagination";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Pagination {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type                        | Default     | Description |
+| ----------- | --------------------------- | ----------- | ----------- |
+| `total`     | `number`                    | `required`  | -           |
+| `current`   | `number`                    | `required`  | -           |
+| `onChange`  | `(page: number) =&gt; void` | `undefined` | -           |
+| `showEdges` | `boolean`                   | `true`      | -           |
+| `siblings`  | `number`                    | `1`         | -           |
+
+## Registry Files
+
+- `components/ui/pagination.tsx`

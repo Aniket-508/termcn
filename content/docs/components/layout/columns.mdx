@@ -1,0 +1,46 @@
+---
+title: "Columns"
+description: "Multi-column layout with configurable widths"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="columns" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/columns.json
+```
+
+## Usage
+
+```tsx
+import { Columns } from "@/components/ui/columns";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Columns {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type                            | Default    | Description |
+| ---------- | ------------------------------- | ---------- | ----------- |
+| `children` | `ReactNode`                     | `required` | -           |
+| `gap`      | `number`                        | `0`        | -           |
+| `align`    | `"top" \| "center" \| "bottom"` | `"top"`    | -           |
+
+## Registry Files
+
+- `components/ui/columns.tsx`

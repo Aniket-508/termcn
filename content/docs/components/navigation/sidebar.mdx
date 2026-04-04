@@ -1,0 +1,53 @@
+---
+title: "Sidebar"
+description: "Collapsible navigation sidebar panel"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="sidebar" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/sidebar.json
+```
+
+## Usage
+
+```tsx
+import { Sidebar } from "@/components/ui/sidebar";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Sidebar {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type                       | Default     | Description |
+| ----------- | -------------------------- | ----------- | ----------- |
+| `items`     | `SidebarItem[]`            | `required`  | -           |
+| `activeKey` | `string`                   | `undefined` | -           |
+| `onSelect`  | `(key: string) =&gt; void` | `undefined` | -           |
+| `collapsed` | `boolean`                  | `false`     | -           |
+| `width`     | `number`                   | `20`        | -           |
+| `title`     | `string`                   | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/sidebar.tsx`

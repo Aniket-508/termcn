@@ -1,0 +1,48 @@
+---
+title: "Key Value"
+description: "Aligned key–value pairs"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="key-value" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/key-value.json
+```
+
+## Usage
+
+```tsx
+import { KeyValue } from "@/components/ui/key-value";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <KeyValue {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type             | Default     | Description |
+| ------------ | ---------------- | ----------- | ----------- |
+| `items`      | `KeyValueItem[]` | `required`  | -           |
+| `keyWidth`   | `number`         | `undefined` | -           |
+| `separator`  | `string`         | `":"`       | -           |
+| `keyColor`   | `string`         | `undefined` | -           |
+| `valueColor` | `string`         | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/key-value.tsx`

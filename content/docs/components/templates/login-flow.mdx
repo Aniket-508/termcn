@@ -1,0 +1,54 @@
+---
+title: "Login Flow"
+description: "Full-page onboarding/login screen with announcement banner, big ASCII title, description, and numbered select"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="login-flow" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/login-flow.json
+```
+
+## Usage
+
+```tsx
+import { LoginFlow } from "@/components/ui/login-flow";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <LoginFlow {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `big-text`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type                         | Default     | Description |
+| ------------ | ---------------------------- | ----------- | ----------- |
+| `title`      | `string`                     | `undefined` | -           |
+| `titleFont`  | `BigTextFont`                | `"block"`   | -           |
+| `titleColor` | `string`                     | `undefined` | -           |
+| `padding`    | `number`                     | `2`         | -           |
+| `onSelect`   | `(index: number) =&gt; void` | `undefined` | -           |
+| `children`   | `ReactNode`                  | `required`  | -           |
+
+## Registry Files
+
+- `components/ui/login-flow.tsx`

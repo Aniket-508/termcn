@@ -1,0 +1,50 @@
+---
+title: "Welcome Screen"
+description: "Two-panel welcome dashboard with titled border, logo, greeting, and sections"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="welcome-screen" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/welcome-screen.json
+```
+
+## Usage
+
+```tsx
+import { WelcomeScreen } from "@/components/ui/welcome-screen";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <WelcomeScreen {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop           | Type                                        | Default     | Description |
+| -------------- | ------------------------------------------- | ----------- | ----------- |
+| `appName`      | `string`                                    | `required`  | -           |
+| `appNameColor` | `string`                                    | `undefined` | -           |
+| `version`      | `string`                                    | `undefined` | -           |
+| `borderColor`  | `string`                                    | `undefined` | -           |
+| `borderStyle`  | `"single" \| "round" \| "double" \| "bold"` | `undefined` | -           |
+| `leftWidth`    | `number`                                    | `undefined` | -           |
+| `children`     | `ReactNode`                                 | `required`  | -           |
+
+## Registry Files
+
+- `components/ui/welcome-screen.tsx`

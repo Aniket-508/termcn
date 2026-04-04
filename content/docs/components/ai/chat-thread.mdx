@@ -1,0 +1,50 @@
+---
+title: "Chat Thread"
+description: "Scrollable container for stacking ChatMessage components in a conversation thread"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="chat-thread" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/chat-thread.json
+```
+
+## Usage
+
+```tsx
+import { ChatThread } from "@/components/ui/chat-thread";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ChatThread {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `chat-message`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type        | Default     | Description |
+| ------------ | ----------- | ----------- | ----------- |
+| `maxHeight`  | `number`    | `undefined` | -           |
+| `autoScroll` | `boolean`   | `true`      | -           |
+| `children`   | `ReactNode` | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/chat-thread.tsx`

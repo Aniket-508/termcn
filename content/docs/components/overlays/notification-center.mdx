@@ -1,0 +1,48 @@
+---
+title: "Notification Center"
+description: "Persistent queue-based notification panel with useNotifications hook"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="notification-center" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/notification-center.json
+```
+
+## Usage
+
+```tsx
+import { NotificationCenter } from "@/components/ui/notification-center";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <NotificationCenter {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+- `use-notifications`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+No props table was generated for this file. Inspect the source for the latest API.
+
+## Registry Files
+
+- `components/ui/notification-center.tsx`
+- `components/ui/notification-badge.tsx`

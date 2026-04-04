@@ -1,0 +1,58 @@
+---
+title: "Splash Screen"
+description: "Styled startup banner with big ASCII art title, subtitle, author credit, and status line"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="splash-screen" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/splash-screen.json
+```
+
+## Usage
+
+```tsx
+import { SplashScreen } from "@/components/ui/splash-screen";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <SplashScreen {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `big-text`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop            | Type                                        | Default     | Description |
+| --------------- | ------------------------------------------- | ----------- | ----------- |
+| `title`         | `string`                                    | `required`  | -           |
+| `font`          | `FigletFont`                                | `"block"`   | -           |
+| `titleColor`    | `string`                                    | `undefined` | -           |
+| `titleColorAlt` | `string`                                    | `undefined` | -           |
+| `bold`          | `boolean`                                   | `undefined` | -           |
+| `subtitle`      | `string`                                    | `undefined` | -           |
+| `subtitleDim`   | `boolean`                                   | `true`      | -           |
+| `author`        | `&#123; name: string; href?: string &#125;` | `undefined` | -           |
+| `statusLine`    | `ReactNode`                                 | `undefined` | -           |
+| `padding`       | `number`                                    | `2`         | -           |
+| `align`         | `"left" \| "center"`                        | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/splash-screen.tsx`

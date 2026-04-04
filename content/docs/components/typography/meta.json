@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "badge",
+    "big-text",
+    "code",
+    "digits",
+    "gradient",
+    "heading",
+    "link",
+    "markdown",
+    "tag",
+    "text"
+  ],
+  "title": "Typography"
+}

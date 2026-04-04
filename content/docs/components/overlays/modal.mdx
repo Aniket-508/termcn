@@ -1,0 +1,58 @@
+---
+title: "Modal"
+description: "Focus-trapped overlay modal, close with Esc"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="modal" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/modal.json
+```
+
+## Usage
+
+```tsx
+import { Modal } from "@/components/ui/modal";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Modal {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop               | Type                                                                                            | Default                | Description                                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- |
+| `open`             | `boolean`                                                                                       | `required`             | -                                                                                              |
+| `onClose`          | `() =&gt; void`                                                                                 | `required`             | -                                                                                              |
+| `title`            | `string`                                                                                        | `undefined`            | -                                                                                              |
+| `width`            | `number`                                                                                        | `60`                   | -                                                                                              |
+| `children`         | `ReactNode`                                                                                     | `undefined`            | -                                                                                              |
+| `borderStyle`      | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`              | Border style. Default: 'round'                                                                 |
+| `borderColor`      | `string`                                                                                        | `undefined`            | Border color. Default: theme.colors.primary                                                    |
+| `paddingX`         | `number`                                                                                        | `1`                    | Horizontal padding. Default: 1                                                                 |
+| `paddingY`         | `number`                                                                                        | `0`                    | Vertical padding. Default: 0                                                                   |
+| `titleBorderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`             | Title bar border style. Default: 'single'                                                      |
+| `closeHint`        | `string \| false`                                                                               | `"Press Esc to close"` | Close hint text. Set to false to hide, or a string to customize. Default: 'Press Esc to close' |
+
+## Registry Files
+
+- `components/ui/modal.tsx`

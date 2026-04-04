@@ -1,0 +1,53 @@
+---
+title: "Checkbox"
+description: "Checkbox with indeterminate state"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="checkbox" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/checkbox.json
+```
+
+## Usage
+
+```tsx
+import { Checkbox } from "@/components/ui/checkbox";
+
+export function Example() {
+  <Checkbox checked label="Enable telemetry" />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop                | Type                            | Default     | Description                                      |
+| ------------------- | ------------------------------- | ----------- | ------------------------------------------------ |
+| `checked`           | `boolean`                       | `undefined` | -                                                |
+| `onChange`          | `(checked: boolean) =&gt; void` | `undefined` | -                                                |
+| `label`             | `string`                        | `undefined` | -                                                |
+| `indeterminate`     | `boolean`                       | `false`     | -                                                |
+| `disabled`          | `boolean`                       | `false`     | -                                                |
+| `id`                | `string`                        | `undefined` | -                                                |
+| `checkedIcon`       | `string`                        | `"■"`       | Character shown when checked. Default: '■'       |
+| `uncheckedIcon`     | `string`                        | `"□"`       | Character shown when unchecked. Default: '□'     |
+| `indeterminateIcon` | `string`                        | `"▪"`       | Character shown when indeterminate. Default: '▪' |
+
+## Registry Files
+
+- `components/ui/checkbox.tsx`

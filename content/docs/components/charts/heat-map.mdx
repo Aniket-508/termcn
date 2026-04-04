@@ -1,0 +1,49 @@
+---
+title: "Heat Map"
+description: "Grid heatmap with color intensity scale"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="heat-map" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/heat-map.json
+```
+
+## Usage
+
+```tsx
+import { HeatMap } from "@/components/ui/heat-map";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <HeatMap {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type         | Default               | Description |
+| ------------ | ------------ | --------------------- | ----------- |
+| `data`       | `number[][]` | `required`            | -           |
+| `rowLabels`  | `string[]`   | `undefined`           | -           |
+| `colLabels`  | `string[]`   | `undefined`           | -           |
+| `colorScale` | `string[]`   | `DEFAULT_COLOR_SCALE` | -           |
+| `cellWidth`  | `number`     | `5`                   | -           |
+| `showValues` | `boolean`    | `false`               | -           |
+
+## Registry Files
+
+- `components/ui/heat-map.tsx`

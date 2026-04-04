@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "app-shell",
+    "bullet-list",
+    "help-screen",
+    "info-box",
+    "login-flow",
+    "setup-flow",
+    "splash-screen",
+    "usage-monitor",
+    "welcome-screen"
+  ],
+  "title": "Templates"
+}

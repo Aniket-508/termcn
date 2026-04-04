@@ -1,0 +1,50 @@
+---
+title: "Menu"
+description: "Dropdown menu with nested submenus"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="menu" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/menu.json
+```
+
+## Usage
+
+```tsx
+import { Menu } from "@/components/ui/menu";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Menu {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type                          | Default     | Description |
+| ---------- | ----------------------------- | ----------- | ----------- |
+| `items`    | `MenuItem[]`                  | `required`  | -           |
+| `onSelect` | `(item: MenuItem) =&gt; void` | `undefined` | -           |
+| `title`    | `string`                      | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/menu.tsx`

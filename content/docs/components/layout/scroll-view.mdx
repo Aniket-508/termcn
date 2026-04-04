@@ -1,0 +1,47 @@
+---
+title: "Scroll View"
+description: "Scrollable container with scrollbar"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="scroll-view" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/scroll-view.json
+```
+
+## Usage
+
+```tsx
+import { ScrollView } from "@/components/ui/scroll-view";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ScrollView {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop             | Type        | Default    | Description |
+| ---------------- | ----------- | ---------- | ----------- |
+| `height`         | `number`    | `required` | -           |
+| `children`       | `ReactNode` | `required` | -           |
+| `showScrollbar`  | `boolean`   | `true`     | -           |
+| `scrollbarColor` | `string`    | `"gray"`   | -           |
+
+## Registry Files
+
+- `components/ui/scroll-view.tsx`

@@ -1,0 +1,50 @@
+---
+title: "Breadcrumb"
+description: "Breadcrumb navigation trail"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="breadcrumb" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/breadcrumb.json
+```
+
+## Usage
+
+```tsx
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Breadcrumb {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type               | Default     | Description |
+| ----------- | ------------------ | ----------- | ----------- |
+| `items`     | `BreadcrumbItem[]` | `required`  | -           |
+| `separator` | `string`           | `"›"`       | -           |
+| `activeKey` | `string`           | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/breadcrumb.tsx`

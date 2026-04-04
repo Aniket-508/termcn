@@ -1,0 +1,45 @@
+---
+title: "Multi Select"
+description: "Multi-select list with checkboxes and select-all"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="multi-select" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/multi-select.json
+```
+
+## Usage
+
+```tsx
+import { MultiSelect } from "@/components/ui/multi-select";
+
+export function Example() {
+  <MultiSelect
+    options={["alpha", "beta", "gamma"]}
+    value={["alpha", "gamma"]}
+  />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+No props table was generated for this file. Inspect the source for the latest API.
+
+## Registry Files
+
+- `components/ui/multi-select.tsx`

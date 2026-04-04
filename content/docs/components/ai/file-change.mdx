@@ -1,0 +1,51 @@
+---
+title: "File Change"
+description: "Interactive file-change review list with diff expansion, per-file accept/reject actions, and accept-all shortcut"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="file-change" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/file-change.json
+```
+
+## Usage
+
+```tsx
+import { FileChange } from "@/components/ui/file-change";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <FileChange {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                        | Default     | Description |
+| ------------- | --------------------------- | ----------- | ----------- |
+| `changes`     | `FileChangeItem[]`          | `required`  | -           |
+| `onAccept`    | `(path: string) =&gt; void` | `undefined` | -           |
+| `onReject`    | `(path: string) =&gt; void` | `undefined` | -           |
+| `onAcceptAll` | `() =&gt; void`             | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/file-change.tsx`

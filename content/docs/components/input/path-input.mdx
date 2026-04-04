@@ -1,0 +1,61 @@
+---
+title: "Path Input"
+description: "Filesystem path input with tab autocomplete"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="path-input" />
+</TerminalPreview>
+
+> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/path-input.json
+```
+
+## Usage
+
+```tsx
+import { PathInput } from "@/components/ui/path-input";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <PathInput {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+- `glob`
+
+## Props
+
+| Prop          | Type                         | Default     | Description                                                        |
+| ------------- | ---------------------------- | ----------- | ------------------------------------------------------------------ |
+| `value`       | `string`                     | `undefined` | -                                                                  |
+| `onChange`    | `(value: string) =&gt; void` | `undefined` | -                                                                  |
+| `onSubmit`    | `(value: string) =&gt; void` | `undefined` | -                                                                  |
+| `label`       | `string`                     | `undefined` | -                                                                  |
+| `placeholder` | `string`                     | `"/"`       | -                                                                  |
+| `autoFocus`   | `boolean`                    | `false`     | -                                                                  |
+| `id`          | `string`                     | `undefined` | -                                                                  |
+| `width`       | `number`                     | `40`        | -                                                                  |
+| `filter`      | `string`                     | `undefined` | Filter to only show files/dirs matching this extension, e.g. '.ts' |
+| `dirsOnly`    | `boolean`                    | `false`     | Show only directories                                              |
+
+## Registry Files
+
+- `components/ui/path-input.tsx`

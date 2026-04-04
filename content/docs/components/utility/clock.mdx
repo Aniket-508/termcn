@@ -1,0 +1,53 @@
+---
+title: "Clock"
+description: "Real-time clock display with 12h/24h and date"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="clock" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/clock.json
+```
+
+## Usage
+
+```tsx
+import { Clock } from "@/components/ui/clock";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Clock {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type             | Default     | Description |
+| ------------- | ---------------- | ----------- | ----------- |
+| `format`      | `"12h" \| "24h"` | `"24h"`     | -           |
+| `showSeconds` | `boolean`        | `true`      | -           |
+| `showDate`    | `boolean`        | `false`     | -           |
+| `timezone`    | `string`         | `undefined` | -           |
+| `color`       | `string`         | `undefined` | -           |
+| `size`        | `"sm" \| "lg"`   | `"sm"`      | -           |
+
+## Registry Files
+
+- `components/ui/clock.tsx`

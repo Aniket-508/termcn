@@ -1,0 +1,46 @@
+---
+title: "Progress Bar"
+description: "Determinate progress bar with percent and value/total display"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="progress-bar" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/progress-bar.json
+```
+
+## Usage
+
+```tsx
+import { ProgressBar } from "@/components/ui/progress-bar";
+
+export function Example() {
+  <ProgressBar value={42} max={100} label="Uploading" />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                                                                        | Default     | Description |
+| ------------- | ------------------------------------------------------------------------------------------- | ----------- | ----------- |
+| `value`       | `number; // 0–100 total?: number; // if set, value is current, total is max width?: number` | `required`  | -           |
+| `showPercent` | `boolean`                                                                                   | `true`      | -           |
+| `showEta`     | `boolean`                                                                                   | `false`     | -           |
+| `fillChar`    | `string`                                                                                    | `"█"`       | -           |
+| `emptyChar`   | `string`                                                                                    | `"░"`       | -           |
+| `color`       | `string`                                                                                    | `undefined` | -           |
+| `label`       | `string`                                                                                    | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/progress-bar.tsx`

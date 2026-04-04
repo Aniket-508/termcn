@@ -1,0 +1,51 @@
+---
+title: "App Shell"
+description: "Full-screen TUI layout with header, tip bar, full-width input, scrollable content, and hints footer"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="app-shell" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/app-shell.json
+```
+
+## Usage
+
+```tsx
+import { AppShell } from "@/components/ui/app-shell";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <AppShell {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `info-box`
+- `bullet-list`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type        | Default     | Description |
+| ------------ | ----------- | ----------- | ----------- |
+| `children`   | `ReactNode` | `required`  | -           |
+| `fullscreen` | `boolean`   | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/app-shell.tsx`

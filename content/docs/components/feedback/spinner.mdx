@@ -1,0 +1,48 @@
+---
+title: "Spinner"
+description: "Animated spinner with 12+ styles"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="spinner" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/spinner.json
+```
+
+## Usage
+
+```tsx
+import { Spinner } from "@/components/ui/spinner";
+
+export function Example() {
+  <Spinner label="Loading components" />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop     | Type           | Default     | Description                                                   |
+| -------- | -------------- | ----------- | ------------------------------------------------------------- |
+| `style`  | `SpinnerStyle` | `undefined` | -                                                             |
+| `label`  | `string`       | `undefined` | -                                                             |
+| `color`  | `string`       | `undefined` | -                                                             |
+| `fps`    | `number`       | `12`        | -                                                             |
+| `frames` | `string[]`     | `undefined` | Custom animation frames (overrides style). Default: undefined |
+
+## Registry Files
+
+- `components/ui/spinner.tsx`

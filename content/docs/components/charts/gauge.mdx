@@ -1,0 +1,49 @@
+---
+title: "Gauge"
+description: "Arc/speedometer gauge meter"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="gauge" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/gauge.json
+```
+
+## Usage
+
+```tsx
+import { Gauge } from "@/components/ui/gauge";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Gauge {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop    | Type        | Default     | Description |
+| ------- | ----------- | ----------- | ----------- |
+| `value` | `number`    | `required`  | -           |
+| `min`   | `number`    | `0`         | -           |
+| `max`   | `number`    | `100`       | -           |
+| `label` | `string`    | `undefined` | -           |
+| `color` | `string`    | `undefined` | -           |
+| `size`  | `GaugeSize` | `"md"`      | -           |
+
+## Registry Files
+
+- `components/ui/gauge.tsx`

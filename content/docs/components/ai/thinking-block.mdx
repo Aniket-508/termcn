@@ -1,0 +1,53 @@
+---
+title: "Thinking Block"
+description: "Collapsible block for displaying extended thinking / reasoning content from an AI model"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="thinking-block" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/thinking-block.json
+```
+
+## Usage
+
+```tsx
+import { ThinkingBlock } from "@/components/ui/thinking-block";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ThinkingBlock {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop               | Type      | Default       | Description |
+| ------------------ | --------- | ------------- | ----------- |
+| `content`          | `string`  | `required`    | -           |
+| `streaming`        | `boolean` | `false`       | -           |
+| `defaultCollapsed` | `boolean` | `true`        | -           |
+| `label`            | `string`  | `"Reasoning"` | -           |
+| `tokenCount`       | `number`  | `undefined`   | -           |
+| `duration`         | `number`  | `undefined`   | -           |
+
+## Registry Files
+
+- `components/ui/thinking-block.tsx`

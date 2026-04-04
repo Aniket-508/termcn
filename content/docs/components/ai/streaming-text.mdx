@@ -1,0 +1,50 @@
+---
+title: "Streaming Text"
+description: "Token-by-token streaming text with blinking cursor and optional typing animation"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="streaming-text" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/streaming-text.json
+```
+
+## Usage
+
+```tsx
+import { StreamingText } from "@/components/ui/streaming-text";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <StreamingText {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                            | Default     | Description                                                  |
+| ------------- | ------------------------------- | ----------- | ------------------------------------------------------------ |
+| `text`        | `string`                        | `undefined` | Current accumulated string to display (controlled mode)      |
+| `stream`      | `AsyncIterable&lt;string&gt;`   | `undefined` | AsyncIterable&lt;string&gt; source; manages state internally |
+| `cursor`      | `boolean`                       | `true`      | Show blinking ▌ cursor at end while streaming                |
+| `animate`     | `boolean`                       | `false`     | Simulate typing animation for pre-buffered text              |
+| `speed`       | `number`                        | `30`        | Typing animation speed in ms per character (default 30)      |
+| `onComplete`  | `(fullText: string) =&gt; void` | `undefined` | Called with full text when streaming/animation completes     |
+| `cursorColor` | `string`                        | `undefined` | Color for the cursor                                         |
+
+## Registry Files
+
+- `components/ui/streaming-text.tsx`

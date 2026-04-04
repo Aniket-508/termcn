@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "aspect-ratio",
+    "box",
+    "center",
+    "columns",
+    "divider",
+    "grid",
+    "scroll-view",
+    "spacer",
+    "stack"
+  ],
+  "title": "Layout"
+}

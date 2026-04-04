@@ -1,0 +1,45 @@
+---
+title: "Definition"
+description: "Term–description definition list"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="definition" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/definition.json
+```
+
+## Usage
+
+```tsx
+import { Definition } from "@/components/ui/definition";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Definition {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type               | Default     | Description |
+| ----------- | ------------------ | ----------- | ----------- |
+| `items`     | `DefinitionItem[]` | `required`  | -           |
+| `termColor` | `string`           | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/definition.tsx`

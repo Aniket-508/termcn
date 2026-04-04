@@ -1,103 +1,31 @@
 ---
-title: Installation
-description: How to customize termcn and publish registry components.
+title: "Installation"
+description: "Install terminal components, hooks, and themes from the registry."
 ---
 
-## Building Your Component
-
-### 1. Get the code
-
-Clone or fork [termcn on GitHub](https://github.com/termcn/termcn).
-
-### 2. Install Dependencies
+## Install a Component
 
 ```bash
-pnpm install
+npx shadcn@latest add https://termcn.vercel.app/r/spinner.json
 ```
 
-### 3. Create Your Component
+## Install a Theme
 
-Replace the placeholder at `registry/new-york/your-component.tsx`:
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-dracula.json
+```
+
+## Wrap Your App
 
 ```tsx
-import { forwardRef, HTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { draculaTheme } from "@/lib/terminal-themes/dracula";
 
-export interface MyButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "outline";
-}
-
-const MyButton = forwardRef<HTMLButtonElement, MyButtonProps>(
-  ({ className, variant = "default", ...props }, ref) => {
-    return (
-      <button
-        ref={ref}
-        className={cn(
-          "rounded-md px-4 py-2 font-medium",
-          variant === "default" && "bg-primary text-primary-foreground",
-          variant === "outline" && "border border-input",
-          className
-        )}
-        {...props}
-      />
-    );
-  }
-);
-
-MyButton.displayName = "MyButton";
-
-export { MyButton };
-```
-
-### 4. Update registry.json
-
-```json
-{
-  "name": "your-name/your-registry",
-  "homepage": "https://your-site.com",
-  "items": [
-    {
-      "name": "my-button",
-      "type": "registry:ui",
-      "title": "My Button",
-      "description": "A custom button component.",
-      "files": [
-        {
-          "path": "registry/new-york/my-button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/my-button.tsx"
-        }
-      ]
-    }
-  ]
+export function App() {
+  return (
+    <ThemeProvider theme={draculaTheme}>{/* your Ink tree */}</ThemeProvider>
+  );
 }
 ```
 
-### 5. Build & Deploy
-
-```bash
-pnpm registry:build
-pnpm build
-```
-
-Deploy your app and your component is live!
-
----
-
-## Installing Components
-
-To install a component from a termcn (or other shadcn-compatible) registry:
-
-```bash
-npx shadcn@latest add https://example.com/r/my-button.json
-```
-
-Then use it:
-
-```tsx
-import { MyButton } from "@/components/ui/my-button";
-
-export function Demo() {
-  return <MyButton variant="outline">Click me</MyButton>;
-}
-```
+Registry items automatically pull in their hook or theme dependencies through `registryDependencies`.

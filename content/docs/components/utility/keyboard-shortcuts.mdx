@@ -1,0 +1,46 @@
+---
+title: "Keyboard Shortcuts"
+description: "Formatted keyboard shortcut reference table"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="keyboard-shortcuts" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/keyboard-shortcuts.json
+```
+
+## Usage
+
+```tsx
+import { KeyboardShortcuts } from "@/components/ui/keyboard-shortcuts";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <KeyboardShortcuts {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type         | Default     | Description |
+| ----------- | ------------ | ----------- | ----------- |
+| `shortcuts` | `Shortcut[]` | `required`  | -           |
+| `columns`   | `number`     | `1`         | -           |
+| `title`     | `string`     | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/keyboard-shortcuts.tsx`

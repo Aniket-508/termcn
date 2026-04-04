@@ -1,0 +1,51 @@
+---
+title: "Form"
+description: "Form container with validation, Ctrl+S submit, and dirty tracking"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="form" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/form.json
+```
+
+## Usage
+
+```tsx
+import { Form } from "@/components/ui/form";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Form {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop            | Type                                                 | Default        | Description |
+| --------------- | ---------------------------------------------------- | -------------- | ----------- |
+| `onSubmit`      | `(values: Record&lt;string, unknown&gt;) =&gt; void` | `required`     | -           |
+| `initialValues` | `Record&lt;string, unknown&gt;`                      | `&#123;&#125;` | -           |
+| `fields`        | `FormField[]`                                        | `[]`           | -           |
+| `children`      | `ReactNode`                                          | `required`     | -           |
+
+## Registry Files
+
+- `components/ui/form.tsx`

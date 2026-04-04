@@ -1,0 +1,51 @@
+---
+title: "Stopwatch"
+description: "Count-up stopwatch with laps and reset"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="stopwatch" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/stopwatch.json
+```
+
+## Usage
+
+```tsx
+import { Stopwatch } from "@/components/ui/stopwatch";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Stopwatch {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type      | Default     | Description |
+| ----------- | --------- | ----------- | ----------- |
+| `autoStart` | `boolean` | `false`     | -           |
+| `color`     | `string`  | `undefined` | -           |
+| `showLaps`  | `boolean` | `true`      | -           |
+
+## Registry Files
+
+- `components/ui/stopwatch.tsx`

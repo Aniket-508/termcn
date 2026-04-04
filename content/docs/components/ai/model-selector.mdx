@@ -1,0 +1,53 @@
+---
+title: "Model Selector"
+description: "Keyboard-navigable list for selecting an AI model, with optional provider grouping and context-window display"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="model-selector" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/model-selector.json
+```
+
+## Usage
+
+```tsx
+import { ModelSelector } from "@/components/ui/model-selector";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ModelSelector {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop              | Type                      | Default    | Description |
+| ----------------- | ------------------------- | ---------- | ----------- |
+| `models`          | `ModelOption[]`           | `required` | -           |
+| `selected`        | `string`                  | `required` | -           |
+| `onSelect`        | `(id: string) =&gt; void` | `required` | -           |
+| `showContext`     | `boolean`                 | `true`     | -           |
+| `showProvider`    | `boolean`                 | `true`     | -           |
+| `groupByProvider` | `boolean`                 | `false`    | -           |
+
+## Registry Files
+
+- `components/ui/model-selector.tsx`

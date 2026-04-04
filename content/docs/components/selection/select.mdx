@@ -1,0 +1,42 @@
+---
+title: "Select"
+description: "Single-select dropdown with arrow-key navigation"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="select" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/select.json
+```
+
+## Usage
+
+```tsx
+import { Select } from "@/components/ui/select";
+
+export function Example() {
+  <Select options={["alpha", "beta", "gamma"]} value="beta" />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+No props table was generated for this file. Inspect the source for the latest API.
+
+## Registry Files
+
+- `components/ui/select.tsx`

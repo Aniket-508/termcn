@@ -1,0 +1,52 @@
+---
+title: "Popover"
+description: "Positioned popover with arbitrary content"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="popover" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/popover.json
+```
+
+## Usage
+
+```tsx
+import { Popover } from "@/components/ui/popover";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Popover {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type            | Default     | Description |
+| ---------- | --------------- | ----------- | ----------- |
+| `trigger`  | `ReactNode`     | `required`  | -           |
+| `children` | `ReactNode`     | `required`  | -           |
+| `isOpen`   | `boolean`       | `false`     | -           |
+| `onClose`  | `() =&gt; void` | `undefined` | -           |
+| `title`    | `string`        | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/popover.tsx`

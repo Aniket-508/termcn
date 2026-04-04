@@ -1,0 +1,53 @@
+---
+title: "Panel"
+description: "Titled bordered panel"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="panel" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/panel.json
+```
+
+## Usage
+
+```tsx
+import { Panel } from "@/components/ui/panel";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Panel {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                                                                            | Default     | Description                                   |
+| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------- |
+| `title`       | `string`                                                                                        | `undefined` | -                                             |
+| `titleColor`  | `string`                                                                                        | `undefined` | -                                             |
+| `borderColor` | `string`                                                                                        | `undefined` | -                                             |
+| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` | -                                             |
+| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the panel. Default: true |
+| `width`       | `number`                                                                                        | `undefined` | -                                             |
+| `height`      | `number`                                                                                        | `undefined` | -                                             |
+| `paddingX`    | `number`                                                                                        | `1`         | -                                             |
+| `paddingY`    | `number`                                                                                        | `0`         | -                                             |
+| `children`    | `ReactNode`                                                                                     | `undefined` | -                                             |
+
+## Registry Files
+
+- `components/ui/panel.tsx`

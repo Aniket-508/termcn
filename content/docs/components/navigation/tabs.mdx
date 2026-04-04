@@ -1,0 +1,57 @@
+---
+title: "Tabs"
+description: "Tab bar with left/right arrow and tab-key navigation"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="tabs" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/tabs.json
+```
+
+## Usage
+
+```tsx
+import { Tabs } from "@/components/ui/tabs";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Tabs {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop             | Type                                                                                            | Default     | Description                                          |
+| ---------------- | ----------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
+| `tabs`           | `Tab[]`                                                                                         | `required`  | -                                                    |
+| `defaultTab`     | `string`                                                                                        | `undefined` | -                                                    |
+| `activeTab`      | `string`                                                                                        | `undefined` | -                                                    |
+| `onTabChange`    | `(key: string) =&gt; void`                                                                      | `undefined` | -                                                    |
+| `borderColor`    | `string`                                                                                        | `undefined` | -                                                    |
+| `borderStyle`    | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style of the content panel. Default: 'single' |
+| `separator`      | `string`                                                                                        | `" │ "`     | Separator between tab labels. Default: ' │ '         |
+| `tabBarPaddingX` | `number`                                                                                        | `2`         | Horizontal padding of the tab bar. Default: 2        |
+| `paddingX`       | `number`                                                                                        | `1`         | Horizontal padding of the content panel. Default: 1  |
+| `paddingY`       | `number`                                                                                        | `0`         | Vertical padding of the content panel. Default: 0    |
+
+## Registry Files
+
+- `components/ui/tabs.tsx`

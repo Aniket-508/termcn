@@ -1,0 +1,53 @@
+---
+title: "Chat Message"
+description: "Chat message bubble with role label, streaming indicator, and collapsible content"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="chat-message" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/chat-message.json
+```
+
+## Usage
+
+```tsx
+import { ChatMessage } from "@/components/ui/chat-message";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ChatMessage {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type        | Default     | Description                              |
+| ----------- | ----------- | ----------- | ---------------------------------------- |
+| `sender`    | `ChatRole`  | `required`  | Chat author label (not a DOM ARIA role). |
+| `name`      | `string`    | `undefined` | -                                        |
+| `timestamp` | `Date`      | `undefined` | -                                        |
+| `streaming` | `boolean`   | `false`     | -                                        |
+| `collapsed` | `boolean`   | `undefined` | -                                        |
+| `children`  | `ReactNode` | `undefined` | -                                        |
+
+## Registry Files
+
+- `components/ui/chat-message.tsx`

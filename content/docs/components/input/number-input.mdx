@@ -1,0 +1,62 @@
+---
+title: "Number Input"
+description: "Numeric input with increment/decrement and bounds"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="number-input" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/number-input.json
+```
+
+## Usage
+
+```tsx
+import { NumberInput } from "@/components/ui/number-input";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <NumberInput {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                                                                            | Default     | Description                                                          |
+| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------- |
+| `value`       | `number`                                                                                        | `undefined` | -                                                                    |
+| `onChange`    | `(value: number) =&gt; void`                                                                    | `undefined` | -                                                                    |
+| `onSubmit`    | `(value: number) =&gt; void`                                                                    | `undefined` | -                                                                    |
+| `min`         | `number`                                                                                        | `undefined` | -                                                                    |
+| `max`         | `number`                                                                                        | `undefined` | -                                                                    |
+| `step`        | `number`                                                                                        | `1`         | -                                                                    |
+| `placeholder` | `string`                                                                                        | `""`        | -                                                                    |
+| `label`       | `string`                                                                                        | `undefined` | -                                                                    |
+| `id`          | `string`                                                                                        | `undefined` | -                                                                    |
+| `format`      | `(n: number) =&gt; string`                                                                      | `undefined` | -                                                                    |
+| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style. Default: 'round'                                       |
+| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                                       |
+| `cursor`      | `string`                                                                                        | `"█"`       | Cursor character shown when focused. Default: '█'                    |
+| `stepHint`    | `string`                                                                                        | `undefined` | Step hint format. Default: '↑ +&#123;step&#125; ↓ -&#123;step&#125;' |
+
+## Registry Files
+
+- `components/ui/number-input.tsx`

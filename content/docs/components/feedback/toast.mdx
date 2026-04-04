@@ -1,0 +1,52 @@
+---
+title: "Toast"
+description: "Auto-dismissing toast notification"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="toast" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/toast.json
+```
+
+## Usage
+
+```tsx
+import { Toast } from "@/components/ui/toast";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Toast {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-interval`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type            | Default     | Description |
+| ----------- | --------------- | ----------- | ----------- |
+| `message`   | `string`        | `required`  | -           |
+| `variant`   | `ToastVariant`  | `"info"`    | -           |
+| `duration`  | `number`        | `3000`      | -           |
+| `onDismiss` | `() =&gt; void` | `undefined` | -           |
+| `icon`      | `string`        | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/toast.tsx`

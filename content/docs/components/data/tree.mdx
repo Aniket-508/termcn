@@ -1,0 +1,53 @@
+---
+title: "Tree"
+description: "Expandable/collapsible tree view"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="tree" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/tree.json
+```
+
+## Usage
+
+```tsx
+import { Tree } from "@/components/ui/tree";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Tree {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop              | Type                          | Default     | Description                                                         |
+| ----------------- | ----------------------------- | ----------- | ------------------------------------------------------------------- |
+| `nodes`           | `TreeNode[]`                  | `required`  | -                                                                   |
+| `onSelect`        | `(node: TreeNode) =&gt; void` | `undefined` | -                                                                   |
+| `defaultExpanded` | `string[]`                    | `[]`        | -                                                                   |
+| `expandedIcon`    | `string`                      | `"▼"`       | Icon shown for expanded branch nodes. Default: '▼'                  |
+| `collapsedIcon`   | `string`                      | `"▶"`       | Icon shown for collapsed branch nodes. Default: '▶'                 |
+| `leafIcon`        | `string`                      | `"•"`       | Default icon for leaf nodes (overridden by node.icon). Default: '•' |
+
+## Registry Files
+
+- `components/ui/tree.tsx`

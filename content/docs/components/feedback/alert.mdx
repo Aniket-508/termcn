@@ -1,0 +1,50 @@
+---
+title: "Alert"
+description: "Alert box with success/error/warning/info variants"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="alert" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/alert.json
+```
+
+## Usage
+
+```tsx
+import { Alert } from "@/components/ui/alert";
+
+export function Example() {
+  <Alert variant="success" title="Build complete">
+    Everything is ready to ship.
+  </Alert>;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                                                                            | Default     | Description                                   |
+| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------- |
+| `variant`     | `AlertVariant`                                                                                  | `"info"`    | -                                             |
+| `title`       | `string`                                                                                        | `undefined` | -                                             |
+| `children`    | `ReactNode`                                                                                     | `undefined` | -                                             |
+| `icon`        | `string`                                                                                        | `undefined` | -                                             |
+| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the alert. Default: true |
+| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` | Border style. Default: theme.border.style     |
+| `color`       | `string`                                                                                        | `undefined` | Override the border/icon color                |
+| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding. Default: 1                |
+| `paddingY`    | `number`                                                                                        | `0`         | Vertical padding. Default: 0                  |
+
+## Registry Files
+
+- `components/ui/alert.tsx`

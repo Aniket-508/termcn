@@ -1,0 +1,55 @@
+---
+title: "Time Picker"
+description: "Time picker with hour/minute/second spinners"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="time-picker" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/time-picker.json
+```
+
+## Usage
+
+```tsx
+import { TimePicker } from "@/components/ui/time-picker";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <TimePicker {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type                                                              | Default     | Description                       |
+| ----------- | ----------------------------------------------------------------- | ----------- | --------------------------------- |
+| `value`     | `&#123; hours: number; minutes: number &#125;`                    | `undefined` | -                                 |
+| `onChange`  | `(time: &#123; hours: number; minutes: number &#125;) =&gt; void` | `undefined` | -                                 |
+| `onSubmit`  | `(time: &#123; hours: number; minutes: number &#125;) =&gt; void` | `undefined` | -                                 |
+| `label`     | `string`                                                          | `undefined` | -                                 |
+| `format`    | `12 \| 24`                                                        | `24`        | 12 or 24 hour format. Default: 24 |
+| `autoFocus` | `boolean`                                                         | `false`     | -                                 |
+| `id`        | `string`                                                          | `undefined` | -                                 |
+
+## Registry Files
+
+- `components/ui/time-picker.tsx`

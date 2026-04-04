@@ -1,0 +1,48 @@
+---
+title: "Git Status"
+description: "Git status display (branch, staged, modified, ahead/behind)"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="git-status" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/git-status.json
+```
+
+## Usage
+
+```tsx
+import { GitStatus } from "@/components/ui/git-status";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <GitStatus {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type     | Default    | Description |
+| ---------- | -------- | ---------- | ----------- |
+| `branch`   | `string` | `required` | -           |
+| `staged`   | `number` | `0`        | -           |
+| `modified` | `number` | `0`        | -           |
+| `ahead`    | `number` | `0`        | -           |
+| `behind`   | `number` | `0`        | -           |
+
+## Registry Files
+
+- `components/ui/git-status.tsx`

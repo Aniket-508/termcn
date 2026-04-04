@@ -1,0 +1,50 @@
+---
+title: "Usage Monitor"
+description: "Real-time dashboard with diamond header, progress metrics, burn rate, predictions, and status bar"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="usage-monitor" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/usage-monitor.json
+```
+
+## Usage
+
+```tsx
+import { UsageMonitor } from "@/components/ui/usage-monitor";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <UsageMonitor {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop              | Type        | Default    | Description |
+| ----------------- | ----------- | ---------- | ----------- |
+| `refreshInterval` | `number`    | `1000`     | -           |
+| `separatorChar`   | `string`    | `"─"`      | -           |
+| `children`        | `ReactNode` | `required` | -           |
+
+## Registry Files
+
+- `components/ui/usage-monitor.tsx`

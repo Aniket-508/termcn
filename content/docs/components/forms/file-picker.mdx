@@ -1,0 +1,62 @@
+---
+title: "File Picker"
+description: "Interactive file browser and picker"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="file-picker" />
+</TerminalPreview>
+
+> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/file-picker.json
+```
+
+## Usage
+
+```tsx
+import { FilePicker } from "@/components/ui/file-picker";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <FilePicker {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+- `glob`
+
+## Props
+
+| Prop         | Type                        | Default         | Description                                |
+| ------------ | --------------------------- | --------------- | ------------------------------------------ |
+| `value`      | `string`                    | `undefined`     | -                                          |
+| `onChange`   | `(path: string) =&gt; void` | `undefined`     | -                                          |
+| `onSubmit`   | `(path: string) =&gt; void` | `undefined`     | -                                          |
+| `label`      | `string`                    | `undefined`     | -                                          |
+| `startDir`   | `string`                    | `process.cwd()` | Starting directory. Default: process.cwd() |
+| `extensions` | `string[]`                  | `undefined`     | Show only files with these extensions      |
+| `dirsOnly`   | `boolean`                   | `false`         | Show only directories                      |
+| `autoFocus`  | `boolean`                   | `false`         | -                                          |
+| `id`         | `string`                    | `undefined`     | -                                          |
+| `width`      | `number`                    | `50`            | -                                          |
+| `maxVisible` | `number`                    | `8`             | Max number of files to show. Default: 8    |
+
+## Registry Files
+
+- `components/ui/file-picker.tsx`

@@ -1,0 +1,55 @@
+---
+title: "Directory Tree"
+description: "Filesystem browser with expand/collapse"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="directory-tree" />
+</TerminalPreview>
+
+> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/directory-tree.json
+```
+
+## Usage
+
+```tsx
+import { DirectoryTree } from "@/components/ui/directory-tree";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <DirectoryTree {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+- `glob`
+
+## Props
+
+| Prop         | Type                        | Default         | Description                                         |
+| ------------ | --------------------------- | --------------- | --------------------------------------------------- |
+| `rootPath`   | `string`                    | `process.cwd()` | Root path to display. Default: process.cwd()        |
+| `onSelect`   | `(path: string) =&gt; void` | `undefined`     | -                                                   |
+| `maxDepth`   | `number`                    | `2`             | Max depth to show initially. Default: 2             |
+| `showHidden` | `boolean`                   | `false`         | Show hidden files (starting with .). Default: false |
+| `label`      | `string`                    | `undefined`     | -                                                   |
+
+## Registry Files
+
+- `components/ui/directory-tree.tsx`

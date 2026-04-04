@@ -1,0 +1,46 @@
+---
+title: "Help"
+description: "Auto-generated help panel from a keymap"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="help" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/help.json
+```
+
+## Usage
+
+```tsx
+import { Help } from "@/components/ui/help";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Help {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop      | Type                           | Default     | Description |
+| --------- | ------------------------------ | ----------- | ----------- |
+| `keymap`  | `Record&lt;string, string&gt;` | `required`  | -           |
+| `title`   | `string`                       | `undefined` | -           |
+| `compact` | `boolean`                      | `false`     | -           |
+
+## Registry Files
+
+- `components/ui/help.tsx`

@@ -1,0 +1,49 @@
+---
+title: "Divider"
+description: "Horizontal or vertical divider / rule"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="divider" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/divider.json
+```
+
+## Usage
+
+```tsx
+import { Divider } from "@/components/ui/divider";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Divider {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                             | Default        | Description |
+| ------------- | -------------------------------- | -------------- | ----------- |
+| `variant`     | `"single" \| "double" \| "bold"` | `"single"`     | -           |
+| `orientation` | `"horizontal" \| "vertical"`     | `"horizontal"` | -           |
+| `color`       | `string`                         | `undefined`    | -           |
+| `label`       | `string`                         | `undefined`    | -           |
+| `height`      | `number`                         | `1`            | -           |
+| `width`       | `number`                         | `undefined`    | -           |
+
+## Registry Files
+
+- `components/ui/divider.tsx`

@@ -1,0 +1,49 @@
+---
+title: "Line Chart"
+description: "ASCII line chart with axes and multi-series support"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="line-chart" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/line-chart.json
+```
+
+## Usage
+
+```tsx
+import { LineChart } from "@/components/ui/line-chart";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <LineChart {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type                   | Default     | Description |
+| ---------- | ---------------------- | ----------- | ----------- |
+| `data`     | `LineChartDataPoint[]` | `required`  | -           |
+| `width`    | `number`               | `40`        | -           |
+| `height`   | `number`               | `10`        | -           |
+| `title`    | `string`               | `undefined` | -           |
+| `color`    | `string`               | `undefined` | -           |
+| `showAxes` | `boolean`              | `true`      | -           |
+
+## Registry Files
+
+- `components/ui/line-chart.tsx`

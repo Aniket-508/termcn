@@ -1,0 +1,56 @@
+---
+title: "Date Picker"
+description: "Calendar date picker with keyboard navigation"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="date-picker" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/date-picker.json
+```
+
+## Usage
+
+```tsx
+import { DatePicker } from "@/components/ui/date-picker";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <DatePicker {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type                      | Default     | Description |
+| ----------- | ------------------------- | ----------- | ----------- |
+| `value`     | `Date`                    | `undefined` | -           |
+| `onChange`  | `(date: Date) =&gt; void` | `undefined` | -           |
+| `onSubmit`  | `(date: Date) =&gt; void` | `undefined` | -           |
+| `label`     | `string`                  | `undefined` | -           |
+| `minDate`   | `Date`                    | `undefined` | -           |
+| `maxDate`   | `Date`                    | `undefined` | -           |
+| `autoFocus` | `boolean`                 | `false`     | -           |
+| `id`        | `string`                  | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/date-picker.tsx`

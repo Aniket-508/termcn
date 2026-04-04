@@ -1,0 +1,42 @@
+---
+title: "Theme Provider"
+description: "Wrap your Ink component tree with the terminal theme provider."
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-provider.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { defaultTheme } from "@/lib/terminal-themes/default";
+import { Spinner } from "@/components/ui/spinner";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Spinner label="Generating registry items" />
+    </ThemeProvider>
+  );
+}
+```
+
+## Custom Themes
+
+```tsx
+import { createTheme } from "@/components/ui/theme-provider";
+
+export const oceanTheme = createTheme({
+  name: "ocean",
+  colors: {
+    primary: "#0ea5e9",
+    accent: "#22d3ee",
+    background: "#0f172a",
+    foreground: "#e2e8f0",
+  },
+});
+```

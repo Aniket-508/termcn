@@ -1,0 +1,44 @@
+---
+title: "Multi Progress"
+description: "Parallel progress display for package managers, build pipelines, and deploy tools"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="multi-progress" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/multi-progress.json
+```
+
+## Usage
+
+```tsx
+import { MultiProgress } from "@/components/ui/multi-progress";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <MultiProgress {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop    | Type                  | Default    | Description |
+| ------- | --------------------- | ---------- | ----------- |
+| `items` | `MultiProgressItem[]` | `required` | -           |
+
+## Registry Files
+
+- `components/ui/multi-progress.tsx`

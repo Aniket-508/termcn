@@ -1,0 +1,48 @@
+---
+title: "Progress Circle"
+description: "Circular progress indicator using Unicode braille"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="progress-circle" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/progress-circle.json
+```
+
+## Usage
+
+```tsx
+import { ProgressCircle } from "@/components/ui/progress-circle";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ProgressCircle {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                 | Default     | Description |
+| ------------- | -------------------- | ----------- | ----------- |
+| `value`       | `number`             | `required`  | -           |
+| `size`        | `ProgressCircleSize` | `"sm"`      | -           |
+| `color`       | `string`             | `undefined` | -           |
+| `label`       | `string`             | `undefined` | -           |
+| `showPercent` | `boolean`            | `false`     | -           |
+
+## Registry Files
+
+- `components/ui/progress-circle.tsx`

@@ -1,0 +1,48 @@
+---
+title: "Info Box"
+description: "Bordered info panel with header, key-value rows, and tree-prefix rows"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="info-box" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/info-box.json
+```
+
+## Usage
+
+```tsx
+import { InfoBox } from "@/components/ui/info-box";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <InfoBox {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                                        | Default     | Description |
+| ------------- | ------------------------------------------- | ----------- | ----------- |
+| `borderStyle` | `"single" \| "round" \| "double" \| "bold"` | `"single"`  | -           |
+| `borderColor` | `string`                                    | `undefined` | -           |
+| `padding`     | `[number, number]`                          | `[0`        | -           |
+| `width`       | `number \| "full"`                          | `undefined` | -           |
+| `children`    | `ReactNode`                                 | `required`  | -           |
+
+## Registry Files
+
+- `components/ui/info-box.tsx`

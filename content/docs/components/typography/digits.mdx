@@ -1,0 +1,46 @@
+---
+title: "Digits"
+description: "Box-drawing character numerals"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="digits" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/digits.json
+```
+
+## Usage
+
+```tsx
+import { Digits } from "@/components/ui/digits";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Digits {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop    | Type               | Default     | Description |
+| ------- | ------------------ | ----------- | ----------- |
+| `value` | `string \| number` | `required`  | -           |
+| `color` | `string`           | `undefined` | -           |
+| `size`  | `DigitSize`        | `"md"`      | -           |
+
+## Registry Files
+
+- `components/ui/digits.tsx`

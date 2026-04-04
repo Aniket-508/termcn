@@ -1,0 +1,54 @@
+---
+title: "Confirm"
+description: "Yes/No confirmation prompt"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="confirm" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/confirm.json
+```
+
+## Usage
+
+```tsx
+import { Confirm } from "@/components/ui/confirm";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Confirm {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop           | Type                    | Default     | Description |
+| -------------- | ----------------------- | ----------- | ----------- |
+| `message`      | `string`                | `required`  | -           |
+| `onConfirm`    | `() =&gt; void`         | `undefined` | -           |
+| `onCancel`     | `() =&gt; void`         | `undefined` | -           |
+| `confirmLabel` | `string`                | `"Yes"`     | -           |
+| `cancelLabel`  | `string`                | `"No"`      | -           |
+| `defaultValue` | `boolean`               | `false`     | -           |
+| `variant`      | `"default" \| "danger"` | `"default"` | -           |
+
+## Registry Files
+
+- `components/ui/confirm.tsx`

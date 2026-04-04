@@ -1,0 +1,47 @@
+---
+title: "Link"
+description: "OSC 8 clickable hyperlink"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="link" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/link.json
+```
+
+## Usage
+
+```tsx
+import { Link } from "@/components/ui/link";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Link {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type        | Default     | Description |
+| ---------- | ----------- | ----------- | ----------- |
+| `children` | `ReactNode` | `required`  | -           |
+| `href`     | `string`    | `required`  | -           |
+| `color`    | `string`    | `undefined` | -           |
+| `showHref` | `boolean`   | `false`     | -           |
+
+## Registry Files
+
+- `components/ui/link.tsx`

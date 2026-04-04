@@ -1,0 +1,45 @@
+---
+title: "Spacer"
+description: "Flexible space between flex children"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="spacer" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/spacer.json
+```
+
+## Usage
+
+```tsx
+import { Spacer } from "@/components/ui/spacer";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Spacer {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type                         | Default        | Description |
+| ----------- | ---------------------------- | -------------- | ----------- |
+| `size`      | `number`                     | `undefined`    | -           |
+| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | -           |
+
+## Registry Files
+
+- `components/ui/spacer.tsx`

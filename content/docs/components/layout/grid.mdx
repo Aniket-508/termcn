@@ -1,0 +1,46 @@
+---
+title: "Grid"
+description: "Rows × columns grid layout"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="grid" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/grid.json
+```
+
+## Usage
+
+```tsx
+import { Grid } from "@/components/ui/grid";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Grid {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type        | Default    | Description |
+| ---------- | ----------- | ---------- | ----------- |
+| `columns`  | `number`    | `required` | -           |
+| `gap`      | `number`    | `0`        | -           |
+| `children` | `ReactNode` | `required` | -           |
+
+## Registry Files
+
+- `components/ui/grid.tsx`

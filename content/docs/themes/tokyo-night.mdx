@@ -1,0 +1,30 @@
+---
+title: "Tokyo Night"
+description: "Tokyo Night colors for terminal interfaces."
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ThemeShowcasePreview />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-tokyo-night.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { tokyoNightTheme } from "@/lib/terminal-themes/tokyoNight";
+import { Badge } from "@/components/ui/badge";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={tokyoNightTheme}>
+      <Badge variant="info">Tokyo Night</Badge>
+    </ThemeProvider>
+  );
+}
+```

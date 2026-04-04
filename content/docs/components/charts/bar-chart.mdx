@@ -1,0 +1,49 @@
+---
+title: "Bar Chart"
+description: "Horizontal and vertical bar chart with labels"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="bar-chart" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/bar-chart.json
+```
+
+## Usage
+
+```tsx
+import { BarChart } from "@/components/ui/bar-chart";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <BarChart {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type                         | Default        | Description |
+| ------------ | ---------------------------- | -------------- | ----------- |
+| `data`       | `BarChartItem[]`             | `required`     | -           |
+| `direction`  | `"horizontal" \| "vertical"` | `"horizontal"` | -           |
+| `width`      | `number`                     | `30`           | -           |
+| `height`     | `number`                     | `10`           | -           |
+| `showValues` | `boolean`                    | `true`         | -           |
+| `title`      | `string`                     | `undefined`    | -           |
+
+## Registry Files
+
+- `components/ui/bar-chart.tsx`

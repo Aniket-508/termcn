@@ -1,0 +1,52 @@
+---
+title: "Clipboard"
+description: "Copy-to-clipboard button with success feedback"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="clipboard" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/clipboard.json
+```
+
+## Usage
+
+```tsx
+import { Clipboard } from "@/components/ui/clipboard";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Clipboard {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+- `use-clipboard`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop             | Type     | Default     | Description |
+| ---------------- | -------- | ----------- | ----------- |
+| `value`          | `string` | `required`  | -           |
+| `label`          | `string` | `undefined` | -           |
+| `successMessage` | `string` | `"Copied!"` | -           |
+| `timeout`        | `number` | `2000`      | -           |
+
+## Registry Files
+
+- `components/ui/clipboard.tsx`

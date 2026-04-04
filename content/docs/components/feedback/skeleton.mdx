@@ -1,0 +1,50 @@
+---
+title: "Skeleton"
+description: "Shimmer loading placeholder"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="skeleton" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/skeleton.json
+```
+
+## Usage
+
+```tsx
+import { Skeleton } from "@/components/ui/skeleton";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Skeleton {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-animation`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type      | Default | Description |
+| ---------- | --------- | ------- | ----------- |
+| `width`    | `number`  | `20`    | -           |
+| `height`   | `number`  | `1`     | -           |
+| `animated` | `boolean` | `true`  | -           |
+
+## Registry Files
+
+- `components/ui/skeleton.tsx`

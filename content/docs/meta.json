@@ -1,4 +1,4 @@
 {
-  "root": true,
-  "pages": ["(root)", "examples"]
+  "pages": ["(root)", "themes", "components"],
+  "root": true
 }

@@ -1,0 +1,54 @@
+---
+title: "Drawer"
+description: "Slide-in panel from any edge"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="drawer" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/drawer.json
+```
+
+## Usage
+
+```tsx
+import { Drawer } from "@/components/ui/drawer";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Drawer {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type            | Default     | Description |
+| ---------- | --------------- | ----------- | ----------- |
+| `isOpen`   | `boolean`       | `false`     | -           |
+| `edge`     | `DrawerEdge`    | `"right"`   | -           |
+| `title`    | `string`        | `undefined` | -           |
+| `children` | `ReactNode`     | `required`  | -           |
+| `onClose`  | `() =&gt; void` | `undefined` | -           |
+| `width`    | `number`        | `40`        | -           |
+| `height`   | `number`        | `10`        | -           |
+
+## Registry Files
+
+- `components/ui/drawer.tsx`

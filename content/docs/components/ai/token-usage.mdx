@@ -1,0 +1,47 @@
+---
+title: "Token Usage"
+description: "Compact token counter showing prompt and completion usage with optional cost estimate; also exports ContextMeter for visualising context window fill"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="token-usage" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/token-usage.json
+```
+
+## Usage
+
+```tsx
+import { TokenUsage } from "@/components/ui/token-usage";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <TokenUsage {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop         | Type      | Default     | Description |
+| ------------ | --------- | ----------- | ----------- |
+| `prompt`     | `number`  | `required`  | -           |
+| `completion` | `number`  | `required`  | -           |
+| `model`      | `string`  | `undefined` | -           |
+| `showCost`   | `boolean` | `false`     | -           |
+
+## Registry Files
+
+- `components/ui/token-usage.tsx`

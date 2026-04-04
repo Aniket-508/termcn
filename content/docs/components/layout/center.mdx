@@ -1,0 +1,45 @@
+---
+title: "Center"
+description: "Centers children horizontally and vertically"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="center" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/center.json
+```
+
+## Usage
+
+```tsx
+import { Center } from "@/components/ui/center";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Center {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type                                   | Default    | Description |
+| ---------- | -------------------------------------- | ---------- | ----------- |
+| `children` | `ReactNode`                            | `required` | -           |
+| `axis`     | `"both" \| "horizontal" \| "vertical"` | `"both"`   | -           |
+
+## Registry Files
+
+- `components/ui/center.tsx`

@@ -1,0 +1,55 @@
+---
+title: "Color Picker"
+description: "Color picker with palette, hex, and RGB input"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="color-picker" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/color-picker.json
+```
+
+## Usage
+
+```tsx
+import { ColorPicker } from "@/components/ui/color-picker";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ColorPicker {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type                         | Default           | Description |
+| ----------- | ---------------------------- | ----------------- | ----------- |
+| `value`     | `string`                     | `undefined`       | -           |
+| `onChange`  | `(color: string) =&gt; void` | `undefined`       | -           |
+| `onSubmit`  | `(color: string) =&gt; void` | `undefined`       | -           |
+| `label`     | `string`                     | `undefined`       | -           |
+| `palette`   | `string[]`                   | `DEFAULT_PALETTE` | -           |
+| `autoFocus` | `boolean`                    | `false`           | -           |
+| `id`        | `string`                     | `undefined`       | -           |
+
+## Registry Files
+
+- `components/ui/color-picker.tsx`

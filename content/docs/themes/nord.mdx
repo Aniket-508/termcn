@@ -1,0 +1,30 @@
+---
+title: "Nord"
+description: "A cool Nord palette tuned for terminal contrast."
+---
+
+<TerminalPreview defaultThemeKey="nord">
+  <ThemeShowcasePreview />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-nord.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { nordTheme } from "@/lib/terminal-themes/nord";
+import { Badge } from "@/components/ui/badge";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={nordTheme}>
+      <Badge variant="info">Nord</Badge>
+    </ThemeProvider>
+  );
+}
+```

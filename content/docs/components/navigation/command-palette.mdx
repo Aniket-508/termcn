@@ -1,0 +1,53 @@
+---
+title: "Command Palette"
+description: "VS Code–style command palette with fuzzy search"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="command-palette" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/command-palette.json
+```
+
+## Usage
+
+```tsx
+import { CommandPalette } from "@/components/ui/command-palette";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <CommandPalette {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+- `mnemonist`
+
+## Props
+
+| Prop          | Type            | Default               | Description                 |
+| ------------- | --------------- | --------------------- | --------------------------- |
+| `commands`    | `Command[]`     | `required`            | -                           |
+| `isOpen`      | `boolean`       | `required`            | Whether palette is open     |
+| `onClose`     | `() =&gt; void` | `required`            | -                           |
+| `placeholder` | `string`        | `"Type a command..."` | -                           |
+| `maxItems`    | `number`        | `8`                   | Max items shown. Default: 8 |
+
+## Registry Files
+
+- `components/ui/command-palette.tsx`

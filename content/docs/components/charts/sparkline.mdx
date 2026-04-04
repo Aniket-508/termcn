@@ -1,0 +1,47 @@
+---
+title: "Sparkline"
+description: "Inline Unicode braille sparkline chart"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="sparkline" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/sparkline.json
+```
+
+## Usage
+
+```tsx
+import { Sparkline } from "@/components/ui/sparkline";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Sparkline {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop    | Type       | Default     | Description |
+| ------- | ---------- | ----------- | ----------- |
+| `data`  | `number[]` | `required`  | -           |
+| `width` | `number`   | `20`        | -           |
+| `color` | `string`   | `undefined` | -           |
+| `label` | `string`   | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/sparkline.tsx`

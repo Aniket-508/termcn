@@ -1,0 +1,30 @@
+---
+title: "Default"
+description: "The default termcn terminal theme."
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ThemeShowcasePreview />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-default.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { defaultTheme } from "@/lib/terminal-themes/default";
+import { Badge } from "@/components/ui/badge";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Badge variant="info">Default</Badge>
+    </ThemeProvider>
+  );
+}
+```

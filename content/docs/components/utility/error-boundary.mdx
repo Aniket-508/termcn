@@ -1,0 +1,47 @@
+---
+title: "Error Boundary"
+description: "React error boundary with graceful terminal display"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="error-boundary" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/error-boundary.json
+```
+
+## Usage
+
+```tsx
+import { ErrorBoundary } from "@/components/ui/error-boundary";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ErrorBoundary {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type                                                                    | Default     | Description |
+| ---------- | ----------------------------------------------------------------------- | ----------- | ----------- |
+| `children` | `ReactNode`                                                             | `required`  | -           |
+| `fallback` | `ReactNode`                                                             | `undefined` | -           |
+| `onError`  | `(error: Error, info: &#123; componentStack: string &#125;) =&gt; void` | `undefined` | -           |
+| `title`    | `string`                                                                | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/error-boundary.tsx`

@@ -1,0 +1,50 @@
+---
+title: "Diff View"
+description: "Unified, split, and inline diff viewer with LCS-based diff algorithm and line numbers"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="diff-view" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/diff-view.json
+```
+
+## Usage
+
+```tsx
+import { DiffView } from "@/components/ui/diff-view";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <DiffView {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop              | Type       | Default     | Description |
+| ----------------- | ---------- | ----------- | ----------- |
+| `oldText`         | `string`   | `required`  | -           |
+| `newText`         | `string`   | `required`  | -           |
+| `filename`        | `string`   | `undefined` | -           |
+| `language`        | `string`   | `undefined` | -           |
+| `mode`            | `DiffMode` | `"unified"` | -           |
+| `context`         | `number`   | `3`         | -           |
+| `showLineNumbers` | `boolean`  | `false`     | -           |
+
+## Registry Files
+
+- `components/ui/diff-view.tsx`

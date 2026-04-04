@@ -1,0 +1,46 @@
+---
+title: "Big Text"
+description: "Figlet-style large ASCII art text"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="big-text" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/big-text.json
+```
+
+## Usage
+
+```tsx
+import { BigText } from "@/components/ui/big-text";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <BigText {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type          | Default     | Description |
+| ---------- | ------------- | ----------- | ----------- |
+| `children` | `string`      | `required`  | -           |
+| `color`    | `string`      | `undefined` | -           |
+| `font`     | `BigTextFont` | `"block"`   | -           |
+
+## Registry Files
+
+- `components/ui/big-text.tsx`

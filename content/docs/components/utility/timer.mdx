@@ -1,0 +1,53 @@
+---
+title: "Timer"
+description: "Countdown timer with pause/resume and auto-start"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="timer" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/timer.json
+```
+
+## Usage
+
+```tsx
+import { Timer } from "@/components/ui/timer";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Timer {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type                                            | Default     | Description |
+| ----------- | ----------------------------------------------- | ----------- | ----------- |
+| `duration`  | `number; // seconds onComplete?: () =&gt; void` | `required`  | -           |
+| `autoStart` | `boolean`                                       | `false`     | -           |
+| `format`    | `"hms" \| "ms" \| "s"`                          | `"hms"`     | -           |
+| `color`     | `string`                                        | `undefined` | -           |
+| `label`     | `string`                                        | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/timer.tsx`

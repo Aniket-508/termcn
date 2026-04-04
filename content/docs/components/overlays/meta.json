@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "dialog",
+    "drawer",
+    "modal",
+    "notification-center",
+    "popover",
+    "tooltip"
+  ],
+  "title": "Overlays"
+}

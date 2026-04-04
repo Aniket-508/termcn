@@ -1,0 +1,55 @@
+---
+title: "Tool Call"
+description: "Displays an AI tool invocation with status indicator, args, result, and elapsed time"
+---
+
+<TerminalPreview defaultThemeKey="tokyo-night">
+  <ComponentPreview name="tool-call" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/tool-call.json
+```
+
+## Usage
+
+```tsx
+import { ToolCall } from "@/components/ui/tool-call";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <ToolCall {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-input`
+- `use-animation`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop               | Type                            | Default     | Description |
+| ------------------ | ------------------------------- | ----------- | ----------- |
+| `name`             | `string`                        | `required`  | -           |
+| `args`             | `Record&lt;string, unknown&gt;` | `undefined` | -           |
+| `status`           | `ToolCallStatus`                | `required`  | -           |
+| `result`           | `unknown`                       | `undefined` | -           |
+| `duration`         | `number`                        | `undefined` | -           |
+| `collapsible`      | `boolean`                       | `true`      | -           |
+| `defaultCollapsed` | `boolean`                       | `true`      | -           |
+
+## Registry Files
+
+- `components/ui/tool-call.tsx`

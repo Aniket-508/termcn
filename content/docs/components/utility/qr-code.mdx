@@ -1,0 +1,47 @@
+---
+title: "QR Code"
+description: "Unicode block QR code generator"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="qr-code" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/qr-code.json
+```
+
+## Usage
+
+```tsx
+import { QRCode } from "@/components/ui/qr-code";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <QRCode {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop    | Type                   | Default     | Description |
+| ------- | ---------------------- | ----------- | ----------- |
+| `value` | `string`               | `required`  | -           |
+| `size`  | `"sm" \| "md" \| "lg"` | `"md"`      | -           |
+| `color` | `string`               | `undefined` | -           |
+| `label` | `string`               | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/qr-code.tsx`

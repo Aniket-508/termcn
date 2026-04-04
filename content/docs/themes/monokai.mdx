@@ -1,0 +1,30 @@
+---
+title: "Monokai"
+description: "A classic Monokai-inspired theme for terminal apps."
+---
+
+<TerminalPreview defaultThemeKey="monokai">
+  <ThemeShowcasePreview />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-monokai.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { monokaiTheme } from "@/lib/terminal-themes/monokai";
+import { Badge } from "@/components/ui/badge";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={monokaiTheme}>
+      <Badge variant="info">Monokai</Badge>
+    </ThemeProvider>
+  );
+}
+```

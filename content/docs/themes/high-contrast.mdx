@@ -1,0 +1,32 @@
+---
+title: "High Contrast"
+description: "High contrast themes for dark and light terminal backgrounds."
+---
+
+<TerminalPreview defaultThemeKey="high-contrast">
+  <ThemeShowcasePreview />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-high-contrast.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { highContrastTheme } from "@/lib/terminal-themes/highContrast";
+import { Badge } from "@/components/ui/badge";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={highContrastTheme}>
+      <Badge variant="info">High Contrast</Badge>
+    </ThemeProvider>
+  );
+}
+```
+
+This file also exports `highContrastLightTheme` for bright terminal backgrounds.

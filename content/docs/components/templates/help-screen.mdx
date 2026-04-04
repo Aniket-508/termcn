@@ -1,0 +1,56 @@
+---
+title: "Help Screen"
+description: "Figlet banner + tagline + aligned Options/Commands help sections"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="help-screen" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/help-screen.json
+```
+
+## Usage
+
+```tsx
+import { HelpScreen } from "@/components/ui/help-screen";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <HelpScreen {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `big-text`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type          | Default     | Description |
+| ------------- | ------------- | ----------- | ----------- |
+| `title`       | `string`      | `required`  | -           |
+| `font`        | `BigTextFont` | `"block"`   | -           |
+| `titleColor`  | `string`      | `undefined` | -           |
+| `tagline`     | `string`      | `undefined` | -           |
+| `usage`       | `string`      | `undefined` | -           |
+| `description` | `string`      | `undefined` | -           |
+| `columnGap`   | `number`      | `4`         | -           |
+| `flagWidth`   | `number`      | `undefined` | -           |
+| `children`    | `ReactNode`   | `required`  | -           |
+
+## Registry Files
+
+- `components/ui/help-screen.tsx`

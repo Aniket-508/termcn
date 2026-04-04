@@ -1,0 +1,30 @@
+---
+title: "Solarized"
+description: "A Solarized theme for terminal components."
+---
+
+<TerminalPreview defaultThemeKey="solarized">
+  <ThemeShowcasePreview />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/theme-solarized.json
+```
+
+## Usage
+
+```tsx
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { solarizedTheme } from "@/lib/terminal-themes/solarized";
+import { Badge } from "@/components/ui/badge";
+
+export function Example() {
+  return (
+    <ThemeProvider theme={solarizedTheme}>
+      <Badge variant="info">Solarized</Badge>
+    </ThemeProvider>
+  );
+}
+```

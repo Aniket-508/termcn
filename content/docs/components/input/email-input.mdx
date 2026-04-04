@@ -1,0 +1,57 @@
+---
+title: "Email Input"
+description: "Email input with validation and domain suggestions"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="email-input" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/email-input.json
+```
+
+## Usage
+
+```tsx
+import { EmailInput } from "@/components/ui/email-input";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <EmailInput {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `use-focus`
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop          | Type                         | Default             | Description |
+| ------------- | ---------------------------- | ------------------- | ----------- |
+| `value`       | `string`                     | `undefined`         | -           |
+| `onChange`    | `(value: string) =&gt; void` | `undefined`         | -           |
+| `onSubmit`    | `(value: string) =&gt; void` | `undefined`         | -           |
+| `label`       | `string`                     | `undefined`         | -           |
+| `placeholder` | `string`                     | `"you@example.com"` | -           |
+| `autoFocus`   | `boolean`                    | `false`             | -           |
+| `id`          | `string`                     | `undefined`         | -           |
+| `width`       | `number`                     | `40`                | -           |
+| `suggestions` | `string[]`                   | `["gmail.com"`      | -           |
+
+## Registry Files
+
+- `components/ui/email-input.tsx`

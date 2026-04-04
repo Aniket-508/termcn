@@ -1,0 +1,47 @@
+---
+title: "Tag"
+description: "Removable chip/tag"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="tag" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/tag.json
+```
+
+## Usage
+
+```tsx
+import { Tag } from "@/components/ui/tag";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Tag {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type            | Default     | Description |
+| ---------- | --------------- | ----------- | ----------- |
+| `children` | `ReactNode`     | `required`  | -           |
+| `onRemove` | `() =&gt; void` | `undefined` | -           |
+| `color`    | `string`        | `undefined` | -           |
+| `variant`  | `TagVariant`    | `"default"` | -           |
+
+## Registry Files
+
+- `components/ui/tag.tsx`

@@ -1,0 +1,46 @@
+---
+title: "Aspect Ratio"
+description: "Constrains children to a given aspect ratio"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="aspect-ratio" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/aspect-ratio.json
+```
+
+## Usage
+
+```tsx
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <AspectRatio {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type        | Default    | Description |
+| ---------- | ----------- | ---------- | ----------- |
+| `children` | `ReactNode` | `required` | -           |
+| `ratio`    | `number`    | `16 / 9`   | -           |
+| `width`    | `number`    | `80`       | -           |
+
+## Registry Files
+
+- `components/ui/aspect-ratio.tsx`

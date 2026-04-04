@@ -1,0 +1,51 @@
+---
+title: "JSON"
+description: "Pretty-printed JSON with collapsible nodes"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="json" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/json.json
+```
+
+## Usage
+
+```tsx
+import { JSONView } from "@/components/ui/json";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <JSONView {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop        | Type      | Default     | Description                                   |
+| ----------- | --------- | ----------- | --------------------------------------------- |
+| `data`      | `unknown` | `required`  | -                                             |
+| `indent`    | `number`  | `2`         | Initial indent spaces. Default: 2             |
+| `collapsed` | `boolean` | `false`     | Whether nodes start collapsed. Default: false |
+| `label`     | `string`  | `undefined` | -                                             |
+
+## Registry Files
+
+- `components/ui/json.tsx`

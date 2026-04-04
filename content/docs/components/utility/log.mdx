@@ -1,0 +1,52 @@
+---
+title: "Log"
+description: "Scrolling log viewer with severity levels and filtering"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="log" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/log.json
+```
+
+## Usage
+
+```tsx
+import { Log } from "@/components/ui/log";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Log {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### Registry Dependencies
+
+- `theme-provider`
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop            | Type         | Default     | Description |
+| --------------- | ------------ | ----------- | ----------- |
+| `entries`       | `LogEntry[]` | `required`  | -           |
+| `height`        | `number`     | `10`        | -           |
+| `showTimestamp` | `boolean`    | `true`      | -           |
+| `filter`        | `string`     | `undefined` | -           |
+| `follow`        | `boolean`    | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/log.tsx`

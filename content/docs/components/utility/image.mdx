@@ -1,0 +1,50 @@
+---
+title: "Image"
+description: "Image renderer with iTerm2/Kitty protocol and ASCII fallback"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="image" />
+</TerminalPreview>
+
+> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/image.json
+```
+
+## Usage
+
+```tsx
+import { Image } from "@/components/ui/image";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Image {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop       | Type            | Default     | Description |
+| ---------- | --------------- | ----------- | ----------- |
+| `src`      | `string`        | `required`  | -           |
+| `width`    | `number`        | `20`        | -           |
+| `height`   | `number`        | `undefined` | -           |
+| `protocol` | `ImageProtocol` | `"auto"`    | -           |
+| `alt`      | `string`        | `undefined` | -           |
+
+## Registry Files
+
+- `components/ui/image.tsx`

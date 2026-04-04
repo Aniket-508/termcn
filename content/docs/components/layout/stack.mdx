@@ -1,0 +1,50 @@
+---
+title: "Stack"
+description: "Vertical/horizontal stack with gap"
+---
+
+<TerminalPreview defaultThemeKey="default">
+  <ComponentPreview name="stack" />
+</TerminalPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://termcn.vercel.app/r/stack.json
+```
+
+## Usage
+
+```tsx
+import { Stack } from "@/components/ui/stack";
+
+export function Example() {
+  const demoProps = {
+    // See the live preview for a working example.
+  };
+
+  return <Stack {...demoProps} />;
+}
+```
+
+## Dependencies
+
+### npm Dependencies
+
+- `ink`
+
+## Props
+
+| Prop             | Type                                                                             | Default      | Description |
+| ---------------- | -------------------------------------------------------------------------------- | ------------ | ----------- |
+| `direction`      | `"vertical" \| "horizontal"`                                                     | `"vertical"` | -           |
+| `gap`            | `number`                                                                         | `0`          | -           |
+| `children`       | `ReactNode`                                                                      | `required`   | -           |
+| `width`          | `number \| string`                                                               | `undefined`  | -           |
+| `height`         | `number \| string`                                                               | `undefined`  | -           |
+| `alignItems`     | `"flex-start" \| "center" \| "flex-end"`                                         | `undefined`  | -           |
+| `justifyContent` | `\| "flex-start" \| "center" \| "flex-end" \| "space-between" \| "space-around"` | `undefined`  | -           |
+
+## Registry Files
+
+- `components/ui/stack.tsx`
