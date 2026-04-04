@@ -262,6 +262,7 @@ const genericProps = (name: string) => ({
 
 const renderVirtualListItem = (item: string) => <Text>{item}</Text>;
 
+// eslint-disable-next-line complexity
 const DemoElement = ({
   name,
   Component,

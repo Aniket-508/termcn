@@ -6,7 +6,7 @@ const pool = new Map<
   { id: ReturnType<typeof setInterval>; subs: Set<Subscriber>; tick: number }
 >();
 
-const subscribe = (milliseconds: number, callback: Subscriber) => {
+const subscribe = (milliseconds: number, subscriber: Subscriber) => {
   if (!pool.has(milliseconds)) {
     const entry = {
       id: null as unknown as ReturnType<typeof setInterval>,
@@ -16,24 +16,24 @@ const subscribe = (milliseconds: number, callback: Subscriber) => {
 
     entry.id = setInterval(() => {
       entry.tick += 1;
-      for (const subscriber of entry.subs) {
-        subscriber(entry.tick);
+      for (const sub of entry.subs) {
+        sub(entry.tick);
       }
     }, milliseconds);
 
     pool.set(milliseconds, entry);
   }
 
-  pool.get(milliseconds)?.subs.add(callback);
+  pool.get(milliseconds)?.subs.add(subscriber);
 };
 
-const unsubscribe = (milliseconds: number, callback: Subscriber) => {
+const unsubscribe = (milliseconds: number, subscriber: Subscriber) => {
   const entry = pool.get(milliseconds);
   if (!entry) {
     return;
   }
 
-  entry.subs.delete(callback);
+  entry.subs.delete(subscriber);
   if (entry.subs.size === 0) {
     clearInterval(entry.id);
     pool.delete(milliseconds);
