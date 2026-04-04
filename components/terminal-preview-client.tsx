@@ -5,6 +5,11 @@ import "@xterm/xterm/css/xterm.css";
 import { InkTerminalBox } from "ink-web";
 import { useCallback, useState } from "react";
 
+import { MacWindow } from "@/components/mac-window";
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@/components/ui/native-select";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { terminalThemeMap, terminalThemeOptions } from "@/lib/terminal-themes";
 
@@ -31,41 +36,23 @@ const TerminalPreviewClient = ({
   );
 
   return (
-    <div className="bg-surface border-border mt-6 overflow-hidden rounded-xl border">
-      <div className="border-border flex items-center justify-between gap-4 border-b px-4 py-3">
-        <div>
-          <p className="text-sm font-medium">Live Terminal Preview</p>
-          <p className="text-muted-foreground text-xs">
-            Static docs page, client-side Ink terminal.
-          </p>
-        </div>
-        <label className="flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Theme</span>
-          <select
-            className="bg-background border-input rounded-md border px-2 py-1 text-sm"
-            value={themeKey}
-            onChange={handleThemeChange}
-          >
-            {terminalThemeOptions.map((theme) => (
-              <option key={theme.value} value={theme.value}>
-                {theme.label}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <div className="bg-black">
-        <InkTerminalBox
-          className="min-h-[320px]"
-          focus
-          loading="skeleton"
-          padding={12}
-          rows={rows}
-        >
-          <ThemeProvider theme={activeTheme}>{children}</ThemeProvider>
-        </InkTerminalBox>
-      </div>
-    </div>
+    <MacWindow
+      className="mt-6"
+      title="Terminal"
+      trailing={
+        <NativeSelect size="sm" value={themeKey} onChange={handleThemeChange}>
+          {terminalThemeOptions.map((theme) => (
+            <NativeSelectOption key={theme.value} value={theme.value}>
+              {theme.label}
+            </NativeSelectOption>
+          ))}
+        </NativeSelect>
+      }
+    >
+      <InkTerminalBox focus loading="skeleton" padding={12} rows={rows}>
+        <ThemeProvider theme={activeTheme}>{children}</ThemeProvider>
+      </InkTerminalBox>
+    </MacWindow>
   );
 };
 
