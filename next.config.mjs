@@ -18,6 +18,9 @@ const nextConfig = {
   outputFileTracingIncludes: {
     "/*": ["./registry/**/*"],
   },
+  turbopack: {
+    resolveAlias: { ink: "ink-web" },
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

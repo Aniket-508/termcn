@@ -5,8 +5,11 @@ import * as React from "react";
 import { Callout } from "@/components/callout";
 import { CodeBlock } from "@/components/code-block";
 import { CodeTabs } from "@/components/code-tabs";
+import { ComponentPreview } from "@/components/component-preview";
 import { CopyButton } from "@/components/copy-button";
 import { getIconForLanguageExtension } from "@/components/icons";
+import { TerminalPreview } from "@/components/terminal-preview";
+import { ThemeShowcasePreview } from "@/components/theme-showcase";
 import {
   Accordion,
   AccordionContent,
@@ -39,6 +42,7 @@ export const mdxComponents = {
     </div>
   ),
   CodeTabs,
+  ComponentPreview,
   Image: ({
     src,
     className,
@@ -130,6 +134,8 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  TerminalPreview,
+  ThemeShowcasePreview,
   a: ({ className, children, ...props }: React.ComponentProps<"a">) => (
     <a
       className={cn("font-medium underline underline-offset-4", className)}
