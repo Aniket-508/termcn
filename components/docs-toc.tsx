@@ -12,6 +12,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
+const headingById = (id: string): Element | null =>
+  document.querySelector(`#${CSS.escape(id)}`);
+
 const useActiveItem = (itemIds: string[]) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -28,7 +31,10 @@ const useActiveItem = (itemIds: string[]) => {
     );
 
     for (const id of itemIds ?? []) {
-      const element = document.querySelector(`#${id}`);
+      if (!id) {
+        continue;
+      }
+      const element = headingById(id);
       if (element) {
         observer.observe(element);
       }
@@ -36,7 +42,10 @@ const useActiveItem = (itemIds: string[]) => {
 
     return () => {
       for (const id of itemIds ?? []) {
-        const element = document.querySelector(`#${id}`);
+        if (!id) {
+          continue;
+        }
+        const element = headingById(id);
         if (element) {
           observer.unobserve(element);
         }

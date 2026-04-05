@@ -39,7 +39,7 @@ export default function IndexPage() {
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <Button asChild size="lg">
-              <Link href="/docs/installation">
+              <Link href="/docs/get-started">
                 Get Started
                 <ArrowRightIcon className="ml-2 size-4" />
               </Link>

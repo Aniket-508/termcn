@@ -1,0 +1,28 @@
+---
+title: MCP
+description: Learn how to use the shadcn MCP (Model Context Protocol) server with termcn.
+---
+
+[MCP](https://modelcontextprotocol.io/) is an open protocol that standardizes how applications provide context to LLMs. The shadcn CLI can register an MCP server so your editor can discover registry components—including items you install from **termcn** via the same CLI.
+
+## Configure MCP
+
+Run:
+
+```bash
+npx dlx shadcn@latest mcp init
+```
+
+Choose your MCP client when prompted, then enable the MCP server in that client to finish setup.
+
+## Usage
+
+With MCP enabled, you can ask your IDE to work with **Ink** terminal UI patterns and termcn registry components. Example prompts:
+
+- Build a CLI status screen with **Spinner**, **ProgressBar**, and **StatusMessage**.
+- Add a **CommandPalette** and **Menu** for keyboard-driven navigation in a terminal app.
+- Create an AI-style flow with **ChatThread**, **ChatMessage**, **ToolCall**, and **StreamingText**.
+- Lay out a TUI dashboard using **Box**, **Stack**, **Table**, and **DataGrid** with a **Sidebar**.
+- Implement a multi-step flow with **Wizard**, **Form**, **Confirm**, and **Modal**.
+
+Install components from this registry with `npx shadcn@latest add` and the JSON URL from each docs page, then reference them in your Ink `ThemeProvider` tree as usual.

@@ -1,7 +1,5 @@
 {
   "pages": [
-    "index",
-    "theme-provider",
     "default",
     "dracula",
     "nord",

@@ -24,25 +24,40 @@ export const docsConfig: DocsConfig = {
           title: "Introduction",
         },
         {
-          href: "/docs/installation",
+          href: "/docs/get-started",
           items: [],
-          title: "Installation",
+          title: "Get Started",
+        },
+        {
+          href: "/docs/theming",
+          items: [],
+          title: "Theming",
+        },
+        {
+          href: "/docs/mcp",
+          items: [],
+          title: "MCP",
+        },
+        {
+          href: "/docs/registry",
+          items: [],
+          title: "Registry",
+        },
+        {
+          href: "/docs/changelog",
+          items: [],
+          title: "Changelog",
+        },
+        {
+          href: "/llms.txt",
+          items: [],
+          title: "llms.txt",
         },
       ],
-      title: "Getting Started",
+      title: "Overview",
     },
     {
       items: [
-        {
-          href: "/docs/themes",
-          items: [],
-          title: "Themes",
-        },
-        {
-          href: "/docs/themes/theme-provider",
-          items: [],
-          title: "Theme Provider",
-        },
         {
           href: "/docs/themes/default",
           items: [],
