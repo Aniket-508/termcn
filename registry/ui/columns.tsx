@@ -1,5 +1,6 @@
 import { Box } from "ink";
 import type { ReactNode } from "react";
+import React from "react";
 
 export interface ColumnsProps {
   children: ReactNode;
