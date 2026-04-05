@@ -4,7 +4,7 @@ import { LINK } from "@/constants/links";
 import { SITE } from "@/constants/site";
 
 interface CreatePageMetadataOptions {
-  description: string;
+  description?: string;
   noIndex?: boolean;
   ogDescription?: string;
   ogImage?: string;
