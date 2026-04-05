@@ -35,18 +35,11 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Typecheck
-        run: pnpm typecheck
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
+      # Generates `.next/types/routes.d.ts` (e.g. global `RouteContext`) before `tsc`.
       - name: Build
         env:
           NEXT_TELEMETRY_DISABLED: 1
         run: pnpm build
+
+      - name: Typecheck
+        run: pnpm typecheck
