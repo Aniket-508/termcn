@@ -5,10 +5,10 @@ import { Callout } from "@/components/callout";
 import { CodeBlock } from "@/components/code-block";
 import { CodeTabs } from "@/components/code-tabs";
 import { ComponentPreview } from "@/components/component-preview";
+import { ComponentSource } from "@/components/component-source";
 import { CopyButton } from "@/components/copy-button";
 import { getIconForLanguageExtension } from "@/components/icons";
 import { TerminalPreview } from "@/components/terminal-preview";
-import { ThemeShowcasePreview } from "@/components/theme-showcase";
 import {
   Accordion,
   AccordionContent,
@@ -19,6 +19,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ThemeShowcasePreview } from "@/examples/theme-showcase";
 import { cn } from "@/lib/utils";
 
 export const mdxComponents = {
@@ -42,6 +43,7 @@ export const mdxComponents = {
   ),
   CodeTabs,
   ComponentPreview,
+  ComponentSource,
   Image: ({
     src,
     className,
