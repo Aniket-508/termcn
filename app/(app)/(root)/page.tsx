@@ -5,13 +5,14 @@ import Link from "next/link";
 import { CommandBox } from "@/components/command-box";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/config";
+import { ROUTES } from "@/constants/routes";
+import { SITE } from "@/constants/site";
 import { createPageMetadata } from "@/seo/metadata";
 
-const title = siteConfig.name;
-const { description } = siteConfig;
+const title = SITE.name;
+const { description } = SITE;
 
-const installCommand = `npx shadcn@latest add ${siteConfig.url}/r/badge.json`;
+const installCommand = `npx shadcn@latest add ${SITE.url}/r/badge.json`;
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -39,13 +40,13 @@ export default function IndexPage() {
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <Button asChild size="lg">
-              <Link href="/docs/get-started">
+              <Link href={ROUTES.DOCS_GET_STARTED}>
                 Get Started
                 <ArrowRightIcon className="ml-2 size-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/docs/components/typography/badge">
+              <Link href={`${ROUTES.DOCS_COMPONENTS}/typography/badge`}>
                 Browse Components
               </Link>
             </Button>

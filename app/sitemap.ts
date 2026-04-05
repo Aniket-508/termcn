@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
-import { siteConfig } from "@/lib/config";
+import { ROUTES } from "@/constants/routes";
+import { SITE } from "@/constants/site";
 import { source } from "@/lib/source";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       lastModified: new Date(),
       priority: 1,
-      url: siteConfig.url,
+      url: SITE.url,
     },
   ];
 
@@ -18,8 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const docPages: MetadataRoute.Sitemap = source.getPages().map((page) => ({
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
-    priority: page.url === "/docs" ? 0.9 : 0.8,
-    url: `${siteConfig.url}${page.url}`,
+    priority: page.url === ROUTES.DOCS ? 0.9 : 0.8,
+    url: `${SITE.url}${page.url}`,
   }));
 
   return [...staticPages, ...docPages];

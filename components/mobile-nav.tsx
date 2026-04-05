@@ -11,22 +11,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { showMcpDocs } from "@/lib/flags";
+import { ROUTES } from "@/constants/routes";
 import type { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
 
 const TOP_LEVEL_SECTIONS = [
-  { href: "/docs", name: "Get Started" },
+  { href: ROUTES.DOCS, name: "Get Started" },
   {
-    href: "/docs/components",
+    href: ROUTES.DOCS_COMPONENTS,
     name: "Components",
   },
   {
-    href: "/docs/registry",
+    href: ROUTES.DOCS_REGISTRY,
     name: "Registry",
   },
   {
-    href: "/docs/mcp",
+    href: ROUTES.DOCS_MCP,
     name: "MCP Server",
   },
 ];
@@ -116,7 +116,7 @@ export const MobileNav = ({
               Menu
             </div>
             <div className="flex flex-col gap-3">
-              <MobileLink href="/" onOpenChange={setOpen}>
+              <MobileLink href={ROUTES.HOME} onOpenChange={setOpen}>
                 Home
               </MobileLink>
               {items.map((item) => (
@@ -135,16 +135,11 @@ export const MobileNav = ({
               Sections
             </div>
             <div className="flex flex-col gap-3">
-              {TOP_LEVEL_SECTIONS.map(({ name, href }) => {
-                if (!showMcpDocs && href.includes("/mcp")) {
-                  return null;
-                }
-                return (
-                  <MobileLink key={name} href={href} onOpenChange={setOpen}>
-                    {name}
-                  </MobileLink>
-                );
-              })}
+              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
+                <MobileLink key={name} href={href} onOpenChange={setOpen}>
+                  {name}
+                </MobileLink>
+              ))}
             </div>
           </div>
           <div className="flex flex-col gap-8">
@@ -158,9 +153,6 @@ export const MobileNav = ({
                     <div className="flex flex-col gap-3">
                       {group.children.map((item) => {
                         if (item.type === "page") {
-                          if (!showMcpDocs && item.url.includes("/mcp")) {
-                            return null;
-                          }
                           return (
                             <MobileLink
                               key={`${item.url}-${group.$id}`}

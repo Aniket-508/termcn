@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-import { siteConfig, siteKeywords } from "@/lib/config";
+import { LINK } from "@/constants/links";
+import { SITE } from "@/constants/site";
 
 export interface CreatePageMetadataOptions {
   description: string;
@@ -10,9 +11,6 @@ export interface CreatePageMetadataOptions {
   title: string;
 }
 
-/**
- * Per-route metadata (merges with root `baseMetadata` from the App Router).
- */
 export const createPageMetadata = (
   options: CreatePageMetadataOptions
 ): Metadata => {
@@ -20,9 +18,7 @@ export const createPageMetadata = (
   const pathname = path.startsWith("/") ? path : `/${path}`;
   const ogImageUrl = `/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
   const pageUrl =
-    pathname === "/"
-      ? siteConfig.url
-      : `${siteConfig.url.replace(/\/$/, "")}${pathname}`;
+    pathname === "/" ? SITE.url : `${SITE.url.replace(/\/$/, "")}${pathname}`;
 
   return {
     alternates: {
@@ -54,45 +50,45 @@ export const createPageMetadata = (
   };
 };
 
-const defaultOgImage = {
-  alt: siteConfig.name,
-  height: 630,
-  url: siteConfig.ogImage,
-  width: 1200,
-};
-
 export const baseMetadata: Metadata = {
-  applicationName: siteConfig.name,
-  authors: [{ name: siteConfig.name, url: siteConfig.links.github }],
+  applicationName: SITE.name,
+  authors: [{ name: SITE.name, url: LINK.PORTFOLIO }],
   category: "technology",
-  creator: siteConfig.name,
-  description: siteConfig.description,
+  creator: SITE.name,
+  description: SITE.description,
   icons: {
     apple: "/apple-touch-icon.png",
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
   },
-  keywords: [...siteKeywords],
-  manifest: `${siteConfig.url}/site.webmanifest`,
-  metadataBase: new URL(siteConfig.url),
+  keywords: [...SITE.keywords],
+  manifest: `${SITE.url}/site.webmanifest`,
+  metadataBase: new URL(SITE.url),
   openGraph: {
-    description: siteConfig.description,
-    images: [defaultOgImage],
+    description: SITE.description,
+    images: [
+      {
+        alt: SITE.name,
+        height: 630,
+        url: SITE.ogImage,
+        width: 1200,
+      },
+    ],
     locale: "en_US",
-    siteName: siteConfig.name,
-    title: siteConfig.name,
+    siteName: SITE.name,
+    title: SITE.name,
     type: "website",
-    url: siteConfig.url,
+    url: SITE.url,
   },
-  publisher: siteConfig.name,
+  publisher: SITE.name,
   title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    default: SITE.name,
+    template: `%s - ${SITE.name}`,
   },
   twitter: {
     card: "summary_large_image",
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    title: siteConfig.name,
+    description: SITE.description,
+    images: [SITE.ogImage],
+    title: SITE.name,
   },
 };

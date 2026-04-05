@@ -28,7 +28,6 @@ import { Separator } from "@/components/ui/separator";
 import { useConfig } from "@/hooks/use-config";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
-import { showMcpDocs } from "@/lib/flags";
 import type { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
 
@@ -254,10 +253,6 @@ export const CommandMenu = ({
                   group.children.map((item) => {
                     if (item.type === "page") {
                       const isComponent = item.url.includes("/components/");
-
-                      if (!showMcpDocs && item.url.includes("/mcp")) {
-                        return null;
-                      }
 
                       return (
                         <CommandMenuItem

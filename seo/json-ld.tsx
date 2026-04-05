@@ -1,4 +1,5 @@
-import { siteConfig, siteKeywords } from "@/lib/config";
+import { LINK } from "@/constants/links";
+import { SITE } from "@/constants/site";
 
 const JsonLdScript = ({ data }: { data: Record<string, unknown> }) => (
   <script
@@ -12,10 +13,10 @@ export const WebsiteJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    description: siteConfig.description,
+    description: SITE.description,
     inLanguage: "en-US",
-    name: siteConfig.name,
-    url: siteConfig.url,
+    name: SITE.name,
+    url: SITE.url,
   };
   return <JsonLdScript data={data} />;
 };
@@ -27,18 +28,18 @@ export const SoftwareSourceCodeJsonLd = () => {
     applicationCategory: "DeveloperApplication",
     author: {
       "@type": "Organization",
-      name: siteConfig.name,
-      url: siteConfig.links.github,
+      name: SITE.name,
+      url: LINK.GITHUB,
     },
-    codeRepository: siteConfig.links.github,
-    description: siteConfig.description,
+    codeRepository: LINK.GITHUB,
+    description: SITE.description,
     isAccessibleForFree: true,
-    keywords: siteKeywords.join(", "),
-    license: siteConfig.licenseUrl,
-    name: siteConfig.name,
+    keywords: SITE.keywords.join(", "),
+    license: LINK.LICENSE,
+    name: SITE.name,
     programmingLanguage: ["TypeScript", "React", "Next.js"],
     runtimePlatform: "Node.js",
-    url: siteConfig.url,
+    url: SITE.url,
   };
   return <JsonLdScript data={data} />;
 };
@@ -47,9 +48,9 @@ export const OrganizationJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: siteConfig.name,
-    sameAs: [siteConfig.links.github],
-    url: siteConfig.url,
+    name: SITE.name,
+    sameAs: [LINK.GITHUB],
+    url: SITE.url,
   };
   return <JsonLdScript data={data} />;
 };
@@ -57,18 +58,18 @@ export const OrganizationJsonLd = () => {
 export const FAQJsonLd = () => {
   const faqs = [
     {
-      answer: siteConfig.description,
-      question: `What is ${siteConfig.name}?`,
+      answer: SITE.description,
+      question: `What is ${SITE.name}?`,
     },
     {
       answer:
         "Add components under registry/new-york/, list them in registry.json, run pnpm registry:build, then deploy. Users install with npx shadcn@latest add pointing at your published JSON URL.",
-      question: `How do I publish components with ${siteConfig.name}?`,
+      question: `How do I publish components with ${SITE.name}?`,
     },
     {
       answer:
         "Yes. The project is intended to be forked or cloned; source is available on GitHub under an open license.",
-      question: `Is ${siteConfig.name} open source?`,
+      question: `Is ${SITE.name} open source?`,
     },
   ];
 
@@ -99,7 +100,7 @@ export const BreadcrumbJsonLd = ({
       const pathname = item.path.startsWith("/") ? item.path : `/${item.path}`;
       return {
         "@type": "ListItem",
-        item: `${siteConfig.url.replace(/\/$/, "")}${pathname}`,
+        item: `${SITE.url.replace(/\/$/, "")}${pathname}`,
         name: item.name,
         position: index + 1,
       };
