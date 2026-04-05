@@ -1,5 +1,6 @@
 "use client";
 
+import type { Node as PageTreeNode } from "fumadocs-core/page-tree";
 import type { LinkProps } from "next/link";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -59,6 +60,75 @@ const MobileLink = ({
     </Link>
   );
 };
+
+const folderHasRenderableEntries = (nodes: PageTreeNode[]): boolean => {
+  for (const n of nodes) {
+    if (n.type === "page") {
+      return true;
+    }
+    if (n.type === "folder") {
+      if (n.index) {
+        return true;
+      }
+      if (folderHasRenderableEntries(n.children)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
+const renderDocSectionChildren = (
+  nodes: PageTreeNode[],
+  setOpen: (open: boolean) => void,
+  depth: number
+): React.ReactNode[] =>
+  nodes.flatMap((node) => {
+    if (node.type === "separator") {
+      return [];
+    }
+    if (node.type === "page") {
+      return [
+        <MobileLink
+          key={node.url}
+          href={node.url}
+          onOpenChange={setOpen}
+          className={cn(depth > 0 && "pl-3 text-xl")}
+        >
+          {node.name}
+        </MobileLink>,
+      ];
+    }
+    if (node.type === "folder") {
+      if (!node.index && !folderHasRenderableEntries(node.children)) {
+        return [];
+      }
+      return [
+        <div key={node.$id} className="flex flex-col gap-3">
+          <div
+            className={cn(
+              "text-muted-foreground text-xs font-semibold tracking-wide uppercase",
+              depth > 0 && "pl-3"
+            )}
+          >
+            {node.name}
+          </div>
+          {node.index ? (
+            <MobileLink
+              key={node.index.url}
+              href={node.index.url}
+              onOpenChange={setOpen}
+              className="pl-3 text-xl"
+            >
+              {node.index.name}
+            </MobileLink>
+          ) : null}
+          {renderDocSectionChildren(node.children, setOpen, depth + 1)}
+        </div>,
+      ];
+    }
+    return [];
+  });
 
 export const MobileNav = ({
   tree,
@@ -150,21 +220,8 @@ export const MobileNav = ({
                     <div className="text-muted-foreground text-sm font-medium">
                       {group.name}
                     </div>
-                    <div className="flex flex-col gap-3">
-                      {group.children.map((item) => {
-                        if (item.type === "page") {
-                          return (
-                            <MobileLink
-                              key={`${item.url}-${group.$id}`}
-                              href={item.url}
-                              onOpenChange={setOpen}
-                            >
-                              {item.name}
-                            </MobileLink>
-                          );
-                        }
-                        return null;
-                      })}
+                    <div className="flex flex-col gap-4">
+                      {renderDocSectionChildren(group.children, setOpen, 0)}
                     </div>
                   </div>
                 );
