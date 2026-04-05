@@ -6,10 +6,11 @@ runs:
   steps:
     - uses: pnpm/action-setup@v4
       with:
-        version: 10
+        version: 10.28.2
     - uses: actions/setup-node@v6
       with:
         node-version-file: .nvmrc
         cache: pnpm
+        cache-dependency-path: pnpm-lock.yaml
     - shell: bash
       run: pnpm install --frozen-lockfile
