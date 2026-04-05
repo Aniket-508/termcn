@@ -33,7 +33,7 @@ export const ComponentPreview = async ({
 
   return (
     <>
-      <TerminalPreview defaultThemeKey="default">
+      <TerminalPreview>
         <ExamplePreview name={name} />
       </TerminalPreview>
       {source && (
