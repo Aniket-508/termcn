@@ -1,6 +1,6 @@
 "use client";
 
-import { IconMenu3 } from "@tabler/icons-react";
+import { MenuIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -90,7 +90,7 @@ export const DocsTableOfContents = ({
             size="sm"
             className={cn("h-8 md:h-7", className)}
           >
-            <IconMenu3 /> On This Page
+            <MenuIcon /> On This Page
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent

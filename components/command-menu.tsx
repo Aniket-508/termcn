@@ -1,8 +1,11 @@
 "use client";
 
 import type { DialogProps } from "@radix-ui/react-dialog";
-import { IconArrowRight } from "@tabler/icons-react";
-import { CornerDownLeftIcon, SquareDashedIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  CornerDownLeftIcon,
+  SquareDashedIcon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -237,7 +240,7 @@ export const CommandMenu = ({
                     // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
                     onSelect={() => runCommand(() => router.push(item.href))}
                   >
-                    <IconArrowRight />
+                    <ArrowRightIcon />
                     {item.label}
                   </CommandMenuItem>
                 ))}
@@ -275,7 +278,7 @@ export const CommandMenu = ({
                           {isComponent ? (
                             <div className="border-muted-foreground aspect-square size-4 rounded-full border border-dashed" />
                           ) : (
-                            <IconArrowRight />
+                            <ArrowRightIcon />
                           )}
                           {item.name}
                         </CommandMenuItem>

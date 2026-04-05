@@ -5,9 +5,13 @@ import { terminalThemeMap } from "@/lib/terminal-themes";
 
 export type TerminalThemeKey = keyof typeof terminalThemeMap;
 
+export type PackageManager = "npm" | "yarn" | "pnpm" | "bun";
+
+export type InstallationType = "cli" | "manual";
+
 export interface Config {
-  packageManager: "npm" | "yarn" | "pnpm" | "bun";
-  installationType: "cli" | "manual";
+  packageManager: PackageManager;
+  installationType: InstallationType;
   terminalThemeKey: TerminalThemeKey;
 }
 

@@ -1,9 +1,5 @@
-import {
-  IconArrowLeft,
-  IconArrowRight,
-  IconArrowUpRight,
-} from "@tabler/icons-react";
 import { findNeighbour } from "fumadocs-core/page-tree";
+import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -87,7 +83,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                         asChild
                       >
                         <Link href={neighbours.previous.url}>
-                          <IconArrowLeft />
+                          <ArrowLeftIcon />
                           <span className="sr-only">Previous</span>
                         </Link>
                       </Button>
@@ -101,7 +97,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                       >
                         <Link href={neighbours.next.url}>
                           <span className="sr-only">Next</span>
-                          <IconArrowRight />
+                          <ArrowRightIcon />
                         </Link>
                       </Button>
                     )}
@@ -119,14 +115,14 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                 {links?.doc && (
                   <Badge asChild variant="secondary">
                     <Link href={links.doc} target="_blank" rel="noreferrer">
-                      Docs <IconArrowUpRight />
+                      Docs <ArrowUpRightIcon />
                     </Link>
                   </Badge>
                 )}
                 {links?.api && (
                   <Badge asChild variant="secondary">
                     <Link href={links.api} target="_blank" rel="noreferrer">
-                      API Reference <IconArrowUpRight />
+                      API Reference <ArrowUpRightIcon />
                     </Link>
                   </Badge>
                 )}
@@ -146,7 +142,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
               className="shadow-none"
             >
               <Link href={neighbours.previous.url}>
-                <IconArrowLeft /> {neighbours.previous.name}
+                <ArrowLeftIcon /> {neighbours.previous.name}
               </Link>
             </Button>
           )}
@@ -158,7 +154,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
               asChild
             >
               <Link href={neighbours.next.url}>
-                {neighbours.next.name} <IconArrowRight />
+                {neighbours.next.name} <ArrowRightIcon />
               </Link>
             </Button>
           )}

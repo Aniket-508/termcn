@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { CopyButton } from "@/components/copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConfig } from "@/hooks/use-config";
+import type { PackageManager } from "@/hooks/use-config";
 
 interface CodeBlockProps extends React.ComponentProps<"pre"> {
   __npm__?: string;
@@ -78,7 +79,7 @@ export const CodeBlock = ({
     (value: string) => {
       setConfig({
         ...config,
-        packageManager: value as "pnpm" | "npm" | "yarn" | "bun",
+        packageManager: value as PackageManager,
       });
     },
     [config, setConfig]
