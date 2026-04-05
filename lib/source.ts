@@ -3,6 +3,7 @@ import { loader } from "fumadocs-core/source";
 
 import { docs } from "@/.source/server";
 import { ROUTES } from "@/constants/routes";
+import { docsContentRoute, docsImageRoute } from "@/lib/docs";
 
 export const source = loader({
   baseUrl: ROUTES.DOCS,
@@ -14,7 +15,16 @@ export const getPageImage = (page: InferPageType<typeof source>) => {
 
   return {
     segments,
-    url: `/og/docs/${segments.join("/")}`,
+    url: `${docsImageRoute}/${segments.join("/")}`,
+  };
+};
+
+export const getPageMarkdownUrl = (page: InferPageType<typeof source>) => {
+  const segments = [...page.slugs, "content.md"];
+
+  return {
+    segments,
+    url: `${docsContentRoute}/${segments.join("/")}`,
   };
 };
 

@@ -8,4 +8,7 @@ export const ROUTES = {
   DOCS_THEMING: "/docs/theming",
   HOME: "/",
   LLMS: "/llms.txt",
+  LLMS_FULL: "/llms-full.txt",
+  LLMS_MDX: "/llms.mdx",
+  OG: "/og",
 } as const;

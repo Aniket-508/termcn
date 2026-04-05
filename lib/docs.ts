@@ -69,7 +69,7 @@ export const docsConfig: DocsConfig = {
         navLeaf("Theming", ROUTES.DOCS_THEMING),
         navLeaf("MCP", ROUTES.DOCS_MCP),
         navLeaf("Registry", ROUTES.DOCS_REGISTRY),
-        navLeaf("Changelog", ROUTES.DOCS_CHANGELOG),
+        // navLeaf("Changelog", ROUTES.DOCS_CHANGELOG),
         navLeaf("llms.txt", ROUTES.LLMS),
       ],
       title: "Overview",
@@ -221,3 +221,6 @@ export const docsConfig: DocsConfig = {
     ]),
   ],
 };
+
+export const docsContentRoute = `${ROUTES.LLMS_MDX}${ROUTES.DOCS}`;
+export const docsImageRoute = `${ROUTES.OG}${ROUTES.DOCS}`;
