@@ -37,7 +37,7 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
   [
     "markdown",
     (url) => (
-      <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
+      <a href={`${url}.mdx`} rel="noopener noreferrer" target="_blank">
         <MarkdownDocIcon />
         View as Markdown
       </a>

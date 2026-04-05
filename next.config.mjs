@@ -21,9 +21,6 @@ const nextConfig = {
   turbopack: {
     resolveAlias: { ink: "ink-web" },
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
 };
 
 const withMDX = createMDX({});
