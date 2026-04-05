@@ -30,11 +30,11 @@ import {
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { SITE } from "@/constants/site";
-import { THEME_PRIMARY_SWATCH } from "@/constants/theme-command-swatches";
 import { useConfig } from "@/hooks/use-config";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import type { source } from "@/lib/source";
+import { themePrimaryBySlug } from "@/lib/terminal-themes";
 import { cn } from "@/lib/utils";
 
 type DocUrlKind =
@@ -80,7 +80,7 @@ const buildDocPageKeywords = (
 
 const DocPageLeadingIcon = ({ parsed }: { parsed: DocUrlKind }) => {
   if (parsed.kind === "theme") {
-    const color = THEME_PRIMARY_SWATCH[parsed.slug];
+    const color = themePrimaryBySlug[parsed.slug];
     return (
       <span
         className="border-border/60 size-4 shrink-0 rounded-[2px] border"
