@@ -1,66 +1,98 @@
 import { ArrowRightIcon } from "lucide-react";
-import type { Metadata } from "next";
 import Link from "next/link";
 
-import { CommandBox } from "@/components/command-box";
-import { Badge } from "@/components/ui/badge";
+import { ExamplePreview } from "@/components/example-preview";
+import { TerminalPreview } from "@/components/terminal-preview";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
-import { SITE } from "@/constants/site";
-import { createPageMetadata } from "@/seo/metadata";
-
-const title = SITE.name;
-const { description } = SITE;
-
-const installCommand = `npx shadcn@latest add ${SITE.url}/r/badge.json`;
+import { cn } from "@/lib/utils";
 
 export const dynamic = "force-static";
 export const revalidate = false;
 
-export const metadata: Metadata = createPageMetadata({
-  description,
-  path: "/",
-  title,
-});
+const showcaseItems = [
+  {
+    className: "md:col-span-2 lg:row-span-2",
+    name: "table-demo",
+    title: "Table",
+  },
+  {
+    name: "badge-demo",
+    rows: 6,
+    title: "Badge",
+  },
+  {
+    name: "spinner-demo",
+    rows: 6,
+    title: "Spinner",
+  },
+  {
+    name: "bar-chart-demo",
+    rows: 10,
+    title: "Bar Chart",
+  },
+  {
+    name: "alert-demo",
+    rows: 10,
+    title: "Alert",
+  },
+  {
+    name: "tool-call-demo",
+    rows: 10,
+    title: "Tool Call",
+  },
+];
 
 export default function IndexPage() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="container-wrapper relative">
-        <div className="container flex flex-col items-center gap-8 py-20 text-center md:py-28 lg:py-36">
-          <h1 className="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            {title}
-          </h1>
+    <>
+      <section className="relative overflow-hidden">
+        <div className="container-wrapper relative">
+          <div className="container flex flex-col items-center gap-4 py-16 text-center md:py-20 lg:py-24">
+            <h1 className="max-w-7xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl from-foreground via-foreground to-foreground/65 bg-linear-to-b bg-clip-text text-transparent">
+              Beautiful terminal UIs, made simple
+            </h1>
 
-          <p className="max-w-2xl text-lg text-zinc-400 sm:text-xl">
-            {description}
-          </p>
+            <p className="max-w-2xl text-lg text-muted-foreground sm:text-xl">
+              Ready to use, customizable terminal components for React.
+              <br className="hidden sm:block" />
+              Built on Ink. Styled with Tailwind.
+            </p>
 
-          <CommandBox command={installCommand} />
-
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Button asChild size="lg">
-              <Link href={ROUTES.DOCS_GET_STARTED}>
-                Get Started
-                <ArrowRightIcon className="ml-2 size-4" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href={`${ROUTES.DOCS_COMPONENTS}/typography/badge`}>
-                Browse Components
-              </Link>
-            </Button>
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
+              <Button asChild size="lg">
+                <Link href={ROUTES.DOCS_GET_STARTED}>
+                  Get Started
+                  <ArrowRightIcon className="ml-2 size-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href={`${ROUTES.DOCS_COMPONENTS}/typography/badge`}>
+                  Browse Components
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="flex flex-col items-center gap-6">
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <Badge variant="secondary">113 Components</Badge>
-          <Badge variant="secondary">Live xterm Previews</Badge>
-          <Badge variant="secondary">Shadcn Registry</Badge>
+      <section className="container-wrapper pb-8 lg:pb-12">
+        <div className="container">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {showcaseItems.map((item) => (
+              <div key={item.name} className={cn(item.className)}>
+                <TerminalPreview
+                  className="mt-0 h-full"
+                  title={item.title}
+                  rows={item.rows}
+                >
+                  <ExamplePreview name={item.name} />
+                </TerminalPreview>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
