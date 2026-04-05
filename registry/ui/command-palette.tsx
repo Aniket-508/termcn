@@ -9,7 +9,7 @@ export interface Command {
   label: string;
   description?: string;
   shortcut?: string;
-  onSelect: () => void;
+  onSelect?: () => void;
   group?: string;
 }
 
@@ -17,7 +17,7 @@ export interface CommandPaletteProps {
   commands: Command[];
   /** Whether palette is open */
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   placeholder?: string;
   /** Max items shown. Default: 8 */
   maxItems?: number;
@@ -90,7 +90,7 @@ export const CommandPalette = function CommandPalette({
     if (key.escape) {
       setQuery("");
       setCursor(0);
-      onClose();
+      onClose?.();
       return;
     }
 
@@ -107,10 +107,10 @@ export const CommandPalette = function CommandPalette({
     if (key.return) {
       const cmd = filtered[cursor];
       if (cmd) {
-        cmd.onSelect();
+        cmd.onSelect?.();
         setQuery("");
         setCursor(0);
-        onClose();
+        onClose?.();
       }
       return;
     }

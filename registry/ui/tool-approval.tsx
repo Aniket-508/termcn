@@ -11,8 +11,8 @@ export interface ToolApprovalProps {
   description?: string;
   args?: Record<string, unknown>;
   risk?: RiskLevel;
-  onApprove: () => void;
-  onDeny: () => void;
+  onApprove?: () => void;
+  onDeny?: () => void;
   onAlwaysAllow?: () => void;
   /** Auto-deny timeout in seconds */
   timeout?: number;
@@ -45,7 +45,7 @@ export const ToolApproval = function ToolApproval({
       setRemaining((r) => {
         if (r <= 1) {
           clearInterval(id);
-          onDenyRef.current();
+          onDenyRef.current?.();
           return 0;
         }
         return r - 1;
@@ -56,9 +56,9 @@ export const ToolApproval = function ToolApproval({
 
   useInput((input) => {
     if (input === "y" || input === "Y") {
-      onApprove();
+      onApprove?.();
     } else if (input === "n" || input === "N") {
-      onDeny();
+      onDeny?.();
     } else if ((input === "a" || input === "A") && onAlwaysAllow) {
       onAlwaysAllow();
     }

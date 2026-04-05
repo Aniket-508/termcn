@@ -41,7 +41,7 @@ export interface LoginFlowSelectProps {
   cursor?: string;
   cursorColor?: string;
   activeColor?: string;
-  onSelect: (index: number) => void;
+  onSelect?: (index: number) => void;
   keyboardNav?: boolean;
 }
 
@@ -147,7 +147,7 @@ const LoginFlowSelect = function LoginFlowSelect({
         setInternalIndex(next);
       }
     } else if (key.return) {
-      onSelect(activeIdx);
+      onSelect?.(activeIdx);
     } else {
       // Number key shortcuts 1–9
       const num = Number.parseInt(input, 10);
@@ -156,7 +156,7 @@ const LoginFlowSelect = function LoginFlowSelect({
         if (controlledIndex === undefined) {
           setInternalIndex(idx);
         }
-        onSelect(idx);
+        onSelect?.(idx);
       }
     }
   });

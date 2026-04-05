@@ -14,7 +14,7 @@ export interface ModelOption {
 export interface ModelSelectorProps {
   models: ModelOption[];
   selected: string;
-  onSelect: (id: string) => void;
+  onSelect?: (id: string) => void;
   showContext?: boolean;
   showProvider?: boolean;
   groupByProvider?: boolean;
@@ -109,7 +109,7 @@ export const ModelSelector = function ModelSelector({
     } else if (key.return) {
       const m = models[activeIndex];
       if (m) {
-        onSelect(m.id);
+        onSelect?.(m.id);
       }
     }
   });

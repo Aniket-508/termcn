@@ -7,7 +7,7 @@ import { useInput } from "@/hooks/use-input";
 
 export interface ModalProps {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   title?: string;
   width?: number;
   children?: ReactNode;
@@ -61,7 +61,7 @@ export const Modal = function Modal({
         return;
       }
       if (key.escape) {
-        onClose();
+        onClose?.();
       }
     },
     { isActive: open }

@@ -45,7 +45,7 @@ export interface FormField {
 }
 
 export interface FormProps {
-  onSubmit: (values: Record<string, unknown>) => void;
+  onSubmit?: (values: Record<string, unknown>) => void;
   initialValues?: Record<string, unknown>;
   fields?: FormField[];
   children: ReactNode;
@@ -90,7 +90,7 @@ export const Form = function Form({
         setErrors(newErrors);
         return;
       }
-      onSubmit(values);
+      onSubmit?.(values);
     }
   });
 
