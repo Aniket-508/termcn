@@ -33,55 +33,70 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
 `
   )}`;
 
-const menuItems = {
-  chatgpt: (url: string) => (
-    <a
-      href={getPromptUrl("https://chatgpt.com", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <ChatGptIcon />
-      Open in ChatGPT
-    </a>
-  ),
-  claude: (url: string) => (
-    <a
-      href={getPromptUrl("https://claude.ai/new", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <ClaudeIcon />
-      Open in Claude
-    </a>
-  ),
-  markdown: (url: string) => (
-    <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
-      <MarkdownDocIcon />
-      View as Markdown
-    </a>
-  ),
-  scira: (url: string) => (
-    <a
-      className="m-0 p-0"
-      href={getPromptUrl("https://scira.ai/", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <SciraIcon />
-      Open in Scira
-    </a>
-  ),
-  v0: (url: string) => (
-    <a
-      href={getPromptUrl("https://v0.dev", url)}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <V0Icon />
-      <span className="-translate-x-[2px]">Open in v0</span>
-    </a>
-  ),
-};
+const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
+  [
+    "markdown",
+    (url) => (
+      <a href={`${url}.md`} rel="noopener noreferrer" target="_blank">
+        <MarkdownDocIcon />
+        View as Markdown
+      </a>
+    ),
+  ],
+  [
+    "v0",
+    (url) => (
+      <a
+        href={getPromptUrl("https://v0.dev", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <V0Icon />
+        <span className="-translate-x-[2px]">Open in v0</span>
+      </a>
+    ),
+  ],
+  [
+    "chatgpt",
+    (url) => (
+      <a
+        href={getPromptUrl("https://chatgpt.com", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <ChatGptIcon />
+        Open in ChatGPT
+      </a>
+    ),
+  ],
+  [
+    "claude",
+    (url) => (
+      <a
+        href={getPromptUrl("https://claude.ai/new", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <ClaudeIcon />
+        Open in Claude
+      </a>
+    ),
+  ],
+  [
+    "scira",
+    (url) => (
+      <a
+        className="m-0 p-0"
+        href={getPromptUrl("https://scira.ai/", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <SciraIcon />
+        Open in Scira
+      </a>
+    ),
+  ],
+];
 
 export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
   const { write } = useClipboard();
@@ -104,7 +119,7 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
     <Button
       variant="secondary"
       size="sm"
-      className="peer -ml-0.5 size-8 shadow-none md:size-7 md:text-[0.8rem]"
+      className="peer -ml-0.5 size-8 md:size-7 md:text-[0.8rem]"
     >
       <ChevronDownIcon className="rotate-180 sm:rotate-0" />
     </Button>
@@ -117,7 +132,7 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
         <Button
           variant="secondary"
           size="sm"
-          className="h-8 shadow-none md:h-7 md:text-[0.8rem]"
+          className="md:h-7 md:text-[0.8rem]"
           onClick={handleCopyPage}
         >
           {isCopied ? <CheckIcon /> : <CopyIcon />}
@@ -131,9 +146,9 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
             align="end"
             className="animate-none! rounded-lg shadow-none"
           >
-            {Object.entries(menuItems).map(([key, value]) => (
+            {MENU_ITEMS.map(([key, render]) => (
               <DropdownMenuItem key={key} asChild>
-                {value(url)}
+                {render(url)}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -149,7 +164,7 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
           className="w-52 origin-center! rounded-lg bg-background/70 p-1 shadow-none backdrop-blur-sm dark:bg-background/60"
           align="start"
         >
-          {Object.entries(menuItems).map(([key, value]) => (
+          {MENU_ITEMS.map(([key, render]) => (
             <Button
               variant="ghost"
               size="lg"
@@ -157,7 +172,7 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
               key={key}
               className="w-full justify-start text-base font-normal *:[svg]:text-muted-foreground"
             >
-              {value(url)}
+              {render(url)}
             </Button>
           ))}
         </PopoverContent>

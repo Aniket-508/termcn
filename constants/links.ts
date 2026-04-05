@@ -10,5 +10,6 @@ export const LINK = {
   GITHUB: GITHUB_URL,
   LICENSE: `${GITHUB_URL}/blob/${GITHUB.branch}/LICENSE`,
   PORTFOLIO: "https://aniketpawar.com",
+  SPONSOR: `https://github.com/sponsors/${GITHUB.user}`,
   X: "https://x.com/alaymanguy",
 } as const;

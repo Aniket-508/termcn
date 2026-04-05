@@ -56,7 +56,7 @@ export default function IndexPage() {
             <p className="max-w-2xl text-lg text-muted-foreground sm:text-xl">
               Ready to use, customizable terminal components for React.
               <br className="hidden sm:block" />
-              Built on Ink. Styled with Tailwind.
+              Built on Ink. Distributed via shadcn.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-3">

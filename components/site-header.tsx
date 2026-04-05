@@ -2,15 +2,15 @@ import Link from "next/link";
 
 import { CommandMenu } from "@/components/command-menu";
 import { GitHubLink } from "@/components/github-link";
+import { LogoMark } from "@/components/logo";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModeSwitcher } from "@/components/mode-switcher";
+import { SponsorLink } from "@/components/sponsor-link";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 import { source } from "@/lib/source";
-
-import { LogoMark } from "./logo";
 
 const navItems = [{ href: ROUTES.DOCS, label: "Docs" }];
 
@@ -43,6 +43,7 @@ export const SiteHeader = () => {
               <CommandMenu tree={pageTree} navItems={navItems} />
             </div>
             <GitHubLink />
+            <SponsorLink />
             <ModeSwitcher />
           </div>
         </div>
