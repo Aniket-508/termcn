@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/ui/center.tsx",
-      "content": "import { Box } from \"ink\";\nimport React from \"react\";\nimport type { ReactNode } from \"react\";\n\nexport interface CenterProps {\n  children: ReactNode;\n  axis?: \"both\" | \"horizontal\" | \"vertical\";\n}\n\nexport const Center = function Center({\n  children,\n  axis = \"both\",\n}: CenterProps) {\n  const justifyContent =\n    axis === \"both\" || axis === \"horizontal\" ? \"center\" : undefined;\n  const alignItems =\n    axis === \"both\" || axis === \"vertical\" ? \"center\" : undefined;\n\n  return (\n    <Box\n      flexGrow={1}\n      justifyContent={justifyContent as \"center\" | undefined}\n      alignItems={alignItems as \"center\" | undefined}\n    >\n      {children}\n    </Box>\n  );\n};\n",
+      "content": "import { Box } from \"ink\";\nimport type { ReactNode } from \"react\";\n\nexport interface CenterProps {\n  children: ReactNode;\n  axis?: \"both\" | \"horizontal\" | \"vertical\";\n}\n\nexport const Center = function Center({\n  children,\n  axis = \"both\",\n}: CenterProps) {\n  const justifyContent =\n    axis === \"both\" || axis === \"horizontal\" ? \"center\" : undefined;\n  const alignItems =\n    axis === \"both\" || axis === \"vertical\" ? \"center\" : undefined;\n\n  return (\n    <Box\n      flexGrow={1}\n      justifyContent={justifyContent as \"center\" | undefined}\n      alignItems={alignItems as \"center\" | undefined}\n    >\n      {children}\n    </Box>\n  );\n};\n",
       "type": "registry:ui"
     }
   ],

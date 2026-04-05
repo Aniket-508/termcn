@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/ui/aspect-ratio.tsx",
-      "content": "import { Box } from \"ink\";\nimport React from \"react\";\nimport type { ReactNode } from \"react\";\n\nexport interface AspectRatioProps {\n  children: ReactNode;\n  ratio?: number;\n  width?: number;\n}\n\nexport const AspectRatio = function AspectRatio({\n  children,\n  ratio = 16 / 9,\n  width = 80,\n}: AspectRatioProps) {\n  const height = Math.round(width / ratio / 2);\n\n  return (\n    <Box width={width} height={height} overflow=\"hidden\">\n      {children}\n    </Box>\n  );\n};\n",
+      "content": "import { Box } from \"ink\";\nimport type { ReactNode } from \"react\";\n\nexport interface AspectRatioProps {\n  children: ReactNode;\n  ratio?: number;\n  width?: number;\n}\n\nexport const AspectRatio = function AspectRatio({\n  children,\n  ratio = 16 / 9,\n  width = 80,\n}: AspectRatioProps) {\n  const height = Math.round(width / ratio / 2);\n\n  return (\n    <Box width={width} height={height} overflow=\"hidden\">\n      {children}\n    </Box>\n  );\n};\n",
       "type": "registry:ui"
     }
   ],

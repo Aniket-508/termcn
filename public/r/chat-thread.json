@@ -8,7 +8,7 @@
   "files": [
     {
       "path": "registry/ui/chat-thread.tsx",
-      "content": "import { Box } from \"ink\";\nimport React from \"react\";\nimport type { ReactNode } from \"react\";\n\nexport interface ChatThreadProps {\n  maxHeight?: number;\n  autoScroll?: boolean;\n  children?: ReactNode;\n}\n\nexport const ChatThread = function ChatThread({\n  maxHeight,\n  autoScroll = true,\n  children,\n}: ChatThreadProps) {\n  // autoScroll is kept as a conceptual prop — in Ink's static rendering model,\n  // the latest content naturally appears at the bottom. The prop is accepted for\n  // API compatibility and future enhancement.\n  void autoScroll;\n\n  const containerProps = maxHeight\n    ? { height: maxHeight, overflow: \"hidden\" as const }\n    : {\n        /* noop */\n      };\n\n  return (\n    <Box flexDirection=\"column\" {...containerProps}>\n      {children}\n    </Box>\n  );\n};\n",
+      "content": "import { Box } from \"ink\";\nimport type { ReactNode } from \"react\";\n\nexport interface ChatThreadProps {\n  maxHeight?: number;\n  autoScroll?: boolean;\n  children?: ReactNode;\n}\n\nexport const ChatThread = function ChatThread({\n  maxHeight,\n  autoScroll = true,\n  children,\n}: ChatThreadProps) {\n  void autoScroll;\n\n  const containerProps = maxHeight\n    ? { height: maxHeight, overflow: \"hidden\" as const }\n    : {\n        /* noop */\n      };\n\n  return (\n    <Box flexDirection=\"column\" {...containerProps}>\n      {children}\n    </Box>\n  );\n};\n",
       "type": "registry:ui"
     }
   ],
