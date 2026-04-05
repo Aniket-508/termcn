@@ -42,6 +42,7 @@ const componentSection = (
   folder: string,
   slugs: readonly string[]
 ): NavItemWithChildren => ({
+  href: `${ROUTES.DOCS}/components/${folder}`,
   items: slugs.map((slug) =>
     navLeaf(titleFromSlug(slug), `${ROUTES.DOCS}/components/${folder}/${slug}`)
   ),
@@ -65,6 +66,7 @@ export const docsConfig: DocsConfig = {
     {
       items: [
         navLeaf("Introduction", ROUTES.DOCS),
+        navLeaf("Components", ROUTES.DOCS_COMPONENTS),
         navLeaf("Get Started", ROUTES.DOCS_GET_STARTED),
         navLeaf("Theming", ROUTES.DOCS_THEMING),
         navLeaf("MCP", ROUTES.DOCS_MCP),
