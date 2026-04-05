@@ -254,7 +254,7 @@ export const CommandMenu = ({
     nodes: PageTreeNode[],
     breadcrumb: string[],
     depth: number
-  ): React.ReactNode[] =>
+  ): React.ReactElement[] =>
     nodes.flatMap((node) => {
       if (node.type === "separator") {
         return [];
@@ -384,7 +384,7 @@ export const CommandMenu = ({
                 ))}
               </CommandGroup>
             )}
-            {tree.children.flatMap((group) => {
+            {tree.children.flatMap((group): React.ReactElement[] => {
               if (group.type !== "folder") {
                 return [];
               }
@@ -398,7 +398,7 @@ export const CommandMenu = ({
               const breadcrumb = [sectionLabel].filter(Boolean);
 
               if (sectionLabel === "Components") {
-                const items: React.ReactNode[] = [];
+                const items: React.ReactElement[] = [];
                 if (group.index) {
                   items.push(renderDocPageItem(group.index, breadcrumb));
                 }
