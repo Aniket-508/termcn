@@ -1,6 +1,5 @@
 import { Box as InkBox } from "ink";
 import type { BoxProps as InkBoxProps } from "ink";
-import React from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";

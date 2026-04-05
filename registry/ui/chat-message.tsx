@@ -20,6 +20,13 @@ export interface ChatMessageProps {
 const formatTime = (date: Date): string =>
   date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
+const wrapPlainChildren = (node: ReactNode): ReactNode =>
+  typeof node === "string" || typeof node === "number" ? (
+    <Text>{node}</Text>
+  ) : (
+    node
+  );
+
 export const ChatMessage = ({
   sender,
   name,
@@ -71,7 +78,9 @@ export const ChatMessage = ({
     if (streaming) {
       return (
         <Box>
-          {children || (
+          {children ? (
+            wrapPlainChildren(children)
+          ) : (
             <Text color={color} dimColor>
               {dots}
             </Text>
@@ -89,7 +98,7 @@ export const ChatMessage = ({
         </Box>
       );
     }
-    return <Box>{children}</Box>;
+    return <Box>{wrapPlainChildren(children)}</Box>;
   };
 
   return (

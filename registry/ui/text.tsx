@@ -1,5 +1,4 @@
 import { Text as InkText } from "ink";
-import React from "react";
 import type { ReactNode } from "react";
 
 export interface TextProps {

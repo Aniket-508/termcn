@@ -1,5 +1,4 @@
 import { Box } from "ink";
-import React from "react";
 
 export interface SpacerProps {
   size?: number;

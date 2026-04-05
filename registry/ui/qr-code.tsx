@@ -3,7 +3,6 @@
 /* eslint-disable no-bitwise -- bitwise ops are fundamental to QR code encoding (GF(256), Reed-Solomon, bit packing) */
 
 import { Box, Text } from "ink";
-import React from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
 

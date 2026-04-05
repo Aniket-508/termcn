@@ -1,5 +1,4 @@
 import { Text } from "ink";
-import React from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
 import { useAnimation } from "@/hooks/use-animation";
