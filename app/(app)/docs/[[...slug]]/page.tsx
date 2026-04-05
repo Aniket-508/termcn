@@ -7,10 +7,12 @@ import { findNeighbour } from "fumadocs-core/page-tree";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { DocsCopyPage } from "@/components/docs-copy-page";
 import { DocsTableOfContents } from "@/components/docs-toc";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { source } from "@/lib/source";
+import { absoluteUrl } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
 import { createPageMetadata } from "@/seo/metadata";
 
@@ -54,6 +56,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
   const doc = page.data;
   const MdxContent = doc.body;
   const neighbours = await findNeighbour(source.pageTree, page.url);
+  const raw = await page.data.getText("raw");
 
   const { links } = doc as { links?: { doc?: string; api?: string } };
 
@@ -67,10 +70,43 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
         <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
-              <div className="flex items-start justify-between">
+              <div className="flex items-center justify-between">
                 <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
                   {doc.title}
                 </h1>
+                <div className="docs-nav flex items-center gap-2">
+                  <div className="hidden sm:block">
+                    <DocsCopyPage page={raw} url={absoluteUrl(page.url)} />
+                  </div>
+                  <div className="ml-auto flex gap-2">
+                    {neighbours.previous && (
+                      <Button
+                        variant="secondary"
+                        size="icon"
+                        className="extend-touch-target size-8 shadow-none md:size-7"
+                        asChild
+                      >
+                        <Link href={neighbours.previous.url}>
+                          <IconArrowLeft />
+                          <span className="sr-only">Previous</span>
+                        </Link>
+                      </Button>
+                    )}
+                    {neighbours.next && (
+                      <Button
+                        variant="secondary"
+                        size="icon"
+                        className="extend-touch-target size-8 shadow-none md:size-7"
+                        asChild
+                      >
+                        <Link href={neighbours.next.url}>
+                          <span className="sr-only">Next</span>
+                          <IconArrowRight />
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+                </div>
               </div>
               {doc.description && (
                 <p className="text-muted-foreground text-[1.05rem] text-balance sm:text-base">
