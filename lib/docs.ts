@@ -21,7 +21,7 @@ const TITLE_OVERRIDES: Record<string, string> = {
   "qr-code": "QR Code",
 };
 
-const titleFromSlug = (slug: string): string =>
+export const titleFromSlug = (slug: string): string =>
   TITLE_OVERRIDES[slug] ??
   slug
     .split("-")

@@ -3,9 +3,13 @@ import type { Metadata } from "next";
 import { LINK } from "@/constants/links";
 import { SITE } from "@/constants/site";
 
-export interface CreatePageMetadataOptions {
+interface CreatePageMetadataOptions {
   description: string;
   noIndex?: boolean;
+  ogDescription?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogTitle?: string;
   ogType?: "article" | "website";
   path: string;
   title: string;
@@ -14,55 +18,76 @@ export interface CreatePageMetadataOptions {
 export const createPageMetadata = (
   options: CreatePageMetadataOptions
 ): Metadata => {
-  const { description, noIndex, ogType = "website", path, title } = options;
-  const pathname = path.startsWith("/") ? path : `/${path}`;
-  const ogImageUrl = `/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
-  const pageUrl =
-    pathname === "/" ? SITE.url : `${SITE.url.replace(/\/$/, "")}${pathname}`;
+  const {
+    description,
+    noIndex = false,
+    ogDescription,
+    ogImage,
+    ogImageAlt,
+    ogTitle,
+    ogType = "website",
+    path,
+    title,
+  } = options;
+
+  const canonical = path.startsWith("/") ? path : `/${path}`;
+  const resolvedOgImage = ogImage ?? `/og${canonical === "/" ? "" : canonical}`;
+  const resolvedTitle = ogTitle ?? title;
 
   return {
     alternates: {
-      canonical: pathname,
+      canonical,
     },
     description,
     openGraph: {
-      description,
-      images: [{ url: ogImageUrl }],
-      title,
+      description: ogDescription ?? description,
+      images: [
+        {
+          alt: ogImageAlt ?? resolvedTitle,
+          height: 630,
+          url: resolvedOgImage,
+          width: 1200,
+        },
+      ],
+      locale: "en_US",
+      siteName: SITE.name,
+      title: resolvedTitle,
       type: ogType,
-      url: pageUrl,
+      url: `${SITE.url}${canonical}`,
     },
     title,
     twitter: {
       card: "summary_large_image",
-      description,
-      images: [ogImageUrl],
-      title,
+      creator: SITE.author.twitter,
+      description: ogDescription ?? description,
+      images: [resolvedOgImage],
+      site: SITE.author.twitter,
+      title: resolvedTitle,
     },
-    ...(noIndex
-      ? {
-          robots: {
-            follow: false,
-            index: false,
-          },
-        }
-      : {}),
+    ...(noIndex && {
+      robots: {
+        follow: false,
+        index: false,
+      },
+    }),
   };
 };
 
 export const baseMetadata: Metadata = {
-  applicationName: SITE.name,
-  authors: [{ name: SITE.name, url: LINK.PORTFOLIO }],
-  category: "technology",
-  creator: SITE.name,
-  description: SITE.description,
-  icons: {
-    apple: "/apple-touch-icon.png",
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
+  alternates: {
+    canonical: "/",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: SITE.name,
+  },
+  applicationName: SITE.name,
+  authors: [{ name: SITE.author.name, url: LINK.GITHUB }],
+  category: "technology",
+  creator: SITE.author.name,
+  description: SITE.description,
   keywords: [...SITE.keywords],
-  manifest: `${SITE.url}/site.webmanifest`,
   metadataBase: new URL(SITE.url),
   openGraph: {
     description: SITE.description,
@@ -80,15 +105,17 @@ export const baseMetadata: Metadata = {
     type: "website",
     url: SITE.url,
   },
-  publisher: SITE.name,
+  publisher: SITE.author.name,
   title: {
     default: SITE.name,
-    template: `%s - ${SITE.name}`,
+    template: `%s | ${SITE.name}`,
   },
   twitter: {
     card: "summary_large_image",
+    creator: SITE.author.twitter,
     description: SITE.description,
     images: [SITE.ogImage],
+    site: SITE.author.twitter,
     title: SITE.name,
   },
 };

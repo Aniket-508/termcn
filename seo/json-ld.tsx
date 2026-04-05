@@ -29,7 +29,7 @@ export const SoftwareSourceCodeJsonLd = () => {
     author: {
       "@type": "Organization",
       name: SITE.name,
-      url: LINK.GITHUB,
+      url: LINK.PORTFOLIO,
     },
     codeRepository: LINK.GITHUB,
     description: SITE.description,
@@ -37,6 +37,12 @@ export const SoftwareSourceCodeJsonLd = () => {
     keywords: SITE.keywords.join(", "),
     license: LINK.LICENSE,
     name: SITE.name,
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      price: "0",
+      priceCurrency: "USD",
+    },
     programmingLanguage: ["TypeScript", "React", "Next.js"],
     runtimePlatform: "Node.js",
     url: SITE.url,
@@ -48,6 +54,7 @@ export const OrganizationJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    logo: SITE.ogImage,
     name: SITE.name,
     sameAs: [LINK.GITHUB],
     url: SITE.url,
@@ -100,7 +107,7 @@ export const BreadcrumbJsonLd = ({
       const pathname = item.path.startsWith("/") ? item.path : `/${item.path}`;
       return {
         "@type": "ListItem",
-        item: `${SITE.url.replace(/\/$/, "")}${pathname}`,
+        item: `${SITE.url}${pathname}`,
         name: item.name,
         position: index + 1,
       };

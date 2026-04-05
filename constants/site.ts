@@ -7,6 +7,10 @@ const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 const normalizedBase = baseUrl.replace(/\/$/, "");
 
 export const SITE = {
+  author: {
+    name: "Aniket Pawar",
+    twitter: "@alaymanguy",
+  },
   description:
     "termcn is a shadcn-compatible component registry: publish UI blocks and install them with the shadcn CLI.",
   keywords: [

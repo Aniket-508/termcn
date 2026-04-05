@@ -6,6 +6,7 @@ import { TerminalPreview } from "@/components/terminal-preview";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import { BreadcrumbJsonLd } from "@/seo/json-ld";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -46,6 +47,7 @@ const showcaseItems = [
 export default function IndexPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }]} />
       <section className="relative overflow-hidden">
         <div className="container-wrapper relative">
           <div className="container flex flex-col items-center gap-4 py-16 text-center md:py-20 lg:py-24">
