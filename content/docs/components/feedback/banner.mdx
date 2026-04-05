@@ -3,80 +3,78 @@ title: "Banner"
 description: "Full-width announcement banner"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="banner" />
-</TerminalPreview>
+<ComponentPreview name="banner-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/banner.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="banner"
+  title="components/ui/banner.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Banner } from "@/components/ui/banner";
-
-export function Example() {
-  return (
-    <Banner variant="info" title="Update">
-      A new version is available. Run npx update to upgrade.
-    </Banner>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type            | Default     | Description                                      |
-| ------------- | --------------- | ----------- | ------------------------------------------------ |
-| `children`    | `ReactNode`     | `required`  | Banner message content                           |
-| `variant`     | `BannerVariant` | `"info"`    | Visual style variant                             |
-| `icon`        | `string`        | `undefined` | Custom icon character, overrides variant default |
-| `title`       | `string`        | `undefined` | Bold label displayed before the message          |
-| `dismissible` | `boolean`       | `false`     | Allow dismissing with Escape key                 |
-| `onDismiss`   | `() => void`    | `undefined` | Callback fired on dismiss                        |
-| `color`       | `string`        | `undefined` | Override the variant color                       |
-| `accentChar`  | `string`        | `"┃"`       | Left accent bar character                        |
-| `gap`         | `number`        | `1`         | Gap between accent bar and content               |
+```tsx
+<Banner variant="info" title="Update">
+  A new version is available. Run npx update to upgrade.
+</Banner>
+```
 
 ## Examples
 
 ### Success Banner
 
-```tsx
-<Banner variant="success" title="Deployed">
-  All services are live.
-</Banner>
-```
-
-### Dismissible Warning
-
-```tsx
-<Banner
-  variant="warning"
-  dismissible
-  onDismiss={() => console.log("dismissed")}
->
-  Disk usage is above 90%.
-</Banner>
-```
+<ComponentPreview name="banner-success" />
 
 ### Error with Custom Icon
 
-```tsx
-<Banner variant="error" icon="💥" title="Crash">
-  Worker process exited with code 1.
-</Banner>
-```
+<ComponentPreview name="banner-error" />
 
-## Registry Files
+## API Reference
 
-- `components/ui/banner.tsx`
+### Banner
+
+| Prop          | Type            | Default     |
+| ------------- | --------------- | ----------- |
+| `children`    | `ReactNode`     | `required`  |
+| `variant`     | `BannerVariant` | `"info"`    |
+| `icon`        | `string`        | `undefined` |
+| `title`       | `string`        | `undefined` |
+| `dismissible` | `boolean`       | `false`     |
+| `onDismiss`   | `() => void`    | `undefined` |
+| `color`       | `string`        | `undefined` |
+| `accentChar`  | `string`        | `"┃"`       |
+| `gap`         | `number`        | `1`         |

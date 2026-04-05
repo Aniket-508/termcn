@@ -3,72 +3,76 @@ title: "Spinner"
 description: "Animated spinner with 12+ styles"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="spinner" />
-</TerminalPreview>
+<ComponentPreview name="spinner-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/spinner.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="spinner"
+  title="components/ui/spinner.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Spinner } from "@/components/ui/spinner";
-
-export function Example() {
-  return <Spinner style="dots" label="Loading components" />;
-}
 ```
 
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop     | Type           | Default     | Description                              |
-| -------- | -------------- | ----------- | ---------------------------------------- |
-| `style`  | `SpinnerStyle` | `"dots"`    | Animation style preset                   |
-| `label`  | `string`       | `undefined` | Text displayed next to the spinner       |
-| `color`  | `string`       | `undefined` | Override the spinner color               |
-| `fps`    | `number`       | `12`        | Animation speed in frames per second     |
-| `frames` | `string[]`     | `undefined` | Custom animation frames, overrides style |
+```tsx
+<Spinner style="dots" label="Loading components" />
+```
 
 ## Examples
 
 ### With Label
 
-```tsx
-<Spinner label="Installing dependencies" />
-```
+A spinner with a descriptive label.
 
-### Different Styles
+<ComponentPreview name="spinner-label" />
 
-```tsx
-<Spinner style="earth" label="Deploying" />
-```
+### Spinner Styles
 
-### Custom Speed and Color
+Multiple built-in animation styles.
 
-```tsx
-<Spinner style="arc" fps={6} color="#f59e0b" label="Compiling" />
-```
+<ComponentPreview name="spinner-styles" />
 
-### Custom Frames
+## API Reference
 
-```tsx
-<Spinner frames={["🌑", "🌒", "🌓", "🌔", "🌕"]} label="Processing" />
-```
+### Spinner
 
-## Registry Files
-
-- `components/ui/spinner.tsx`
+| Prop     | Type           | Default     |
+| -------- | -------------- | ----------- |
+| `style`  | `SpinnerStyle` | `"dots"`    |
+| `label`  | `string`       | `undefined` |
+| `color`  | `string`       | `undefined` |
+| `fps`    | `number`       | `12`        |
+| `frames` | `string[]`     | `undefined` |

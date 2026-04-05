@@ -3,164 +3,126 @@ title: "Welcome Screen"
 description: "Two-panel welcome dashboard with titled border, logo, greeting, and sections"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="welcome-screen" />
-</TerminalPreview>
+<ComponentPreview name="welcome-screen-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/welcome-screen.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="welcome-screen"
+  title="components/ui/welcome-screen.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { WelcomeScreen } from "@/components/ui/welcome-screen";
-
-export function Example() {
-  return (
-    <WelcomeScreen appName="DevTool" version="v2.1.0" borderStyle="round">
-      <WelcomeScreen.Left>
-        <WelcomeScreen.Logo>{"  ╔══╗\n  ║DT║\n  ╚══╝"}</WelcomeScreen.Logo>
-        <WelcomeScreen.Greeting>
-          Welcome back, developer!
-        </WelcomeScreen.Greeting>
-        <WelcomeScreen.Meta
-          items={["Node 20.x", "TypeScript 5.4", "macOS"]}
-          dim
-        />
-      </WelcomeScreen.Left>
-      <WelcomeScreen.Right>
-        <WelcomeScreen.Section title="Quick Start">
-          Run `devtool init` to scaffold a new project.
-        </WelcomeScreen.Section>
-        <WelcomeScreen.Section title="Recent Projects">
-          my-app, api-server, dashboard
-        </WelcomeScreen.Section>
-      </WelcomeScreen.Right>
-    </WelcomeScreen>
-  );
-}
 ```
 
-## Dependencies
+```tsx
+<WelcomeScreen appName="DevTool" version="v2.1.0" borderStyle="round">
+  <WelcomeScreen.Left>
+    <WelcomeScreen.Logo>{"  ╔══╗\n  ║DT║\n  ╚══╝"}</WelcomeScreen.Logo>
+    <WelcomeScreen.Greeting>Welcome back, developer!</WelcomeScreen.Greeting>
+    <WelcomeScreen.Meta items={["Node 20.x", "TypeScript 5.4", "macOS"]} dim />
+  </WelcomeScreen.Left>
+  <WelcomeScreen.Right>
+    <WelcomeScreen.Section title="Quick Start">
+      Run `devtool init` to scaffold a new project.
+    </WelcomeScreen.Section>
+    <WelcomeScreen.Section title="Recent Projects">
+      my-app, api-server, dashboard
+    </WelcomeScreen.Section>
+  </WelcomeScreen.Right>
+</WelcomeScreen>
+```
 
-### npm Dependencies
-
-- `ink`
-
-## Props
+## API Reference
 
 ### WelcomeScreen
 
-| Prop           | Type                                        | Default     | Description                                           |
-| -------------- | ------------------------------------------- | ----------- | ----------------------------------------------------- |
-| `appName`      | `string`                                    | `required`  | Application name displayed in the title bar.          |
-| `appNameColor` | `string`                                    | `undefined` | Color of the app name; defaults to theme primary.     |
-| `version`      | `string`                                    | `undefined` | Version string appended to the app name.              |
-| `borderColor`  | `string`                                    | `undefined` | Color for the outer border; defaults to theme border. |
-| `borderStyle`  | `"single" \| "round" \| "double" \| "bold"` | `"single"`  | Border style for the two-panel layout.                |
-| `leftWidth`    | `number`                                    | `26`        | Character width of the left panel.                    |
-| `children`     | `ReactNode`                                 | `required`  | `WelcomeScreen.Left` and `WelcomeScreen.Right` slots. |
+| Prop           | Type                                        | Default     |
+| -------------- | ------------------------------------------- | ----------- |
+| `appName`      | `string`                                    | `required`  |
+| `appNameColor` | `string`                                    | `undefined` |
+| `version`      | `string`                                    | `undefined` |
+| `borderColor`  | `string`                                    | `undefined` |
+| `borderStyle`  | `"single" \| "round" \| "double" \| "bold"` | `"single"`  |
+| `leftWidth`    | `number`                                    | `26`        |
+| `children`     | `ReactNode`                                 | `required`  |
 
 ### WelcomeScreen.Left
 
-| Prop       | Type        | Default    | Description                 |
-| ---------- | ----------- | ---------- | --------------------------- |
-| `children` | `ReactNode` | `required` | Content for the left panel. |
+| Prop       | Type        | Default    |
+| ---------- | ----------- | ---------- |
+| `children` | `ReactNode` | `required` |
 
 ### WelcomeScreen.Right
 
-| Prop       | Type        | Default    | Description                  |
-| ---------- | ----------- | ---------- | ---------------------------- |
-| `children` | `ReactNode` | `required` | Content for the right panel. |
+| Prop       | Type        | Default    |
+| ---------- | ----------- | ---------- |
+| `children` | `ReactNode` | `required` |
 
 ### WelcomeScreen.Greeting
 
-| Prop       | Type                 | Default     | Description                              |
-| ---------- | -------------------- | ----------- | ---------------------------------------- |
-| `children` | `ReactNode`          | `required`  | Greeting text, rendered bold by default. |
-| `bold`     | `boolean`            | `true`      | Render the greeting in bold.             |
-| `align`    | `"left" \| "center"` | `"left"`    | Horizontal alignment.                    |
-| `color`    | `string`             | `undefined` | Text color override.                     |
+| Prop       | Type                 | Default     |
+| ---------- | -------------------- | ----------- |
+| `children` | `ReactNode`          | `required`  |
+| `bold`     | `boolean`            | `true`      |
+| `align`    | `"left" \| "center"` | `"left"`    |
+| `color`    | `string`             | `undefined` |
 
 ### WelcomeScreen.Logo
 
-| Prop       | Type                 | Default    | Description                                        |
-| ---------- | -------------------- | ---------- | -------------------------------------------------- |
-| `children` | `ReactNode`          | `required` | ASCII art string or React nodes for the logo area. |
-| `align`    | `"left" \| "center"` | `"left"`   | Horizontal alignment of the logo.                  |
+| Prop       | Type                 | Default    |
+| ---------- | -------------------- | ---------- |
+| `children` | `ReactNode`          | `required` |
+| `align`    | `"left" \| "center"` | `"left"`   |
 
 ### WelcomeScreen.Meta
 
-| Prop        | Type                 | Default     | Description                                   |
-| ----------- | -------------------- | ----------- | --------------------------------------------- |
-| `items`     | `string[]`           | `required`  | Metadata entries displayed inline or stacked. |
-| `separator` | `string`             | `" · "`     | Separator between items in inline mode.       |
-| `align`     | `"left" \| "center"` | `"center"`  | Horizontal alignment.                         |
-| `dim`       | `boolean`            | `false`     | Dim the metadata text.                        |
-| `color`     | `string`             | `undefined` | Color override for all items.                 |
-| `stack`     | `boolean`            | `false`     | Stack items vertically instead of inline.     |
+| Prop        | Type                 | Default     |
+| ----------- | -------------------- | ----------- |
+| `items`     | `string[]`           | `required`  |
+| `separator` | `string`             | `" · "`     |
+| `align`     | `"left" \| "center"` | `"center"`  |
+| `dim`       | `boolean`            | `false`     |
+| `color`     | `string`             | `undefined` |
+| `stack`     | `boolean`            | `false`     |
 
 ### WelcomeScreen.Section
 
-| Prop         | Type        | Default     | Description                                       |
-| ------------ | ----------- | ----------- | ------------------------------------------------- |
-| `title`      | `string`    | `required`  | Section heading text.                             |
-| `titleColor` | `string`    | `undefined` | Color for the heading; defaults to theme primary. |
-| `titleBold`  | `boolean`   | `true`      | Render the heading in bold.                       |
-| `children`   | `ReactNode` | `required`  | Section body content.                             |
-
-## Examples
-
-### Minimal welcome
-
-```tsx
-<WelcomeScreen appName="MyApp">
-  <WelcomeScreen.Left>
-    <WelcomeScreen.Greeting>Hello!</WelcomeScreen.Greeting>
-  </WelcomeScreen.Left>
-  <WelcomeScreen.Right>
-    <WelcomeScreen.Section title="Getting Started">
-      Type `help` for available commands.
-    </WelcomeScreen.Section>
-  </WelcomeScreen.Right>
-</WelcomeScreen>
-```
-
-### With logo and stacked meta
-
-```tsx
-<WelcomeScreen appName="Server" version="v3.0" borderStyle="double">
-  <WelcomeScreen.Left>
-    <WelcomeScreen.Logo align="center">{"⚡\nSRV"}</WelcomeScreen.Logo>
-    <WelcomeScreen.Meta items={["Uptime: 14d", "Requests: 1.2M"]} stack dim />
-  </WelcomeScreen.Left>
-  <WelcomeScreen.Right>
-    <WelcomeScreen.Section title="Status">
-      All systems operational
-    </WelcomeScreen.Section>
-  </WelcomeScreen.Right>
-</WelcomeScreen>
-```
-
-### Custom colors
-
-```tsx
-<WelcomeScreen appName="Dashboard" appNameColor="magenta" borderColor="magenta">
-  <WelcomeScreen.Left>
-    <WelcomeScreen.Greeting color="magenta">Welcome!</WelcomeScreen.Greeting>
-    <WelcomeScreen.Meta items={["v1.0", "beta"]} color="magenta" />
-  </WelcomeScreen.Left>
-  <WelcomeScreen.Right>
-    <WelcomeScreen.Section title="News" titleColor="magenta">
-      New features available.
-    </WelcomeScreen.Section>
-  </WelcomeScreen.Right>
-</WelcomeScreen>
-```
-
-## Registry Files
-
-- `components/ui/welcome-screen.tsx`
+| Prop         | Type        | Default     |
+| ------------ | ----------- | ----------- |
+| `title`      | `string`    | `required`  |
+| `titleColor` | `string`    | `undefined` |
+| `titleBold`  | `boolean`   | `true`      |
+| `children`   | `ReactNode` | `required`  |

@@ -3,69 +3,63 @@ title: "Clock"
 description: "Real-time clock display with 12h/24h and date"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="clock" />
-</TerminalPreview>
+<ComponentPreview name="clock-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/clock.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="clock"
+  title="components/ui/clock.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Clock } from "@/components/ui/clock";
-
-export function Example() {
-  return (
-    <Clock format="12h" showSeconds showDate timezone="America/New_York" />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type             | Default     | Description                                      |
-| ------------- | ---------------- | ----------- | ------------------------------------------------ |
-| `format`      | `"12h" \| "24h"` | `"24h"`     | Time format to use                               |
-| `showSeconds` | `boolean`        | `true`      | Whether to display seconds                       |
-| `showDate`    | `boolean`        | `false`     | Show the current date above the time             |
-| `timezone`    | `string`         | `undefined` | IANA timezone string (e.g. `"America/New_York"`) |
-| `color`       | `string`         | `undefined` | Custom color for the time display                |
-| `size`        | `"sm" \| "lg"`   | `"sm"`      | Display size; `"lg"` uses box-drawing digit art  |
-
-## Examples
-
-### 24-hour clock without seconds
 
 ```tsx
-<Clock format="24h" showSeconds={false} />
+<Clock format="12h" showSeconds showDate timezone="America/New_York" />
 ```
 
-### Large display with date
+## API Reference
 
-```tsx
-<Clock size="lg" showDate format="12h" />
-```
+### Clock
 
-### Timezone-specific clock
-
-```tsx
-<Clock timezone="Asia/Tokyo" format="24h" color="cyan" />
-```
-
-## Registry Files
-
-- `components/ui/clock.tsx`
+| Prop          | Type             | Default     |
+| ------------- | ---------------- | ----------- |
+| `format`      | `"12h" \| "24h"` | `"24h"`     |
+| `showSeconds` | `boolean`        | `true`      |
+| `showDate`    | `boolean`        | `false`     |
+| `timezone`    | `string`         | `undefined` |
+| `color`       | `string`         | `undefined` |
+| `size`        | `"sm" \| "lg"`   | `"sm"`      |

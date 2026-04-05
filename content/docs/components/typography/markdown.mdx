@@ -3,68 +3,59 @@ title: "Markdown"
 description: "Full markdown renderer for terminal"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="markdown" />
-</TerminalPreview>
+<ComponentPreview name="markdown-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/markdown.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="markdown"
+  title="components/ui/markdown.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Markdown } from "@/components/ui/markdown";
-
-export function Example() {
-  return (
-    <Markdown>{`# Welcome\n\nThis is **bold** and *italic* text.`}</Markdown>
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-- `marked`
-
-## Props
-
-| Prop       | Type     | Default     | Description                         |
-| ---------- | -------- | ----------- | ----------------------------------- |
-| `children` | `string` | `required`  | Markdown string to parse and render |
-| `width`    | `number` | `undefined` | Max width for text wrapping         |
-
-## Examples
-
-### Basic Usage
 
 ```tsx
-<Markdown>
-  {`# Hello World\n\nA paragraph with **bold** and *italic* text.`}
-</Markdown>
+<Markdown>{`# Welcome\n\nThis is **bold** and *italic* text.`}</Markdown>
 ```
 
-### Lists and Blockquotes
+## API Reference
 
-```tsx
-<Markdown>
-  {`> Important note\n\n- First item\n- Second item\n- Third item`}
-</Markdown>
-```
+### Markdown
 
-### With Width Constraint
-
-```tsx
-<Markdown width={60}>
-  {`## Heading\n\nThis long paragraph will wrap at 60 characters to keep output readable in narrow terminals.`}
-</Markdown>
-```
-
-## Registry Files
-
-- `components/ui/markdown.tsx`
+| Prop       | Type     | Default     |
+| ---------- | -------- | ----------- |
+| `children` | `string` | `required`  |
+| `width`    | `number` | `undefined` |

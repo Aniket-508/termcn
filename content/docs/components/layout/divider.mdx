@@ -3,79 +3,63 @@ title: "Divider"
 description: "Horizontal or vertical divider / rule"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="divider" />
-</TerminalPreview>
+<ComponentPreview name="divider-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/divider.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="divider"
+  title="components/ui/divider.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Divider } from "@/components/ui/divider";
-
-export function Example() {
-  return (
-    <Box flexDirection="column">
-      <Text>Above</Text>
-      <Divider label="Section" />
-      <Text>Below</Text>
-    </Box>
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                             | Default        | Description                                               |
-| ------------- | -------------------------------- | -------------- | --------------------------------------------------------- |
-| `variant`     | `"single" \| "double" \| "bold"` | `"single"`     | Line character style (─, ═, or ━)                         |
-| `orientation` | `"horizontal" \| "vertical"`     | `"horizontal"` | Direction the divider draws                               |
-| `color`       | `string`                         | `undefined`    | Custom color override; defaults to the theme border color |
-| `label`       | `string`                         | `undefined`    | Optional inline text label for horizontal dividers        |
-| `height`      | `number`                         | `1`            | Height in rows for vertical dividers                      |
-| `width`       | `number`                         | `undefined`    | Width in columns for horizontal dividers                  |
-
-## Examples
-
-### Simple horizontal divider
 
 ```tsx
-<Divider />
+<Divider label="Section" />
 ```
 
-### Bold divider with label
+## API Reference
 
-```tsx
-<Divider variant="bold" label="Settings" />
-```
+### Divider
 
-### Double-line divider with fixed width
-
-```tsx
-<Divider variant="double" width={40} />
-```
-
-### Vertical divider
-
-```tsx
-<Box flexDirection="row">
-  <Text>Left</Text>
-  <Divider orientation="vertical" height={3} />
-  <Text>Right</Text>
-</Box>
-```
-
-## Registry Files
-
-- `components/ui/divider.tsx`
+| Prop          | Type             | Default        |
+| ------------- | ---------------- | -------------- |
+| `variant`     | `DividerVariant` | `"single"`     |
+| `orientation` | `Orientation`    | `"horizontal"` |
+| `color`       | `string`         | `undefined`    |
+| `label`       | `string`         | `undefined`    |
+| `height`      | `number`         | `1`            |
+| `width`       | `number`         | `undefined`    |

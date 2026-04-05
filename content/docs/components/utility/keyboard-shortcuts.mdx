@@ -3,90 +3,75 @@ title: "Keyboard Shortcuts"
 description: "Formatted keyboard shortcut reference table"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="keyboard-shortcuts" />
-</TerminalPreview>
+<ComponentPreview name="keyboard-shortcuts-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/keyboard-shortcuts.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="keyboard-shortcuts"
+  title="components/ui/keyboard-shortcuts.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { KeyboardShortcuts } from "@/components/ui/keyboard-shortcuts";
-
-export function Example() {
-  return (
-    <KeyboardShortcuts
-      title="Editor Shortcuts"
-      shortcuts={[
-        { key: "Ctrl+S", description: "Save file" },
-        { key: "Ctrl+Z", description: "Undo" },
-        { key: "Ctrl+F", description: "Find" },
-      ]}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type         | Default     | Description                                                                  |
-| ----------- | ------------ | ----------- | ---------------------------------------------------------------------------- |
-| `shortcuts` | `Shortcut[]` | `required`  | Array of shortcut objects with `key`, `description`, and optional `category` |
-| `columns`   | `number`     | `1`         | Number of columns to display shortcuts in a grid layout                      |
-| `title`     | `string`     | `undefined` | Title displayed at the top of the shortcuts panel                            |
-
-## Examples
-
-### Multi-column layout
 
 ```tsx
 <KeyboardShortcuts
-  columns={2}
+  title="Editor Shortcuts"
   shortcuts={[
-    { key: "j", description: "Move down" },
-    { key: "k", description: "Move up" },
-    { key: "h", description: "Move left" },
-    { key: "l", description: "Move right" },
+    { key: "Ctrl+S", description: "Save file" },
+    { key: "Ctrl+Z", description: "Undo" },
+    { key: "Ctrl+F", description: "Find" },
   ]}
 />
 ```
 
-### Grouped by category
+## API Reference
 
-```tsx
-<KeyboardShortcuts
-  title="App Shortcuts"
-  shortcuts={[
-    { key: "Ctrl+N", description: "New file", category: "File" },
-    { key: "Ctrl+O", description: "Open file", category: "File" },
-    { key: "Ctrl+C", description: "Copy", category: "Edit" },
-    { key: "Ctrl+V", description: "Paste", category: "Edit" },
-  ]}
-/>
-```
+### KeyboardShortcuts
 
-### Simple list without title
+| Prop        | Type         | Default     |
+| ----------- | ------------ | ----------- |
+| `shortcuts` | `Shortcut[]` | `required`  |
+| `columns`   | `number`     | `1`         |
+| `title`     | `string`     | `undefined` |
 
-```tsx
-<KeyboardShortcuts
-  shortcuts={[
-    { key: "q", description: "Quit" },
-    { key: "?", description: "Show help" },
-  ]}
-/>
-```
+### Shortcut
 
-## Registry Files
-
-- `components/ui/keyboard-shortcuts.tsx`
+| Prop          | Type     | Default     |
+| ------------- | -------- | ----------- |
+| `key`         | `string` | `required`  |
+| `description` | `string` | `required`  |
+| `category`    | `string` | `undefined` |

@@ -3,88 +3,77 @@ title: "Code"
 description: "Syntax-highlighted code block (50+ languages)"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="code" />
-</TerminalPreview>
+<ComponentPreview name="code-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/code.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="code"
+  title="components/ui/code.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Code } from "@/components/ui/code";
-
-export function Example() {
-  return (
-    <Code language="typescript">
-      {`const greeting = "Hello, world!";\nconsole.log(greeting);`}
-    </Code>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop                  | Type                                                                                            | Default     | Description                                         |
-| --------------------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
-| `children`            | `string`                                                                                        | `required`  | Source code string to display                       |
-| `language`            | `string`                                                                                        | `undefined` | Language label shown in the top-right corner        |
-| `inline`              | `boolean`                                                                                       | `false`     | Render as an inline code snippet instead of a block |
-| `borderStyle`         | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"single"`  | Border style for the code block frame               |
-| `showLineNumbers`     | `boolean`                                                                                       | `true`      | Whether to show line numbers in the gutter          |
-| `lineNumberSeparator` | `string`                                                                                        | `"│ "`      | Separator string between line numbers and code      |
-| `keywordColor`        | `string`                                                                                        | `undefined` | Override color for keyword tokens                   |
-| `stringColor`         | `string`                                                                                        | `undefined` | Override color for string literal tokens            |
-| `numberColor`         | `string`                                                                                        | `undefined` | Override color for number tokens                    |
-| `commentColor`        | `string`                                                                                        | `undefined` | Override color for comment tokens                   |
-| `operatorColor`       | `string`                                                                                        | `undefined` | Override color for operator tokens                  |
-| `plainColor`          | `string`                                                                                        | `undefined` | Override color for plain/identifier tokens          |
+```tsx
+<Code language="typescript">
+  {`const greeting = "Hello, world!";\nconsole.log(greeting);`}
+</Code>
+```
 
 ## Examples
 
-### Basic Usage
+### Multiline
 
-```tsx
-<Code language="javascript">{`const x = 42;`}</Code>
-```
+<ComponentPreview name="code-multiline" />
 
-### Inline Code
+## API Reference
 
-```tsx
-<Code inline>{`npm install ink`}</Code>
-```
+### Code
 
-### Without Line Numbers
-
-```tsx
-<Code language="python" showLineNumbers={false}>
-  {`def greet(name):\n    return f"Hello, {name}"`}
-</Code>
-```
-
-### Custom Token Colors
-
-```tsx
-<Code
-  language="typescript"
-  keywordColor="#c678dd"
-  stringColor="#98c379"
-  numberColor="#d19a66"
->
-  {`const count = 10;\nconst msg = "done";`}
-</Code>
-```
-
-## Registry Files
-
-- `components/ui/code.tsx`
+| Prop                  | Type          | Default     |
+| --------------------- | ------------- | ----------- |
+| `children`            | `string`      | `required`  |
+| `language`            | `string`      | `undefined` |
+| `inline`              | `boolean`     | `false`     |
+| `borderStyle`         | `BorderStyle` | `"single"`  |
+| `showLineNumbers`     | `boolean`     | `true`      |
+| `lineNumberSeparator` | `string`      | `"│ "`      |
+| `keywordColor`        | `string`      | `undefined` |
+| `stringColor`         | `string`      | `undefined` |
+| `numberColor`         | `string`      | `undefined` |
+| `commentColor`        | `string`      | `undefined` |
+| `operatorColor`       | `string`      | `undefined` |
+| `plainColor`          | `string`      | `undefined` |

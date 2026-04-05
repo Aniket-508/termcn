@@ -3,78 +3,64 @@ title: "Color Picker"
 description: "Color picker with palette, hex, and RGB input"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="color-picker" />
-</TerminalPreview>
+<ComponentPreview name="color-picker-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/color-picker.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="color-picker"
+  title="components/ui/color-picker.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ColorPicker } from "@/components/ui/color-picker";
-
-export function Example() {
-  return (
-    <ColorPicker
-      label="Pick a color"
-      onChange={(color) => console.log("Selected:", color)}
-      onSubmit={(color) => console.log("Confirmed:", color)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type                      | Default           | Description                                    |
-| ----------- | ------------------------- | ----------------- | ---------------------------------------------- |
-| `value`     | `string`                  | `undefined`       | Controlled hex color value                     |
-| `onChange`  | `(color: string) => void` | `undefined`       | Callback fired when a color is picked          |
-| `onSubmit`  | `(color: string) => void` | `undefined`       | Callback fired when the selection is confirmed |
-| `label`     | `string`                  | `undefined`       | Heading text displayed above the picker        |
-| `palette`   | `string[]`                | `DEFAULT_PALETTE` | Array of hex colors shown in the palette grid  |
-| `autoFocus` | `boolean`                 | `false`           | Automatically focus the picker on mount        |
-| `id`        | `string`                  | `undefined`       | Focus identifier for `useFocus`                |
-
-## Examples
-
-### Custom Palette
 
 ```tsx
-<ColorPicker
-  label="Brand colors"
-  palette={["#1e40af", "#059669", "#d97706", "#dc2626", "#7c3aed", "#0891b2"]}
-/>
+<ColorPicker label="Pick a color" onChange={(color) => {}} />
 ```
 
-### Controlled Value
+## API Reference
 
-```tsx
-<ColorPicker value="#ff6600" onChange={(color) => setColor(color)} />
-```
+### ColorPicker
 
-### Auto-Focused
-
-```tsx
-<ColorPicker label="Background" autoFocus />
-```
-
-## Registry Files
-
-- `components/ui/color-picker.tsx`
+| Prop        | Type                      | Default           |
+| ----------- | ------------------------- | ----------------- |
+| `value`     | `string`                  | `undefined`       |
+| `onChange`  | `(color: string) => void` | `undefined`       |
+| `onSubmit`  | `(color: string) => void` | `undefined`       |
+| `label`     | `string`                  | `undefined`       |
+| `palette`   | `string[]`                | `DEFAULT_PALETTE` |
+| `autoFocus` | `boolean`                 | `false`           |
+| `id`        | `string`                  | `undefined`       |

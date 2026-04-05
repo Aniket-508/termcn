@@ -3,77 +3,61 @@ title: "Sparkline"
 description: "Inline Unicode braille sparkline chart"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="sparkline" />
-</TerminalPreview>
+<ComponentPreview name="sparkline-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/sparkline.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="sparkline"
+  title="components/ui/sparkline.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Sparkline } from "@/components/ui/sparkline";
-
-export function Example() {
-  return (
-    <Sparkline
-      data={[4, 8, 15, 16, 23, 42, 38, 26, 19, 12]}
-      width={20}
-      label="Requests"
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop    | Type       | Default     | Description                           |
-| ------- | ---------- | ----------- | ------------------------------------- |
-| `data`  | `number[]` | `required`  | Array of numeric values to plot       |
-| `width` | `number`   | `20`        | Maximum width in characters           |
-| `color` | `string`   | `undefined` | Custom color for the sparkline        |
-| `label` | `string`   | `undefined` | Text label displayed before the chart |
-
-## Examples
-
-### Minimal Sparkline
 
 ```tsx
-<Sparkline data={[1, 3, 2, 5, 4, 6, 3]} />
+<Sparkline data={[4, 8, 15, 16, 23, 42, 38, 26]} width={20} label="Requests" />
 ```
 
-### Colored with Label
+## API Reference
 
-```tsx
-<Sparkline
-  data={[20, 40, 35, 50, 45, 60, 55, 70]}
-  label="CPU"
-  color="#dc2626"
-  width={16}
-/>
-```
+### Sparkline
 
-### Wide Sparkline
-
-```tsx
-<Sparkline
-  data={[10, 12, 8, 14, 9, 16, 11, 18, 13, 20, 15, 22]}
-  width={40}
-  label="Throughput"
-  color="#16a34a"
-/>
-```
-
-## Registry Files
-
-- `components/ui/sparkline.tsx`
+| Prop    | Type       | Default     |
+| ------- | ---------- | ----------- |
+| `data`  | `number[]` | `required`  |
+| `width` | `number`   | `20`        |
+| `color` | `string`   | `undefined` |
+| `label` | `string`   | `undefined` |

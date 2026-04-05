@@ -3,133 +3,85 @@ title: "Tree"
 description: "Expandable/collapsible tree view"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="tree" />
-</TerminalPreview>
+<ComponentPreview name="tree-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/tree.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="tree"
+  title="components/ui/tree.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Tree } from "@/components/ui/tree";
-
-export function Example() {
-  return (
-    <Tree
-      defaultExpanded={["src"]}
-      nodes={[
-        {
-          key: "src",
-          label: "src",
-          children: [
-            { key: "index", label: "index.ts" },
-            { key: "utils", label: "utils.ts" },
-          ],
-        },
-        { key: "pkg", label: "package.json" },
-        { key: "readme", label: "README.md" },
-      ]}
-      onSelect={(node) => console.log(node.key)}
-    />
-  );
-}
 ```
 
-## Dependencies
+```tsx
+<Tree
+  defaultExpanded={["src"]}
+  nodes={[
+    {
+      key: "src",
+      label: "src",
+      children: [
+        { key: "index", label: "index.ts" },
+        { key: "utils", label: "utils.ts" },
+      ],
+    },
+    { key: "pkg", label: "package.json" },
+  ]}
+/>
+```
 
-### Registry Dependencies
+## API Reference
 
-- `theme-provider`
+### Tree
 
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop              | Type                       | Default     | Description                                             |
-| ----------------- | -------------------------- | ----------- | ------------------------------------------------------- |
-| `nodes`           | `TreeNode[]`               | `required`  | Array of tree nodes to display                          |
-| `onSelect`        | `(node: TreeNode) => void` | `undefined` | Callback fired when a node is selected                  |
-| `defaultExpanded` | `string[]`                 | `[]`        | Keys of nodes expanded on initial render                |
-| `expandedIcon`    | `string`                   | `"▼"`       | Icon shown for expanded branch nodes                    |
-| `collapsedIcon`   | `string`                   | `"▶"`       | Icon shown for collapsed branch nodes                   |
-| `leafIcon`        | `string`                   | `"•"`       | Default icon for leaf nodes (overridden by `node.icon`) |
+| Prop              | Type                       | Default     |
+| ----------------- | -------------------------- | ----------- |
+| `nodes`           | `TreeNode[]`               | `required`  |
+| `onSelect`        | `(node: TreeNode) => void` | `undefined` |
+| `defaultExpanded` | `string[]`                 | `[]`        |
+| `expandedIcon`    | `string`                   | `"▼"`       |
+| `collapsedIcon`   | `string`                   | `"▶"`       |
+| `leafIcon`        | `string`                   | `"•"`       |
 
 ### TreeNode
 
-| Prop       | Type         | Description                      |
-| ---------- | ------------ | -------------------------------- |
-| `key`      | `string`     | Unique identifier for the node   |
-| `label`    | `string`     | Display text for the node        |
-| `children` | `TreeNode[]` | Optional nested child nodes      |
-| `icon`     | `string`     | Override icon for this leaf node |
-
-## Examples
-
-### Custom icons
-
-```tsx
-<Tree
-  expandedIcon="📂"
-  collapsedIcon="📁"
-  leafIcon="📄"
-  defaultExpanded={["docs"]}
-  nodes={[
-    {
-      key: "docs",
-      label: "docs",
-      children: [
-        { key: "guide", label: "guide.md" },
-        { key: "api", label: "api.md" },
-      ],
-    },
-  ]}
-/>
-```
-
-### Deeply nested tree
-
-```tsx
-<Tree
-  defaultExpanded={["root", "components"]}
-  nodes={[
-    {
-      key: "root",
-      label: "app",
-      children: [
-        {
-          key: "components",
-          label: "components",
-          children: [
-            { key: "btn", label: "Button.tsx" },
-            { key: "input", label: "Input.tsx" },
-          ],
-        },
-        { key: "layout", label: "layout.tsx" },
-      ],
-    },
-  ]}
-/>
-```
-
-### Leaf nodes with custom icons
-
-```tsx
-<Tree
-  nodes={[
-    { key: "1", label: "Tests passing", icon: "✔" },
-    { key: "2", label: "Build warning", icon: "⚠" },
-    { key: "3", label: "Deploy failed", icon: "✘" },
-  ]}
-/>
-```
-
-## Registry Files
-
-- `components/ui/tree.tsx`
+| Prop       | Type         | Default     |
+| ---------- | ------------ | ----------- |
+| `key`      | `string`     | `required`  |
+| `label`    | `string`     | `required`  |
+| `children` | `TreeNode[]` | `undefined` |
+| `icon`     | `string`     | `undefined` |

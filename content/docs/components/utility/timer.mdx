@@ -3,81 +3,63 @@ title: "Timer"
 description: "Countdown timer with pause/resume and auto-start"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="timer" />
-</TerminalPreview>
+<ComponentPreview name="timer-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/timer.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="timer"
+  title="components/ui/timer.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Timer } from "@/components/ui/timer";
-
-export function Example() {
-  return (
-    <Timer
-      duration={300}
-      format="ms"
-      label="Pomodoro"
-      autoStart
-      onComplete={() => console.log("Time is up!")}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop         | Type                   | Default     | Description                                      |
-| ------------ | ---------------------- | ----------- | ------------------------------------------------ |
-| `duration`   | `number`               | `required`  | Countdown duration in seconds                    |
-| `onComplete` | `() => void`           | `undefined` | Callback invoked when the countdown reaches zero |
-| `autoStart`  | `boolean`              | `false`     | Start counting down immediately on mount         |
-| `format`     | `"hms" \| "ms" \| "s"` | `"hms"`     | Time display format                              |
-| `color`      | `string`               | `undefined` | Custom color for the time display                |
-| `label`      | `string`               | `undefined` | Label shown above the timer                      |
-
-## Examples
-
-### Simple 60-second timer
 
 ```tsx
-<Timer duration={60} autoStart />
+<Timer duration={300} format="ms" label="Pomodoro" autoStart />
 ```
 
-### Minutes and seconds format with label
+## API Reference
 
-```tsx
-<Timer duration={120} format="ms" label="Break time" />
-```
+### Timer
 
-### Seconds-only format with completion callback
-
-```tsx
-<Timer
-  duration={10}
-  format="s"
-  color="red"
-  onComplete={() => process.exit(0)}
-/>
-```
-
-## Registry Files
-
-- `components/ui/timer.tsx`
+| Prop         | Type                   | Default     |
+| ------------ | ---------------------- | ----------- |
+| `duration`   | `number`               | `required`  |
+| `onComplete` | `() => void`           | `undefined` |
+| `autoStart`  | `boolean`              | `false`     |
+| `format`     | `"hms" \| "ms" \| "s"` | `"hms"`     |
+| `color`      | `string`               | `undefined` |
+| `label`      | `string`               | `undefined` |

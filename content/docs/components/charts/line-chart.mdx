@@ -3,93 +3,72 @@ title: "Line Chart"
 description: "ASCII line chart with axes and multi-series support"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="line-chart" />
-</TerminalPreview>
+<ComponentPreview name="line-chart-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/line-chart.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="line-chart"
+  title="components/ui/line-chart.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { LineChart } from "@/components/ui/line-chart";
-
-export function Example() {
-  return (
-    <LineChart
-      data={[
-        { label: "Jan", value: 30 },
-        { label: "Feb", value: 45 },
-        { label: "Mar", value: 28 },
-        { label: "Apr", value: 60 },
-        { label: "May", value: 52 },
-        { label: "Jun", value: 75 },
-      ]}
-      width={40}
-      height={10}
-      title="Monthly Sales"
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type                   | Default     | Description                                    |
-| ---------- | ---------------------- | ----------- | ---------------------------------------------- |
-| `data`     | `LineChartDataPoint[]` | `required`  | Array of numbers or `{ label, value }` objects |
-| `width`    | `number`               | `40`        | Total chart width in columns                   |
-| `height`   | `number`               | `10`        | Chart height in rows                           |
-| `title`    | `string`               | `undefined` | Optional title displayed above chart           |
-| `color`    | `string`               | `undefined` | Custom color for the plot line                 |
-| `showAxes` | `boolean`              | `true`      | Show X and Y axes with labels                  |
-
-## Examples
-
-### Simple Numeric Data
-
-```tsx
-<LineChart data={[3, 7, 4, 8, 2, 9, 5]} width={30} height={8} />
-```
-
-### Without Axes
-
-```tsx
-<LineChart
-  data={[10, 25, 18, 42, 33, 55, 48]}
-  showAxes={false}
-  width={36}
-  height={6}
-  color="#16a34a"
-/>
-```
-
-### Labeled Data Points
 
 ```tsx
 <LineChart
   data={[
-    { label: "W1", value: 100 },
-    { label: "W2", value: 140 },
-    { label: "W3", value: 120 },
-    { label: "W4", value: 180 },
+    { label: "Jan", value: 30 },
+    { label: "Feb", value: 45 },
+    { label: "Mar", value: 28 },
   ]}
-  width={32}
+  width={40}
   height={10}
-  title="Weekly Users"
+  title="Monthly Sales"
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/line-chart.tsx`
+### LineChart
+
+| Prop       | Type                   | Default     |
+| ---------- | ---------------------- | ----------- |
+| `data`     | `LineChartDataPoint[]` | `required`  |
+| `width`    | `number`               | `40`        |
+| `height`   | `number`               | `10`        |
+| `title`    | `string`               | `undefined` |
+| `color`    | `string`               | `undefined` |
+| `showAxes` | `boolean`              | `true`      |

@@ -3,93 +3,68 @@ title: "Notification Center"
 description: "Persistent queue-based notification panel with useNotifications hook"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="notification-center" />
-</TerminalPreview>
+<ComponentPreview name="notification-center-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/notification-center.json
 ```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="notification-center"
+  title="components/ui/notification-center.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
 
 ## Usage
 
 ```tsx
 import { NotificationCenter } from "@/components/ui/notification-center";
 import { useNotifications } from "@/hooks/use-notifications";
-import { useEffect } from "react";
-
-export function Example() {
-  const { notify } = useNotifications();
-
-  useEffect(() => {
-    notify({
-      title: "Build complete",
-      body: "All checks passed",
-      variant: "success",
-    });
-    notify({
-      title: "Low disk space",
-      body: "Only 2 GB remaining",
-      variant: "warning",
-    });
-  }, []);
-
-  return <NotificationCenter maxVisible={5} width={40} />;
-}
 ```
 
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-- `use-notifications`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop         | Type     | Default | Description                                   |
-| ------------ | -------- | ------- | --------------------------------------------- |
-| `maxVisible` | `number` | `5`     | Maximum number of notifications shown at once |
-| `width`      | `number` | `40`    | Width of the notification panel in columns    |
-
-## Examples
-
-### Narrow Panel
-
 ```tsx
-<NotificationCenter maxVisible={3} width={30} />
-```
+const { notify } = useNotifications();
 
-### Full-Width Panel
-
-```tsx
-<NotificationCenter maxVisible={10} width={80} />
-```
-
-### Using the Hook to Push Notifications
-
-```tsx
-const { notify, dismiss, clear } = useNotifications();
-
-notify({ title: "Deployed", variant: "success" });
 notify({
-  title: "Error",
-  body: "Connection refused",
-  variant: "error",
-  persistent: true,
+  title: "Build complete",
+  body: "All checks passed",
+  variant: "success",
 });
 
-dismiss(notificationId);
-clear();
+<NotificationCenter maxVisible={5} width={40} />;
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/notification-center.tsx`
-- `components/ui/notification-badge.tsx`
+### NotificationCenter
+
+| Prop         | Type     | Default |
+| ------------ | -------- | ------- |
+| `maxVisible` | `number` | `5`     |
+| `width`      | `number` | `40`    |

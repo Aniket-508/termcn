@@ -3,72 +3,72 @@ title: "Progress Bar"
 description: "Determinate progress bar with percent and value/total display"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="progress-bar" />
-</TerminalPreview>
+<ComponentPreview name="progress-bar-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/progress-bar.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="progress-bar"
+  title="components/ui/progress-bar.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ProgressBar } from "@/components/ui/progress-bar";
-
-export function Example() {
-  return <ProgressBar value={42} total={100} label="Uploading" />;
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type      | Default     | Description                                                  |
-| ------------- | --------- | ----------- | ------------------------------------------------------------ |
-| `value`       | `number`  | `required`  | Progress value (0-100, or current if `total` is set)         |
-| `total`       | `number`  | `undefined` | Maximum value; when set, `value` is treated as current count |
-| `width`       | `number`  | `30`        | Character width of the bar                                   |
-| `showPercent` | `boolean` | `true`      | Show percentage label next to the bar                        |
-| `showEta`     | `boolean` | `false`     | Reserved for estimated time remaining                        |
-| `fillChar`    | `string`  | `"█"`       | Character used for the filled portion                        |
-| `emptyChar`   | `string`  | `"░"`       | Character used for the empty portion                         |
-| `color`       | `string`  | `undefined` | Override the bar color                                       |
-| `label`       | `string`  | `undefined` | Text label displayed above the bar                           |
+```tsx
+<ProgressBar value={42} total={100} label="Uploading" />
+```
 
 ## Examples
 
-### Basic Percentage
-
-```tsx
-<ProgressBar value={65} />
-```
-
-### With Value and Total
-
-```tsx
-<ProgressBar value={37} total={50} label="Files processed" />
-```
-
 ### Custom Characters and Color
 
-```tsx
-<ProgressBar value={80} fillChar="=" emptyChar="-" color="#22c55e" />
-```
+<ComponentPreview name="progress-bar-custom" />
 
-### Without Percentage
+## API Reference
 
-```tsx
-<ProgressBar value={50} showPercent={false} width={40} />
-```
+### ProgressBar
 
-## Registry Files
-
-- `components/ui/progress-bar.tsx`
+| Prop          | Type      | Default     |
+| ------------- | --------- | ----------- |
+| `value`       | `number`  | `required`  |
+| `total`       | `number`  | `undefined` |
+| `width`       | `number`  | `30`        |
+| `showPercent` | `boolean` | `true`      |
+| `showEta`     | `boolean` | `false`     |
+| `fillChar`    | `string`  | `"█"`       |
+| `emptyChar`   | `string`  | `"░"`       |
+| `color`       | `string`  | `undefined` |
+| `label`       | `string`  | `undefined` |

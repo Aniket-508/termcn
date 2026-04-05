@@ -3,77 +3,68 @@ title: "Help"
 description: "Auto-generated help panel from a keymap"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="help" />
-</TerminalPreview>
+<ComponentPreview name="help-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/help.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="help"
+  title="components/ui/help.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Help } from "@/components/ui/help";
-
-export function Example() {
-  return (
-    <Help
-      title="Keyboard Shortcuts"
-      keymap={{
-        q: "Quit",
-        h: "Help",
-        j: "Move down",
-        k: "Move up",
-      }}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop      | Type                     | Default     | Description                                              |
-| --------- | ------------------------ | ----------- | -------------------------------------------------------- |
-| `keymap`  | `Record<string, string>` | `required`  | Map of key labels to their action descriptions           |
-| `title`   | `string`                 | `undefined` | Optional title shown at the top of the help panel        |
-| `compact` | `boolean`                | `false`     | Render as a single inline row instead of a bordered list |
-
-## Examples
-
-### Compact inline help
-
-```tsx
-<Help compact keymap={{ q: "Quit", "?": "Help", "/": "Search" }} />
-```
-
-### With title
 
 ```tsx
 <Help
-  title="Editor"
+  title="Keyboard Shortcuts"
   keymap={{
-    "ctrl+s": "Save",
-    "ctrl+z": "Undo",
-    "ctrl+y": "Redo",
+    q: "Quit",
+    h: "Help",
+    j: "Move down",
+    k: "Move up",
   }}
 />
 ```
 
-### Minimal keymap
+## API Reference
 
-```tsx
-<Help keymap={{ Enter: "Confirm", Esc: "Cancel" }} />
-```
+### Help
 
-## Registry Files
-
-- `components/ui/help.tsx`
+| Prop      | Type                     | Default     |
+| --------- | ------------------------ | ----------- |
+| `keymap`  | `Record<string, string>` | `required`  |
+| `title`   | `string`                 | `undefined` |
+| `compact` | `boolean`                | `false`     |

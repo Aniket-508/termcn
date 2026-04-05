@@ -3,64 +3,60 @@ title: "Gradient"
 description: "Color gradient text"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="gradient" />
-</TerminalPreview>
+<ComponentPreview name="gradient-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/gradient.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="gradient"
+  title="components/ui/gradient.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Gradient } from "@/components/ui/gradient";
-
-export function Example() {
-  return <Gradient colors={["#ff6b6b", "#4ecdc4"]}>Hello Gradient</Gradient>;
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type       | Default    | Description                               |
-| ---------- | ---------- | ---------- | ----------------------------------------- |
-| `children` | `string`   | `required` | Text string to apply the gradient to      |
-| `colors`   | `string[]` | `required` | Array of hex color stops for the gradient |
-| `bold`     | `boolean`  | `false`    | Whether to render the text in bold        |
-
-## Examples
-
-### Basic Usage
 
 ```tsx
-<Gradient colors={["#ee5a24", "#f9ca24"]}>Sunset Text</Gradient>
+<Gradient colors={["#ff6b6b", "#4ecdc4"]}>Hello Gradient</Gradient>
 ```
 
-### Three-Color Gradient
+## API Reference
 
-```tsx
-<Gradient colors={["#7f8c8d", "#2ecc71", "#3498db"]}>
-  Multi-stop gradient
-</Gradient>
-```
+### Gradient
 
-### Bold Gradient
-
-```tsx
-<Gradient colors={["#6c5ce7", "#fd79a8"]} bold>
-  Bold Gradient
-</Gradient>
-```
-
-## Registry Files
-
-- `components/ui/gradient.tsx`
+| Prop       | Type       | Default    |
+| ---------- | ---------- | ---------- |
+| `children` | `string`   | `required` |
+| `colors`   | `string[]` | `required` |
+| `bold`     | `boolean`  | `false`    |

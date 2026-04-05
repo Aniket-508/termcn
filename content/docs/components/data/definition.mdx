@@ -3,77 +3,71 @@ title: "Definition"
 description: "Term–description definition list"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="definition" />
-</TerminalPreview>
+<ComponentPreview name="definition-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/definition.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="definition"
+  title="components/ui/definition.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Definition } from "@/components/ui/definition";
-
-export function Example() {
-  return (
-    <Definition
-      items={[
-        { term: "CLI", description: "Command Line Interface" },
-        { term: "TUI", description: "Terminal User Interface" },
-        { term: "REPL", description: "Read-Eval-Print Loop" },
-      ]}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type               | Default     | Description                                |
-| ----------- | ------------------ | ----------- | ------------------------------------------ |
-| `items`     | `DefinitionItem[]` | `required`  | Array of term/description pairs to display |
-| `termColor` | `string`           | `undefined` | Override color for the term labels         |
-
-### DefinitionItem
-
-| Prop          | Type     | Description             |
-| ------------- | -------- | ----------------------- |
-| `term`        | `string` | The term or label       |
-| `description` | `string` | The definition or value |
-
-## Examples
-
-### Custom term color
 
 ```tsx
 <Definition
-  termColor="cyan"
   items={[
-    { term: "Node.js", description: "JavaScript runtime built on V8" },
-    {
-      term: "Deno",
-      description: "Secure runtime for JavaScript and TypeScript",
-    },
+    { term: "CLI", description: "Command Line Interface" },
+    { term: "TUI", description: "Terminal User Interface" },
   ]}
 />
 ```
 
-### Single item
+## API Reference
 
-```tsx
-<Definition items={[{ term: "Version", description: "1.4.2" }]} />
-```
+### Definition
 
-## Registry Files
+| Prop        | Type               | Default     |
+| ----------- | ------------------ | ----------- |
+| `items`     | `DefinitionItem[]` | `required`  |
+| `termColor` | `string`           | `undefined` |
 
-- `components/ui/definition.tsx`
+### DefinitionItem
+
+| Prop          | Type     | Default    |
+| ------------- | -------- | ---------- |
+| `term`        | `string` | `required` |
+| `description` | `string` | `required` |

@@ -3,89 +3,70 @@ title: "Masked Input"
 description: "Masked input for phone, date, credit card formats"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="masked-input" />
-</TerminalPreview>
+<ComponentPreview name="masked-input-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/masked-input.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="masked-input"
+  title="components/ui/masked-input.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { MaskedInput } from "@/components/ui/masked-input";
-
-export function Example() {
-  return (
-    <MaskedInput
-      mask="(###) ###-####"
-      label="Phone Number"
-      placeholder="(555) 123-4567"
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                      | Default      | Description                                          |
-| ------------- | ------------------------- | ------------ | ---------------------------------------------------- |
-| `mask`        | `string`                  | **required** | Format mask where `#` represents a digit placeholder |
-| `value`       | `string`                  | `undefined`  | Controlled raw digit string (unformatted)            |
-| `onChange`    | `(value: string) => void` | `undefined`  | Called with the raw digit string on change           |
-| `onSubmit`    | `(value: string) => void` | `undefined`  | Called with the raw digit string on Enter            |
-| `label`       | `string`                  | `undefined`  | Label text displayed above the input                 |
-| `placeholder` | `string`                  | `undefined`  | Placeholder shown when the input is empty            |
-| `autoFocus`   | `boolean`                 | `false`      | Whether to focus the input on mount                  |
-| `id`          | `string`                  | `undefined`  | Unique identifier for focus management               |
-| `width`       | `number`                  | `40`         | Width of the input box in columns                    |
-
-## Examples
-
-### Phone Number
-
-```tsx
-<MaskedInput mask="(###) ###-####" label="Phone" placeholder="(555) 123-4567" />
-```
-
-### Date Input
-
-```tsx
-<MaskedInput mask="##/##/####" label="Date of Birth" placeholder="MM/DD/YYYY" />
-```
-
-### Credit Card
-
-```tsx
-<MaskedInput mask="####-####-####-####" label="Card Number" width={30} />
-```
-
-### Controlled Value
 
 ```tsx
 <MaskedInput
-  mask="###-##-####"
-  label="SSN"
-  value={ssn}
-  onChange={setSsn}
-  onSubmit={(val) => verify(val)}
+  mask="(###) ###-####"
+  label="Phone Number"
+  placeholder="(555) 123-4567"
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/masked-input.tsx`
+### MaskedInput
+
+| Prop          | Type                      | Default      |
+| ------------- | ------------------------- | ------------ |
+| `mask`        | `string`                  | **required** |
+| `value`       | `string`                  | `undefined`  |
+| `onChange`    | `(value: string) => void` | `undefined`  |
+| `onSubmit`    | `(value: string) => void` | `undefined`  |
+| `label`       | `string`                  | `undefined`  |
+| `placeholder` | `string`                  | `undefined`  |
+| `autoFocus`   | `boolean`                 | `false`      |
+| `id`          | `string`                  | `undefined`  |
+| `width`       | `number`                  | `40`         |

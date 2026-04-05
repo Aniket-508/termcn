@@ -3,65 +3,60 @@ title: "Stopwatch"
 description: "Count-up stopwatch with laps and reset"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="stopwatch" />
-</TerminalPreview>
+<ComponentPreview name="stopwatch-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/stopwatch.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="stopwatch"
+  title="components/ui/stopwatch.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Stopwatch } from "@/components/ui/stopwatch";
-
-export function Example() {
-  return <Stopwatch autoStart showLaps color="green" />;
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type      | Default     | Description                               |
-| ----------- | --------- | ----------- | ----------------------------------------- |
-| `autoStart` | `boolean` | `false`     | Start the stopwatch immediately on mount  |
-| `color`     | `string`  | `undefined` | Custom color for the elapsed time display |
-| `showLaps`  | `boolean` | `true`      | Whether to display the lap times list     |
-
-## Examples
-
-### Auto-starting stopwatch
 
 ```tsx
-<Stopwatch autoStart />
+<Stopwatch autoStart showLaps color="green" />
 ```
 
-### Without lap tracking
+## API Reference
 
-```tsx
-<Stopwatch showLaps={false} />
-```
+### Stopwatch
 
-### Custom color
-
-```tsx
-<Stopwatch color="cyan" autoStart showLaps />
-```
-
-## Registry Files
-
-- `components/ui/stopwatch.tsx`
+| Prop        | Type      | Default     |
+| ----------- | --------- | ----------- |
+| `autoStart` | `boolean` | `false`     |
+| `color`     | `string`  | `undefined` |
+| `showLaps`  | `boolean` | `true`      |

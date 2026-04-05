@@ -3,90 +3,70 @@ title: "Form"
 description: "Form container with validation, Ctrl+S submit, and dirty tracking"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="form" />
-</TerminalPreview>
+<ComponentPreview name="form-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/form.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="form"
+  title="components/ui/form.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Form } from "@/components/ui/form";
-import { FormField } from "@/components/ui/form-field";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <Form
-      initialValues={{ name: "", email: "" }}
-      fields={[
-        { name: "name", validate: (v) => (v ? null : "Name is required") },
-        { name: "email", validate: (v) => (v ? null : "Email is required") },
-      ]}
-      onSubmit={(values) => console.log("Submitted:", values)}
-    >
-      <Text>Name and email form (Ctrl+S to submit)</Text>
-    </Form>
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop            | Type                                        | Default    | Description                                      |
-| --------------- | ------------------------------------------- | ---------- | ------------------------------------------------ |
-| `onSubmit`      | `(values: Record<string, unknown>) => void` | `required` | Callback fired with all field values on submit   |
-| `initialValues` | `Record<string, unknown>`                   | `{}`       | Initial values for the form fields               |
-| `fields`        | `FormField[]`                               | `[]`       | Field definitions with optional validation rules |
-| `children`      | `ReactNode`                                 | `required` | Form content, typically `FormField` components   |
-
-## Examples
-
-### With Validation
 
 ```tsx
 <Form
+  initialValues={{ name: "", email: "" }}
   fields={[
-    {
-      name: "port",
-      validate: (v) => {
-        const n = Number(v);
-        return n >= 1 && n <= 65535 ? null : "Invalid port number";
-      },
-    },
+    { name: "name", validate: (v) => (v ? null : "Name is required") },
+    { name: "email", validate: (v) => (v ? null : "Email is required") },
   ]}
-  onSubmit={(values) => startServer(Number(values.port))}
+  onSubmit={(values) => console.log("Submitted:", values)}
 >
-  <Text>Enter a port number</Text>
+  <Text>Name and email form (Ctrl+S to submit)</Text>
 </Form>
 ```
 
-### Simple Form Without Validation
+## API Reference
 
-```tsx
-<Form
-  initialValues={{ query: "" }}
-  onSubmit={(values) => search(String(values.query))}
->
-  <Text>Search query form</Text>
-</Form>
-```
+### Form
 
-## Registry Files
-
-- `components/ui/form.tsx`
+| Prop            | Type                                        | Default    |
+| --------------- | ------------------------------------------- | ---------- |
+| `onSubmit`      | `(values: Record<string, unknown>) => void` | `required` |
+| `initialValues` | `Record<string, unknown>`                   | `{}`       |
+| `fields`        | `FormField[]`                               | `[]`       |
+| `children`      | `ReactNode`                                 | `required` |

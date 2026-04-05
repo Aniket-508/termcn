@@ -3,66 +3,67 @@ title: "Image"
 description: "Image renderer with iTerm2/Kitty protocol and ASCII fallback"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="image" />
-</TerminalPreview>
+<ComponentPreview name="image-demo" hideCode />
 
-> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+<Callout type="info">
+  Image rendering uses terminal-specific protocols (iTerm2, Kitty) and falls
+  back to ASCII art. Results vary by terminal emulator.
+</Callout>
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/image.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="image"
+  title="components/ui/image.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Image } from "@/components/ui/image";
-
-export function Example() {
-  return (
-    <Image src="./screenshot.png" width={40} alt="Application screenshot" />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type            | Default     | Description                                                       |
-| ---------- | --------------- | ----------- | ----------------------------------------------------------------- |
-| `src`      | `string`        | `required`  | File path to the image                                            |
-| `width`    | `number`        | `20`        | Display width in terminal columns                                 |
-| `height`   | `number`        | `undefined` | Display height in terminal rows                                   |
-| `protocol` | `ImageProtocol` | `"auto"`    | Rendering protocol: `"auto"`, `"iterm2"`, `"kitty"`, or `"ascii"` |
-| `alt`      | `string`        | `undefined` | Alt text shown below the image and in the ASCII fallback          |
-
-## Examples
-
-### ASCII fallback
 
 ```tsx
-<Image src="./logo.png" protocol="ascii" alt="Company logo" />
+<Image src="./screenshot.png" width={40} alt="Application screenshot" />
 ```
 
-### Custom dimensions
+## API Reference
 
-```tsx
-<Image src="./banner.png" width={60} height={15} />
-```
+### Image
 
-### Force Kitty protocol
-
-```tsx
-<Image src="./photo.jpg" protocol="kitty" width={30} alt="Profile photo" />
-```
-
-## Registry Files
-
-- `components/ui/image.tsx`
+| Prop       | Type            | Default     |
+| ---------- | --------------- | ----------- |
+| `src`      | `string`        | `required`  |
+| `width`    | `number`        | `20`        |
+| `height`   | `number`        | `undefined` |
+| `protocol` | `ImageProtocol` | `"auto"`    |
+| `alt`      | `string`        | `undefined` |

@@ -3,104 +3,74 @@ title: "File Change"
 description: "Interactive file-change review list with diff expansion, per-file accept/reject actions, and accept-all shortcut"
 ---
 
-<TerminalPreview defaultThemeKey="tokyo-night">
-  <ComponentPreview name="file-change" />
-</TerminalPreview>
+<ComponentPreview name="file-change-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/file-change.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="file-change"
+  title="components/ui/file-change.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { FileChange } from "@/components/ui/file-change";
-
-export function Example() {
-  return (
-    <FileChange
-      changes={[
-        { path: "src/utils.ts", type: "modify", diff: "-old line\n+new line" },
-        {
-          path: "src/helpers.ts",
-          type: "create",
-          content: "export const add = (a, b) => a + b;",
-        },
-        { path: "src/legacy.ts", type: "delete" },
-      ]}
-      onAccept={(path) => console.log("accepted", path)}
-      onReject={(path) => console.log("rejected", path)}
-      onAcceptAll={() => console.log("accepted all")}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                     | Default     | Description                                                                                   |
-| ------------- | ------------------------ | ----------- | --------------------------------------------------------------------------------------------- |
-| `changes`     | `FileChangeItem[]`       | `required`  | Array of file changes to review. Each item has `path`, `type`, optional `diff` and `content`. |
-| `onAccept`    | `(path: string) => void` | `undefined` | Called when a single file is accepted with `y`.                                               |
-| `onReject`    | `(path: string) => void` | `undefined` | Called when a single file is rejected with `n`.                                               |
-| `onAcceptAll` | `() => void`             | `undefined` | Called when all files are bulk-accepted with `a`.                                             |
-
-## Examples
-
-### Single modified file
-
-```tsx
-<FileChange
-  changes={[{ path: "README.md", type: "modify", diff: "-old\n+new" }]}
-  onAccept={(p) => console.log("accepted", p)}
-  onReject={(p) => console.log("rejected", p)}
-/>
-```
-
-### Mixed change types
 
 ```tsx
 <FileChange
   changes={[
-    { path: "src/index.ts", type: "modify" },
+    { path: "src/utils.ts", type: "modify", diff: "-old line\n+new line" },
     {
-      path: "src/new-feature.ts",
+      path: "src/helpers.ts",
       type: "create",
-      content: "export function feature() {}",
+      content: "export const add = (a, b) => a + b;",
     },
-    { path: "src/deprecated.ts", type: "delete" },
+    { path: "src/legacy.ts", type: "delete" },
   ]}
-  onAcceptAll={() => console.log("all accepted")}
+  onAccept={(path) => console.log("accepted", path)}
+  onReject={(path) => console.log("rejected", path)}
+  onAcceptAll={() => console.log("accepted all")}
 />
 ```
 
-### New file with content preview
+## API Reference
 
-```tsx
-<FileChange
-  changes={[
-    {
-      path: "src/config.ts",
-      type: "create",
-      content:
-        "export const config = {\n  apiUrl: 'https://api.example.com',\n};",
-    },
-  ]}
-/>
-```
+### FileChange
 
-## Registry Files
-
-- `components/ui/file-change.tsx`
+| Prop          | Type                     | Default     |
+| ------------- | ------------------------ | ----------- |
+| `changes`     | `FileChangeItem[]`       | `required`  |
+| `onAccept`    | `(path: string) => void` | `undefined` |
+| `onReject`    | `(path: string) => void` | `undefined` |
+| `onAcceptAll` | `() => void`             | `undefined` |

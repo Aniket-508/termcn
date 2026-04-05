@@ -3,81 +3,61 @@ title: "Clipboard"
 description: "Copy-to-clipboard button with success feedback"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="clipboard" />
-</TerminalPreview>
+<ComponentPreview name="clipboard-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/clipboard.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="clipboard"
+  title="components/ui/clipboard.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Clipboard } from "@/components/ui/clipboard";
-
-export function Example() {
-  return (
-    <Clipboard
-      value="npm install termcn"
-      label="Install command"
-      successMessage="Copied!"
-      timeout={2000}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-- `use-clipboard`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop             | Type     | Default     | Description                                             |
-| ---------------- | -------- | ----------- | ------------------------------------------------------- |
-| `value`          | `string` | `required`  | The text value to copy to the clipboard                 |
-| `label`          | `string` | `undefined` | Optional label displayed above the clipboard field      |
-| `successMessage` | `string` | `"Copied!"` | Message shown after a successful copy                   |
-| `timeout`        | `number` | `2000`      | Duration in ms to show the success message before reset |
-
-## Examples
-
-### Basic copy field
 
 ```tsx
-<Clipboard value="sk-abc123xyz" />
+<Clipboard value="npm install termcn" label="Install command" />
 ```
 
-### With label and custom message
+## API Reference
 
-```tsx
-<Clipboard
-  value="https://example.com/invite/abc"
-  label="Share link"
-  successMessage="Link copied!"
-/>
-```
+### Clipboard
 
-### Short feedback timeout
-
-```tsx
-<Clipboard
-  value="export API_KEY=abc123"
-  label="Environment variable"
-  timeout={1000}
-/>
-```
-
-## Registry Files
-
-- `components/ui/clipboard.tsx`
+| Prop             | Type     | Default     |
+| ---------------- | -------- | ----------- |
+| `value`          | `string` | `required`  |
+| `label`          | `string` | `undefined` |
+| `successMessage` | `string` | `"Copied!"` |
+| `timeout`        | `number` | `2000`      |

@@ -3,62 +3,66 @@ title: "Status Message"
 description: "Inline status message with icon and color"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="status-message" />
-</TerminalPreview>
+<ComponentPreview name="status-message-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/status-message.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="status-message"
+  title="components/ui/status-message.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { StatusMessage } from "@/components/ui/status-message";
-
-export function Example() {
-  return <StatusMessage variant="success">All tests passed.</StatusMessage>;
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type            | Default     | Description                                                                 |
-| ---------- | --------------- | ----------- | --------------------------------------------------------------------------- |
-| `variant`  | `StatusVariant` | `"info"`    | Status type: "success", "error", "warning", "info", "loading", or "pending" |
-| `children` | `ReactNode`     | `required`  | Message content                                                             |
-| `icon`     | `string`        | `undefined` | Custom icon character, overrides variant default                            |
+```tsx
+<StatusMessage variant="success">All tests passed.</StatusMessage>
+```
 
 ## Examples
 
-### Error Status
+### Variants
 
-```tsx
-<StatusMessage variant="error">Connection to database failed.</StatusMessage>
-```
+<ComponentPreview name="status-message-variants" />
 
-### Loading Status
+## API Reference
 
-```tsx
-<StatusMessage variant="loading">Fetching remote config...</StatusMessage>
-```
+### StatusMessage
 
-### Warning with Custom Icon
-
-```tsx
-<StatusMessage variant="warning" icon="⏳">
-  Rate limit approaching.
-</StatusMessage>
-```
-
-## Registry Files
-
-- `components/ui/status-message.tsx`
+| Prop       | Type            | Default     |
+| ---------- | --------------- | ----------- |
+| `variant`  | `StatusVariant` | `"info"`    |
+| `children` | `ReactNode`     | `required`  |
+| `icon`     | `string`        | `undefined` |

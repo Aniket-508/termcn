@@ -3,100 +3,70 @@ title: "Tool Call"
 description: "Displays an AI tool invocation with status indicator, args, result, and elapsed time"
 ---
 
-<TerminalPreview defaultThemeKey="tokyo-night">
-  <ComponentPreview name="tool-call" />
-</TerminalPreview>
+<ComponentPreview name="tool-call-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/tool-call.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="tool-call"
+  title="components/ui/tool-call.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ToolCall } from "@/components/ui/tool-call";
-
-export function Example() {
-  return (
-    <ToolCall
-      name="search_codebase"
-      args={{ query: "handleSubmit", maxResults: 10 }}
-      status="success"
-      result="Found 3 matches in src/components/"
-      duration={245}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-- `use-animation`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop               | Type                      | Default     | Description                                                         |
-| ------------------ | ------------------------- | ----------- | ------------------------------------------------------------------- |
-| `name`             | `string`                  | `required`  | Name of the tool being invoked.                                     |
-| `args`             | `Record<string, unknown>` | `undefined` | Key-value arguments passed to the tool.                             |
-| `status`           | `ToolCallStatus`          | `required`  | Current state: `"pending"`, `"running"`, `"success"`, or `"error"`. |
-| `result`           | `unknown`                 | `undefined` | Return value from the tool, shown when expanded.                    |
-| `duration`         | `number`                  | `undefined` | Execution time in milliseconds, displayed next to the name.         |
-| `collapsible`      | `boolean`                 | `true`      | Whether the args/result section can be toggled with Enter or Space. |
-| `defaultCollapsed` | `boolean`                 | `true`      | Whether the detail section starts collapsed.                        |
-
-## Examples
-
-### Running state
 
 ```tsx
 <ToolCall
-  name="fetch_url"
-  args={{ url: "https://api.example.com/data" }}
-  status="running"
-/>
-```
-
-### Completed with result
-
-```tsx
-<ToolCall
-  name="read_file"
-  args={{ path: "package.json" }}
+  name="search_codebase"
+  args={{ query: "handleSubmit", maxResults: 10 }}
   status="success"
-  result={{ name: "my-app", version: "1.0.0" }}
-  duration={12}
-  defaultCollapsed={false}
+  result="Found 3 matches in src/components/"
+  duration={245}
 />
 ```
 
-### Error state
+## API Reference
 
-```tsx
-<ToolCall
-  name="execute_command"
-  args={{ command: "npm test" }}
-  status="error"
-  result="Process exited with code 1"
-  duration={4320}
-/>
-```
+### ToolCall
 
-### Non-collapsible pending
-
-```tsx
-<ToolCall name="lint_files" status="pending" collapsible={false} />
-```
-
-## Registry Files
-
-- `components/ui/tool-call.tsx`
+| Prop               | Type                      | Default     |
+| ------------------ | ------------------------- | ----------- |
+| `name`             | `string`                  | `required`  |
+| `args`             | `Record<string, unknown>` | `undefined` |
+| `status`           | `ToolCallStatus`          | `required`  |
+| `result`           | `unknown`                 | `undefined` |
+| `duration`         | `number`                  | `undefined` |
+| `collapsible`      | `boolean`                 | `true`      |
+| `defaultCollapsed` | `boolean`                 | `true`      |

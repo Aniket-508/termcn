@@ -3,77 +3,84 @@ title: "Badge"
 description: "Semantic status indicator badge (success/error/warning/info)"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="badge" />
-</TerminalPreview>
+<ComponentPreview name="badge-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/badge.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="badge"
+  title="components/ui/badge.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Badge } from "@/components/ui/badge";
-
-export function Example() {
-  return <Badge variant="success">Active</Badge>;
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                                                                                            | Default     | Description                               |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
-| `children`    | `string`                                                                                        | `required`  | Text content displayed inside the badge   |
-| `variant`     | `BadgeVariant`                                                                                  | `"default"` | Visual style variant for the badge color  |
-| `color`       | `string`                                                                                        | `undefined` | Custom color override for text and border |
-| `bold`        | `boolean`                                                                                       | `false`     | Whether to render text in bold            |
-| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the badge            |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style for the badge outline        |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding inside the border      |
+```tsx
+<Badge variant="success">Active</Badge>
+```
 
 ## Examples
 
-### Basic Usage
+### Basic
 
-```tsx
-<Badge>Default</Badge>
-```
+A basic default badge.
 
-### Status Variants
-
-```tsx
-<Badge variant="success">Passing</Badge>
-<Badge variant="error">Failed</Badge>
-<Badge variant="warning">Pending</Badge>
-<Badge variant="info">Note</Badge>
-```
+<ComponentPreview name="badge-basic" />
 
 ### Bold Without Border
 
-```tsx
-<Badge bold bordered={false}>
-  Inline Label
-</Badge>
-```
+Use `bold` and `bordered={false}` for an inline label style.
+
+<ComponentPreview name="badge-bold" />
 
 ### Custom Border Style
 
-```tsx
-<Badge variant="info" borderStyle="double" paddingX={2}>
-  Important
-</Badge>
-```
+Customize the border style and padding.
 
-## Registry Files
+<ComponentPreview name="badge-custom-border" />
 
-- `components/ui/badge.tsx`
+## API Reference
+
+### Badge
+
+| Prop          | Type           | Default     |
+| ------------- | -------------- | ----------- |
+| `children`    | `string`       | `required`  |
+| `variant`     | `BadgeVariant` | `"default"` |
+| `color`       | `string`       | `undefined` |
+| `bold`        | `boolean`      | `false`     |
+| `bordered`    | `boolean`      | `true`      |
+| `borderStyle` | `BorderStyle`  | `"round"`   |
+| `paddingX`    | `number`       | `1`         |

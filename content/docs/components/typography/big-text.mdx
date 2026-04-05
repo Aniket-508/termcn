@@ -3,60 +3,60 @@ title: "Big Text"
 description: "Figlet-style large ASCII art text"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="big-text" />
-</TerminalPreview>
+<ComponentPreview name="big-text-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/big-text.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="big-text"
+  title="components/ui/big-text.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { BigText } from "@/components/ui/big-text";
-
-export function Example() {
-  return <BigText>HELLO</BigText>;
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type          | Default     | Description                                          |
-| ---------- | ------------- | ----------- | ---------------------------------------------------- |
-| `children` | `string`      | `required`  | Text string to render as large ASCII art             |
-| `color`    | `string`      | `undefined` | Color override for the rendered characters           |
-| `font`     | `BigTextFont` | `"block"`   | Font style: `"block"` (solid) or `"simple"` (shaded) |
-
-## Examples
-
-### Basic Usage
 
 ```tsx
 <BigText>HELLO</BigText>
 ```
 
-### With Custom Color
+## API Reference
 
-```tsx
-<BigText color="#ff6b6b">ERROR</BigText>
-```
+### BigText
 
-### Simple Font
-
-```tsx
-<BigText font="simple">DONE</BigText>
-```
-
-## Registry Files
-
-- `components/ui/big-text.tsx`
+| Prop       | Type          | Default     |
+| ---------- | ------------- | ----------- |
+| `children` | `string`      | `required`  |
+| `color`    | `string`      | `undefined` |
+| `font`     | `BigTextFont` | `"block"`   |

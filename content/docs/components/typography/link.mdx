@@ -3,65 +3,61 @@ title: "Link"
 description: "OSC 8 clickable hyperlink"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="link" />
-</TerminalPreview>
+<ComponentPreview name="link-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/link.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="link"
+  title="components/ui/link.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Link } from "@/components/ui/link";
-
-export function Example() {
-  return <Link href="https://github.com">GitHub</Link>;
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type        | Default     | Description                                |
-| ---------- | ----------- | ----------- | ------------------------------------------ |
-| `children` | `ReactNode` | `required`  | Display text for the link                  |
-| `href`     | `string`    | `required`  | URL the link points to                     |
-| `color`    | `string`    | `undefined` | Color override for the link text           |
-| `showHref` | `boolean`   | `false`     | Show the URL in parentheses after the text |
-
-## Examples
-
-### Basic Usage
 
 ```tsx
-<Link href="https://example.com">Visit Example</Link>
+<Link href="https://github.com">GitHub</Link>
 ```
 
-### With Visible URL
+## API Reference
 
-```tsx
-<Link href="https://docs.example.com/api" showHref>
-  API Docs
-</Link>
-```
+### Link
 
-### Custom Color
-
-```tsx
-<Link href="https://github.com" color="#e74c3c">
-  GitHub
-</Link>
-```
-
-## Registry Files
-
-- `components/ui/link.tsx`
+| Prop       | Type        | Default     |
+| ---------- | ----------- | ----------- |
+| `children` | `ReactNode` | `required`  |
+| `href`     | `string`    | `required`  |
+| `color`    | `string`    | `undefined` |
+| `showHref` | `boolean`   | `false`     |

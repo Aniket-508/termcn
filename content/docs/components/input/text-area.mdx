@@ -3,85 +3,72 @@ title: "Text Area"
 description: "Multi-line text editor with word wrap"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="text-area" />
-</TerminalPreview>
+<ComponentPreview name="text-area-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/text-area.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="text-area"
+  title="components/ui/text-area.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { TextArea } from "@/components/ui/text-area";
-
-export function Example() {
-  return (
-    <TextArea
-      label="Description"
-      placeholder="Enter a description..."
-      rows={4}
-      onSubmit={(value) => console.log("Submitted:", value)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                                                                                         | Default     | Description                               |
-| ------------- | -------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------- |
-| `value`       | `string`                                                                                     | `undefined` | Controlled text value                     |
-| `onChange`    | `(value: string) => void`                                                                    | `undefined` | Called when the text changes              |
-| `onSubmit`    | `(value: string) => void`                                                                    | `undefined` | Called on Ctrl+Enter                      |
-| `placeholder` | `string`                                                                                     | `""`        | Placeholder shown when the input is empty |
-| `rows`        | `number`                                                                                     | `4`         | Number of visible text rows               |
-| `label`       | `string`                                                                                     | `undefined` | Label text displayed above the input      |
-| `id`          | `string`                                                                                     | `undefined` | Unique identifier for focus management    |
-| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style for the input box            |
-| `paddingX`    | `number`                                                                                     | `1`         | Horizontal padding inside the border      |
-| `cursor`      | `string`                                                                                     | `"█"`       | Cursor character shown when focused       |
-
-## Examples
-
-### Compact Two-Row Input
-
-```tsx
-<TextArea label="Note" rows={2} placeholder="Quick note..." />
-```
-
-### Large Editor
-
-```tsx
-<TextArea label="Commit Message" rows={8} borderStyle="single" />
-```
-
-### Controlled Value
 
 ```tsx
 <TextArea
-  label="Bio"
-  value={bio}
-  onChange={setBio}
-  rows={5}
-  placeholder="Tell us about yourself..."
+  label="Description"
+  placeholder="Enter a description..."
+  rows={4}
+  onSubmit={(value) => console.log("Submitted:", value)}
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/text-area.tsx`
+### TextArea
+
+| Prop          | Type                                                                                         | Default     |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `value`       | `string`                                                                                     | `undefined` |
+| `onChange`    | `(value: string) => void`                                                                    | `undefined` |
+| `onSubmit`    | `(value: string) => void`                                                                    | `undefined` |
+| `placeholder` | `string`                                                                                     | `""`        |
+| `rows`        | `number`                                                                                     | `4`         |
+| `label`       | `string`                                                                                     | `undefined` |
+| `id`          | `string`                                                                                     | `undefined` |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   |
+| `paddingX`    | `number`                                                                                     | `1`         |
+| `cursor`      | `string`                                                                                     | `"█"`       |

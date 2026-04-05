@@ -3,99 +3,76 @@ title: "Search Input"
 description: "Fuzzy search input with autocomplete"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="search-input" />
-</TerminalPreview>
+<ComponentPreview name="search-input-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/search-input.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="search-input"
+  title="components/ui/search-input.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { SearchInput } from "@/components/ui/search-input";
-
-export function Example() {
-  return (
-    <SearchInput
-      label="Search Packages"
-      options={["react", "vue", "svelte", "angular", "solid"]}
-      placeholder="Search..."
-      onSelect={(item) => console.log("Selected:", item)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-- `mnemonist`
-
-## Props
-
-| Prop           | Type                                                                                         | Default       | Description                                 |
-| -------------- | -------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------- |
-| `options`      | `T[]`                                                                                        | `undefined`   | List of items to search through             |
-| `getValue`     | `(item: T) => string`                                                                        | `undefined`   | Extracts a searchable string from each item |
-| `value`        | `string`                                                                                     | `undefined`   | Controlled search query                     |
-| `onChange`     | `(query: string) => void`                                                                    | `undefined`   | Called when the search query changes        |
-| `onSelect`     | `(item: T) => void`                                                                          | `undefined`   | Called when a result is selected with Enter |
-| `placeholder`  | `string`                                                                                     | `"Search..."` | Placeholder shown when the input is empty   |
-| `label`        | `string`                                                                                     | `undefined`   | Label text displayed above the input        |
-| `maxResults`   | `number`                                                                                     | `5`           | Maximum number of results to display        |
-| `id`           | `string`                                                                                     | `undefined`   | Unique identifier for focus management      |
-| `borderStyle`  | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`     | Border style for the input box              |
-| `paddingX`     | `number`                                                                                     | `1`           | Horizontal padding inside the border        |
-| `cursor`       | `string`                                                                                     | `"█"`         | Cursor character shown when focused         |
-| `searchIcon`   | `string`                                                                                     | `"🔍 "`       | Icon shown before the search input          |
-| `resultCursor` | `string`                                                                                     | `"› "`        | Cursor shown before the selected result     |
-
-## Examples
-
-### Simple String Search
 
 ```tsx
 <SearchInput
-  label="Pick a Color"
-  options={["red", "green", "blue", "yellow", "purple"]}
-  onSelect={(color) => applyColor(color)}
+  label="Search Packages"
+  options={["react", "vue", "svelte", "angular", "solid"]}
+  placeholder="Search..."
+  onSelect={(item) => console.log("Selected:", item)}
 />
 ```
 
-### Object Search with getValue
+## API Reference
 
-```tsx
-<SearchInput
-  label="Find User"
-  options={users}
-  getValue={(user) => user.name}
-  onSelect={(user) => openProfile(user.id)}
-  maxResults={3}
-/>
-```
+### SearchInput
 
-### Custom Icons
-
-```tsx
-<SearchInput
-  options={commands}
-  searchIcon="⌘ "
-  resultCursor="→ "
-  placeholder="Type a command..."
-/>
-```
-
-## Registry Files
-
-- `components/ui/search-input.tsx`
+| Prop           | Type                                                                                         | Default       |
+| -------------- | -------------------------------------------------------------------------------------------- | ------------- |
+| `options`      | `T[]`                                                                                        | `undefined`   |
+| `getValue`     | `(item: T) => string`                                                                        | `undefined`   |
+| `value`        | `string`                                                                                     | `undefined`   |
+| `onChange`     | `(query: string) => void`                                                                    | `undefined`   |
+| `onSelect`     | `(item: T) => void`                                                                          | `undefined`   |
+| `placeholder`  | `string`                                                                                     | `"Search..."` |
+| `label`        | `string`                                                                                     | `undefined`   |
+| `maxResults`   | `number`                                                                                     | `5`           |
+| `id`           | `string`                                                                                     | `undefined`   |
+| `borderStyle`  | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`     |
+| `paddingX`     | `number`                                                                                     | `1`           |
+| `cursor`       | `string`                                                                                     | `"█"`         |
+| `searchIcon`   | `string`                                                                                     | `"🔍 "`       |
+| `resultCursor` | `string`                                                                                     | `"› "`        |

@@ -3,117 +3,79 @@ title: "Menu"
 description: "Dropdown menu with nested submenus"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="menu" />
-</TerminalPreview>
+<ComponentPreview name="menu-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/menu.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="menu"
+  title="components/ui/menu.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Menu } from "@/components/ui/menu";
-
-export function Example() {
-  return (
-    <Menu
-      title="File"
-      items={[
-        { key: "new", label: "New File", icon: "📄", shortcut: "⌘N" },
-        { key: "open", label: "Open...", icon: "📂", shortcut: "⌘O" },
-        { key: "sep1", label: "", separator: true },
-        { key: "save", label: "Save", shortcut: "⌘S" },
-        { key: "export", label: "Export", disabled: true },
-      ]}
-      onSelect={(item) => console.log(item.key)}
-    />
-  );
-}
 ```
 
-## Dependencies
+```tsx
+<Menu
+  title="File"
+  items={[
+    { key: "new", label: "New File", shortcut: "⌘N" },
+    { key: "save", label: "Save", shortcut: "⌘S" },
+  ]}
+  onSelect={(item) => console.log(item.key)}
+/>
+```
 
-### Registry Dependencies
+## API Reference
 
-- `theme-provider`
+### Menu
 
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type                       | Default     | Description                                         |
-| ---------- | -------------------------- | ----------- | --------------------------------------------------- |
-| `items`    | `MenuItem[]`               | `required`  | Array of menu items to render                       |
-| `onSelect` | `(item: MenuItem) => void` | `undefined` | Callback fired when a non-disabled item is selected |
-| `title`    | `string`                   | `undefined` | Optional title displayed above the menu             |
+| Prop       | Type                       | Default     |
+| ---------- | -------------------------- | ----------- |
+| `items`    | `MenuItem[]`               | `required`  |
+| `onSelect` | `(item: MenuItem) => void` | `undefined` |
+| `title`    | `string`                   | `undefined` |
 
 ### MenuItem
 
-| Prop        | Type         | Default     | Description                                       |
-| ----------- | ------------ | ----------- | ------------------------------------------------- |
-| `key`       | `string`     | `required`  | Unique identifier for the item                    |
-| `label`     | `string`     | `required`  | Display text for the menu item                    |
-| `icon`      | `string`     | `undefined` | Icon character shown before the label             |
-| `shortcut`  | `string`     | `undefined` | Keyboard shortcut hint shown on the right         |
-| `disabled`  | `boolean`    | `undefined` | When true, the item cannot be selected or focused |
-| `separator` | `boolean`    | `undefined` | When true, renders a horizontal divider line      |
-| `children`  | `MenuItem[]` | `undefined` | Nested submenu items opened with the right arrow  |
-
-## Examples
-
-### With nested submenus
-
-```tsx
-<Menu
-  items={[
-    {
-      key: "view",
-      label: "View",
-      children: [
-        { key: "zoom-in", label: "Zoom In", shortcut: "⌘+" },
-        { key: "zoom-out", label: "Zoom Out", shortcut: "⌘-" },
-      ],
-    },
-    { key: "settings", label: "Settings", icon: "⚙" },
-  ]}
-  onSelect={(item) => console.log(item.key)}
-/>
-```
-
-### Minimal menu without title
-
-```tsx
-<Menu
-  items={[
-    { key: "cut", label: "Cut", shortcut: "⌘X" },
-    { key: "copy", label: "Copy", shortcut: "⌘C" },
-    { key: "paste", label: "Paste", shortcut: "⌘V" },
-  ]}
-  onSelect={(item) => console.log(item.key)}
-/>
-```
-
-### With disabled items and separators
-
-```tsx
-<Menu
-  title="Edit"
-  items={[
-    { key: "undo", label: "Undo", shortcut: "⌘Z" },
-    { key: "redo", label: "Redo", shortcut: "⌘⇧Z", disabled: true },
-    { key: "sep", label: "", separator: true },
-    { key: "find", label: "Find", shortcut: "⌘F" },
-  ]}
-  onSelect={(item) => console.log(item.key)}
-/>
-```
-
-## Registry Files
-
-- `components/ui/menu.tsx`
+| Prop        | Type         | Default     |
+| ----------- | ------------ | ----------- |
+| `key`       | `string`     | `required`  |
+| `label`     | `string`     | `required`  |
+| `icon`      | `string`     | `undefined` |
+| `shortcut`  | `string`     | `undefined` |
+| `disabled`  | `boolean`    | `undefined` |
+| `separator` | `boolean`    | `undefined` |
+| `children`  | `MenuItem[]` | `undefined` |

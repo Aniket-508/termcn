@@ -3,81 +3,66 @@ title: "Directory Tree"
 description: "Filesystem browser with expand/collapse"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="directory-tree" />
-</TerminalPreview>
-
-> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+<ComponentPreview name="directory-tree-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/directory-tree.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="directory-tree"
+  title="components/ui/directory-tree.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { DirectoryTree } from "@/components/ui/directory-tree";
-
-export function Example() {
-  return (
-    <DirectoryTree
-      rootPath="/home/user/project"
-      maxDepth={3}
-      label="Project Files"
-      onSelect={(path) => console.log("Selected:", path)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-- `glob`
-
-## Props
-
-| Prop         | Type                     | Default         | Description                               |
-| ------------ | ------------------------ | --------------- | ----------------------------------------- |
-| `rootPath`   | `string`                 | `process.cwd()` | Root directory path to display            |
-| `onSelect`   | `(path: string) => void` | `undefined`     | Callback fired when a file is selected    |
-| `maxDepth`   | `number`                 | `2`             | Maximum directory depth to show initially |
-| `showHidden` | `boolean`                | `false`         | Whether to show hidden files (dotfiles)   |
-| `label`      | `string`                 | `undefined`     | Label displayed above the tree            |
-
-## Examples
-
-### Show hidden files
-
-```tsx
-<DirectoryTree rootPath="/home/user/project" showHidden maxDepth={2} />
-```
-
-### With custom label and shallow depth
-
-```tsx
-<DirectoryTree rootPath="/etc" maxDepth={1} label="System Config" />
-```
-
-### File select handler
 
 ```tsx
 <DirectoryTree
-  rootPath="."
-  onSelect={(filePath) => {
-    process.stdout.write(`Opening ${filePath}\n`);
-  }}
+  rootPath="/home/user/project"
+  maxDepth={3}
+  label="Project Files"
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/directory-tree.tsx`
+### DirectoryTree
+
+| Prop         | Type                     | Default         |
+| ------------ | ------------------------ | --------------- |
+| `rootPath`   | `string`                 | `process.cwd()` |
+| `onSelect`   | `(path: string) => void` | `undefined`     |
+| `maxDepth`   | `number`                 | `2`             |
+| `showHidden` | `boolean`                | `false`         |
+| `label`      | `string`                 | `undefined`     |

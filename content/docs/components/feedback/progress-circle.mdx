@@ -3,74 +3,68 @@ title: "Progress Circle"
 description: "Circular progress indicator using Unicode braille"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="progress-circle" />
-</TerminalPreview>
+<ComponentPreview name="progress-circle-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/progress-circle.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="progress-circle"
+  title="components/ui/progress-circle.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ProgressCircle } from "@/components/ui/progress-circle";
-
-export function Example() {
-  return <ProgressCircle value={75} size="sm" label="Memory" showPercent />;
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                 | Default     | Description                           |
-| ------------- | -------------------- | ----------- | ------------------------------------- |
-| `value`       | `number`             | `required`  | Progress value from 0 to 100          |
-| `size`        | `ProgressCircleSize` | `"sm"`      | Display size: "sm", "md", or "lg"     |
-| `color`       | `string`             | `undefined` | Override the indicator color          |
-| `label`       | `string`             | `undefined` | Text label displayed below the circle |
-| `showPercent` | `boolean`            | `false`     | Show percentage text                  |
+```tsx
+<ProgressCircle value={75} size="sm" label="Memory" showPercent />
+```
 
 ## Examples
 
-### Small (Default)
+### Sizes
 
-```tsx
-<ProgressCircle value={60} />
-```
+<ComponentPreview name="progress-circle-sizes" />
 
-### Medium with Label
+## API Reference
 
-```tsx
-<ProgressCircle value={45} size="md" label="CPU" />
-```
+### ProgressCircle
 
-### Large with Percentage
-
-```tsx
-<ProgressCircle value={88} size="lg" showPercent />
-```
-
-### Custom Color
-
-```tsx
-<ProgressCircle
-  value={100}
-  size="sm"
-  color="#22c55e"
-  label="Done"
-  showPercent
-/>
-```
-
-## Registry Files
-
-- `components/ui/progress-circle.tsx`
+| Prop          | Type                 | Default     |
+| ------------- | -------------------- | ----------- |
+| `value`       | `number`             | `required`  |
+| `size`        | `ProgressCircleSize` | `"sm"`      |
+| `color`       | `string`             | `undefined` |
+| `label`       | `string`             | `undefined` |
+| `showPercent` | `boolean`            | `false`     |

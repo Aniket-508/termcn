@@ -3,97 +3,75 @@ title: "Log"
 description: "Scrolling log viewer with severity levels and filtering"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="log" />
-</TerminalPreview>
+<ComponentPreview name="log-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/log.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="log" title="components/ui/log.tsx" collapsible={false} />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Log } from "@/components/ui/log";
-
-export function Example() {
-  return (
-    <Log
-      entries={[
-        {
-          level: "info",
-          message: "Server started on port 3000",
-          timestamp: new Date(),
-        },
-        {
-          level: "warn",
-          message: "Deprecated API call detected",
-          timestamp: new Date(),
-        },
-        {
-          level: "error",
-          message: "Failed to connect to database",
-          timestamp: new Date(),
-        },
-      ]}
-      height={10}
-      showTimestamp
-      follow
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop            | Type         | Default     | Description                                                            |
-| --------------- | ------------ | ----------- | ---------------------------------------------------------------------- |
-| `entries`       | `LogEntry[]` | `required`  | Array of log entries with `level`, `message`, and optional `timestamp` |
-| `height`        | `number`     | `10`        | Visible height in rows                                                 |
-| `showTimestamp` | `boolean`    | `true`      | Show the timestamp column for entries that have one                    |
-| `filter`        | `string`     | `undefined` | Filter entries by message or level substring match                     |
-| `follow`        | `boolean`    | `false`     | Auto-scroll to the latest entry as new ones arrive                     |
-
-## Examples
-
-### Compact log without timestamps
 
 ```tsx
 <Log
   entries={[
-    { level: "info", message: "Build started" },
-    { level: "info", message: "Compiling 42 files..." },
-    { level: "debug", message: "Cache hit for module A" },
+    { level: "info", message: "Server started on port 3000" },
+    { level: "warn", message: "Deprecated API call detected" },
+    { level: "error", message: "Failed to connect to database" },
   ]}
-  showTimestamp={false}
-  height={5}
+  height={10}
+  showTimestamp
+  follow
 />
 ```
 
-### Filtered error view
+## API Reference
 
-```tsx
-<Log entries={logs} filter="error" height={8} />
-```
+### Log
 
-### Follow mode for live output
+| Prop            | Type         | Default     |
+| --------------- | ------------ | ----------- |
+| `entries`       | `LogEntry[]` | `required`  |
+| `height`        | `number`     | `10`        |
+| `showTimestamp` | `boolean`    | `true`      |
+| `filter`        | `string`     | `undefined` |
+| `follow`        | `boolean`    | `false`     |
 
-```tsx
-<Log entries={streamingLogs} follow height={15} />
-```
+### LogEntry
 
-## Registry Files
-
-- `components/ui/log.tsx`
+| Prop        | Type                                     | Default     |
+| ----------- | ---------------------------------------- | ----------- |
+| `level`     | `"debug" \| "info" \| "warn" \| "error"` | `required`  |
+| `message`   | `string`                                 | `required`  |
+| `timestamp` | `Date`                                   | `undefined` |

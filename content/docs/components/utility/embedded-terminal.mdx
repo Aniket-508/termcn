@@ -3,78 +3,73 @@ title: "Embedded Terminal"
 description: "Embedded PTY terminal panel (requires node-pty peer)"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="embedded-terminal" />
-</TerminalPreview>
+<ComponentPreview name="embedded-terminal-demo" hideCode />
 
-> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+<Callout type="info">
+  Embedded terminal requires Node.js and may not render in the browser preview.
+</Callout>
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/embedded-terminal.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="embedded-terminal"
+  title="components/ui/embedded-terminal.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { EmbeddedTerminal } from "@/components/ui/embedded-terminal";
-
-export function Example() {
-  return (
-    <EmbeddedTerminal
-      command="bash"
-      args={["-c", "echo Hello world"]}
-      width={80}
-      height={24}
-      onExit={(code) => console.log(`Exited with ${code}`)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop      | Type                     | Default     | Description                                           |
-| --------- | ------------------------ | ----------- | ----------------------------------------------------- |
-| `command` | `string`                 | `required`  | The shell command or binary to spawn                  |
-| `args`    | `string[]`               | `[]`        | Arguments passed to the command                       |
-| `cwd`     | `string`                 | `undefined` | Working directory for the spawned process             |
-| `width`   | `number`                 | `80`        | Terminal width in columns                             |
-| `height`  | `number`                 | `24`        | Terminal height in rows                               |
-| `onExit`  | `(code: number) => void` | `undefined` | Callback invoked when the process exits with its code |
-
-## Examples
-
-### Run a shell command
-
-```tsx
-<EmbeddedTerminal command="ls" args={["-la", "/tmp"]} width={100} />
-```
-
-### Interactive shell session
-
-```tsx
-<EmbeddedTerminal command="bash" height={30} />
-```
-
-### Custom working directory with exit handler
 
 ```tsx
 <EmbeddedTerminal
-  command="npm"
-  args={["test"]}
-  cwd="/home/user/project"
-  onExit={(code) => console.log(`Tests finished: ${code}`)}
+  command="bash"
+  args={["-c", "echo Hello world"]}
+  width={80}
+  height={24}
+  onExit={(code) => console.log(`Exited with ${code}`)}
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/embedded-terminal.tsx`
+### EmbeddedTerminal
+
+| Prop      | Type                     | Default     |
+| --------- | ------------------------ | ----------- |
+| `command` | `string`                 | `required`  |
+| `args`    | `string[]`               | `[]`        |
+| `cwd`     | `string`                 | `undefined` |
+| `width`   | `number`                 | `80`        |
+| `height`  | `number`                 | `24`        |
+| `onExit`  | `(code: number) => void` | `undefined` |

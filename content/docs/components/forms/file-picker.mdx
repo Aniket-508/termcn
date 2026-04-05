@@ -3,97 +3,77 @@ title: "File Picker"
 description: "Interactive file browser and picker"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="file-picker" />
-</TerminalPreview>
+<ComponentPreview name="file-picker-demo" hideCode />
 
-> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+<Callout type="info">
+  File picker requires Node.js filesystem access and may not render in the
+  browser preview.
+</Callout>
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/file-picker.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="file-picker"
+  title="components/ui/file-picker.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { FilePicker } from "@/components/ui/file-picker";
-
-export function Example() {
-  return (
-    <FilePicker
-      label="Select a config file"
-      extensions={[".json", ".yaml", ".yml"]}
-      onSubmit={(path) => console.log("Selected:", path)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-- `glob`
-
-## Props
-
-| Prop         | Type                     | Default         | Description                                       |
-| ------------ | ------------------------ | --------------- | ------------------------------------------------- |
-| `value`      | `string`                 | `undefined`     | Controlled selected file path                     |
-| `onChange`   | `(path: string) => void` | `undefined`     | Callback fired when a file is selected            |
-| `onSubmit`   | `(path: string) => void` | `undefined`     | Callback fired when the user confirms a selection |
-| `label`      | `string`                 | `undefined`     | Label displayed above the picker                  |
-| `startDir`   | `string`                 | `process.cwd()` | Starting directory for the file browser           |
-| `extensions` | `string[]`               | `undefined`     | Show only files with these extensions             |
-| `dirsOnly`   | `boolean`                | `false`         | Show only directories                             |
-| `autoFocus`  | `boolean`                | `false`         | Whether the picker receives focus on mount        |
-| `id`         | `string`                 | `undefined`     | Focus ID for use with `useFocus`                  |
-| `width`      | `number`                 | `50`            | Width of the file browser panel in columns        |
-| `maxVisible` | `number`                 | `8`             | Maximum number of entries visible at once         |
-
-## Examples
-
-### Directory-Only Mode
 
 ```tsx
 <FilePicker
-  label="Choose output directory"
-  dirsOnly
-  onSubmit={(dir) => setOutputDir(dir)}
+  label="Select a config file"
+  extensions={[".json", ".yaml", ".yml"]}
+  onSubmit={(path) => console.log("Selected:", path)}
 />
 ```
 
-### Filter by Extension
+## API Reference
 
-```tsx
-<FilePicker
-  label="Pick a TypeScript file"
-  extensions={[".ts", ".tsx"]}
-  startDir="./src"
-  onChange={(path) => console.log(path)}
-/>
-```
+### FilePicker
 
-### Custom Width and Visible Count
-
-```tsx
-<FilePicker
-  label="Browse project"
-  width={70}
-  maxVisible={12}
-  autoFocus
-  onSubmit={(path) => openFile(path)}
-/>
-```
-
-## Registry Files
-
-- `components/ui/file-picker.tsx`
+| Prop         | Type                     | Default         |
+| ------------ | ------------------------ | --------------- |
+| `value`      | `string`                 | `undefined`     |
+| `onChange`   | `(path: string) => void` | `undefined`     |
+| `onSubmit`   | `(path: string) => void` | `undefined`     |
+| `label`      | `string`                 | `undefined`     |
+| `startDir`   | `string`                 | `process.cwd()` |
+| `extensions` | `string[]`               | `undefined`     |
+| `dirsOnly`   | `boolean`                | `false`         |
+| `autoFocus`  | `boolean`                | `false`         |
+| `id`         | `string`                 | `undefined`     |
+| `width`      | `number`                 | `50`            |
+| `maxVisible` | `number`                 | `8`             |

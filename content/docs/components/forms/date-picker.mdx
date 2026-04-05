@@ -3,86 +3,70 @@ title: "Date Picker"
 description: "Calendar date picker with keyboard navigation"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="date-picker" />
-</TerminalPreview>
+<ComponentPreview name="date-picker-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/date-picker.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="date-picker"
+  title="components/ui/date-picker.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { DatePicker } from "@/components/ui/date-picker";
-
-export function Example() {
-  return (
-    <DatePicker
-      label="Birth date"
-      value={new Date(2000, 0, 1)}
-      onChange={(date) => console.log("Selected:", date)}
-      onSubmit={(date) => console.log("Submitted:", date)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type                   | Default     | Description                                          |
-| ----------- | ---------------------- | ----------- | ---------------------------------------------------- |
-| `value`     | `Date`                 | `undefined` | Controlled date value                                |
-| `onChange`  | `(date: Date) => void` | `undefined` | Callback fired when the selected date changes        |
-| `onSubmit`  | `(date: Date) => void` | `undefined` | Callback fired when the user presses Enter to submit |
-| `label`     | `string`               | `undefined` | Label displayed above the picker                     |
-| `minDate`   | `Date`                 | `undefined` | Earliest selectable date                             |
-| `maxDate`   | `Date`                 | `undefined` | Latest selectable date                               |
-| `autoFocus` | `boolean`              | `false`     | Whether the picker receives focus on mount           |
-| `id`        | `string`               | `undefined` | Focus ID for use with `useFocus`                     |
-
-## Examples
-
-### With Label
-
-```tsx
-<DatePicker label="Start date" onSubmit={(date) => console.log(date)} />
-```
-
-### Constrained Range
 
 ```tsx
 <DatePicker
-  label="Appointment"
-  minDate={new Date(2025, 0, 1)}
-  maxDate={new Date(2025, 11, 31)}
-  onSubmit={(date) => scheduleAppointment(date)}
+  label="Birth date"
+  value={new Date(2026, 0, 15)}
+  onChange={(date) => console.log("Selected:", date)}
+  onSubmit={(date) => console.log("Submitted:", date)}
 />
 ```
 
-### Auto-Focused
+## API Reference
 
-```tsx
-<DatePicker
-  autoFocus
-  onChange={(date) => setSelectedDate(date)}
-  onSubmit={(date) => confirm(date)}
-/>
-```
+### DatePicker
 
-## Registry Files
-
-- `components/ui/date-picker.tsx`
+| Prop        | Type                   | Default     |
+| ----------- | ---------------------- | ----------- |
+| `value`     | `Date`                 | `undefined` |
+| `onChange`  | `(date: Date) => void` | `undefined` |
+| `onSubmit`  | `(date: Date) => void` | `undefined` |
+| `label`     | `string`               | `undefined` |
+| `minDate`   | `Date`                 | `undefined` |
+| `maxDate`   | `Date`                 | `undefined` |
+| `autoFocus` | `boolean`              | `false`     |
+| `id`        | `string`               | `undefined` |

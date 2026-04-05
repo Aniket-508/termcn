@@ -3,73 +3,64 @@ title: "Heading"
 description: "h1–h4 styled headings with optional figlet ASCII art"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="heading" />
-</TerminalPreview>
+<ComponentPreview name="heading-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/heading.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="heading"
+  title="components/ui/heading.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Heading } from "@/components/ui/heading";
-
-export function Example() {
-  return <Heading level={1}>Getting Started</Heading>;
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type           | Default     | Description                               |
-| ----------- | -------------- | ----------- | ----------------------------------------- |
-| `level`     | `HeadingLevel` | `1`         | Heading level: `1`, `2`, `3`, or `4`      |
-| `children`  | `ReactNode`    | `required`  | Content to display as the heading text    |
-| `color`     | `string`       | `undefined` | Color override for the heading text       |
-| `prefix1`   | `string`       | `"██ "`     | Prefix symbol for level 1 headings        |
-| `prefix2`   | `string`       | `"▌ "`      | Prefix symbol for level 2 headings        |
-| `prefix3`   | `string`       | `"› "`      | Prefix symbol for level 3 headings        |
-| `uppercase` | `boolean`      | `true`      | Whether to uppercase level 1 heading text |
-
-## Examples
-
-### Level 1 (Default)
 
 ```tsx
-<Heading>Project Setup</Heading>
+<Heading level={1}>Getting Started</Heading>
 ```
 
-### Level 2
+## API Reference
 
-```tsx
-<Heading level={2}>Configuration</Heading>
-```
+### Heading
 
-### Level 3 and Level 4
-
-```tsx
-<Heading level={3}>Options</Heading>
-<Heading level={4}>Advanced Settings</Heading>
-```
-
-### Custom Color Without Uppercase
-
-```tsx
-<Heading level={1} color="#e74c3c" uppercase={false}>
-  Custom Heading
-</Heading>
-```
-
-## Registry Files
-
-- `components/ui/heading.tsx`
+| Prop        | Type           | Default     |
+| ----------- | -------------- | ----------- |
+| `level`     | `HeadingLevel` | `1`         |
+| `children`  | `ReactNode`    | `required`  |
+| `color`     | `string`       | `undefined` |
+| `prefix1`   | `string`       | `"██ "`     |
+| `prefix2`   | `string`       | `"▌ "`      |
+| `prefix3`   | `string`       | `"› "`      |
+| `uppercase` | `boolean`      | `true`      |

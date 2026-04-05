@@ -3,71 +3,62 @@ title: "Tag Input"
 description: "Add and remove tags inline"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="tag-input" />
-</TerminalPreview>
+<ComponentPreview name="tag-input-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/tag-input.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="tag-input"
+  title="components/ui/tag-input.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { TagInput } from "@/components/ui/tag-input";
-
-export function Example() {
-  return (
-    <TagInput
-      placeholder="Add a tag…"
-      onChange={(tags) => console.log("Tags:", tags)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                       | Default                   | Description                                      |
-| ------------- | -------------------------- | ------------------------- | ------------------------------------------------ |
-| `value`       | `string[]`                 | `undefined`               | Controlled array of tag strings                  |
-| `onChange`    | `(tags: string[]) => void` | `undefined`               | Callback fired when tags are added or removed    |
-| `placeholder` | `string`                   | `"Type and press Enter…"` | Placeholder text shown when the input is empty   |
-| `maxTags`     | `number`                   | `undefined`               | Maximum number of tags allowed                   |
-| `delimiter`   | `string`                   | `undefined`               | Character used to split input into multiple tags |
-
-## Examples
-
-### With Max Tags
 
 ```tsx
-<TagInput placeholder="Add up to 3 skills…" maxTags={3} />
+<TagInput placeholder="Add a tag…" onChange={(tags) => {}} />
 ```
 
-### Controlled Tags
+## API Reference
 
-```tsx
-<TagInput value={["react", "typescript"]} onChange={(tags) => setTags(tags)} />
-```
+### TagInput
 
-### Custom Placeholder
-
-```tsx
-<TagInput placeholder="Enter email addresses…" />
-```
-
-## Registry Files
-
-- `components/ui/tag-input.tsx`
+| Prop          | Type                       | Default                   |
+| ------------- | -------------------------- | ------------------------- |
+| `value`       | `string[]`                 | `undefined`               |
+| `onChange`    | `(tags: string[]) => void` | `undefined`               |
+| `placeholder` | `string`                   | `"Type and press Enter…"` |
+| `maxTags`     | `number`                   | `undefined`               |
+| `delimiter`   | `string`                   | `undefined`               |

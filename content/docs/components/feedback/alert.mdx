@@ -3,82 +3,94 @@ title: "Alert"
 description: "Alert box with success/error/warning/info variants"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="alert" />
-</TerminalPreview>
+<ComponentPreview name="alert-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/alert.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="alert"
+  title="components/ui/alert.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Alert } from "@/components/ui/alert";
-
-export function Example() {
-  return (
-    <Alert variant="success" title="Build complete">
-      Everything is ready to ship.
-    </Alert>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                                                                                            | Default     | Description                                      |
-| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------ |
-| `variant`     | `AlertVariant`                                                                                  | `"info"`    | Visual style variant                             |
-| `title`       | `string`                                                                                        | `undefined` | Bold heading displayed next to icon              |
-| `children`    | `ReactNode`                                                                                     | `undefined` | Body content rendered below the title            |
-| `icon`        | `string`                                                                                        | `undefined` | Custom icon character, overrides variant default |
-| `bordered`    | `boolean`                                                                                       | `true`      | Show a border around the alert                   |
-| `borderStyle` | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` | Border style, defaults to theme setting          |
-| `color`       | `string`                                                                                        | `undefined` | Override the border and icon color               |
-| `paddingX`    | `number`                                                                                        | `1`         | Horizontal padding inside the box                |
-| `paddingY`    | `number`                                                                                        | `0`         | Vertical padding inside the box                  |
+```tsx
+<Alert variant="success" title="Build complete">
+  Everything is ready to ship.
+</Alert>
+```
 
 ## Examples
 
-### Info Alert (Default)
+### Error
 
-```tsx
-<Alert title="Note">Run migrations before starting the server.</Alert>
-```
+Use `variant="error"` to display an error alert.
 
-### Error Alert
+<ComponentPreview name="alert-error" />
 
-```tsx
-<Alert variant="error" title="Build failed">
-  TypeScript found 3 errors in src/index.ts.
-</Alert>
-```
+### Warning
+
+Use `variant="warning"` to display a warning alert.
+
+<ComponentPreview name="alert-warning" />
 
 ### Without Border
 
-```tsx
-<Alert variant="warning" title="Deprecation" bordered={false}>
-  This API will be removed in v3.0.
-</Alert>
-```
+Set `bordered={false}` to remove the border.
+
+<ComponentPreview name="alert-no-border" />
 
 ### Custom Icon and Color
 
-```tsx
-<Alert variant="success" icon="🚀" color="#a78bfa" title="Deployed">
-  Production deploy finished in 42s.
-</Alert>
-```
+Override the icon and color with `icon` and `color` props.
 
-## Registry Files
+<ComponentPreview name="alert-custom" />
 
-- `components/ui/alert.tsx`
+## API Reference
+
+### Alert
+
+| Prop          | Type           | Default     |
+| ------------- | -------------- | ----------- |
+| `variant`     | `AlertVariant` | `"info"`    |
+| `title`       | `string`       | `undefined` |
+| `children`    | `ReactNode`    | `undefined` |
+| `icon`        | `string`       | `undefined` |
+| `bordered`    | `boolean`      | `true`      |
+| `borderStyle` | `BorderStyle`  | `undefined` |
+| `color`       | `string`       | `undefined` |
+| `paddingX`    | `number`       | `1`         |
+| `paddingY`    | `number`       | `0`         |

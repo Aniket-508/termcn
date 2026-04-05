@@ -3,78 +3,63 @@ title: "Error Boundary"
 description: "React error boundary with graceful terminal display"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="error-boundary" />
-</TerminalPreview>
+<ComponentPreview name="error-boundary-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/error-boundary.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="error-boundary"
+  title="components/ui/error-boundary.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ErrorBoundary } from "@/components/ui/error-boundary";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <ErrorBoundary
-      title="Application Error"
-      onError={(error, info) => console.error(error, info.componentStack)}
-    >
-      <Text>Your app content here</Text>
-    </ErrorBoundary>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type                                                       | Default     | Description                                         |
-| ---------- | ---------------------------------------------------------- | ----------- | --------------------------------------------------- |
-| `children` | `ReactNode`                                                | `required`  | The component tree to wrap with error protection    |
-| `fallback` | `ReactNode`                                                | `undefined` | Custom fallback UI rendered when an error is caught |
-| `onError`  | `(error: Error, info: { componentStack: string }) => void` | `undefined` | Callback fired when an error is caught              |
-| `title`    | `string`                                                   | `"Error"`   | Heading displayed in the default error panel        |
-
-## Examples
-
-### Basic wrapper
-
 ```tsx
-<ErrorBoundary>
-  <MyComponent />
+<ErrorBoundary title="Application Error">
+  <YourAppContent />
 </ErrorBoundary>
 ```
 
-### Custom fallback UI
+## API Reference
 
-```tsx
-<ErrorBoundary fallback={<Text color="red">Something went wrong.</Text>}>
-  <RiskyComponent />
-</ErrorBoundary>
-```
+### ErrorBoundary
 
-### With error logging and title
-
-```tsx
-<ErrorBoundary
-  title="Plugin Crash"
-  onError={(error) => logger.error("Plugin failed", error)}
->
-  <PluginHost />
-</ErrorBoundary>
-```
-
-## Registry Files
-
-- `components/ui/error-boundary.tsx`
+| Prop       | Type                                                       | Default     |
+| ---------- | ---------------------------------------------------------- | ----------- |
+| `children` | `ReactNode`                                                | `required`  |
+| `fallback` | `ReactNode`                                                | `undefined` |
+| `onError`  | `(error: Error, info: { componentStack: string }) => void` | `undefined` |
+| `title`    | `string`                                                   | `"Error"`   |

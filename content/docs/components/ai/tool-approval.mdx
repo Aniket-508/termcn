@@ -3,101 +3,73 @@ title: "Tool Approval"
 description: "Interactive approval prompt for AI tool calls with risk-level badge, args display, and auto-deny timeout"
 ---
 
-<TerminalPreview defaultThemeKey="tokyo-night">
-  <ComponentPreview name="tool-approval" />
-</TerminalPreview>
+<ComponentPreview name="tool-approval-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/tool-approval.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="tool-approval"
+  title="components/ui/tool-approval.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ToolApproval } from "@/components/ui/tool-approval";
-
-export function Example() {
-  return (
-    <ToolApproval
-      name="execute_shell"
-      description="Run a shell command on the host machine"
-      args={{ command: "rm -rf ./dist" }}
-      risk="high"
-      onApprove={() => console.log("approved")}
-      onDeny={() => console.log("denied")}
-      timeout={30}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop            | Type                      | Default     | Description                                                          |
-| --------------- | ------------------------- | ----------- | -------------------------------------------------------------------- |
-| `name`          | `string`                  | `required`  | Name of the tool requesting approval.                                |
-| `description`   | `string`                  | `undefined` | Short description of what the tool does.                             |
-| `args`          | `Record<string, unknown>` | `undefined` | Key-value arguments the tool was invoked with.                       |
-| `risk`          | `RiskLevel`               | `"low"`     | Risk level badge: `"low"`, `"medium"`, or `"high"`.                  |
-| `onApprove`     | `() => void`              | `required`  | Called when the user presses `y` to approve.                         |
-| `onDeny`        | `() => void`              | `required`  | Called when the user presses `n` to deny, or the timeout expires.    |
-| `onAlwaysAllow` | `() => void`              | `undefined` | Called when the user presses `a` to always allow this tool.          |
-| `timeout`       | `number`                  | `undefined` | Auto-deny countdown in seconds; denied automatically when it hits 0. |
-
-## Examples
-
-### Low-risk tool
-
-```tsx
-<ToolApproval
-  name="read_file"
-  description="Read a file from the workspace"
-  args={{ path: "src/index.ts" }}
-  risk="low"
-  onApprove={() => {}}
-  onDeny={() => {}}
-/>
-```
-
-### High-risk with timeout
 
 ```tsx
 <ToolApproval
   name="execute_shell"
-  args={{ command: "DROP TABLE users;" }}
+  description="Run a shell command on the host machine"
+  args={{ command: "rm -rf ./dist" }}
   risk="high"
-  onApprove={() => {}}
-  onDeny={() => {}}
-  timeout={15}
+  onApprove={() => console.log("approved")}
+  onDeny={() => console.log("denied")}
+  timeout={30}
 />
 ```
 
-### With always-allow option
+## API Reference
 
-```tsx
-<ToolApproval
-  name="write_file"
-  description="Write content to a file"
-  args={{ path: "config.json", content: "{}" }}
-  risk="medium"
-  onApprove={() => {}}
-  onDeny={() => {}}
-  onAlwaysAllow={() => {}}
-/>
-```
+### ToolApproval
 
-## Registry Files
-
-- `components/ui/tool-approval.tsx`
+| Prop            | Type                      | Default     |
+| --------------- | ------------------------- | ----------- |
+| `name`          | `string`                  | `required`  |
+| `description`   | `string`                  | `undefined` |
+| `args`          | `Record<string, unknown>` | `undefined` |
+| `risk`          | `RiskLevel`               | `"low"`     |
+| `onApprove`     | `() => void`              | `required`  |
+| `onDeny`        | `() => void`              | `required`  |
+| `onAlwaysAllow` | `() => void`              | `undefined` |
+| `timeout`       | `number`                  | `undefined` |

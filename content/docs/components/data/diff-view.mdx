@@ -3,87 +3,68 @@ title: "Diff View"
 description: "Unified, split, and inline diff viewer with LCS-based diff algorithm and line numbers"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="diff-view" />
-</TerminalPreview>
+<ComponentPreview name="diff-view-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/diff-view.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="diff-view"
+  title="components/ui/diff-view.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { DiffView } from "@/components/ui/diff-view";
-
-export function Example() {
-  return (
-    <DiffView
-      filename="config.ts"
-      oldText={"const port = 3000;\nconst host = 'localhost';"}
-      newText={
-        "const port = 8080;\nconst host = 'localhost';\nconst debug = true;"
-      }
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop              | Type                               | Default     | Description                                |
-| ----------------- | ---------------------------------- | ----------- | ------------------------------------------ |
-| `oldText`         | `string`                           | `required`  | Original text content to diff against      |
-| `newText`         | `string`                           | `required`  | Updated text content                       |
-| `filename`        | `string`                           | `undefined` | Optional filename displayed as a header    |
-| `language`        | `string`                           | `undefined` | Language hint for the content              |
-| `mode`            | `"unified" \| "split" \| "inline"` | `"unified"` | Diff display mode                          |
-| `context`         | `number`                           | `3`         | Number of context lines around each change |
-| `showLineNumbers` | `boolean`                          | `false`     | Show line numbers in the gutter            |
-
-## Examples
-
-### Split mode with line numbers
 
 ```tsx
 <DiffView
-  mode="split"
-  showLineNumbers
-  oldText={"function add(a, b) {\n  return a + b;\n}"}
-  newText={"function add(a: number, b: number): number {\n  return a + b;\n}"}
+  filename="config.ts"
+  oldText={"const port = 3000;\nconst host = 'localhost';"}
+  newText={"const port = 8080;\nconst host = 'localhost';\nconst debug = true;"}
 />
 ```
 
-### Inline mode
+## API Reference
 
-```tsx
-<DiffView
-  mode="inline"
-  filename="README.md"
-  oldText={"# My Project\nA simple tool."}
-  newText={"# My Project\nA powerful CLI tool.\n\n## Features\n- Fast"}
-/>
-```
+### DiffView
 
-### With extra context lines
-
-```tsx
-<DiffView
-  context={5}
-  showLineNumbers
-  oldText={"line 1\nline 2\nline 3\nold line\nline 5"}
-  newText={"line 1\nline 2\nline 3\nnew line\nline 5"}
-/>
-```
-
-## Registry Files
-
-- `components/ui/diff-view.tsx`
+| Prop              | Type                               | Default     |
+| ----------------- | ---------------------------------- | ----------- |
+| `oldText`         | `string`                           | `required`  |
+| `newText`         | `string`                           | `required`  |
+| `filename`        | `string`                           | `undefined` |
+| `language`        | `string`                           | `undefined` |
+| `mode`            | `"unified" \| "split" \| "inline"` | `"unified"` |
+| `context`         | `number`                           | `3`         |
+| `showLineNumbers` | `boolean`                          | `false`     |

@@ -3,86 +3,65 @@ title: "Chat Message"
 description: "Chat message bubble with role label, streaming indicator, and collapsible content"
 ---
 
-<TerminalPreview defaultThemeKey="tokyo-night">
-  <ComponentPreview name="chat-message" />
-</TerminalPreview>
+<ComponentPreview name="chat-message-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/chat-message.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="chat-message"
+  title="components/ui/chat-message.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ChatMessage } from "@/components/ui/chat-message";
-
-export function Example() {
-  return (
-    <ChatMessage sender="assistant" name="Claude" timestamp={new Date()}>
-      Here is the refactored version of your function.
-    </ChatMessage>
-  );
-}
 ```
 
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type        | Default     | Description                                                                    |
-| ----------- | ----------- | ----------- | ------------------------------------------------------------------------------ |
-| `sender`    | `ChatRole`  | `required`  | Role of the message author: `"user"`, `"assistant"`, `"system"`, or `"error"`. |
-| `name`      | `string`    | `undefined` | Display name shown in the header; falls back to the sender role label.         |
-| `timestamp` | `Date`      | `undefined` | Timestamp rendered next to the name in `HH:MM` format.                         |
-| `streaming` | `boolean`   | `false`     | Shows an animated dot indicator while the response is being streamed.          |
-| `collapsed` | `boolean`   | `undefined` | Start the message collapsed; press Enter or Space to toggle.                   |
-| `children`  | `ReactNode` | `undefined` | Message body content.                                                          |
-
-## Examples
-
-### Assistant reply
-
 ```tsx
-<ChatMessage sender="assistant">
-  The tests are passing now. I fixed the off-by-one error in the loop.
+<ChatMessage sender="assistant" name="Claude" timestamp={new Date()}>
+  Here is the refactored version of your function.
 </ChatMessage>
 ```
 
-### Streaming state
+## API Reference
 
-```tsx
-<ChatMessage sender="assistant" name="Claude" streaming>
-  Generating response...
-</ChatMessage>
-```
+### ChatMessage
 
-### Error message
-
-```tsx
-<ChatMessage sender="error" timestamp={new Date()}>
-  Rate limit exceeded. Please try again in 30 seconds.
-</ChatMessage>
-```
-
-### Collapsed system message
-
-```tsx
-<ChatMessage sender="system" collapsed>
-  You are a helpful coding assistant. Follow the user instructions carefully and
-  produce clean, well-tested code.
-</ChatMessage>
-```
-
-## Registry Files
-
-- `components/ui/chat-message.tsx`
+| Prop        | Type        | Default     |
+| ----------- | ----------- | ----------- |
+| `sender`    | `ChatRole`  | `required`  |
+| `name`      | `string`    | `undefined` |
+| `timestamp` | `Date`      | `undefined` |
+| `streaming` | `boolean`   | `false`     |
+| `collapsed` | `boolean`   | `undefined` |
+| `children`  | `ReactNode` | `undefined` |

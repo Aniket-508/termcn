@@ -3,78 +3,49 @@ title: "Model Selector"
 description: "Keyboard-navigable list for selecting an AI model, with optional provider grouping and context-window display"
 ---
 
-<TerminalPreview defaultThemeKey="tokyo-night">
-  <ComponentPreview name="model-selector" />
-</TerminalPreview>
+<ComponentPreview name="model-selector-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/model-selector.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="model-selector"
+  title="components/ui/model-selector.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ModelSelector } from "@/components/ui/model-selector";
-
-export function Example() {
-  return (
-    <ModelSelector
-      models={[
-        { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI", context: 128000 },
-        {
-          id: "claude-3-5-sonnet",
-          name: "Claude 3.5 Sonnet",
-          provider: "Anthropic",
-          context: 200000,
-        },
-      ]}
-      selected="gpt-4o"
-      onSelect={(id) => console.log("selected", id)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop              | Type                   | Default    | Description                                                                               |
-| ----------------- | ---------------------- | ---------- | ----------------------------------------------------------------------------------------- |
-| `models`          | `ModelOption[]`        | `required` | Array of models. Each has `id`, `name`, `provider`, and optional `context` (token count). |
-| `selected`        | `string`               | `required` | The `id` of the currently selected model.                                                 |
-| `onSelect`        | `(id: string) => void` | `required` | Called with the model `id` when the user presses Enter.                                   |
-| `showContext`     | `boolean`              | `true`     | Display the context-window size next to each model.                                       |
-| `showProvider`    | `boolean`              | `true`     | Display the provider name next to each model.                                             |
-| `groupByProvider` | `boolean`              | `false`    | Group models under provider headings.                                                     |
-
-## Examples
-
-### Minimal list without context
-
-```tsx
-<ModelSelector
-  models={[
-    { id: "gpt-4o-mini", name: "GPT-4o Mini", provider: "OpenAI" },
-    { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI" },
-  ]}
-  selected="gpt-4o-mini"
-  onSelect={(id) => console.log(id)}
-  showContext={false}
-/>
-```
-
-### Grouped by provider
 
 ```tsx
 <ModelSelector
@@ -86,38 +57,21 @@ export function Example() {
       provider: "Anthropic",
       context: 200000,
     },
-    {
-      id: "claude-3-opus",
-      name: "Claude 3 Opus",
-      provider: "Anthropic",
-      context: 200000,
-    },
-  ]}
-  selected="claude-3-5-sonnet"
-  onSelect={(id) => console.log(id)}
-  groupByProvider
-/>
-```
-
-### Provider hidden
-
-```tsx
-<ModelSelector
-  models={[
-    { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI", context: 128000 },
-    {
-      id: "gpt-4-turbo",
-      name: "GPT-4 Turbo",
-      provider: "OpenAI",
-      context: 128000,
-    },
   ]}
   selected="gpt-4o"
-  onSelect={(id) => console.log(id)}
-  showProvider={false}
+  onSelect={(id) => console.log("selected", id)}
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/model-selector.tsx`
+### ModelSelector
+
+| Prop              | Type                   | Default    |
+| ----------------- | ---------------------- | ---------- |
+| `models`          | `ModelOption[]`        | `required` |
+| `selected`        | `string`               | `required` |
+| `onSelect`        | `(id: string) => void` | `required` |
+| `showContext`     | `boolean`              | `true`     |
+| `showProvider`    | `boolean`              | `true`     |
+| `groupByProvider` | `boolean`              | `false`    |

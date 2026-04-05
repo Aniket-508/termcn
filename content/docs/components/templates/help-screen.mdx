@@ -3,140 +3,98 @@ title: "Help Screen"
 description: "Figlet banner + tagline + aligned Options/Commands help sections"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="help-screen" />
-</TerminalPreview>
+<ComponentPreview name="help-screen-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/help-screen.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="help-screen"
+  title="components/ui/help-screen.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { HelpScreen } from "@/components/ui/help-screen";
-
-export function Example() {
-  return (
-    <HelpScreen
-      title="mycli"
-      tagline="A blazing-fast task runner"
-      usage="mycli <command> [options]"
-    >
-      <HelpScreen.Section label="Commands">
-        <HelpScreen.Row flag="init" description="Create a new project" />
-        <HelpScreen.Row flag="build" description="Compile the source files" />
-        <HelpScreen.Row flag="test" description="Run the test suite" />
-      </HelpScreen.Section>
-      <HelpScreen.Section label="Options">
-        <HelpScreen.Row
-          flag="--help, -h"
-          description="Show this help message"
-        />
-        <HelpScreen.Row
-          flag="--version, -v"
-          description="Print version number"
-        />
-        <HelpScreen.Row flag="--verbose" description="Enable verbose logging" />
-      </HelpScreen.Section>
-    </HelpScreen>
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `big-text`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-### HelpScreen
-
-| Prop          | Type          | Default     | Description                                              |
-| ------------- | ------------- | ----------- | -------------------------------------------------------- |
-| `title`       | `string`      | `required`  | CLI name rendered as a large ASCII art banner.           |
-| `font`        | `BigTextFont` | `"block"`   | Font used for the title banner.                          |
-| `titleColor`  | `string`      | `undefined` | Color of the title text; defaults to theme primary.      |
-| `tagline`     | `string`      | `undefined` | Short description shown below the title.                 |
-| `usage`       | `string`      | `undefined` | Usage pattern string, e.g. `"mycli <cmd> [opts]"`.       |
-| `description` | `string`      | `undefined` | Longer description paragraph below the usage line.       |
-| `columnGap`   | `number`      | `4`         | Horizontal gap between the flag and description columns. |
-| `flagWidth`   | `number`      | `undefined` | Fixed flag column width; auto-computed when omitted.     |
-| `children`    | `ReactNode`   | `required`  | One or more `HelpScreen.Section` elements.               |
-
-### HelpScreen.Section
-
-| Prop         | Type        | Default     | Description                                        |
-| ------------ | ----------- | ----------- | -------------------------------------------------- |
-| `label`      | `string`    | `required`  | Section heading text (e.g. "Commands", "Options"). |
-| `labelColor` | `string`    | `undefined` | Color override for the section heading.            |
-| `children`   | `ReactNode` | `required`  | One or more `HelpScreen.Row` elements.             |
-
-### HelpScreen.Row
-
-| Prop               | Type     | Default     | Description                                    |
-| ------------------ | -------- | ----------- | ---------------------------------------------- |
-| `flag`             | `string` | `required`  | Flag or command name shown in the left column. |
-| `description`      | `string` | `required`  | Explanation text in the right column.          |
-| `flagColor`        | `string` | `undefined` | Color for the flag text; defaults to muted.    |
-| `descriptionColor` | `string` | `undefined` | Color for the description text.                |
-
-## Examples
-
-### Minimal help
-
-```tsx
-<HelpScreen title="serve" usage="serve [dir] [--port N]">
-  <HelpScreen.Section label="Options">
-    <HelpScreen.Row flag="--port, -p" description="Port to listen on" />
-    <HelpScreen.Row flag="--host" description="Hostname to bind" />
-  </HelpScreen.Section>
-</HelpScreen>
-```
-
-### With tagline and description
 
 ```tsx
 <HelpScreen
-  title="deploy"
-  tagline="Ship your app to the cloud"
-  usage="deploy <target>"
-  description="Deploys the current project to the specified target environment."
+  title="mycli"
+  tagline="A blazing-fast task runner"
+  usage="mycli <command> [options]"
 >
-  <HelpScreen.Section label="Targets">
-    <HelpScreen.Row flag="production" description="Live environment" />
-    <HelpScreen.Row flag="staging" description="Pre-release testing" />
+  <HelpScreen.Section label="Commands">
+    <HelpScreen.Row flag="init" description="Create a new project" />
+    <HelpScreen.Row flag="build" description="Compile the source files" />
+    <HelpScreen.Row flag="test" description="Run the test suite" />
+  </HelpScreen.Section>
+  <HelpScreen.Section label="Options">
+    <HelpScreen.Row flag="--help, -h" description="Show this help message" />
+    <HelpScreen.Row flag="--version, -v" description="Print version number" />
+    <HelpScreen.Row flag="--verbose" description="Enable verbose logging" />
   </HelpScreen.Section>
 </HelpScreen>
 ```
 
-### Custom colors
+## API Reference
 
-```tsx
-<HelpScreen title="lint" titleColor="yellow" font="simple">
-  <HelpScreen.Section label="Rules" labelColor="green">
-    <HelpScreen.Row
-      flag="--fix"
-      description="Auto-fix violations"
-      flagColor="cyan"
-    />
-    <HelpScreen.Row
-      flag="--strict"
-      description="Enable strict mode"
-      flagColor="cyan"
-    />
-  </HelpScreen.Section>
-</HelpScreen>
-```
+### HelpScreen
 
-## Registry Files
+| Prop          | Type          | Default     |
+| ------------- | ------------- | ----------- |
+| `title`       | `string`      | `required`  |
+| `font`        | `BigTextFont` | `"block"`   |
+| `titleColor`  | `string`      | `undefined` |
+| `tagline`     | `string`      | `undefined` |
+| `usage`       | `string`      | `undefined` |
+| `description` | `string`      | `undefined` |
+| `columnGap`   | `number`      | `4`         |
+| `flagWidth`   | `number`      | `undefined` |
+| `children`    | `ReactNode`   | `required`  |
 
-- `components/ui/help-screen.tsx`
+### HelpScreen.Section
+
+| Prop         | Type        | Default     |
+| ------------ | ----------- | ----------- |
+| `label`      | `string`    | `required`  |
+| `labelColor` | `string`    | `undefined` |
+| `children`   | `ReactNode` | `required`  |
+
+### HelpScreen.Row
+
+| Prop               | Type     | Default     |
+| ------------------ | -------- | ----------- |
+| `flag`             | `string` | `required`  |
+| `description`      | `string` | `required`  |
+| `flagColor`        | `string` | `undefined` |
+| `descriptionColor` | `string` | `undefined` |

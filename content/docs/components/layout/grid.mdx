@@ -3,87 +3,67 @@ title: "Grid"
 description: "Rows × columns grid layout"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="grid" />
-</TerminalPreview>
+<ComponentPreview name="grid-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/grid.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="grid"
+  title="components/ui/grid.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Grid } from "@/components/ui/grid";
-
-export function Example() {
-  return (
-    <Grid columns={3} gap={1}>
-      <Text>A</Text>
-      <Text>B</Text>
-      <Text>C</Text>
-      <Text>D</Text>
-      <Text>E</Text>
-      <Text>F</Text>
-    </Grid>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type        | Default  | Description                               |
-| ---------- | ----------- | -------- | ----------------------------------------- |
-| `columns`  | `number`    | required | Number of columns per row                 |
-| `gap`      | `number`    | `0`      | Spacing between rows and columns          |
-| `children` | `ReactNode` | required | Items to distribute across the grid cells |
-
-## Examples
-
-### 2-column grid
-
 ```tsx
-<Grid columns={2}>
-  <Text>Cell 1</Text>
-  <Text>Cell 2</Text>
-  <Text>Cell 3</Text>
-  <Text>Cell 4</Text>
+<Grid columns={3} gap={1}>
+  <Text>A</Text>
+  <Text>B</Text>
+  <Text>C</Text>
+  <Text>D</Text>
+  <Text>E</Text>
+  <Text>F</Text>
 </Grid>
 ```
 
-### 4-column grid with gap
+## API Reference
 
-```tsx
-<Grid columns={4} gap={2}>
-  <Text>1</Text>
-  <Text>2</Text>
-  <Text>3</Text>
-  <Text>4</Text>
-  <Text>5</Text>
-  <Text>6</Text>
-  <Text>7</Text>
-  <Text>8</Text>
-</Grid>
-```
+### Grid
 
-### Single-column layout
-
-```tsx
-<Grid columns={1} gap={1}>
-  <Text>Row 1</Text>
-  <Text>Row 2</Text>
-  <Text>Row 3</Text>
-</Grid>
-```
-
-## Registry Files
-
-- `components/ui/grid.tsx`
+| Prop       | Type        | Default  |
+| ---------- | ----------- | -------- |
+| `columns`  | `number`    | required |
+| `gap`      | `number`    | `0`      |
+| `children` | `ReactNode` | required |

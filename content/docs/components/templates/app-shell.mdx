@@ -3,141 +3,111 @@ title: "App Shell"
 description: "Full-screen TUI layout with header, tip bar, full-width input, scrollable content, and hints footer"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="app-shell" />
-</TerminalPreview>
+<ComponentPreview name="app-shell-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/app-shell.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="app-shell"
+  title="components/ui/app-shell.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { AppShell } from "@/components/ui/app-shell";
-
-export function Example() {
-  return (
-    <AppShell>
-      <AppShell.Header>
-        <AppShell.Tip>Press Tab to autocomplete commands</AppShell.Tip>
-      </AppShell.Header>
-      <AppShell.Input
-        placeholder="Enter a command..."
-        prefix="$"
-        onSubmit={(value) => console.log(value)}
-      />
-      <AppShell.Content height={16}>
-        {/* scrollable output area */}
-      </AppShell.Content>
-      <AppShell.Hints items={["↑↓ scroll", "enter submit", "esc quit"]} />
-    </AppShell>
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `info-box`
-- `bullet-list`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-### AppShell
-
-| Prop         | Type        | Default     | Description                                   |
-| ------------ | ----------- | ----------- | --------------------------------------------- |
-| `children`   | `ReactNode` | `required`  | Layout content composed from sub-components.  |
-| `fullscreen` | `boolean`   | `undefined` | Expand the shell to fill the entire terminal. |
-
-### AppShell.Header
-
-| Prop       | Type        | Default    | Description                               |
-| ---------- | ----------- | ---------- | ----------------------------------------- |
-| `children` | `ReactNode` | `required` | Header content, typically contains `Tip`. |
-
-### AppShell.Tip
-
-| Prop       | Type        | Default    | Description                          |
-| ---------- | ----------- | ---------- | ------------------------------------ |
-| `children` | `ReactNode` | `required` | Dimmed tip text shown in the header. |
-
-### AppShell.Input
-
-| Prop          | Type                                        | Default               | Description                                      |
-| ------------- | ------------------------------------------- | --------------------- | ------------------------------------------------ |
-| `value`       | `string`                                    | `undefined`           | Controlled input value.                          |
-| `onChange`    | `(value: string) => void`                   | `undefined`           | Callback fired on each keystroke.                |
-| `onSubmit`    | `(value: string) => void`                   | `undefined`           | Callback fired when Enter is pressed.            |
-| `placeholder` | `string`                                    | `"Type something..."` | Dimmed placeholder shown when input is empty.    |
-| `borderStyle` | `"single" \| "double" \| "round" \| "bold"` | `"single"`            | Border style around the input box.               |
-| `borderColor` | `string`                                    | `undefined`           | Border color override; defaults to theme border. |
-| `prefix`      | `string`                                    | `">"`                 | Prompt character displayed before the input.     |
-
-### AppShell.Content
-
-| Prop         | Type        | Default     | Description                                        |
-| ------------ | ----------- | ----------- | -------------------------------------------------- |
-| `children`   | `ReactNode` | `required`  | Scrollable body content.                           |
-| `autoscroll` | `boolean`   | `undefined` | Automatically scroll to the bottom on new content. |
-| `height`     | `number`    | `20`        | Visible height in rows.                            |
-
-### AppShell.Hints
-
-| Prop       | Type        | Default     | Description                                         |
-| ---------- | ----------- | ----------- | --------------------------------------------------- |
-| `items`    | `string[]`  | `undefined` | Shortcut hints joined with `\|` separators.         |
-| `children` | `ReactNode` | `undefined` | Custom hint content (used when `items` is not set). |
-
-## Examples
-
-### Minimal shell with input
-
-```tsx
-<AppShell>
-  <AppShell.Input placeholder="Search..." prefix="?" />
-</AppShell>
-```
-
-### With header tip and hints
 
 ```tsx
 <AppShell>
   <AppShell.Header>
-    <AppShell.Tip>Use arrow keys to navigate history</AppShell.Tip>
+    <AppShell.Tip>Press Tab to autocomplete commands</AppShell.Tip>
   </AppShell.Header>
-  <AppShell.Input onSubmit={(v) => run(v)} />
-  <AppShell.Hints items={["↑↓ history", "tab complete", "ctrl+c exit"]} />
-</AppShell>
-```
-
-### Custom border style
-
-```tsx
-<AppShell>
   <AppShell.Input
-    borderStyle="round"
-    borderColor="cyan"
-    prefix="λ"
-    placeholder="Type an expression..."
+    placeholder="Enter a command..."
+    prefix="$"
+    onSubmit={(value) => console.log(value)}
   />
-  <AppShell.Content height={10}>
-    {output.map((line, i) => (
-      <Text key={i}>{line}</Text>
-    ))}
+  <AppShell.Content height={16}>
+    {/* scrollable output area */}
   </AppShell.Content>
+  <AppShell.Hints items={["↑↓ scroll", "enter submit", "esc quit"]} />
 </AppShell>
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/app-shell.tsx`
+### AppShell
+
+| Prop         | Type        | Default     |
+| ------------ | ----------- | ----------- |
+| `children`   | `ReactNode` | `required`  |
+| `fullscreen` | `boolean`   | `undefined` |
+
+### AppShell.Header
+
+| Prop       | Type        | Default    |
+| ---------- | ----------- | ---------- |
+| `children` | `ReactNode` | `required` |
+
+### AppShell.Tip
+
+| Prop       | Type        | Default    |
+| ---------- | ----------- | ---------- |
+| `children` | `ReactNode` | `required` |
+
+### AppShell.Input
+
+| Prop          | Type                                        | Default               |
+| ------------- | ------------------------------------------- | --------------------- |
+| `value`       | `string`                                    | `undefined`           |
+| `onChange`    | `(value: string) => void`                   | `undefined`           |
+| `onSubmit`    | `(value: string) => void`                   | `undefined`           |
+| `placeholder` | `string`                                    | `"Type something..."` |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold"` | `"single"`            |
+| `borderColor` | `string`                                    | `undefined`           |
+| `prefix`      | `string`                                    | `">"`                 |
+
+### AppShell.Content
+
+| Prop         | Type        | Default     |
+| ------------ | ----------- | ----------- |
+| `children`   | `ReactNode` | `required`  |
+| `autoscroll` | `boolean`   | `undefined` |
+| `height`     | `number`    | `20`        |
+
+### AppShell.Hints
+
+| Prop       | Type        | Default     |
+| ---------- | ----------- | ----------- |
+| `items`    | `string[]`  | `undefined` |
+| `children` | `ReactNode` | `undefined` |

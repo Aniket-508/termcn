@@ -3,66 +3,60 @@ title: "Digits"
 description: "Box-drawing character numerals"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="digits" />
-</TerminalPreview>
+<ComponentPreview name="digits-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/digits.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="digits"
+  title="components/ui/digits.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Digits } from "@/components/ui/digits";
-
-export function Example() {
-  return <Digits value="12:30" />;
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop    | Type               | Default     | Description                                        |
-| ------- | ------------------ | ----------- | -------------------------------------------------- |
-| `value` | `string \| number` | `required`  | Numeric value or string to render as large digits  |
-| `color` | `string`           | `undefined` | Color override for the digit characters            |
-| `size`  | `DigitSize`        | `"md"`      | Digit size: `"sm"` (plain text), `"md"`, or `"lg"` |
-
-## Examples
-
-### Basic Usage
 
 ```tsx
-<Digits value={42} />
+<Digits value="12:30" />
 ```
 
-### Large Digits
+## API Reference
 
-```tsx
-<Digits value="09:45" size="lg" />
-```
+### Digits
 
-### Small Inline Digits
-
-```tsx
-<Digits value={100} size="sm" />
-```
-
-### With Custom Color
-
-```tsx
-<Digits value="3.14" color="#61afef" />
-```
-
-## Registry Files
-
-- `components/ui/digits.tsx`
+| Prop    | Type               | Default     |
+| ------- | ------------------ | ----------- |
+| `value` | `string \| number` | `required`  |
+| `color` | `string`           | `undefined` |
+| `size`  | `DigitSize`        | `"md"`      |

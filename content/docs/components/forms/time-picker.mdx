@@ -3,89 +3,69 @@ title: "Time Picker"
 description: "Time picker with hour/minute/second spinners"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="time-picker" />
-</TerminalPreview>
+<ComponentPreview name="time-picker-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/time-picker.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="time-picker"
+  title="components/ui/time-picker.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { TimePicker } from "@/components/ui/time-picker";
-
-export function Example() {
-  return (
-    <TimePicker
-      label="Meeting time"
-      value={{ hours: 14, minutes: 30 }}
-      onChange={(time) => console.log("Changed:", time)}
-      onSubmit={(time) => console.log("Submitted:", time)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type                                                 | Default     | Description                                          |
-| ----------- | ---------------------------------------------------- | ----------- | ---------------------------------------------------- |
-| `value`     | `{ hours: number; minutes: number }`                 | `undefined` | Controlled time value                                |
-| `onChange`  | `(time: { hours: number; minutes: number }) => void` | `undefined` | Callback fired when the selected time changes        |
-| `onSubmit`  | `(time: { hours: number; minutes: number }) => void` | `undefined` | Callback fired when the user presses Enter to submit |
-| `label`     | `string`                                             | `undefined` | Label displayed above the picker                     |
-| `format`    | `12 \| 24`                                           | `24`        | 12-hour or 24-hour clock format                      |
-| `autoFocus` | `boolean`                                            | `false`     | Whether the picker receives focus on mount           |
-| `id`        | `string`                                             | `undefined` | Focus ID for use with `useFocus`                     |
-
-## Examples
-
-### 12-Hour Format
 
 ```tsx
 <TimePicker
-  label="Alarm"
-  format={12}
-  value={{ hours: 7, minutes: 0 }}
-  onSubmit={(time) => setAlarm(time)}
+  label="Meeting time"
+  value={{ hours: 14, minutes: 30 }}
+  onChange={(time) => console.log("Changed:", time)}
+  onSubmit={(time) => console.log("Submitted:", time)}
 />
 ```
 
-### Auto-Focused
+## API Reference
 
-```tsx
-<TimePicker
-  autoFocus
-  label="Start time"
-  onChange={(time) => setStartTime(time)}
-/>
-```
+### TimePicker
 
-### No Label
-
-```tsx
-<TimePicker
-  format={24}
-  value={{ hours: 18, minutes: 45 }}
-  onSubmit={(time) => scheduleEvent(time)}
-/>
-```
-
-## Registry Files
-
-- `components/ui/time-picker.tsx`
+| Prop        | Type                                                 | Default     |
+| ----------- | ---------------------------------------------------- | ----------- |
+| `value`     | `{ hours: number; minutes: number }`                 | `undefined` |
+| `onChange`  | `(time: { hours: number; minutes: number }) => void` | `undefined` |
+| `onSubmit`  | `(time: { hours: number; minutes: number }) => void` | `undefined` |
+| `label`     | `string`                                             | `undefined` |
+| `format`    | `12 \| 24`                                           | `24`        |
+| `autoFocus` | `boolean`                                            | `false`     |
+| `id`        | `string`                                             | `undefined` |

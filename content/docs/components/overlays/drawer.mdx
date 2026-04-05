@@ -3,90 +3,73 @@ title: "Drawer"
 description: "Slide-in panel from any edge"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="drawer" />
-</TerminalPreview>
+<ComponentPreview name="drawer-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/drawer.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="drawer"
+  title="components/ui/drawer.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Drawer } from "@/components/ui/drawer";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <Drawer
-      isOpen={true}
-      edge="right"
-      title="Details"
-      width={40}
-      onClose={() => console.log("closed")}
-    >
-      <Text>Name: my-project</Text>
-      <Text>Status: active</Text>
-    </Drawer>
-  );
-}
 ```
 
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type                                     | Default     | Description                                             |
-| ---------- | ---------------------------------------- | ----------- | ------------------------------------------------------- |
-| `isOpen`   | `boolean`                                | `false`     | Whether the drawer is visible                           |
-| `edge`     | `"left" \| "right" \| "top" \| "bottom"` | `"right"`   | Which edge the drawer slides in from                    |
-| `title`    | `string`                                 | `undefined` | Title displayed in the drawer header                    |
-| `children` | `ReactNode`                              | `required`  | Content rendered inside the drawer body                 |
-| `onClose`  | `() => void`                             | `undefined` | Callback fired when Esc is pressed                      |
-| `width`    | `number`                                 | `40`        | Width of the drawer when edge is `"left"` or `"right"`  |
-| `height`   | `number`                                 | `10`        | Height of the drawer when edge is `"top"` or `"bottom"` |
-
-## Examples
-
-### Left Edge
-
 ```tsx
-<Drawer isOpen={true} edge="left" title="Navigation" width={30}>
-  <Text>Home</Text>
-  <Text>Settings</Text>
-  <Text>Help</Text>
+<Drawer
+  isOpen={true}
+  edge="right"
+  title="Details"
+  width={40}
+  onClose={() => close()}
+>
+  <Text>Name: my-project</Text>
+  <Text>Status: active</Text>
 </Drawer>
 ```
 
-### Bottom Edge
+## API Reference
 
-```tsx
-<Drawer isOpen={true} edge="bottom" title="Logs" height={8}>
-  <Text>[INFO] Server started on port 3000</Text>
-  <Text>[INFO] Connected to database</Text>
-</Drawer>
-```
+### Drawer
 
-### Without Title
-
-```tsx
-<Drawer isOpen={true} edge="right" width={35} onClose={() => close()}>
-  <Text bold>Quick Actions</Text>
-  <Text>Press Enter to select</Text>
-</Drawer>
-```
-
-## Registry Files
-
-- `components/ui/drawer.tsx`
+| Prop       | Type                                     | Default     |
+| ---------- | ---------------------------------------- | ----------- |
+| `isOpen`   | `boolean`                                | `false`     |
+| `edge`     | `"left" \| "right" \| "top" \| "bottom"` | `"right"`   |
+| `title`    | `string`                                 | `undefined` |
+| `children` | `ReactNode`                              | `required`  |
+| `onClose`  | `() => void`                             | `undefined` |
+| `width`    | `number`                                 | `40`        |
+| `height`   | `number`                                 | `10`        |

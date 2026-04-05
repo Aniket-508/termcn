@@ -3,141 +3,117 @@ title: "Setup Flow"
 description: "@clack-style step flow with ◇/◆/│ visual language, badge, info steps, and multi-select"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="setup-flow" />
-</TerminalPreview>
+<ComponentPreview name="setup-flow-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/setup-flow.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="setup-flow"
+  title="components/ui/setup-flow.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { SetupFlow } from "@/components/ui/setup-flow";
-
-export function Example() {
-  return (
-    <SetupFlow title="create-app">
-      <SetupFlow.Badge label="v1.0.0" />
-      <SetupFlow.Step status="done">Project name set to my-app</SetupFlow.Step>
-      <SetupFlow.Step status="done">Template selected: React</SetupFlow.Step>
-      <SetupFlow.Step status="active">
-        Installing dependencies...
-      </SetupFlow.Step>
-      <SetupFlow.MultiSelect
-        label="Select features"
-        hint="space to toggle, enter to confirm"
-        options={[
-          { value: "ts", label: "TypeScript" },
-          { value: "eslint", label: "ESLint", description: "Code linting" },
-          { value: "prettier", label: "Prettier", description: "Formatting" },
-        ]}
-        onSubmit={(values) => console.log(values)}
-      />
-    </SetupFlow>
-  );
-}
 ```
 
-## Dependencies
+```tsx
+<SetupFlow title="create-app">
+  <SetupFlow.Badge label="v1.0.0" />
+  <SetupFlow.Step status="done">Project name set to my-app</SetupFlow.Step>
+  <SetupFlow.Step status="done">Template selected: React</SetupFlow.Step>
+  <SetupFlow.Step status="active">Installing dependencies...</SetupFlow.Step>
+  <SetupFlow.MultiSelect
+    label="Select features"
+    hint="space to toggle, enter to confirm"
+    options={[
+      { value: "ts", label: "TypeScript" },
+      { value: "eslint", label: "ESLint", description: "Code linting" },
+      { value: "prettier", label: "Prettier", description: "Formatting" },
+    ]}
+    onSubmit={(values) => console.log(values)}
+  />
+</SetupFlow>
+```
 
-### Registry Dependencies
-
-- `big-text`
-- `use-animation`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
+## API Reference
 
 ### SetupFlow
 
-| Prop             | Type          | Default     | Description                                           |
-| ---------------- | ------------- | ----------- | ----------------------------------------------------- |
-| `title`          | `string`      | `undefined` | ASCII art title rendered at the top of the flow.      |
-| `titleFont`      | `BigTextFont` | `"block"`   | Font variant for the title.                           |
-| `titleColor`     | `string`      | `"#888888"` | Primary color for the title text.                     |
-| `titleColorAlt`  | `string`      | `undefined` | Alternate row color for a striped title effect.       |
-| `connectorChar`  | `string`      | `"│"`       | Character drawn between steps.                        |
-| `connectorColor` | `string`      | `undefined` | Color of the connector; defaults to muted foreground. |
-| `children`       | `ReactNode`   | `required`  | Step, Badge, Spinner, and MultiSelect sub-components. |
+| Prop             | Type          | Default     |
+| ---------------- | ------------- | ----------- |
+| `title`          | `string`      | `undefined` |
+| `titleFont`      | `BigTextFont` | `"block"`   |
+| `titleColor`     | `string`      | `"#888888"` |
+| `titleColorAlt`  | `string`      | `undefined` |
+| `connectorChar`  | `string`      | `"│"`       |
+| `connectorColor` | `string`      | `undefined` |
+| `children`       | `ReactNode`   | `required`  |
 
 ### SetupFlow.Badge
 
-| Prop    | Type     | Default    | Description                           |
-| ------- | -------- | ---------- | ------------------------------------- |
-| `label` | `string` | `required` | Text displayed inside the badge pill. |
-| `bg`    | `string` | `"cyan"`   | Background color of the badge.        |
-| `color` | `string` | `"black"`  | Foreground text color of the badge.   |
+| Prop    | Type     | Default    |
+| ------- | -------- | ---------- |
+| `label` | `string` | `required` |
+| `bg`    | `string` | `"cyan"`   |
+| `color` | `string` | `"black"`  |
 
 ### SetupFlow.Step
 
-| Prop        | Type                                                      | Default     | Description                                         |
-| ----------- | --------------------------------------------------------- | ----------- | --------------------------------------------------- |
-| `icon`      | `string`                                                  | `undefined` | Custom icon character; overrides the status icon.   |
-| `iconColor` | `string`                                                  | `undefined` | Color for the icon; overrides status-derived color. |
-| `status`    | `"done" \| "active" \| "pending" \| "success" \| "error"` | `"done"`    | Visual state determining the icon and dimming.      |
-| `children`  | `ReactNode`                                               | `required`  | Step label text.                                    |
+| Prop        | Type                                                      | Default     |
+| ----------- | --------------------------------------------------------- | ----------- |
+| `icon`      | `string`                                                  | `undefined` |
+| `iconColor` | `string`                                                  | `undefined` |
+| `status`    | `"done" \| "active" \| "pending" \| "success" \| "error"` | `"done"`    |
+| `children`  | `ReactNode`                                               | `required`  |
 
 ### SetupFlow.Spinner
 
-| Prop         | Type         | Default     | Description                                |
-| ------------ | ------------ | ----------- | ------------------------------------------ |
-| `label`      | `string`     | `required`  | Text shown next to the animated spinner.   |
-| `onComplete` | `() => void` | `undefined` | Callback fired when the spinner completes. |
+| Prop         | Type         | Default     |
+| ------------ | ------------ | ----------- |
+| `label`      | `string`     | `required`  |
+| `onComplete` | `() => void` | `undefined` |
 
 ### SetupFlow.MultiSelect
 
-| Prop            | Type                                                       | Default     | Description                                       |
-| --------------- | ---------------------------------------------------------- | ----------- | ------------------------------------------------- |
-| `label`         | `string`                                                   | `required`  | Prompt text above the options.                    |
-| `hint`          | `string`                                                   | `undefined` | Helper text shown in parentheses after the label. |
-| `options`       | `{ value: string; label: string; description?: string }[]` | `required`  | Selectable option definitions.                    |
-| `values`        | `string[]`                                                 | `undefined` | Controlled selected values.                       |
-| `onChange`      | `(values: string[]) => void`                               | `undefined` | Callback fired when selection changes.            |
-| `onSubmit`      | `(values: string[]) => void`                               | `undefined` | Callback fired when Enter confirms the selection. |
-| `checkedChar`   | `string`                                                   | `"■"`       | Character for checked options.                    |
-| `uncheckedChar` | `string`                                                   | `"□"`       | Character for unchecked options.                  |
-| `checkedColor`  | `string`                                                   | `"green"`   | Color for the checked indicator.                  |
-
-## Examples
-
-### Completed steps
-
-```tsx
-<SetupFlow>
-  <SetupFlow.Step status="success">Dependencies installed</SetupFlow.Step>
-  <SetupFlow.Step status="success">Config files created</SetupFlow.Step>
-  <SetupFlow.Step status="done">Ready to go!</SetupFlow.Step>
-</SetupFlow>
-```
-
-### Active spinner step
-
-```tsx
-<SetupFlow title="init" titleColor="cyan">
-  <SetupFlow.Badge label="create-app" bg="green" />
-  <SetupFlow.Step status="done">Cloned template</SetupFlow.Step>
-  <SetupFlow.Spinner label="Installing packages..." />
-</SetupFlow>
-```
-
-### Error state
-
-```tsx
-<SetupFlow>
-  <SetupFlow.Step status="done">Checked permissions</SetupFlow.Step>
-  <SetupFlow.Step status="error">Network connection failed</SetupFlow.Step>
-  <SetupFlow.Step status="pending">Deploy to server</SetupFlow.Step>
-</SetupFlow>
-```
-
-## Registry Files
-
-- `components/ui/setup-flow.tsx`
+| Prop            | Type                                                       | Default     |
+| --------------- | ---------------------------------------------------------- | ----------- |
+| `label`         | `string`                                                   | `required`  |
+| `hint`          | `string`                                                   | `undefined` |
+| `options`       | `{ value: string; label: string; description?: string }[]` | `required`  |
+| `values`        | `string[]`                                                 | `undefined` |
+| `onChange`      | `(values: string[]) => void`                               | `undefined` |
+| `onSubmit`      | `(values: string[]) => void`                               | `undefined` |
+| `checkedChar`   | `string`                                                   | `"■"`       |
+| `uncheckedChar` | `string`                                                   | `"□"`       |
+| `checkedColor`  | `string`                                                   | `"green"`   |

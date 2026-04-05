@@ -3,121 +3,77 @@ title: "Tree Select"
 description: "Hierarchical tree selection"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="tree-select" />
-</TerminalPreview>
+<ComponentPreview name="tree-select-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/tree-select.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="tree-select"
+  title="components/ui/tree-select.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { TreeSelect } from "@/components/ui/tree-select";
-
-export function Example() {
-  return (
-    <TreeSelect
-      label="Select a file"
-      nodes={[
-        {
-          value: "src",
-          label: "src",
-          children: [
-            { value: "index.ts", label: "index.ts" },
-            { value: "utils.ts", label: "utils.ts" },
-          ],
-        },
-        { value: "README.md", label: "README.md" },
-      ]}
-      onChange={(value) => console.log("Selected:", value)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop                | Type                  | Default     | Description                                                          |
-| ------------------- | --------------------- | ----------- | -------------------------------------------------------------------- |
-| `nodes`             | `TreeSelectNode<T>[]` | `required`  | Hierarchical array of `{ value, label, children?, disabled? }` nodes |
-| `value`             | `T`                   | `undefined` | Controlled selected value                                            |
-| `onChange`          | `(value: T) => void`  | `undefined` | Callback fired when a node is selected                               |
-| `onSubmit`          | `(value: T) => void`  | `undefined` | Callback fired on Enter to confirm selection                         |
-| `label`             | `string`              | `undefined` | Heading text displayed above the tree                                |
-| `expandedByDefault` | `boolean`             | `false`     | Expand all parent nodes on initial render                            |
-
-## Examples
-
-### Expanded by Default
 
 ```tsx
 <TreeSelect
-  label="Project"
-  expandedByDefault
+  label="Select a file"
   nodes={[
     {
-      value: "components",
-      label: "components",
+      value: "src",
+      label: "src",
       children: [
-        { value: "Button.tsx", label: "Button.tsx" },
-        { value: "Input.tsx", label: "Input.tsx" },
+        { value: "index.ts", label: "index.ts" },
+        { value: "utils.ts", label: "utils.ts" },
       ],
     },
-    {
-      value: "hooks",
-      label: "hooks",
-      children: [{ value: "useTheme.ts", label: "useTheme.ts" }],
-    },
+    { value: "README.md", label: "README.md" },
   ]}
+  onChange={(value) => {}}
 />
 ```
 
-### With Disabled Nodes
+## API Reference
 
-```tsx
-<TreeSelect
-  label="Packages"
-  nodes={[
-    {
-      value: "core",
-      label: "core",
-      children: [
-        { value: "runtime", label: "runtime" },
-        { value: "compiler", label: "compiler", disabled: true },
-      ],
-    },
-    { value: "cli", label: "cli" },
-  ]}
-/>
-```
+### TreeSelect
 
-### Flat List (No Nesting)
-
-```tsx
-<TreeSelect
-  label="Pick a tool"
-  nodes={[
-    { value: "eslint", label: "ESLint" },
-    { value: "prettier", label: "Prettier" },
-    { value: "oxlint", label: "Oxlint" },
-  ]}
-/>
-```
-
-## Registry Files
-
-- `components/ui/tree-select.tsx`
+| Prop                | Type                  | Default     |
+| ------------------- | --------------------- | ----------- |
+| `nodes`             | `TreeSelectNode<T>[]` | `required`  |
+| `value`             | `T`                   | `undefined` |
+| `onChange`          | `(value: T) => void`  | `undefined` |
+| `onSubmit`          | `(value: T) => void`  | `undefined` |
+| `label`             | `string`              | `undefined` |
+| `expandedByDefault` | `boolean`             | `false`     |

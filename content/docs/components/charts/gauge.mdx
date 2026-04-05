@@ -3,63 +3,63 @@ title: "Gauge"
 description: "Arc/speedometer gauge meter"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="gauge" />
-</TerminalPreview>
+<ComponentPreview name="gauge-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/gauge.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="gauge"
+  title="components/ui/gauge.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Gauge } from "@/components/ui/gauge";
-
-export function Example() {
-  return <Gauge value={72} max={100} label="CPU Usage" size="md" />;
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop    | Type                   | Default     | Description                          |
-| ------- | ---------------------- | ----------- | ------------------------------------ |
-| `value` | `number`               | `required`  | Current value to display             |
-| `min`   | `number`               | `0`         | Minimum value of the gauge range     |
-| `max`   | `number`               | `100`       | Maximum value of the gauge range     |
-| `label` | `string`               | `undefined` | Text label displayed below the gauge |
-| `color` | `string`               | `undefined` | Custom color for the filled portion  |
-| `size`  | `"sm" \| "md" \| "lg"` | `"md"`      | Gauge size: small, medium, or large  |
-
-## Examples
-
-### Small Inline Gauge
 
 ```tsx
-<Gauge value={45} size="sm" label="Memory" />
+<Gauge value={72} max={100} label="CPU Usage" size="md" />
 ```
 
-### Large Gauge with Custom Range
+## API Reference
 
-```tsx
-<Gauge value={3200} min={0} max={5000} size="lg" label="RPM" color="#d97706" />
-```
+### Gauge
 
-### Colored Warning Gauge
-
-```tsx
-<Gauge value={92} max={100} size="md" label="Disk Usage" color="#dc2626" />
-```
-
-## Registry Files
-
-- `components/ui/gauge.tsx`
+| Prop    | Type                   | Default     |
+| ------- | ---------------------- | ----------- |
+| `value` | `number`               | `required`  |
+| `min`   | `number`               | `0`         |
+| `max`   | `number`               | `100`       |
+| `label` | `string`               | `undefined` |
+| `color` | `string`               | `undefined` |
+| `size`  | `"sm" \| "md" \| "lg"` | `"md"`      |

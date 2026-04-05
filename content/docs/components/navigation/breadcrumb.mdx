@@ -3,89 +3,74 @@ title: "Breadcrumb"
 description: "Breadcrumb navigation trail"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="breadcrumb" />
-</TerminalPreview>
+<ComponentPreview name="breadcrumb-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/breadcrumb.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="breadcrumb"
+  title="components/ui/breadcrumb.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-
-export function Example() {
-  return (
-    <Breadcrumb
-      items={[
-        { key: "home", label: "Home", onSelect: () => console.log("home") },
-        { key: "docs", label: "Docs", onSelect: () => console.log("docs") },
-        { key: "components", label: "Components" },
-      ]}
-      activeKey="components"
-      separator="›"
-    />
-  );
-}
 ```
 
-## Dependencies
+```tsx
+<Breadcrumb
+  items={[
+    { key: "home", label: "Home", onSelect: () => {} },
+    { key: "docs", label: "Docs" },
+  ]}
+  activeKey="docs"
+/>
+```
 
-### Registry Dependencies
+## API Reference
 
-- `theme-provider`
+### Breadcrumb
 
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type               | Default     | Description                                                |
-| ----------- | ------------------ | ----------- | ---------------------------------------------------------- |
-| `items`     | `BreadcrumbItem[]` | `required`  | Array of breadcrumb items to display in the trail          |
-| `separator` | `string`           | `"›"`       | Character displayed between breadcrumb items               |
-| `activeKey` | `string`           | `undefined` | Key of the active item; defaults to the last item if unset |
+| Prop        | Type               | Default     |
+| ----------- | ------------------ | ----------- |
+| `items`     | `BreadcrumbItem[]` | `required`  |
+| `separator` | `string`           | `"›"`       |
+| `activeKey` | `string`           | `undefined` |
 
 ### BreadcrumbItem
 
-| Prop       | Type         | Default     | Description                              |
-| ---------- | ------------ | ----------- | ---------------------------------------- |
-| `label`    | `string`     | `required`  | Display text for the breadcrumb item     |
-| `key`      | `string`     | `required`  | Unique identifier for the item           |
-| `onSelect` | `() => void` | `undefined` | Callback fired when navigating backwards |
-
-## Examples
-
-### Custom separator
-
-```tsx
-<Breadcrumb
-  items={[
-    { key: "root", label: "Root" },
-    { key: "src", label: "src" },
-    { key: "index", label: "index.ts" },
-  ]}
-  separator="/"
-/>
-```
-
-### Two-level path
-
-```tsx
-<Breadcrumb
-  items={[
-    { key: "settings", label: "Settings", onSelect: () => goBack() },
-    { key: "profile", label: "Profile" },
-  ]}
-  activeKey="profile"
-/>
-```
-
-## Registry Files
-
-- `components/ui/breadcrumb.tsx`
+| Prop       | Type         | Default     |
+| ---------- | ------------ | ----------- |
+| `label`    | `string`     | `required`  |
+| `key`      | `string`     | `required`  |
+| `onSelect` | `() => void` | `undefined` |

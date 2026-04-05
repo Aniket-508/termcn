@@ -3,81 +3,76 @@ title: "Path Input"
 description: "Filesystem path input with tab autocomplete"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="path-input" />
-</TerminalPreview>
+<ComponentPreview name="path-input-demo" hideCode />
 
-> This component relies on Node-only capabilities or a long-running runtime context, so the docs render a themed terminal placeholder instead of a live browser preview.
+<Callout type="info">
+  Path input requires Node.js filesystem access and may not render in the
+  browser preview.
+</Callout>
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/path-input.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="path-input"
+  title="components/ui/path-input.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { PathInput } from "@/components/ui/path-input";
-
-export function Example() {
-  return (
-    <PathInput
-      label="Project Directory"
-      placeholder="/home/user/projects"
-      onSubmit={(path) => console.log("Selected:", path)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-- `glob`
-
-## Props
-
-| Prop          | Type                      | Default     | Description                               |
-| ------------- | ------------------------- | ----------- | ----------------------------------------- |
-| `value`       | `string`                  | `undefined` | Controlled path value                     |
-| `onChange`    | `(value: string) => void` | `undefined` | Called when the path value changes        |
-| `onSubmit`    | `(value: string) => void` | `undefined` | Called when Enter is pressed              |
-| `label`       | `string`                  | `undefined` | Label text displayed above the input      |
-| `placeholder` | `string`                  | `"/"`       | Placeholder shown when the input is empty |
-| `autoFocus`   | `boolean`                 | `false`     | Whether to focus the input on mount       |
-| `id`          | `string`                  | `undefined` | Unique identifier for focus management    |
-| `width`       | `number`                  | `40`        | Width of the input box in columns         |
-| `filter`      | `string`                  | `undefined` | File extension filter, e.g. `".ts"`       |
-| `dirsOnly`    | `boolean`                 | `false`     | Only show directories in completions      |
-
-## Examples
-
-### Directories Only
 
 ```tsx
-<PathInput label="Output Directory" dirsOnly placeholder="/var/output" />
+<PathInput
+  label="Project Directory"
+  placeholder="/home/user/projects"
+  onSubmit={(path) => console.log("Selected:", path)}
+/>
 ```
 
-### Filter by Extension
+## API Reference
 
-```tsx
-<PathInput label="Config File" filter=".json" placeholder="/etc/config.json" />
-```
+### PathInput
 
-### Custom Width
-
-```tsx
-<PathInput label="Log File" width={60} autoFocus />
-```
-
-## Registry Files
-
-- `components/ui/path-input.tsx`
+| Prop          | Type                      | Default     |
+| ------------- | ------------------------- | ----------- |
+| `value`       | `string`                  | `undefined` |
+| `onChange`    | `(value: string) => void` | `undefined` |
+| `onSubmit`    | `(value: string) => void` | `undefined` |
+| `label`       | `string`                  | `undefined` |
+| `placeholder` | `string`                  | `"/"`       |
+| `autoFocus`   | `boolean`                 | `false`     |
+| `id`          | `string`                  | `undefined` |
+| `width`       | `number`                  | `40`        |
+| `filter`      | `string`                  | `undefined` |
+| `dirsOnly`    | `boolean`                 | `false`     |

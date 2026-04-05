@@ -3,95 +3,68 @@ title: "Pie Chart"
 description: "Unicode block pie chart with legend"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="pie-chart" />
-</TerminalPreview>
+<ComponentPreview name="pie-chart-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/pie-chart.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="pie-chart"
+  title="components/ui/pie-chart.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { PieChart } from "@/components/ui/pie-chart";
-
-export function Example() {
-  return (
-    <PieChart
-      data={[
-        { label: "TypeScript", value: 45 },
-        { label: "Rust", value: 25 },
-        { label: "Go", value: 20 },
-        { label: "Python", value: 10 },
-      ]}
-      radius={6}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop              | Type             | Default    | Description                          |
-| ----------------- | ---------------- | ---------- | ------------------------------------ |
-| `data`            | `PieChartItem[]` | `required` | Array of labeled slices with values  |
-| `radius`          | `number`         | `5`        | Radius of the pie in character rows  |
-| `showLegend`      | `boolean`        | `true`     | Show the color legend beside the pie |
-| `showPercentages` | `boolean`        | `true`     | Show percentage values in the legend |
-
-## Examples
-
-### Custom Slice Colors
 
 ```tsx
 <PieChart
   data={[
-    { label: "Pass", value: 87, color: "#16a34a" },
-    { label: "Fail", value: 8, color: "#dc2626" },
-    { label: "Skip", value: 5, color: "#d97706" },
+    { label: "TypeScript", value: 45 },
+    { label: "Rust", value: 25 },
+    { label: "Go", value: 20 },
   ]}
-  radius={5}
+  radius={6}
 />
 ```
 
-### Without Legend
+## API Reference
 
-```tsx
-<PieChart
-  data={[
-    { label: "A", value: 40 },
-    { label: "B", value: 35 },
-    { label: "C", value: 25 },
-  ]}
-  showLegend={false}
-  radius={4}
-/>
-```
+### PieChart
 
-### Large Chart Without Percentages
-
-```tsx
-<PieChart
-  data={[
-    { label: "React", value: 50 },
-    { label: "Vue", value: 30 },
-    { label: "Svelte", value: 15 },
-    { label: "Angular", value: 5 },
-  ]}
-  radius={8}
-  showPercentages={false}
-/>
-```
-
-## Registry Files
-
-- `components/ui/pie-chart.tsx`
+| Prop              | Type             | Default    |
+| ----------------- | ---------------- | ---------- |
+| `data`            | `PieChartItem[]` | `required` |
+| `radius`          | `number`         | `5`        |
+| `showLegend`      | `boolean`        | `true`     |
+| `showPercentages` | `boolean`        | `true`     |

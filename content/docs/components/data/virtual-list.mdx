@@ -3,106 +3,67 @@ title: "Virtual List"
 description: "Virtualized list for 10k+ items"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="virtual-list" />
-</TerminalPreview>
+<ComponentPreview name="virtual-list-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/virtual-list.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="virtual-list"
+  title="components/ui/virtual-list.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { VirtualList } from "@/components/ui/virtual-list";
-import { Text } from "ink";
-
-export function Example() {
-  const items = Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`);
-
-  return (
-    <VirtualList
-      items={items}
-      height={10}
-      renderItem={(item, index, isActive) => (
-        <Text bold={isActive} color={isActive ? "blue" : undefined}>
-          {isActive ? "› " : "  "}
-          {item}
-        </Text>
-      )}
-      onSelect={(item, index) => console.log(`Selected: ${item}`)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-- `mnemonist`
-
-## Props
-
-| Prop         | Type                                                       | Default     | Description                                        |
-| ------------ | ---------------------------------------------------------- | ----------- | -------------------------------------------------- |
-| `items`      | `T[]`                                                      | `required`  | Array of items to render in the list               |
-| `renderItem` | `(item: T, index: number, isActive: boolean) => ReactNode` | `required`  | Render function called for each visible item       |
-| `height`     | `number`                                                   | `required`  | Number of visible rows in the viewport             |
-| `onSelect`   | `(item: T, index: number) => void`                         | `undefined` | Callback fired when an item is selected with Enter |
-| `cursor`     | `string`                                                   | `undefined` | Cursor character for the active item               |
-| `overscan`   | `number`                                                   | `2`         | Extra rows rendered above and below the viewport   |
-
-## Examples
-
-### Large dataset with scrollbar
 
 ```tsx
 <VirtualList
-  items={Array.from({ length: 10000 }, (_, i) => ({
-    id: i,
-    label: `Log entry #${i}`,
-  }))}
-  height={15}
-  renderItem={(item, _idx, isActive) => (
-    <Text inverse={isActive}> {item.label} </Text>
-  )}
+  items={Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`)}
+  height={10}
+  renderItem={(item, index, isActive) => <Text bold={isActive}>{item}</Text>}
 />
 ```
 
-### Custom overscan
+## API Reference
 
-```tsx
-<VirtualList
-  items={["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta"]}
-  height={3}
-  overscan={1}
-  renderItem={(item, _idx, isActive) => (
-    <Text color={isActive ? "green" : undefined}>{item}</Text>
-  )}
-/>
-```
+### VirtualList
 
-### With select handler
-
-```tsx
-<VirtualList
-  items={["Create file", "Delete file", "Rename file", "Copy file"]}
-  height={4}
-  onSelect={(item) => console.log(`Action: ${item}`)}
-  renderItem={(item, _idx, isActive) => (
-    <Text bold={isActive}>{isActive ? `› ${item}` : `  ${item}`}</Text>
-  )}
-/>
-```
-
-## Registry Files
-
-- `components/ui/virtual-list.tsx`
+| Prop         | Type                                                       | Default     |
+| ------------ | ---------------------------------------------------------- | ----------- |
+| `items`      | `T[]`                                                      | `required`  |
+| `renderItem` | `(item: T, index: number, isActive: boolean) => ReactNode` | `required`  |
+| `height`     | `number`                                                   | `required`  |
+| `onSelect`   | `(item: T, index: number) => void`                         | `undefined` |
+| `cursor`     | `string`                                                   | `undefined` |
+| `overscan`   | `number`                                                   | `2`         |

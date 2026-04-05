@@ -3,80 +3,70 @@ title: "Email Input"
 description: "Email input with validation and domain suggestions"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="email-input" />
-</TerminalPreview>
+<ComponentPreview name="email-input-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/email-input.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="email-input"
+  title="components/ui/email-input.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { EmailInput } from "@/components/ui/email-input";
-
-export function Example() {
-  return (
-    <EmailInput
-      label="Email"
-      placeholder="you@example.com"
-      onSubmit={(value) => console.log("Submitted:", value)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                      | Default                                                    | Description                                     |
-| ------------- | ------------------------- | ---------------------------------------------------------- | ----------------------------------------------- |
-| `value`       | `string`                  | `undefined`                                                | Controlled input value                          |
-| `onChange`    | `(value: string) => void` | `undefined`                                                | Called when the input value changes             |
-| `onSubmit`    | `(value: string) => void` | `undefined`                                                | Called when Enter is pressed with a valid email |
-| `label`       | `string`                  | `undefined`                                                | Label text displayed above the input            |
-| `placeholder` | `string`                  | `"you@example.com"`                                        | Placeholder shown when the input is empty       |
-| `autoFocus`   | `boolean`                 | `false`                                                    | Whether to focus the input on mount             |
-| `id`          | `string`                  | `undefined`                                                | Unique identifier for focus management          |
-| `width`       | `number`                  | `40`                                                       | Width of the input box in columns               |
-| `suggestions` | `string[]`                | `["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]` | Domain suggestions shown after typing `@`       |
-
-## Examples
-
-### With Label and Custom Width
-
-```tsx
-<EmailInput label="Work Email" width={50} placeholder="name@company.com" />
-```
-
-### Controlled Value
-
-```tsx
-<EmailInput value={email} onChange={setEmail} onSubmit={(val) => signup(val)} />
-```
-
-### Custom Domain Suggestions
 
 ```tsx
 <EmailInput
-  label="Corporate Email"
-  suggestions={["acme.com", "acme.org", "acme.io"]}
+  label="Email"
+  placeholder="you@example.com"
+  onSubmit={(value) => console.log("Submitted:", value)}
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/email-input.tsx`
+### EmailInput
+
+| Prop          | Type                      | Default                                                    |
+| ------------- | ------------------------- | ---------------------------------------------------------- |
+| `value`       | `string`                  | `undefined`                                                |
+| `onChange`    | `(value: string) => void` | `undefined`                                                |
+| `onSubmit`    | `(value: string) => void` | `undefined`                                                |
+| `label`       | `string`                  | `undefined`                                                |
+| `placeholder` | `string`                  | `"you@example.com"`                                        |
+| `autoFocus`   | `boolean`                 | `false`                                                    |
+| `id`          | `string`                  | `undefined`                                                |
+| `width`       | `number`                  | `40`                                                       |
+| `suggestions` | `string[]`                | `["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]` |

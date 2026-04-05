@@ -3,93 +3,68 @@ title: "JSON"
 description: "Pretty-printed JSON with collapsible nodes"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="json" />
-</TerminalPreview>
+<ComponentPreview name="json-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/json.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="json"
+  title="components/ui/json.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { JSONView } from "@/components/ui/json";
-
-export function Example() {
-  return (
-    <JSONView
-      label="package.json"
-      data={{
-        name: "my-cli",
-        version: "1.0.0",
-        dependencies: {
-          ink: "^5.0.0",
-          react: "^18.0.0",
-        },
-      }}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type      | Default     | Description                                  |
-| ----------- | --------- | ----------- | -------------------------------------------- |
-| `data`      | `unknown` | `required`  | The JSON-serializable data to display        |
-| `indent`    | `number`  | `2`         | Number of spaces per indentation level       |
-| `collapsed` | `boolean` | `false`     | Whether all nodes start in a collapsed state |
-| `label`     | `string`  | `undefined` | Label displayed above the JSON tree          |
-
-## Examples
-
-### Collapsed by default
 
 ```tsx
 <JSONView
-  collapsed
+  label="package.json"
   data={{
-    users: [
-      { name: "Alice", age: 30 },
-      { name: "Bob", age: 25 },
-    ],
-    meta: { total: 2 },
+    name: "my-cli",
+    version: "1.0.0",
+    dependencies: { ink: "^5.0.0" },
   }}
 />
 ```
 
-### Custom indentation
+## API Reference
 
-```tsx
-<JSONView indent={4} data={["react", "ink", "chalk", "yoga-layout"]} />
-```
+### JSONView
 
-### Simple key-value data
-
-```tsx
-<JSONView
-  label="Environment"
-  data={{
-    NODE_ENV: "production",
-    PORT: 3000,
-    DEBUG: false,
-  }}
-/>
-```
-
-## Registry Files
-
-- `components/ui/json.tsx`
+| Prop        | Type      | Default     |
+| ----------- | --------- | ----------- |
+| `data`      | `unknown` | `required`  |
+| `indent`    | `number`  | `2`         |
+| `collapsed` | `boolean` | `false`     |
+| `label`     | `string`  | `undefined` |

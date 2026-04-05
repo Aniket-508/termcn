@@ -3,73 +3,73 @@ title: "Toast"
 description: "Auto-dismissing toast notification"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="toast" />
-</TerminalPreview>
+<ComponentPreview name="toast-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/toast.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="toast"
+  title="components/ui/toast.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Toast } from "@/components/ui/toast";
-
-export function Example() {
-  return (
-    <Toast
-      variant="success"
-      message="Settings saved successfully."
-      duration={5000}
-      onDismiss={() => console.log("toast closed")}
-    />
-  );
-}
 ```
 
-## Dependencies
-
-### Registry Dependencies
-
-- `use-interval`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type           | Default     | Description                                      |
-| ----------- | -------------- | ----------- | ------------------------------------------------ |
-| `message`   | `string`       | `required`  | Text content of the toast                        |
-| `variant`   | `ToastVariant` | `"info"`    | Visual style variant                             |
-| `duration`  | `number`       | `3000`      | Auto-dismiss delay in milliseconds               |
-| `onDismiss` | `() => void`   | `undefined` | Callback fired when the toast is dismissed       |
-| `icon`      | `string`       | `undefined` | Custom icon character, overrides variant default |
+```tsx
+<Toast
+  variant="success"
+  message="Settings saved successfully."
+  duration={5000}
+  onDismiss={() => console.log("toast closed")}
+/>
+```
 
 ## Examples
 
-### Info Toast
-
-```tsx
-<Toast message="New version available." />
-```
-
 ### Error with Longer Duration
 
-```tsx
-<Toast variant="error" message="Deploy failed. Check logs." duration={8000} />
-```
+<ComponentPreview name="toast-error" />
 
-### Warning with Custom Icon
+## API Reference
 
-```tsx
-<Toast variant="warning" message="API rate limit at 80%." icon="🔥" />
-```
+### Toast
 
-## Registry Files
-
-- `components/ui/toast.tsx`
+| Prop        | Type           | Default     |
+| ----------- | -------------- | ----------- |
+| `message`   | `string`       | `required`  |
+| `variant`   | `ToastVariant` | `"info"`    |
+| `duration`  | `number`       | `3000`      |
+| `onDismiss` | `() => void`   | `undefined` |
+| `icon`      | `string`       | `undefined` |

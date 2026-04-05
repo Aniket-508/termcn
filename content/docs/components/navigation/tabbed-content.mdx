@@ -3,133 +3,81 @@ title: "Tabbed Content"
 description: "Tab bar wired to content panels"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="tabbed-content" />
-</TerminalPreview>
+<ComponentPreview name="tabbed-content-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/tabbed-content.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="tabbed-content"
+  title="components/ui/tabbed-content.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { TabbedContent } from "@/components/ui/tabbed-content";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <TabbedContent
-      defaultTab="overview"
-      tabBarStyle="underline"
-      tabs={[
-        {
-          id: "overview",
-          label: "Overview",
-          content: <Text>Project overview goes here.</Text>,
-        },
-        {
-          id: "logs",
-          label: "Logs",
-          content: <Text>Application logs output.</Text>,
-        },
-        {
-          id: "settings",
-          label: "Settings",
-          content: <Text>Configuration panel.</Text>,
-        },
-      ]}
-      onChange={(id) => console.log(id)}
-    />
-  );
-}
 ```
 
-## Dependencies
+```tsx
+<TabbedContent
+  defaultTab="overview"
+  tabs={[
+    {
+      id: "overview",
+      label: "Overview",
+      content: <Text>Overview content.</Text>,
+    },
+    { id: "logs", label: "Logs", content: <Text>Logs content.</Text> },
+  ]}
+/>
+```
 
-### Registry Dependencies
+## API Reference
 
-- `tabs`
-- `theme-provider`
+### TabbedContent
 
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                                | Default       | Description                                        |
-| ------------- | ----------------------------------- | ------------- | -------------------------------------------------- |
-| `tabs`        | `TabbedContentTab[]`                | `required`    | Array of tab definitions with labels and content   |
-| `defaultTab`  | `string`                            | `undefined`   | ID of the initially active tab (uncontrolled mode) |
-| `activeTab`   | `string`                            | `undefined`   | ID of the active tab (controlled mode)             |
-| `onChange`    | `(id: string) => void`              | `undefined`   | Callback fired with the new tab ID on switch       |
-| `tabBarStyle` | `"underline" \| "box" \| "minimal"` | `"underline"` | Visual style of the tab bar                        |
+| Prop          | Type                                | Default       |
+| ------------- | ----------------------------------- | ------------- |
+| `tabs`        | `TabbedContentTab[]`                | `required`    |
+| `defaultTab`  | `string`                            | `undefined`   |
+| `activeTab`   | `string`                            | `undefined`   |
+| `onChange`    | `(id: string) => void`              | `undefined`   |
+| `tabBarStyle` | `"underline" \| "box" \| "minimal"` | `"underline"` |
 
 ### TabbedContentTab
 
-| Prop       | Type        | Default     | Description                                     |
-| ---------- | ----------- | ----------- | ----------------------------------------------- |
-| `id`       | `string`    | `required`  | Unique identifier for the tab                   |
-| `label`    | `string`    | `required`  | Display text shown in the tab bar               |
-| `content`  | `ReactNode` | `required`  | Content rendered when this tab is active        |
-| `disabled` | `boolean`   | `undefined` | When true, the tab is skipped during navigation |
-
-## Examples
-
-### Box-style tab bar
-
-```tsx
-<TabbedContent
-  tabBarStyle="box"
-  tabs={[
-    { id: "code", label: "Code", content: <Text>Source code view.</Text> },
-    { id: "preview", label: "Preview", content: <Text>Live preview.</Text> },
-  ]}
-/>
-```
-
-### Minimal tab bar
-
-```tsx
-<TabbedContent
-  tabBarStyle="minimal"
-  tabs={[
-    { id: "all", label: "All", content: <Text>All items listed here.</Text> },
-    { id: "active", label: "Active", content: <Text>Active items only.</Text> },
-    {
-      id: "archived",
-      label: "Archived",
-      content: <Text>Archived items.</Text>,
-    },
-  ]}
-/>
-```
-
-### With disabled tab
-
-```tsx
-<TabbedContent
-  defaultTab="general"
-  tabs={[
-    {
-      id: "general",
-      label: "General",
-      content: <Text>General settings.</Text>,
-    },
-    {
-      id: "advanced",
-      label: "Advanced",
-      content: <Text>Advanced options.</Text>,
-      disabled: true,
-    },
-    { id: "about", label: "About", content: <Text>Version info.</Text> },
-  ]}
-/>
-```
-
-## Registry Files
-
-- `components/ui/tabbed-content.tsx`
+| Prop       | Type        | Default     |
+| ---------- | ----------- | ----------- |
+| `id`       | `string`    | `required`  |
+| `label`    | `string`    | `required`  |
+| `content`  | `ReactNode` | `required`  |
+| `disabled` | `boolean`   | `undefined` |

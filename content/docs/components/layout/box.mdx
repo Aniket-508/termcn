@@ -3,80 +3,60 @@ title: "Box"
 description: "Enhanced flexbox container with theme-aware borders"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="box" />
-</TerminalPreview>
+<ComponentPreview name="box-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/box.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="box" title="components/ui/box.tsx" collapsible={false} />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Box } from "@/components/ui/box";
-
-export function Example() {
-  return (
-    <Box border borderVariant="focus" padding={1}>
-      <Text>Focused container</Text>
-    </Box>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop            | Type                                                                   | Default     | Description                                                               |
-| --------------- | ---------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
-| `border`        | `boolean`                                                              | `undefined` | When true, renders a border around the box using the theme's border style |
-| `borderVariant` | `"default" \| "muted" \| "focus" \| "success" \| "error" \| "warning"` | `"default"` | Semantic border color variant resolved from the current theme             |
-| `borderColor`   | `string`                                                               | `undefined` | Explicit border color that overrides `borderVariant`                      |
-| `children`      | `ReactNode`                                                            | `undefined` | Content to render inside the box                                          |
-| `...props`      | `InkBoxProps`                                                          | —           | All standard Ink `Box` props (padding, margin, flexDirection, etc.)       |
-
-## Examples
-
-### Bordered box with default variant
-
 ```tsx
-<Box border padding={1}>
-  <Text>Default border</Text>
+<Box border borderVariant="focus" padding={1}>
+  <Text>Focused container</Text>
 </Box>
 ```
 
-### Success variant
+## API Reference
 
-```tsx
-<Box border borderVariant="success" padding={1}>
-  <Text>Operation completed</Text>
-</Box>
-```
+### Box
 
-### Error variant with custom padding
-
-```tsx
-<Box border borderVariant="error" paddingX={2} paddingY={1}>
-  <Text>Something went wrong</Text>
-</Box>
-```
-
-### Custom border color
-
-```tsx
-<Box border borderColor="#ff69b4" padding={1}>
-  <Text>Custom pink border</Text>
-</Box>
-```
-
-## Registry Files
-
-- `components/ui/box.tsx`
+| Prop            | Type            | Default     |
+| --------------- | --------------- | ----------- |
+| `border`        | `boolean`       | `undefined` |
+| `borderVariant` | `BorderVariant` | `"default"` |
+| `borderColor`   | `string`        | `undefined` |
+| `children`      | `ReactNode`     | `undefined` |
+| `...props`      | `InkBoxProps`   | —           |

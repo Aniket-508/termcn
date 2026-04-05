@@ -3,104 +3,73 @@ title: "Splash Screen"
 description: "Styled startup banner with big ASCII art title, subtitle, author credit, and status line"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="splash-screen" />
-</TerminalPreview>
+<ComponentPreview name="splash-screen-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/splash-screen.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="splash-screen"
+  title="components/ui/splash-screen.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { SplashScreen } from "@/components/ui/splash-screen";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <SplashScreen
-      title="MyCLI"
-      subtitle="The modern developer toolkit"
-      author={{ name: "Jane Doe", href: "https://example.com" }}
-      statusLine={<Text color="green">● Ready on port 3000</Text>}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `big-text`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop            | Type                              | Default     | Description                                                   |
-| --------------- | --------------------------------- | ----------- | ------------------------------------------------------------- |
-| `title`         | `string`                          | `required`  | Text rendered as large ASCII art.                             |
-| `font`          | `FigletFont`                      | `"block"`   | Font used for the ASCII title (`"block"` or `"simple"`).      |
-| `titleColor`    | `string`                          | `undefined` | Primary title color; defaults to theme primary.               |
-| `titleColorAlt` | `string`                          | `undefined` | Alternate row color for a striped depth effect on the title.  |
-| `bold`          | `boolean`                         | `true`      | Render the title text in bold.                                |
-| `subtitle`      | `string`                          | `undefined` | Tagline shown below the title.                                |
-| `subtitleDim`   | `boolean`                         | `true`      | Dim the subtitle text.                                        |
-| `author`        | `{ name: string; href?: string }` | `undefined` | Author credit line; `href` creates a clickable terminal link. |
-| `statusLine`    | `ReactNode`                       | `undefined` | Custom status content rendered below the author line.         |
-| `padding`       | `number`                          | `2`         | Left padding for the entire splash layout.                    |
-| `align`         | `"left" \| "center"`              | `undefined` | Horizontal alignment of the content.                          |
-
-## Examples
-
-### Minimal splash
-
-```tsx
-<SplashScreen title="Hello" subtitle="Welcome to the app" />
-```
-
-### With alternating title colors
 
 ```tsx
 <SplashScreen
-  title="Deploy"
-  titleColor="#00ff88"
-  titleColorAlt="#0088ff"
-  subtitle="Ship with confidence"
+  title="MyCLI"
+  subtitle="The modern developer toolkit"
+  author={{ name: "Jane Doe", href: "https://example.com" }}
+  statusLine={<Text color="green">● Ready on port 3000</Text>}
 />
 ```
 
-### Author credit with link
+## API Reference
 
-```tsx
-<SplashScreen
-  title="Toolbox"
-  font="simple"
-  author={{ name: "Acme Corp", href: "https://acme.dev" }}
-  subtitle="v4.2.0"
-  subtitleDim={false}
-/>
-```
+### SplashScreen
 
-### Custom status line
-
-```tsx
-<SplashScreen
-  title="Server"
-  statusLine={
-    <Text>
-      <Text color="green">✓</Text> Listening on <Text bold>:8080</Text>
-    </Text>
-  }
-/>
-```
-
-## Registry Files
-
-- `components/ui/splash-screen.tsx`
+| Prop            | Type                              | Default     |
+| --------------- | --------------------------------- | ----------- |
+| `title`         | `string`                          | `required`  |
+| `font`          | `FigletFont`                      | `"block"`   |
+| `titleColor`    | `string`                          | `undefined` |
+| `titleColorAlt` | `string`                          | `undefined` |
+| `bold`          | `boolean`                         | `true`      |
+| `subtitle`      | `string`                          | `undefined` |
+| `subtitleDim`   | `boolean`                         | `true`      |
+| `author`        | `{ name: string; href?: string }` | `undefined` |
+| `statusLine`    | `ReactNode`                       | `undefined` |
+| `padding`       | `number`                          | `2`         |
+| `align`         | `"left" \| "center"`              | `undefined` |

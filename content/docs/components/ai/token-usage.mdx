@@ -3,93 +3,73 @@ title: "Token Usage"
 description: "Compact token counter showing prompt and completion usage with optional cost estimate; also exports ContextMeter for visualising context window fill"
 ---
 
-<TerminalPreview defaultThemeKey="tokyo-night">
-  <ComponentPreview name="token-usage" />
-</TerminalPreview>
+<ComponentPreview name="token-usage-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/token-usage.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="token-usage"
+  title="components/ui/token-usage.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
-import { TokenUsage } from "@/components/ui/token-usage";
-
-export function Example() {
-  return <TokenUsage prompt={2450} completion={890} model="gpt-4o" showCost />;
-}
+import { TokenUsage, ContextMeter } from "@/components/ui/token-usage";
 ```
 
-## Dependencies
+```tsx
+<TokenUsage prompt={2450} completion={890} model="gpt-4o" showCost />
+```
 
-### npm Dependencies
-
-- `ink`
-
-## Props
+## API Reference
 
 ### TokenUsage
 
-| Prop         | Type      | Default     | Description                                                                   |
-| ------------ | --------- | ----------- | ----------------------------------------------------------------------------- |
-| `prompt`     | `number`  | `required`  | Number of input/prompt tokens used.                                           |
-| `completion` | `number`  | `required`  | Number of output/completion tokens generated.                                 |
-| `model`      | `string`  | `undefined` | Model name used for cost estimation (e.g. `"gpt-4o"`, `"claude-3-5-sonnet"`). |
-| `showCost`   | `boolean` | `false`     | Display an estimated cost based on the model's per-token pricing.             |
+| Prop         | Type      | Default     |
+| ------------ | --------- | ----------- |
+| `prompt`     | `number`  | `required`  |
+| `completion` | `number`  | `required`  |
+| `model`      | `string`  | `undefined` |
+| `showCost`   | `boolean` | `false`     |
 
 ### ContextMeter
 
-| Prop          | Type      | Default     | Description                                         |
-| ------------- | --------- | ----------- | --------------------------------------------------- |
-| `used`        | `number`  | `required`  | Number of tokens currently used.                    |
-| `limit`       | `number`  | `required`  | Maximum context window size in tokens.              |
-| `label`       | `string`  | `undefined` | Optional label shown before the progress bar.       |
-| `showPercent` | `boolean` | `true`      | Display the usage percentage next to the bar.       |
-| `warnAt`      | `number`  | `75`        | Percentage threshold at which the bar turns yellow. |
-| `criticalAt`  | `number`  | `90`        | Percentage threshold at which the bar turns red.    |
-| `width`       | `number`  | `20`        | Width of the progress bar in characters.            |
-
-## Examples
-
-### Basic token count
-
-```tsx
-<TokenUsage prompt={1500} completion={420} />
-```
-
-### With model and cost
-
-```tsx
-<TokenUsage
-  prompt={12000}
-  completion={3400}
-  model="claude-3-5-sonnet"
-  showCost
-/>
-```
-
-### Context meter
-
-```tsx
-<ContextMeter used={95000} limit={128000} label="Context" />
-```
-
-### Context meter at critical level
-
-```tsx
-<ContextMeter
-  used={185000}
-  limit={200000}
-  label="Window"
-  warnAt={70}
-  criticalAt={85}
-  width={30}
-/>
-```
-
-## Registry Files
-
-- `components/ui/token-usage.tsx`
+| Prop          | Type      | Default     |
+| ------------- | --------- | ----------- |
+| `used`        | `number`  | `required`  |
+| `limit`       | `number`  | `required`  |
+| `label`       | `string`  | `undefined` |
+| `showPercent` | `boolean` | `true`      |
+| `warnAt`      | `number`  | `75`        |
+| `criticalAt`  | `number`  | `90`        |
+| `width`       | `number`  | `20`        |

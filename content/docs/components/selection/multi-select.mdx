@@ -3,99 +3,71 @@ title: "Multi Select"
 description: "Multi-select list with checkboxes and select-all"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="multi-select" />
-</TerminalPreview>
+<ComponentPreview name="multi-select-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/multi-select.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="multi-select"
+  title="components/ui/multi-select.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { MultiSelect } from "@/components/ui/multi-select";
-
-export function Example() {
-  return (
-    <MultiSelect
-      options={[
-        { value: "react", label: "React" },
-        { value: "vue", label: "Vue" },
-        { value: "svelte", label: "Svelte" },
-      ]}
-      onChange={(values) => console.log("Selected:", values)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type                     | Default     | Description                                         |
-| ----------- | ------------------------ | ----------- | --------------------------------------------------- |
-| `options`   | `MultiSelectOption<T>[]` | `required`  | Array of `{ value, label, hint?, disabled? }` items |
-| `value`     | `T[]`                    | `undefined` | Controlled array of selected values                 |
-| `onChange`  | `(values: T[]) => void`  | `undefined` | Callback fired when selection changes               |
-| `onSubmit`  | `(values: T[]) => void`  | `undefined` | Callback fired on Enter to confirm selection        |
-| `cursor`    | `string`                 | `"›"`       | Character used for the active-row cursor            |
-| `checkmark` | `string`                 | `"◉"`       | Character used to indicate a selected option        |
-| `height`    | `number`                 | `undefined` | Visible row count; enables scrolling when set       |
-
-## Examples
-
-### With Hints and Disabled Options
 
 ```tsx
 <MultiSelect
   options={[
-    { value: "node", label: "Node.js", hint: "LTS" },
-    { value: "deno", label: "Deno", hint: "v2" },
-    { value: "bun", label: "Bun", disabled: true },
+    { value: "react", label: "React" },
+    { value: "vue", label: "Vue" },
+    { value: "svelte", label: "Svelte" },
   ]}
+  onChange={(values) => {}}
 />
 ```
 
-### Scrollable List
+## API Reference
 
-```tsx
-<MultiSelect
-  options={[
-    { value: "a", label: "Alpha" },
-    { value: "b", label: "Beta" },
-    { value: "c", label: "Gamma" },
-    { value: "d", label: "Delta" },
-    { value: "e", label: "Epsilon" },
-  ]}
-  height={3}
-/>
-```
+### MultiSelect
 
-### Custom Cursor and Checkmark
-
-```tsx
-<MultiSelect
-  options={[
-    { value: "ts", label: "TypeScript" },
-    { value: "js", label: "JavaScript" },
-  ]}
-  cursor="→"
-  checkmark="✓"
-/>
-```
-
-## Registry Files
-
-- `components/ui/multi-select.tsx`
+| Prop        | Type                     | Default     |
+| ----------- | ------------------------ | ----------- |
+| `options`   | `MultiSelectOption<T>[]` | `required`  |
+| `value`     | `T[]`                    | `undefined` |
+| `onChange`  | `(values: T[]) => void`  | `undefined` |
+| `onSubmit`  | `(values: T[]) => void`  | `undefined` |
+| `cursor`    | `string`                 | `"›"`       |
+| `checkmark` | `string`                 | `"◉"`       |
+| `height`    | `number`                 | `undefined` |

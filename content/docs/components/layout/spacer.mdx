@@ -3,77 +3,63 @@ title: "Spacer"
 description: "Flexible space between flex children"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="spacer" />
-</TerminalPreview>
+<ComponentPreview name="spacer-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/spacer.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="spacer"
+  title="components/ui/spacer.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Spacer } from "@/components/ui/spacer";
-
-export function Example() {
-  return (
-    <Box flexDirection="row">
-      <Text>Left</Text>
-      <Spacer />
-      <Text>Right</Text>
-    </Box>
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop        | Type                         | Default        | Description                                                  |
-| ----------- | ---------------------------- | -------------- | ------------------------------------------------------------ |
-| `size`      | `number`                     | `undefined`    | Fixed size in columns or rows; omit to fill available space  |
-| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Axis along which the spacer expands when `size` is specified |
-
-## Examples
-
-### Flexible spacer (pushes items apart)
 
 ```tsx
 <Box flexDirection="row">
-  <Text>Logo</Text>
+  <Text>Left</Text>
   <Spacer />
-  <Text>Menu</Text>
+  <Text>Right</Text>
 </Box>
 ```
 
-### Fixed horizontal space
+## API Reference
 
-```tsx
-<Box flexDirection="row">
-  <Text>A</Text>
-  <Spacer size={4} />
-  <Text>B</Text>
-</Box>
-```
+### Spacer
 
-### Fixed vertical space
-
-```tsx
-<Box flexDirection="column">
-  <Text>Header</Text>
-  <Spacer size={2} direction="vertical" />
-  <Text>Body</Text>
-</Box>
-```
-
-## Registry Files
-
-- `components/ui/spacer.tsx`
+| Prop        | Type        | Default        |
+| ----------- | ----------- | -------------- |
+| `size`      | `number`    | `undefined`    |
+| `direction` | `Direction` | `"horizontal"` |

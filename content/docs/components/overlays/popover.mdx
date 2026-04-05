@@ -3,97 +3,69 @@ title: "Popover"
 description: "Positioned popover with arbitrary content"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="popover" />
-</TerminalPreview>
+<ComponentPreview name="popover-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/popover.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="popover"
+  title="components/ui/popover.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Popover } from "@/components/ui/popover";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <Popover
-      isOpen={true}
-      title="Info"
-      trigger={<Text bold>[?] Help</Text>}
-      onClose={() => console.log("closed")}
-    >
-      <Text>Press Enter to confirm, Esc to cancel.</Text>
-    </Popover>
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type         | Default     | Description                                        |
-| ---------- | ------------ | ----------- | -------------------------------------------------- |
-| `trigger`  | `ReactNode`  | `required`  | Element that anchors the popover                   |
-| `children` | `ReactNode`  | `required`  | Content rendered inside the popover body           |
-| `isOpen`   | `boolean`    | `false`     | Whether the popover is visible                     |
-| `onClose`  | `() => void` | `undefined` | Callback fired when Esc is pressed                 |
-| `title`    | `string`     | `undefined` | Optional title displayed at the top of the popover |
-
-## Examples
-
-### Simple Popover
-
-```tsx
-<Popover isOpen={true} trigger={<Text>⚙ Settings</Text>}>
-  <Text>Theme: dark</Text>
-  <Text>Language: en</Text>
-</Popover>
-```
-
-### With Title and Close Handler
 
 ```tsx
 <Popover
   isOpen={true}
-  title="Actions"
-  trigger={<Text bold>Menu</Text>}
-  onClose={() => setOpen(false)}
+  title="Info"
+  trigger={<Text bold>[?] Help</Text>}
+  onClose={() => close()}
 >
-  <Text>Copy</Text>
-  <Text>Paste</Text>
-  <Text>Delete</Text>
+  <Text>Press Enter to confirm, Esc to cancel.</Text>
 </Popover>
 ```
 
-### Contextual Help
+## API Reference
 
-```tsx
-<Popover
-  isOpen={showHelp}
-  title="Keyboard Shortcuts"
-  trigger={<Text color="blue">[?]</Text>}
-  onClose={() => setShowHelp(false)}
->
-  <Text>Tab — Next field</Text>
-  <Text>Enter — Submit</Text>
-  <Text>Esc — Cancel</Text>
-</Popover>
-```
+### Popover
 
-## Registry Files
-
-- `components/ui/popover.tsx`
+| Prop       | Type         | Default     |
+| ---------- | ------------ | ----------- |
+| `trigger`  | `ReactNode`  | `required`  |
+| `children` | `ReactNode`  | `required`  |
+| `isOpen`   | `boolean`    | `false`     |
+| `onClose`  | `() => void` | `undefined` |
+| `title`    | `string`     | `undefined` |

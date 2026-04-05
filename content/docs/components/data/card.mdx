@@ -3,80 +3,69 @@ title: "Card"
 description: "Card with header, body, and footer slots"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="card" />
-</TerminalPreview>
+<ComponentPreview name="card-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/card.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="card"
+  title="components/ui/card.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Card } from "@/components/ui/card";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <Card title="System Info" subtitle="Local machine">
-      <Text>CPU: 4 cores @ 3.2 GHz</Text>
-      <Text>Memory: 16 GB</Text>
-    </Card>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop                | Type                                                                                            | Default     | Description                                |
-| ------------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------ |
-| `title`             | `string`                                                                                        | `undefined` | Title displayed at the top of the card     |
-| `subtitle`          | `string`                                                                                        | `undefined` | Subtitle displayed below the title         |
-| `children`          | `ReactNode`                                                                                     | `required`  | Body content rendered inside the card      |
-| `footer`            | `ReactNode`                                                                                     | `undefined` | Content rendered below the footer divider  |
-| `borderColor`       | `string`                                                                                        | `undefined` | Override border color (uses theme default) |
-| `width`             | `number`                                                                                        | `undefined` | Fixed width of the card in columns         |
-| `borderStyle`       | `\| "single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border style for the card outline          |
-| `paddingX`          | `number`                                                                                        | `1`         | Horizontal padding inside the card         |
-| `paddingY`          | `number`                                                                                        | `0`         | Vertical padding inside the card           |
-| `footerDividerChar` | `string`                                                                                        | `"─"`       | Character used for the footer divider      |
-
-## Examples
-
-### Card with footer
-
 ```tsx
-<Card title="Deploy Status" footer={<Text color="green">✔ Deployed</Text>}>
-  <Text>Region: us-east-1</Text>
-  <Text>Instances: 3</Text>
+<Card title="System Info" subtitle="Local machine">
+  <Text>CPU: 4 cores @ 3.2 GHz</Text>
 </Card>
 ```
 
-### Custom border style
+## API Reference
 
-```tsx
-<Card title="Alerts" borderStyle="double" borderColor="red">
-  <Text>3 critical issues found</Text>
-</Card>
-```
+### Card
 
-### Minimal card without header
-
-```tsx
-<Card paddingX={2} paddingY={1} width={40}>
-  <Text>A simple content-only card.</Text>
-</Card>
-```
-
-## Registry Files
-
-- `components/ui/card.tsx`
+| Prop                | Type                                                                                         | Default     |
+| ------------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `title`             | `string`                                                                                     | `undefined` |
+| `subtitle`          | `string`                                                                                     | `undefined` |
+| `children`          | `ReactNode`                                                                                  | `required`  |
+| `footer`            | `ReactNode`                                                                                  | `undefined` |
+| `borderColor`       | `string`                                                                                     | `undefined` |
+| `width`             | `number`                                                                                     | `undefined` |
+| `borderStyle`       | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   |
+| `paddingX`          | `number`                                                                                     | `1`         |
+| `paddingY`          | `number`                                                                                     | `0`         |
+| `footerDividerChar` | `string`                                                                                     | `"─"`       |

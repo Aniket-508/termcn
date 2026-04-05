@@ -3,70 +3,62 @@ title: "Aspect Ratio"
 description: "Constrains children to a given aspect ratio"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="aspect-ratio" />
-</TerminalPreview>
+<ComponentPreview name="aspect-ratio-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/aspect-ratio.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="aspect-ratio"
+  title="components/ui/aspect-ratio.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-
-export function Example() {
-  return (
-    <AspectRatio ratio={16 / 9} width={60}>
-      <Text>Widescreen content</Text>
-    </AspectRatio>
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop       | Type        | Default  | Description                                          |
-| ---------- | ----------- | -------- | ---------------------------------------------------- |
-| `children` | `ReactNode` | required | Content to render inside the aspect ratio container  |
-| `ratio`    | `number`    | `16 / 9` | Width-to-height ratio (e.g. `4 / 3`, `1` for square) |
-| `width`    | `number`    | `80`     | Container width in columns                           |
-
-## Examples
-
-### Square aspect ratio
-
 ```tsx
-<AspectRatio ratio={1} width={40}>
-  <Text>Square</Text>
+<AspectRatio ratio={16 / 9} width={60}>
+  <Text>Widescreen content</Text>
 </AspectRatio>
 ```
 
-### 4:3 ratio with custom width
+## API Reference
 
-```tsx
-<AspectRatio ratio={4 / 3} width={60}>
-  <Text>Classic 4:3</Text>
-</AspectRatio>
-```
+### AspectRatio
 
-### Widescreen (default)
-
-```tsx
-<AspectRatio width={80}>
-  <Text>16:9 content at full width</Text>
-</AspectRatio>
-```
-
-## Registry Files
-
-- `components/ui/aspect-ratio.tsx`
+| Prop       | Type        | Default  |
+| ---------- | ----------- | -------- |
+| `children` | `ReactNode` | required |
+| `ratio`    | `number`    | `16 / 9` |
+| `width`    | `number`    | `80`     |

@@ -3,85 +3,67 @@ title: "Thinking Block"
 description: "Collapsible block for displaying extended thinking / reasoning content from an AI model"
 ---
 
-<TerminalPreview defaultThemeKey="tokyo-night">
-  <ComponentPreview name="thinking-block" />
-</TerminalPreview>
+<ComponentPreview name="thinking-block-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/thinking-block.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="thinking-block"
+  title="components/ui/thinking-block.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ThinkingBlock } from "@/components/ui/thinking-block";
-
-export function Example() {
-  return (
-    <ThinkingBlock
-      content="The user wants to refactor the function. I should split it into smaller helpers and add proper error handling..."
-      tokenCount={1284}
-      duration={3200}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop               | Type      | Default       | Description                                                     |
-| ------------------ | --------- | ------------- | --------------------------------------------------------------- |
-| `content`          | `string`  | `required`    | The reasoning/thinking text to display inside the block.        |
-| `streaming`        | `boolean` | `false`       | Show a "Thinking..." header while the model is still reasoning. |
-| `defaultCollapsed` | `boolean` | `true`        | Whether the block starts collapsed; toggle with Enter or Space. |
-| `label`            | `string`  | `"Reasoning"` | Header label shown when not streaming.                          |
-| `tokenCount`       | `number`  | `undefined`   | Number of thinking tokens used, displayed in the header.        |
-| `duration`         | `number`  | `undefined`   | Thinking duration in milliseconds, shown as seconds in header.  |
-
-## Examples
-
-### Collapsed by default
 
 ```tsx
 <ThinkingBlock
-  content="Let me analyze the error stack trace to find the root cause..."
-  tokenCount={832}
-  duration={2100}
+  content="The user wants to refactor the function. I should split it into smaller helpers..."
+  tokenCount={1284}
+  duration={3200}
 />
 ```
 
-### Expanded on render
+## API Reference
 
-```tsx
-<ThinkingBlock
-  content="I need to consider edge cases: empty arrays, null values, and circular references."
-  defaultCollapsed={false}
-  label="Chain of thought"
-/>
-```
+### ThinkingBlock
 
-### Currently streaming
-
-```tsx
-<ThinkingBlock
-  content="Working through the problem step by step..."
-  streaming
-  defaultCollapsed={false}
-/>
-```
-
-## Registry Files
-
-- `components/ui/thinking-block.tsx`
+| Prop               | Type      | Default       |
+| ------------------ | --------- | ------------- |
+| `content`          | `string`  | `required`    |
+| `streaming`        | `boolean` | `false`       |
+| `defaultCollapsed` | `boolean` | `true`        |
+| `label`            | `string`  | `"Reasoning"` |
+| `tokenCount`       | `number`  | `undefined`   |
+| `duration`         | `number`  | `undefined`   |

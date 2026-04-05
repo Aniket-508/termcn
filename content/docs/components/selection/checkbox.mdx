@@ -3,77 +3,66 @@ title: "Checkbox"
 description: "Checkbox with indeterminate state"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="checkbox" />
-</TerminalPreview>
+<ComponentPreview name="checkbox-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/checkbox.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="checkbox"
+  title="components/ui/checkbox.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Checkbox } from "@/components/ui/checkbox";
-
-export function Example() {
-  return (
-    <Checkbox
-      checked
-      label="Enable telemetry"
-      onChange={(checked) => console.log("Checked:", checked)}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop                | Type                         | Default     | Description                                   |
-| ------------------- | ---------------------------- | ----------- | --------------------------------------------- |
-| `checked`           | `boolean`                    | `undefined` | Whether the checkbox is checked               |
-| `onChange`          | `(checked: boolean) => void` | `undefined` | Callback fired when the checked state changes |
-| `label`             | `string`                     | `undefined` | Text label displayed next to the checkbox     |
-| `indeterminate`     | `boolean`                    | `false`     | Show an indeterminate (partial) state icon    |
-| `disabled`          | `boolean`                    | `false`     | Prevent interaction and dim the checkbox      |
-| `id`                | `string`                     | `undefined` | Focus identifier for `useFocus`               |
-| `checkedIcon`       | `string`                     | `"■"`       | Character shown when checked                  |
-| `uncheckedIcon`     | `string`                     | `"□"`       | Character shown when unchecked                |
-| `indeterminateIcon` | `string`                     | `"▪"`       | Character shown when indeterminate            |
-
-## Examples
-
-### Disabled Checkbox
 
 ```tsx
-<Checkbox label="Locked option" disabled />
+<Checkbox checked label="Enable telemetry" onChange={(checked) => {}} />
 ```
 
-### Indeterminate State
+## API Reference
 
-```tsx
-<Checkbox label="Select all" indeterminate />
-```
+### Checkbox
 
-### Custom Icons
-
-```tsx
-<Checkbox label="Accept terms" checkedIcon="✓" uncheckedIcon="✗" />
-```
-
-## Registry Files
-
-- `components/ui/checkbox.tsx`
+| Prop                | Type                         | Default     |
+| ------------------- | ---------------------------- | ----------- |
+| `checked`           | `boolean`                    | `undefined` |
+| `onChange`          | `(checked: boolean) => void` | `undefined` |
+| `label`             | `string`                     | `undefined` |
+| `indeterminate`     | `boolean`                    | `false`     |
+| `disabled`          | `boolean`                    | `false`     |
+| `id`                | `string`                     | `undefined` |
+| `checkedIcon`       | `string`                     | `"■"`       |
+| `uncheckedIcon`     | `string`                     | `"□"`       |
+| `indeterminateIcon` | `string`                     | `"▪"`       |

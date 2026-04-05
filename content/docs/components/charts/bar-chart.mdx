@@ -3,102 +3,71 @@ title: "Bar Chart"
 description: "Horizontal and vertical bar chart with labels"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="bar-chart" />
-</TerminalPreview>
+<ComponentPreview name="bar-chart-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/bar-chart.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="bar-chart"
+  title="components/ui/bar-chart.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { BarChart } from "@/components/ui/bar-chart";
-
-export function Example() {
-  return (
-    <BarChart
-      data={[
-        { label: "Mon", value: 12 },
-        { label: "Tue", value: 28 },
-        { label: "Wed", value: 19 },
-        { label: "Thu", value: 35 },
-        { label: "Fri", value: 24 },
-      ]}
-      width={40}
-      showValues
-      title="Weekly Traffic"
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop         | Type                         | Default        | Description                            |
-| ------------ | ---------------------------- | -------------- | -------------------------------------- |
-| `data`       | `BarChartItem[]`             | `required`     | Array of data points to chart          |
-| `direction`  | `"horizontal" \| "vertical"` | `"horizontal"` | Render bars horizontally or vertically |
-| `width`      | `number`                     | `30`           | Chart width in columns                 |
-| `height`     | `number`                     | `10`           | Chart height in rows (vertical only)   |
-| `showValues` | `boolean`                    | `true`         | Show value labels alongside bars       |
-| `title`      | `string`                     | `undefined`    | Optional title displayed above chart   |
-
-## Examples
-
-### Vertical Bar Chart
 
 ```tsx
 <BarChart
   data={[
-    { label: "Q1", value: 40 },
-    { label: "Q2", value: 65 },
-    { label: "Q3", value: 52 },
-    { label: "Q4", value: 78 },
+    { label: "Mon", value: 12 },
+    { label: "Tue", value: 28 },
   ]}
-  direction="vertical"
-  width={24}
-  height={8}
-  title="Quarterly Revenue"
+  width={40}
+  showValues
+  title="Weekly Traffic"
 />
 ```
 
-### Custom Colors
+## API Reference
 
-```tsx
-<BarChart
-  data={[
-    { label: "Pass", value: 87, color: "#16a34a" },
-    { label: "Warn", value: 12, color: "#d97706" },
-    { label: "Fail", value: 3, color: "#dc2626" },
-  ]}
-  width={36}
-/>
-```
+### BarChart
 
-### Without Values
-
-```tsx
-<BarChart
-  data={[
-    { label: "Alice", value: 95 },
-    { label: "Bob", value: 72 },
-    { label: "Carol", value: 88 },
-  ]}
-  showValues={false}
-  width={30}
-/>
-```
-
-## Registry Files
-
-- `components/ui/bar-chart.tsx`
+| Prop         | Type                         | Default        |
+| ------------ | ---------------------------- | -------------- |
+| `data`       | `BarChartItem[]`             | `required`     |
+| `direction`  | `"horizontal" \| "vertical"` | `"horizontal"` |
+| `width`      | `number`                     | `30`           |
+| `height`     | `number`                     | `10`           |
+| `showValues` | `boolean`                    | `true`         |
+| `title`      | `string`                     | `undefined`    |

@@ -3,105 +3,49 @@ title: "Wizard"
 description: "Multi-step wizard with per-step validation"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="wizard" />
-</TerminalPreview>
+<ComponentPreview name="wizard-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/wizard.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="wizard"
+  title="components/ui/wizard.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Wizard } from "@/components/ui/wizard";
-import { Text } from "ink";
-
-export function Example() {
-  return (
-    <Wizard
-      steps={[
-        {
-          key: "account",
-          title: "Account",
-          content: <Text>Enter your username and password</Text>,
-        },
-        {
-          key: "profile",
-          title: "Profile",
-          content: <Text>Set up your profile details</Text>,
-        },
-        {
-          key: "confirm",
-          title: "Confirm",
-          content: <Text>Review and confirm your settings</Text>,
-        },
-      ]}
-      onComplete={(keys) => console.log("Completed steps:", keys)}
-      onCancel={() => console.log("Wizard cancelled")}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop           | Type                                 | Default     | Description                                            |
-| -------------- | ------------------------------------ | ----------- | ------------------------------------------------------ |
-| `steps`        | `WizardStep[]`                       | `required`  | Array of step definitions with key, title, and content |
-| `onComplete`   | `(completedSteps: string[]) => void` | `undefined` | Callback fired with all step keys when the wizard ends |
-| `onCancel`     | `() => void`                         | `undefined` | Callback fired when the user presses Escape to cancel  |
-| `showProgress` | `boolean`                            | `true`      | Whether to display the step progress indicator         |
-
-## Examples
-
-### With Step Validation
-
-```tsx
-<Wizard
-  steps={[
-    {
-      key: "name",
-      title: "Name",
-      content: <Text>Enter your name</Text>,
-      validate: () => (nameValue ? true : "Name is required"),
-    },
-    {
-      key: "done",
-      title: "Done",
-      content: <Text>All set!</Text>,
-    },
-  ]}
-  onComplete={(keys) => finish(keys)}
-/>
-```
-
-### Hidden Progress Bar
-
-```tsx
-<Wizard
-  showProgress={false}
-  steps={[
-    { key: "step1", title: "Step 1", content: <Text>First step</Text> },
-    { key: "step2", title: "Step 2", content: <Text>Second step</Text> },
-  ]}
-  onComplete={() => console.log("Done")}
-/>
-```
-
-### Two-Step Setup
 
 ```tsx
 <Wizard
@@ -109,19 +53,40 @@ export function Example() {
     {
       key: "install",
       title: "Install",
-      content: <Text>Installing dependencies...</Text>,
+      content: <Text>Install dependencies</Text>,
     },
     {
-      key: "config",
+      key: "configure",
       title: "Configure",
-      content: <Text>Set your preferences</Text>,
+      content: <Text>Set up your preferences</Text>,
+    },
+    {
+      key: "finish",
+      title: "Finish",
+      content: <Text>Review and confirm your settings</Text>,
     },
   ]}
-  onComplete={() => launchApp()}
-  onCancel={() => process.exit(0)}
+  onComplete={(keys) => console.log("Completed:", keys)}
+  onCancel={() => console.log("Cancelled")}
 />
 ```
 
-## Registry Files
+## API Reference
 
-- `components/ui/wizard.tsx`
+### Wizard
+
+| Prop           | Type                                 | Default     |
+| -------------- | ------------------------------------ | ----------- |
+| `steps`        | `WizardStep[]`                       | `required`  |
+| `onComplete`   | `(completedSteps: string[]) => void` | `undefined` |
+| `onCancel`     | `() => void`                         | `undefined` |
+| `showProgress` | `boolean`                            | `true`      |
+
+### WizardStep
+
+| Prop       | Type                      | Default     |
+| ---------- | ------------------------- | ----------- |
+| `key`      | `string`                  | `required`  |
+| `title`    | `string`                  | `required`  |
+| `content`  | `ReactNode`               | `required`  |
+| `validate` | `() => boolean \| string` | `undefined` |

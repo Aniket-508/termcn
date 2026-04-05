@@ -3,98 +3,71 @@ title: "Heat Map"
 description: "Grid heatmap with color intensity scale"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="heat-map" />
-</TerminalPreview>
+<ComponentPreview name="heat-map-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/heat-map.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="heat-map"
+  title="components/ui/heat-map.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { HeatMap } from "@/components/ui/heat-map";
-
-export function Example() {
-  return (
-    <HeatMap
-      data={[
-        [1, 4, 7, 2],
-        [3, 8, 5, 1],
-        [6, 2, 9, 4],
-      ]}
-      rowLabels={["Mon", "Tue", "Wed"]}
-      colLabels={["Q1", "Q2", "Q3", "Q4"]}
-      showValues
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop         | Type         | Default               | Description                             |
-| ------------ | ------------ | --------------------- | --------------------------------------- |
-| `data`       | `number[][]` | `required`            | 2D array of numeric values for the grid |
-| `rowLabels`  | `string[]`   | `undefined`           | Labels displayed along the left axis    |
-| `colLabels`  | `string[]`   | `undefined`           | Labels displayed along the top axis     |
-| `colorScale` | `string[]`   | `DEFAULT_COLOR_SCALE` | Array of hex colors from low to high    |
-| `cellWidth`  | `number`     | `5`                   | Width of each cell in characters        |
-| `showValues` | `boolean`    | `false`               | Show numeric values inside cells        |
-
-## Examples
-
-### Minimal Grid Without Labels
 
 ```tsx
 <HeatMap
   data={[
-    [0, 3, 6],
-    [2, 5, 8],
-    [4, 7, 10],
+    [1, 4, 7, 2],
+    [3, 8, 5, 1],
   ]}
-/>
-```
-
-### Custom Color Scale
-
-```tsx
-<HeatMap
-  data={[
-    [10, 30, 50],
-    [20, 60, 80],
-    [40, 70, 100],
-  ]}
-  rowLabels={["Low", "Mid", "High"]}
-  colLabels={["A", "B", "C"]}
-  colorScale={["#1e3a5f", "#2980b9", "#f39c12", "#e74c3c"]}
+  rowLabels={["Mon", "Tue"]}
+  colLabels={["Q1", "Q2", "Q3", "Q4"]}
   showValues
 />
 ```
 
-### Wide Cells
+## API Reference
 
-```tsx
-<HeatMap
-  data={[
-    [5, 15, 25],
-    [10, 20, 30],
-  ]}
-  cellWidth={8}
-  colLabels={["Jan", "Feb", "Mar"]}
-  showValues
-/>
-```
+### HeatMap
 
-## Registry Files
-
-- `components/ui/heat-map.tsx`
+| Prop         | Type         | Default               |
+| ------------ | ------------ | --------------------- |
+| `data`       | `number[][]` | `required`            |
+| `rowLabels`  | `string[]`   | `undefined`           |
+| `colLabels`  | `string[]`   | `undefined`           |
+| `colorScale` | `string[]`   | `DEFAULT_COLOR_SCALE` |
+| `cellWidth`  | `number`     | `5`                   |
+| `showValues` | `boolean`    | `false`               |

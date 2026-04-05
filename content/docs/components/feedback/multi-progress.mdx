@@ -3,124 +3,91 @@ title: "Multi Progress"
 description: "Parallel progress display for package managers, build pipelines, and deploy tools"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="multi-progress" />
-</TerminalPreview>
+<ComponentPreview name="multi-progress-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/multi-progress.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="multi-progress"
+  title="components/ui/multi-progress.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { MultiProgress } from "@/components/ui/multi-progress";
-
-export function Example() {
-  return (
-    <MultiProgress
-      items={[
-        {
-          id: "api",
-          label: "API Server",
-          value: 80,
-          total: 100,
-          status: "running",
-        },
-        { id: "db", label: "Database", value: 100, total: 100, status: "done" },
-        {
-          id: "cache",
-          label: "Redis",
-          value: 30,
-          total: 100,
-          status: "running",
-        },
-      ]}
-    />
-  );
-}
 ```
 
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop          | Type                  | Default    | Description                                              |
-| ------------- | --------------------- | ---------- | -------------------------------------------------------- |
-| `items`       | `MultiProgressItem[]` | `required` | Array of progress items to display                       |
-| `barWidth`    | `number`              | `20`       | Character width of each progress bar                     |
-| `labelWidth`  | `number`              | `20`       | Max character width for labels (truncated with ellipsis) |
-| `compact`     | `boolean`             | `false`    | Single-line layout per item                              |
-| `showPercent` | `boolean`             | `true`     | Show percentage next to the bar                          |
-
-### MultiProgressItem
-
-| Prop         | Type                  | Default     | Description                                      |
-| ------------ | --------------------- | ----------- | ------------------------------------------------ |
-| `id`         | `string`              | `required`  | Unique key for the item                          |
-| `label`      | `string`              | `required`  | Display label                                    |
-| `value`      | `number`              | `required`  | Current progress value                           |
-| `total`      | `number`              | `required`  | Maximum progress value                           |
-| `status`     | `MultiProgressStatus` | `undefined` | Status: "pending", "running", "done", or "error" |
-| `statusText` | `string`              | `undefined` | Extra text shown after the label                 |
+```tsx
+<MultiProgress
+  items={[
+    {
+      id: "api",
+      label: "API Server",
+      value: 80,
+      total: 100,
+      status: "running",
+    },
+    { id: "db", label: "Database", value: 100, total: 100, status: "done" },
+    { id: "cache", label: "Redis", value: 30, total: 100, status: "running" },
+  ]}
+/>
+```
 
 ## Examples
 
 ### Compact Mode
 
-```tsx
-<MultiProgress
-  compact
-  items={[
-    { id: "1", label: "eslint", value: 50, total: 100, status: "running" },
-    { id: "2", label: "tsc", value: 100, total: 100, status: "done" },
-  ]}
-/>
-```
+<ComponentPreview name="multi-progress-compact" />
 
-### Custom Bar Width
+## API Reference
 
-```tsx
-<MultiProgress
-  barWidth={40}
-  labelWidth={15}
-  items={[
-    {
-      id: "pkg",
-      label: "Installing",
-      value: 65,
-      total: 100,
-      statusText: "65 of 100 packages",
-    },
-  ]}
-/>
-```
+### MultiProgress
 
-### With Error Status
+| Prop          | Type                  | Default    |
+| ------------- | --------------------- | ---------- |
+| `items`       | `MultiProgressItem[]` | `required` |
+| `barWidth`    | `number`              | `20`       |
+| `labelWidth`  | `number`              | `20`       |
+| `compact`     | `boolean`             | `false`    |
+| `showPercent` | `boolean`             | `true`     |
 
-```tsx
-<MultiProgress
-  items={[
-    { id: "a", label: "Build", value: 100, total: 100, status: "done" },
-    {
-      id: "b",
-      label: "Test",
-      value: 12,
-      total: 48,
-      status: "error",
-      statusText: "FAIL",
-    },
-    { id: "c", label: "Deploy", value: 0, total: 100, status: "pending" },
-  ]}
-/>
-```
+### MultiProgressItem
 
-## Registry Files
-
-- `components/ui/multi-progress.tsx`
+| Prop         | Type                  | Default     |
+| ------------ | --------------------- | ----------- |
+| `id`         | `string`              | `required`  |
+| `label`      | `string`              | `required`  |
+| `value`      | `number`              | `required`  |
+| `total`      | `number`              | `required`  |
+| `status`     | `MultiProgressStatus` | `undefined` |
+| `statusText` | `string`              | `undefined` |

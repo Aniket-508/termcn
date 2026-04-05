@@ -3,89 +3,65 @@ title: "Scroll View"
 description: "Scrollable container with scrollbar"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="scroll-view" />
-</TerminalPreview>
+<ComponentPreview name="scroll-view-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/scroll-view.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="scroll-view"
+  title="components/ui/scroll-view.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { ScrollView } from "@/components/ui/scroll-view";
-
-export function Example() {
-  return (
-    <ScrollView height={10}>
-      <Text>Line 1</Text>
-      <Text>Line 2</Text>
-      <Text>Line 3</Text>
-      <Text>Line 4</Text>
-      <Text>Line 5</Text>
-      <Text>Line 6</Text>
-      <Text>Line 7</Text>
-      <Text>Line 8</Text>
-      <Text>Line 9</Text>
-      <Text>Line 10</Text>
-      <Text>Line 11</Text>
-      <Text>Line 12</Text>
-    </ScrollView>
-  );
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop             | Type        | Default  | Description                            |
-| ---------------- | ----------- | -------- | -------------------------------------- |
-| `height`         | `number`    | required | Visible viewport height in rows        |
-| `children`       | `ReactNode` | required | Scrollable content                     |
-| `showScrollbar`  | `boolean`   | `true`   | Whether to display the scrollbar track |
-| `scrollbarColor` | `string`    | `"gray"` | Color of the scrollbar indicator       |
-
-## Examples
-
-### Basic scrollable list
 
 ```tsx
 <ScrollView height={5}>
-  <Text>Item 1</Text>
-  <Text>Item 2</Text>
-  <Text>Item 3</Text>
-  <Text>Item 4</Text>
-  <Text>Item 5</Text>
-  <Text>Item 6</Text>
-  <Text>Item 7</Text>
-  <Text>Item 8</Text>
+  <Text>Line 1</Text>
+  <Text>Line 2</Text>
+  <Text>Line 3</Text>
 </ScrollView>
 ```
 
-### Hidden scrollbar
+## API Reference
 
-```tsx
-<ScrollView height={8} showScrollbar={false}>
-  <Text>Content without a visible scrollbar</Text>
-</ScrollView>
-```
+### ScrollView
 
-### Custom scrollbar color
-
-```tsx
-<ScrollView height={6} scrollbarColor="cyan">
-  <Text>Scrollable content with a cyan scrollbar</Text>
-</ScrollView>
-```
-
-## Registry Files
-
-- `components/ui/scroll-view.tsx`
+| Prop             | Type        | Default  |
+| ---------------- | ----------- | -------- |
+| `height`         | `number`    | required |
+| `children`       | `ReactNode` | required |
+| `showScrollbar`  | `boolean`   | `true`   |
+| `scrollbarColor` | `string`    | `"gray"` |

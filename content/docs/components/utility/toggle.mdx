@@ -3,88 +3,68 @@ title: "Toggle"
 description: "Toggle/switch component with on/off labels"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="toggle" />
-</TerminalPreview>
+<ComponentPreview name="toggle-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/toggle.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="toggle"
+  title="components/ui/toggle.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Toggle } from "@/components/ui/toggle";
-import { useState } from "react";
-
-export function Example() {
-  const [enabled, setEnabled] = useState(false);
-
-  return <Toggle checked={enabled} onChange={setEnabled} label="Dark mode" />;
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-focus`
-- `theme-provider`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop            | Type                                                                                         | Default     | Description                                  |
-| --------------- | -------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------- |
-| `checked`       | `boolean`                                                                                    | `undefined` | Controlled checked state                     |
-| `onChange`      | `(checked: boolean) => void`                                                                 | `undefined` | Callback fired when the toggle value changes |
-| `label`         | `string`                                                                                     | `undefined` | Text label displayed next to the toggle      |
-| `onLabel`       | `string`                                                                                     | `"ON"`      | Text shown inside the toggle when checked    |
-| `offLabel`      | `string`                                                                                     | `"OFF"`     | Text shown inside the toggle when unchecked  |
-| `id`            | `string`                                                                                     | `undefined` | Focus ID for keyboard navigation             |
-| `disabled`      | `boolean`                                                                                    | `false`     | Disable interaction                          |
-| `checkedIcon`   | `string`                                                                                     | `"●"`       | Icon shown when checked                      |
-| `uncheckedIcon` | `string`                                                                                     | `"○"`       | Icon shown when unchecked                    |
-| `borderStyle`   | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   | Border drawing style for the toggle track    |
-| `paddingX`      | `number`                                                                                     | `1`         | Horizontal padding inside the toggle         |
-
-## Examples
-
-### Uncontrolled toggle
 
 ```tsx
-<Toggle label="Notifications" />
+<Toggle checked={enabled} onChange={setEnabled} label="Dark mode" />
 ```
 
-### Custom labels and icons
+## API Reference
 
-```tsx
-<Toggle
-  label="Sound"
-  onLabel="Yes"
-  offLabel="No"
-  checkedIcon="✔"
-  uncheckedIcon="✘"
-/>
-```
+### Toggle
 
-### Disabled state
-
-```tsx
-<Toggle label="Premium feature" disabled checked />
-```
-
-### Bold border style
-
-```tsx
-<Toggle label="Verbose logging" borderStyle="bold" />
-```
-
-## Registry Files
-
-- `components/ui/toggle.tsx`
+| Prop            | Type                         | Default     |
+| --------------- | ---------------------------- | ----------- |
+| `checked`       | `boolean`                    | `undefined` |
+| `onChange`      | `(checked: boolean) => void` | `undefined` |
+| `label`         | `string`                     | `undefined` |
+| `onLabel`       | `string`                     | `"ON"`      |
+| `offLabel`      | `string`                     | `"OFF"`     |
+| `id`            | `string`                     | `undefined` |
+| `disabled`      | `boolean`                    | `false`     |
+| `checkedIcon`   | `string`                     | `"●"`       |
+| `uncheckedIcon` | `string`                     | `"○"`       |
+| `borderStyle`   | `BorderStyle`                | `"round"`   |
+| `paddingX`      | `number`                     | `1`         |

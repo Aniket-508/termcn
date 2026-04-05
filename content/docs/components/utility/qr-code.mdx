@@ -3,61 +3,61 @@ title: "QR Code"
 description: "Unicode block QR code generator"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="qr-code" />
-</TerminalPreview>
+<ComponentPreview name="qr-code-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/qr-code.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="qr-code"
+  title="components/ui/qr-code.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { QRCode } from "@/components/ui/qr-code";
-
-export function Example() {
-  return <QRCode value="https://termcn.dev" size="md" label="Scan to visit" />;
-}
 ```
-
-## Dependencies
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop    | Type                   | Default     | Description                                                      |
-| ------- | ---------------------- | ----------- | ---------------------------------------------------------------- |
-| `value` | `string`               | `required`  | The text or URL to encode (max ~17 bytes for V1 QR)              |
-| `size`  | `"sm" \| "md" \| "lg"` | `"md"`      | Render size: `"sm"` uses half-blocks, `"lg"` doubles each module |
-| `color` | `string`               | `undefined` | Custom color for the QR modules                                  |
-| `label` | `string`               | `undefined` | Label displayed below the QR code                                |
-
-## Examples
-
-### Small compact QR
 
 ```tsx
-<QRCode value="https://example.com" size="sm" />
+<QRCode value="https://termcn.dev" size="md" label="Scan to visit" />
 ```
 
-### Large QR with custom color
+## API Reference
 
-```tsx
-<QRCode value="HELLO" size="lg" color="cyan" label="Scan me" />
-```
+### QRCode
 
-### Numeric data
-
-```tsx
-<QRCode value="1234567890" size="md" label="Order #1234567890" />
-```
-
-## Registry Files
-
-- `components/ui/qr-code.tsx`
+| Prop    | Type                   | Default     |
+| ------- | ---------------------- | ----------- |
+| `value` | `string`               | `required`  |
+| `size`  | `"sm" \| "md" \| "lg"` | `"md"`      |
+| `color` | `string`               | `undefined` |
+| `label` | `string`               | `undefined` |

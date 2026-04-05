@@ -3,90 +3,68 @@ title: "Confirm"
 description: "Yes/No confirmation prompt"
 ---
 
-<TerminalPreview defaultThemeKey="default">
-  <ComponentPreview name="confirm" />
-</TerminalPreview>
+<ComponentPreview name="confirm-demo" hideCode />
 
 ## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
 
 ```bash
 npx shadcn@latest add https://termcn.vercel.app/r/confirm.json
 ```
 
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="confirm"
+  title="components/ui/confirm.tsx"
+  collapsible={false}
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
 ## Usage
 
 ```tsx
 import { Confirm } from "@/components/ui/confirm";
-
-export function Example() {
-  return (
-    <Confirm
-      message="Are you sure you want to continue?"
-      onConfirm={() => console.log("Confirmed")}
-      onCancel={() => console.log("Cancelled")}
-    />
-  );
-}
 ```
-
-## Dependencies
-
-### Registry Dependencies
-
-- `use-input`
-
-### npm Dependencies
-
-- `ink`
-
-## Props
-
-| Prop           | Type                    | Default     | Description                                          |
-| -------------- | ----------------------- | ----------- | ---------------------------------------------------- |
-| `message`      | `string`                | `required`  | The question or prompt displayed to the user         |
-| `onConfirm`    | `() => void`            | `undefined` | Callback fired when the user confirms                |
-| `onCancel`     | `() => void`            | `undefined` | Callback fired when the user cancels                 |
-| `confirmLabel` | `string`                | `"Yes"`     | Label for the confirm option                         |
-| `cancelLabel`  | `string`                | `"No"`      | Label for the cancel option                          |
-| `defaultValue` | `boolean`               | `false`     | Whether the confirm option is initially selected     |
-| `variant`      | `"default" \| "danger"` | `"default"` | Visual variant; `"danger"` highlights confirm in red |
-
-## Examples
-
-### Danger Variant
 
 ```tsx
 <Confirm
-  message="Delete all files? This cannot be undone."
-  variant="danger"
-  onConfirm={() => deleteFiles()}
-  onCancel={() => console.log("Aborted")}
+  message="Are you sure you want to continue?"
+  onConfirm={() => console.log("Confirmed")}
+  onCancel={() => console.log("Cancelled")}
 />
 ```
 
-### Custom Labels
+## API Reference
 
-```tsx
-<Confirm
-  message="Save changes before exiting?"
-  confirmLabel="Save"
-  cancelLabel="Discard"
-  defaultValue={true}
-  onConfirm={() => saveAndExit()}
-  onCancel={() => exit()}
-/>
-```
+### Confirm
 
-### Default Selection on Confirm
-
-```tsx
-<Confirm
-  message="Enable dark mode?"
-  defaultValue={true}
-  onConfirm={() => setDarkMode(true)}
-/>
-```
-
-## Registry Files
-
-- `components/ui/confirm.tsx`
+| Prop           | Type                    | Default     |
+| -------------- | ----------------------- | ----------- |
+| `message`      | `string`                | `required`  |
+| `onConfirm`    | `() => void`            | `undefined` |
+| `onCancel`     | `() => void`            | `undefined` |
+| `confirmLabel` | `string`                | `"Yes"`     |
+| `cancelLabel`  | `string`                | `"No"`      |
+| `defaultValue` | `boolean`               | `false`     |
+| `variant`      | `"default" \| "danger"` | `"default"` |
