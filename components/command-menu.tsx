@@ -83,7 +83,7 @@ const DocPageLeadingIcon = ({ parsed }: { parsed: DocUrlKind }) => {
     const color = themePrimaryBySlug[parsed.slug];
     return (
       <span
-        className="border-border/60 size-4 shrink-0 rounded-[2px] border"
+        className="border-border/60 size-4 shrink-0 rounded-sm border"
         style={color ? { backgroundColor: color } : undefined}
         aria-hidden
       />

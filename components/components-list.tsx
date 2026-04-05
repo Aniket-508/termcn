@@ -4,9 +4,9 @@ import type { PageTreeFolder, PageTreePage } from "@/lib/page-tree";
 import { getPagesFromFolder } from "@/lib/page-tree";
 import { source } from "@/lib/source";
 
-const getComponentsFolder = (): PageTreeFolder | undefined => {
+const getFolder = (name: string): PageTreeFolder | undefined => {
   for (const node of source.pageTree.children) {
-    if (node.type === "folder" && node.name === "Components") {
+    if (node.type === "folder" && node.name === name) {
       return node;
     }
   }
@@ -27,13 +27,13 @@ const ComponentGrid = ({ pages }: { pages: PageTreePage[] }) => (
 );
 
 export const ComponentsList = ({
-  componentsFolder,
+  folderName = "Components",
   category,
 }: {
-  componentsFolder?: PageTreeFolder;
+  folderName?: string;
   category?: string;
 }) => {
-  const folder = componentsFolder ?? getComponentsFolder();
+  const folder = getFolder(folderName);
   if (!folder) {
     return null;
   }
@@ -54,6 +54,11 @@ export const ComponentsList = ({
   const categories = folder.children.filter(
     (child): child is PageTreeFolder => child.type === "folder"
   );
+
+  if (categories.length === 0) {
+    const pages = getPagesFromFolder(folder);
+    return <ComponentGrid pages={pages} />;
+  }
 
   return (
     <div className="flex flex-col gap-10">
