@@ -13,7 +13,6 @@ export interface ClockProps {
   size?: "sm" | "lg";
 }
 
-// Box-drawing digit segments for large display (7-segment style, 3 wide x 5 tall)
 const BIG_DIGITS: Record<string, string[]> = {
   " ": ["   ", "   ", "   ", "   ", "   "],
   "0": ["╔═╗", "║ ║", "║ ║", "║ ║", "╚═╝"],
@@ -43,7 +42,6 @@ const renderBigText = function renderBigText(
   return (
     <Box flexDirection="column">
       {rows.map((row, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Text key={i} color={color}>
           {row}
         </Text>

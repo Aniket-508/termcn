@@ -243,7 +243,6 @@ const AltColorBigText = ({
       {Array.from({ length: rows }, (_, rowIdx) => {
         const rowColor = rowIdx % 2 === 0 ? color : colorAlt;
         return (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={rowIdx} flexDirection="row">
             {chars.map((ch, charIdx) => {
               const upper = ch.toUpperCase();
@@ -253,7 +252,6 @@ const AltColorBigText = ({
                 .map((pixel) => (pixel ? onChar : offChar))
                 .join("");
               return (
-                // eslint-disable-next-line react/no-array-index-key
                 <Text key={charIdx} color={rowColor}>
                   {`${rowStr} `}
                 </Text>

@@ -12,11 +12,8 @@ export interface CheckboxProps {
   indeterminate?: boolean;
   disabled?: boolean;
   id?: string;
-  /** Character shown when checked. Default: '■' */
   checkedIcon?: string;
-  /** Character shown when unchecked. Default: '□' */
   uncheckedIcon?: string;
-  /** Character shown when indeterminate. Default: '▪' */
   indeterminateIcon?: string;
 }
 

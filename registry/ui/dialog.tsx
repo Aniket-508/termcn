@@ -27,7 +27,6 @@ export const Dialog = function Dialog({
   isOpen = false,
 }: DialogProps) {
   const theme = useTheme();
-  // focusedButton: 0 = cancel, 1 = confirm
   const [focusedButton, setFocusedButton] = useState<0 | 1>(0);
 
   useInput(

@@ -161,7 +161,6 @@ export const DatePicker = function DatePicker({
         borderColor={isFocused ? theme.colors.focusRing : theme.colors.border}
         paddingX={1}
       >
-        {/* Month */}
         <Box flexDirection="column" alignItems="center">
           <Text color={fieldColor("month")}>▲</Text>
           <Text
@@ -176,7 +175,6 @@ export const DatePicker = function DatePicker({
 
         <Text color={theme.colors.border}>/</Text>
 
-        {/* Day */}
         <Box flexDirection="column" alignItems="center">
           <Text color={fieldColor("day")}>▲</Text>
           <Text
@@ -191,7 +189,6 @@ export const DatePicker = function DatePicker({
 
         <Text color={theme.colors.border}>/</Text>
 
-        {/* Year */}
         <Box flexDirection="column" alignItems="center">
           <Text color={fieldColor("year")}>▲</Text>
           <Text

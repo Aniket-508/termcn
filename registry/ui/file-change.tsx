@@ -146,7 +146,6 @@ export const FileChange = ({
 
   return (
     <Box flexDirection="column">
-      {/* Summary */}
       <Box gap={2} marginBottom={1}>
         <Text bold color={theme.colors.foreground}>
           File Changes ({changes.length})
@@ -157,7 +156,6 @@ export const FileChange = ({
         </Text>
       </Box>
 
-      {/* File list */}
       {changes.map((item, idx) => {
         const isActive = idx === activeIndex;
         const isExpanded = expandedPaths.has(item.path);
@@ -196,7 +194,6 @@ export const FileChange = ({
               )}
             </Box>
 
-            {/* Expanded diff view */}
             {isExpanded && (
               <Box paddingLeft={2} marginTop={1}>
                 {item.diff && diffParts && (
@@ -210,7 +207,6 @@ export const FileChange = ({
                 {!(item.diff && diffParts) && item.content && (
                   <Box flexDirection="column">
                     {item.content.split("\n").map((line, li) => (
-                      // eslint-disable-next-line react/no-array-index-key
                       <Text key={li} color={theme.colors.success ?? "green"}>
                         +{line}
                       </Text>

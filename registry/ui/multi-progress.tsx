@@ -15,13 +15,9 @@ export interface MultiProgressItem {
 
 export interface MultiProgressProps {
   items: MultiProgressItem[];
-  // default 20
   barWidth?: number;
-  // default 20, truncates labels
   labelWidth?: number;
-  // single line per item (default false = two lines)
   compact?: boolean;
-  // default true
   showPercent?: boolean;
 }
 

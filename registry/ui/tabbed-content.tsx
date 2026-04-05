@@ -123,7 +123,6 @@ export const TabbedContent = function TabbedContent({
       );
     }
 
-    // underline (default)
     return (
       <Box>
         {tabs.map((tab, idx) => {

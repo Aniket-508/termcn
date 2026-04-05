@@ -15,11 +15,8 @@ export interface TreeProps {
   nodes: TreeNode[];
   onSelect?: (node: TreeNode) => void;
   defaultExpanded?: string[];
-  /** Icon shown for expanded branch nodes. Default: '▼' */
   expandedIcon?: string;
-  /** Icon shown for collapsed branch nodes. Default: '▶' */
   collapsedIcon?: string;
-  /** Default icon for leaf nodes (overridden by node.icon). Default: '•' */
   leafIcon?: string;
 }
 

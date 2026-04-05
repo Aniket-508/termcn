@@ -15,11 +15,9 @@ export interface Command {
 
 export interface CommandPaletteProps {
   commands: Command[];
-  /** Whether palette is open */
   isOpen: boolean;
   onClose?: () => void;
   placeholder?: string;
-  /** Max items shown. Default: 8 */
   maxItems?: number;
 }
 
@@ -56,7 +54,6 @@ const fuzzyScore = function fuzzyScore(str: string, query: string): number {
 
   for (let i = 0; i < s.length && qi < q.length; i += 1) {
     if (s[i] === q[qi]) {
-      // gap penalty
       score += i - lastMatchIdx - 1;
       lastMatchIdx = i;
       qi += 1;
@@ -151,7 +148,6 @@ export const CommandPalette = function CommandPalette({
       borderColor={theme.colors.focusRing}
       paddingX={1}
     >
-      {/* Search input */}
       <Box borderStyle="single" borderColor={theme.colors.border} paddingX={1}>
         <Text color={theme.colors.mutedForeground}>⌘ </Text>
         <Text
@@ -162,7 +158,6 @@ export const CommandPalette = function CommandPalette({
         <Text color={theme.colors.focusRing}>█</Text>
       </Box>
 
-      {/* Results */}
       {filtered.length === 0 ? (
         <Box paddingX={1} paddingY={0}>
           <Text color={theme.colors.mutedForeground} dimColor>

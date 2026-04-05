@@ -17,9 +17,7 @@ export interface PathInputProps {
   autoFocus?: boolean;
   id?: string;
   width?: number;
-  /** Filter to only show files/dirs matching this extension, e.g. '.ts' */
   filter?: string;
-  /** Show only directories */
   dirsOnly?: boolean;
 }
 

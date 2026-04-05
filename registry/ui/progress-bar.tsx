@@ -3,9 +3,7 @@ import { Box, Text } from "ink";
 import { useTheme } from "@/components/ui/theme-provider";
 
 export interface ProgressBarProps {
-  // 0–100
   value: number;
-  // if set, value is current, total is max
   total?: number;
   width?: number;
   showPercent?: boolean;

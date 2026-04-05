@@ -50,7 +50,6 @@ export interface SpinnerProps {
   label?: string;
   color?: string;
   fps?: number;
-  /** Custom animation frames (overrides style). Default: undefined */
   frames?: string[];
 }
 

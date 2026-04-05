@@ -80,7 +80,6 @@ export const TagInput = function TagInput({
     <Box flexDirection="column" gap={1}>
       <Box flexWrap="wrap" gap={1}>
         {tags.map((tag, idx) => (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={idx}>
             <Text bold>[</Text>
             <Text>{tag}</Text>

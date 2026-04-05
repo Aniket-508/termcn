@@ -13,7 +13,6 @@ export interface TextAreaProps {
   rows?: number;
   label?: string;
   id?: string;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -22,9 +21,7 @@ export interface TextAreaProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Cursor character shown when focused. Default: '█' */
   cursor?: string;
 }
 
@@ -61,7 +58,6 @@ export const TextArea = function TextArea({
     }
   };
 
-  // eslint-disable-next-line complexity
   useInput((input, key) => {
     if (!isFocused) {
       return;
@@ -74,7 +70,6 @@ export const TextArea = function TextArea({
       return;
     }
 
-    // Enter adds a newline (unless at row limit)
     if (key.return) {
       const totalLines = lines.length;
       if (totalLines >= rows && cursorLine === rows - 1) {
@@ -230,7 +225,6 @@ export const TextArea = function TextArea({
 
           if (isEmpty && rowIdx === 0) {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Box key={rowIdx} flexDirection="row">
                 <Text color={theme.colors.mutedForeground}>{placeholder}</Text>
                 {isFocused && (
@@ -244,7 +238,6 @@ export const TextArea = function TextArea({
             const before = line.slice(0, cursorCol);
             const after = line.slice(cursorCol);
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Box key={rowIdx} flexDirection="row">
                 <Text color={theme.colors.foreground}>{before}</Text>
                 <Text color={theme.colors.focusRing}>{cursor}</Text>
@@ -254,7 +247,6 @@ export const TextArea = function TextArea({
           }
 
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={rowIdx}>
               <Text color={theme.colors.foreground}>{line}</Text>
             </Box>

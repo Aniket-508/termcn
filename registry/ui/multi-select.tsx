@@ -118,7 +118,6 @@ export const MultiSelect = <T = string>({
         }
 
         return (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={idx} gap={1}>
             <Text color={isActive ? theme.colors.primary : undefined}>
               {isActive ? cursor : " "}

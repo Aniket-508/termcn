@@ -10,7 +10,6 @@ export interface TimePickerProps {
   onChange?: (time: { hours: number; minutes: number }) => void;
   onSubmit?: (time: { hours: number; minutes: number }) => void;
   label?: string;
-  /** 12 or 24 hour format. Default: 24 */
   format?: 12 | 24;
   autoFocus?: boolean;
   id?: string;
@@ -54,7 +53,6 @@ export const TimePicker = function TimePicker({
     onChange?.({ hours: actualHours, minutes: m });
   };
 
-  // eslint-disable-next-line complexity
   useInput((_input, key) => {
     if (!isFocused) {
       return;
@@ -147,7 +145,6 @@ export const TimePicker = function TimePicker({
         borderColor={isFocused ? theme.colors.focusRing : theme.colors.border}
         paddingX={1}
       >
-        {/* Hours */}
         <Box flexDirection="column" alignItems="center">
           <Text color={fieldColor("hours")}>▲</Text>
           <Text
@@ -168,7 +165,6 @@ export const TimePicker = function TimePicker({
           <Text color={theme.colors.border}> </Text>
         </Box>
 
-        {/* Minutes */}
         <Box flexDirection="column" alignItems="center">
           <Text color={fieldColor("minutes")}>▲</Text>
           <Text
@@ -192,7 +188,6 @@ export const TimePicker = function TimePicker({
               <Text color={theme.colors.border}> </Text>
               <Text color={theme.colors.border}> </Text>
             </Box>
-            {/* AM/PM */}
             <Box flexDirection="column" alignItems="center">
               <Text color={fieldColor("ampm")}>▲</Text>
               <Text

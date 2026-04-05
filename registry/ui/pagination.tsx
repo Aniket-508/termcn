@@ -38,7 +38,6 @@ const buildPages = function buildPages(
     pages.push("...");
   }
 
-  // Always include last page
   pages.push(total);
 
   return pages;
@@ -80,7 +79,6 @@ export const Pagination = function Pagination({
 
   return (
     <Box flexDirection="row" alignItems="center" gap={1}>
-      {/* Prev button */}
       <Text
         color={
           activePage === 1 ? theme.colors.mutedForeground : theme.colors.primary
@@ -95,7 +93,6 @@ export const Pagination = function Pagination({
       {pages.map((p, idx) => {
         if (p === "...") {
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Text key={`ellipsis-${idx}`} color={theme.colors.mutedForeground}>
               …
             </Text>
@@ -115,7 +112,6 @@ export const Pagination = function Pagination({
         );
       })}
 
-      {/* Next button */}
       <Text
         color={
           activePage === total

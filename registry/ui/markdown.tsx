@@ -4,7 +4,6 @@ import { useTheme } from "@/components/ui/theme-provider";
 
 export interface MarkdownProps {
   children: string;
-  /** Max width for text wrapping */
   width?: number;
 }
 
@@ -19,7 +18,6 @@ interface InlineSegment {
 
 const parseInline = (line: string): InlineSegment[] => {
   const segments: InlineSegment[] = [];
-  // Regex matches: **bold**, *italic*, `code`, [text](url)
   const re = /(\*\*(.+?)\*\*|\*(.+?)\*|`(.+?)`|\[(.+?)\]\((.+?)\))/g;
   let last = 0;
   let match: RegExpExecArray | null;
@@ -58,7 +56,6 @@ const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
       {segments.map((seg, i) => {
         if (seg.code) {
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Text key={i} color={theme.colors.accent}>
               {seg.text}
             </Text>
@@ -66,7 +63,6 @@ const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
         }
         if (seg.link) {
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={i}>
               <Text underline color={theme.colors.info}>
                 {seg.text}
@@ -79,7 +75,6 @@ const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
           );
         }
         return (
-          // eslint-disable-next-line react/no-array-index-key
           <Text key={i} bold={seg.bold} italic={seg.italic}>
             {seg.text}
           </Text>
@@ -89,7 +84,6 @@ const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
   );
 };
 
-// eslint-disable-next-line complexity
 export const Markdown = ({ children, width }: MarkdownProps) => {
   const theme = useTheme();
   const lines = children.split("\n");
@@ -100,7 +94,6 @@ export const Markdown = ({ children, width }: MarkdownProps) => {
   while (i < lines.length) {
     const line = lines[i];
 
-    // Headings
     const h4 = line.match(/^####\s+(.*)/);
     const h3 = line.match(/^###\s+(.*)/);
     const h2 = line.match(/^##\s+(.*)/);
@@ -131,14 +124,12 @@ export const Markdown = ({ children, width }: MarkdownProps) => {
         </Text>
       );
     } else if (/^---+$/.test(line)) {
-      // Divider
       elements.push(
         <Text key={i} color={theme.colors.border}>
           {"─".repeat(width ?? 40)}
         </Text>
       );
     } else if (/^>\s/.test(line)) {
-      // Blockquote
       const content = line.replace(/^>\s/, "");
       elements.push(
         <Box key={i} gap={1}>
@@ -147,7 +138,6 @@ export const Markdown = ({ children, width }: MarkdownProps) => {
         </Box>
       );
     } else if (/^[-*]\s/.test(line)) {
-      // Bullet list item
       const content = line.replace(/^[-*]\s/, "");
       elements.push(
         <Box key={i} gap={1}>

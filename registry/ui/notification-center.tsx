@@ -10,9 +10,7 @@ import {
 import type { NotificationVariant } from "@/hooks/use-notifications";
 
 export interface NotificationCenterProps {
-  // default 5
   maxVisible?: number;
-  // default 40
   width?: number;
 }
 

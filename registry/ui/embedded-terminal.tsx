@@ -46,7 +46,6 @@ export const EmbeddedTerminal = function EmbeddedTerminal({
 
     (async () => {
       try {
-        // eslint-disable-next-line no-new-func
         const loadPty = new Function(
           'return import("node-pty")'
         ) as () => Promise<NodePtyModule>;
@@ -97,7 +96,6 @@ export const EmbeddedTerminal = function EmbeddedTerminal({
       {err ? (
         <Text color="red">{err}</Text>
       ) : (
-        // eslint-disable-next-line react/no-array-index-key
         lines.map((line, i) => <Text key={i}>{line}</Text>)
       )}
     </Box>

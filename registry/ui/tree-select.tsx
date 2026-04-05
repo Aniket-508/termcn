@@ -177,7 +177,6 @@ export const TreeSelect = <T = string>({
         );
 
         return (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={`${item.path}-${idx}`}>
             <Text
               color={color}

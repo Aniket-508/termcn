@@ -1,7 +1,3 @@
-/* eslint-disable unicorn/number-literal-case -- oxfmt/pnpm fix lowercases a-f in hex; values follow ISO/IEC 18004 */
-/* oxlint-disable unicorn/number-literal-case */
-/* eslint-disable no-bitwise -- bitwise ops are fundamental to QR code encoding (GF(256), Reed-Solomon, bit packing) */
-
 import { Box, Text } from "ink";
 
 import { useTheme } from "@/components/ui/theme-provider";
@@ -13,13 +9,6 @@ export interface QRCodeProps {
   label?: string;
 }
 
-// ---------------------------------------------------------------------------
-// Minimal QR Code encoder — Version 1 (21×21), Error Correction Level M
-// Supports: Numeric, Alphanumeric, and Byte (Latin-1) modes.
-// Reference: ISO/IEC 18004:2015
-// ---------------------------------------------------------------------------
-
-// GF(256) arithmetic for Reed-Solomon
 const GF_EXP = new Uint8Array(512);
 const GF_LOG = new Uint8Array(256);
 (function initGF() {
@@ -76,17 +65,12 @@ const rsEncode = function rsEncode(
   return msg.slice(data.length);
 };
 
-// Version 1 QR constants (21×21 matrix)
 const VERSION = 1;
-// 21
 const SIZE = 17 + VERSION * 4;
-
-// Data capacity: V1-M (Error Correction M) = 14 data codewords, 10 EC codewords
 const DATA_CODEWORDS = 14;
 const EC_CODEWORDS = 10;
 
 const encodeData = function encodeData(text: string): Uint8Array {
-  // Try Numeric mode first, then Alphanumeric, then Byte
   const ALNUM_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
 
   const isNumeric = /^[0-9]*$/.test(text);
@@ -101,9 +85,7 @@ const encodeData = function encodeData(text: string): Uint8Array {
   };
 
   if (isNumeric) {
-    // mode indicator
     pushBits(0b0001, 4);
-    // char count (V1 numeric = 10 bits)
     pushBits(text.length, 10);
     for (let i = 0; i < text.length; i += 3) {
       const group = text.slice(i, i + 3);
@@ -118,7 +100,6 @@ const encodeData = function encodeData(text: string): Uint8Array {
     }
   } else if (isAlphanumeric) {
     pushBits(0b0010, 4);
-    // V1 alphanumeric = 9 bits
     pushBits(text.length, 9);
     for (let i = 0; i < text.length; i += 2) {
       if (i + 1 < text.length) {
@@ -131,27 +112,22 @@ const encodeData = function encodeData(text: string): Uint8Array {
       }
     }
   } else {
-    // Byte mode (UTF-8 subset — Latin-1 safe)
     const bytes = [...text].map((c) => (c.codePointAt(0) ?? 0) & 0xff);
     pushBits(0b0100, 4);
-    // V1 byte = 8 bits
     pushBits(bytes.length, 8);
     for (const b of bytes) {
       pushBits(b, 8);
     }
   }
 
-  // Terminator
   for (let i = 0; i < 4 && bits.length < DATA_CODEWORDS * 8; i += 1) {
     bits.push(0);
   }
 
-  // Pad to byte boundary
   while (bits.length % 8 !== 0) {
     bits.push(0);
   }
 
-  // Pad codewords
   const padBytes = [0xec, 0x11];
   let padIdx = 0;
   while (bits.length < DATA_CODEWORDS * 8) {
@@ -159,7 +135,6 @@ const encodeData = function encodeData(text: string): Uint8Array {
     pushBits(b, 8);
   }
 
-  // Pack bits into bytes
   const codewords = new Uint8Array(DATA_CODEWORDS);
   for (let i = 0; i < DATA_CODEWORDS; i += 1) {
     let byte = 0;
@@ -179,7 +154,6 @@ const makeMatrix = function makeMatrix(): Matrix {
   );
 };
 
-// Finder pattern (7×7 + separator)
 const placeFinderPattern = function placeFinderPattern(
   matrix: Matrix,
   row: number,
@@ -205,7 +179,6 @@ const placeFinderPattern = function placeFinderPattern(
   }
 };
 
-// Timing patterns
 const placeTimingPatterns = function placeTimingPatterns(matrix: Matrix) {
   for (let i = 8; i < SIZE - 8; i += 1) {
     matrix[6][i] = i % 2 === 0;
@@ -213,7 +186,6 @@ const placeTimingPatterns = function placeTimingPatterns(matrix: Matrix) {
   }
 };
 
-// Dark module
 const placeDarkModule = function placeDarkModule(matrix: Matrix) {
   const row = matrix[SIZE - 8];
   if (row) {
@@ -221,13 +193,11 @@ const placeDarkModule = function placeDarkModule(matrix: Matrix) {
   }
 };
 
-// Track which modules are "function" (reserved/fixed)
 const buildFunctionMask = function buildFunctionMask(
   _matrix: Matrix
 ): boolean[][] {
   const mask = makeMatrix();
 
-  // Finder patterns + separators
   const setRegion = (r: number, c: number, h: number, w: number) => {
     for (let dr = 0; dr < h; dr += 1) {
       for (let dc = 0; dc < w; dc += 1) {
@@ -241,20 +211,15 @@ const buildFunctionMask = function buildFunctionMask(
     }
   };
 
-  // Top-left finder + separator
   setRegion(0, 0, 8, 8);
-  // Top-right finder + separator
   setRegion(0, SIZE - 8, 8, 8);
-  // Bottom-left finder + separator
   setRegion(SIZE - 8, 0, 8, 8);
 
-  // Timing patterns
   for (let i = 0; i < SIZE; i += 1) {
     mask[6][i] = true;
     mask[i][6] = true;
   }
 
-  // Format information areas
   for (let i = 0; i < 9; i += 1) {
     mask[i][8] = true;
     mask[8][i] = true;
@@ -267,26 +232,14 @@ const buildFunctionMask = function buildFunctionMask(
   return mask;
 };
 
-// Format string for Mask 0 (M level)
-// EC level M = 00, mask pattern 0 = 000 → format bits before masking = 000000000
-// Format: 5-bit data (ec<<3|mask) + 10-bit EC from BCH + XOR 101010000010010
 const FORMAT_STRINGS: Record<number, number> = {
-  // EC level M (00), mask patterns 0-7
-  // M, mask 0
   0: 0b101_0100_0001_0010,
-  // M, mask 1
   1: 0b101_0001_0010_0101,
-  // M, mask 2
   2: 0b101_1110_0111_1100,
-  // M, mask 3
   3: 0b101_1011_0100_1011,
-  // M, mask 4
   4: 0b100_0101_1111_1001,
-  // M, mask 5
   5: 0b100_0000_1100_1110,
-  // M, mask 6
   6: 0b100_1111_1001_0111,
-  // M, mask 7
   7: 0b100_1010_1010_0000,
 };
 
@@ -296,7 +249,6 @@ const placeFormatInfo = function placeFormatInfo(
 ) {
   const fmt = FORMAT_STRINGS[maskPattern] ?? FORMAT_STRINGS[0];
 
-  // Place around top-left finder
   const bits15 = Array.from({ length: 15 }, (_, i) => (fmt >> (14 - i)) & 1);
   const positions = [
     [0, 8],
@@ -325,7 +277,6 @@ const placeFormatInfo = function placeFormatInfo(
     }
   }
 
-  // Place around top-right and bottom-left finders
   const positions2 = [
     [8, SIZE - 1],
     [8, SIZE - 2],
@@ -366,7 +317,6 @@ const placeFormatInfo = function placeFormatInfo(
   }
 };
 
-// Data placement (zigzag)
 const placeData = function placeData(
   matrix: Matrix,
   funcMask: boolean[][],
@@ -374,11 +324,9 @@ const placeData = function placeData(
 ) {
   let idx = 0;
   let goingUp = true;
-  // Right column of current 2-wide strip
   for (let col = SIZE - 1; col >= 1; col -= 2) {
     if (col === 6) {
       col = 5;
-      // skip timing column
     }
     for (let rowStep = 0; rowStep < SIZE; rowStep += 1) {
       const row = goingUp ? SIZE - 1 - rowStep : rowStep;
@@ -395,7 +343,6 @@ const placeData = function placeData(
   }
 };
 
-// Apply mask pattern
 const applyMask = function applyMask(
   matrix: Matrix,
   funcMask: boolean[][],
@@ -451,11 +398,9 @@ const applyMask = function applyMask(
   }
 };
 
-// Penalty scoring — choose best mask
 const scorePenalty = function scorePenalty(matrix: Matrix): number {
   let penalty = 0;
 
-  // Rule 1: runs of 5+ same-color in row/col
   for (let r = 0; r < SIZE; r += 1) {
     for (const isRow of [true, false]) {
       let run = 1;
@@ -476,7 +421,6 @@ const scorePenalty = function scorePenalty(matrix: Matrix): number {
     }
   }
 
-  // Rule 2: 2×2 blocks
   for (let r = 0; r < SIZE - 1; r += 1) {
     for (let c = 0; c < SIZE - 1; c += 1) {
       const v = matrix[r][c];
@@ -494,13 +438,11 @@ const scorePenalty = function scorePenalty(matrix: Matrix): number {
 };
 
 const generateQR = function generateQR(text: string): Matrix {
-  // Clamp to what V1 can hold (max ~17 bytes in byte mode)
   const capped = text.slice(0, 17);
 
   const dataBytes = encodeData(capped);
   const ecBytes = rsEncode(dataBytes, EC_CODEWORDS);
 
-  // Build the full bitstream
   const allBytes = new Uint8Array([...dataBytes, ...ecBytes]);
   const bits: number[] = [];
   for (const b of allBytes) {
@@ -509,7 +451,6 @@ const generateQR = function generateQR(text: string): Matrix {
     }
   }
 
-  // Try all 8 mask patterns, pick lowest penalty
   let bestMatrix: Matrix | null = null;
   let bestPenalty = Infinity;
 
@@ -536,14 +477,8 @@ const generateQR = function generateQR(text: string): Matrix {
   return bestMatrix ?? makeMatrix();
 };
 
-// ---------------------------------------------------------------------------
-// Rendering
-// ---------------------------------------------------------------------------
-
-// modules of white border
 const QUIET_ZONE = 2;
 
-// eslint-disable-next-line complexity
 export const QRCode = function QRCode({
   value,
   size = "md",
@@ -565,7 +500,6 @@ export const QRCode = function QRCode({
     );
   }
 
-  // Add quiet zone
   const qzMatrix: Matrix = [];
   const totalSize = SIZE + QUIET_ZONE * 2;
   for (let r = 0; r < totalSize; r += 1) {
@@ -580,13 +514,9 @@ export const QRCode = function QRCode({
     qzMatrix.push(row);
   }
 
-  // Render modes
-  // sm: half-block (2 rows → 1 terminal line using ▀▄)
-  // md/lg: full block █ / space per module (scale factor)
   const scale = size === "lg" ? 2 : 1;
 
   if (size === "sm") {
-    // Pair rows: top half ▀ (upper), bottom half ▄ (lower)
     const lines: React.ReactElement[] = [];
     for (let r = 0; r < totalSize; r += 2) {
       const chars: string[] = [];
@@ -617,7 +547,6 @@ export const QRCode = function QRCode({
     );
   }
 
-  // md / lg: each module is scale×scale characters
   const lines: React.ReactElement[] = [];
   for (let r = 0; r < totalSize; r += 1) {
     const chars: string[] = [];

@@ -8,12 +8,9 @@ import { useTheme } from "@/components/ui/theme-provider";
 import { useInput } from "@/hooks/use-input";
 
 export interface DirectoryTreeProps {
-  /** Root path to display. Default: process.cwd() */
   rootPath?: string;
   onSelect?: (path: string) => void;
-  /** Max depth to show initially. Default: 2 */
   maxDepth?: number;
-  /** Show hidden files (starting with .). Default: false */
   showHidden?: boolean;
   label?: string;
 }
@@ -44,7 +41,6 @@ const readEntries = function readEntries(
     return result;
   }
 
-  // Sort: directories first, then files
   entries.sort((a, b) => {
     try {
       const aIsDir = statSync(join(dir, a)).isDirectory();
@@ -56,7 +52,7 @@ const readEntries = function readEntries(
         return 1;
       }
     } catch {
-      // ignore
+      /* noop */
     }
     return a.localeCompare(b);
   });
@@ -70,7 +66,7 @@ const readEntries = function readEntries(
     try {
       isDir = statSync(fullPath).isDirectory();
     } catch {
-      // ignore
+      /* noop */
     }
 
     result.push({ depth, isDir, isLast, name, path: fullPath });
@@ -127,7 +123,6 @@ export const DirectoryTree = function DirectoryTree({
   return (
     <Box flexDirection="column">
       {label && <Text bold>{label}</Text>}
-      {/* Root dir */}
       <Text color={theme.colors.primary} bold>
         {rootPath}
       </Text>

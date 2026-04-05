@@ -6,9 +6,7 @@ import { useFocus } from "@/hooks/use-focus";
 import { useInput } from "@/hooks/use-input";
 
 export interface MaskedInputProps {
-  // e.g. '(###) ###-####'
   mask: string;
-  // raw digits only
   value?: string;
   onChange?: (value: string) => void;
   onSubmit?: (value: string) => void;

@@ -15,10 +15,8 @@ export const Skeleton = function Skeleton({
   animated = true,
 }: SkeletonProps) {
   const theme = useTheme();
-  // fps=4 gives slow shimmer; frame increments at ~4 fps
   const frame = useAnimation(4);
 
-  // Offset cycles 0 → width repeatedly
   const offset = animated ? frame % (width + 6) : -1;
 
   const _buildRow = (): string => {
@@ -31,7 +29,6 @@ export const Skeleton = function Skeleton({
   };
 
   const rows = Array.from({ length: height }, (_, rowIndex) => {
-    // Stagger each row's shimmer slightly by shifting the offset
     const rowOffset = animated ? (frame + rowIndex * 2) % (width + 6) : -1;
     let row = "";
     for (let i = 0; i < width; i += 1) {
@@ -44,11 +41,9 @@ export const Skeleton = function Skeleton({
   return (
     <Box flexDirection="column">
       {rows.map((row, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Text key={i}>
           {[...row].map((char, j) => (
             <Text
-              // eslint-disable-next-line react/no-array-index-key
               key={j}
               color={
                 char === "█" ? theme.colors.mutedForeground : theme.colors.muted

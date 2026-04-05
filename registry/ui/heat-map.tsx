@@ -11,29 +11,18 @@ export interface HeatMapProps {
   showValues?: boolean;
 }
 
-// Default color scale from cool → warm (low → high intensity)
 const DEFAULT_COLOR_SCALE = [
-  // very low — dark blue
   "#1e3a5f",
-  // low
   "#1a5276",
-  // below mid
   "#1f618d",
-  // mid-low
   "#2980b9",
-  // mid
   "#5dade2",
-  // mid-high
   "#f39c12",
-  // high
   "#e67e22",
-  // very high
   "#e74c3c",
-  // max — deep red
   "#c0392b",
 ];
 
-// Unicode shading chars for intensity (light → dense)
 const SHADE_CHARS = [" ", "░", "▒", "▓", "█"];
 
 const getColorForValue = function getColorForValue(
@@ -110,12 +99,10 @@ export const HeatMap = function HeatMap({
 
   return (
     <Box flexDirection="column">
-      {/* Column labels row */}
       {colLabels && (
         <Box flexDirection="row">
           {rowLabelWidth > 0 && <Text>{" ".repeat(rowLabelWidth + 1)}</Text>}
           {Array.from({ length: numCols }, (_, ci) => (
-            // eslint-disable-next-line react/no-array-index-key
             <Text key={ci} color={theme.colors.mutedForeground}>
               {padCenter(colLabels[ci] ?? String(ci), cellWidth)}
             </Text>
@@ -123,18 +110,14 @@ export const HeatMap = function HeatMap({
         </Box>
       )}
 
-      {/* Data rows */}
       {data.map((row, ri) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Box key={ri} flexDirection="row">
-          {/* Row label */}
           {rowLabels && (
             <Text color={theme.colors.mutedForeground}>
               {padStart(rowLabels[ri] ?? String(ri), rowLabelWidth)}{" "}
             </Text>
           )}
 
-          {/* Cells */}
           {row.map((val, ci) => {
             const cellColor = getColorForValue(val, min, max, colorScale);
             const shadeChar = getShadeForValue(val, min, max);
@@ -143,7 +126,6 @@ export const HeatMap = function HeatMap({
               : shadeChar.repeat(cellWidth);
 
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={ci} color={cellColor}>
                 {cellContent}
               </Text>
@@ -152,11 +134,9 @@ export const HeatMap = function HeatMap({
         </Box>
       ))}
 
-      {/* Scale legend */}
       <Box flexDirection="row" gap={1} marginTop={1}>
         <Text color={theme.colors.mutedForeground}>Low</Text>
         {colorScale.map((c, idx) => (
-          // eslint-disable-next-line react/no-array-index-key
           <Text key={idx} color={c}>
             █
           </Text>

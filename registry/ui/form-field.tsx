@@ -9,11 +9,8 @@ export interface FormFieldProps {
   error?: string;
   hint?: string;
   required?: boolean;
-  /** Gap between label, input, and hint/error. Default: 0 */
   gap?: number;
-  /** Icon shown before error message. Default: '✗' */
   errorIcon?: string;
-  /** Color override for the label. Default: theme.colors.foreground */
   labelColor?: string;
 }
 

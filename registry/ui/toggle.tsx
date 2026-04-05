@@ -13,11 +13,8 @@ export interface ToggleProps {
   offLabel?: string;
   id?: string;
   disabled?: boolean;
-  /** Icon shown when checked. Default: '●' */
   checkedIcon?: string;
-  /** Icon shown when unchecked. Default: '○' */
   uncheckedIcon?: string;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -26,7 +23,6 @@ export interface ToggleProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
 }
 

@@ -15,27 +15,17 @@ export interface PieChartProps {
   showPercentages?: boolean;
 }
 
-// Default palette for items without explicit colors
 const DEFAULT_COLORS = [
-  // violet
   "#7c3aed",
-  // blue
   "#2563eb",
-  // green
   "#16a34a",
-  // amber
   "#d97706",
-  // red
   "#dc2626",
-  // cyan
   "#0891b2",
-  // pink
   "#be185d",
-  // lime
   "#65a30d",
 ];
 
-// Block chars for pie slices
 const FULL_BLOCK = "█";
 const _HALF_BLOCK = "▌";
 const LEGEND_SQUARE = "■";
@@ -128,17 +118,13 @@ export const PieChart = ({
 
   return (
     <Box flexDirection="row" gap={2}>
-      {/* Pie grid */}
       <Box flexDirection="column">
         {grid.map((row, rowIdx) => (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={rowIdx} flexDirection="row">
             {row.map((cell, colIdx) =>
               cell.char === " " ? (
-                // eslint-disable-next-line react/no-array-index-key
                 <Text key={colIdx}> </Text>
               ) : (
-                // eslint-disable-next-line react/no-array-index-key
                 <Text key={colIdx} color={cell.color || theme.colors.primary}>
                   {cell.char}
                 </Text>
@@ -148,14 +134,12 @@ export const PieChart = ({
         ))}
       </Box>
 
-      {/* Legend */}
       {showLegend && (
         <Box flexDirection="column" justifyContent="center">
           {itemsWithColors.map((item, idx) => {
             const pct =
               total > 0 ? ((item.value / total) * 100).toFixed(1) : "0.0";
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Box key={idx} flexDirection="row" gap={1}>
                 <Text color={item.color}>{LEGEND_SQUARE}</Text>
                 <Text color={theme.colors.foreground}>{item.label}</Text>

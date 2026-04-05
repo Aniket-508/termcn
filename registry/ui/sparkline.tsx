@@ -9,8 +9,6 @@ export interface SparklineProps {
   label?: string;
 }
 
-// Braille Unicode block characters ordered by dot fill level (0–7)
-// Each char represents increasing fill: ▁ through full block using braille patterns
 const BRAILLE_LEVELS = ["⣀", "⣄", "⣤", "⣦", "⣶", "⣷", "⣿", "⣿"];
 
 const normalize = function normalize(data: number[], levels: number): number[] {
@@ -44,7 +42,6 @@ export const Sparkline = function Sparkline({
     );
   }
 
-  // Sample/truncate data to fit width
   const sampled =
     data.length > width
       ? Array.from(

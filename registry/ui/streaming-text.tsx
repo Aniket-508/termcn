@@ -4,19 +4,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/components/ui/theme-provider";
 
 export interface StreamingTextProps {
-  /** Current accumulated string to display (controlled mode) */
   text?: string;
-  /** AsyncIterable<string> source; manages state internally */
   stream?: AsyncIterable<string>;
-  /** Show blinking ▌ cursor at end while streaming */
   cursor?: boolean;
-  /** Simulate typing animation for pre-buffered text */
   animate?: boolean;
-  /** Typing animation speed in ms per character (default 30) */
   speed?: number;
-  /** Called with full text when streaming/animation completes */
   onComplete?: (fullText: string) => void;
-  /** Color for the cursor */
   cursorColor?: string;
 }
 
@@ -69,7 +62,7 @@ export const StreamingText = function StreamingText({
           setInternalText(full);
         }
       } catch {
-        // stream ended or errored
+        /* noop */
       }
       if (!cancelled) {
         setIsStreaming(false);

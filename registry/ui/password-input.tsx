@@ -14,7 +14,6 @@ export interface PasswordInputProps {
   showToggle?: boolean;
   label?: string;
   id?: string;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -23,11 +22,8 @@ export interface PasswordInputProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Width of the input box. Default: undefined (auto) */
   width?: number;
-  /** Cursor character shown when focused. Default: '█' */
   cursor?: string;
 }
 
@@ -65,7 +61,6 @@ export const PasswordInput = function PasswordInput({
       return;
     }
 
-    // Ctrl+H toggles visibility when showToggle is enabled
     if (showToggle && input === "\u0008") {
       setIsVisible((v) => !v);
       return;

@@ -9,13 +9,9 @@ export interface HeadingProps {
   level?: HeadingLevel;
   children: ReactNode;
   color?: string;
-  /** Prefix symbol for level 1 headings. Default: '██ ' */
   prefix1?: string;
-  /** Prefix symbol for level 2 headings. Default: '▌ ' */
   prefix2?: string;
-  /** Prefix symbol for level 3 headings. Default: '› ' */
   prefix3?: string;
-  /** Whether to uppercase level 1 heading text. Default: true */
   uppercase?: boolean;
 }
 

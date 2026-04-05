@@ -13,16 +13,12 @@ export interface FilePickerProps {
   onChange?: (path: string) => void;
   onSubmit?: (path: string) => void;
   label?: string;
-  /** Starting directory. Default: process.cwd() */
   startDir?: string;
-  /** Show only files with these extensions */
   extensions?: string[];
-  /** Show only directories */
   dirsOnly?: boolean;
   autoFocus?: boolean;
   id?: string;
   width?: number;
-  /** Max number of files to show. Default: 8 */
   maxVisible?: number;
 }
 
@@ -58,11 +54,10 @@ const readDir = (
         }
         result.push({ isDir, name, path: fullPath });
       } catch {
-        // skip
+        /* noop */
       }
     }
 
-    // Sort: dirs first, then files
     result.sort((a, b) => {
       if (a.isDir && !b.isDir) {
         return -1;
@@ -155,7 +150,6 @@ export const FilePicker = ({
     <Box flexDirection="column">
       {label && <Text bold>{label}</Text>}
 
-      {/* Current directory */}
       <Box
         borderStyle="single"
         borderColor={isFocused ? theme.colors.focusRing : theme.colors.border}
@@ -167,7 +161,6 @@ export const FilePicker = ({
         </Text>
       </Box>
 
-      {/* File listing */}
       <Box
         flexDirection="column"
         borderStyle="single"
@@ -211,7 +204,6 @@ export const FilePicker = ({
         )}
       </Box>
 
-      {/* Selected file */}
       {selected && (
         <Box paddingX={1}>
           <Text color={theme.colors.mutedForeground}>Selected: </Text>

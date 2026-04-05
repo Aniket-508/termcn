@@ -8,7 +8,6 @@ import { useInput } from "@/hooks/use-input";
 export type ChatRole = "user" | "assistant" | "system" | "error";
 
 export interface ChatMessageProps {
-  /** Chat author (user, assistant, …). Named `sender` to avoid clashing with DOM `role`. */
   sender: ChatRole;
   name?: string;
   timestamp?: Date;
@@ -103,7 +102,6 @@ export const ChatMessage = ({
 
   return (
     <Box flexDirection="column" marginBottom={1}>
-      {/* Header row */}
       <Box gap={1}>
         <Text color={color} bold>
           {name ?? roleLabel[sender]}
@@ -120,7 +118,6 @@ export const ChatMessage = ({
         )}
       </Box>
 
-      {/* Content */}
       {renderContent()}
     </Box>
   );

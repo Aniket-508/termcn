@@ -9,7 +9,6 @@ export interface GridProps {
 }
 
 export const Grid = function Grid({ columns, gap = 0, children }: GridProps) {
-  // eslint-disable-next-line react/no-react-children
   const items = Children.toArray(children);
   const rows: ReactNode[][] = [];
 
@@ -20,10 +19,8 @@ export const Grid = function Grid({ columns, gap = 0, children }: GridProps) {
   return (
     <Box flexDirection="column" gap={gap}>
       {rows.map((row, rowIdx) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Box key={rowIdx} flexDirection="row" gap={gap}>
           {row.map((cell, colIdx) => (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={colIdx} flexGrow={1}>
               {cell}
             </Box>

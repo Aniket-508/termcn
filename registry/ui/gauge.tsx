@@ -13,12 +13,6 @@ export interface GaugeProps {
   size?: GaugeSize;
 }
 
-// Arc-style fill chars (left→right, bottom arc fill)
-// We render a multi-row arc approximation using Unicode block elements.
-// Row 0 (top):    ╭────────╮
-// Row 1 (mid):   ╱  val%   ╲
-// Row 2 (bot):  ╰─▓▓▓▓░░░░─╯
-
 const ARC_CHARS_FILL = "█";
 const ARC_CHARS_EMPTY = "░";
 
@@ -31,7 +25,6 @@ const renderSmGauge = function renderSmGauge(
   color: string,
   mutedColor: string
 ): React.ReactNode {
-  // Single-line gauge: [▓▓▓▓░░] value%
   const width = 10;
   const filled = Math.round(pct * width);
   const empty = width - filled;
@@ -53,11 +46,6 @@ const renderMdGauge = function renderMdGauge(
   mutedColor: string,
   fgColor: string
 ): React.ReactNode {
-  // 3-line arc gauge
-  //   ╭──────────╮
-  //  ╱  72%  ╲
-  // ╰▓▓▓▓▓▓▓░░░╯
-
   const arcWidth = 14;
   const filled = Math.round(pct * arcWidth);
   const empty = arcWidth - filled;
@@ -87,13 +75,6 @@ const renderLgGauge = function renderLgGauge(
   mutedColor: string,
   fgColor: string
 ): React.ReactNode {
-  // 5-line large arc gauge
-  //    ╭────────────────────╮
-  //   ╱                    ╲
-  //  │         72%          │
-  //   ╲                    ╱
-  //    ╰▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░╯
-
   const arcWidth = 22;
   const filled = Math.round(pct * arcWidth);
   const empty = arcWidth - filled;

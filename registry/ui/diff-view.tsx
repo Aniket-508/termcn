@@ -14,14 +14,11 @@ export interface DiffViewProps {
   showLineNumbers?: boolean;
 }
 
-// ─── LCS-based diff algorithm ────────────────────────────────────────────────
-
 interface DiffOp {
   type: "equal" | "insert" | "delete";
   line: string;
 }
 
-// eslint-disable-next-line complexity
 const computeDiff = function computeDiff(
   oldLines: string[],
   newLines: string[]
@@ -129,8 +126,6 @@ const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
   return hunks;
 };
 
-// ─── Unified view ─────────────────────────────────────────────────────────────
-
 interface ViewProps {
   hunks: Hunk[];
   showLineNumbers: boolean;
@@ -210,8 +205,6 @@ const UnifiedView = function UnifiedView({
 
   return <Box flexDirection="column">{rows}</Box>;
 };
-
-// ─── Split view ───────────────────────────────────────────────────────────────
 
 const SplitView = function SplitView({
   hunks,
@@ -297,8 +290,6 @@ const SplitView = function SplitView({
   return <Box flexDirection="column">{rows}</Box>;
 };
 
-// ─── Inline view ──────────────────────────────────────────────────────────────
-
 interface InlineViewProps {
   ops: DiffOp[];
   showLineNumbers: boolean;
@@ -367,8 +358,6 @@ const InlineView = function InlineView({
 
   return <Box flexDirection="column">{rows}</Box>;
 };
-
-// ─── Component ────────────────────────────────────────────────────────────────
 
 export const DiffView = function DiffView({
   oldText,

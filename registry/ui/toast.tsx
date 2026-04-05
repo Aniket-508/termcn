@@ -73,7 +73,6 @@ export const Toast = function Toast({
 
   const remaining = Math.max(0, duration - elapsed);
   const remainingSeconds = (remaining / 1000).toFixed(1);
-  // 1.0 → 0.0
   const progress = remaining / duration;
   const filledChars = Math.round(progress * BAR_WIDTH);
   const emptyChars = BAR_WIDTH - filledChars;

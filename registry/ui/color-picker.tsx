@@ -106,7 +106,6 @@ export const ColorPicker = ({
     <Box flexDirection="column">
       {label && <Text bold>{label}</Text>}
 
-      {/* Palette grid */}
       <Box flexDirection="column">
         {Array.from({ length: rows }, (_, r) => (
           <Box key={r}>
@@ -134,7 +133,6 @@ export const ColorPicker = ({
         ))}
       </Box>
 
-      {/* Current color preview */}
       <Box marginTop={1} gap={1}>
         <Text color={theme.colors.mutedForeground}>Selected:</Text>
         <Text backgroundColor={currentColor} color={currentColor}>
@@ -143,7 +141,6 @@ export const ColorPicker = ({
         <Text color={theme.colors.foreground}>{currentColor}</Text>
       </Box>
 
-      {/* Hex input */}
       <Box
         borderStyle="round"
         borderColor={

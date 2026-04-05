@@ -14,7 +14,6 @@ export interface ToolApprovalProps {
   onApprove?: () => void;
   onDeny?: () => void;
   onAlwaysAllow?: () => void;
-  /** Auto-deny timeout in seconds */
   timeout?: number;
 }
 
@@ -92,7 +91,6 @@ export const ToolApproval = function ToolApproval({
       paddingX={1}
       paddingY={0}
     >
-      {/* Title row */}
       <Box gap={2}>
         <Text bold color={theme.colors.foreground}>
           Tool Approval Required
@@ -107,7 +105,6 @@ export const ToolApproval = function ToolApproval({
         )}
       </Box>
 
-      {/* Tool info */}
       <Box flexDirection="column" marginTop={1}>
         <Box gap={1}>
           <Text color={theme.colors.mutedForeground}>Tool:</Text>
@@ -123,7 +120,6 @@ export const ToolApproval = function ToolApproval({
         )}
       </Box>
 
-      {/* Args */}
       {args && Object.keys(args).length > 0 && (
         <Box flexDirection="column" marginTop={1}>
           <Text color={theme.colors.mutedForeground} dimColor>
@@ -138,7 +134,6 @@ export const ToolApproval = function ToolApproval({
         </Box>
       )}
 
-      {/* Keybindings */}
       <Box gap={2} marginTop={1}>
         <Text color={theme.colors.success ?? "green"} bold>
           [y] Approve

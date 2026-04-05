@@ -111,7 +111,6 @@ export const Stopwatch = function Stopwatch({
             const prevLap = laps[i - 1] ?? 0;
             const split = i === 0 ? lapTime : lapTime - prevLap;
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Box key={i} gap={2}>
                 <Text color={theme.colors.mutedForeground}>
                   #{String(i + 1).padStart(2, "0")}

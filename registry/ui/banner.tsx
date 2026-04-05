@@ -26,11 +26,8 @@ export interface BannerProps {
   title?: string;
   dismissible?: boolean;
   onDismiss?: () => void;
-  /** Override the variant color */
   color?: string;
-  /** Left accent bar character. Default: '┃' */
   accentChar?: string;
-  /** Gap between accent bar and content. Default: 1 */
   gap?: number;
 }
 

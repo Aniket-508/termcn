@@ -17,9 +17,7 @@ export interface AlertProps {
   title?: string;
   children?: ReactNode;
   icon?: string;
-  /** Show a border around the alert. Default: true */
   bordered?: boolean;
-  /** Border style. Default: theme.border.style */
   borderStyle?:
     | "single"
     | "double"
@@ -28,11 +26,8 @@ export interface AlertProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Override the border/icon color */
   color?: string;
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Vertical padding. Default: 0 */
   paddingY?: number;
 }
 

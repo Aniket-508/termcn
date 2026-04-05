@@ -6,9 +6,7 @@ import { useInput } from "@/hooks/use-input";
 
 export interface JSONViewProps {
   data: unknown;
-  /** Initial indent spaces. Default: 2 */
   indent?: number;
-  /** Whether nodes start collapsed. Default: false */
   collapsed?: boolean;
   label?: string;
 }
@@ -208,7 +206,6 @@ export const JSONView = function JSONView({
             collapsedPaths.has(line.path) ||
             (collapsed && collapsedPaths.size === 0 && line.depth === 0);
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={line.path + idx}>
               <Text
                 backgroundColor={isCursor ? theme.colors.selection : undefined}
@@ -241,7 +238,6 @@ export const JSONView = function JSONView({
 
         if (line.type === "close") {
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={line.path + idx}>
               <Text
                 backgroundColor={isCursor ? theme.colors.selection : undefined}
@@ -254,9 +250,7 @@ export const JSONView = function JSONView({
           );
         }
 
-        // primitive
         return (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={line.path + idx}>
             <Text
               backgroundColor={isCursor ? theme.colors.selection : undefined}

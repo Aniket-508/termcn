@@ -36,10 +36,8 @@ const computeFlagWidth = function computeFlagWidth(
   children: ReactNode
 ): number {
   let max = 0;
-  // eslint-disable-next-line react/no-react-children
   React.Children.forEach(children, (section) => {
     if (React.isValidElement(section)) {
-      // eslint-disable-next-line react/no-react-children
       React.Children.forEach(
         (section.props as { children?: ReactNode }).children,
         (row) => {
@@ -72,10 +70,8 @@ const HelpScreenRoot = function HelpScreenRoot({
 
   const resolvedFlagWidth = flagWidth ?? computeFlagWidth(children);
 
-  // eslint-disable-next-line react/no-react-children
   const enrichedChildren = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      // eslint-disable-next-line react/no-clone-element
       return React.cloneElement(
         child as React.ReactElement<Record<string, unknown>>,
         {
@@ -130,10 +126,8 @@ const HelpScreenSection = function HelpScreenSection({
 }: HelpScreenSectionProps & { _flagWidth?: number; _columnGap?: number }) {
   const theme = useTheme();
 
-  // eslint-disable-next-line react/no-react-children
   const enrichedRows = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      // eslint-disable-next-line react/no-clone-element
       return React.cloneElement(
         child as React.ReactElement<Record<string, unknown>>,
         {

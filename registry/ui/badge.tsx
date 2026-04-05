@@ -15,9 +15,7 @@ export interface BadgeProps {
   variant?: BadgeVariant;
   color?: string;
   bold?: boolean;
-  /** Show a border around the badge. Default: true */
   bordered?: boolean;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -26,7 +24,6 @@ export interface BadgeProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
 }
 

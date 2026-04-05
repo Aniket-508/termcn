@@ -10,17 +10,6 @@ export interface DigitsProps {
   size?: DigitSize;
 }
 
-// 7-segment style: each digit is 3 chars wide × 3 rows tall
-// Using box-drawing characters: ─ │ ╭ ╮ ╰ ╯ ┼
-// Row layout:
-//   row 0: top segment    e.g. " ─ " or "   "
-//   row 1: middle segment e.g. "│ │" or "  │"
-//   row 2: mid-bar        e.g. " ─ " or "   "
-//   row 3: lower sides    e.g. "│ │" or "  │"
-//   row 4: bottom segment e.g. " ─ " or "   "
-// For 'md' we use 3×5, for 'lg' we use 5×5
-
-// 3-wide × 5-row representation for each digit/symbol (7-segment style)
 const SEGMENTS_MD: Record<string, string[]> = {
   " ": ["   ", "   ", "   ", "   ", "   "],
   "-": ["   ", "   ", " ─ ", "   ", "   "],
@@ -38,7 +27,6 @@ const SEGMENTS_MD: Record<string, string[]> = {
   ":": ["   ", " ● ", "   ", " ● ", "   "],
 };
 
-// 5-wide × 5-row for lg size
 const SEGMENTS_LG: Record<string, string[]> = {
   " ": ["     ", "     ", "     ", "     ", "     "],
   "-": ["     ", "     ", " ─── ", "     ", "     "],
@@ -100,7 +88,6 @@ export const Digits = function Digits({
             const rowStr =
               segments[rowIdx] ?? " ".repeat(size === "lg" ? 5 : 3);
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={charIdx} color={resolvedColor}>
                 {rowStr}{" "}
               </Text>

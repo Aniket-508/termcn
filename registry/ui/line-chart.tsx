@@ -31,7 +31,6 @@ const normalize = (
   return Math.round(((value - min) / (max - min)) * (rows - 1));
 };
 
-// Characters used to draw the line
 const PLOT_CHAR = "●";
 const _CONNECT_H = "─";
 const CONNECT_UP = "╱";
@@ -41,7 +40,6 @@ const AXIS_V = "│";
 const AXIS_H = "─";
 const AXIS_CORNER = "└";
 const AXIS_TICK_V = "┤";
-// unused but defined for completeness
 const _AXIS_TICK_H = "┬";
 
 export const LineChart = ({
@@ -87,9 +85,7 @@ export const LineChart = ({
 
     if (col < chartWidth - 1) {
       const nextRow = normalizedRows[col + 1] ?? row;
-      if (nextRow === row) {
-        // flat — connector sits on same row, but plot char takes priority
-      } else if (nextRow < row) {
+      if (nextRow < row) {
         let r = row - 1;
         while (r > nextRow) {
           grid[r][col] = AXIS_V;
@@ -128,7 +124,6 @@ export const LineChart = ({
         </Text>
       )}
       {grid.map((row, rowIdx) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Box key={rowIdx} flexDirection="row">
           {showAxes && (
             <Text color={theme.colors.mutedForeground}>
@@ -140,7 +135,6 @@ export const LineChart = ({
             const isPlot = cell === PLOT_CHAR;
             return (
               <Text
-                // eslint-disable-next-line react/no-array-index-key
                 key={colIdx}
                 color={isPlot ? resolvedColor : theme.colors.mutedForeground}
               >
@@ -159,7 +153,6 @@ export const LineChart = ({
           </Text>
         </Box>
       )}
-      {/* X-axis labels — show first, mid, last */}
       {showAxes && (
         <Box flexDirection="row">
           <Text color={theme.colors.mutedForeground}>
@@ -173,13 +166,11 @@ export const LineChart = ({
               idx === chartWidth - 1
             ) {
               return (
-                // eslint-disable-next-line react/no-array-index-key
                 <Text key={idx} color={theme.colors.mutedForeground}>
                   {lbl || String(idx)}
                 </Text>
               );
             }
-            // eslint-disable-next-line react/no-array-index-key
             return <Text key={idx}> </Text>;
           })}
         </Box>

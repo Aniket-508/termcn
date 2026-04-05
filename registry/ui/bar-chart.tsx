@@ -72,7 +72,6 @@ export const BarChart = ({
           const resolvedColor = item.color ?? theme.colors.primary;
 
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={idx} flexDirection="row" gap={1}>
               <Text color={theme.colors.foreground}>
                 {pad(item.label, maxLabelLen)}
@@ -90,7 +89,6 @@ export const BarChart = ({
     );
   }
 
-  // Vertical direction
   const barW = Math.max(3, Math.floor(width / data.length));
   const rows: string[][] = [];
 
@@ -113,7 +111,6 @@ export const BarChart = ({
       {rows.map((row, rowIdx) => {
         const threshold = ((height - 1 - rowIdx) / (height - 1)) * maxValue;
         return (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={rowIdx} flexDirection="row">
             {row.map((cell, colIdx) => {
               const item = data[colIdx];
@@ -121,7 +118,6 @@ export const BarChart = ({
               const isFilled = item.value >= threshold;
               return (
                 <Text
-                  // eslint-disable-next-line react/no-array-index-key
                   key={colIdx}
                   color={isFilled ? resolvedColor : theme.colors.muted}
                 >
@@ -132,13 +128,11 @@ export const BarChart = ({
           </Box>
         );
       })}
-      {/* Value row */}
       {showValues && (
         <Box flexDirection="row">
           {data.map((item, idx) => {
             const resolvedColor = item.color ?? theme.colors.primary;
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} color={resolvedColor}>
                 {pad(String(item.value), barW)}
               </Text>
@@ -146,10 +140,8 @@ export const BarChart = ({
           })}
         </Box>
       )}
-      {/* Labels row */}
       <Box flexDirection="row">
         {data.map((item, idx) => (
-          // eslint-disable-next-line react/no-array-index-key
           <Text key={idx} color={theme.colors.mutedForeground}>
             {pad(item.label, barW)}
           </Text>

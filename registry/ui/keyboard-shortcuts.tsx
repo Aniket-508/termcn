@@ -64,11 +64,9 @@ const ShortcutGrid = function ShortcutGrid({
   return (
     <Box flexDirection="column" gap={0}>
       {rows.map((row, ri) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Box key={ri} gap={3}>
           {row.map((s, ci) => (
             <ShortcutRow
-              // eslint-disable-next-line react/no-array-index-key
               key={ci}
               shortcut={s}
               keyColor={theme.colors.primary}
@@ -119,7 +117,6 @@ export const KeyboardShortcuts = function KeyboardShortcuts({
             ) : (
               items.map((s, i) => (
                 <ShortcutRow
-                  // eslint-disable-next-line react/no-array-index-key
                   key={i}
                   shortcut={s}
                   keyColor={theme.colors.primary}
@@ -145,7 +142,6 @@ export const KeyboardShortcuts = function KeyboardShortcuts({
       ) : (
         shortcuts.map((s, i) => (
           <ShortcutRow
-            // eslint-disable-next-line react/no-array-index-key
             key={i}
             shortcut={s}
             keyColor={theme.colors.primary}

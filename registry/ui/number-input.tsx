@@ -16,7 +16,6 @@ export interface NumberInputProps {
   label?: string;
   id?: string;
   format?: (n: number) => string;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -25,11 +24,8 @@ export interface NumberInputProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Cursor character shown when focused. Default: '█' */
   cursor?: string;
-  /** Step hint format. Default: '↑ +{step}  ↓ -{step}' */
   stepHint?: string;
 }
 
@@ -81,7 +77,6 @@ export const NumberInput = function NumberInput({
     setBuffer(String(clamped));
   };
 
-  // eslint-disable-next-line complexity
   useInput((input, key) => {
     if (!isFocused) {
       return;

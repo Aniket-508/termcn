@@ -49,7 +49,6 @@ export const Divider = function Divider({
     );
   }
 
-  // Horizontal
   if (label) {
     return (
       <Box flexDirection="row" width={width}>

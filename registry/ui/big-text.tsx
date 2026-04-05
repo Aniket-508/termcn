@@ -10,8 +10,6 @@ export interface BigTextProps {
   font?: BigTextFont;
 }
 
-// Each character is defined as a 3-wide × 5-tall grid (row-major, 0=off, 1=on)
-// Rows are stored top-to-bottom.
 const FONT: Record<string, number[][]> = {
   " ": [
     [0, 0, 0],
@@ -346,7 +344,6 @@ export const BigText = function BigText({
               .map((pixel) => (pixel ? onChar : offChar))
               .join("");
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={charIdx} color={resolvedColor}>
                 {`${rowStr} `}
               </Text>

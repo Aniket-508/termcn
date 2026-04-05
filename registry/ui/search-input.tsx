@@ -15,7 +15,6 @@ export interface SearchInputProps<T = string> {
   label?: string;
   maxResults?: number;
   id?: string;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -24,13 +23,9 @@ export interface SearchInputProps<T = string> {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Cursor character shown when focused. Default: '█' */
   cursor?: string;
-  /** Icon shown before the search input. Default: '🔍 ' */
   searchIcon?: string;
-  /** Cursor shown before selected result. Default: '› ' */
   resultCursor?: string;
 }
 
@@ -174,7 +169,6 @@ export const SearchInput = <T = string>({
           {filteredResults.map((item, idx) => {
             const isSelected = idx === selectedIndex;
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Box key={idx} flexDirection="row">
                 <Text
                   color={

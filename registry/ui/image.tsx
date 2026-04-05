@@ -53,7 +53,7 @@ const writeIterm2 = function writeIterm2(
 
     process.stdout.write(`\u001B]1337;File=${args}:${base64}\u0007`);
   } catch {
-    // file read failed — fall through to ascii
+    /* noop */
   }
 };
 
@@ -66,7 +66,6 @@ const writeKitty = function writeKitty(
     const data = fs.readFileSync(src);
     const base64 = data.toString("base64");
 
-    // Kitty graphics protocol: transmit image via chunks
     const chunkSize = 4096;
     let offset = 0;
     let first = true;
@@ -89,7 +88,7 @@ const writeKitty = function writeKitty(
       process.stdout.write(`\u001B_G${header};${chunk}\u001B\\`);
     }
   } catch {
-    // fall through
+    /* noop */
   }
 };
 
@@ -127,7 +126,6 @@ export const Image = function Image({
     }
   }, [src, resolvedProtocol, width, height]);
 
-  // ASCII fallback: draw a placeholder box
   if (resolvedProtocol === "ascii" || renderError) {
     const boxWidth = width ?? 20;
     const topBottom = "─".repeat(boxWidth - 2);
@@ -151,7 +149,6 @@ export const Image = function Image({
     return (
       <Box flexDirection="column" gap={0}>
         {displayLines.map((line, i) => (
-          // eslint-disable-next-line react/no-array-index-key
           <Text key={i} color={theme.colors.border}>
             {line}
           </Text>
@@ -172,8 +169,6 @@ export const Image = function Image({
     );
   }
 
-  // For iTerm2/Kitty the image is rendered inline by the terminal itself.
-  // We render a small label below to indicate what was displayed.
   return (
     <Box flexDirection="column" gap={0}>
       <Text color={theme.colors.mutedForeground} dimColor>

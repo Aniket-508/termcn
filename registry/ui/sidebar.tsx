@@ -147,13 +147,10 @@ export const Sidebar = ({
 
         return (
           <Box key={item.key} flexDirection="row" alignItems="center">
-            {/* Active indicator */}
             <Text color={isActive ? theme.colors.primary : "transparent"}>
               {isActive ? "▌" : " "}
             </Text>
-            {/* Indent */}
             {indent > 0 && <Text>{" ".repeat(indent)}</Text>}
-            {/* Expand indicator */}
             {hasChildren ? (
               <Text color={theme.colors.mutedForeground}>
                 {isExpanded ? "▾ " : "▸ "}
@@ -161,7 +158,6 @@ export const Sidebar = ({
             ) : (
               <Text>{"  "}</Text>
             )}
-            {/* Icon */}
             {item.icon && (
               <Text
                 color={
@@ -171,11 +167,9 @@ export const Sidebar = ({
                 {item.icon}{" "}
               </Text>
             )}
-            {/* Label */}
             <Text color={labelColor} bold={isActive || isFocused}>
               {item.label}
             </Text>
-            {/* Badge */}
             {item.badge !== undefined && (
               <Box marginLeft={1}>
                 <Text color={theme.colors.primary}>{item.badge}</Text>

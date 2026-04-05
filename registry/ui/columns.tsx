@@ -22,13 +22,11 @@ export const Columns = function Columns({
   gap = 0,
   align = "top",
 }: ColumnsProps) {
-  // eslint-disable-next-line react/no-react-children
   const items = React.Children.toArray(children);
 
   return (
     <Box flexDirection="row" gap={gap} alignItems={ALIGN_MAP[align]}>
       {items.map((child, index) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Box key={index} flexGrow={1} flexDirection="column">
           {child}
         </Box>

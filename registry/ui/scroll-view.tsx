@@ -11,9 +11,6 @@ export interface ScrollViewProps {
   scrollbarColor?: string;
 }
 
-// Note: Ink doesn't natively support scrolling viewport clipping.
-// ScrollView uses a scroll offset and the `overflow: 'hidden'` Box prop.
-// The children are rendered inside an offset container.
 export const ScrollView = function ScrollView({
   height,
   children,

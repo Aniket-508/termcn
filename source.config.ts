@@ -13,8 +13,7 @@ export default defineConfig({
     rehypePlugins: (plugins) => {
       plugins.shift();
       plugins.push([
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        rehypePrettyCode as any,
+        rehypePrettyCode,
         {
           theme: {
             dark: "github-dark",

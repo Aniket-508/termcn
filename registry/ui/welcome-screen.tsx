@@ -42,7 +42,6 @@ export interface WelcomeScreenSectionProps {
   children: ReactNode;
 }
 
-// Sub-component slots — detected by displayName
 const WelcomeScreenLeft = function WelcomeScreenLeft({
   children,
 }: {
@@ -86,10 +85,7 @@ const WelcomeScreenLogo = function WelcomeScreenLogo({
       paddingY={1}
     >
       {typeof children === "string"
-        ? children.split("\n").map((line, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Text key={i}>{line}</Text>
-          ))
+        ? children.split("\n").map((line, i) => <Text key={i}>{line}</Text>)
         : children}
     </Box>
   );
@@ -111,7 +107,6 @@ const WelcomeScreenMeta = function WelcomeScreenMeta({
         paddingTop={1}
       >
         {items.map((item, i) => (
-          // eslint-disable-next-line react/no-array-index-key
           <Text key={i} dimColor={dim} color={color}>
             {item}
           </Text>
@@ -128,7 +123,6 @@ const WelcomeScreenMeta = function WelcomeScreenMeta({
       paddingTop={1}
     >
       {items.map((item, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Text key={i} dimColor={dim} color={color}>
           {item}
           {i < items.length - 1 ? separator : ""}
@@ -168,7 +162,6 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
   const resolvedBorderColor = borderColor ?? theme.colors.border;
   const resolvedAppNameColor = appNameColor ?? theme.colors.primary;
 
-  // eslint-disable-next-line react/no-react-children
   const childArray = React.Children.toArray(children);
   const leftChildren = childArray.filter(
     (c) =>
@@ -183,16 +176,14 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
 
   const leftContent = leftChildren.flatMap((c) =>
     React.isValidElement(c)
-      ? // eslint-disable-next-line react/no-react-children
-        React.Children.toArray(
+      ? React.Children.toArray(
           (c.props as { children?: React.ReactNode }).children
         )
       : []
   );
   const rightContent = rightChildren.flatMap((c) =>
     React.isValidElement(c)
-      ? // eslint-disable-next-line react/no-react-children
-        React.Children.toArray(
+      ? React.Children.toArray(
           (c.props as { children?: React.ReactNode }).children
         )
       : []
@@ -202,7 +193,6 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
 
   return (
     <Box flexDirection="column">
-      {/* Titled top border line */}
       <Box flexDirection="row">
         <Text color={resolvedBorderColor}>{"── "}</Text>
         <Text color={resolvedAppNameColor} bold>
@@ -210,22 +200,18 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
         </Text>
         <Text color={resolvedBorderColor}>{" ─"}</Text>
       </Box>
-      {/* Two-panel body with border */}
       <Box
         borderStyle={borderStyle}
         borderColor={resolvedBorderColor}
         borderTop={false}
         flexDirection="row"
       >
-        {/* Left panel */}
         <Box width={leftWidth} flexDirection="column" paddingX={1} paddingY={1}>
           {leftContent}
         </Box>
-        {/* Vertical divider */}
         <Box width={1} flexDirection="column" alignItems="center">
           <Text color={resolvedBorderColor}>│</Text>
         </Box>
-        {/* Right panel */}
         <Box flexGrow={1} flexDirection="column" paddingX={1} paddingY={1}>
           {rightContent}
         </Box>

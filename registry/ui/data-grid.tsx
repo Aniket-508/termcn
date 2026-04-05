@@ -98,7 +98,6 @@ export const DataGrid = <
     );
   }, [data, filter, columns]);
 
-  // Sort
   const sorted = useMemo(() => {
     if (!sortKey) {
       return filtered;
@@ -111,11 +110,9 @@ export const DataGrid = <
     });
   }, [filtered, sortKey, sortDir]);
 
-  // Paginate
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
   const pageData = sorted.slice(page * pageSize, (page + 1) * pageSize);
 
-  // eslint-disable-next-line complexity
   useInput((input, key) => {
     if (filterMode) {
       if (key.escape) {
@@ -166,7 +163,6 @@ export const DataGrid = <
       : "";
 
     return (
-      // eslint-disable-next-line react/no-array-index-key
       <Box key={rowIdx} flexDirection="row">
         {rowNumStr && <Text dimColor>{rowNumStr}</Text>}
         <Text
@@ -190,7 +186,6 @@ export const DataGrid = <
 
   return (
     <Box flexDirection="column">
-      {/* Filter bar */}
       {(filterMode || filter) && (
         <Box flexDirection="row" marginBottom={1}>
           <Text color={theme.colors.primary}>{"Filter: "}</Text>
@@ -204,7 +199,6 @@ export const DataGrid = <
         borderColor={resolvedBorderColor}
         flexDirection="column"
       >
-        {/* Header */}
         <Box flexDirection="row" paddingX={1}>
           {rowNumHeader && <Text dimColor>{rowNumHeader}</Text>}
           <Text bold color={theme.colors.primary}>
@@ -215,10 +209,8 @@ export const DataGrid = <
           {"─".repeat(headerCells.join(colSep).length + 2)}
         </Text>
 
-        {/* Rows */}
         {pageData.length > 0 ? (
           pageData.map((row, i) => (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={i} paddingX={1}>
               {renderRow(row, i, i === selectedRow)}
             </Box>
@@ -230,7 +222,6 @@ export const DataGrid = <
         )}
       </Box>
 
-      {/* Pagination + hints */}
       <Box flexDirection="row" gap={2} marginTop={1}>
         <Text dimColor>
           {`Page ${page + 1}/${totalPages} (${sorted.length} rows)`}

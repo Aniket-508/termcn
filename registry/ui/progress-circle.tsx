@@ -14,7 +14,6 @@ export interface ProgressCircleProps {
 
 const BRAILLE_CHARS = ["○", "◔", "◑", "◕", "●", "◉", "⬤", "●"];
 
-// 3×3 arc chars for md/lg sizes
 const _MD_TOP = ["▄▄▄", "▄██▄"];
 const _MD_MID_EMPTY = "█   █";
 const _MD_MID_FILL = "█████";
@@ -52,8 +51,6 @@ export const ProgressCircle = function ProgressCircle({
     );
   }
 
-  // md and lg: render percentage inside compact brackets
-  // lg adds more padding / a border ring
   const percentLabel = `${Math.round(clamped)}%`;
 
   if (size === "md") {
@@ -71,10 +68,7 @@ export const ProgressCircle = function ProgressCircle({
     );
   }
 
-  // lg: 3-line arc representation
-  // 0.0 → 1.0
   const fillLevel = clamped / 100;
-  // Top arc always shown; mid row fills from bottom; bot arc always shown
   const topArc = " ▄█▄";
   const midLeft = "█";
   const midRight = "█";

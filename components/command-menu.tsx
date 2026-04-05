@@ -1,6 +1,7 @@
 "use client";
 
 import type { DialogProps } from "@radix-ui/react-dialog";
+import type { Node as PageTreeNode } from "fumadocs-core/page-tree";
 import {
   ArrowRightIcon,
   CornerDownLeftIcon,
@@ -28,11 +29,90 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { SITE } from "@/constants/site";
+import { THEME_PRIMARY_SWATCH } from "@/constants/theme-command-swatches";
 import { useConfig } from "@/hooks/use-config";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import type { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
+
+type DocUrlKind =
+  | { kind: "theme"; slug: string }
+  | { kind: "component"; slug: string }
+  | { kind: "page" };
+
+const GROUP_HEADING_CLS =
+  "!p-0 [&_[cmdk-group-heading]]:scroll-mt-16 [&_[cmdk-group-heading]]:!p-3 [&_[cmdk-group-heading]]:!pb-1";
+
+const parseDocPageUrl = (url: string): DocUrlKind => {
+  const parts = url.split("/").filter(Boolean);
+  const themesIdx = parts.indexOf("themes");
+  if (themesIdx !== -1 && parts[themesIdx + 1]) {
+    return { kind: "theme", slug: parts[themesIdx + 1] };
+  }
+  const componentsIdx = parts.indexOf("components");
+  if (componentsIdx !== -1 && parts[componentsIdx + 1]) {
+    return { kind: "component", slug: parts.at(-1) ?? "" };
+  }
+  return { kind: "page" };
+};
+
+const nodeNameToString = (name: React.ReactNode): string =>
+  typeof name === "string" || typeof name === "number" ? String(name) : "";
+
+const searchKeywordsFromUrl = (url: string) => {
+  const segments = url.split("/").filter(Boolean);
+  return segments.flatMap((segment) =>
+    segment.includes("-") ? [segment, ...segment.split("-")] : [segment]
+  );
+};
+
+const buildDocPageKeywords = (
+  parsed: DocUrlKind,
+  url: string,
+  breadcrumb: string[]
+): string[] => [
+  ...(parsed.kind === "page" ? [] : [parsed.kind]),
+  ...breadcrumb.filter(Boolean).flatMap((s) => [s, s.toLowerCase()]),
+  ...searchKeywordsFromUrl(url),
+];
+
+const DocPageLeadingIcon = ({ parsed }: { parsed: DocUrlKind }) => {
+  if (parsed.kind === "theme") {
+    const color = THEME_PRIMARY_SWATCH[parsed.slug];
+    return (
+      <span
+        className="border-border/60 size-4 shrink-0 rounded-[2px] border"
+        style={color ? { backgroundColor: color } : undefined}
+        aria-hidden
+      />
+    );
+  }
+  if (parsed.kind === "component") {
+    return (
+      <div className="border-muted-foreground aspect-square size-4 rounded-full border border-dashed" />
+    );
+  }
+  return <ArrowRightIcon />;
+};
+
+const folderHasRenderableEntries = (nodes: PageTreeNode[]): boolean => {
+  for (const n of nodes) {
+    if (n.type === "page") {
+      return true;
+    }
+    if (n.type === "folder") {
+      if (n.index) {
+        return true;
+      }
+      if (folderHasRenderableEntries(n.children)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
 
 const CommandMenuKbd = ({
   className,
@@ -99,31 +179,34 @@ export const CommandMenu = ({
   const isMac = useIsMac();
   const [config] = useConfig();
   const [open, setOpen] = useState(false);
-  const [selectedType, setSelectedType] = useState<
-    "page" | "component" | "block" | null
-  >(null);
+  const [showGoToPage, setShowGoToPage] = useState(false);
   const [copyPayload, setCopyPayload] = useState("");
   const packageManager = config.packageManager || "pnpm";
 
-  const handlePageHighlight = useCallback(
-    (isComponent: boolean, item: { url: string; name?: React.ReactNode }) => {
-      if (isComponent) {
-        const componentName = item.url.split("/").pop();
-        setSelectedType("component");
+  const handleDocPageHighlight = useCallback(
+    (item: { url: string; name?: React.ReactNode }) => {
+      setShowGoToPage(true);
+      const parsed = parseDocPageUrl(item.url);
+      if (parsed.kind === "theme") {
         setCopyPayload(
-          `${packageManager} dlx shadcn@latest add ${componentName}`
+          `${packageManager} dlx shadcn@latest add ${SITE.url}/r/theme-${parsed.slug}.json`
         );
-      } else {
-        setSelectedType("page");
-        setCopyPayload("");
+        return;
       }
+      if (parsed.kind === "component") {
+        setCopyPayload(
+          `${packageManager} dlx shadcn@latest add ${SITE.url}/r/${parsed.slug}.json`
+        );
+        return;
+      }
+      setCopyPayload("");
     },
     [packageManager]
   );
 
   const handleBlockHighlight = useCallback(
     (block: { name: string; description: string; categories: string[] }) => {
-      setSelectedType("block");
+      setShowGoToPage(true);
       setCopyPayload(`${packageManager} dlx shadcn@latest add ${block.name}`);
     },
     [packageManager]
@@ -147,6 +230,73 @@ export const CommandMenu = ({
     []
   );
 
+  const renderDocPageItem = (
+    page: { url: string; name: React.ReactNode },
+    breadcrumb: string[]
+  ) => {
+    const parsed = parseDocPageUrl(page.url);
+    const title = page.name?.toString() ?? "";
+    return (
+      <CommandMenuItem
+        key={page.url}
+        keywords={buildDocPageKeywords(parsed, page.url, breadcrumb)}
+        value={[...breadcrumb, title].filter(Boolean).join(" ")}
+        onHighlight={() => handleDocPageHighlight(page)}
+        onSelect={() => runCommand(() => router.push(page.url))}
+      >
+        <DocPageLeadingIcon parsed={parsed} />
+        {page.name}
+      </CommandMenuItem>
+    );
+  };
+
+  const renderDocTreeNodes = (
+    nodes: PageTreeNode[],
+    breadcrumb: string[],
+    depth: number
+  ): React.ReactNode[] =>
+    nodes.flatMap((node) => {
+      if (node.type === "separator") {
+        return [];
+      }
+
+      if (node.type === "page") {
+        return [renderDocPageItem(node, breadcrumb)];
+      }
+
+      if (node.type === "folder") {
+        const folderName = nodeNameToString(node.name);
+        const nextBreadcrumb = [...breadcrumb, folderName];
+
+        if (!node.index && !folderHasRenderableEntries(node.children)) {
+          return [];
+        }
+
+        const children = renderDocTreeNodes(
+          node.children,
+          nextBreadcrumb,
+          depth + 1
+        );
+
+        return [
+          <CommandGroup
+            key={node.$id}
+            className={cn(
+              GROUP_HEADING_CLS,
+              depth > 0 &&
+                "[&_[cmdk-group-heading]]:!text-muted-foreground [&_[cmdk-group-heading]]:!pl-5 [&_[cmdk-group-heading]]:!pt-2"
+            )}
+            heading={node.name}
+          >
+            {node.index ? renderDocPageItem(node.index, nextBreadcrumb) : null}
+            {children}
+          </CommandGroup>,
+        ];
+      }
+
+      return [];
+    });
+
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
@@ -165,14 +315,7 @@ export const CommandMenu = ({
 
       if (e.key === "c" && (e.metaKey || e.ctrlKey)) {
         runCommand(() => {
-          if (selectedType === "block") {
-            copyToClipboardWithMeta(copyPayload, {
-              name: "copy_npm_command",
-              properties: { command: copyPayload, pm: packageManager },
-            });
-          }
-
-          if (selectedType === "page" || selectedType === "component") {
+          if (copyPayload) {
             copyToClipboardWithMeta(copyPayload, {
               name: "copy_npm_command",
               properties: { command: copyPayload, pm: packageManager },
@@ -184,7 +327,7 @@ export const CommandMenu = ({
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, [copyPayload, runCommand, selectedType, packageManager]);
+  }, [copyPayload, runCommand, packageManager]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -223,21 +366,16 @@ export const CommandMenu = ({
               No results found.
             </CommandEmpty>
             {navItems && navItems.length > 0 && (
-              <CommandGroup
-                heading="Pages"
-                className="!p-0 [&_[cmdk-group-heading]]:scroll-mt-16 [&_[cmdk-group-heading]]:!p-3 [&_[cmdk-group-heading]]:!pb-1"
-              >
+              <CommandGroup heading="Pages" className={GROUP_HEADING_CLS}>
                 {navItems.map((item) => (
                   <CommandMenuItem
                     key={item.href}
                     value={`Navigation ${item.label}`}
                     keywords={["nav", "navigation", item.label.toLowerCase()]}
-                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
                     onHighlight={() => {
-                      setSelectedType("page");
+                      setShowGoToPage(true);
                       setCopyPayload("");
                     }}
-                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
                     onSelect={() => runCommand(() => router.push(item.href))}
                   >
                     <ArrowRightIcon />
@@ -246,58 +384,52 @@ export const CommandMenu = ({
                 ))}
               </CommandGroup>
             )}
-            {tree.children.map((group) => (
-              <CommandGroup
-                key={group.$id}
-                heading={group.name}
-                className="!p-0 [&_[cmdk-group-heading]]:scroll-mt-16 [&_[cmdk-group-heading]]:!p-3 [&_[cmdk-group-heading]]:!pb-1"
-              >
-                {group.type === "folder" &&
-                  group.children.map((item) => {
-                    if (item.type === "page") {
-                      const isComponent = item.url.includes("/components/");
+            {tree.children.flatMap((group) => {
+              if (group.type !== "folder") {
+                return [];
+              }
 
-                      return (
-                        <CommandMenuItem
-                          key={item.url}
-                          value={
-                            item.name?.toString()
-                              ? `${group.name} ${item.name}`
-                              : ""
-                          }
-                          keywords={isComponent ? ["component"] : undefined}
-                          // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
-                          onHighlight={() =>
-                            handlePageHighlight(isComponent, item)
-                          }
-                          // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
-                          onSelect={() =>
-                            runCommand(() => router.push(item.url))
-                          }
-                        >
-                          {isComponent ? (
-                            <div className="border-muted-foreground aspect-square size-4 rounded-full border border-dashed" />
-                          ) : (
-                            <ArrowRightIcon />
-                          )}
-                          {item.name}
-                        </CommandMenuItem>
-                      );
-                    }
-                    return null;
-                  })}
-              </CommandGroup>
-            ))}
+              const sectionLabel = nodeNameToString(group.name);
+
+              if (!group.index && !folderHasRenderableEntries(group.children)) {
+                return [];
+              }
+
+              const breadcrumb = [sectionLabel].filter(Boolean);
+
+              if (sectionLabel === "Components") {
+                const items: React.ReactNode[] = [];
+                if (group.index) {
+                  items.push(renderDocPageItem(group.index, breadcrumb));
+                }
+                items.push(
+                  ...renderDocTreeNodes(group.children, breadcrumb, 0)
+                );
+                return items;
+              }
+
+              return [
+                <CommandGroup
+                  key={group.$id}
+                  className={GROUP_HEADING_CLS}
+                  heading={group.name}
+                >
+                  {group.index
+                    ? renderDocPageItem(group.index, breadcrumb)
+                    : null}
+                  {renderDocTreeNodes(group.children, breadcrumb, 0)}
+                </CommandGroup>,
+              ];
+            })}
             {blocks?.length ? (
               <CommandGroup
                 heading="Blocks"
-                className="!p-0 [&_[cmdk-group-heading]]:!p-3"
+                className="p-0! **:[[cmdk-group-heading]]:p-3!"
               >
                 {blocks.map((block) => (
                   <CommandMenuItem
                     key={block.name}
                     value={block.name}
-                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
                     onHighlight={() => handleBlockHighlight(block)}
                     keywords={[
                       "block",
@@ -305,7 +437,6 @@ export const CommandMenu = ({
                       block.description,
                       ...block.categories,
                     ]}
-                    // eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
                     onSelect={() =>
                       runCommand(() =>
                         router.push(
@@ -325,22 +456,24 @@ export const CommandMenu = ({
             ) : null}
           </CommandList>
         </Command>
-        <div className="text-muted-foreground absolute inset-x-0 bottom-0 z-20 flex h-10 items-center gap-2 rounded-b-xl border-t border-t-neutral-100 bg-neutral-50 px-4 text-xs font-medium dark:border-t-neutral-700 dark:bg-neutral-800">
-          <div className="flex items-center gap-2">
-            <CommandMenuKbd>
+        <div className="text-muted-foreground absolute inset-x-0 bottom-0 z-20 flex h-10 items-center gap-2 overflow-hidden rounded-b-xl border-t border-t-neutral-100 bg-neutral-50 px-4 text-xs font-medium dark:border-t-neutral-700 dark:bg-neutral-800">
+          <div className="flex items-center gap-2 shrink-0">
+            <CommandMenuKbd className="shrink-0">
               <CornerDownLeftIcon />
             </CommandMenuKbd>{" "}
-            {selectedType === "page" || selectedType === "component"
-              ? "Go to Page"
-              : null}
+            {showGoToPage ? (
+              <span className="min-w-0 truncate">Go to Page</span>
+            ) : null}
           </div>
           {copyPayload && (
             <>
-              <Separator orientation="vertical" className="!h-4" />
-              <div className="flex items-center gap-1">
-                <CommandMenuKbd>{isMac ? "⌘" : "Ctrl"}</CommandMenuKbd>
-                <CommandMenuKbd>C</CommandMenuKbd>
-                {copyPayload}
+              <Separator orientation="vertical" className="h-4!" />
+              <div className="flex min-w-0 items-center gap-1">
+                <CommandMenuKbd className="shrink-0">
+                  {isMac ? "⌘" : "Ctrl"}
+                </CommandMenuKbd>
+                <CommandMenuKbd className="shrink-0">C</CommandMenuKbd>
+                <span className="min-w-0 truncate">{copyPayload}</span>
               </div>
             </>
           )}

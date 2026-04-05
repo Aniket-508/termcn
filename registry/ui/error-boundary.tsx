@@ -29,7 +29,6 @@ export class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    // eslint-disable-next-line react/no-set-state
     this.setState({ componentStack: info.componentStack ?? "" });
     this.props.onError?.(error, { componentStack: info.componentStack ?? "" });
   }
@@ -73,7 +72,6 @@ export class ErrorBoundary extends Component<
                 Stack trace:
               </Text>
               {stackLines.map((line, idx) => (
-                // eslint-disable-next-line react/no-array-index-key
                 <Text key={idx} color="red" dimColor>
                   {line}
                 </Text>

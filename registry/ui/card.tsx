@@ -10,7 +10,6 @@ export interface CardProps {
   footer?: ReactNode;
   borderColor?: string;
   width?: number;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -19,11 +18,8 @@ export interface CardProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Vertical padding. Default: 0 */
   paddingY?: number;
-  /** Character used for the footer divider. Default: '─' */
   footerDividerChar?: string;
 }
 

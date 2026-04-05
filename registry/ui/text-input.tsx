@@ -16,9 +16,7 @@ export interface TextInputProps {
   label?: string;
   autoFocus?: boolean;
   id?: string;
-  /** Show a border around the input. Default: true */
   bordered?: boolean;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -27,9 +25,7 @@ export interface TextInputProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Cursor character shown when focused. Default: '█' */
   cursor?: string;
 }
 

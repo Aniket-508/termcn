@@ -10,7 +10,6 @@ export interface GitStatusProps {
   behind?: number;
 }
 
-/** Presentational git summary line; pair with a custom `useGit` hook or git porcelain parsing. */
 export const GitStatus = function GitStatus({
   branch,
   staged = 0,

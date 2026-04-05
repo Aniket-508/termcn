@@ -65,7 +65,6 @@ export const gradientText = function gradientText(
     if (len <= 1) {
       return { char, color: colors[0] };
     }
-    // Position in [0, segments]
     const pos = (i / (len - 1)) * segments;
     const segIndex = Math.min(Math.floor(pos), segments - 1);
     const t = pos - segIndex;
@@ -86,7 +85,6 @@ export const Gradient = function Gradient({
   return (
     <Box flexDirection="row">
       {chars.map((item, idx) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Text key={idx} color={item.color} bold={bold}>
           {item.char}
         </Text>

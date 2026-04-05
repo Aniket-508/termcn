@@ -58,7 +58,6 @@ export const VirtualList = <T,>({
     [items, visibleStart, visibleEnd]
   );
 
-  // Scrollbar calculations
   const thumbSize = Math.max(1, Math.floor((height * height) / items.length));
   const thumbPosition =
     items.length <= height
@@ -96,7 +95,6 @@ export const VirtualList = <T,>({
         <Box flexDirection="column" marginLeft={1}>
           {scrollbar.map((char, i) => (
             <Text
-              // eslint-disable-next-line react/no-array-index-key
               key={i}
               color={
                 char === "█"

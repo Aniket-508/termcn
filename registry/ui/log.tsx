@@ -105,7 +105,6 @@ export const Log = function Log({
             messageColor = theme.colors.foreground;
           }
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <Box key={i} gap={1}>
               {showTimestamp && entry.timestamp && (
                 <Text color={theme.colors.mutedForeground} dimColor>

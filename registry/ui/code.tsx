@@ -6,7 +6,6 @@ export interface CodeProps {
   children: string;
   language?: string;
   inline?: boolean;
-  /** Border style. Default: 'single' */
   borderStyle?:
     | "single"
     | "double"
@@ -15,21 +14,13 @@ export interface CodeProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Whether to show line numbers. Default: true */
   showLineNumbers?: boolean;
-  /** Line number separator string. Default: '│ ' */
   lineNumberSeparator?: string;
-  /** Override color for keyword tokens. Default: theme.colors.accent */
   keywordColor?: string;
-  /** Override color for string tokens. Default: theme.colors.success */
   stringColor?: string;
-  /** Override color for number tokens. Default: theme.colors.warning */
   numberColor?: string;
-  /** Override color for comment tokens. Default: theme.colors.mutedForeground */
   commentColor?: string;
-  /** Override color for operator tokens. Default: theme.colors.info */
   operatorColor?: string;
-  /** Override color for plain tokens. Default: theme.colors.foreground */
   plainColor?: string;
 }
 
@@ -92,7 +83,6 @@ interface Token {
   kind: "keyword" | "string" | "number" | "comment" | "operator" | "plain";
 }
 
-// eslint-disable-next-line complexity
 const tokenizeLine = function tokenizeLine(line: string): Token[] {
   const trimmed = line.trimStart();
   if (trimmed.startsWith("//")) {
@@ -189,7 +179,6 @@ const CodeLine = function CodeLine({
         switch (token.kind) {
           case "keyword": {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} color={keywordColor}>
                 {token.text}
               </Text>
@@ -197,7 +186,6 @@ const CodeLine = function CodeLine({
           }
           case "string": {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} color={stringColor}>
                 {token.text}
               </Text>
@@ -205,7 +193,6 @@ const CodeLine = function CodeLine({
           }
           case "number": {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} color={numberColor}>
                 {token.text}
               </Text>
@@ -213,7 +200,6 @@ const CodeLine = function CodeLine({
           }
           case "comment": {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} dimColor>
                 {token.text}
               </Text>
@@ -221,7 +207,6 @@ const CodeLine = function CodeLine({
           }
           case "operator": {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} color={operatorColor}>
                 {token.text}
               </Text>
@@ -229,7 +214,6 @@ const CodeLine = function CodeLine({
           }
           default: {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <Text key={idx} color={plainColor}>
                 {token.text}
               </Text>
@@ -301,7 +285,6 @@ export const Code = function Code({
         </Box>
       )}
       {lines.map((line, idx) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Box key={idx} flexDirection="row" paddingX={1}>
           {showLineNumbers && (
             <>

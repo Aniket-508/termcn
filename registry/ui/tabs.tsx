@@ -17,7 +17,6 @@ export interface TabsProps {
   activeTab?: string;
   onTabChange?: (key: string) => void;
   borderColor?: string;
-  /** Border style of the content panel. Default: 'single' */
   borderStyle?:
     | "single"
     | "double"
@@ -26,13 +25,9 @@ export interface TabsProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Separator between tab labels. Default: ' │ ' */
   separator?: string;
-  /** Horizontal padding of the tab bar. Default: 2 */
   tabBarPaddingX?: number;
-  /** Horizontal padding of the content panel. Default: 1 */
   paddingX?: number;
-  /** Vertical padding of the content panel. Default: 0 */
   paddingY?: number;
 }
 
@@ -62,8 +57,6 @@ export const Tabs = function Tabs({
     if (!nextKey || nextKey === activeKey) {
       return;
     }
-    // Clear the entire screen before switching so Ink redraws from a clean
-    // slate — prevents old lines from a taller tab persisting as ghost content.
     stdout.write("\u001B[2J\u001B[H");
     if (onTabChange) {
       onTabChange(nextKey);
@@ -84,7 +77,6 @@ export const Tabs = function Tabs({
 
   return (
     <Box flexDirection="column">
-      {/* Tab bar — plain row, no border */}
       <Box paddingX={tabBarPaddingX} gap={0}>
         {tabs.map((tab, idx) => {
           const isActive = tab.key === activeKey;
@@ -106,7 +98,6 @@ export const Tabs = function Tabs({
           );
         })}
       </Box>
-      {/* Only the active tab's content is rendered */}
       <Box
         borderStyle={borderStyle}
         borderColor={resolvedBorderColor}

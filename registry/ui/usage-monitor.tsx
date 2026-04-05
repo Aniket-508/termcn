@@ -150,12 +150,9 @@ const UsageMonitorRoot = function UsageMonitorRoot({
 
   return (
     <Box flexDirection="column">
-      {/* eslint-disable-next-line react/no-react-children */}
       {React.Children.map(children, (child, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <React.Fragment key={i}>
           {child}
-          {/* eslint-disable-next-line react/no-react-children */}
           {i < React.Children.count(children) - 1 &&
             React.isValidElement(child) &&
             (child.type as unknown as { displayName?: string }).displayName !==
@@ -201,7 +198,6 @@ const UsageMonitorTags = function UsageMonitorTags({
     <Box flexDirection="row" marginBottom={1}>
       <Text color={bracketColor ?? "cyan"}>{"[ "}</Text>
       {items.map((item, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <React.Fragment key={i}>
           <Text>{item}</Text>
           {i < items.length - 1 && (
@@ -288,14 +284,12 @@ const UsageMonitorDistributionMetric = function UsageMonitorDistributionMetric({
       <Text dimColor>{label.padEnd(16)}</Text>
       <Text>[</Text>
       {bars.map((seg, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Text key={i} color={seg.color ?? "white"}>
           {"█".repeat(seg.count)}
         </Text>
       ))}
       <Text>]</Text>
       {segments.map((seg, i) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Text key={i} color={seg.color ?? "white"}>
           {`${seg.label} ${seg.percent}%`}
           {i < segments.length - 1 ? " | " : ""}

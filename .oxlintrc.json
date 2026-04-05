@@ -4,5 +4,24 @@
     "./node_modules/ultracite/config/oxlint/core/.oxlintrc.json",
     "./node_modules/ultracite/config/oxlint/react/.oxlintrc.json",
     "./node_modules/ultracite/config/oxlint/next/.oxlintrc.json"
+  ],
+  "rules": {
+    "react-perf/jsx-no-new-function-as-prop": "off"
+  },
+  "overrides": [
+    {
+      "files": ["registry/ui/**/*.tsx"],
+      "rules": {
+        "react/no-array-index-key": "off",
+        "react/no-react-children": "off",
+        "react/no-clone-element": "off",
+        "react/no-set-state": "off",
+        "react/style-prop-object": "off",
+        "complexity": "off",
+        "no-bitwise": "off",
+        "unicorn/number-literal-case": "off",
+        "no-new-func": "off"
+      }
+    }
   ]
 }

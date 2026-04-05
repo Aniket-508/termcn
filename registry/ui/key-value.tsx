@@ -46,7 +46,6 @@ export const KeyValue = function KeyValue({
       {items.map((item, idx) => {
         const paddedKey = item.key.padEnd(resolvedKeyWidth, " ");
         return (
-          // eslint-disable-next-line react/no-array-index-key
           <Box key={idx} flexDirection="row" gap={1}>
             <Text color={resolvedKeyColor}>{paddedKey}</Text>
             <Text color={resolvedKeyColor}>{separator}</Text>

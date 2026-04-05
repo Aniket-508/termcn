@@ -9,7 +9,6 @@ export interface TokenUsageProps {
   showCost?: boolean;
 }
 
-// Approximate pricing per 1M tokens (input/output) for common models
 const MODEL_PRICING: Record<string, { input: number; output: number }> = {
   "claude-3-5-haiku": { input: 0.8, output: 4 },
   "claude-3-5-sonnet": { input: 3, output: 15 },
@@ -95,8 +94,6 @@ export const TokenUsage = function TokenUsage({
     </Box>
   );
 };
-
-// ─── ContextMeter ─────────────────────────────────────────────────────────────
 
 export interface ContextMeterProps {
   used: number;

@@ -10,7 +10,6 @@ export interface ModalProps {
   title?: string;
   width?: number;
   children?: ReactNode;
-  /** Border style. Default: 'round' */
   borderStyle?:
     | "single"
     | "double"
@@ -19,13 +18,9 @@ export interface ModalProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Border color. Default: theme.colors.primary */
   borderColor?: string;
-  /** Horizontal padding. Default: 1 */
   paddingX?: number;
-  /** Vertical padding. Default: 0 */
   paddingY?: number;
-  /** Title bar border style. Default: 'single' */
   titleBorderStyle?:
     | "single"
     | "double"
@@ -34,7 +29,6 @@ export interface ModalProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Close hint text. Set to false to hide, or a string to customize. Default: 'Press Esc to close' */
   closeHint?: string | false;
 }
 

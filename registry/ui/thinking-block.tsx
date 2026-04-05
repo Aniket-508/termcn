@@ -50,7 +50,6 @@ export const ThinkingBlock = function ThinkingBlock({
       borderColor={theme.colors.border}
       paddingX={1}
     >
-      {/* Toggle header */}
       <Box gap={1}>
         <Text color={theme.colors.mutedForeground}>
           {collapsed ? "▶" : "▼"}
@@ -65,7 +64,6 @@ export const ThinkingBlock = function ThinkingBlock({
         </Text>
       </Box>
 
-      {/* Content (when expanded) */}
       {!collapsed && (
         <Box flexDirection="column" paddingTop={1}>
           <Text color={theme.colors.mutedForeground} dimColor wrap="wrap">

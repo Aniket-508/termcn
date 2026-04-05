@@ -6,7 +6,6 @@ import { useInput } from "@/hooks/use-input";
 import { useInterval } from "@/hooks/use-interval";
 
 export interface TimerProps {
-  // seconds
   duration: number;
   onComplete?: () => void;
   autoStart?: boolean;

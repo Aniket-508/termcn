@@ -15,7 +15,6 @@ export interface PanelProps {
     | "singleDouble"
     | "doubleSingle"
     | "classic";
-  /** Show a border around the panel. Default: true */
   bordered?: boolean;
   width?: number;
   height?: number;
