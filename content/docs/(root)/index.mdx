@@ -1,23 +1,75 @@
 ---
 title: "Introduction"
-description: "termcn ships a shadcn-style registry for 113 Ink terminal components and bundled themes."
+description: "Copy-paste terminal UI components for React. Built on Ink, works with the shadcn CLI."
 ---
 
-**termcn** publishes a large Ink component registry that installs through the shadcn CLI while keeping the source code in your app.
+**termcn** provides beautifully designed, accessible, and customizable terminal UI components. Built on [Ink](https://github.com/vadimdemedes/ink) and designed to work seamlessly with the [shadcn CLI](https://ui.shadcn.com).
 
-## What You Get
+## Philosophy
 
-- 113 terminal UI components grouped by category
-- Bundled terminal theming with live browser previews
-- Registry items for UI components, hooks, and theme files
-- Static docs pages with client-side xterm.js previews
+termcn follows the shadcn model for terminal UIs: copy-paste components you can own, with zero lock-in and sensible defaults that work immediately.
 
-## Install Any Component
+Terminal apps are often treated as afterthoughts — bolted together with ad-hoc formatting and inconsistent styling. termcn takes a different approach. It stays close to Ink's primitives, keeps the API familiar, and lets you drop down to raw Ink components whenever you need more control.
 
-```bash
-npx shadcn@latest add https://termcn.vercel.app/r/badge.json
-```
+The goal is simple: make terminal UIs feel like the rest of your stack — composable, themeable, accessible, and easy to customize.
 
-## Themes
+## Why termcn?
 
-The docs preview every component inside a browser terminal and let you switch between the bundled terminal themes live.
+Most Ink component setups are either too opinionated or too scattered. termcn is built for teams that want to ship quickly without giving up control:
+
+- **Own Your Code:** Copy the components into your project and customize everything.
+- **Start Fast:** Run one command and render your first terminal UI with production-ready defaults.
+- **Scale Safely:** Build on top of Ink directly, then drop to raw APIs when needed.
+
+## Any Terminal Style
+
+termcn works with any terminal that supports ANSI escape codes and Unicode. This means your components look great everywhere:
+
+- [iTerm2](https://iterm2.com) — Full Unicode and true color support on macOS
+- [Kitty](https://sw.kovidgoyal.net/kitty/) — GPU-accelerated with image protocol support
+- [Alacritty](https://alacritty.org) — Fast, cross-platform, GPU-accelerated
+- [Windows Terminal](https://github.com/microsoft/terminal) — Modern terminal for Windows
+- [Ghostty](https://ghostty.org) — Modern, GPU-accelerated terminal emulator
+- And any other terminal with ANSI/Unicode support
+
+## Features
+
+<div className="not-prose grid gap-4 sm:grid-cols-2 mt-4">
+  <FeatureCard
+    icon={ZapIcon}
+    title="Zero Config"
+    description="Works out of the box with sensible defaults. No boilerplate needed."
+  />
+  <FeatureCard
+    icon={SunMoonIcon}
+    title="Theme Aware"
+    description="Automatically adapts colors to your chosen terminal theme."
+  />
+  <FeatureCard
+    icon={LayoutGridIcon}
+    title="Composable"
+    description="Build complex terminal UIs with simple, declarative components."
+  />
+  <FeatureCard
+    icon={Code2Icon}
+    title="TypeScript"
+    description="Full type safety with comprehensive TypeScript support."
+  />
+  <FeatureCard
+    icon={ClipboardCopyIcon}
+    title="Copy & Paste"
+    description="Own your code. No runtime dependencies, just install into your project."
+  />
+  <FeatureCard
+    icon={BlocksIcon}
+    title="shadcn Compatible"
+    description="Uses the same registry format — add components with npx shadcn add."
+  />
+</div>
+
+import { ZapIcon } from "lucide-react";
+import { SunMoonIcon } from "lucide-react";
+import { LayoutGridIcon } from "lucide-react";
+import { Code2Icon } from "lucide-react";
+import { ClipboardCopyIcon } from "lucide-react";
+import { BlocksIcon } from "lucide-react";

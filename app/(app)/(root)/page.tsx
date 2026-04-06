@@ -59,7 +59,7 @@ export default function IndexPage() {
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
               <Button asChild size="lg">
-                <Link href={ROUTES.DOCS_GET_STARTED}>
+                <Link href={ROUTES.DOCS_INSTALLATION}>
                   Get Started
                   <ArrowRightIcon className="ml-2 size-4" />
                 </Link>

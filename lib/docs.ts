@@ -53,9 +53,9 @@ export const docsConfig: DocsConfig = {
     {
       items: [
         navLeaf("Introduction", ROUTES.DOCS),
+        navLeaf("Installation", ROUTES.DOCS_INSTALLATION),
         navLeaf("Components", ROUTES.DOCS_COMPONENTS),
         navLeaf("Templates", ROUTES.DOCS_TEMPLATES),
-        navLeaf("Get Started", ROUTES.DOCS_GET_STARTED),
         navLeaf("Theming", ROUTES.DOCS_THEMING),
         navLeaf("MCP", ROUTES.DOCS_MCP),
         navLeaf("Registry", ROUTES.DOCS_REGISTRY),

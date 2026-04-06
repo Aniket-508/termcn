@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,6 +20,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ThemeShowcasePreview } from "@/examples/theme-showcase";
 import { cn } from "@/lib/utils";
@@ -46,6 +48,33 @@ export const mdxComponents = {
   ComponentPreview,
   ComponentSource,
   ComponentsList,
+  FeatureCard: ({
+    icon: Icon,
+    title,
+    description,
+    className,
+  }: React.ComponentProps<typeof Card> & {
+    icon: LucideIcon;
+    title: string;
+    description: string;
+  }) => (
+    <Card
+      className={cn(
+        "flex flex-col gap-2 rounded-xl py-4 shadow-none",
+        className
+      )}
+    >
+      <CardHeader className="flex items-center gap-2 px-4">
+        <div className="bg-primary/10 flex size-8 shrink-0 items-center justify-center rounded-md text-primary">
+          <Icon className="size-4" />
+        </div>
+        <CardTitle className="text-base font-medium">{title}</CardTitle>
+      </CardHeader>
+      <CardContent className="px-4 text-sm text-muted-foreground">
+        {description}
+      </CardContent>
+    </Card>
+  ),
   Image: ({
     src,
     className,
