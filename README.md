@@ -1,52 +1,53 @@
-# termcn
+<h1 align="center">termcn</h1>
 
-A Next.js-powered shadcn-compatible registry for Ink terminal UI components.
+<p align="center">
+  Free & open-source, ready-to-use, customizable terminal UI components for React.<br/>
+  Zero config. One command setup. Built on <a href="https://github.com/vadimdemedes/ink">Ink</a>, works seamlessly with <a href="https://ui.shadcn.com/">shadcn/ui</a>.
+</p>
+
+<p align="center">
+  <a href="https://termcn.vercel.app/docs">Get Started</a> ·
+  <a href="https://termcn.vercel.app/docs/installation">Installation</a> ·
+  <a href="https://termcn.vercel.app/docs/components">Components</a>
+</p>
+
+<br />
+
+<p align="center">
+  <img src="public/og.png" alt="termcn banner" />
+</p>
 
 ## Features
 
-- 113 Ink-based terminal components exposed through the shadcn registry format
-- Registry source organized by type under `registry/ui`, `registry/hooks`, and `registry/themes`
-- Static Fumadocs pages with client-side `ink-web` + `xterm.js` previews
-- Bundled terminal theme provider and installable theme files
+- 🎨 **Theme-aware** — Automatically adapts to your chosen terminal theme
+- 🎯 **Zero config** — Works out of the box with sensible defaults
+- 📦 **shadcn/ui compatible** — Uses the same registry format and CLI
+- ⌨️ **Ink powered** — Full access to Ink's powerful terminal rendering
+- 🧩 **Composable** — Build complex terminal UIs with simple, declarative components
+- 📊 **Charts & Data** — Bar charts, line charts, gauges, heat maps, and more
+- 🤖 **AI Components** — Chat messages, tool approvals, streaming text, and thinking blocks
+- 🎮 **Navigation** — Command palettes, tabs, menus, sidebars, and pagination
 
-## Quick Start
+## Contributing
 
-```bash
-pnpm install
-pnpm dev
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Build the registry output:
-
-```bash
-pnpm registry:build
-```
-
-## Install a Component
-
-```bash
-npx shadcn@latest add https://termcn.vercel.app/r/badge.json
-```
-
-## Project Structure
-
-```text
-├── registry/
-│   ├── hooks/              # registry hook items
-│   ├── themes/             # installable theme files
-│   └── ui/                 # registry UI components
-├── content/docs/           # generated component + theme docs
-├── components/docs/        # browser preview components
-├── app/                    # Next.js app
-└── public/r/               # built registry JSON output
-```
-
-## Scripts
-
-- `pnpm dev` starts the docs app locally.
-- `pnpm registry:build` emits JSON under `public/r/`.
-- `pnpm build` runs the registry build and the Next.js production build.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
+[MIT](LICENSE)
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=Aniket-508%2Ftermcn&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Aniket-508/termcn&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Aniket-508/termcn&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Aniket-508/termcn&type=date&legend=top-left" />
+ </picture>
+</a>

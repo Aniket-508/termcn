@@ -107,7 +107,7 @@ export const baseMetadata: Metadata = {
   },
   publisher: SITE.AUTHOR.NAME,
   title: {
-    default: SITE.NAME,
+    default: `${SITE.NAME} - ${SITE.DESCRIPTION.SHORT}`,
     template: `%s | ${SITE.NAME}`,
   },
   twitter: {
