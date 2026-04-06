@@ -1,5 +1,5 @@
 import { Box, Text } from "ink";
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
 import { useInput } from "@/hooks/use-input";
@@ -21,23 +21,21 @@ export interface TableProps<
   onSelect?: (row: T) => void;
   maxRows?: number;
   borderColor?: string;
-  borderStyle?:
-    | "single"
-    | "double"
-    | "round"
-    | "bold"
-    | "singleDouble"
-    | "doubleSingle"
-    | "classic";
-  columnSeparator?: string;
-  rowSeparatorChar?: string;
 }
 
-const pad = function pad(
+const BORDER = {
+  bottom: { cross: "┴", left: "╰", line: "─", right: "╯" },
+  data: { cross: "│", left: "│", line: " ", right: "│" },
+  heading: { cross: "│", left: "│", line: " ", right: "│" },
+  separator: { cross: "┼", left: "├", line: "─", right: "┤" },
+  top: { cross: "┬", left: "╭", line: "─", right: "╮" },
+} as const;
+
+const pad = (
   str: string,
   width: number,
   align: "left" | "right" | "center" = "left"
-): string {
+): string => {
   const s = String(str);
   if (s.length >= width) {
     return s.slice(0, width);
@@ -47,12 +45,94 @@ const pad = function pad(
     return " ".repeat(diff) + s;
   }
   if (align === "center") {
-    const left = Math.floor(diff / 2);
-    const right = diff - left;
-    return " ".repeat(left) + `${s} `.repeat(right);
+    const l = Math.floor(diff / 2);
+    return " ".repeat(l) + s + " ".repeat(diff - l);
   }
-  return `${s} `.repeat(diff);
+  return s + " ".repeat(diff);
 };
+
+const intersperse = <T,>(items: T[], separator: (index: number) => T): T[] => {
+  const result: T[] = [];
+  for (let i = 0; i < items.length; i += 1) {
+    if (i > 0) {
+      result.push(separator(i));
+    }
+    const item = items[i];
+    if (item !== undefined) {
+      result.push(item);
+    }
+  }
+  return result;
+};
+
+interface SkeletonChars {
+  left: string;
+  right: string;
+  cross: string;
+  line: string;
+}
+
+const SkeletonRow = ({
+  widths,
+  skeleton,
+  color,
+}: {
+  widths: number[];
+  skeleton: SkeletonChars;
+  color: string;
+}) => (
+  <Box flexDirection="row">
+    <Text color={color}>{skeleton.left}</Text>
+    {intersperse(
+      widths.map((w, i) => (
+        <Text key={i} color={color}>
+          {skeleton.line.repeat(w + 2)}
+        </Text>
+      )),
+      (i) => (
+        <Text key={`sep-${i}`} color={color}>
+          {skeleton.cross}
+        </Text>
+      )
+    )}
+    <Text color={color}>{skeleton.right}</Text>
+  </Box>
+);
+
+const CellRow = ({
+  widths,
+  cells,
+  skeleton,
+  borderColor,
+  textColor,
+  bold,
+  inverse,
+}: {
+  widths: number[];
+  cells: { text: string; align: "left" | "right" | "center" }[];
+  skeleton: SkeletonChars;
+  borderColor: string;
+  textColor: string;
+  bold?: boolean;
+  inverse?: boolean;
+}) => (
+  <Box flexDirection="row">
+    <Text color={borderColor}>{skeleton.left}</Text>
+    {intersperse(
+      cells.map((cell, i) => (
+        <Text key={i} color={textColor} bold={bold} inverse={inverse}>
+          {` ${pad(cell.text, widths[i] ?? 0, cell.align)} `}
+        </Text>
+      )),
+      (i) => (
+        <Text key={`sep-${i}`} color={borderColor}>
+          {skeleton.cross}
+        </Text>
+      )
+    )}
+    <Text color={borderColor}>{skeleton.right}</Text>
+  </Box>
+);
 
 export const Table = <
   T extends Record<string, unknown> = Record<string, unknown>,
@@ -64,9 +144,6 @@ export const Table = <
   onSelect,
   maxRows = 20,
   borderColor,
-  borderStyle = "round",
-  columnSeparator = " │ ",
-  rowSeparatorChar = "─",
 }: TableProps<T>) => {
   const theme = useTheme();
   const [sortKey, setSortKey] = useState<string | null>(null);
@@ -81,9 +158,7 @@ export const Table = <
       return data;
     }
     return [...data].toSorted((a, b) => {
-      const av = a[sortKey];
-      const bv = b[sortKey];
-      const cmp = String(av).localeCompare(String(bv));
+      const cmp = String(a[sortKey]).localeCompare(String(b[sortKey]));
       return sortDir === "asc" ? cmp : -cmp;
     });
   }, [data, sortKey, sortDir]);
@@ -120,61 +195,76 @@ export const Table = <
     for (const row of data) {
       dataMax = Math.max(dataMax, String(row[col.key] ?? "").length);
     }
-    return col.width ?? Math.max(col.header.length, dataMax) + 2;
+    return col.width ?? Math.max(col.header.length, dataMax);
   });
 
-  const headerRow = columns
-    .map((col, i) =>
-      pad(col.header, colWidths[i] ?? col.header.length, col.align)
-    )
-    .join(columnSeparator);
-  const separator = colWidths
-    .map((w) => rowSeparatorChar.repeat(w))
-    .join(`${rowSeparatorChar}┼${rowSeparatorChar}`);
+  const headerCells = columns.map((col) => ({
+    align: col.align ?? ("left" as const),
+    text: col.header,
+  }));
 
   return (
-    <Box
-      flexDirection="column"
-      borderStyle={borderStyle}
-      borderColor={resolvedBorderColor}
-    >
-      <Box paddingX={1}>
-        <Text bold color={theme.colors.primary}>
-          {headerRow}
-        </Text>
-      </Box>
-      <Box paddingX={1}>
-        <Text color={resolvedBorderColor}>{separator}</Text>
-      </Box>
+    <Box flexDirection="column">
+      <SkeletonRow
+        widths={colWidths}
+        skeleton={BORDER.top}
+        color={resolvedBorderColor}
+      />
+      <CellRow
+        widths={colWidths}
+        cells={headerCells}
+        skeleton={BORDER.heading}
+        borderColor={resolvedBorderColor}
+        textColor={theme.colors.primary}
+        bold
+      />
+      <SkeletonRow
+        widths={colWidths}
+        skeleton={BORDER.separator}
+        color={resolvedBorderColor}
+      />
       {visible.map((row, rowIdx) => {
         const isActive = rowIdx === activeRow && selectable;
-        const cells = columns
-          .map((col, i) =>
-            pad(String(row[col.key] ?? ""), colWidths[i] ?? 8, col.align)
-          )
-          .join(columnSeparator);
+        const rowCells = columns.map((col) => ({
+          align: col.align ?? ("left" as const),
+          text: String(row[col.key] ?? ""),
+        }));
         return (
-          <Box key={rowIdx} paddingX={1}>
-            <Text
-              color={
-                isActive
-                  ? theme.colors.selectionForeground
-                  : theme.colors.foreground
-              }
-              inverse={isActive}
-            >
-              {cells}
-            </Text>
-          </Box>
+          <CellRow
+            key={rowIdx}
+            widths={colWidths}
+            cells={rowCells}
+            skeleton={BORDER.data}
+            borderColor={resolvedBorderColor}
+            textColor={
+              isActive
+                ? theme.colors.selectionForeground
+                : theme.colors.foreground
+            }
+            inverse={isActive}
+          />
         );
       })}
-      {data.length > maxRows && (
-        <Box paddingX={1}>
-          <Text color={theme.colors.mutedForeground} dimColor>
-            … {data.length - maxRows} more rows
-          </Text>
-        </Box>
-      )}
+      {data.length > maxRows &&
+        (() => {
+          const innerWidth =
+            colWidths.reduce((a, b) => a + b, 0) + colWidths.length * 3 - 3;
+          const msg = `… ${data.length - maxRows} more rows`;
+          return (
+            <Box flexDirection="row">
+              <Text color={resolvedBorderColor}>│</Text>
+              <Text color={theme.colors.mutedForeground} dimColor>
+                {` ${pad(msg, innerWidth)} `}
+              </Text>
+              <Text color={resolvedBorderColor}>│</Text>
+            </Box>
+          );
+        })()}
+      <SkeletonRow
+        widths={colWidths}
+        skeleton={BORDER.bottom}
+        color={resolvedBorderColor}
+      />
     </Box>
   );
 };
