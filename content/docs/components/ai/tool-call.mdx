@@ -61,12 +61,12 @@ import { ToolCall } from "@/components/ui/tool-call";
 
 ### ToolCall
 
-| Prop               | Type                      | Default     |
-| ------------------ | ------------------------- | ----------- |
-| `name`             | `string`                  | `required`  |
-| `args`             | `Record<string, unknown>` | `undefined` |
-| `status`           | `ToolCallStatus`          | `required`  |
-| `result`           | `unknown`                 | `undefined` |
-| `duration`         | `number`                  | `undefined` |
-| `collapsible`      | `boolean`                 | `true`      |
-| `defaultCollapsed` | `boolean`                 | `true`      |
+| Prop               | Type                                             | Default     |
+| ------------------ | ------------------------------------------------ | ----------- |
+| `name`             | `string`                                         | `required`  |
+| `args`             | `Record<string, unknown>`                        | `undefined` |
+| `status`           | `"pending" \| "running" \| "success" \| "error"` | `required`  |
+| `result`           | `unknown`                                        | `undefined` |
+| `duration`         | `number`                                         | `undefined` |
+| `collapsible`      | `boolean`                                        | `true`      |
+| `defaultCollapsed` | `boolean`                                        | `true`      |

@@ -69,23 +69,31 @@ Multiple labeled inputs stacked together.
 
 <ComponentPreview name="text-input-label" />
 
+### Cursor and editing
+
+With `showCursor` (default `true`), use the left and right arrow keys to move the insertion point; type and Backspace apply at the cursor.
+
+<ComponentPreview name="text-input-cursor" />
+
 ## API Reference
 
 ### TextInput
 
-| Prop          | Type                              | Default     |
-| ------------- | --------------------------------- | ----------- |
-| `value`       | `string`                          | `undefined` |
-| `onChange`    | `(value: string) => void`         | `undefined` |
-| `onSubmit`    | `(value: string) => void`         | `undefined` |
-| `placeholder` | `string`                          | `""`        |
-| `mask`        | `string`                          | `undefined` |
-| `validate`    | `(value: string) => string\|null` | `undefined` |
-| `width`       | `number`                          | `40`        |
-| `label`       | `string`                          | `undefined` |
-| `autoFocus`   | `boolean`                         | `false`     |
-| `id`          | `string`                          | `undefined` |
-| `bordered`    | `boolean`                         | `true`      |
-| `borderStyle` | `BorderStyle`                     | `"round"`   |
-| `paddingX`    | `number`                          | `1`         |
-| `cursor`      | `string`                          | `"█"`       |
+| Prop                  | Type                                                                                         | Default     |
+| --------------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `value`               | `string`                                                                                     | `undefined` |
+| `onChange`            | `(value: string) => void`                                                                    | `undefined` |
+| `onSubmit`            | `(value: string) => void`                                                                    | `undefined` |
+| `placeholder`         | `string`                                                                                     | `""`        |
+| `mask`                | `string`                                                                                     | `undefined` |
+| `showCursor`          | `boolean`                                                                                    | `true`      |
+| `highlightPastedText` | `boolean`                                                                                    | `false`     |
+| `validate`            | `(value: string) => string\|null`                                                            | `undefined` |
+| `width`               | `number`                                                                                     | `40`        |
+| `label`               | `string`                                                                                     | `undefined` |
+| `autoFocus`           | `boolean`                                                                                    | `false`     |
+| `id`                  | `string`                                                                                     | `undefined` |
+| `bordered`            | `boolean`                                                                                    | `true`      |
+| `borderStyle`         | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   |
+| `paddingX`            | `number`                                                                                     | `1`         |
+| `cursor`              | `string`                                                                                     | `"█"`       |

@@ -51,15 +51,29 @@ import { Divider } from "@/components/ui/divider";
 <Divider label="Section" />
 ```
 
+## Examples
+
+### Vertical rule and label styling
+
+Use `dividerChar` and `height` for vertical rules; `titlePadding` and `labelColor` adjust the labeled horizontal variant.
+
+<ComponentPreview name="divider-custom" />
+
 ## API Reference
 
 ### Divider
 
-| Prop          | Type             | Default        |
-| ------------- | ---------------- | -------------- |
-| `variant`     | `DividerVariant` | `"single"`     |
-| `orientation` | `Orientation`    | `"horizontal"` |
-| `color`       | `string`         | `undefined`    |
-| `label`       | `string`         | `undefined`    |
-| `height`      | `number`         | `1`            |
-| `width`       | `number`         | `undefined`    |
+| Prop           | Type                             | Default        |
+| -------------- | -------------------------------- | -------------- |
+| `variant`      | `"single" \| "double" \| "bold"` | `"single"`     |
+| `orientation`  | `"horizontal" \| "vertical"`     | `"horizontal"` |
+| `color`        | `string`                         | `undefined`    |
+| `label`        | `string`                         | `undefined`    |
+| `labelColor`   | `string`                         | `undefined`    |
+| `dividerChar`  | `string`                         | `undefined`    |
+| `titlePadding` | `number`                         | `1`            |
+| `padding`      | `number`                         | `0`            |
+| `height`       | `number`                         | `1`            |
+| `width`        | `number \| "auto"`               | `"auto"`       |
+
+On horizontal dividers, the rule still uses Ink’s top border on flex-grown segments; `dividerChar` applies to **vertical** orientation.

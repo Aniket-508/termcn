@@ -51,12 +51,20 @@ import { BigText } from "@/components/ui/big-text";
 <BigText>HELLO</BigText>
 ```
 
+## Examples
+
+### Font variants
+
+`font` can be `block` (default pixel font), `simple` (lighter block), `shade` (density characters), or `slim` (box-drawing style).
+
+<ComponentPreview name="big-text-fonts" />
+
 ## API Reference
 
 ### BigText
 
-| Prop       | Type          | Default     |
-| ---------- | ------------- | ----------- |
-| `children` | `string`      | `required`  |
-| `color`    | `string`      | `undefined` |
-| `font`     | `BigTextFont` | `"block"`   |
+| Prop       | Type                                       | Default     |
+| ---------- | ------------------------------------------ | ----------- |
+| `children` | `string`                                   | `required`  |
+| `color`    | `string`                                   | `undefined` |
+| `font`     | `"block" \| "simple" \| "shade" \| "slim"` | `"block"`   |

@@ -51,12 +51,23 @@ import { Gradient } from "@/components/ui/gradient";
 <Gradient colors={["#ff6b6b", "#4ecdc4"]}>Hello Gradient</Gradient>
 ```
 
+## Examples
+
+### Named presets
+
+Use the `name` prop with a built-in palette instead of passing `colors`.
+
+<ComponentPreview name="gradient-presets" />
+
 ## API Reference
 
 ### Gradient
 
-| Prop       | Type       | Default    |
-| ---------- | ---------- | ---------- |
-| `children` | `string`   | `required` |
-| `colors`   | `string[]` | `required` |
-| `bold`     | `boolean`  | `false`    |
+Either pass `colors`, or pass `name` (not both required; `name` selects a preset when `colors` is omitted).
+
+| Prop       | Type                                                                                                                                                     | Default     |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `children` | `string`                                                                                                                                                 | `required`  |
+| `colors`   | `string[]`                                                                                                                                               | `undefined` |
+| `name`     | `"cristal" \| "teen" \| "mind" \| "morning" \| "vice" \| "passion" \| "fruit" \| "instagram" \| "atlas" \| "retro" \| "summer" \| "pastel" \| "rainbow"` | `undefined` |
+| `bold`     | `boolean`                                                                                                                                                | `false`     |
