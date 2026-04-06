@@ -60,7 +60,7 @@ export const StatusMessage = function StatusMessage({
   return (
     <Box gap={1} flexDirection="row">
       {variant === "loading" ? (
-        <Spinner style="dots" color={variantColor} />
+        <Spinner type="dots" color={variantColor} />
       ) : (
         <Text color={variantColor}>
           {icon ?? ICONS[variant as Exclude<StatusVariant, "loading">]}

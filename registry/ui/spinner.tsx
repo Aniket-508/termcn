@@ -3,7 +3,7 @@ import { Text } from "ink";
 import { useTheme } from "@/components/ui/theme-provider";
 import { useAnimation } from "@/hooks/use-animation";
 
-export type SpinnerStyle =
+export type SpinnerType =
   | "dots"
   | "line"
   | "star"
@@ -17,7 +17,7 @@ export type SpinnerStyle =
   | "pipe"
   | "earth";
 
-const FRAMES: Record<SpinnerStyle, string[]> = {
+const FRAMES: Record<SpinnerType, string[]> = {
   arc: ["◜", "◠", "◝", "◞", "◡", "◟"],
   arrow: ["←", "↖", "↑", "↗", "→", "↘", "↓", "↙"],
   bar: ["▏", "▎", "▍", "▌", "▋", "▊", "▉", "█", "▉", "▊", "▋", "▌", "▍", "▎"],
@@ -46,7 +46,7 @@ const FRAMES: Record<SpinnerStyle, string[]> = {
 };
 
 export interface SpinnerProps {
-  style?: SpinnerStyle;
+  type?: SpinnerType;
   label?: string;
   color?: string;
   fps?: number;
@@ -54,7 +54,7 @@ export interface SpinnerProps {
 }
 
 export const Spinner = function Spinner({
-  style: spinnerStyle = "dots",
+  type: spinnerType = "dots",
   label,
   color,
   fps = 12,
@@ -62,7 +62,7 @@ export const Spinner = function Spinner({
 }: SpinnerProps) {
   const theme = useTheme();
   const frame = useAnimation(fps);
-  const frames = customFrames ?? FRAMES[spinnerStyle];
+  const frames = customFrames ?? FRAMES[spinnerType];
   const icon = frames[frame % frames.length];
   const resolvedColor = color ?? theme.colors.primary;
 
