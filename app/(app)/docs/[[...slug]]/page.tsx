@@ -7,7 +7,7 @@ import { DocsCopyPage } from "@/components/docs-copy-page";
 import { DocsTableOfContents } from "@/components/docs-toc";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { titleFromSlug } from "@/lib/docs";
+import { formatTitleFromSlug } from "@/lib/docs";
 import { getPageImage, source } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
@@ -59,7 +59,7 @@ const buildBreadcrumbs = (
   let currentPath = "/docs";
   for (let i = 0; i < slugs.length - 1; i += 1) {
     currentPath += `/${slugs[i]}`;
-    items.push({ name: titleFromSlug(slugs[i]), path: currentPath });
+    items.push({ name: formatTitleFromSlug(slugs[i]), path: currentPath });
   }
 
   items.push({ name: pageTitle, path: pageUrl });

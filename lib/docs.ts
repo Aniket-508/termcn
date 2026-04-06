@@ -1,5 +1,7 @@
 import { ROUTES } from "@/constants/routes";
 
+import { formatLabelFromSlug } from "./utils";
+
 export interface NavItem {
   title: string;
   href?: string;
@@ -21,12 +23,8 @@ const TITLE_OVERRIDES: Record<string, string> = {
   "qr-code": "QR Code",
 };
 
-export const titleFromSlug = (slug: string): string =>
-  TITLE_OVERRIDES[slug] ??
-  slug
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+export const formatTitleFromSlug = (slug: string): string =>
+  TITLE_OVERRIDES[slug] ?? formatLabelFromSlug(slug);
 
 const navLeaf = (
   title: string,
@@ -45,22 +43,10 @@ const buildSection = (
 ): NavItemWithChildren => ({
   href: `${href}/${folder}`,
   items: slugs.map((slug) =>
-    navLeaf(titleFromSlug(slug), `${href}/${folder}/${slug}`)
+    navLeaf(formatLabelFromSlug(slug), `${href}/${folder}/${slug}`)
   ),
   title,
 });
-
-const THEME_SLUGS = [
-  "default",
-  "dracula",
-  "nord",
-  "catppuccin",
-  "monokai",
-  "solarized",
-  "tokyo-night",
-  "one-dark",
-  "high-contrast",
-] as const;
 
 export const docsConfig: DocsConfig = {
   sidebarNav: [
@@ -78,12 +64,17 @@ export const docsConfig: DocsConfig = {
       ],
       title: "Overview",
     },
-    {
-      items: THEME_SLUGS.map((slug) =>
-        navLeaf(titleFromSlug(slug), `${ROUTES.DOCS}/themes/${slug}`)
-      ),
-      title: "Themes",
-    },
+    buildSection("Themes", ROUTES.DOCS, "themes", [
+      "default",
+      "dracula",
+      "nord",
+      "catppuccin",
+      "monokai",
+      "solarized",
+      "tokyo-night",
+      "one-dark",
+      "high-contrast",
+    ]),
     buildSection("Layout", ROUTES.DOCS_COMPONENTS, "layout", [
       "aspect-ratio",
       "box",
@@ -212,7 +203,7 @@ export const docsConfig: DocsConfig = {
       "tool-approval",
       "tool-call",
     ]),
-    buildSection("Templates", ROUTES.DOCS_TEMPLATES, "templates", [
+    buildSection("Templates", ROUTES.DOCS, "templates", [
       "app-shell",
       "bullet-list",
       "help-screen",

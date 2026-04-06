@@ -1,3 +1,4 @@
+import { formatLabelFromSlug } from "@/lib/utils";
 import { catppuccinTheme } from "@/registry/themes/catppuccin";
 import { defaultTheme } from "@/registry/themes/default";
 import { draculaTheme } from "@/registry/themes/dracula";
@@ -24,16 +25,10 @@ export const terminalThemeMap = {
   "tokyo-night": tokyoNightTheme,
 } as const;
 
-const slugToLabel = (s: string) =>
-  s.replaceAll(
-    /(^|-)(\w)/g,
-    (_, sep, ch: string) => `${sep ? " " : ""}${ch.toUpperCase()}`
-  );
-
 const themes = Object.values(terminalThemeMap);
 
 export const terminalThemeOptions = themes.map((t) => ({
-  label: slugToLabel(t.name),
+  label: formatLabelFromSlug(t.name),
   value: t.name,
 }));
 
