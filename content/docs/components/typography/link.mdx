@@ -51,13 +51,22 @@ import { Link } from "@/components/ui/link";
 <Link href="https://github.com">GitHub</Link>
 ```
 
+## Examples
+
+### Show URL and terminals without OSC 8
+
+`showHref` appends the URL in dim text. When the terminal does not support OSC 8 hyperlinks, the same fallback is used unless you set `fallback={false}` or pass a custom `fallback` function.
+
+<ComponentPreview name="link-show-href" />
+
 ## API Reference
 
 ### Link
 
-| Prop       | Type        | Default     |
-| ---------- | ----------- | ----------- |
-| `children` | `ReactNode` | `required`  |
-| `href`     | `string`    | `required`  |
-| `color`    | `string`    | `undefined` |
-| `showHref` | `boolean`   | `false`     |
+| Prop       | Type                                                 | Default     |
+| ---------- | ---------------------------------------------------- | ----------- |
+| `children` | `ReactNode`                                          | `required`  |
+| `href`     | `string`                                             | `required`  |
+| `color`    | `string`                                             | `undefined` |
+| `showHref` | `boolean`                                            | `false`     |
+| `fallback` | `boolean \| ((text: string, url: string) => string)` | `true`      |

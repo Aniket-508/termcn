@@ -1,8 +1,50 @@
 import { Box, Text } from "ink";
 
+export type GradientName =
+  | "cristal"
+  | "teen"
+  | "mind"
+  | "morning"
+  | "vice"
+  | "passion"
+  | "fruit"
+  | "instagram"
+  | "atlas"
+  | "retro"
+  | "summer"
+  | "pastel"
+  | "rainbow";
+
+const GRADIENT_PRESETS: Record<GradientName, string[]> = {
+  atlas: ["#feac5e", "#c779d0", "#4bc0c8"],
+  cristal: ["#bdfff3", "#4ac29a"],
+  fruit: ["#ff4e50", "#f9d423"],
+  instagram: ["#833ab4", "#fd1d1d", "#fcb045"],
+  mind: ["#473b7b", "#3584a7", "#30d2be"],
+  morning: ["#ff5f6d", "#ffc371"],
+  passion: ["#f43b47", "#453a94"],
+  pastel: ["#74ebd5", "#9face6"],
+  rainbow: ["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"],
+  retro: [
+    "#3f51b1",
+    "#5a55ae",
+    "#7b5fac",
+    "#8f6aae",
+    "#a86aa4",
+    "#cc6b8e",
+    "#f18271",
+    "#f3a469",
+    "#f7c978",
+  ],
+  summer: ["#22c1c3", "#fdbb2d"],
+  teen: ["#77a1d3", "#79cbca", "#e684ae"],
+  vice: ["#5ee7df", "#b490ca"],
+};
+
 export interface GradientProps {
   children: string;
-  colors: string[];
+  name?: GradientName;
+  colors?: string[];
   bold?: boolean;
 }
 
@@ -77,10 +119,12 @@ export const gradientText = function gradientText(
 
 export const Gradient = function Gradient({
   children,
+  name,
   colors,
   bold = false,
 }: GradientProps) {
-  const chars = gradientText(children, colors);
+  const resolvedColors = colors ?? (name ? GRADIENT_PRESETS[name] : []);
+  const chars = gradientText(children, resolvedColors);
 
   return (
     <Box flexDirection="row">

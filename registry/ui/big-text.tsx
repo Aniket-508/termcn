@@ -2,7 +2,7 @@ import { Box, Text } from "ink";
 
 import { useTheme } from "@/components/ui/theme-provider";
 
-export type BigTextFont = "block" | "simple";
+export type BigTextFont = "block" | "simple" | "shade" | "slim";
 
 export interface BigTextProps {
   children: string;
@@ -307,6 +307,51 @@ const FONT: Record<string, number[][]> = {
   ],
 };
 
+const SLIM_FONT: Record<string, string[]> = {
+  " ": ["   ", "   ", "   "],
+  "!": ["║", "║", "╩"],
+  "-": ["   ", "═══", "   "],
+  ".": ["  ", "  ", "╩ "],
+  "0": ["╔═╗", "║ ║", "╚═╝"],
+  "1": ["╗  ", "║  ", "╩  "],
+  "2": ["══╗", "╔═╝", "╚══"],
+  "3": ["══╗", " ═╣", "══╝"],
+  "4": ["╦ ╦", "╚═╣", "  ╩"],
+  "5": ["╔══", "╚═╗", "══╝"],
+  "6": ["╔══", "╠═╗", "╚═╝"],
+  "7": ["══╗", "  ║", "  ╩"],
+  "8": ["╔═╗", "╠═╣", "╚═╝"],
+  "9": ["╔═╗", "╚═╣", "══╝"],
+  ":": [" ", "╥", "╨"],
+  "?": ["╔═╗", " ╔╝", " ╩ "],
+  A: ["╔═╗", "╠═╣", "╩ ╩"],
+  B: ["╔╗ ", "╠╩╗", "╚═╝"],
+  C: ["╔═╗", "║  ", "╚═╝"],
+  D: ["╔╗ ", "║ ║", "╚═╝"],
+  E: ["╔══", "╠═ ", "╚══"],
+  F: ["╔══", "╠═ ", "╩  "],
+  G: ["╔═╗", "║ ╦", "╚═╝"],
+  H: ["╦ ╦", "╠═╣", "╩ ╩"],
+  I: ["╦", "║", "╩"],
+  J: ["  ╦", "  ║", "╚═╝"],
+  K: ["╦╔╝", "╠╩╗", "╩ ╩"],
+  L: ["╦  ", "║  ", "╚══"],
+  M: ["╔╦╗", "║║║", "╩ ╩"],
+  N: ["╔╗╗", "║║║", "╩╚╝"],
+  O: ["╔═╗", "║ ║", "╚═╝"],
+  P: ["╔═╗", "╠═╝", "╩  "],
+  Q: ["╔═╗", "║ ║", "╚╦╝"],
+  R: ["╔═╗", "╠╦╝", "╩╚╗"],
+  S: ["╔═╗", "╚═╗", "╚═╝"],
+  T: ["═╦═", " ║ ", " ╩ "],
+  U: ["╦ ╦", "║ ║", "╚═╝"],
+  V: ["╦ ╦", "╚╦╝", " ╩ "],
+  W: ["╦ ╦", "║║║", "╚╩╝"],
+  X: ["╦ ╦", " ╬ ", "╩ ╩"],
+  Y: ["╦ ╦", " ╦ ", " ╩ "],
+  Z: ["══╦", "╔═╝", "╚══"],
+};
+
 const FALLBACK: number[][] = [
   [1, 1, 1],
   [1, 0, 1],
@@ -320,6 +365,17 @@ const getCharRows = function getCharRows(ch: string): number[][] {
   return FONT[upper] ?? FONT[ch] ?? FALLBACK;
 };
 
+const SHADE_CHARS: Record<number, string> = {
+  0: " ",
+  1: "░",
+  2: "▒",
+  3: "▓",
+  4: "█",
+};
+
+const renderShadeRow = (row: number[]): string =>
+  row.map((p) => (p ? (SHADE_CHARS[3] ?? "▓") : " ")).join("");
+
 export const BigText = function BigText({
   children,
   color,
@@ -327,10 +383,36 @@ export const BigText = function BigText({
 }: BigTextProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
-  const onChar = font === "block" ? "█" : "▓";
-  const offChar = " ";
 
   const chars = [...children];
+
+  if (font === "slim") {
+    const rowCount = 3;
+    return (
+      <Box flexDirection="column">
+        {Array.from({ length: rowCount }, (_, rowIdx) => (
+          <Box key={rowIdx} flexDirection="row">
+            {chars.map((ch, charIdx) => {
+              const upper = ch.toUpperCase();
+              const slimChar = SLIM_FONT[upper] ?? SLIM_FONT[ch];
+              const line = slimChar ? (slimChar[rowIdx] ?? "   ") : "   ";
+              return (
+                <Text key={charIdx} color={resolvedColor}>
+                  {`${line} `}
+                </Text>
+              );
+            })}
+          </Box>
+        ))}
+      </Box>
+    );
+  }
+
+  let onChar = "▓";
+  if (font === "block") {
+    onChar = "█";
+  }
+  const offChar = " ";
   const rows = 5;
 
   return (
@@ -340,9 +422,10 @@ export const BigText = function BigText({
           {chars.map((ch, charIdx) => {
             const charRows = getCharRows(ch);
             const row = charRows[rowIdx] ?? [0, 0, 0];
-            const rowStr = row
-              .map((pixel) => (pixel ? onChar : offChar))
-              .join("");
+            const rowStr =
+              font === "shade"
+                ? renderShadeRow(row)
+                : row.map((pixel) => (pixel ? onChar : offChar)).join("");
             return (
               <Text key={charIdx} color={resolvedColor}>
                 {`${rowStr} `}

@@ -71,6 +71,10 @@ export const ExamplesIndex: Record<
     component: lazy(() => import("./big-text-demo")),
     filePath: "examples/big-text-demo.tsx",
   },
+  "big-text-fonts": {
+    component: lazy(() => import("./big-text-fonts")),
+    filePath: "examples/big-text-fonts.tsx",
+  },
   "box-demo": {
     component: lazy(() => import("./box-demo")),
     filePath: "examples/box-demo.tsx",
@@ -167,6 +171,10 @@ export const ExamplesIndex: Record<
     component: lazy(() => import("./directory-tree-demo")),
     filePath: "examples/directory-tree-demo.tsx",
   },
+  "divider-custom": {
+    component: lazy(() => import("./divider-custom")),
+    filePath: "examples/divider-custom.tsx",
+  },
   "divider-demo": {
     component: lazy(() => import("./divider-demo")),
     filePath: "examples/divider-demo.tsx",
@@ -215,6 +223,10 @@ export const ExamplesIndex: Record<
     component: lazy(() => import("./gradient-demo")),
     filePath: "examples/gradient-demo.tsx",
   },
+  "gradient-presets": {
+    component: lazy(() => import("./gradient-presets")),
+    filePath: "examples/gradient-presets.tsx",
+  },
   "grid-demo": {
     component: lazy(() => import("./grid-demo")),
     filePath: "examples/grid-demo.tsx",
@@ -262,6 +274,10 @@ export const ExamplesIndex: Record<
   "link-demo": {
     component: lazy(() => import("./link-demo")),
     filePath: "examples/link-demo.tsx",
+  },
+  "link-show-href": {
+    component: lazy(() => import("./link-show-href")),
+    filePath: "examples/link-show-href.tsx",
   },
   "list-demo": {
     component: lazy(() => import("./list-demo")),
@@ -367,6 +383,10 @@ export const ExamplesIndex: Record<
     component: lazy(() => import("./scroll-view-demo")),
     filePath: "examples/scroll-view-demo.tsx",
   },
+  "scroll-view-scrollbar": {
+    component: lazy(() => import("./scroll-view-scrollbar")),
+    filePath: "examples/scroll-view-scrollbar.tsx",
+  },
   "search-input-demo": {
     component: lazy(() => import("./search-input-demo")),
     filePath: "examples/search-input-demo.tsx",
@@ -443,6 +463,10 @@ export const ExamplesIndex: Record<
     component: lazy(() => import("./table-demo")),
     filePath: "examples/table-demo.tsx",
   },
+  "table-selectable": {
+    component: lazy(() => import("./table-selectable")),
+    filePath: "examples/table-selectable.tsx",
+  },
   "table-sortable": {
     component: lazy(() => import("./table-sortable")),
     filePath: "examples/table-sortable.tsx",
@@ -462,6 +486,10 @@ export const ExamplesIndex: Record<
   "text-area-demo": {
     component: lazy(() => import("./text-area-demo")),
     filePath: "examples/text-area-demo.tsx",
+  },
+  "text-input-cursor": {
+    component: lazy(() => import("./text-input-cursor")),
+    filePath: "examples/text-input-cursor.tsx",
   },
   "text-input-demo": {
     component: lazy(() => import("./text-input-demo")),

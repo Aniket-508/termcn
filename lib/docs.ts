@@ -96,7 +96,6 @@ export const docsConfig: DocsConfig = {
       "link",
       "markdown",
       "tag",
-      "text",
     ]),
     buildSection("Input", ROUTES.DOCS_COMPONENTS, "input", [
       "email-input",

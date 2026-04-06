@@ -7,17 +7,15 @@ export interface DividerProps {
   orientation?: "horizontal" | "vertical";
   color?: string;
   label?: string;
+  labelColor?: string;
+  dividerChar?: string;
+  titlePadding?: number;
+  padding?: number;
   height?: number;
-  width?: number;
+  width?: number | "auto";
 }
 
-const HORIZONTAL_CHARS: Record<NonNullable<DividerProps["variant"]>, string> = {
-  bold: "━",
-  double: "═",
-  single: "─",
-};
-
-const VERTICAL_CHARS: Record<NonNullable<DividerProps["variant"]>, string> = {
+const DIVIDER_CHARS: Record<NonNullable<DividerProps["variant"]>, string> = {
   bold: "┃",
   double: "║",
   single: "│",
@@ -28,13 +26,16 @@ export const Divider = function Divider({
   orientation = "horizontal",
   color,
   label,
+  labelColor,
+  dividerChar,
+  titlePadding = 1,
+  padding = 0,
   height = 1,
-  width,
+  width = "auto",
 }: DividerProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.border;
-  const hChar = HORIZONTAL_CHARS[variant];
-  const vChar = VERTICAL_CHARS[variant];
+  const vChar = dividerChar ?? DIVIDER_CHARS[variant];
 
   if (orientation === "vertical") {
     const lines = Array.from({ length: height }, (_, i) => i);
@@ -49,33 +50,55 @@ export const Divider = function Divider({
     );
   }
 
+  const paddingStr = " ".repeat(padding);
+  const titlePad = " ".repeat(titlePadding);
+
   if (label) {
+    const resolvedLabelColor = labelColor ?? resolvedColor;
     return (
-      <Box flexDirection="row" width={width}>
-        <Text color={resolvedColor}>
-          {hChar}
-          {hChar}
-          {hChar}{" "}
+      <Box flexDirection="row" width={width === "auto" ? undefined : width}>
+        {padding > 0 && <Text>{paddingStr}</Text>}
+        <Box
+          flexGrow={1}
+          borderStyle="single"
+          borderColor={resolvedColor}
+          borderBottom={false}
+          borderLeft={false}
+          borderRight={false}
+          borderTop
+        />
+        <Text color={resolvedLabelColor}>
+          {titlePad}
+          {label}
+          {titlePad}
         </Text>
-        <Text color={resolvedColor}>{label}</Text>
-        <Text color={resolvedColor}>
-          {" "}
-          {hChar}
-          {hChar}
-          {hChar}
-        </Text>
-        <Box flexGrow={1}>
-          <Text color={resolvedColor}>{hChar.repeat(1)}</Text>
-        </Box>
+        <Box
+          flexGrow={1}
+          borderStyle="single"
+          borderColor={resolvedColor}
+          borderBottom={false}
+          borderLeft={false}
+          borderRight={false}
+          borderTop
+        />
+        {padding > 0 && <Text>{paddingStr}</Text>}
       </Box>
     );
   }
 
   return (
-    <Box width={width ?? "100%"}>
-      <Text color={resolvedColor} wrap="truncate">
-        {hChar.repeat(width ?? 80)}
-      </Text>
+    <Box flexDirection="row" width={width === "auto" ? undefined : width}>
+      {padding > 0 && <Text>{paddingStr}</Text>}
+      <Box
+        flexGrow={1}
+        borderStyle="single"
+        borderColor={resolvedColor}
+        borderBottom={false}
+        borderLeft={false}
+        borderRight={false}
+        borderTop
+      />
+      {padding > 0 && <Text>{paddingStr}</Text>}
     </Box>
   );
 };
