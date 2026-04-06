@@ -13,34 +13,30 @@ export const revalidate = false;
 
 const showcaseItems = [
   {
-    className: "md:col-span-2 lg:row-span-2",
+    className: "md:col-span-2",
     name: "table-demo",
     title: "Table",
   },
   {
-    name: "badge-demo",
-    rows: 6,
-    title: "Badge",
-  },
-  {
-    name: "spinner-demo",
-    rows: 6,
-    title: "Spinner",
-  },
-  {
     name: "bar-chart-demo",
-    rows: 10,
     title: "Bar Chart",
   },
   {
+    name: "spinner-demo",
+    title: "Spinner",
+  },
+  {
     name: "alert-demo",
-    rows: 10,
     title: "Alert",
   },
   {
     name: "tool-call-demo",
-    rows: 10,
     title: "Tool Call",
+  },
+  {
+    className: "md:col-span-2",
+    name: "badge-demo",
+    title: "Badge",
   },
 ];
 
@@ -80,14 +76,10 @@ export default function IndexPage() {
 
       <section className="container-wrapper pb-8 lg:pb-12">
         <div className="container">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {showcaseItems.map((item) => (
               <div key={item.name} className={cn(item.className)}>
-                <TerminalPreview
-                  className="mt-0 h-full"
-                  title={item.title}
-                  rows={item.rows}
-                >
+                <TerminalPreview className="mt-0 h-full" title={item.title}>
                   <ExamplePreview name={item.name} />
                 </TerminalPreview>
               </div>

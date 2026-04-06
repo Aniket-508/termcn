@@ -13,7 +13,7 @@ export const MacWindow = ({
 }) => (
   <div
     className={cn(
-      "flex flex-col overflow-hidden rounded-2xl border bg-card shadow-lg",
+      "overflow-hidden rounded-2xl border bg-card shadow-lg",
       className
     )}
   >
@@ -30,6 +30,6 @@ export const MacWindow = ({
       )}
       {trailing ? <div className="flex justify-end">{trailing}</div> : <div />}
     </div>
-    <div className="flex-1 overflow-x-auto overscroll-x-none">{children}</div>
+    <div className="overflow-x-auto overscroll-x-none">{children}</div>
   </div>
 );
