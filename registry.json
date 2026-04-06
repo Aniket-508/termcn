@@ -1387,20 +1387,6 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
-      "description": "Rich inline text with bold, italic, color, dim formatting",
-      "files": [
-        {
-          "path": "registry/ui/text.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "text",
-      "title": "Text",
-      "type": "registry:ui"
-    },
-    {
       "categories": ["input"],
       "dependencies": ["ink"],
       "description": "Multi-line text editor with word wrap",

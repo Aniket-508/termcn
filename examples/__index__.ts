@@ -463,10 +463,6 @@ export const ExamplesIndex: Record<
     component: lazy(() => import("./text-area-demo")),
     filePath: "examples/text-area-demo.tsx",
   },
-  "text-demo": {
-    component: lazy(() => import("./text-demo")),
-    filePath: "examples/text-demo.tsx",
-  },
   "text-input-demo": {
     component: lazy(() => import("./text-input-demo")),
     filePath: "examples/text-input-demo.tsx",
