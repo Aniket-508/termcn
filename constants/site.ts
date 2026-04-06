@@ -31,6 +31,6 @@ export const SITE = {
     "npx shadcn add",
   ] as const,
   NAME: "termcn",
-  OG_IMAGE: `${getBaseUrl()}/og.jpg`,
+  OG_IMAGE: `${getBaseUrl()}/og.png`,
   URL: getBaseUrl(),
 };
