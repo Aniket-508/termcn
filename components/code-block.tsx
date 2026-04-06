@@ -156,7 +156,11 @@ const CommandCodeBlock = ({
           ))}
         </div>
       </Tabs>
-      <CopyButton className={codeBlockCopyButtonClass} value={copyValue} />
+      <CopyButton
+        className={codeBlockCopyButtonClass}
+        value={copyValue}
+        event="copy_npm_command"
+      />
     </div>
   );
 };
@@ -200,7 +204,11 @@ const PreviewCodeBlock = ({
           </TabsContent>
         </div>
       </Tabs>
-      <CopyButton className={codeBlockCopyButtonClass} value={__ts__} />
+      <CopyButton
+        className={codeBlockCopyButtonClass}
+        value={__ts__}
+        event="copy_usage_code"
+      />
     </div>
   );
 };
@@ -219,7 +227,11 @@ const PlainCodeBlock = ({ __ts__ }: { __ts__: string }) => {
       <div className="no-scrollbar overflow-x-auto px-4 py-3.5">
         <CodeContent code={__ts__} highlightedCode={highlightedCode} />
       </div>
-      <CopyButton className={codeBlockCopyButtonClass} value={__ts__} />
+      <CopyButton
+        className={codeBlockCopyButtonClass}
+        value={__ts__}
+        event="copy_primitive_code"
+      />
     </div>
   );
 };

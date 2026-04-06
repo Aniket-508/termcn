@@ -51,6 +51,7 @@ export const ComponentSource = async ({
           <CopyButton
             value={code}
             className="absolute top-3 right-2 z-10 size-7 opacity-70 hover:opacity-100"
+            event="copy_primitive_code"
           />
           <div
             className="max-h-[450px] overflow-auto [&_span]:text-(--shiki-light) dark:[&_span]:text-(--shiki-dark)"
