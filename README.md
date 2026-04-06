@@ -6,9 +6,9 @@
 </p>
 
 <p align="center">
-  <a href="https://termcn.vercel.app/docs">Get Started</a> ·
-  <a href="https://termcn.vercel.app/docs/installation">Installation</a> ·
-  <a href="https://termcn.vercel.app/docs/components">Components</a>
+  <a href="https://termcn.dev/docs">Get Started</a> ·
+  <a href="https://termcn.dev/docs/installation">Installation</a> ·
+  <a href="https://termcn.dev/docs/components">Components</a>
 </p>
 
 <br />
