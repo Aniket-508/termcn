@@ -88,7 +88,10 @@ export const ComponentSource = async ({
   }
 
   return (
-    <CodeCollapsibleWrapper className={className}>
+    <CodeCollapsibleWrapper
+      className={className}
+      navTriggerClassName={cn(!title && "top-3")}
+    >
       <ComponentCode
         code={code}
         highlightedCode={highlightedCode}

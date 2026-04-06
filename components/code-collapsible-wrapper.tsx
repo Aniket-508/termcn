@@ -14,8 +14,11 @@ import { cn } from "@/lib/utils";
 export const CodeCollapsibleWrapper = ({
   className,
   children,
+  navTriggerClassName,
   ...props
-}: React.ComponentProps<typeof Collapsible>) => {
+}: React.ComponentProps<typeof Collapsible> & {
+  navTriggerClassName?: string;
+}) => {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
@@ -26,7 +29,12 @@ export const CodeCollapsibleWrapper = ({
       {...props}
     >
       <CollapsibleTrigger asChild>
-        <div className="absolute top-1.5 right-9 z-10 flex items-center">
+        <div
+          className={cn(
+            "absolute top-1.5 right-9 z-10 flex items-center",
+            navTriggerClassName
+          )}
+        >
           <Button
             variant="ghost"
             size="sm"
