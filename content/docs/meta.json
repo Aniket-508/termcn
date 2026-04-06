@@ -1,4 +1,4 @@
 {
-  "pages": ["(root)", "registry", "themes", "components"],
+  "pages": ["(root)", "registry", "themes", "components", "templates"],
   "root": true
 }

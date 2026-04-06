@@ -37,16 +37,17 @@ const navLeaf = (
   title,
 });
 
-const componentSection = (
-  sectionTitle: string,
+const buildSection = (
+  title: string,
+  href: string,
   folder: string,
   slugs: readonly string[]
 ): NavItemWithChildren => ({
-  href: `${ROUTES.DOCS}/components/${folder}`,
+  href: `${href}/${folder}`,
   items: slugs.map((slug) =>
-    navLeaf(titleFromSlug(slug), `${ROUTES.DOCS}/components/${folder}/${slug}`)
+    navLeaf(titleFromSlug(slug), `${href}/${folder}/${slug}`)
   ),
-  title: sectionTitle,
+  title,
 });
 
 const THEME_SLUGS = [
@@ -67,6 +68,7 @@ export const docsConfig: DocsConfig = {
       items: [
         navLeaf("Introduction", ROUTES.DOCS),
         navLeaf("Components", ROUTES.DOCS_COMPONENTS),
+        navLeaf("Templates", ROUTES.DOCS_TEMPLATES),
         navLeaf("Get Started", ROUTES.DOCS_GET_STARTED),
         navLeaf("Theming", ROUTES.DOCS_THEMING),
         navLeaf("MCP", ROUTES.DOCS_MCP),
@@ -82,7 +84,7 @@ export const docsConfig: DocsConfig = {
       ),
       title: "Themes",
     },
-    componentSection("Layout", "layout", [
+    buildSection("Layout", ROUTES.DOCS_COMPONENTS, "layout", [
       "aspect-ratio",
       "box",
       "center",
@@ -93,7 +95,7 @@ export const docsConfig: DocsConfig = {
       "spacer",
       "stack",
     ]),
-    componentSection("Typography", "typography", [
+    buildSection("Typography", ROUTES.DOCS_COMPONENTS, "typography", [
       "badge",
       "big-text",
       "code",
@@ -105,7 +107,7 @@ export const docsConfig: DocsConfig = {
       "tag",
       "text",
     ]),
-    componentSection("Input", "input", [
+    buildSection("Input", ROUTES.DOCS_COMPONENTS, "input", [
       "email-input",
       "masked-input",
       "number-input",
@@ -115,7 +117,7 @@ export const docsConfig: DocsConfig = {
       "text-area",
       "text-input",
     ]),
-    componentSection("Selection", "selection", [
+    buildSection("Selection", ROUTES.DOCS_COMPONENTS, "selection", [
       "checkbox",
       "checkbox-group",
       "color-picker",
@@ -125,7 +127,7 @@ export const docsConfig: DocsConfig = {
       "tag-input",
       "tree-select",
     ]),
-    componentSection("Data", "data", [
+    buildSection("Data", ROUTES.DOCS_COMPONENTS, "data", [
       "card",
       "data-grid",
       "definition",
@@ -139,7 +141,7 @@ export const docsConfig: DocsConfig = {
       "tree",
       "virtual-list",
     ]),
-    componentSection("Feedback", "feedback", [
+    buildSection("Feedback", ROUTES.DOCS_COMPONENTS, "feedback", [
       "alert",
       "banner",
       "multi-progress",
@@ -150,7 +152,7 @@ export const docsConfig: DocsConfig = {
       "status-message",
       "toast",
     ]),
-    componentSection("Navigation", "navigation", [
+    buildSection("Navigation", ROUTES.DOCS_COMPONENTS, "navigation", [
       "breadcrumb",
       "command-palette",
       "menu",
@@ -159,7 +161,7 @@ export const docsConfig: DocsConfig = {
       "tabbed-content",
       "tabs",
     ]),
-    componentSection("Overlays", "overlays", [
+    buildSection("Overlays", ROUTES.DOCS_COMPONENTS, "overlays", [
       "dialog",
       "drawer",
       "modal",
@@ -167,7 +169,7 @@ export const docsConfig: DocsConfig = {
       "popover",
       "tooltip",
     ]),
-    componentSection("Forms", "forms", [
+    buildSection("Forms", ROUTES.DOCS_COMPONENTS, "forms", [
       "confirm",
       "date-picker",
       "file-picker",
@@ -176,7 +178,7 @@ export const docsConfig: DocsConfig = {
       "time-picker",
       "wizard",
     ]),
-    componentSection("Utility", "utility", [
+    buildSection("Utility", ROUTES.DOCS_COMPONENTS, "utility", [
       "clipboard",
       "clock",
       "embedded-terminal",
@@ -191,7 +193,7 @@ export const docsConfig: DocsConfig = {
       "timer",
       "toggle",
     ]),
-    componentSection("Charts", "charts", [
+    buildSection("Charts", ROUTES.DOCS_COMPONENTS, "charts", [
       "bar-chart",
       "gauge",
       "heat-map",
@@ -199,18 +201,7 @@ export const docsConfig: DocsConfig = {
       "pie-chart",
       "sparkline",
     ]),
-    componentSection("Templates", "templates", [
-      "app-shell",
-      "bullet-list",
-      "help-screen",
-      "info-box",
-      "login-flow",
-      "setup-flow",
-      "splash-screen",
-      "usage-monitor",
-      "welcome-screen",
-    ]),
-    componentSection("AI", "ai", [
+    buildSection("AI", ROUTES.DOCS_COMPONENTS, "ai", [
       "chat-message",
       "chat-thread",
       "file-change",
@@ -220,6 +211,15 @@ export const docsConfig: DocsConfig = {
       "token-usage",
       "tool-approval",
       "tool-call",
+    ]),
+    buildSection("Templates", ROUTES.DOCS_TEMPLATES, "templates", [
+      "app-shell",
+      "bullet-list",
+      "help-screen",
+      "info-box",
+      "login-flow",
+      "setup-flow",
+      "splash-screen",
     ]),
   ],
 };
