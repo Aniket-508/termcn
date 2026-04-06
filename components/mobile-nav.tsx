@@ -1,6 +1,5 @@
 "use client";
 
-import type { Node as PageTreeNode } from "fumadocs-core/page-tree";
 import type { LinkProps } from "next/link";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,24 +12,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ROUTES } from "@/constants/routes";
-import type { source } from "@/lib/source";
+import { docsConfig } from "@/lib/docs";
 import { cn } from "@/lib/utils";
-
-const TOP_LEVEL_SECTIONS = [
-  { href: ROUTES.DOCS, name: "Get Started" },
-  {
-    href: ROUTES.DOCS_COMPONENTS,
-    name: "Components",
-  },
-  {
-    href: ROUTES.DOCS_REGISTRY,
-    name: "Registry",
-  },
-  {
-    href: ROUTES.DOCS_MCP,
-    name: "MCP Server",
-  },
-];
 
 const MobileLink = ({
   href,
@@ -61,81 +44,10 @@ const MobileLink = ({
   );
 };
 
-const folderHasRenderableEntries = (nodes: PageTreeNode[]): boolean => {
-  for (const n of nodes) {
-    if (n.type === "page") {
-      return true;
-    }
-    if (n.type === "folder") {
-      if (n.index) {
-        return true;
-      }
-      if (folderHasRenderableEntries(n.children)) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
-
-const renderDocSectionChildren = (
-  nodes: PageTreeNode[],
-  setOpen: (open: boolean) => void,
-  depth: number
-): React.ReactNode[] =>
-  nodes.flatMap((node) => {
-    if (node.type === "separator") {
-      return [];
-    }
-    if (node.type === "page") {
-      return [
-        <MobileLink
-          key={node.url}
-          href={node.url}
-          onOpenChange={setOpen}
-          className={cn(depth > 0 && "pl-3 text-xl")}
-        >
-          {node.name}
-        </MobileLink>,
-      ];
-    }
-    if (node.type === "folder") {
-      if (!node.index && !folderHasRenderableEntries(node.children)) {
-        return [];
-      }
-      return [
-        <div key={node.$id} className="flex flex-col gap-3">
-          <div
-            className={cn(
-              "text-muted-foreground text-xs font-semibold tracking-wide uppercase",
-              depth > 0 && "pl-3"
-            )}
-          >
-            {node.name}
-          </div>
-          {node.index ? (
-            <MobileLink
-              key={node.index.url}
-              href={node.index.url}
-              onOpenChange={setOpen}
-              className="pl-3 text-xl"
-            >
-              {node.index.name}
-            </MobileLink>
-          ) : null}
-          {renderDocSectionChildren(node.children, setOpen, depth + 1)}
-        </div>,
-      ];
-    }
-    return [];
-  });
-
 export const MobileNav = ({
-  tree,
   items,
   className,
 }: {
-  tree: typeof source.pageTree;
   items: { href: string; label: string }[];
   className?: string;
 }) => {
@@ -200,35 +112,37 @@ export const MobileNav = ({
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="text-muted-foreground text-sm font-medium">
-              Sections
-            </div>
-            <div className="flex flex-col gap-3">
-              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
-                <MobileLink key={name} href={href} onOpenChange={setOpen}>
-                  {name}
-                </MobileLink>
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col gap-8">
-            {tree?.children?.map((group) => {
-              if (group.type === "folder") {
-                return (
-                  <div key={group.$id} className="flex flex-col gap-4">
-                    <div className="text-muted-foreground text-sm font-medium">
-                      {group.name}
-                    </div>
-                    <div className="flex flex-col gap-4">
-                      {renderDocSectionChildren(group.children, setOpen, 0)}
-                    </div>
+          {docsConfig.sidebarNav.map((group) => (
+            <div key={group.title} className="flex flex-col gap-4">
+              <div className="text-muted-foreground text-sm font-medium">
+                {group.title}
+              </div>
+              <div className="flex flex-col gap-3">
+                {group.items.map((item) => (
+                  <div
+                    key={item.href ?? item.title}
+                    className="flex flex-col gap-3"
+                  >
+                    {item.href && (
+                      <MobileLink href={item.href} onOpenChange={setOpen}>
+                        {item.title}
+                      </MobileLink>
+                    )}
+                    {item.items?.map((subItem) => (
+                      <MobileLink
+                        key={subItem.href ?? subItem.title}
+                        href={subItem.href ?? "#"}
+                        onOpenChange={setOpen}
+                        className="ml-4 text-muted-foreground"
+                      >
+                        {subItem.title}
+                      </MobileLink>
+                    ))}
                   </div>
-                );
-              }
-              return null;
-            })}
-          </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </PopoverContent>
     </Popover>

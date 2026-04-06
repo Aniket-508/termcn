@@ -1,10 +1,10 @@
 "use client";
 
 import type { DialogProps } from "@radix-ui/react-dialog";
-import type { Node as PageTreeNode } from "fumadocs-core/page-tree";
 import {
   ArrowRightIcon,
   CornerDownLeftIcon,
+  CircleDashedIcon,
   SquareDashedIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -33,13 +33,14 @@ import { SITE } from "@/constants/site";
 import { useConfig } from "@/hooks/use-config";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
-import type { source } from "@/lib/source";
+import { docsConfig } from "@/lib/docs";
 import { themePrimaryBySlug } from "@/lib/terminal-themes";
 import { cn } from "@/lib/utils";
 
 type DocUrlKind =
   | { kind: "theme"; slug: string }
   | { kind: "component"; slug: string }
+  | { kind: "template"; slug: string }
   | { kind: "page" };
 
 const GROUP_HEADING_CLS =
@@ -55,11 +56,12 @@ const parseDocPageUrl = (url: string): DocUrlKind => {
   if (componentsIdx !== -1 && parts[componentsIdx + 1]) {
     return { kind: "component", slug: parts.at(-1) ?? "" };
   }
+  const templatesIdx = parts.indexOf("templates");
+  if (templatesIdx !== -1 && parts[templatesIdx + 1]) {
+    return { kind: "template", slug: parts.at(-1) ?? "" };
+  }
   return { kind: "page" };
 };
-
-const nodeNameToString = (name: React.ReactNode): string =>
-  typeof name === "string" || typeof name === "number" ? String(name) : "";
 
 const searchKeywordsFromUrl = (url: string) => {
   const segments = url.split("/").filter(Boolean);
@@ -90,28 +92,12 @@ const DocPageLeadingIcon = ({ parsed }: { parsed: DocUrlKind }) => {
     );
   }
   if (parsed.kind === "component") {
-    return (
-      <div className="border-muted-foreground aspect-square size-4 rounded-full border border-dashed" />
-    );
+    return <CircleDashedIcon />;
+  }
+  if (parsed.kind === "template") {
+    return <SquareDashedIcon />;
   }
   return <ArrowRightIcon />;
-};
-
-const folderHasRenderableEntries = (nodes: PageTreeNode[]): boolean => {
-  for (const n of nodes) {
-    if (n.type === "page") {
-      return true;
-    }
-    if (n.type === "folder") {
-      if (n.index) {
-        return true;
-      }
-      if (folderHasRenderableEntries(n.children)) {
-        return true;
-      }
-    }
-  }
-  return false;
 };
 
 const CommandMenuKbd = ({
@@ -166,14 +152,12 @@ const CommandMenuItem = ({
 };
 
 export const CommandMenu = ({
-  tree,
   blocks,
   navItems,
   ...props
 }: DialogProps & {
-  tree: typeof source.pageTree;
   blocks?: { name: string; description: string; categories: string[] }[];
-  navItems?: { href: string; label: string }[];
+  navItems: { href: string; label: string }[];
 }) => {
   const router = useRouter();
   const isMac = useIsMac();
@@ -184,7 +168,7 @@ export const CommandMenu = ({
   const packageManager = config.packageManager || "pnpm";
 
   const handleDocPageHighlight = useCallback(
-    (item: { url: string; name?: React.ReactNode }) => {
+    (item: { url: string; name?: string }) => {
       setShowGoToPage(true);
       const parsed = parseDocPageUrl(item.url);
       if (parsed.kind === "theme") {
@@ -193,7 +177,7 @@ export const CommandMenu = ({
         );
         return;
       }
-      if (parsed.kind === "component") {
+      if (parsed.kind === "component" || parsed.kind === "template") {
         setCopyPayload(
           `${packageManager} dlx shadcn@latest add ${SITE.URL}/r/${parsed.slug}.json`
         );
@@ -231,71 +215,24 @@ export const CommandMenu = ({
   );
 
   const renderDocPageItem = (
-    page: { url: string; name: React.ReactNode },
+    title: string,
+    url: string,
     breadcrumb: string[]
   ) => {
-    const parsed = parseDocPageUrl(page.url);
-    const title = page.name?.toString() ?? "";
+    const parsed = parseDocPageUrl(url);
     return (
       <CommandMenuItem
-        key={page.url}
-        keywords={buildDocPageKeywords(parsed, page.url, breadcrumb)}
+        key={url}
+        keywords={buildDocPageKeywords(parsed, url, breadcrumb)}
         value={[...breadcrumb, title].filter(Boolean).join(" ")}
-        onHighlight={() => handleDocPageHighlight(page)}
-        onSelect={() => runCommand(() => router.push(page.url))}
+        onHighlight={() => handleDocPageHighlight({ name: title, url })}
+        onSelect={() => runCommand(() => router.push(url))}
       >
         <DocPageLeadingIcon parsed={parsed} />
-        {page.name}
+        {title}
       </CommandMenuItem>
     );
   };
-
-  const renderDocTreeNodes = (
-    nodes: PageTreeNode[],
-    breadcrumb: string[],
-    depth: number
-  ): React.ReactElement[] =>
-    nodes.flatMap((node) => {
-      if (node.type === "separator") {
-        return [];
-      }
-
-      if (node.type === "page") {
-        return [renderDocPageItem(node, breadcrumb)];
-      }
-
-      if (node.type === "folder") {
-        const folderName = nodeNameToString(node.name);
-        const nextBreadcrumb = [...breadcrumb, folderName];
-
-        if (!node.index && !folderHasRenderableEntries(node.children)) {
-          return [];
-        }
-
-        const children = renderDocTreeNodes(
-          node.children,
-          nextBreadcrumb,
-          depth + 1
-        );
-
-        return [
-          <CommandGroup
-            key={node.$id}
-            className={cn(
-              GROUP_HEADING_CLS,
-              depth > 0 &&
-                "[&_[cmdk-group-heading]]:!text-muted-foreground [&_[cmdk-group-heading]]:!pl-5 [&_[cmdk-group-heading]]:!pt-2"
-            )}
-            heading={node.name}
-          >
-            {node.index ? renderDocPageItem(node.index, nextBreadcrumb) : null}
-            {children}
-          </CommandGroup>,
-        ];
-      }
-
-      return [];
-    });
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -384,43 +321,28 @@ export const CommandMenu = ({
                 ))}
               </CommandGroup>
             )}
-            {tree.children.flatMap((group): React.ReactElement[] => {
-              if (group.type !== "folder") {
-                return [];
-              }
-
-              const sectionLabel = nodeNameToString(group.name);
-
-              if (!group.index && !folderHasRenderableEntries(group.children)) {
-                return [];
-              }
-
-              const breadcrumb = [sectionLabel].filter(Boolean);
-
-              if (sectionLabel === "Components") {
-                const items: React.ReactElement[] = [];
-                if (group.index) {
-                  items.push(renderDocPageItem(group.index, breadcrumb));
-                }
-                items.push(
-                  ...renderDocTreeNodes(group.children, breadcrumb, 0)
-                );
-                return items;
-              }
-
-              return [
-                <CommandGroup
-                  key={group.$id}
-                  className={GROUP_HEADING_CLS}
-                  heading={group.name}
-                >
-                  {group.index
-                    ? renderDocPageItem(group.index, breadcrumb)
-                    : null}
-                  {renderDocTreeNodes(group.children, breadcrumb, 0)}
-                </CommandGroup>,
-              ];
-            })}
+            {docsConfig.sidebarNav.map((group) => (
+              <CommandGroup
+                key={group.title}
+                className={GROUP_HEADING_CLS}
+                heading={group.title}
+              >
+                {group.items.map((item) => (
+                  <div key={item.href ?? item.title}>
+                    {item.href &&
+                      renderDocPageItem(item.title, item.href, [group.title])}
+                    {item.items?.map((subItem) =>
+                      subItem.href
+                        ? renderDocPageItem(subItem.title, subItem.href, [
+                            group.title,
+                            item.title,
+                          ])
+                        : null
+                    )}
+                  </div>
+                ))}
+              </CommandGroup>
+            ))}
             {blocks?.length ? (
               <CommandGroup
                 heading="Blocks"
