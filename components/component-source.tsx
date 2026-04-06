@@ -1,10 +1,12 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
+import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper";
 import { highlightCode } from "@/lib/highlight-code";
+import { cn } from "@/lib/utils";
 
-import { ComponentSourceCollapsible } from "./component-source-collapsible";
 import { CopyButton } from "./copy-button";
+import { getIconForLanguageExtension } from "./icons";
 
 const readOptional = async (filePath: string): Promise<string | null> => {
   try {
@@ -23,51 +25,76 @@ const resolveSourceFile = async (name: string): Promise<string | null> => {
   );
 };
 
+const ComponentCode = ({
+  code,
+  highlightedCode,
+  language,
+  title,
+}: {
+  code: string;
+  highlightedCode: string;
+  language: string;
+  title: string | undefined;
+}) => (
+  <figure data-rehype-pretty-code-figure="" className="[&>pre]:max-h-96">
+    {title && (
+      <figcaption
+        data-rehype-pretty-code-title=""
+        className="flex items-center gap-2 text-code-foreground [&_svg]:size-4 [&_svg]:text-code-foreground [&_svg]:opacity-70"
+        data-language={language}
+      >
+        {getIconForLanguageExtension(language)}
+        {title}
+      </figcaption>
+    )}
+    <CopyButton value={code} event="copy_primitive_code" />
+    {/* eslint-disable-next-line react/no-danger */}
+    <div dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+  </figure>
+);
+
 export const ComponentSource = async ({
   name,
   title,
   collapsible = true,
+  className,
+  language,
 }: {
   name: string;
   title?: string;
   collapsible?: boolean;
+  className?: string;
+  language?: string;
 }) => {
   const code = await resolveSourceFile(name);
   if (!code) {
     return null;
   }
 
-  const highlighted = await highlightCode(code, "tsx");
+  const lang = language ?? title?.split(".").pop() ?? "tsx";
+  const highlightedCode = await highlightCode(code, lang);
 
   if (!collapsible) {
     return (
-      <figure className="group bg-code text-code-foreground relative mt-6 overflow-hidden rounded-lg text-sm">
-        {title && (
-          <figcaption className="border-border/50 text-muted-foreground border-b px-4 py-2 text-sm">
-            {title}
-          </figcaption>
-        )}
-        <div className="relative">
-          <CopyButton
-            value={code}
-            className="absolute top-3 right-2 z-10 size-7 opacity-70 hover:opacity-100"
-            event="copy_primitive_code"
-          />
-          <div
-            className="max-h-[450px] overflow-auto [&_span]:text-(--shiki-light) dark:[&_span]:text-(--shiki-dark)"
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: highlighted }}
-          />
-        </div>
-      </figure>
+      <div className={cn("relative", className)}>
+        <ComponentCode
+          code={code}
+          highlightedCode={highlightedCode}
+          language={lang}
+          title={title}
+        />
+      </div>
     );
   }
 
   return (
-    <ComponentSourceCollapsible
-      code={code}
-      highlightedCode={highlighted}
-      title={title}
-    />
+    <CodeCollapsibleWrapper className={className}>
+      <ComponentCode
+        code={code}
+        highlightedCode={highlightedCode}
+        language={lang}
+        title={title}
+      />
+    </CodeCollapsibleWrapper>
   );
 };

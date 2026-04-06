@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Callout } from "@/components/callout";
-import { CodeBlock } from "@/components/code-block";
+import { CodeBlockCommand } from "@/components/code-block-command";
 import { CodeTabs } from "@/components/code-tabs";
 import { ComponentPreview } from "@/components/component-preview";
 import { ComponentSource } from "@/components/component-source";
@@ -36,14 +36,6 @@ export const mdxComponents = {
   AspectRatio,
   Button,
   Callout,
-  CodeBlock: ({
-    className,
-    ...props
-  }: React.ComponentProps<typeof CodeBlock>) => (
-    <div className={cn("mt-6", className)}>
-      <CodeBlock {...props} />
-    </div>
-  ),
   CodeTabs,
   ComponentPreview,
   ComponentSource,
@@ -120,7 +112,7 @@ export const mdxComponents = {
   ),
   Steps: ({ ...props }) => (
     <div
-      className="steps mb-12 [counter-reset:step] md:ml-4 md:border-l md:pl-8 [&>h3]:step"
+      className="steps [counter-reset:step] md:ml-4 md:border-l md:pl-8 [&>h3]:step"
       {...props}
     />
   ),
@@ -216,7 +208,7 @@ export const mdxComponents = {
     const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__;
     if (isNpmCommand) {
       return (
-        <CodeBlock
+        <CodeBlockCommand
           __npm__={__npm__}
           __yarn__={__yarn__}
           __pnpm__={__pnpm__}
@@ -281,7 +273,7 @@ export const mdxComponents = {
         .replaceAll("?", "")
         .toLowerCase()}
       className={cn(
-        "font-heading mt-8 scroll-m-28 text-xl font-medium tracking-tight first:mt-0 lg:mt-8 [&+p]:!mt-4 *:[code]:text-xl",
+        "[&+]*:[code]:text-xl mt-10 scroll-m-28 font-heading text-xl font-medium tracking-tight first:mt-0 lg:mt-12 [&+.steps]:mt-0! [&+.steps>h3]:mt-4! [&+h3]:mt-6! [&+p]:mt-4!",
         className
       )}
       {...props}
@@ -292,7 +284,7 @@ export const mdxComponents = {
   h3: ({ className, children, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
-        "font-heading mt-8 scroll-m-28 text-lg font-medium tracking-tight *:[code]:text-xl",
+        "mt-12 scroll-m-28 font-heading text-lg font-medium tracking-tight [&+p]:mt-4! *:[code]:text-xl",
         className
       )}
       {...props}
@@ -355,7 +347,7 @@ export const mdxComponents = {
   pre: ({ className, children, ...props }: React.ComponentProps<"pre">) => (
     <pre
       className={cn(
-        "no-scrollbar min-w-0 overflow-x-auto px-4 py-3.5 outline-none has-[[data-highlighted-line]]:px-0 has-[[data-line-numbers]]:px-0 has-[[data-slot=tabs]]:p-0",
+        "no-scrollbar min-w-0 overflow-x-auto px-4 py-3.5 outline-none has-data-highlighted-line:px-0 has-[[data-line-numbers]]:px-0 has-[[data-slot=tabs]]:p-0",
         className
       )}
       {...props}
@@ -367,10 +359,10 @@ export const mdxComponents = {
     <strong className={cn("font-medium", className)} {...props} />
   ),
   table: ({ className, ...props }: React.ComponentProps<"table">) => (
-    <div className="my-6 w-full overflow-y-auto">
+    <div className="my-6 no-scrollbar w-full overflow-y-auto rounded-xl border">
       <table
         className={cn(
-          "relative w-full overflow-hidden border-none text-sm",
+          "relative w-full overflow-hidden border-none text-sm [&_tbody_tr:last-child]:border-b-0",
           className
         )}
         {...props}
@@ -380,7 +372,7 @@ export const mdxComponents = {
   td: ({ className, ...props }: React.ComponentProps<"td">) => (
     <td
       className={cn(
-        "px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
+        "px-4 py-2 text-left whitespace-nowrap [[align=center]]:text-center [[align=right]]:text-right",
         className
       )}
       {...props}
@@ -389,17 +381,14 @@ export const mdxComponents = {
   th: ({ className, ...props }: React.ComponentProps<"th">) => (
     <th
       className={cn(
-        "px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
+        "px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right",
         className
       )}
       {...props}
     />
   ),
   tr: ({ className, ...props }: React.ComponentProps<"tr">) => (
-    <tr
-      className={cn("last:border-b-none m-0 border-b", className)}
-      {...props}
-    />
+    <tr className={cn("m-0 border-b", className)} {...props} />
   ),
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
     <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />

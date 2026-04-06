@@ -1,11 +1,10 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
+import { ComponentSource } from "@/components/component-source";
+import { ExamplePreview } from "@/components/example-preview";
+import { TerminalPreview } from "@/components/terminal-preview";
 import { highlightCode } from "@/lib/highlight-code";
-
-import { ComponentSourceCollapsible } from "./component-source-collapsible";
-import { ExamplePreview } from "./example-preview";
-import { TerminalPreview } from "./terminal-preview";
 
 const resolveExampleSource = async (
   name: string
@@ -36,12 +35,7 @@ export const ComponentPreview = async ({
       <TerminalPreview>
         <ExamplePreview name={name} />
       </TerminalPreview>
-      {source && (
-        <ComponentSourceCollapsible
-          code={source.code}
-          highlightedCode={source.html}
-        />
-      )}
+      {source && <ComponentSource name={name} />}
     </>
   );
 };

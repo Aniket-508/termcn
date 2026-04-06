@@ -12,6 +12,7 @@ export const MacWindow = ({
   trailing?: React.ReactNode;
 }) => (
   <div
+    data-slot="mac-window"
     className={cn(
       "overflow-hidden rounded-2xl border bg-card shadow-lg",
       className

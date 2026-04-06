@@ -5,7 +5,6 @@ import { SITE } from "@/constants/site";
 import { source } from "@/lib/source";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
       changeFrequency: "monthly",
@@ -15,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Dynamic documentation pages from fumadocs
   const docPages: MetadataRoute.Sitemap = source.getPages().map((page) => ({
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
