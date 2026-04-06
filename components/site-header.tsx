@@ -12,7 +12,11 @@ import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 import { source } from "@/lib/source";
 
-const navItems = [{ href: ROUTES.DOCS, label: "Docs" }];
+const navItems = [
+  { href: ROUTES.DOCS, label: "Docs" },
+  { href: ROUTES.DOCS_COMPONENTS, label: "Components" },
+  { href: ROUTES.DOCS_TEMPLATES, label: "Templates" },
+];
 
 export const SiteHeader = () => {
   const { pageTree } = source;

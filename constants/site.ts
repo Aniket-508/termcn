@@ -1,10 +1,14 @@
 export const FALLBACK_SITE_ORIGIN = "https://termcn.vercel.app" as const;
 
-const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : (process.env.SITE_URL ?? FALLBACK_SITE_ORIGIN);
-
-const normalizedBase = baseUrl.replace(/\/$/, "");
+const getBaseUrl = () => {
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:3000";
+  }
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+  return process.env.SITE_URL ?? FALLBACK_SITE_ORIGIN;
+};
 
 export const SITE = {
   author: {
@@ -23,6 +27,6 @@ export const SITE = {
     "npx shadcn add",
   ] as const,
   name: "termcn",
-  ogImage: `${normalizedBase}/og.jpg`,
-  url: normalizedBase,
+  ogImage: `${getBaseUrl()}/og.jpg`,
+  url: getBaseUrl(),
 };

@@ -5,6 +5,7 @@ export const ROUTES = {
   DOCS_GET_STARTED: "/docs/get-started",
   DOCS_MCP: "/docs/mcp",
   DOCS_REGISTRY: "/docs/registry",
+  DOCS_TEMPLATES: "/docs/templates",
   DOCS_THEMING: "/docs/theming",
   HOME: "/",
   LLMS: "/llms.txt",
