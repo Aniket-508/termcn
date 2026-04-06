@@ -13,10 +13,10 @@ export const WebsiteJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    description: SITE.description,
+    description: SITE.DESCRIPTION.LONG,
     inLanguage: "en-US",
-    name: SITE.name,
-    url: SITE.url,
+    name: SITE.NAME,
+    url: SITE.URL,
   };
   return <JsonLdScript data={data} />;
 };
@@ -27,16 +27,22 @@ export const SoftwareSourceCodeJsonLd = () => {
     "@type": "SoftwareSourceCode",
     applicationCategory: "DeveloperApplication",
     author: {
-      "@type": "Organization",
-      name: SITE.name,
+      "@type": "Person",
+      name: SITE.AUTHOR.NAME,
       url: LINK.PORTFOLIO,
     },
     codeRepository: LINK.GITHUB,
-    description: SITE.description,
+    dateModified: new Date().toISOString().split("T")[0],
+    description: SITE.DESCRIPTION.LONG,
     isAccessibleForFree: true,
-    keywords: SITE.keywords.join(", "),
+    keywords: SITE.KEYWORDS,
     license: LINK.LICENSE,
-    name: SITE.name,
+    maintainer: {
+      "@type": "Person",
+      name: SITE.AUTHOR.NAME,
+      url: LINK.PORTFOLIO,
+    },
+    name: SITE.NAME,
     offers: {
       "@type": "Offer",
       availability: "https://schema.org/InStock",
@@ -45,7 +51,7 @@ export const SoftwareSourceCodeJsonLd = () => {
     },
     programmingLanguage: ["TypeScript", "React", "Next.js"],
     runtimePlatform: "Node.js",
-    url: SITE.url,
+    url: SITE.URL,
   };
   return <JsonLdScript data={data} />;
 };
@@ -54,10 +60,15 @@ export const OrganizationJsonLd = () => {
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    logo: SITE.ogImage,
-    name: SITE.name,
-    sameAs: [LINK.GITHUB],
-    url: SITE.url,
+    founder: {
+      "@type": "Person",
+      name: SITE.AUTHOR.NAME,
+      url: LINK.PORTFOLIO,
+    },
+    logo: SITE.OG_IMAGE,
+    name: SITE.NAME,
+    sameAs: [LINK.GITHUB, LINK.PORTFOLIO, LINK.X],
+    url: SITE.URL,
   };
   return <JsonLdScript data={data} />;
 };
@@ -65,18 +76,18 @@ export const OrganizationJsonLd = () => {
 export const FAQJsonLd = () => {
   const faqs = [
     {
-      answer: SITE.description,
-      question: `What is ${SITE.name}?`,
+      answer: SITE.DESCRIPTION.LONG,
+      question: `What is ${SITE.NAME}?`,
     },
     {
       answer:
         "Add components under registry/new-york/, list them in registry.json, run pnpm registry:build, then deploy. Users install with npx shadcn@latest add pointing at your published JSON URL.",
-      question: `How do I publish components with ${SITE.name}?`,
+      question: `How do I publish components with ${SITE.NAME}?`,
     },
     {
       answer:
         "Yes. The project is intended to be forked or cloned; source is available on GitHub under an open license.",
-      question: `Is ${SITE.name} open source?`,
+      question: `Is ${SITE.NAME} open source?`,
     },
   ];
 
@@ -107,7 +118,7 @@ export const BreadcrumbJsonLd = ({
       const pathname = item.path.startsWith("/") ? item.path : `/${item.path}`;
       return {
         "@type": "ListItem",
-        item: `${SITE.url}${pathname}`,
+        item: `${SITE.URL}${pathname}`,
         name: item.name,
         position: index + 1,
       };

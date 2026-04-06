@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       lastModified: new Date(),
       priority: 1,
-      url: SITE.url,
+      url: SITE.URL,
     },
   ];
 
@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: page.url === ROUTES.DOCS ? 0.9 : 0.8,
-    url: `${SITE.url}${page.url}`,
+    url: `${SITE.URL}${page.url}`,
   }));
 
   return [...staticPages, ...docPages];

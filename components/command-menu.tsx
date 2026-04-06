@@ -189,13 +189,13 @@ export const CommandMenu = ({
       const parsed = parseDocPageUrl(item.url);
       if (parsed.kind === "theme") {
         setCopyPayload(
-          `${packageManager} dlx shadcn@latest add ${SITE.url}/r/theme-${parsed.slug}.json`
+          `${packageManager} dlx shadcn@latest add ${SITE.URL}/r/theme-${parsed.slug}.json`
         );
         return;
       }
       if (parsed.kind === "component") {
         setCopyPayload(
-          `${packageManager} dlx shadcn@latest add ${SITE.url}/r/${parsed.slug}.json`
+          `${packageManager} dlx shadcn@latest add ${SITE.URL}/r/${parsed.slug}.json`
         );
         return;
       }

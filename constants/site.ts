@@ -11,13 +11,15 @@ const getBaseUrl = () => {
 };
 
 export const SITE = {
-  author: {
-    name: "Aniket Pawar",
-    twitter: "@alaymanguy",
+  AUTHOR: {
+    NAME: "Aniket Pawar",
+    TWITTER: "@alaymanguy",
   },
-  description:
-    "termcn is a shadcn-compatible component registry: publish UI blocks and install them with the shadcn CLI.",
-  keywords: [
+  DESCRIPTION: {
+    LONG: "termcn is a shadcn-compatible component registry: publish UI blocks and install them with the shadcn CLI.",
+    SHORT: "A shadcn-compatible component registry",
+  },
+  KEYWORDS: [
     "termcn",
     "shadcn",
     "component registry",
@@ -26,7 +28,7 @@ export const SITE = {
     "next.js",
     "npx shadcn add",
   ] as const,
-  name: "termcn",
-  ogImage: `${getBaseUrl()}/og.jpg`,
-  url: getBaseUrl(),
+  NAME: "termcn",
+  OG_IMAGE: `${getBaseUrl()}/og.jpg`,
+  URL: getBaseUrl(),
 };

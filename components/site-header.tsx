@@ -38,7 +38,7 @@ export const SiteHeader = () => {
           >
             <Link href="/">
               <LogoMark className="size-5" />
-              <span className="sr-only">{SITE.name}</span>
+              <span className="sr-only">{SITE.NAME}</span>
             </Link>
           </Button>
           <MainNav items={navItems} className="hidden lg:flex" />
