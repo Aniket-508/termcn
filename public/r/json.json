@@ -3,8 +3,12 @@
   "name": "json",
   "title": "JSON",
   "description": "Pretty-printed JSON with collapsible nodes",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/json.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["data"],
+  "categories": [
+    "data"
+  ],
   "type": "registry:ui"
 }

@@ -3,7 +3,9 @@
   "name": "theme-dracula",
   "title": "Dracula",
   "description": "A purple-heavy Dracula theme for Ink components.",
-  "registryDependencies": ["theme-provider"],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/themes/dracula.ts",
@@ -12,6 +14,8 @@
       "target": "lib/terminal-themes/dracula.ts"
     }
   ],
-  "categories": ["themes"],
+  "categories": [
+    "themes"
+  ],
   "type": "registry:file"
 }

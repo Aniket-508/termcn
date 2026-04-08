@@ -3,8 +3,12 @@
   "name": "form",
   "title": "Form",
   "description": "Form container with validation, Ctrl+S submit, and dirty tracking",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/form.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["forms"],
+  "categories": [
+    "forms"
+  ],
   "type": "registry:ui"
 }

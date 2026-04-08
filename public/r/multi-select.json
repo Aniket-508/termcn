@@ -3,8 +3,12 @@
   "name": "multi-select",
   "title": "Multi Select",
   "description": "Multi-select list with checkboxes and select-all",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/multi-select.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["selection"],
+  "categories": [
+    "selection"
+  ],
   "type": "registry:ui"
 }

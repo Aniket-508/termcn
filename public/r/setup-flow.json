@@ -3,8 +3,14 @@
   "name": "setup-flow",
   "title": "Setup Flow",
   "description": "@clack-style step flow with ◇/◆/│ visual language, badge, info steps, and multi-select",
-  "dependencies": ["ink"],
-  "registryDependencies": ["big-text", "use-animation", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "big-text",
+    "use-animation",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/setup-flow.tsx",
@@ -12,6 +18,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["templates"],
+  "categories": [
+    "templates"
+  ],
   "type": "registry:ui"
 }

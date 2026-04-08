@@ -3,8 +3,13 @@
   "name": "email-input",
   "title": "Email Input",
   "description": "Email input with validation and domain suggestions",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-focus", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-focus",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/email-input.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["input"],
+  "categories": [
+    "input"
+  ],
   "type": "registry:ui"
 }

@@ -3,7 +3,9 @@
   "name": "gradient",
   "title": "Gradient",
   "description": "Color gradient text",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/gradient.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["typography"],
+  "categories": [
+    "typography"
+  ],
   "type": "registry:ui"
 }

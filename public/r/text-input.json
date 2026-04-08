@@ -3,8 +3,13 @@
   "name": "text-input",
   "title": "Text Input",
   "description": "Single-line text input with placeholder, validation, mask",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-focus", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-focus",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/text-input.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["input"],
+  "categories": [
+    "input"
+  ],
   "type": "registry:ui"
 }

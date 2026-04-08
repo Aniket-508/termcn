@@ -3,7 +3,9 @@
   "name": "progress-bar",
   "title": "Progress Bar",
   "description": "Determinate progress bar with percent and value/total display",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/progress-bar.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["feedback"],
+  "categories": [
+    "feedback"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,12 @@
   "name": "form-field",
   "title": "Form Field",
   "description": "Form field wrapper with label, hint, and error",
-  "dependencies": ["ink"],
-  "registryDependencies": ["form"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "form"
+  ],
   "files": [
     {
       "path": "registry/ui/form-field.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["forms"],
+  "categories": [
+    "forms"
+  ],
   "type": "registry:ui"
 }

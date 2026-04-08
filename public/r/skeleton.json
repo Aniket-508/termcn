@@ -3,8 +3,12 @@
   "name": "skeleton",
   "title": "Skeleton",
   "description": "Shimmer loading placeholder",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-animation"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-animation"
+  ],
   "files": [
     {
       "path": "registry/ui/skeleton.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["feedback"],
+  "categories": [
+    "feedback"
+  ],
   "type": "registry:ui"
 }

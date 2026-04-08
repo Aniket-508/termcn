@@ -3,7 +3,9 @@
   "name": "code",
   "title": "Code",
   "description": "Syntax-highlighted code block (50+ languages)",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/code.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["typography"],
+  "categories": [
+    "typography"
+  ],
   "type": "registry:ui"
 }

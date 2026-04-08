@@ -3,8 +3,13 @@
   "name": "notification-center",
   "title": "Notification Center",
   "description": "Persistent queue-based notification panel with useNotifications hook",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider", "use-notifications"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider",
+    "use-notifications"
+  ],
   "files": [
     {
       "path": "registry/ui/notification-center.tsx",
@@ -17,6 +22,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["overlays"],
+  "categories": [
+    "overlays"
+  ],
   "type": "registry:block"
 }

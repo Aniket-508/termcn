@@ -3,8 +3,12 @@
   "name": "confirm",
   "title": "Confirm",
   "description": "Yes/No confirmation prompt",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input"
+  ],
   "files": [
     {
       "path": "registry/ui/confirm.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["forms"],
+  "categories": [
+    "forms"
+  ],
   "type": "registry:ui"
 }

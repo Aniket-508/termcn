@@ -3,7 +3,9 @@
   "name": "theme-high-contrast",
   "title": "High Contrast",
   "description": "High contrast themes for dark and light terminal backgrounds.",
-  "registryDependencies": ["theme-provider"],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/themes/high-contrast.ts",
@@ -12,6 +14,8 @@
       "target": "lib/terminal-themes/high-contrast.ts"
     }
   ],
-  "categories": ["themes"],
+  "categories": [
+    "themes"
+  ],
   "type": "registry:file"
 }

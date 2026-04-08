@@ -3,8 +3,12 @@
   "name": "help-screen",
   "title": "Help Screen",
   "description": "Figlet banner + tagline + aligned Options/Commands help sections",
-  "dependencies": ["ink"],
-  "registryDependencies": ["big-text"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "big-text"
+  ],
   "files": [
     {
       "path": "registry/ui/help-screen.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["templates"],
+  "categories": [
+    "templates"
+  ],
   "type": "registry:ui"
 }

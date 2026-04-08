@@ -3,7 +3,9 @@
   "name": "center",
   "title": "Center",
   "description": "Centers children horizontally and vertically",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/center.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["layout"],
+  "categories": [
+    "layout"
+  ],
   "type": "registry:ui"
 }

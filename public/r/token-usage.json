@@ -3,7 +3,9 @@
   "name": "token-usage",
   "title": "Token Usage",
   "description": "Compact token counter showing prompt and completion usage with optional cost estimate; also exports ContextMeter for visualising context window fill",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/token-usage.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

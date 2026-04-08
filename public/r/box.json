@@ -3,7 +3,9 @@
   "name": "box",
   "title": "Box",
   "description": "Enhanced flexbox container with theme-aware borders",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/box.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["layout"],
+  "categories": [
+    "layout"
+  ],
   "type": "registry:ui"
 }

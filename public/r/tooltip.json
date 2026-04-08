@@ -3,7 +3,9 @@
   "name": "tooltip",
   "title": "Tooltip",
   "description": "Contextual tooltip on focus or hover",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/tooltip.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["overlays"],
+  "categories": [
+    "overlays"
+  ],
   "type": "registry:ui"
 }

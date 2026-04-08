@@ -3,8 +3,12 @@
   "name": "tool-approval",
   "title": "Tool Approval",
   "description": "Interactive approval prompt for AI tool calls with risk-level badge, args display, and auto-deny timeout",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input"
+  ],
   "files": [
     {
       "path": "registry/ui/tool-approval.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

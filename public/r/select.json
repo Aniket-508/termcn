@@ -3,8 +3,12 @@
   "name": "select",
   "title": "Select",
   "description": "Single-select dropdown with arrow-key navigation",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/select.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["selection"],
+  "categories": [
+    "selection"
+  ],
   "type": "registry:ui"
 }

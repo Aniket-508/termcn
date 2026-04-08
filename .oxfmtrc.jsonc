@@ -11,6 +11,13 @@
     "newlinesBetween": true,
     "order": "asc",
   },
+  "ignorePatterns": [
+    "public/r/**",
+    ".agents/**",
+    ".cursor/**",
+    ".changeset/**",
+    ".claude/**",
+  ],
   "experimentalSortPackageJson": true,
   "jsxSingleQuote": false,
   "printWidth": 80,

@@ -3,8 +3,12 @@
   "name": "model-selector",
   "title": "Model Selector",
   "description": "Keyboard-navigable list for selecting an AI model, with optional provider grouping and context-window display",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input"
+  ],
   "files": [
     {
       "path": "registry/ui/model-selector.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

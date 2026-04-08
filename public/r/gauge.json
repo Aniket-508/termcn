@@ -3,7 +3,9 @@
   "name": "gauge",
   "title": "Gauge",
   "description": "Arc/speedometer gauge meter",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/gauge.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["charts"],
+  "categories": [
+    "charts"
+  ],
   "type": "registry:ui"
 }

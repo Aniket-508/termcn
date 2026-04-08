@@ -3,8 +3,12 @@
   "name": "tree",
   "title": "Tree",
   "description": "Expandable/collapsible tree view",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/tree.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["data"],
+  "categories": [
+    "data"
+  ],
   "type": "registry:ui"
 }

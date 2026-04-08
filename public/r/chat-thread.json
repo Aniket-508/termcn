@@ -3,8 +3,12 @@
   "name": "chat-thread",
   "title": "Chat Thread",
   "description": "Scrollable container for stacking ChatMessage components in a conversation thread",
-  "dependencies": ["ink"],
-  "registryDependencies": ["chat-message"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "chat-message"
+  ],
   "files": [
     {
       "path": "registry/ui/chat-thread.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

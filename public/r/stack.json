@@ -3,7 +3,9 @@
   "name": "stack",
   "title": "Stack",
   "description": "Vertical/horizontal stack with gap",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/stack.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["layout"],
+  "categories": [
+    "layout"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,13 @@
   "name": "timer",
   "title": "Timer",
   "description": "Countdown timer with pause/resume and auto-start",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/timer.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["utility"],
+  "categories": [
+    "utility"
+  ],
   "type": "registry:ui"
 }

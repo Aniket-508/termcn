@@ -3,7 +3,9 @@
   "name": "streaming-text",
   "title": "Streaming Text",
   "description": "Token-by-token streaming text with blinking cursor and optional typing animation",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/streaming-text.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

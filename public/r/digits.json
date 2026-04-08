@@ -3,7 +3,9 @@
   "name": "digits",
   "title": "Digits",
   "description": "Box-drawing character numerals",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/digits.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["typography"],
+  "categories": [
+    "typography"
+  ],
   "type": "registry:ui"
 }

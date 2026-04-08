@@ -3,8 +3,13 @@
   "name": "stopwatch",
   "title": "Stopwatch",
   "description": "Count-up stopwatch with laps and reset",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/stopwatch.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["utility"],
+  "categories": [
+    "utility"
+  ],
   "type": "registry:ui"
 }

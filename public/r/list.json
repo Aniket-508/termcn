@@ -3,8 +3,12 @@
   "name": "list",
   "title": "List",
   "description": "Navigable list with optional filtering",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/list.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["data"],
+  "categories": [
+    "data"
+  ],
   "type": "registry:ui"
 }

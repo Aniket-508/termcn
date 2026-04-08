@@ -3,8 +3,13 @@
   "name": "color-picker",
   "title": "Color Picker",
   "description": "Color picker with palette, hex, and RGB input",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-focus", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-focus",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/color-picker.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["selection"],
+  "categories": [
+    "selection"
+  ],
   "type": "registry:ui"
 }

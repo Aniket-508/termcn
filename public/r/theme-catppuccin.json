@@ -3,7 +3,9 @@
   "name": "theme-catppuccin",
   "title": "Catppuccin",
   "description": "A Catppuccin theme for rich terminal UI previews.",
-  "registryDependencies": ["theme-provider"],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/themes/catppuccin.ts",
@@ -12,6 +14,8 @@
       "target": "lib/terminal-themes/catppuccin.ts"
     }
   ],
-  "categories": ["themes"],
+  "categories": [
+    "themes"
+  ],
   "type": "registry:file"
 }

@@ -3,8 +3,13 @@
   "name": "tabbed-content",
   "title": "Tabbed Content",
   "description": "Tab bar wired to content panels",
-  "dependencies": ["ink"],
-  "registryDependencies": ["tabs", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "tabs",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/tabbed-content.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["navigation"],
+  "categories": [
+    "navigation"
+  ],
   "type": "registry:ui"
 }

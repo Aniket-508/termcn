@@ -3,7 +3,9 @@
   "name": "use-input",
   "title": "Use Input",
   "description": "Keyboard input hook wrapping Ink's useInput.",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/hooks/use-input.ts",
@@ -11,6 +13,8 @@
       "type": "registry:hook"
     }
   ],
-  "categories": ["core"],
+  "categories": [
+    "core"
+  ],
   "type": "registry:hook"
 }

@@ -3,7 +3,9 @@
   "name": "pie-chart",
   "title": "Pie Chart",
   "description": "Unicode block pie chart with legend",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/pie-chart.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["charts"],
+  "categories": [
+    "charts"
+  ],
   "type": "registry:ui"
 }

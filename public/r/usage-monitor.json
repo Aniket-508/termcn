@@ -3,8 +3,12 @@
   "name": "usage-monitor",
   "title": "Usage Monitor",
   "description": "Real-time dashboard with diamond header, progress metrics, burn rate, predictions, and status bar",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/usage-monitor.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["templates"],
+  "categories": [
+    "templates"
+  ],
   "type": "registry:ui"
 }

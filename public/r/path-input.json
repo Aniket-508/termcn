@@ -3,8 +3,14 @@
   "name": "path-input",
   "title": "Path Input",
   "description": "Filesystem path input with tab autocomplete",
-  "dependencies": ["ink", "glob"],
-  "registryDependencies": ["use-focus", "theme-provider"],
+  "dependencies": [
+    "ink",
+    "glob"
+  ],
+  "registryDependencies": [
+    "use-focus",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/path-input.tsx",
@@ -12,6 +18,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["input"],
+  "categories": [
+    "input"
+  ],
   "type": "registry:ui"
 }

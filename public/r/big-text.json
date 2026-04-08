@@ -3,7 +3,9 @@
   "name": "big-text",
   "title": "Big Text",
   "description": "Figlet-style large ASCII art text",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/big-text.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["typography"],
+  "categories": [
+    "typography"
+  ],
   "type": "registry:ui"
 }

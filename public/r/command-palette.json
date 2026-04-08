@@ -3,8 +3,13 @@
   "name": "command-palette",
   "title": "Command Palette",
   "description": "VS Code–style command palette with fuzzy search",
-  "dependencies": ["ink", "mnemonist"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink",
+    "mnemonist"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/command-palette.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["navigation"],
+  "categories": [
+    "navigation"
+  ],
   "type": "registry:ui"
 }

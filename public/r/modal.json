@@ -3,8 +3,12 @@
   "name": "modal",
   "title": "Modal",
   "description": "Focus-trapped overlay modal, close with Esc",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/modal.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["overlays"],
+  "categories": [
+    "overlays"
+  ],
   "type": "registry:ui"
 }

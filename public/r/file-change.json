@@ -3,8 +3,12 @@
   "name": "file-change",
   "title": "File Change",
   "description": "Interactive file-change review list with diff expansion, per-file accept/reject actions, and accept-all shortcut",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input"
+  ],
   "files": [
     {
       "path": "registry/ui/file-change.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

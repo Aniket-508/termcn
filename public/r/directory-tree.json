@@ -3,8 +3,13 @@
   "name": "directory-tree",
   "title": "Directory Tree",
   "description": "Filesystem browser with expand/collapse",
-  "dependencies": ["ink", "glob"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink",
+    "glob"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/directory-tree.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["data"],
+  "categories": [
+    "data"
+  ],
   "type": "registry:ui"
 }

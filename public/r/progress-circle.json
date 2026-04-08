@@ -3,7 +3,9 @@
   "name": "progress-circle",
   "title": "Progress Circle",
   "description": "Circular progress indicator using Unicode braille",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/progress-circle.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["feedback"],
+  "categories": [
+    "feedback"
+  ],
   "type": "registry:ui"
 }

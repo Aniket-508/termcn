@@ -3,8 +3,12 @@
   "name": "data-grid",
   "title": "Data Grid",
   "description": "Advanced data grid with sorting, filtering, pagination, and cell editing",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/data-grid.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["data"],
+  "categories": [
+    "data"
+  ],
   "type": "registry:ui"
 }

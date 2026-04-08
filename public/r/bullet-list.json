@@ -3,7 +3,9 @@
   "name": "bullet-list",
   "title": "Bullet List",
   "description": "Nested structured content with ●/└/□ bullet prefixes",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/bullet-list.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["templates"],
+  "categories": [
+    "templates"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,12 @@
   "name": "log",
   "title": "Log",
   "description": "Scrolling log viewer with severity levels and filtering",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/log.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["utility"],
+  "categories": [
+    "utility"
+  ],
   "type": "registry:ui"
 }

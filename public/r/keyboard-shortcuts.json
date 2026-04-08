@@ -3,7 +3,9 @@
   "name": "keyboard-shortcuts",
   "title": "Keyboard Shortcuts",
   "description": "Formatted keyboard shortcut reference table",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/keyboard-shortcuts.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["utility"],
+  "categories": [
+    "utility"
+  ],
   "type": "registry:ui"
 }

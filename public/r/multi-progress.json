@@ -3,7 +3,9 @@
   "name": "multi-progress",
   "title": "Multi Progress",
   "description": "Parallel progress display for package managers, build pipelines, and deploy tools",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/multi-progress.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["feedback"],
+  "categories": [
+    "feedback"
+  ],
   "type": "registry:ui"
 }

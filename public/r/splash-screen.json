@@ -3,8 +3,12 @@
   "name": "splash-screen",
   "title": "Splash Screen",
   "description": "Styled startup banner with big ASCII art title, subtitle, author credit, and status line",
-  "dependencies": ["ink"],
-  "registryDependencies": ["big-text"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "big-text"
+  ],
   "files": [
     {
       "path": "registry/ui/splash-screen.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["templates"],
+  "categories": [
+    "templates"
+  ],
   "type": "registry:ui"
 }

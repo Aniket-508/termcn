@@ -3,7 +3,9 @@
   "name": "error-boundary",
   "title": "Error Boundary",
   "description": "React error boundary with graceful terminal display",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/error-boundary.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["utility"],
+  "categories": [
+    "utility"
+  ],
   "type": "registry:ui"
 }

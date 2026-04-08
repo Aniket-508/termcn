@@ -3,7 +3,9 @@
   "name": "info-box",
   "title": "Info Box",
   "description": "Bordered info panel with header, key-value rows, and tree-prefix rows",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/info-box.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["templates"],
+  "categories": [
+    "templates"
+  ],
   "type": "registry:ui"
 }

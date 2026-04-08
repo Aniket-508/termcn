@@ -3,7 +3,9 @@
   "name": "spacer",
   "title": "Spacer",
   "description": "Flexible space between flex children",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/spacer.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["layout"],
+  "categories": [
+    "layout"
+  ],
   "type": "registry:ui"
 }

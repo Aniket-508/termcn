@@ -3,8 +3,12 @@
   "name": "tree-select",
   "title": "Tree Select",
   "description": "Hierarchical tree selection",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/tree-select.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["selection"],
+  "categories": [
+    "selection"
+  ],
   "type": "registry:ui"
 }

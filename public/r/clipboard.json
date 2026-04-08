@@ -3,8 +3,13 @@
   "name": "clipboard",
   "title": "Clipboard",
   "description": "Copy-to-clipboard button with success feedback",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider", "use-clipboard"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider",
+    "use-clipboard"
+  ],
   "files": [
     {
       "path": "registry/ui/clipboard.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["utility"],
+  "categories": [
+    "utility"
+  ],
   "type": "registry:ui"
 }

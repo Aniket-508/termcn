@@ -3,8 +3,12 @@
   "name": "breadcrumb",
   "title": "Breadcrumb",
   "description": "Breadcrumb navigation trail",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/breadcrumb.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["navigation"],
+  "categories": [
+    "navigation"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,13 @@
   "name": "virtual-list",
   "title": "Virtual List",
   "description": "Virtualized list for 10k+ items",
-  "dependencies": ["ink", "mnemonist"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink",
+    "mnemonist"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/virtual-list.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["data"],
+  "categories": [
+    "data"
+  ],
   "type": "registry:ui"
 }

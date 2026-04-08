@@ -3,7 +3,9 @@
   "name": "status-message",
   "title": "Status Message",
   "description": "Inline status message with icon and color",
-  "dependencies": ["ink"],
+  "dependencies": [
+    "ink"
+  ],
   "files": [
     {
       "path": "registry/ui/status-message.tsx",
@@ -11,6 +13,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["feedback"],
+  "categories": [
+    "feedback"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,13 @@
   "name": "time-picker",
   "title": "Time Picker",
   "description": "Time picker with hour/minute/second spinners",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-focus", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-focus",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/time-picker.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["forms"],
+  "categories": [
+    "forms"
+  ],
   "type": "registry:ui"
 }

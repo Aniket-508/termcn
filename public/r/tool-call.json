@@ -3,8 +3,13 @@
   "name": "tool-call",
   "title": "Tool Call",
   "description": "Displays an AI tool invocation with status indicator, args, result, and elapsed time",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input", "use-animation"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input",
+    "use-animation"
+  ],
   "files": [
     {
       "path": "registry/ui/tool-call.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

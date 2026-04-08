@@ -5,12 +5,19 @@
     "./node_modules/ultracite/config/oxlint/react/.oxlintrc.json",
     "./node_modules/ultracite/config/oxlint/next/.oxlintrc.json"
   ],
+  "ignorePatterns": [
+    "public/r/**",
+    ".agents/**",
+    ".cursor/**",
+    ".changeset/**",
+    ".claude/**"
+  ],
   "rules": {
     "react-perf/jsx-no-new-function-as-prop": "off"
   },
   "overrides": [
     {
-      "files": ["registry/ui/**/*.tsx"],
+      "files": ["registry/ui/**/*.tsx", "registry/bases/ink/ui/**/*.tsx"],
       "rules": {
         "react/no-array-index-key": "off",
         "react/no-react-children": "off",

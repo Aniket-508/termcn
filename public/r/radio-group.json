@@ -3,8 +3,12 @@
   "name": "radio-group",
   "title": "Radio Group",
   "description": "Mutually exclusive radio button group",
-  "dependencies": ["ink"],
-  "registryDependencies": ["theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/radio-group.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["selection"],
+  "categories": [
+    "selection"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,14 @@
   "name": "search-input",
   "title": "Search Input",
   "description": "Fuzzy search input with autocomplete",
-  "dependencies": ["ink", "mnemonist"],
-  "registryDependencies": ["use-focus", "theme-provider"],
+  "dependencies": [
+    "ink",
+    "mnemonist"
+  ],
+  "registryDependencies": [
+    "use-focus",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/search-input.tsx",
@@ -12,6 +18,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["input"],
+  "categories": [
+    "input"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,12 @@
   "name": "chat-message",
   "title": "Chat Message",
   "description": "Chat message bubble with role label, streaming indicator, and collapsible content",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-input"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-input"
+  ],
   "files": [
     {
       "path": "registry/ui/chat-message.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["ai"],
+  "categories": [
+    "ai"
+  ],
   "type": "registry:ui"
 }

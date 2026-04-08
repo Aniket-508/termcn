@@ -3,7 +3,9 @@
   "name": "theme-solarized",
   "title": "Solarized",
   "description": "A Solarized theme for terminal components.",
-  "registryDependencies": ["theme-provider"],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/themes/solarized.ts",
@@ -12,6 +14,8 @@
       "target": "lib/terminal-themes/solarized.ts"
     }
   ],
-  "categories": ["themes"],
+  "categories": [
+    "themes"
+  ],
   "type": "registry:file"
 }

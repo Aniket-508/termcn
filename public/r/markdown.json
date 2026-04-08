@@ -3,7 +3,10 @@
   "name": "markdown",
   "title": "Markdown",
   "description": "Full markdown renderer for terminal",
-  "dependencies": ["ink", "marked"],
+  "dependencies": [
+    "ink",
+    "marked"
+  ],
   "files": [
     {
       "path": "registry/ui/markdown.tsx",
@@ -11,6 +14,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["typography"],
+  "categories": [
+    "typography"
+  ],
   "type": "registry:ui"
 }

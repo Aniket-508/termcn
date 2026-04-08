@@ -3,8 +3,12 @@
   "name": "toast",
   "title": "Toast",
   "description": "Auto-dismissing toast notification",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-interval"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-interval"
+  ],
   "files": [
     {
       "path": "registry/ui/toast.tsx",
@@ -12,6 +16,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["feedback"],
+  "categories": [
+    "feedback"
+  ],
   "type": "registry:ui"
 }

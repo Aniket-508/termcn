@@ -10,6 +10,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["core"],
+  "categories": [
+    "core"
+  ],
   "type": "registry:ui"
 }

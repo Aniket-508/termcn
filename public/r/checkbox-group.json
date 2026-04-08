@@ -3,8 +3,13 @@
   "name": "checkbox-group",
   "title": "Checkbox Group",
   "description": "Checkbox group with min/max selection",
-  "dependencies": ["ink"],
-  "registryDependencies": ["checkbox", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "checkbox",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/checkbox-group.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["selection"],
+  "categories": [
+    "selection"
+  ],
   "type": "registry:ui"
 }

@@ -3,8 +3,13 @@
   "name": "number-input",
   "title": "Number Input",
   "description": "Numeric input with increment/decrement and bounds",
-  "dependencies": ["ink"],
-  "registryDependencies": ["use-focus", "theme-provider"],
+  "dependencies": [
+    "ink"
+  ],
+  "registryDependencies": [
+    "use-focus",
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/number-input.tsx",
@@ -12,6 +17,8 @@
       "type": "registry:ui"
     }
   ],
-  "categories": ["input"],
+  "categories": [
+    "input"
+  ],
   "type": "registry:ui"
 }
