@@ -7,6 +7,7 @@
     "ink"
   ],
   "registryDependencies": [
+    "theme-provider",
     "use-animation"
   ],
   "files": [

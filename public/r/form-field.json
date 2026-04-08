@@ -7,7 +7,8 @@
     "ink"
   ],
   "registryDependencies": [
-    "form"
+    "form",
+    "theme-provider"
   ],
   "files": [
     {

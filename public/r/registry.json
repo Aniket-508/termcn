@@ -3,8 +3,12 @@
   "homepage": "https://termcn.dev",
   "items": [
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Alert box with success/error/warning/info variants",
       "files": [
         {
@@ -14,11 +18,18 @@
       ],
       "name": "alert",
       "title": "Alert",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Full-screen TUI layout with header, tip bar, full-width input, scrollable content, and hints footer",
       "files": [
         {
@@ -27,13 +38,21 @@
         }
       ],
       "name": "app-shell",
-      "registryDependencies": ["info-box", "bullet-list", "theme-provider"],
+      "registryDependencies": [
+        "info-box",
+        "bullet-list",
+        "theme-provider"
+      ],
       "title": "App Shell",
       "type": "registry:ui"
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Constrains children to a given aspect ratio",
       "files": [
         {
@@ -46,8 +65,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Semantic status indicator badge (success/error/warning/info)",
       "files": [
         {
@@ -57,11 +80,18 @@
       ],
       "name": "badge",
       "title": "Badge",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Full-width announcement banner",
       "files": [
         {
@@ -71,11 +101,18 @@
       ],
       "name": "banner",
       "title": "Banner",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["charts"],
-      "dependencies": ["ink"],
+      "categories": [
+        "charts"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Horizontal and vertical bar chart with labels",
       "files": [
         {
@@ -85,11 +122,18 @@
       ],
       "name": "bar-chart",
       "title": "Bar Chart",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Figlet-style large ASCII art text",
       "files": [
         {
@@ -99,11 +143,18 @@
       ],
       "name": "big-text",
       "title": "Big Text",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Enhanced flexbox container with theme-aware borders",
       "files": [
         {
@@ -113,11 +164,18 @@
       ],
       "name": "box",
       "title": "Box",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["navigation"],
-      "dependencies": ["ink"],
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Breadcrumb navigation trail",
       "files": [
         {
@@ -126,13 +184,19 @@
         }
       ],
       "name": "breadcrumb",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Breadcrumb",
       "type": "registry:ui"
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Nested structured content with ●/└/□ bullet prefixes",
       "files": [
         {
@@ -142,11 +206,18 @@
       ],
       "name": "bullet-list",
       "title": "Bullet List",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Card with header, body, and footer slots",
       "files": [
         {
@@ -156,11 +227,18 @@
       ],
       "name": "card",
       "title": "Card",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Centers children horizontally and vertically",
       "files": [
         {
@@ -173,8 +251,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Chat message bubble with role label, streaming indicator, and collapsible content",
       "files": [
         {
@@ -183,13 +265,20 @@
         }
       ],
       "name": "chat-message",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-input"
+      ],
       "title": "Chat Message",
       "type": "registry:ui"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Scrollable container for stacking ChatMessage components in a conversation thread",
       "files": [
         {
@@ -198,13 +287,19 @@
         }
       ],
       "name": "chat-thread",
-      "registryDependencies": ["chat-message"],
+      "registryDependencies": [
+        "chat-message"
+      ],
       "title": "Chat Thread",
       "type": "registry:ui"
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Checkbox with indeterminate state",
       "files": [
         {
@@ -213,13 +308,20 @@
         }
       ],
       "name": "checkbox",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Checkbox",
       "type": "registry:ui"
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Checkbox group with min/max selection",
       "files": [
         {
@@ -228,13 +330,20 @@
         }
       ],
       "name": "checkbox-group",
-      "registryDependencies": ["checkbox", "theme-provider"],
+      "registryDependencies": [
+        "checkbox",
+        "theme-provider"
+      ],
       "title": "Checkbox Group",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Copy-to-clipboard button with success feedback",
       "files": [
         {
@@ -243,13 +352,20 @@
         }
       ],
       "name": "clipboard",
-      "registryDependencies": ["theme-provider", "use-clipboard"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-clipboard"
+      ],
       "title": "Clipboard",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Real-time clock display with 12h/24h and date",
       "files": [
         {
@@ -258,13 +374,19 @@
         }
       ],
       "name": "clock",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Clock",
       "type": "registry:ui"
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Syntax-highlighted code block (50+ languages)",
       "files": [
         {
@@ -274,11 +396,18 @@
       ],
       "name": "code",
       "title": "Code",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Color picker with palette, hex, and RGB input",
       "files": [
         {
@@ -287,13 +416,20 @@
         }
       ],
       "name": "color-picker",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Color Picker",
       "type": "registry:ui"
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Multi-column layout with configurable widths",
       "files": [
         {
@@ -306,8 +442,13 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["navigation"],
-      "dependencies": ["ink", "mnemonist"],
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "ink",
+        "mnemonist"
+      ],
       "description": "VS Code–style command palette with fuzzy search",
       "files": [
         {
@@ -316,13 +457,19 @@
         }
       ],
       "name": "command-palette",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Command Palette",
       "type": "registry:ui"
     },
     {
-      "categories": ["forms"],
-      "dependencies": ["ink"],
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Yes/No confirmation prompt",
       "files": [
         {
@@ -331,13 +478,20 @@
         }
       ],
       "name": "confirm",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-input"
+      ],
       "title": "Confirm",
       "type": "registry:ui"
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Advanced data grid with sorting, filtering, pagination, and cell editing",
       "files": [
         {
@@ -346,13 +500,19 @@
         }
       ],
       "name": "data-grid",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Data Grid",
       "type": "registry:ui"
     },
     {
-      "categories": ["forms"],
-      "dependencies": ["ink"],
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Calendar date picker with keyboard navigation",
       "files": [
         {
@@ -361,13 +521,20 @@
         }
       ],
       "name": "date-picker",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Date Picker",
       "type": "registry:ui"
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Term–description definition list",
       "files": [
         {
@@ -377,11 +544,18 @@
       ],
       "name": "definition",
       "title": "Definition",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["overlays"],
-      "dependencies": ["ink"],
+      "categories": [
+        "overlays"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Confirmation dialog with OK/Cancel actions",
       "files": [
         {
@@ -390,13 +564,19 @@
         }
       ],
       "name": "dialog",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Dialog",
       "type": "registry:ui"
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Unified, split, and inline diff viewer with LCS-based diff algorithm and line numbers",
       "files": [
         {
@@ -406,11 +586,18 @@
       ],
       "name": "diff-view",
       "title": "Diff View",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Box-drawing character numerals",
       "files": [
         {
@@ -420,11 +607,19 @@
       ],
       "name": "digits",
       "title": "Digits",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink", "glob"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink",
+        "glob"
+      ],
       "description": "Filesystem browser with expand/collapse",
       "files": [
         {
@@ -433,13 +628,19 @@
         }
       ],
       "name": "directory-tree",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Directory Tree",
       "type": "registry:ui"
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Horizontal or vertical divider / rule",
       "files": [
         {
@@ -449,11 +650,18 @@
       ],
       "name": "divider",
       "title": "Divider",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["overlays"],
-      "dependencies": ["ink"],
+      "categories": [
+        "overlays"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Slide-in panel from any edge",
       "files": [
         {
@@ -462,13 +670,19 @@
         }
       ],
       "name": "drawer",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Drawer",
       "type": "registry:ui"
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Email input with validation and domain suggestions",
       "files": [
         {
@@ -477,13 +691,20 @@
         }
       ],
       "name": "email-input",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Email Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Embedded PTY terminal panel (requires node-pty peer)",
       "files": [
         {
@@ -496,8 +717,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "React error boundary with graceful terminal display",
       "files": [
         {
@@ -510,8 +735,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Interactive file-change review list with diff expansion, per-file accept/reject actions, and accept-all shortcut",
       "files": [
         {
@@ -520,13 +749,21 @@
         }
       ],
       "name": "file-change",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-input"
+      ],
       "title": "File Change",
       "type": "registry:ui"
     },
     {
-      "categories": ["forms"],
-      "dependencies": ["ink", "glob"],
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "ink",
+        "glob"
+      ],
       "description": "Interactive file browser and picker",
       "files": [
         {
@@ -535,13 +772,20 @@
         }
       ],
       "name": "file-picker",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "File Picker",
       "type": "registry:ui"
     },
     {
-      "categories": ["forms"],
-      "dependencies": ["ink"],
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Form container with validation, Ctrl+S submit, and dirty tracking",
       "files": [
         {
@@ -550,13 +794,19 @@
         }
       ],
       "name": "form",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Form",
       "type": "registry:ui"
     },
     {
-      "categories": ["forms"],
-      "dependencies": ["ink"],
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Form field wrapper with label, hint, and error",
       "files": [
         {
@@ -565,13 +815,20 @@
         }
       ],
       "name": "form-field",
-      "registryDependencies": ["form"],
+      "registryDependencies": [
+        "form",
+        "theme-provider"
+      ],
       "title": "Form Field",
       "type": "registry:ui"
     },
     {
-      "categories": ["charts"],
-      "dependencies": ["ink"],
+      "categories": [
+        "charts"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Arc/speedometer gauge meter",
       "files": [
         {
@@ -581,11 +838,18 @@
       ],
       "name": "gauge",
       "title": "Gauge",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Git status display (branch, staged, modified, ahead/behind)",
       "files": [
         {
@@ -595,11 +859,18 @@
       ],
       "name": "git-status",
       "title": "Git Status",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Color gradient text",
       "files": [
         {
@@ -612,8 +883,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Rows × columns grid layout",
       "files": [
         {
@@ -626,8 +901,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "h1–h4 styled headings with optional figlet ASCII art",
       "files": [
         {
@@ -637,11 +916,18 @@
       ],
       "name": "heading",
       "title": "Heading",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["charts"],
-      "dependencies": ["ink"],
+      "categories": [
+        "charts"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Grid heatmap with color intensity scale",
       "files": [
         {
@@ -651,11 +937,18 @@
       ],
       "name": "heat-map",
       "title": "Heat Map",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Auto-generated help panel from a keymap",
       "files": [
         {
@@ -665,11 +958,18 @@
       ],
       "name": "help",
       "title": "Help",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Figlet banner + tagline + aligned Options/Commands help sections",
       "files": [
         {
@@ -678,13 +978,20 @@
         }
       ],
       "name": "help-screen",
-      "registryDependencies": ["big-text"],
+      "registryDependencies": [
+        "big-text",
+        "theme-provider"
+      ],
       "title": "Help Screen",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Image renderer with iTerm2/Kitty protocol and ASCII fallback",
       "files": [
         {
@@ -694,11 +1001,18 @@
       ],
       "name": "image",
       "title": "Image",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Bordered info panel with header, key-value rows, and tree-prefix rows",
       "files": [
         {
@@ -708,11 +1022,18 @@
       ],
       "name": "info-box",
       "title": "Info Box",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Pretty-printed JSON with collapsible nodes",
       "files": [
         {
@@ -721,13 +1042,19 @@
         }
       ],
       "name": "json",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "JSON",
       "type": "registry:ui"
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Aligned key–value pairs",
       "files": [
         {
@@ -737,11 +1064,18 @@
       ],
       "name": "key-value",
       "title": "Key Value",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Formatted keyboard shortcut reference table",
       "files": [
         {
@@ -751,11 +1085,18 @@
       ],
       "name": "keyboard-shortcuts",
       "title": "Keyboard Shortcuts",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["charts"],
-      "dependencies": ["ink"],
+      "categories": [
+        "charts"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "ASCII line chart with axes and multi-series support",
       "files": [
         {
@@ -765,11 +1106,18 @@
       ],
       "name": "line-chart",
       "title": "Line Chart",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "OSC 8 clickable hyperlink",
       "files": [
         {
@@ -779,11 +1127,18 @@
       ],
       "name": "link",
       "title": "Link",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Navigable list with optional filtering",
       "files": [
         {
@@ -792,13 +1147,19 @@
         }
       ],
       "name": "list",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "List",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Scrolling log viewer with severity levels and filtering",
       "files": [
         {
@@ -807,13 +1168,19 @@
         }
       ],
       "name": "log",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Log",
       "type": "registry:ui"
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Full-page onboarding/login screen with announcement banner, big ASCII title, description, and numbered select",
       "files": [
         {
@@ -822,13 +1189,21 @@
         }
       ],
       "name": "login-flow",
-      "registryDependencies": ["big-text", "theme-provider"],
+      "registryDependencies": [
+        "big-text",
+        "theme-provider"
+      ],
       "title": "Login Flow",
       "type": "registry:ui"
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink", "marked"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink",
+        "marked"
+      ],
       "description": "Full markdown renderer for terminal",
       "files": [
         {
@@ -838,11 +1213,18 @@
       ],
       "name": "markdown",
       "title": "Markdown",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Masked input for phone, date, credit card formats",
       "files": [
         {
@@ -851,13 +1233,20 @@
         }
       ],
       "name": "masked-input",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Masked Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["navigation"],
-      "dependencies": ["ink"],
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Dropdown menu with nested submenus",
       "files": [
         {
@@ -866,13 +1255,19 @@
         }
       ],
       "name": "menu",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Menu",
       "type": "registry:ui"
     },
     {
-      "categories": ["overlays"],
-      "dependencies": ["ink"],
+      "categories": [
+        "overlays"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Focus-trapped overlay modal, close with Esc",
       "files": [
         {
@@ -881,13 +1276,19 @@
         }
       ],
       "name": "modal",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Modal",
       "type": "registry:ui"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Keyboard-navigable list for selecting an AI model, with optional provider grouping and context-window display",
       "files": [
         {
@@ -896,13 +1297,20 @@
         }
       ],
       "name": "model-selector",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-input"
+      ],
       "title": "Model Selector",
       "type": "registry:ui"
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Parallel progress display for package managers, build pipelines, and deploy tools",
       "files": [
         {
@@ -912,11 +1320,18 @@
       ],
       "name": "multi-progress",
       "title": "Multi Progress",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Multi-select list with checkboxes and select-all",
       "files": [
         {
@@ -925,13 +1340,19 @@
         }
       ],
       "name": "multi-select",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Multi Select",
       "type": "registry:ui"
     },
     {
-      "categories": ["overlays"],
-      "dependencies": ["ink"],
+      "categories": [
+        "overlays"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Persistent queue-based notification panel with useNotifications hook",
       "files": [
         {
@@ -944,13 +1365,20 @@
         }
       ],
       "name": "notification-center",
-      "registryDependencies": ["theme-provider", "use-notifications"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-notifications"
+      ],
       "title": "Notification Center",
       "type": "registry:block"
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Numeric input with increment/decrement and bounds",
       "files": [
         {
@@ -959,13 +1387,20 @@
         }
       ],
       "name": "number-input",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Number Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["navigation"],
-      "dependencies": ["ink"],
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Page navigation with prev/next and jump",
       "files": [
         {
@@ -974,13 +1409,19 @@
         }
       ],
       "name": "pagination",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Pagination",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Titled bordered panel",
       "files": [
         {
@@ -990,11 +1431,18 @@
       ],
       "name": "panel",
       "title": "Panel",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Password input with masked characters and reveal toggle",
       "files": [
         {
@@ -1003,13 +1451,21 @@
         }
       ],
       "name": "password-input",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Password Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink", "glob"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink",
+        "glob"
+      ],
       "description": "Filesystem path input with tab autocomplete",
       "files": [
         {
@@ -1018,13 +1474,20 @@
         }
       ],
       "name": "path-input",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Path Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["charts"],
-      "dependencies": ["ink"],
+      "categories": [
+        "charts"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Unicode block pie chart with legend",
       "files": [
         {
@@ -1034,11 +1497,18 @@
       ],
       "name": "pie-chart",
       "title": "Pie Chart",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["overlays"],
-      "dependencies": ["ink"],
+      "categories": [
+        "overlays"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Positioned popover with arbitrary content",
       "files": [
         {
@@ -1047,13 +1517,19 @@
         }
       ],
       "name": "popover",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Popover",
       "type": "registry:ui"
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Determinate progress bar with percent and value/total display",
       "files": [
         {
@@ -1063,11 +1539,18 @@
       ],
       "name": "progress-bar",
       "title": "Progress Bar",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Circular progress indicator using Unicode braille",
       "files": [
         {
@@ -1077,11 +1560,18 @@
       ],
       "name": "progress-circle",
       "title": "Progress Circle",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Unicode block QR code generator",
       "files": [
         {
@@ -1091,11 +1581,18 @@
       ],
       "name": "qr-code",
       "title": "QR Code",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Mutually exclusive radio button group",
       "files": [
         {
@@ -1104,13 +1601,19 @@
         }
       ],
       "name": "radio-group",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Radio Group",
       "type": "registry:ui"
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Scrollable container with scrollbar",
       "files": [
         {
@@ -1120,11 +1623,19 @@
       ],
       "name": "scroll-view",
       "title": "Scroll View",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink", "mnemonist"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink",
+        "mnemonist"
+      ],
       "description": "Fuzzy search input with autocomplete",
       "files": [
         {
@@ -1133,13 +1644,20 @@
         }
       ],
       "name": "search-input",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Search Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Single-select dropdown with arrow-key navigation",
       "files": [
         {
@@ -1148,13 +1666,19 @@
         }
       ],
       "name": "select",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Select",
       "type": "registry:ui"
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "@clack-style step flow with ◇/◆/│ visual language, badge, info steps, and multi-select",
       "files": [
         {
@@ -1163,13 +1687,21 @@
         }
       ],
       "name": "setup-flow",
-      "registryDependencies": ["big-text", "use-animation", "theme-provider"],
+      "registryDependencies": [
+        "big-text",
+        "use-animation",
+        "theme-provider"
+      ],
       "title": "Setup Flow",
       "type": "registry:ui"
     },
     {
-      "categories": ["navigation"],
-      "dependencies": ["ink"],
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Collapsible navigation sidebar panel",
       "files": [
         {
@@ -1178,13 +1710,19 @@
         }
       ],
       "name": "sidebar",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Sidebar",
       "type": "registry:ui"
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Shimmer loading placeholder",
       "files": [
         {
@@ -1193,13 +1731,20 @@
         }
       ],
       "name": "skeleton",
-      "registryDependencies": ["use-animation"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-animation"
+      ],
       "title": "Skeleton",
       "type": "registry:ui"
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Flexible space between flex children",
       "files": [
         {
@@ -1212,8 +1757,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["charts"],
-      "dependencies": ["ink"],
+      "categories": [
+        "charts"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Inline Unicode braille sparkline chart",
       "files": [
         {
@@ -1223,11 +1772,18 @@
       ],
       "name": "sparkline",
       "title": "Sparkline",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Animated spinner with 12+ styles",
       "files": [
         {
@@ -1236,13 +1792,19 @@
         }
       ],
       "name": "spinner",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Spinner",
       "type": "registry:ui"
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Styled startup banner with big ASCII art title, subtitle, author credit, and status line",
       "files": [
         {
@@ -1251,13 +1813,20 @@
         }
       ],
       "name": "splash-screen",
-      "registryDependencies": ["big-text"],
+      "registryDependencies": [
+        "big-text",
+        "theme-provider"
+      ],
       "title": "Splash Screen",
       "type": "registry:ui"
     },
     {
-      "categories": ["layout"],
-      "dependencies": ["ink"],
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Vertical/horizontal stack with gap",
       "files": [
         {
@@ -1270,8 +1839,12 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Inline status message with icon and color",
       "files": [
         {
@@ -1281,11 +1854,18 @@
       ],
       "name": "status-message",
       "title": "Status Message",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Count-up stopwatch with laps and reset",
       "files": [
         {
@@ -1294,13 +1874,20 @@
         }
       ],
       "name": "stopwatch",
-      "registryDependencies": ["use-input", "theme-provider"],
+      "registryDependencies": [
+        "use-input",
+        "theme-provider"
+      ],
       "title": "Stopwatch",
       "type": "registry:ui"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Token-by-token streaming text with blinking cursor and optional typing animation",
       "files": [
         {
@@ -1310,11 +1897,18 @@
       ],
       "name": "streaming-text",
       "title": "Streaming Text",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["navigation"],
-      "dependencies": ["ink"],
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Tab bar wired to content panels",
       "files": [
         {
@@ -1323,13 +1917,20 @@
         }
       ],
       "name": "tabbed-content",
-      "registryDependencies": ["tabs", "theme-provider"],
+      "registryDependencies": [
+        "tabs",
+        "theme-provider"
+      ],
       "title": "Tabbed Content",
       "type": "registry:ui"
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Sortable, selectable, paginated data table",
       "files": [
         {
@@ -1338,13 +1939,19 @@
         }
       ],
       "name": "table",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Table",
       "type": "registry:ui"
     },
     {
-      "categories": ["navigation"],
-      "dependencies": ["ink"],
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Tab bar with left/right arrow and tab-key navigation",
       "files": [
         {
@@ -1353,13 +1960,19 @@
         }
       ],
       "name": "tabs",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Tabs",
       "type": "registry:ui"
     },
     {
-      "categories": ["typography"],
-      "dependencies": ["ink"],
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Removable chip/tag",
       "files": [
         {
@@ -1369,11 +1982,18 @@
       ],
       "name": "tag",
       "title": "Tag",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Add and remove tags inline",
       "files": [
         {
@@ -1382,13 +2002,19 @@
         }
       ],
       "name": "tag-input",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Tag Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Multi-line text editor with word wrap",
       "files": [
         {
@@ -1397,13 +2023,20 @@
         }
       ],
       "name": "text-area",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Text Area",
       "type": "registry:ui"
     },
     {
-      "categories": ["input"],
-      "dependencies": ["ink"],
+      "categories": [
+        "input"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Single-line text input with placeholder, validation, mask",
       "files": [
         {
@@ -1412,12 +2045,17 @@
         }
       ],
       "name": "text-input",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Text Input",
       "type": "registry:ui"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "A Catppuccin theme for rich terminal UI previews.",
       "files": [
         {
@@ -1427,12 +2065,16 @@
         }
       ],
       "name": "theme-catppuccin",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Catppuccin",
       "type": "registry:file"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "The default termcn terminal theme.",
       "files": [
         {
@@ -1442,12 +2084,16 @@
         }
       ],
       "name": "theme-default",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Default",
       "type": "registry:file"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "A purple-heavy Dracula theme for Ink components.",
       "files": [
         {
@@ -1457,12 +2103,16 @@
         }
       ],
       "name": "theme-dracula",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Dracula",
       "type": "registry:file"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "High contrast themes for dark and light terminal backgrounds.",
       "files": [
         {
@@ -1472,12 +2122,16 @@
         }
       ],
       "name": "theme-high-contrast",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "High Contrast",
       "type": "registry:file"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "A classic Monokai-inspired theme for terminal apps.",
       "files": [
         {
@@ -1487,12 +2141,16 @@
         }
       ],
       "name": "theme-monokai",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Monokai",
       "type": "registry:file"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "A cool Nord palette tuned for terminal contrast.",
       "files": [
         {
@@ -1502,12 +2160,16 @@
         }
       ],
       "name": "theme-nord",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Nord",
       "type": "registry:file"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "A One Dark theme for terminal components.",
       "files": [
         {
@@ -1517,12 +2179,16 @@
         }
       ],
       "name": "theme-one-dark",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "One Dark",
       "type": "registry:file"
     },
     {
-      "categories": ["core"],
+      "categories": [
+        "core"
+      ],
       "description": "Terminal theme provider, design tokens, and theme helpers.",
       "files": [
         {
@@ -1535,7 +2201,9 @@
       "type": "registry:ui"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "A Solarized theme for terminal components.",
       "files": [
         {
@@ -1545,12 +2213,16 @@
         }
       ],
       "name": "theme-solarized",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Solarized",
       "type": "registry:file"
     },
     {
-      "categories": ["themes"],
+      "categories": [
+        "themes"
+      ],
       "description": "Tokyo Night colors for terminal interfaces.",
       "files": [
         {
@@ -1560,13 +2232,19 @@
         }
       ],
       "name": "theme-tokyo-night",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Tokyo Night",
       "type": "registry:file"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Collapsible block for displaying extended thinking / reasoning content from an AI model",
       "files": [
         {
@@ -1575,13 +2253,20 @@
         }
       ],
       "name": "thinking-block",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-input"
+      ],
       "title": "Thinking Block",
       "type": "registry:ui"
     },
     {
-      "categories": ["forms"],
-      "dependencies": ["ink"],
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Time picker with hour/minute/second spinners",
       "files": [
         {
@@ -1590,13 +2275,20 @@
         }
       ],
       "name": "time-picker",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Time Picker",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Countdown timer with pause/resume and auto-start",
       "files": [
         {
@@ -1605,13 +2297,20 @@
         }
       ],
       "name": "timer",
-      "registryDependencies": ["use-input", "theme-provider"],
+      "registryDependencies": [
+        "use-input",
+        "theme-provider"
+      ],
       "title": "Timer",
       "type": "registry:ui"
     },
     {
-      "categories": ["feedback"],
-      "dependencies": ["ink"],
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Auto-dismissing toast notification",
       "files": [
         {
@@ -1620,13 +2319,20 @@
         }
       ],
       "name": "toast",
-      "registryDependencies": ["use-interval"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-interval"
+      ],
       "title": "Toast",
       "type": "registry:ui"
     },
     {
-      "categories": ["utility"],
-      "dependencies": ["ink"],
+      "categories": [
+        "utility"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Toggle/switch component with on/off labels",
       "files": [
         {
@@ -1635,13 +2341,20 @@
         }
       ],
       "name": "toggle",
-      "registryDependencies": ["use-focus", "theme-provider"],
+      "registryDependencies": [
+        "use-focus",
+        "theme-provider"
+      ],
       "title": "Toggle",
       "type": "registry:ui"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Compact token counter showing prompt and completion usage with optional cost estimate; also exports ContextMeter for visualising context window fill",
       "files": [
         {
@@ -1651,11 +2364,18 @@
       ],
       "name": "token-usage",
       "title": "Token Usage",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Interactive approval prompt for AI tool calls with risk-level badge, args display, and auto-deny timeout",
       "files": [
         {
@@ -1664,13 +2384,20 @@
         }
       ],
       "name": "tool-approval",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-input"
+      ],
       "title": "Tool Approval",
       "type": "registry:ui"
     },
     {
-      "categories": ["ai"],
-      "dependencies": ["ink"],
+      "categories": [
+        "ai"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Displays an AI tool invocation with status indicator, args, result, and elapsed time",
       "files": [
         {
@@ -1679,13 +2406,21 @@
         }
       ],
       "name": "tool-call",
-      "registryDependencies": ["use-input", "use-animation"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-animation",
+        "use-input"
+      ],
       "title": "Tool Call",
       "type": "registry:ui"
     },
     {
-      "categories": ["overlays"],
-      "dependencies": ["ink"],
+      "categories": [
+        "overlays"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Contextual tooltip on focus or hover",
       "files": [
         {
@@ -1695,11 +2430,18 @@
       ],
       "name": "tooltip",
       "title": "Tooltip",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Expandable/collapsible tree view",
       "files": [
         {
@@ -1708,13 +2450,19 @@
         }
       ],
       "name": "tree",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Tree",
       "type": "registry:ui"
     },
     {
-      "categories": ["selection"],
-      "dependencies": ["ink"],
+      "categories": [
+        "selection"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Hierarchical tree selection",
       "files": [
         {
@@ -1723,13 +2471,19 @@
         }
       ],
       "name": "tree-select",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Tree Select",
       "type": "registry:ui"
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Real-time dashboard with diamond header, progress metrics, burn rate, predictions, and status bar",
       "files": [
         {
@@ -1738,12 +2492,16 @@
         }
       ],
       "name": "usage-monitor",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Usage Monitor",
       "type": "registry:ui"
     },
     {
-      "categories": ["core"],
+      "categories": [
+        "core"
+      ],
       "description": "Frame-based animation helper for Ink components.",
       "files": [
         {
@@ -1756,7 +2514,9 @@
       "type": "registry:hook"
     },
     {
-      "categories": ["core"],
+      "categories": [
+        "core"
+      ],
       "description": "Clipboard hook with browser and terminal fallbacks.",
       "files": [
         {
@@ -1769,8 +2529,12 @@
       "type": "registry:hook"
     },
     {
-      "categories": ["core"],
-      "dependencies": ["ink"],
+      "categories": [
+        "core"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Focus helper wrapping Ink's useFocus.",
       "files": [
         {
@@ -1783,8 +2547,12 @@
       "type": "registry:hook"
     },
     {
-      "categories": ["core"],
-      "dependencies": ["ink"],
+      "categories": [
+        "core"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Keyboard input hook wrapping Ink's useInput.",
       "files": [
         {
@@ -1797,7 +2565,9 @@
       "type": "registry:hook"
     },
     {
-      "categories": ["core"],
+      "categories": [
+        "core"
+      ],
       "description": "React-safe interval helper.",
       "files": [
         {
@@ -1810,7 +2580,9 @@
       "type": "registry:hook"
     },
     {
-      "categories": ["core"],
+      "categories": [
+        "core"
+      ],
       "description": "Notifications state and context helpers.",
       "files": [
         {
@@ -1823,8 +2595,13 @@
       "type": "registry:hook"
     },
     {
-      "categories": ["data"],
-      "dependencies": ["ink", "mnemonist"],
+      "categories": [
+        "data"
+      ],
+      "dependencies": [
+        "ink",
+        "mnemonist"
+      ],
       "description": "Virtualized list for 10k+ items",
       "files": [
         {
@@ -1833,13 +2610,19 @@
         }
       ],
       "name": "virtual-list",
-      "registryDependencies": ["theme-provider"],
+      "registryDependencies": [
+        "theme-provider"
+      ],
       "title": "Virtual List",
       "type": "registry:ui"
     },
     {
-      "categories": ["templates"],
-      "dependencies": ["ink"],
+      "categories": [
+        "templates"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Two-panel welcome dashboard with titled border, logo, greeting, and sections",
       "files": [
         {
@@ -1849,11 +2632,18 @@
       ],
       "name": "welcome-screen",
       "title": "Welcome Screen",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": [
+        "theme-provider"
+      ]
     },
     {
-      "categories": ["forms"],
-      "dependencies": ["ink"],
+      "categories": [
+        "forms"
+      ],
+      "dependencies": [
+        "ink"
+      ],
       "description": "Multi-step wizard with per-step validation",
       "files": [
         {
@@ -1862,7 +2652,10 @@
         }
       ],
       "name": "wizard",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": [
+        "theme-provider",
+        "use-input"
+      ],
       "title": "Wizard",
       "type": "registry:ui"
     }
