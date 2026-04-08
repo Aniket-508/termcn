@@ -1,4 +1,5 @@
-import { Spinner } from "@/registry/bases/opentui/components/spinner";
+/* @jsxImportSource @opentui/react */
+import { Spinner } from "@/registry/bases/opentui/ui/spinner";
 
 export default function OpenTuiSpinnerDemo() {
   return (
