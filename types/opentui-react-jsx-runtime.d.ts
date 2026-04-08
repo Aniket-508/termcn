@@ -94,3 +94,39 @@ declare module "@opentui/react/jsx-runtime" {
     }
   }
 }
+
+declare module "@opentui/react/jsx-dev-runtime" {
+  export function jsxDEV(
+    type: unknown,
+    props: unknown,
+    key: string | number | null | undefined,
+    isStaticChildren: boolean,
+    source: unknown,
+    self: unknown
+  ): unknown;
+
+  export namespace JSX {
+    interface IntrinsicElements {
+      a: { children?: ReactNode; href?: string };
+      "ascii-font": Record<string, unknown>;
+      b: { children?: ReactNode };
+      box: OpenTUIBoxProps;
+      br: Record<string, never>;
+      code: Record<string, unknown>;
+      diff: Record<string, unknown>;
+      em: { children?: ReactNode };
+      i: { children?: ReactNode };
+      input: Record<string, unknown>;
+      "line-numbers": Record<string, unknown>;
+      markdown: Record<string, unknown>;
+      scrollbox: Record<string, unknown>;
+      select: Record<string, unknown>;
+      span: { children?: ReactNode };
+      strong: { children?: ReactNode };
+      "tab-select": Record<string, unknown>;
+      textarea: Record<string, unknown>;
+      text: OpenTUITextProps;
+      u: { children?: ReactNode };
+    }
+  }
+}

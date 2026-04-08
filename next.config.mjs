@@ -1,5 +1,10 @@
 import { createMDX } from "fumadocs-mdx/next";
 
+/** Turbopack requires project-relative alias targets (not absolute paths). */
+const opentuiJsxRuntimeTurbo = "./lib/opentui-bridge/react-jsx-runtime.ts";
+const opentuiJsxDevRuntimeTurbo =
+  "./lib/opentui-bridge/react-jsx-dev-runtime.ts";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   devIndicators: false,
@@ -28,7 +33,11 @@ const nextConfig = {
     ];
   },
   turbopack: {
-    resolveAlias: { ink: "ink-web" },
+    resolveAlias: {
+      "@opentui/react/jsx-dev-runtime": opentuiJsxDevRuntimeTurbo,
+      "@opentui/react/jsx-runtime": opentuiJsxRuntimeTurbo,
+      ink: "ink-web",
+    },
   },
 };
 

@@ -23,7 +23,12 @@
     "paths": {
       "@/*": ["./*"],
       "@opentui/react": ["./types/opentui-react.d.ts"],
-      "@opentui/react/jsx-runtime": ["./types/opentui-react-jsx-runtime.d.ts"],
+      "@opentui/react/jsx-runtime": [
+        "./lib/opentui-bridge/react-jsx-runtime.ts"
+      ],
+      "@opentui/react/jsx-dev-runtime": [
+        "./lib/opentui-bridge/react-jsx-dev-runtime.ts"
+      ],
       "react": ["./node_modules/@types/react"]
     }
   },
