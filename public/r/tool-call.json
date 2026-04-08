@@ -7,8 +7,9 @@
     "ink"
   ],
   "registryDependencies": [
-    "use-input",
-    "use-animation"
+    "theme-provider",
+    "use-animation",
+    "use-input"
   ],
   "files": [
     {

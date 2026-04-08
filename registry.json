@@ -14,7 +14,8 @@
       ],
       "name": "alert",
       "title": "Alert",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["templates"],
@@ -57,7 +58,8 @@
       ],
       "name": "badge",
       "title": "Badge",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["feedback"],
@@ -71,7 +73,8 @@
       ],
       "name": "banner",
       "title": "Banner",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["charts"],
@@ -85,7 +88,8 @@
       ],
       "name": "bar-chart",
       "title": "Bar Chart",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["typography"],
@@ -99,7 +103,8 @@
       ],
       "name": "big-text",
       "title": "Big Text",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["layout"],
@@ -113,7 +118,8 @@
       ],
       "name": "box",
       "title": "Box",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["navigation"],
@@ -142,7 +148,8 @@
       ],
       "name": "bullet-list",
       "title": "Bullet List",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["data"],
@@ -156,7 +163,8 @@
       ],
       "name": "card",
       "title": "Card",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["layout"],
@@ -183,7 +191,7 @@
         }
       ],
       "name": "chat-message",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": ["theme-provider", "use-input"],
       "title": "Chat Message",
       "type": "registry:ui"
     },
@@ -274,7 +282,8 @@
       ],
       "name": "code",
       "title": "Code",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["selection"],
@@ -331,7 +340,7 @@
         }
       ],
       "name": "confirm",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": ["theme-provider", "use-input"],
       "title": "Confirm",
       "type": "registry:ui"
     },
@@ -377,7 +386,8 @@
       ],
       "name": "definition",
       "title": "Definition",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["overlays"],
@@ -406,7 +416,8 @@
       ],
       "name": "diff-view",
       "title": "Diff View",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["typography"],
@@ -420,7 +431,8 @@
       ],
       "name": "digits",
       "title": "Digits",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["data"],
@@ -449,7 +461,8 @@
       ],
       "name": "divider",
       "title": "Divider",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["overlays"],
@@ -520,7 +533,7 @@
         }
       ],
       "name": "file-change",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": ["theme-provider", "use-input"],
       "title": "File Change",
       "type": "registry:ui"
     },
@@ -565,7 +578,7 @@
         }
       ],
       "name": "form-field",
-      "registryDependencies": ["form"],
+      "registryDependencies": ["form", "theme-provider"],
       "title": "Form Field",
       "type": "registry:ui"
     },
@@ -581,7 +594,8 @@
       ],
       "name": "gauge",
       "title": "Gauge",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["data"],
@@ -595,7 +609,8 @@
       ],
       "name": "git-status",
       "title": "Git Status",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["typography"],
@@ -637,7 +652,8 @@
       ],
       "name": "heading",
       "title": "Heading",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["charts"],
@@ -651,7 +667,8 @@
       ],
       "name": "heat-map",
       "title": "Heat Map",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["utility"],
@@ -665,7 +682,8 @@
       ],
       "name": "help",
       "title": "Help",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["templates"],
@@ -678,7 +696,7 @@
         }
       ],
       "name": "help-screen",
-      "registryDependencies": ["big-text"],
+      "registryDependencies": ["big-text", "theme-provider"],
       "title": "Help Screen",
       "type": "registry:ui"
     },
@@ -694,7 +712,8 @@
       ],
       "name": "image",
       "title": "Image",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["templates"],
@@ -708,7 +727,8 @@
       ],
       "name": "info-box",
       "title": "Info Box",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["data"],
@@ -737,7 +757,8 @@
       ],
       "name": "key-value",
       "title": "Key Value",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["utility"],
@@ -751,7 +772,8 @@
       ],
       "name": "keyboard-shortcuts",
       "title": "Keyboard Shortcuts",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["charts"],
@@ -765,7 +787,8 @@
       ],
       "name": "line-chart",
       "title": "Line Chart",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["typography"],
@@ -779,7 +802,8 @@
       ],
       "name": "link",
       "title": "Link",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["data"],
@@ -838,7 +862,8 @@
       ],
       "name": "markdown",
       "title": "Markdown",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["input"],
@@ -896,7 +921,7 @@
         }
       ],
       "name": "model-selector",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": ["theme-provider", "use-input"],
       "title": "Model Selector",
       "type": "registry:ui"
     },
@@ -912,7 +937,8 @@
       ],
       "name": "multi-progress",
       "title": "Multi Progress",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["selection"],
@@ -990,7 +1016,8 @@
       ],
       "name": "panel",
       "title": "Panel",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["input"],
@@ -1034,7 +1061,8 @@
       ],
       "name": "pie-chart",
       "title": "Pie Chart",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["overlays"],
@@ -1063,7 +1091,8 @@
       ],
       "name": "progress-bar",
       "title": "Progress Bar",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["feedback"],
@@ -1077,7 +1106,8 @@
       ],
       "name": "progress-circle",
       "title": "Progress Circle",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["utility"],
@@ -1091,7 +1121,8 @@
       ],
       "name": "qr-code",
       "title": "QR Code",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["selection"],
@@ -1120,7 +1151,8 @@
       ],
       "name": "scroll-view",
       "title": "Scroll View",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["input"],
@@ -1193,7 +1225,7 @@
         }
       ],
       "name": "skeleton",
-      "registryDependencies": ["use-animation"],
+      "registryDependencies": ["theme-provider", "use-animation"],
       "title": "Skeleton",
       "type": "registry:ui"
     },
@@ -1223,7 +1255,8 @@
       ],
       "name": "sparkline",
       "title": "Sparkline",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["feedback"],
@@ -1251,7 +1284,7 @@
         }
       ],
       "name": "splash-screen",
-      "registryDependencies": ["big-text"],
+      "registryDependencies": ["big-text", "theme-provider"],
       "title": "Splash Screen",
       "type": "registry:ui"
     },
@@ -1281,7 +1314,8 @@
       ],
       "name": "status-message",
       "title": "Status Message",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["utility"],
@@ -1310,7 +1344,8 @@
       ],
       "name": "streaming-text",
       "title": "Streaming Text",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["navigation"],
@@ -1369,7 +1404,8 @@
       ],
       "name": "tag",
       "title": "Tag",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["selection"],
@@ -1575,7 +1611,7 @@
         }
       ],
       "name": "thinking-block",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": ["theme-provider", "use-input"],
       "title": "Thinking Block",
       "type": "registry:ui"
     },
@@ -1620,7 +1656,7 @@
         }
       ],
       "name": "toast",
-      "registryDependencies": ["use-interval"],
+      "registryDependencies": ["theme-provider", "use-interval"],
       "title": "Toast",
       "type": "registry:ui"
     },
@@ -1651,7 +1687,8 @@
       ],
       "name": "token-usage",
       "title": "Token Usage",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["ai"],
@@ -1664,7 +1701,7 @@
         }
       ],
       "name": "tool-approval",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": ["theme-provider", "use-input"],
       "title": "Tool Approval",
       "type": "registry:ui"
     },
@@ -1679,7 +1716,7 @@
         }
       ],
       "name": "tool-call",
-      "registryDependencies": ["use-input", "use-animation"],
+      "registryDependencies": ["theme-provider", "use-animation", "use-input"],
       "title": "Tool Call",
       "type": "registry:ui"
     },
@@ -1695,7 +1732,8 @@
       ],
       "name": "tooltip",
       "title": "Tooltip",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["data"],
@@ -1849,7 +1887,8 @@
       ],
       "name": "welcome-screen",
       "title": "Welcome Screen",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "registryDependencies": ["theme-provider"]
     },
     {
       "categories": ["forms"],
@@ -1862,7 +1901,7 @@
         }
       ],
       "name": "wizard",
-      "registryDependencies": ["use-input"],
+      "registryDependencies": ["theme-provider", "use-input"],
       "title": "Wizard",
       "type": "registry:ui"
     }

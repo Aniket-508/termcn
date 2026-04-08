@@ -7,6 +7,9 @@
     "ink",
     "marked"
   ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/markdown.tsx",

@@ -6,6 +6,9 @@
   "dependencies": [
     "ink"
   ],
+  "registryDependencies": [
+    "theme-provider"
+  ],
   "files": [
     {
       "path": "registry/ui/gauge.tsx",
