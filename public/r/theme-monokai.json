@@ -4,7 +4,7 @@
   "title": "Monokai",
   "description": "A classic Monokai-inspired theme for terminal apps.",
   "registryDependencies": [
-    "theme-provider"
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

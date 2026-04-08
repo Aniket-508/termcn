@@ -4,7 +4,7 @@
   "title": "One Dark",
   "description": "A One Dark theme for terminal components.",
   "registryDependencies": [
-    "theme-provider"
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

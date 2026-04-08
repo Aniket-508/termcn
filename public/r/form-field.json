@@ -7,8 +7,8 @@
     "ink"
   ],
   "registryDependencies": [
-    "form",
-    "theme-provider"
+    "https://termcn.dev/r/form.json",
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

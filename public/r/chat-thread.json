@@ -7,7 +7,7 @@
     "ink"
   ],
   "registryDependencies": [
-    "chat-message"
+    "https://termcn.dev/r/chat-message.json"
   ],
   "files": [
     {

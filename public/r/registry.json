@@ -20,7 +20,7 @@
       "title": "Alert",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -39,9 +39,9 @@
       ],
       "name": "app-shell",
       "registryDependencies": [
-        "info-box",
-        "bullet-list",
-        "theme-provider"
+        "https://termcn.dev/r/info-box.json",
+        "https://termcn.dev/r/bullet-list.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "App Shell",
       "type": "registry:ui"
@@ -82,7 +82,7 @@
       "title": "Badge",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -103,7 +103,7 @@
       "title": "Banner",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -124,7 +124,7 @@
       "title": "Bar Chart",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -145,7 +145,7 @@
       "title": "Big Text",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -166,7 +166,7 @@
       "title": "Box",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -185,7 +185,7 @@
       ],
       "name": "breadcrumb",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Breadcrumb",
       "type": "registry:ui"
@@ -208,7 +208,7 @@
       "title": "Bullet List",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -229,7 +229,7 @@
       "title": "Card",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -266,8 +266,8 @@
       ],
       "name": "chat-message",
       "registryDependencies": [
-        "theme-provider",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "Chat Message",
       "type": "registry:ui"
@@ -288,7 +288,7 @@
       ],
       "name": "chat-thread",
       "registryDependencies": [
-        "chat-message"
+        "https://termcn.dev/r/chat-message.json"
       ],
       "title": "Chat Thread",
       "type": "registry:ui"
@@ -309,8 +309,8 @@
       ],
       "name": "checkbox",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Checkbox",
       "type": "registry:ui"
@@ -331,8 +331,8 @@
       ],
       "name": "checkbox-group",
       "registryDependencies": [
-        "checkbox",
-        "theme-provider"
+        "https://termcn.dev/r/checkbox.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Checkbox Group",
       "type": "registry:ui"
@@ -353,8 +353,8 @@
       ],
       "name": "clipboard",
       "registryDependencies": [
-        "theme-provider",
-        "use-clipboard"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-clipboard.json"
       ],
       "title": "Clipboard",
       "type": "registry:ui"
@@ -375,7 +375,7 @@
       ],
       "name": "clock",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Clock",
       "type": "registry:ui"
@@ -398,7 +398,7 @@
       "title": "Code",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -417,8 +417,8 @@
       ],
       "name": "color-picker",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Color Picker",
       "type": "registry:ui"
@@ -458,7 +458,7 @@
       ],
       "name": "command-palette",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Command Palette",
       "type": "registry:ui"
@@ -479,8 +479,8 @@
       ],
       "name": "confirm",
       "registryDependencies": [
-        "theme-provider",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "Confirm",
       "type": "registry:ui"
@@ -501,7 +501,7 @@
       ],
       "name": "data-grid",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Data Grid",
       "type": "registry:ui"
@@ -522,8 +522,8 @@
       ],
       "name": "date-picker",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Date Picker",
       "type": "registry:ui"
@@ -546,7 +546,7 @@
       "title": "Definition",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -565,7 +565,7 @@
       ],
       "name": "dialog",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Dialog",
       "type": "registry:ui"
@@ -588,7 +588,7 @@
       "title": "Diff View",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -609,7 +609,7 @@
       "title": "Digits",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -629,7 +629,7 @@
       ],
       "name": "directory-tree",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Directory Tree",
       "type": "registry:ui"
@@ -652,7 +652,7 @@
       "title": "Divider",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -671,7 +671,7 @@
       ],
       "name": "drawer",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Drawer",
       "type": "registry:ui"
@@ -692,8 +692,8 @@
       ],
       "name": "email-input",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Email Input",
       "type": "registry:ui"
@@ -750,8 +750,8 @@
       ],
       "name": "file-change",
       "registryDependencies": [
-        "theme-provider",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "File Change",
       "type": "registry:ui"
@@ -773,8 +773,8 @@
       ],
       "name": "file-picker",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "File Picker",
       "type": "registry:ui"
@@ -795,7 +795,7 @@
       ],
       "name": "form",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Form",
       "type": "registry:ui"
@@ -816,8 +816,8 @@
       ],
       "name": "form-field",
       "registryDependencies": [
-        "form",
-        "theme-provider"
+        "https://termcn.dev/r/form.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Form Field",
       "type": "registry:ui"
@@ -840,7 +840,7 @@
       "title": "Gauge",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -861,7 +861,7 @@
       "title": "Git Status",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -918,7 +918,7 @@
       "title": "Heading",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -939,7 +939,7 @@
       "title": "Heat Map",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -960,7 +960,7 @@
       "title": "Help",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -979,8 +979,8 @@
       ],
       "name": "help-screen",
       "registryDependencies": [
-        "big-text",
-        "theme-provider"
+        "https://termcn.dev/r/big-text.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Help Screen",
       "type": "registry:ui"
@@ -1003,7 +1003,7 @@
       "title": "Image",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1024,7 +1024,7 @@
       "title": "Info Box",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1043,7 +1043,7 @@
       ],
       "name": "json",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "JSON",
       "type": "registry:ui"
@@ -1066,7 +1066,7 @@
       "title": "Key Value",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1087,7 +1087,7 @@
       "title": "Keyboard Shortcuts",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1108,7 +1108,7 @@
       "title": "Line Chart",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1129,7 +1129,7 @@
       "title": "Link",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1148,7 +1148,7 @@
       ],
       "name": "list",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "List",
       "type": "registry:ui"
@@ -1169,7 +1169,7 @@
       ],
       "name": "log",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Log",
       "type": "registry:ui"
@@ -1190,8 +1190,8 @@
       ],
       "name": "login-flow",
       "registryDependencies": [
-        "big-text",
-        "theme-provider"
+        "https://termcn.dev/r/big-text.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Login Flow",
       "type": "registry:ui"
@@ -1215,7 +1215,7 @@
       "title": "Markdown",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1234,8 +1234,8 @@
       ],
       "name": "masked-input",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Masked Input",
       "type": "registry:ui"
@@ -1256,7 +1256,7 @@
       ],
       "name": "menu",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Menu",
       "type": "registry:ui"
@@ -1277,7 +1277,7 @@
       ],
       "name": "modal",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Modal",
       "type": "registry:ui"
@@ -1298,8 +1298,8 @@
       ],
       "name": "model-selector",
       "registryDependencies": [
-        "theme-provider",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "Model Selector",
       "type": "registry:ui"
@@ -1322,7 +1322,7 @@
       "title": "Multi Progress",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1341,7 +1341,7 @@
       ],
       "name": "multi-select",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Multi Select",
       "type": "registry:ui"
@@ -1366,8 +1366,8 @@
       ],
       "name": "notification-center",
       "registryDependencies": [
-        "theme-provider",
-        "use-notifications"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-notifications.json"
       ],
       "title": "Notification Center",
       "type": "registry:block"
@@ -1388,8 +1388,8 @@
       ],
       "name": "number-input",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Number Input",
       "type": "registry:ui"
@@ -1410,7 +1410,7 @@
       ],
       "name": "pagination",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Pagination",
       "type": "registry:ui"
@@ -1433,7 +1433,7 @@
       "title": "Panel",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1452,8 +1452,8 @@
       ],
       "name": "password-input",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Password Input",
       "type": "registry:ui"
@@ -1475,8 +1475,8 @@
       ],
       "name": "path-input",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Path Input",
       "type": "registry:ui"
@@ -1499,7 +1499,7 @@
       "title": "Pie Chart",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1518,7 +1518,7 @@
       ],
       "name": "popover",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Popover",
       "type": "registry:ui"
@@ -1541,7 +1541,7 @@
       "title": "Progress Bar",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1562,7 +1562,7 @@
       "title": "Progress Circle",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1583,7 +1583,7 @@
       "title": "QR Code",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1602,7 +1602,7 @@
       ],
       "name": "radio-group",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Radio Group",
       "type": "registry:ui"
@@ -1625,7 +1625,7 @@
       "title": "Scroll View",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1645,8 +1645,8 @@
       ],
       "name": "search-input",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Search Input",
       "type": "registry:ui"
@@ -1667,7 +1667,7 @@
       ],
       "name": "select",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Select",
       "type": "registry:ui"
@@ -1688,9 +1688,9 @@
       ],
       "name": "setup-flow",
       "registryDependencies": [
-        "big-text",
-        "use-animation",
-        "theme-provider"
+        "https://termcn.dev/r/big-text.json",
+        "https://termcn.dev/r/use-animation.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Setup Flow",
       "type": "registry:ui"
@@ -1711,7 +1711,7 @@
       ],
       "name": "sidebar",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Sidebar",
       "type": "registry:ui"
@@ -1732,8 +1732,8 @@
       ],
       "name": "skeleton",
       "registryDependencies": [
-        "theme-provider",
-        "use-animation"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-animation.json"
       ],
       "title": "Skeleton",
       "type": "registry:ui"
@@ -1774,7 +1774,7 @@
       "title": "Sparkline",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1793,7 +1793,7 @@
       ],
       "name": "spinner",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Spinner",
       "type": "registry:ui"
@@ -1814,8 +1814,8 @@
       ],
       "name": "splash-screen",
       "registryDependencies": [
-        "big-text",
-        "theme-provider"
+        "https://termcn.dev/r/big-text.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Splash Screen",
       "type": "registry:ui"
@@ -1856,7 +1856,7 @@
       "title": "Status Message",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1875,8 +1875,8 @@
       ],
       "name": "stopwatch",
       "registryDependencies": [
-        "use-input",
-        "theme-provider"
+        "https://termcn.dev/r/use-input.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Stopwatch",
       "type": "registry:ui"
@@ -1899,7 +1899,7 @@
       "title": "Streaming Text",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -1918,8 +1918,8 @@
       ],
       "name": "tabbed-content",
       "registryDependencies": [
-        "tabs",
-        "theme-provider"
+        "https://termcn.dev/r/tabs.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Tabbed Content",
       "type": "registry:ui"
@@ -1940,7 +1940,7 @@
       ],
       "name": "table",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Table",
       "type": "registry:ui"
@@ -1961,7 +1961,7 @@
       ],
       "name": "tabs",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Tabs",
       "type": "registry:ui"
@@ -1984,7 +1984,7 @@
       "title": "Tag",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -2003,7 +2003,7 @@
       ],
       "name": "tag-input",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Tag Input",
       "type": "registry:ui"
@@ -2024,8 +2024,8 @@
       ],
       "name": "text-area",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Text Area",
       "type": "registry:ui"
@@ -2046,8 +2046,8 @@
       ],
       "name": "text-input",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Text Input",
       "type": "registry:ui"
@@ -2066,7 +2066,7 @@
       ],
       "name": "theme-catppuccin",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Catppuccin",
       "type": "registry:file"
@@ -2085,7 +2085,7 @@
       ],
       "name": "theme-default",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Default",
       "type": "registry:file"
@@ -2104,7 +2104,7 @@
       ],
       "name": "theme-dracula",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Dracula",
       "type": "registry:file"
@@ -2123,7 +2123,7 @@
       ],
       "name": "theme-high-contrast",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "High Contrast",
       "type": "registry:file"
@@ -2142,7 +2142,7 @@
       ],
       "name": "theme-monokai",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Monokai",
       "type": "registry:file"
@@ -2161,7 +2161,7 @@
       ],
       "name": "theme-nord",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Nord",
       "type": "registry:file"
@@ -2180,7 +2180,7 @@
       ],
       "name": "theme-one-dark",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "One Dark",
       "type": "registry:file"
@@ -2214,7 +2214,7 @@
       ],
       "name": "theme-solarized",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Solarized",
       "type": "registry:file"
@@ -2233,7 +2233,7 @@
       ],
       "name": "theme-tokyo-night",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Tokyo Night",
       "type": "registry:file"
@@ -2254,8 +2254,8 @@
       ],
       "name": "thinking-block",
       "registryDependencies": [
-        "theme-provider",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "Thinking Block",
       "type": "registry:ui"
@@ -2276,8 +2276,8 @@
       ],
       "name": "time-picker",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Time Picker",
       "type": "registry:ui"
@@ -2298,8 +2298,8 @@
       ],
       "name": "timer",
       "registryDependencies": [
-        "use-input",
-        "theme-provider"
+        "https://termcn.dev/r/use-input.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Timer",
       "type": "registry:ui"
@@ -2320,8 +2320,8 @@
       ],
       "name": "toast",
       "registryDependencies": [
-        "theme-provider",
-        "use-interval"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-interval.json"
       ],
       "title": "Toast",
       "type": "registry:ui"
@@ -2342,8 +2342,8 @@
       ],
       "name": "toggle",
       "registryDependencies": [
-        "use-focus",
-        "theme-provider"
+        "https://termcn.dev/r/use-focus.json",
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Toggle",
       "type": "registry:ui"
@@ -2366,7 +2366,7 @@
       "title": "Token Usage",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -2385,8 +2385,8 @@
       ],
       "name": "tool-approval",
       "registryDependencies": [
-        "theme-provider",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "Tool Approval",
       "type": "registry:ui"
@@ -2407,9 +2407,9 @@
       ],
       "name": "tool-call",
       "registryDependencies": [
-        "theme-provider",
-        "use-animation",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-animation.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "Tool Call",
       "type": "registry:ui"
@@ -2432,7 +2432,7 @@
       "title": "Tooltip",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -2451,7 +2451,7 @@
       ],
       "name": "tree",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Tree",
       "type": "registry:ui"
@@ -2472,7 +2472,7 @@
       ],
       "name": "tree-select",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Tree Select",
       "type": "registry:ui"
@@ -2493,7 +2493,7 @@
       ],
       "name": "usage-monitor",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Usage Monitor",
       "type": "registry:ui"
@@ -2611,7 +2611,7 @@
       ],
       "name": "virtual-list",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ],
       "title": "Virtual List",
       "type": "registry:ui"
@@ -2634,7 +2634,7 @@
       "title": "Welcome Screen",
       "type": "registry:ui",
       "registryDependencies": [
-        "theme-provider"
+        "https://termcn.dev/r/theme-provider.json"
       ]
     },
     {
@@ -2653,8 +2653,8 @@
       ],
       "name": "wizard",
       "registryDependencies": [
-        "theme-provider",
-        "use-input"
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
       ],
       "title": "Wizard",
       "type": "registry:ui"

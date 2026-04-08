@@ -4,7 +4,7 @@
   "title": "Dracula",
   "description": "A purple-heavy Dracula theme for Ink components.",
   "registryDependencies": [
-    "theme-provider"
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

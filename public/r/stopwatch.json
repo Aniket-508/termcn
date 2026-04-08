@@ -7,8 +7,8 @@
     "ink"
   ],
   "registryDependencies": [
-    "use-input",
-    "theme-provider"
+    "https://termcn.dev/r/use-input.json",
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

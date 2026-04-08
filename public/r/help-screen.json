@@ -7,8 +7,8 @@
     "ink"
   ],
   "registryDependencies": [
-    "big-text",
-    "theme-provider"
+    "https://termcn.dev/r/big-text.json",
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {
