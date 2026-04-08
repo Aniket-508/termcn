@@ -4,7 +4,7 @@
   "title": "High Contrast",
   "description": "High contrast themes for dark and light terminal backgrounds.",
   "registryDependencies": [
-    "theme-provider"
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

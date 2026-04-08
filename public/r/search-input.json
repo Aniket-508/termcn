@@ -8,8 +8,8 @@
     "mnemonist"
   ],
   "registryDependencies": [
-    "use-focus",
-    "theme-provider"
+    "https://termcn.dev/r/use-focus.json",
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

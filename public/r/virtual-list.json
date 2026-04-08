@@ -8,7 +8,7 @@
     "mnemonist"
   ],
   "registryDependencies": [
-    "theme-provider"
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

@@ -4,7 +4,7 @@
   "title": "Default",
   "description": "The default termcn terminal theme.",
   "registryDependencies": [
-    "theme-provider"
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

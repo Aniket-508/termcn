@@ -7,9 +7,9 @@
     "ink"
   ],
   "registryDependencies": [
-    "info-box",
-    "bullet-list",
-    "theme-provider"
+    "https://termcn.dev/r/info-box.json",
+    "https://termcn.dev/r/bullet-list.json",
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {

@@ -4,7 +4,7 @@
   "title": "Tokyo Night",
   "description": "Tokyo Night colors for terminal interfaces.",
   "registryDependencies": [
-    "theme-provider"
+    "https://termcn.dev/r/theme-provider.json"
   ],
   "files": [
     {
