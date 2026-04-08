@@ -1150,6 +1150,15 @@ export const ExamplesIndex: Record<
       filePath: "examples/ink/text-input-placeholder.tsx",
       name: "text-input-placeholder",
     },
+    "theme-showcase": {
+      component: React.lazy(async () => {
+        const mod = await import("./theme-showcase");
+
+        return { default: resolveExampleComponent(mod) };
+      }),
+      filePath: "examples/theme-showcase.tsx",
+      name: "theme-showcase",
+    },
     "thinking-block-demo": {
       component: React.lazy(async () => {
         const mod = await import("./ink/thinking-block-demo");

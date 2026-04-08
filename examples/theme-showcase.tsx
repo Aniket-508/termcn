@@ -4,7 +4,7 @@ import { Box, Text } from "ink";
 
 import { useTheme } from "@/components/ui/theme-provider";
 
-export const ThemeShowcasePreview = () => {
+export default function ThemeShowcasePreview() {
   const theme = useTheme();
 
   const palette = [
@@ -33,4 +33,4 @@ export const ThemeShowcasePreview = () => {
       </Box>
     </Box>
   );
-};
+}
