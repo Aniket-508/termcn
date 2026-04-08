@@ -1152,11 +1152,11 @@ export const ExamplesIndex: Record<
     },
     "theme-showcase": {
       component: React.lazy(async () => {
-        const mod = await import("./theme-showcase");
+        const mod = await import("./ink/theme-showcase");
 
         return { default: resolveExampleComponent(mod) };
       }),
-      filePath: "examples/theme-showcase.tsx",
+      filePath: "examples/ink/theme-showcase.tsx",
       name: "theme-showcase",
     },
     "thinking-block-demo": {

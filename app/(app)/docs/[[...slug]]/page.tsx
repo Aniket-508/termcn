@@ -22,7 +22,7 @@ import type { ExampleFramework } from "@/lib/examples";
 import { PUBLIC_REGISTRY_FRAMEWORK } from "@/lib/registry";
 import { getPageImage, source } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
-import { createMdxComponents } from "@/mdx-components";
+import { mdxComponents } from "@/mdx-components";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 import { createPageMetadata } from "@/seo/metadata";
 
@@ -183,7 +183,6 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
 
   const { links } = doc as { links?: { doc?: string; api?: string } };
   const breadcrumbs = buildBreadcrumbs(canonicalSlug, doc.title, pageUrl);
-  const mdxComponents = createMdxComponents(framework);
 
   return (
     <>

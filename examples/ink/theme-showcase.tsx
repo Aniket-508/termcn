@@ -1,5 +1,3 @@
-"use client";
-
 import { Box, Text } from "ink";
 
 import { useTheme } from "@/components/ui/theme-provider";

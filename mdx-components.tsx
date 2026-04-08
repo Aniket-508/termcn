@@ -21,18 +21,9 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { ExampleFramework } from "@/lib/examples";
 import { cn } from "@/lib/utils";
 
-const matchesFramework = (
-  currentFramework: ExampleFramework,
-  targetFramework: ExampleFramework | ExampleFramework[]
-) =>
-  Array.isArray(targetFramework)
-    ? targetFramework.includes(currentFramework)
-    : currentFramework === targetFramework;
-
-export const createMdxComponents = (framework: ExampleFramework = "ink") => ({
+export const mdxComponents = {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -44,12 +35,8 @@ export const createMdxComponents = (framework: ExampleFramework = "ink") => ({
   Button,
   Callout,
   CodeTabs,
-  ComponentPreview: (props: React.ComponentProps<typeof ComponentPreview>) => (
-    <ComponentPreview framework={framework} {...props} />
-  ),
-  ComponentSource: (props: React.ComponentProps<typeof ComponentSource>) => (
-    <ComponentSource framework={framework} {...props} />
-  ),
+  ComponentPreview,
+  ComponentSource,
   ComponentsList,
   FeatureCard: ({
     icon: Icon,
@@ -78,13 +65,6 @@ export const createMdxComponents = (framework: ExampleFramework = "ink") => ({
       </CardContent>
     </Card>
   ),
-  FrameworkOnly: ({
-    children,
-    value,
-  }: {
-    children?: React.ReactNode;
-    value: ExampleFramework | ExampleFramework[];
-  }) => (matchesFramework(framework, value) ? children : null),
   Image: ({
     src,
     className,
@@ -102,8 +82,6 @@ export const createMdxComponents = (framework: ExampleFramework = "ink") => ({
       {...props}
     />
   ),
-  InkOnly: ({ children }: { children?: React.ReactNode }) =>
-    framework === "ink" ? children : null,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn("font-medium underline underline-offset-4", className)}
@@ -119,8 +97,6 @@ export const createMdxComponents = (framework: ExampleFramework = "ink") => ({
       {...props}
     />
   ),
-  OpenTUIOnly: ({ children }: { children?: React.ReactNode }) =>
-    framework === "opentui" ? children : null,
   Step: ({ className, children, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
@@ -413,6 +389,4 @@ export const createMdxComponents = (framework: ExampleFramework = "ink") => ({
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
     <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
   ),
-});
-
-export const mdxComponents = createMdxComponents();
+};
