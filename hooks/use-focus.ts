@@ -1,1 +1,1 @@
-export { useFocus } from "@/registry/hooks/use-focus";
+export { useFocus } from "@/registry/bases/ink/hooks/use-focus";

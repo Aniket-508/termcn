@@ -2,7 +2,9 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper";
+import type { ExampleFramework } from "@/lib/examples";
 import { highlightCode } from "@/lib/highlight-code";
+import { getRegistryUiSourceCandidates } from "@/lib/registry";
 import { cn } from "@/lib/utils";
 
 import { CopyButton } from "./copy-button";
@@ -16,12 +18,54 @@ const readOptional = async (filePath: string): Promise<string | null> => {
   }
 };
 
-const resolveSourceFile = async (name: string): Promise<string | null> => {
+const resolveSourceFile = async ({
+  filePath,
+  framework,
+  name,
+}: {
+  filePath?: string;
+  framework?: ExampleFramework;
+  name?: string;
+}): Promise<string | null> => {
   const root = process.cwd();
-  const examplePath = path.join(root, "examples", `${name}.tsx`);
-  const registryPath = path.join(root, "registry", "ui", `${name}.tsx`);
+
+  if (filePath) {
+    const resolvedPath = path.isAbsolute(filePath)
+      ? filePath
+      : path.join(root, filePath);
+    return readOptional(resolvedPath);
+  }
+
+  if (!name) {
+    return null;
+  }
+
+  const examplePath = framework
+    ? path.join(root, "examples", framework, `${name}.tsx`)
+    : path.join(root, "examples", "ink", `${name}.tsx`);
+  const alternateExamplePath = path.join(root, "examples", `${name}.tsx`);
+  const registryPaths = getRegistryUiSourceCandidates({ framework, name }).map(
+    (candidate) => path.join(root, candidate)
+  );
+
+  const registryCode = await (async () => {
+    for (const registryPath of registryPaths) {
+      const code = await readOptional(registryPath);
+
+      if (code) {
+        return code;
+      }
+    }
+
+    return null;
+  })();
+
   return (
-    (await readOptional(examplePath)) ?? (await readOptional(registryPath))
+    (await readOptional(examplePath)) ??
+    (framework === undefined
+      ? await readOptional(alternateExamplePath)
+      : null) ??
+    registryCode
   );
 };
 
@@ -55,18 +99,22 @@ const ComponentCode = ({
 
 export const ComponentSource = async ({
   name,
+  filePath,
+  framework,
   title,
   collapsible = true,
   className,
   language,
 }: {
-  name: string;
+  name?: string;
+  filePath?: string;
+  framework?: ExampleFramework;
   title?: string;
   collapsible?: boolean;
   className?: string;
   language?: string;
 }) => {
-  const code = await resolveSourceFile(name);
+  const code = await resolveSourceFile({ filePath, framework, name });
   if (!code) {
     return null;
   }

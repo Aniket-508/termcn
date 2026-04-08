@@ -18,6 +18,15 @@ const nextConfig = {
   outputFileTracingIncludes: {
     "/*": ["./registry/**/*"],
   },
+  redirects() {
+    return [
+      {
+        destination: "/docs/components/ink/:category/:component",
+        permanent: true,
+        source: "/docs/components/:category/:component",
+      },
+    ];
+  },
   turbopack: {
     resolveAlias: { ink: "ink-web" },
   },

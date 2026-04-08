@@ -4,9 +4,10 @@ import { Box, Text } from "ink";
 import { Component as ReactComponent, Suspense } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
-import { ExamplesIndex } from "@/examples/__index__";
+import { getExampleEntry } from "@/lib/examples";
+import type { ExampleFramework } from "@/lib/examples";
 
-const PreviewPlaceholder = ({
+const InkPreviewPlaceholder = ({
   componentName,
   description,
 }: {
@@ -33,13 +34,54 @@ const PreviewPlaceholder = ({
   );
 };
 
+const OpenTuiPreviewPlaceholder = ({
+  componentName,
+  description,
+}: {
+  componentName: string;
+  description: string;
+}) => (
+  <div className="flex min-h-72 items-center justify-center p-6 text-center text-sm text-muted-foreground">
+    <div className="space-y-2">
+      <div className="font-medium text-foreground">{componentName}</div>
+      <div>{description}</div>
+    </div>
+  </div>
+);
+
+const PreviewPlaceholder = ({
+  componentName,
+  description,
+  framework,
+}: {
+  componentName: string;
+  description: string;
+  framework: ExampleFramework;
+}) =>
+  framework === "opentui" ? (
+    <OpenTuiPreviewPlaceholder
+      componentName={componentName}
+      description={description}
+    />
+  ) : (
+    <InkPreviewPlaceholder
+      componentName={componentName}
+      description={description}
+    />
+  );
+
 class PreviewErrorBoundary extends ReactComponent<
-  { children: React.ReactNode; componentName: string },
+  {
+    children: React.ReactNode;
+    componentName: string;
+    framework: ExampleFramework;
+  },
   { hasError: boolean; message?: string }
 > {
   public constructor(props: {
     children: React.ReactNode;
     componentName: string;
+    framework: ExampleFramework;
   }) {
     super(props);
     this.state = { hasError: false };
@@ -59,6 +101,7 @@ class PreviewErrorBoundary extends ReactComponent<
               ? `Live preview fallback: ${this.state.message}`
               : "Live preview fallback."
           }
+          framework={this.props.framework}
         />
       );
     }
@@ -67,18 +110,34 @@ class PreviewErrorBoundary extends ReactComponent<
   }
 }
 
-export const ExamplePreview = ({ name }: { name: string }) => {
-  const example = ExamplesIndex[name];
+export const ExamplePreview = ({
+  framework = "ink",
+  name,
+}: {
+  framework?: ExampleFramework;
+  name: string;
+}) => {
+  const example = getExampleEntry(name, framework);
+  if (!example) {
+    return (
+      <PreviewPlaceholder
+        componentName={name}
+        description={`No ${framework} live preview is registered for this example yet.`}
+        framework={framework}
+      />
+    );
+  }
 
   const ExampleComponent = example.component;
 
   return (
-    <PreviewErrorBoundary componentName={name}>
+    <PreviewErrorBoundary componentName={name} framework={framework}>
       <Suspense
         fallback={
           <PreviewPlaceholder
             componentName={name}
             description="Loading preview..."
+            framework={framework}
           />
         }
       >

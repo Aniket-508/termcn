@@ -11,7 +11,7 @@ export {
   useTheme,
   useThemeUpdater,
   useUnicode,
-} from "@/registry/ui/theme-provider";
+} from "@/registry/bases/ink/ui/theme-provider";
 
 export type {
   AutoThemeProviderProps,
@@ -23,4 +23,4 @@ export type {
   ThemeProviderProps,
   TypographyTokens,
   UnicodeContextValue,
-} from "@/registry/ui/theme-provider";
+} from "@/registry/bases/ink/ui/theme-provider";

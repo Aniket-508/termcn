@@ -3,14 +3,26 @@ import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ComponentPreviewTabs } from "@/components/component-preview-tabs";
 import { DocsCopyPage } from "@/components/docs-copy-page";
 import { DocsTableOfContents } from "@/components/docs-toc";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatTitleFromSlug } from "@/lib/docs";
+import {
+  DOCS_FRAMEWORKS,
+  formatTitleFromSlug,
+  getDocsFrameworkFromSlug,
+  getDocsRoute,
+  getDocsRouteSlug,
+  isComponentDocsSlug,
+  stripDocsFrameworkFromSlug,
+} from "@/lib/docs";
+import { getAvailableComponentFrameworks } from "@/lib/examples";
+import type { ExampleFramework } from "@/lib/examples";
+import { PUBLIC_REGISTRY_FRAMEWORK } from "@/lib/registry";
 import { getPageImage, source } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
-import { mdxComponents } from "@/mdx-components";
+import { createMdxComponents } from "@/mdx-components";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 import { createPageMetadata } from "@/seo/metadata";
 
@@ -18,13 +30,29 @@ export const revalidate = false;
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-export const generateStaticParams = () => source.generateParams();
+export const generateStaticParams = () =>
+  source.generateParams().flatMap((params) => {
+    if (!isComponentDocsSlug(params.slug)) {
+      return [params];
+    }
+
+    const componentName = params.slug.at(-1);
+    const frameworks = componentName
+      ? getAvailableComponentFrameworks(componentName)
+      : [PUBLIC_REGISTRY_FRAMEWORK];
+
+    return frameworks.map((framework) => ({
+      slug: getDocsRouteSlug(params.slug, framework),
+    }));
+  });
 
 export const generateMetadata = async (props: {
   params: Promise<{ slug?: string[] }>;
 }) => {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const framework = getDocsFrameworkFromSlug(params.slug);
+  const contentSlug = stripDocsFrameworkFromSlug(params.slug);
+  const page = source.getPage(contentSlug);
 
   if (!page) {
     notFound();
@@ -37,7 +65,7 @@ export const generateMetadata = async (props: {
     description: doc.description,
     ogImage,
     ogType: "article",
-    path: page.url,
+    path: getDocsRoute(contentSlug, framework),
     title: doc.title,
   });
 };
@@ -66,20 +94,96 @@ const buildBreadcrumbs = (
   return items;
 };
 
+const getDocsPageContext = (slug?: string[]) => {
+  const framework = getDocsFrameworkFromSlug(slug);
+  const contentSlug = stripDocsFrameworkFromSlug(slug);
+  const componentName = contentSlug?.at(-1);
+  const availableFrameworks =
+    contentSlug?.[0] === "components" && componentName
+      ? getAvailableComponentFrameworks(componentName)
+      : DOCS_FRAMEWORKS;
+
+  return {
+    availableFrameworks,
+    canonicalSlug: getDocsRouteSlug(contentSlug, framework) ?? [],
+    contentSlug,
+    framework,
+    isComponentPage: isComponentDocsSlug(contentSlug),
+    pageUrl: getDocsRoute(contentSlug, framework),
+  };
+};
+
+const rewriteDocsNeighbourUrl = (url: string, framework: ExampleFramework) =>
+  (() => {
+    const slug = url.split("/").filter(Boolean).slice(1);
+
+    if (!isComponentDocsSlug(slug)) {
+      return getDocsRoute(slug, framework);
+    }
+
+    const componentName = slug.at(-1);
+    const targetFramework =
+      componentName &&
+      getAvailableComponentFrameworks(componentName).includes(framework)
+        ? framework
+        : PUBLIC_REGISTRY_FRAMEWORK;
+
+    return getDocsRoute(slug, targetFramework);
+  })();
+
+const getDocsNeighbours = (
+  neighbours: Awaited<ReturnType<typeof findNeighbour>>,
+  framework: ExampleFramework,
+  isComponentPage: boolean
+) => {
+  if (!isComponentPage) {
+    return neighbours;
+  }
+
+  return {
+    next: neighbours.next
+      ? {
+          ...neighbours.next,
+          url: rewriteDocsNeighbourUrl(neighbours.next.url, framework),
+        }
+      : null,
+    previous: neighbours.previous
+      ? {
+          ...neighbours.previous,
+          url: rewriteDocsNeighbourUrl(neighbours.previous.url, framework),
+        }
+      : null,
+  };
+};
+
 const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const {
+    availableFrameworks,
+    canonicalSlug,
+    contentSlug,
+    framework,
+    isComponentPage,
+    pageUrl,
+  } = getDocsPageContext(params.slug);
+
+  const page = source.getPage(contentSlug);
   if (!page) {
     notFound();
   }
 
   const doc = page.data;
   const MdxContent = doc.body;
-  const neighbours = await findNeighbour(source.pageTree, page.url);
+  const neighbours = getDocsNeighbours(
+    await findNeighbour(source.pageTree, page.url),
+    framework,
+    isComponentPage
+  );
   const raw = await page.data.getText("raw");
 
   const { links } = doc as { links?: { doc?: string; api?: string } };
-  const breadcrumbs = buildBreadcrumbs(page.slugs, doc.title, page.url);
+  const breadcrumbs = buildBreadcrumbs(canonicalSlug, doc.title, pageUrl);
+  const mdxComponents = createMdxComponents(framework);
 
   return (
     <>
@@ -99,7 +203,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                   </h1>
                   <div className="docs-nav flex items-center gap-2">
                     <div className="hidden sm:block">
-                      <DocsCopyPage page={raw} url={absoluteUrl(page.url)} />
+                      <DocsCopyPage page={raw} url={absoluteUrl(pageUrl)} />
                     </div>
                     <div className="ml-auto flex gap-2">
                       {neighbours.previous && (
@@ -157,6 +261,14 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
               ) : null}
             </div>
             <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
+              {isComponentPage ? (
+                <ComponentPreviewTabs
+                  className="mb-4"
+                  framework={framework}
+                  frameworks={availableFrameworks}
+                  slug={contentSlug ?? []}
+                />
+              ) : null}
               <MdxContent components={mdxComponents} />
             </div>
           </div>

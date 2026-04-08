@@ -5,4 +5,4 @@ export {
   type Notification,
   type NotificationVariant,
   type NotificationsContextValue,
-} from "@/registry/hooks/use-notifications";
+} from "@/registry/bases/ink/hooks/use-notifications";

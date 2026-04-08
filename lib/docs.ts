@@ -1,4 +1,5 @@
 import { ROUTES } from "@/constants/routes";
+import type { ExampleFramework } from "@/lib/examples";
 
 import { formatLabelFromSlug } from "./utils";
 
@@ -19,12 +20,68 @@ export interface DocsConfig {
 }
 
 const TITLE_OVERRIDES: Record<string, string> = {
+  ink: "Ink",
   json: "JSON",
+  opentui: "OpenTUI",
   "qr-code": "QR Code",
 };
 
+export const DOCS_FRAMEWORKS = ["ink", "opentui"] as const;
+export const DEFAULT_DOCS_FRAMEWORK: ExampleFramework = "ink";
+
 export const formatTitleFromSlug = (slug: string): string =>
   TITLE_OVERRIDES[slug] ?? formatLabelFromSlug(slug);
+
+export const isDocsFramework = (
+  value: string | undefined
+): value is ExampleFramework =>
+  value !== undefined && (DOCS_FRAMEWORKS as readonly string[]).includes(value);
+
+export const hasDocsFrameworkInSlug = (slug?: string[]) =>
+  slug?.[0] === "components" && isDocsFramework(slug?.[1]);
+
+export const getDocsFrameworkFromSlug = (slug?: string[]): ExampleFramework =>
+  slug?.[0] === "components" && isDocsFramework(slug?.[1])
+    ? slug[1]
+    : DEFAULT_DOCS_FRAMEWORK;
+
+export const stripDocsFrameworkFromSlug = (slug?: string[]) => {
+  if (slug?.[0] !== "components" || !isDocsFramework(slug?.[1])) {
+    return slug;
+  }
+
+  return ["components", ...slug.slice(2)];
+};
+
+export const isComponentDocsSlug = (slug?: string[]) => {
+  const contentSlug = stripDocsFrameworkFromSlug(slug);
+
+  return contentSlug?.[0] === "components" && contentSlug.length >= 3;
+};
+
+export const getDocsRouteSlug = (
+  slug: string[] | undefined,
+  framework: ExampleFramework = DEFAULT_DOCS_FRAMEWORK
+) => {
+  const contentSlug = stripDocsFrameworkFromSlug(slug);
+
+  if (!contentSlug || !isComponentDocsSlug(contentSlug)) {
+    return contentSlug;
+  }
+
+  return ["components", framework, ...contentSlug.slice(1)];
+};
+
+export const getDocsRoute = (
+  slug: string[] | undefined,
+  framework: ExampleFramework = DEFAULT_DOCS_FRAMEWORK
+) => {
+  const routeSlug = getDocsRouteSlug(slug, framework);
+
+  return routeSlug?.length
+    ? `${ROUTES.DOCS}/${routeSlug.join("/")}`
+    : ROUTES.DOCS;
+};
 
 const navLeaf = (
   title: string,
