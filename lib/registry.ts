@@ -1,38 +1,53 @@
 import path from "node:path";
 
-import type { ExampleFramework } from "@/examples/__index__";
-import {
-  BASE_NAMES,
-  isPublicBaseName,
-  PUBLIC_BASE_NAME,
-} from "@/registry/bases";
+import { readFileFromRoot } from "@/lib/read-file";
+import { isPublicBaseName, PUBLIC_BASE_NAME } from "@/registry/bases";
+import type { BaseName } from "@/registry/bases";
 
-export const INTERNAL_REGISTRY_FRAMEWORKS =
-  BASE_NAMES as readonly ExampleFramework[];
-
-export const PUBLIC_REGISTRY_FRAMEWORK = PUBLIC_BASE_NAME as Extract<
-  ExampleFramework,
-  typeof PUBLIC_BASE_NAME
->;
-
-export const isPublicRegistryFramework = (
-  framework: ExampleFramework | undefined
-): framework is typeof PUBLIC_REGISTRY_FRAMEWORK => isPublicBaseName(framework);
+const readOptional = async (relativePath: string): Promise<string | null> => {
+  try {
+    return await readFileFromRoot(relativePath);
+  } catch {
+    return null;
+  }
+};
 
 export const getRegistryUiSourceCandidates = ({
-  framework,
+  base,
   name,
 }: {
-  framework?: ExampleFramework;
+  base?: BaseName;
   name: string;
 }) => {
-  const candidates: string[] = framework
-    ? [path.join("registry", "bases", framework, "ui", `${name}.tsx`)]
+  const candidates: string[] = base
+    ? [path.join("registry", "bases", base, "ui", `${name}.tsx`)]
     : [];
 
-  if (!framework || isPublicRegistryFramework(framework)) {
+  if (!base || isPublicBaseName(base)) {
     candidates.push(path.join("registry", "ui", `${name}.tsx`));
   }
 
   return [...new Set(candidates)];
+};
+
+export const getDemoSource = (
+  name: string,
+  base: BaseName = PUBLIC_BASE_NAME
+): Promise<string | null> =>
+  readOptional(path.join("examples", base, `${name}.tsx`));
+
+export const getRegistrySource = async (
+  name: string,
+  base?: BaseName
+): Promise<string | null> => {
+  const candidates = getRegistryUiSourceCandidates({ base, name });
+
+  for (const candidate of candidates) {
+    const code = await readOptional(candidate);
+    if (code) {
+      return code;
+    }
+  }
+
+  return null;
 };
