@@ -23,7 +23,7 @@ const nextConfig = {
       {
         destination: "/docs/components/ink/:category/:component",
         permanent: true,
-        source: "/docs/components/:category/:component",
+        source: "/docs/components/:category((?!ink|opentui)[^/]+)/:component",
       },
     ];
   },
