@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "card",
+    "data-grid",
+    "definition",
+    "diff-view",
+    "directory-tree",
+    "git-status",
+    "json",
+    "key-value",
+    "list",
+    "table",
+    "tree",
+    "virtual-list"
+  ],
+  "title": "Data"
+}

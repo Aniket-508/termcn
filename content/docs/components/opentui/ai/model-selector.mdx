@@ -1,0 +1,76 @@
+---
+title: "Model Selector"
+description: "Keyboard-navigable list for selecting an AI model, with optional provider grouping and context-window display"
+---
+
+<ComponentPreview name="model-selector-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/model-selector.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="model-selector"
+  title="components/ui/model-selector.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ModelSelector } from "@/components/ui/model-selector";
+```
+
+```tsx
+<ModelSelector
+  models={[
+    { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI", context: 128000 },
+    {
+      id: "claude-3-5-sonnet",
+      name: "Claude 3.5 Sonnet",
+      provider: "Anthropic",
+      context: 200000,
+    },
+  ]}
+  selected="gpt-4o"
+  onSelect={(id) => console.log("selected", id)}
+/>
+```
+
+## API Reference
+
+### ModelSelector
+
+| Prop              | Type                   | Default    |
+| ----------------- | ---------------------- | ---------- |
+| `models`          | `ModelOption[]`        | `required` |
+| `selected`        | `string`               | `required` |
+| `onSelect`        | `(id: string) => void` | `required` |
+| `showContext`     | `boolean`              | `true`     |
+| `showProvider`    | `boolean`              | `true`     |
+| `groupByProvider` | `boolean`              | `false`    |

@@ -1,0 +1,59 @@
+---
+title: "Sparkline"
+description: "Inline Unicode braille sparkline chart"
+---
+
+<ComponentPreview name="sparkline-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/sparkline.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="sparkline" title="components/ui/sparkline.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Sparkline } from "@/components/ui/sparkline";
+```
+
+```tsx
+<Sparkline data={[4, 8, 15, 16, 23, 42, 38, 26]} width={20} label="Requests" />
+```
+
+## API Reference
+
+### Sparkline
+
+| Prop    | Type       | Default     |
+| ------- | ---------- | ----------- |
+| `data`  | `number[]` | `required`  |
+| `width` | `number`   | `20`        |
+| `color` | `string`   | `undefined` |
+| `label` | `string`   | `undefined` |

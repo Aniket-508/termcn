@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "chat-message",
+    "chat-thread",
+    "file-change",
+    "model-selector",
+    "streaming-text",
+    "thinking-block",
+    "token-usage",
+    "tool-approval",
+    "tool-call"
+  ],
+  "title": "AI"
+}

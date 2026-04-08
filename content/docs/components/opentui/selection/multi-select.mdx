@@ -1,0 +1,69 @@
+---
+title: "Multi Select"
+description: "Multi-select list with checkboxes and select-all"
+---
+
+<ComponentPreview name="multi-select-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/multi-select.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="multi-select" title="components/ui/multi-select.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { MultiSelect } from "@/components/ui/multi-select";
+```
+
+```tsx
+<MultiSelect
+  options={[
+    { value: "react", label: "React" },
+    { value: "vue", label: "Vue" },
+    { value: "svelte", label: "Svelte" },
+  ]}
+  onChange={(values) => {}}
+/>
+```
+
+## API Reference
+
+### MultiSelect
+
+| Prop        | Type                     | Default     |
+| ----------- | ------------------------ | ----------- |
+| `options`   | `MultiSelectOption<T>[]` | `required`  |
+| `value`     | `T[]`                    | `undefined` |
+| `onChange`  | `(values: T[]) => void`  | `undefined` |
+| `onSubmit`  | `(values: T[]) => void`  | `undefined` |
+| `cursor`    | `string`                 | `"›"`       |
+| `checkmark` | `string`                 | `"◉"`       |
+| `height`    | `number`                 | `undefined` |

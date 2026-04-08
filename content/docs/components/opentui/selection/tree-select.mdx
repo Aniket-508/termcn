@@ -1,0 +1,75 @@
+---
+title: "Tree Select"
+description: "Hierarchical tree selection"
+---
+
+<ComponentPreview name="tree-select-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/tree-select.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="tree-select" title="components/ui/tree-select.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { TreeSelect } from "@/components/ui/tree-select";
+```
+
+```tsx
+<TreeSelect
+  label="Select a file"
+  nodes={[
+    {
+      value: "src",
+      label: "src",
+      children: [
+        { value: "index.ts", label: "index.ts" },
+        { value: "utils.ts", label: "utils.ts" },
+      ],
+    },
+    { value: "README.md", label: "README.md" },
+  ]}
+  onChange={(value) => {}}
+/>
+```
+
+## API Reference
+
+### TreeSelect
+
+| Prop                | Type                  | Default     |
+| ------------------- | --------------------- | ----------- |
+| `nodes`             | `TreeSelectNode<T>[]` | `required`  |
+| `value`             | `T`                   | `undefined` |
+| `onChange`          | `(value: T) => void`  | `undefined` |
+| `onSubmit`          | `(value: T) => void`  | `undefined` |
+| `label`             | `string`              | `undefined` |
+| `expandedByDefault` | `boolean`             | `false`     |

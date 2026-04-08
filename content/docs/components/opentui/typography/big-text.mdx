@@ -1,0 +1,66 @@
+---
+title: "Big Text"
+description: "Figlet-style large ASCII art text"
+---
+
+<ComponentPreview name="big-text-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/big-text.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="big-text" title="components/ui/big-text.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { BigText } from "@/components/ui/big-text";
+```
+
+```tsx
+<BigText>HELLO</BigText>
+```
+
+## Examples
+
+### Font variants
+
+`font` can be `block` (default pixel font), `simple` (lighter block), `shade` (density characters), or `slim` (box-drawing style).
+
+<ComponentPreview name="big-text-fonts" />
+
+## API Reference
+
+### BigText
+
+| Prop       | Type                                       | Default     |
+| ---------- | ------------------------------------------ | ----------- |
+| `children` | `string`                                   | `required`  |
+| `color`    | `string`                                   | `undefined` |
+| `font`     | `"block" \| "simple" \| "shade" \| "slim"` | `"block"`   |

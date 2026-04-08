@@ -1,0 +1,77 @@
+---
+title: "Log"
+description: "Scrolling log viewer with severity levels and filtering"
+---
+
+<ComponentPreview name="log-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/log.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="log" title="components/ui/log.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Log } from "@/components/ui/log";
+```
+
+```tsx
+<Log
+  entries={[
+    { level: "info", message: "Server started on port 3000" },
+    { level: "warn", message: "Deprecated API call detected" },
+    { level: "error", message: "Failed to connect to database" },
+  ]}
+  height={10}
+  showTimestamp
+  follow
+/>
+```
+
+## API Reference
+
+### Log
+
+| Prop            | Type         | Default     |
+| --------------- | ------------ | ----------- |
+| `entries`       | `LogEntry[]` | `required`  |
+| `height`        | `number`     | `10`        |
+| `showTimestamp` | `boolean`    | `true`      |
+| `filter`        | `string`     | `undefined` |
+| `follow`        | `boolean`    | `false`     |
+
+### LogEntry
+
+| Prop        | Type                                     | Default     |
+| ----------- | ---------------------------------------- | ----------- |
+| `level`     | `"debug" \| "info" \| "warn" \| "error"` | `required`  |
+| `message`   | `string`                                 | `required`  |
+| `timestamp` | `Date`                                   | `undefined` |

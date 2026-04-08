@@ -1,0 +1,69 @@
+---
+title: "Heat Map"
+description: "Grid heatmap with color intensity scale"
+---
+
+<ComponentPreview name="heat-map-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/heat-map.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="heat-map" title="components/ui/heat-map.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { HeatMap } from "@/components/ui/heat-map";
+```
+
+```tsx
+<HeatMap
+  data={[
+    [1, 4, 7, 2],
+    [3, 8, 5, 1],
+  ]}
+  rowLabels={["Mon", "Tue"]}
+  colLabels={["Q1", "Q2", "Q3", "Q4"]}
+  showValues
+/>
+```
+
+## API Reference
+
+### HeatMap
+
+| Prop         | Type         | Default               |
+| ------------ | ------------ | --------------------- |
+| `data`       | `number[][]` | `required`            |
+| `rowLabels`  | `string[]`   | `undefined`           |
+| `colLabels`  | `string[]`   | `undefined`           |
+| `colorScale` | `string[]`   | `DEFAULT_COLOR_SCALE` |
+| `cellWidth`  | `number`     | `5`                   |
+| `showValues` | `boolean`    | `false`               |

@@ -1,0 +1,81 @@
+---
+title: "Command Palette"
+description: "VS Code–style command palette with fuzzy search"
+---
+
+<ComponentPreview name="command-palette-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/command-palette.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="command-palette"
+  title="components/ui/command-palette.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { CommandPalette } from "@/components/ui/command-palette";
+```
+
+```tsx
+<CommandPalette
+  isOpen={true}
+  onClose={() => setOpen(false)}
+  commands={[
+    { id: "save", label: "Save", onSelect: () => {} },
+    { id: "quit", label: "Quit", onSelect: () => {} },
+  ]}
+/>
+```
+
+## API Reference
+
+### CommandPalette
+
+| Prop          | Type         | Default               |
+| ------------- | ------------ | --------------------- |
+| `commands`    | `Command[]`  | `required`            |
+| `isOpen`      | `boolean`    | `required`            |
+| `onClose`     | `() => void` | `required`            |
+| `placeholder` | `string`     | `"Type a command..."` |
+| `maxItems`    | `number`     | `8`                   |
+
+### Command
+
+| Prop          | Type         | Default     |
+| ------------- | ------------ | ----------- |
+| `id`          | `string`     | `required`  |
+| `label`       | `string`     | `required`  |
+| `description` | `string`     | `undefined` |
+| `shortcut`    | `string`     | `undefined` |
+| `onSelect`    | `() => void` | `required`  |
+| `group`       | `string`     | `undefined` |

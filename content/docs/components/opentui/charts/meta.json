@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "bar-chart",
+    "gauge",
+    "heat-map",
+    "line-chart",
+    "pie-chart",
+    "sparkline"
+  ],
+  "title": "Charts"
+}

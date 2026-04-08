@@ -1,0 +1,60 @@
+---
+title: "Pagination"
+description: "Page navigation with prev/next and jump"
+---
+
+<ComponentPreview name="pagination-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/pagination.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="pagination" title="components/ui/pagination.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Pagination } from "@/components/ui/pagination";
+```
+
+```tsx
+<Pagination total={10} current={page} onChange={(p) => setPage(p)} />
+```
+
+## API Reference
+
+### Pagination
+
+| Prop        | Type                     | Default     |
+| ----------- | ------------------------ | ----------- |
+| `total`     | `number`                 | `required`  |
+| `current`   | `number`                 | `required`  |
+| `onChange`  | `(page: number) => void` | `undefined` |
+| `showEdges` | `boolean`                | `true`      |
+| `siblings`  | `number`                 | `1`         |

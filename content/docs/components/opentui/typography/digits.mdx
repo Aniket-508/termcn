@@ -1,0 +1,58 @@
+---
+title: "Digits"
+description: "Box-drawing character numerals"
+---
+
+<ComponentPreview name="digits-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/digits.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="digits" title="components/ui/digits.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Digits } from "@/components/ui/digits";
+```
+
+```tsx
+<Digits value="12:30" />
+```
+
+## API Reference
+
+### Digits
+
+| Prop    | Type                   | Default     |
+| ------- | ---------------------- | ----------- |
+| `value` | `string \| number`     | `required`  |
+| `color` | `string`               | `undefined` |
+| `size`  | `"sm" \| "md" \| "lg"` | `"md"`      |

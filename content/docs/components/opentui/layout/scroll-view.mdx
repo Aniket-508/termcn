@@ -1,0 +1,75 @@
+---
+title: "Scroll View"
+description: "Scrollable container with scrollbar"
+---
+
+<ComponentPreview name="scroll-view-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/scroll-view.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="scroll-view" title="components/ui/scroll-view.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ScrollView } from "@/components/ui/scroll-view";
+```
+
+```tsx
+<ScrollView height={5} contentHeight={20}>
+  <Text>Line 1</Text>
+  <Text>Line 2</Text>
+  <Text>Line 3</Text>
+</ScrollView>
+```
+
+## Examples
+
+### Scrollbar and keys
+
+Set `contentHeight` to the total line count of scrollable content so the thumb size reflects how much is hidden. Use arrow keys, Page Up/Down, Home, and End to scroll.
+
+<ComponentPreview name="scroll-view-scrollbar" />
+
+## API Reference
+
+### ScrollView
+
+| Prop             | Type        | Default     |
+| ---------------- | ----------- | ----------- |
+| `height`         | `number`    | `required`  |
+| `children`       | `ReactNode` | `required`  |
+| `contentHeight`  | `number`    | `0`         |
+| `showScrollbar`  | `boolean`   | `true`      |
+| `scrollbarColor` | `string`    | `undefined` |
+| `thumbColor`     | `string`    | `undefined` |
+| `trackChar`      | `string`    | `"│"`       |
+| `thumbChar`      | `string`    | `"█"`       |

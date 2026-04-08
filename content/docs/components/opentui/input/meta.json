@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "email-input",
+    "masked-input",
+    "number-input",
+    "password-input",
+    "path-input",
+    "search-input",
+    "text-area",
+    "text-input"
+  ],
+  "title": "Input"
+}

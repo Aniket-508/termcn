@@ -1,0 +1,68 @@
+---
+title: "Email Input"
+description: "Email input with validation and domain suggestions"
+---
+
+<ComponentPreview name="email-input-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/email-input.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="email-input" title="components/ui/email-input.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { EmailInput } from "@/components/ui/email-input";
+```
+
+```tsx
+<EmailInput
+  label="Email"
+  placeholder="you@example.com"
+  onSubmit={(value) => console.log("Submitted:", value)}
+/>
+```
+
+## API Reference
+
+### EmailInput
+
+| Prop          | Type                      | Default                                                    |
+| ------------- | ------------------------- | ---------------------------------------------------------- |
+| `value`       | `string`                  | `undefined`                                                |
+| `onChange`    | `(value: string) => void` | `undefined`                                                |
+| `onSubmit`    | `(value: string) => void` | `undefined`                                                |
+| `label`       | `string`                  | `undefined`                                                |
+| `placeholder` | `string`                  | `"you@example.com"`                                        |
+| `autoFocus`   | `boolean`                 | `false`                                                    |
+| `id`          | `string`                  | `undefined`                                                |
+| `width`       | `number`                  | `40`                                                       |
+| `suggestions` | `string[]`                | `["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]` |

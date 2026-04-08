@@ -1,0 +1,67 @@
+---
+title: "Directory Tree"
+description: "Filesystem browser with expand/collapse"
+---
+
+<ComponentPreview name="directory-tree-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/directory-tree.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="directory-tree"
+  title="components/ui/directory-tree.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DirectoryTree } from "@/components/ui/directory-tree";
+```
+
+```tsx
+<DirectoryTree
+  rootPath="/home/user/project"
+  maxDepth={3}
+  label="Project Files"
+/>
+```
+
+## API Reference
+
+### DirectoryTree
+
+| Prop         | Type                     | Default         |
+| ------------ | ------------------------ | --------------- |
+| `rootPath`   | `string`                 | `process.cwd()` |
+| `onSelect`   | `(path: string) => void` | `undefined`     |
+| `maxDepth`   | `number`                 | `2`             |
+| `showHidden` | `boolean`                | `false`         |
+| `label`      | `string`                 | `undefined`     |

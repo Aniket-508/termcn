@@ -1,0 +1,72 @@
+---
+title: "Checkbox Group"
+description: "Checkbox group with min/max selection"
+---
+
+<ComponentPreview name="checkbox-group-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/checkbox-group.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="checkbox-group"
+  title="components/ui/checkbox-group.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { CheckboxGroup } from "@/components/ui/checkbox-group";
+```
+
+```tsx
+<CheckboxGroup
+  label="Select toppings"
+  options={[
+    { value: "cheese", label: "Extra Cheese" },
+    { value: "pepperoni", label: "Pepperoni" },
+    { value: "mushrooms", label: "Mushrooms" },
+  ]}
+  onChange={(values) => {}}
+/>
+```
+
+## API Reference
+
+### CheckboxGroup
+
+| Prop       | Type                         | Default     |
+| ---------- | ---------------------------- | ----------- |
+| `label`    | `string`                     | `undefined` |
+| `options`  | `CheckboxGroupOption[]`      | `required`  |
+| `value`    | `string[]`                   | `undefined` |
+| `onChange` | `(values: string[]) => void` | `undefined` |
+| `min`      | `number`                     | `undefined` |
+| `max`      | `number`                     | `undefined` |

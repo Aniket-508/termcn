@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "breadcrumb",
+    "command-palette",
+    "menu",
+    "pagination",
+    "sidebar",
+    "tabbed-content",
+    "tabs"
+  ],
+  "title": "Navigation"
+}

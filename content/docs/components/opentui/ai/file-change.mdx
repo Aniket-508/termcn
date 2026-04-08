@@ -1,0 +1,72 @@
+---
+title: "File Change"
+description: "Interactive file-change review list with diff expansion, per-file accept/reject actions, and accept-all shortcut"
+---
+
+<ComponentPreview name="file-change-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://termcn.dev/r/file-change.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="file-change" title="components/ui/file-change.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { FileChange } from "@/components/ui/file-change";
+```
+
+```tsx
+<FileChange
+  changes={[
+    { path: "src/utils.ts", type: "modify", diff: "-old line\n+new line" },
+    {
+      path: "src/helpers.ts",
+      type: "create",
+      content: "export const add = (a, b) => a + b;",
+    },
+    { path: "src/legacy.ts", type: "delete" },
+  ]}
+  onAccept={(path) => console.log("accepted", path)}
+  onReject={(path) => console.log("rejected", path)}
+  onAcceptAll={() => console.log("accepted all")}
+/>
+```
+
+## API Reference
+
+### FileChange
+
+| Prop          | Type                     | Default     |
+| ------------- | ------------------------ | ----------- |
+| `changes`     | `FileChangeItem[]`       | `required`  |
+| `onAccept`    | `(path: string) => void` | `undefined` |
+| `onReject`    | `(path: string) => void` | `undefined` |
+| `onAcceptAll` | `() => void`             | `undefined` |
