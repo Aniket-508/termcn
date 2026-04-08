@@ -1,0 +1,24 @@
+/* @jsxImportSource @opentui/react */
+import type { ReactNode } from "react";
+export interface CenterProps {
+  children: ReactNode;
+  axis?: "both" | "horizontal" | "vertical";
+}
+export const Center = function Center({
+  children,
+  axis = "both",
+}: CenterProps) {
+  const justifyContent =
+    axis === "both" || axis === "horizontal" ? "center" : undefined;
+  const alignItems =
+    axis === "both" || axis === "vertical" ? "center" : undefined;
+  return (
+    <box
+      flexGrow={1}
+      justifyContent={justifyContent as "center" | undefined}
+      alignItems={alignItems as "center" | undefined}
+    >
+      {children}
+    </box>
+  );
+};
