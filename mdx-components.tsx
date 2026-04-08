@@ -10,7 +10,6 @@ import { ComponentSource } from "@/components/component-source";
 import { ComponentsList } from "@/components/components-list";
 import { CopyButton } from "@/components/copy-button";
 import { getIconForLanguageExtension } from "@/components/icons";
-import { TerminalPreview } from "@/components/terminal-preview";
 import {
   Accordion,
   AccordionContent,
@@ -158,8 +157,6 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  TerminalPreview,
-  ThemeShowcasePreview,
   a: ({ className, children, ...props }: React.ComponentProps<"a">) => (
     <a
       className={cn("font-medium underline underline-offset-4", className)}

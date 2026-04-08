@@ -1,8 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
-import { ExamplePreview } from "@/components/example-preview";
-import { TerminalPreview } from "@/components/terminal-preview";
+import { ComponentPreview } from "@/components/component-preview";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
@@ -65,9 +64,7 @@ export default function IndexPage() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link href={`${ROUTES.DOCS_COMPONENTS}/typography/badge`}>
-                  Browse Components
-                </Link>
+                <Link href={ROUTES.DOCS_COMPONENTS}>Browse Components</Link>
               </Button>
             </div>
           </div>
@@ -78,11 +75,13 @@ export default function IndexPage() {
         <div className="container">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {showcaseItems.map((item) => (
-              <div key={item.name} className={cn(item.className)}>
-                <TerminalPreview className="mt-0 h-full" title={item.title}>
-                  <ExamplePreview name={item.name} />
-                </TerminalPreview>
-              </div>
+              <ComponentPreview
+                key={item.name}
+                className={cn("mt-0 h-full", item.className)}
+                title={item.title}
+                name={item.name}
+                hideCode
+              />
             ))}
           </div>
         </div>
