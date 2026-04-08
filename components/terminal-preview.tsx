@@ -4,8 +4,9 @@ import { createDynamicTerminal } from "ink-web/next";
 
 import { ExamplePreview } from "@/components/example-preview";
 import type { InkPreviewProps } from "@/components/ink-preview";
-import type { ExampleFramework } from "@/lib/examples";
 import type { terminalThemeMap } from "@/lib/terminal-themes";
+import { isPublicBaseName } from "@/registry/bases";
+import type { BaseName } from "@/registry/bases";
 
 const InkPreview = createDynamicTerminal<InkPreviewProps>(
   async () => {
@@ -18,27 +19,23 @@ const InkPreview = createDynamicTerminal<InkPreviewProps>(
 );
 
 export interface TerminalPreviewProps {
-  framework: ExampleFramework;
+  base: BaseName;
   name: string;
   theme?: keyof typeof terminalThemeMap;
 }
 
 export const TerminalPreview = ({
-  framework,
+  base,
   name,
   theme,
 }: TerminalPreviewProps) => {
-  if (framework === "opentui") {
-    return (
-      //   <OpenTuiPreview>
-      <ExamplePreview framework={framework} name={name} />
-      //   </OpenTuiPreview>
-    );
+  if (!isPublicBaseName(base)) {
+    return <ExamplePreview base={base} name={name} />;
   }
 
   return (
     <InkPreview theme={theme}>
-      <ExamplePreview framework={framework} name={name} />
+      <ExamplePreview base={base} name={name} />
     </InkPreview>
   );
 };

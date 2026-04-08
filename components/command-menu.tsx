@@ -1,14 +1,15 @@
 "use client";
 
 import type { DialogProps } from "@radix-ui/react-dialog";
+import type { Root as PageTreeRoot } from "fumadocs-core/page-tree";
 import {
   ArrowRightIcon,
   CornerDownLeftIcon,
   CircleDashedIcon,
   SquareDashedIcon,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { copyToClipboardWithMeta } from "@/components/copy-button";
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,12 @@ import { SITE } from "@/constants/site";
 import { useConfig } from "@/hooks/use-config";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
-import { docsConfig } from "@/lib/docs";
+import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
+import {
+  getCategoryFoldersForBase,
+  getCurrentBase,
+  getPagesFromFolder,
+} from "@/lib/page-tree";
 import { themePrimaryBySlug } from "@/lib/terminal-themes";
 import { cn } from "@/lib/utils";
 
@@ -154,18 +160,66 @@ const CommandMenuItem = ({
 export const CommandMenu = ({
   blocks,
   navItems,
+  tree,
   ...props
 }: DialogProps & {
   blocks?: { name: string; description: string; categories: string[] }[];
   navItems: { href: string; label: string }[];
+  tree: PageTreeRoot;
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const isMac = useIsMac();
   const [config] = useConfig();
   const [open, setOpen] = useState(false);
   const [showGoToPage, setShowGoToPage] = useState(false);
   const [copyPayload, setCopyPayload] = useState("");
   const packageManager = config.packageManager || "pnpm";
+  const currentBase = getCurrentBase(pathname);
+
+  const treeGroups = useMemo(() => {
+    const groups: { label: string; pages: { url: string; name: string }[] }[] =
+      [];
+    for (const item of tree.children) {
+      if (item.type !== "folder") {
+        continue;
+      }
+      if (EXCLUDED_SECTIONS.has(item.$id ?? "")) {
+        continue;
+      }
+
+      if (isComponentsFolder(item)) {
+        for (const category of getCategoryFoldersForBase(item, currentBase)) {
+          const pages = getPagesFromFolder(category).map((p) => ({
+            name: typeof p.name === "string" ? p.name : String(p.name),
+            url: p.url,
+          }));
+          if (pages.length > 0) {
+            groups.push({
+              label:
+                typeof category.name === "string"
+                  ? category.name
+                  : String(category.name),
+              pages,
+            });
+          }
+        }
+      } else {
+        const pages = getPagesFromFolder(item).map((p) => ({
+          name: typeof p.name === "string" ? p.name : String(p.name),
+          url: p.url,
+        }));
+        if (pages.length > 0) {
+          groups.push({
+            label:
+              typeof item.name === "string" ? item.name : String(item.name),
+            pages,
+          });
+        }
+      }
+    }
+    return groups;
+  }, [tree, currentBase]);
 
   const handleDocPageHighlight = useCallback(
     (item: { url: string; name?: string }) => {
@@ -321,26 +375,15 @@ export const CommandMenu = ({
                 ))}
               </CommandGroup>
             )}
-            {docsConfig.sidebarNav.map((group) => (
+            {treeGroups.map((group) => (
               <CommandGroup
-                key={group.title}
+                key={group.label}
                 className={GROUP_HEADING_CLS}
-                heading={group.title}
+                heading={group.label}
               >
-                {group.items.map((item) => (
-                  <div key={item.href ?? item.title}>
-                    {item.href &&
-                      renderDocPageItem(item.title, item.href, [group.title])}
-                    {item.items?.map((subItem) =>
-                      subItem.href
-                        ? renderDocPageItem(subItem.title, subItem.href, [
-                            group.title,
-                            item.title,
-                          ])
-                        : null
-                    )}
-                  </div>
-                ))}
+                {group.pages.map((page) =>
+                  renderDocPageItem(page.name, page.url, [group.label])
+                )}
               </CommandGroup>
             ))}
             {blocks?.length ? (

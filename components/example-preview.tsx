@@ -4,8 +4,9 @@ import { Box, Text } from "ink";
 import { Component as ReactComponent, Suspense } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
-import { getExampleEntry } from "@/lib/examples";
-import type { ExampleFramework } from "@/lib/examples";
+import { ExamplesIndex } from "@/examples/__index__";
+import { isPublicBaseName, PUBLIC_BASE_NAME } from "@/registry/bases";
+import type { BaseName } from "@/registry/bases";
 
 const InkPreviewPlaceholder = ({
   componentName,
@@ -52,19 +53,19 @@ const OpenTuiPreviewPlaceholder = ({
 const PreviewPlaceholder = ({
   componentName,
   description,
-  framework,
+  base,
 }: {
   componentName: string;
   description: string;
-  framework: ExampleFramework;
+  base: BaseName;
 }) =>
-  framework === "opentui" ? (
-    <OpenTuiPreviewPlaceholder
+  isPublicBaseName(base) ? (
+    <InkPreviewPlaceholder
       componentName={componentName}
       description={description}
     />
   ) : (
-    <InkPreviewPlaceholder
+    <OpenTuiPreviewPlaceholder
       componentName={componentName}
       description={description}
     />
@@ -74,14 +75,14 @@ class PreviewErrorBoundary extends ReactComponent<
   {
     children: React.ReactNode;
     componentName: string;
-    framework: ExampleFramework;
+    base: BaseName;
   },
   { hasError: boolean; message?: string }
 > {
   public constructor(props: {
     children: React.ReactNode;
     componentName: string;
-    framework: ExampleFramework;
+    base: BaseName;
   }) {
     super(props);
     this.state = { hasError: false };
@@ -101,7 +102,7 @@ class PreviewErrorBoundary extends ReactComponent<
               ? `Live preview fallback: ${this.state.message}`
               : "Live preview fallback."
           }
-          framework={this.props.framework}
+          base={this.props.base}
         />
       );
     }
@@ -111,19 +112,19 @@ class PreviewErrorBoundary extends ReactComponent<
 }
 
 export const ExamplePreview = ({
-  framework = "ink",
+  base = PUBLIC_BASE_NAME,
   name,
 }: {
-  framework?: ExampleFramework;
+  base?: BaseName;
   name: string;
 }) => {
-  const example = getExampleEntry(name, framework);
+  const example = ExamplesIndex[base]?.[name];
   if (!example) {
     return (
       <PreviewPlaceholder
         componentName={name}
-        description={`No ${framework} live preview is registered for this example yet.`}
-        framework={framework}
+        description={`No ${base} live preview is registered for this example yet.`}
+        base={base}
       />
     );
   }
@@ -131,13 +132,13 @@ export const ExamplePreview = ({
   const ExampleComponent = example.component;
 
   return (
-    <PreviewErrorBoundary componentName={name} framework={framework}>
+    <PreviewErrorBoundary componentName={name} base={base}>
       <Suspense
         fallback={
           <PreviewPlaceholder
             componentName={name}
             description="Loading preview..."
-            framework={framework}
+            base={base}
           />
         }
       >

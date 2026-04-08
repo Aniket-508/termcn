@@ -12,19 +12,73 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import type { DocsConfig } from "@/lib/docs";
+import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
+import {
+  getCategoryFoldersForBase,
+  getCurrentBase,
+  getPagesFromFolder,
+} from "@/lib/page-tree";
+import type { source } from "@/lib/source";
+
+const TOP_LEVEL_SECTIONS = [
+  { href: "/docs", name: "Introduction" },
+  { href: "/docs/installation", name: "Installation" },
+  { href: "/docs/components", name: "Components" },
+  { href: "/docs/templates", name: "Templates" },
+  { href: "/docs/theming", name: "Theming" },
+  { href: "/docs/mcp", name: "MCP" },
+  { href: "/docs/registry", name: "Registry" },
+  { href: "/llms.txt", name: "llms.txt" },
+];
+
+const MENU_BUTTON_CLS =
+  "data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md";
+
+const SidebarPageGroup = ({
+  label,
+  pages,
+  pathname,
+}: {
+  label: React.ReactNode;
+  pages: { url: string; name: React.ReactNode }[];
+  pathname: string;
+}) => {
+  if (pages.length === 0) {
+    return null;
+  }
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel className="text-muted-foreground font-medium">
+        {label}
+      </SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu className="gap-0.5">
+          {pages.map((page) => (
+            <SidebarMenuItem key={page.url}>
+              <SidebarMenuButton
+                asChild
+                isActive={page.url === pathname}
+                className={MENU_BUTTON_CLS}
+              >
+                <Link href={page.url}>{page.name}</Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+};
 
 export const DocsSidebar = ({
   tree,
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
-  tree: DocsConfig["sidebarNav"];
+  tree: typeof source.pageTree;
 }) => {
   const pathname = usePathname();
+  const currentBase = getCurrentBase(pathname);
 
   return (
     <Sidebar
@@ -34,45 +88,60 @@ export const DocsSidebar = ({
     >
       <SidebarContent className="no-scrollbar px-2 pb-12">
         <div className="h-(--top-spacing) shrink-0" />
-        {tree.map((group) => (
-          <SidebarGroup key={group.title}>
-            <SidebarGroupLabel className="text-muted-foreground font-medium">
-              {group.title}
-            </SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu className="gap-0.5">
-                {group.items.map((navItem) => (
-                  <SidebarMenuItem key={navItem.href}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={navItem.href === pathname}
-                      className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
-                    >
-                      <Link href={navItem.href ?? ""}>{navItem.title}</Link>
-                    </SidebarMenuButton>
-                    {navItem.items?.length ? (
-                      <SidebarMenuSub>
-                        {navItem.items.map((subItem) => (
-                          <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={subItem.href === pathname}
-                              className="data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md"
-                            >
-                              <Link href={subItem.href ?? ""}>
-                                {subItem.title}
-                              </Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    ) : null}
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-muted-foreground font-medium">
+            Sections
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu className="gap-0.5">
+              {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
+                <SidebarMenuItem key={name}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={
+                      href === "/docs"
+                        ? pathname === href
+                        : pathname.startsWith(href)
+                    }
+                    className={MENU_BUTTON_CLS}
+                  >
+                    <Link href={href}>{name}</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        {tree.children.map((item) => {
+          if (item.type !== "folder") {
+            return null;
+          }
+          if (EXCLUDED_SECTIONS.has(item.$id ?? "")) {
+            return null;
+          }
+
+          if (isComponentsFolder(item)) {
+            return getCategoryFoldersForBase(item, currentBase).map(
+              (category) => (
+                <SidebarPageGroup
+                  key={category.$id}
+                  label={category.name}
+                  pages={getPagesFromFolder(category)}
+                  pathname={pathname}
+                />
+              )
+            );
+          }
+
+          return (
+            <SidebarPageGroup
+              key={item.$id}
+              label={item.name}
+              pages={getPagesFromFolder(item)}
+              pathname={pathname}
+            />
+          );
+        })}
       </SidebarContent>
     </Sidebar>
   );

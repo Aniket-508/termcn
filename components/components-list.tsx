@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+import { isComponentsFolder } from "@/lib/docs";
 import type { PageTreeFolder, PageTreePage } from "@/lib/page-tree";
-import { getPagesFromFolder } from "@/lib/page-tree";
+import { getCategoryFoldersForBase, getPagesFromFolder } from "@/lib/page-tree";
 import { source } from "@/lib/source";
+import { PUBLIC_BASE_NAME } from "@/registry/bases";
 
 const getFolder = (name: string): PageTreeFolder | undefined => {
   for (const node of source.pageTree.children) {
@@ -26,57 +28,67 @@ const ComponentGrid = ({ pages }: { pages: PageTreePage[] }) => (
   </div>
 );
 
+const CategoryGrid = ({ categories }: { categories: PageTreeFolder[] }) => (
+  <div className="flex flex-col gap-10">
+    {categories.map((cat) => {
+      const pages = getPagesFromFolder(cat);
+      if (pages.length === 0) {
+        return null;
+      }
+
+      return (
+        <div key={cat.$id}>
+          <h3 className="font-heading mb-4 text-lg font-medium tracking-tight">
+            {cat.name}
+          </h3>
+          <ComponentGrid pages={pages} />
+        </div>
+      );
+    })}
+  </div>
+);
+
 export const ComponentsList = ({
   folderName = "Components",
   category,
+  base = PUBLIC_BASE_NAME,
 }: {
   folderName?: string;
   category?: string;
+  base?: string;
 }) => {
   const folder = getFolder(folderName);
   if (!folder) {
     return null;
   }
 
-  if (category) {
-    const categoryFolder = folder.children.find(
-      (child): child is PageTreeFolder =>
-        child.type === "folder" &&
-        String(child.$id ?? "").endsWith(`/${category}`)
-    );
-    if (!categoryFolder) {
+  if (!isComponentsFolder(folder)) {
+    const pages = getPagesFromFolder(folder);
+    if (pages.length === 0) {
       return null;
     }
-    const pages = getPagesFromFolder(categoryFolder);
     return <ComponentGrid pages={pages} />;
   }
 
-  const categories = folder.children.filter(
-    (child): child is PageTreeFolder => child.type === "folder"
-  );
+  const categories = getCategoryFoldersForBase(folder, base);
+
+  if (category) {
+    const match = categories.find(
+      (cat) =>
+        cat.$id === category ||
+        String(cat.$id ?? "").endsWith(`/${category}`) ||
+        (typeof cat.name === "string" &&
+          cat.name.toLowerCase() === category.toLowerCase())
+    );
+    if (!match) {
+      return null;
+    }
+    return <ComponentGrid pages={getPagesFromFolder(match)} />;
+  }
 
   if (categories.length === 0) {
-    const pages = getPagesFromFolder(folder);
-    return <ComponentGrid pages={pages} />;
+    return null;
   }
 
-  return (
-    <div className="flex flex-col gap-10">
-      {categories.map((cat) => {
-        const pages = getPagesFromFolder(cat);
-        if (pages.length === 0) {
-          return null;
-        }
-
-        return (
-          <div key={cat.$id}>
-            <h3 className="font-heading mb-4 text-lg font-medium tracking-tight">
-              {cat.name}
-            </h3>
-            <ComponentGrid pages={pages} />
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <CategoryGrid categories={categories} />;
 };
