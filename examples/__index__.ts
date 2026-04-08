@@ -503,6 +503,10 @@ export const ExamplesIndex: Record<
     component: lazy(() => import("./text-input-placeholder")),
     filePath: "examples/text-input-placeholder.tsx",
   },
+  "theme-showcase": {
+    component: lazy(() => import("./theme-showcase")),
+    filePath: "examples/theme-showcase.tsx",
+  },
   "thinking-block-demo": {
     component: lazy(() => import("./thinking-block-demo")),
     filePath: "examples/thinking-block-demo.tsx",
