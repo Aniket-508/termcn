@@ -10,14 +10,18 @@
     ".agents/**",
     ".cursor/**",
     ".changeset/**",
-    ".claude/**"
+    ".claude/**",
+    "types/opentui-react.d.ts"
   ],
   "rules": {
     "react-perf/jsx-no-new-function-as-prop": "off"
   },
   "overrides": [
     {
-      "files": ["registry/ui/**/*.tsx", "registry/bases/ink/ui/**/*.tsx"],
+      "files": [
+        "registry/bases/ink/ui/**/*.tsx",
+        "registry/bases/opentui/ui/**/*.tsx"
+      ],
       "rules": {
         "react/no-array-index-key": "off",
         "react/no-react-children": "off",
@@ -27,7 +31,12 @@
         "complexity": "off",
         "no-bitwise": "off",
         "unicorn/number-literal-case": "off",
-        "no-new-func": "off"
+        "no-new-func": "off",
+        "no-unused-vars": "off",
+        "no-negated-condition": "off",
+        "no-nested-ternary": "off",
+        "unicorn/no-nested-ternary": "off",
+        "func-style": "off"
       }
     }
   ]

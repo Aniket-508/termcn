@@ -22,8 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@opentui/core": ["./types/opentui-core.d.ts"],
       "@opentui/react": ["./types/opentui-react.d.ts"],
+      "@opentui/react/jsx-runtime": ["./types/opentui-react-jsx-runtime.d.ts"],
       "react": ["./node_modules/@types/react"]
     }
   },
