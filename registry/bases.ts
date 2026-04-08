@@ -4,7 +4,7 @@ import { opentuiRegistryBase } from "@/registry/bases/opentui/registry";
 export const BASES = [
   {
     ...inkRegistryBase,
-    dependencies: ["ink", "ink-web"],
+    dependencies: ["ink"],
     description: "React-powered terminal components rendered with Ink.",
     isPublic: true,
     meta: {
@@ -15,7 +15,7 @@ export const BASES = [
   },
   {
     ...opentuiRegistryBase,
-    dependencies: ["@opentui/core", "@opentui/react"],
+    dependencies: ["@opentui/react"],
     description:
       "OpenTUI React components for internal previews and future CLI installs.",
     isPublic: false,
