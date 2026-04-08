@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "ink": {
+      "source": "thanhdongnguyen/ink-skill",
+      "sourceType": "github",
+      "computedHash": "31b11a308ab87386f524f35208059c0fbb358400f6890b59bdfbaf79b0218be1"
+    },
+    "opentui": {
+      "source": "msmps/opentui-skill",
+      "sourceType": "github",
+      "computedHash": "2915038bb3297e759f740f9e6bfa885ed80a4a7fe945825f5874b48db9ce0fd2"
+    }
+  }
+}
