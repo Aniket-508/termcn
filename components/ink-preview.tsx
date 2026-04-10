@@ -3,7 +3,7 @@
 import "ink-web/css";
 import "@xterm/xterm/css/xterm.css";
 import { InkTerminalBox } from "ink-web";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { useConfig } from "@/hooks/use-config";
@@ -32,12 +32,38 @@ const InkPreview = ({
     setConfig((c) => ({ ...c, terminalThemeKey: theme }));
   }, [theme, setConfig]);
 
+  const baseTheme = useMemo(() => terminalThemeMap[themeKey], [themeKey]);
+
+  const xtermTheme = useMemo(
+    () => ({
+      background: baseTheme.colors.background,
+      cursor: baseTheme.colors.foreground,
+      foreground: baseTheme.colors.foreground,
+      selectionBackground: baseTheme.colors.selection,
+      selectionForeground: baseTheme.colors.selectionForeground,
+    }),
+    [baseTheme]
+  );
+
   return (
-    <InkTerminalBox loading={false} padding={12} rows={rows} onReady={onReady}>
-      <ThemeProvider theme={terminalThemeMap[themeKey]}>
-        {children}
-      </ThemeProvider>
-    </InkTerminalBox>
+    <div
+      className="terminal-preview-root"
+      style={
+        {
+          "--ink-terminal-bg": xtermTheme.background,
+        } as React.CSSProperties
+      }
+    >
+      <InkTerminalBox
+        loading={false}
+        padding={10}
+        rows={rows}
+        termOptions={{ theme: xtermTheme }}
+        onReady={onReady}
+      >
+        <ThemeProvider theme={baseTheme}>{children}</ThemeProvider>
+      </InkTerminalBox>
+    </div>
   );
 };
 
