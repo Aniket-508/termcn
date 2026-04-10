@@ -33,7 +33,7 @@ export const tokyoNightTheme: Theme = {
     warning: "#E0AF68",
     warningForeground: "#1A1B26",
   },
-  name: "tokyoNight",
+  name: "tokyo-night",
   spacing: {
     0: 0,
     1: 1,

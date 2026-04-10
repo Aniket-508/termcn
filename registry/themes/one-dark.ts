@@ -33,7 +33,7 @@ export const oneDarkTheme: Theme = {
     warning: "#E5C07B",
     warningForeground: "#282C34",
   },
-  name: "oneDark",
+  name: "one-dark",
   spacing: {
     0: 0,
     1: 1,
