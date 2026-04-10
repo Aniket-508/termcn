@@ -81,12 +81,12 @@ export const FAQJsonLd = () => {
     },
     {
       answer:
-        "Add components under registry/new-york/, list them in registry.json, run pnpm registry:build, then deploy. Users install with npx shadcn@latest add pointing at your published JSON URL.",
+        "Add or edit components under registry/bases/ink/ or registry/bases/opentui/, register them in registry.json, run pnpm registry:build (which refreshes public/r/), then deploy. Consumers install with npx shadcn@latest add against your published registry URL.",
       question: `How do I publish components with ${SITE.NAME}?`,
     },
     {
       answer:
-        "Yes. The project is intended to be forked or cloned; source is available on GitHub under an open license.",
+        "Yes. The source is on GitHub and released under the MIT License.",
       question: `Is ${SITE.NAME} open source?`,
     },
   ];
