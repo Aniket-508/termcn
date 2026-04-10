@@ -1,0 +1,68 @@
+---
+title: "Chat Thread"
+description: "Scrollable container for stacking ChatMessage components in a conversation thread"
+---
+
+<ComponentPreview base="ink" name="chat-thread-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/chat-thread
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="chat-thread"
+  title="components/ui/chat-thread.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ChatThread } from "@/components/ui/chat-thread";
+import { ChatMessage } from "@/components/ui/chat-message";
+```
+
+```tsx
+<ChatThread maxHeight={20}>
+  <ChatMessage sender="user">How do I center a div?</ChatMessage>
+  <ChatMessage sender="assistant">
+    Use flexbox: display flex, justify-content center, align-items center.
+  </ChatMessage>
+</ChatThread>
+```
+
+## API Reference
+
+### ChatThread
+
+| Prop         | Type        | Default     |
+| ------------ | ----------- | ----------- |
+| `maxHeight`  | `number`    | `undefined` |
+| `autoScroll` | `boolean`   | `true`      |
+| `children`   | `ReactNode` | `undefined` |

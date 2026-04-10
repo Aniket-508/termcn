@@ -1,0 +1,61 @@
+---
+title: "Timer"
+description: "Countdown timer with pause/resume and auto-start"
+---
+
+<ComponentPreview base="ink" name="timer-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/timer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="timer" title="components/ui/timer.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Timer } from "@/components/ui/timer";
+```
+
+```tsx
+<Timer duration={300} format="ms" label="Pomodoro" autoStart />
+```
+
+## API Reference
+
+### Timer
+
+| Prop         | Type                   | Default     |
+| ------------ | ---------------------- | ----------- |
+| `duration`   | `number`               | `required`  |
+| `onComplete` | `() => void`           | `undefined` |
+| `autoStart`  | `boolean`              | `false`     |
+| `format`     | `"hms" \| "ms" \| "s"` | `"hms"`     |
+| `color`      | `string`               | `undefined` |
+| `label`      | `string`               | `undefined` |

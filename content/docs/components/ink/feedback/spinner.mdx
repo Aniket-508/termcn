@@ -1,0 +1,68 @@
+---
+title: "Spinner"
+description: "Animated spinner with 12+ styles"
+---
+
+<ComponentPreview base="ink" name="spinner-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/spinner
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="spinner" title="components/ui/spinner.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Spinner } from "@/components/ui/spinner";
+```
+
+```tsx
+<Spinner type="dots" label="Loading components" />
+```
+
+## Examples
+
+### Spinner Styles
+
+Multiple built-in animation styles.
+
+<ComponentPreview base="ink" name="spinner-styles" />
+
+## API Reference
+
+### Spinner
+
+| Prop     | Type                                                                              | Default     |
+| -------- | --------------------------------------------------------------------------------- | ----------- |
+| `type`   | `SpinnerName` from [`cli-spinners`](https://github.com/sindresorhus/cli-spinners) | `"dots"`    |
+| `label`  | `string`                                                                          | `undefined` |
+| `color`  | `string`                                                                          | `undefined` |
+| `fps`    | `number` — used only with custom `frames`                                         | `12`        |
+| `frames` | `string[]`                                                                        | `undefined` |

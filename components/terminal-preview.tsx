@@ -2,14 +2,15 @@
 
 import { createDynamicTerminal } from "ink-web/next";
 
-import { MacWindow } from "@/components/mac-window";
-import type { TerminalPreviewClientProps } from "@/components/terminal-preview-client";
-import { TerminalTheme } from "@/components/terminal-theme";
-import { cn } from "@/lib/utils";
+import { ExamplePreview } from "@/components/example-preview";
+import type { InkPreviewProps } from "@/components/ink-preview";
+import type { terminalThemeMap } from "@/lib/terminal-themes";
+import { isPublicBaseName } from "@/registry/bases";
+import type { BaseName } from "@/registry/bases";
 
-const TerminalPreviewClient = createDynamicTerminal<TerminalPreviewClientProps>(
+const InkPreview = createDynamicTerminal<InkPreviewProps>(
   async () => {
-    const m = await import("./terminal-preview-client");
+    const m = await import("./ink-preview");
     return m.default;
   },
   {
@@ -17,16 +18,24 @@ const TerminalPreviewClient = createDynamicTerminal<TerminalPreviewClientProps>(
   }
 );
 
+export interface TerminalPreviewProps {
+  base: BaseName;
+  name: string;
+  theme?: keyof typeof terminalThemeMap;
+}
+
 export const TerminalPreview = ({
-  className,
-  title = "Terminal",
-  ...props
-}: TerminalPreviewClientProps & { className?: string; title?: string }) => (
-  <MacWindow
-    className={cn("mt-6", className)}
-    title={title}
-    trailing={<TerminalTheme />}
-  >
-    <TerminalPreviewClient {...props} />
-  </MacWindow>
-);
+  base,
+  name,
+  theme,
+}: TerminalPreviewProps) => {
+  if (!isPublicBaseName(base)) {
+    return <ExamplePreview base={base} name={name} />;
+  }
+
+  return (
+    <InkPreview theme={theme}>
+      <ExamplePreview base={base} name={name} />
+    </InkPreview>
+  );
+};

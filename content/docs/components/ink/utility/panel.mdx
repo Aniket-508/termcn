@@ -1,0 +1,67 @@
+---
+title: "Panel"
+description: "Titled bordered panel"
+---
+
+<ComponentPreview base="ink" name="panel-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/panel
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="panel" title="components/ui/panel.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Panel } from "@/components/ui/panel";
+```
+
+```tsx
+<Panel title="System Status" borderStyle="round" width={40}>
+  <Text>All services operational</Text>
+</Panel>
+```
+
+## API Reference
+
+### Panel
+
+| Prop          | Type                                                                                         | Default     |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `title`       | `string`                                                                                     | `undefined` |
+| `titleColor`  | `string`                                                                                     | `undefined` |
+| `borderColor` | `string`                                                                                     | `undefined` |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `undefined` |
+| `bordered`    | `boolean`                                                                                    | `true`      |
+| `width`       | `number`                                                                                     | `undefined` |
+| `height`      | `number`                                                                                     | `undefined` |
+| `paddingX`    | `number`                                                                                     | `1`         |
+| `paddingY`    | `number`                                                                                     | `0`         |
+| `children`    | `ReactNode`                                                                                  | `undefined` |

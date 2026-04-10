@@ -1,17 +1,4 @@
 {
-  "pages": [
-    "layout",
-    "typography",
-    "input",
-    "selection",
-    "data",
-    "feedback",
-    "navigation",
-    "overlays",
-    "forms",
-    "utility",
-    "charts",
-    "ai"
-  ],
-  "title": "Components"
+  "title": "Components",
+  "pages": ["..."]
 }

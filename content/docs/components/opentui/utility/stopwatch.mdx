@@ -1,0 +1,62 @@
+---
+title: "Stopwatch"
+description: "Count-up stopwatch with laps and reset"
+---
+
+<ComponentPreview base="opentui" name="stopwatch-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/stopwatch
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="stopwatch"
+  title="components/ui/stopwatch.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Stopwatch } from "@/components/ui/stopwatch";
+```
+
+```tsx
+<Stopwatch autoStart showLaps color="green" />
+```
+
+## API Reference
+
+### Stopwatch
+
+| Prop        | Type      | Default     |
+| ----------- | --------- | ----------- |
+| `autoStart` | `boolean` | `false`     |
+| `color`     | `string`  | `undefined` |
+| `showLaps`  | `boolean` | `true`      |

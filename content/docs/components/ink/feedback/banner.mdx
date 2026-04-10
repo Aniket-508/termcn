@@ -1,0 +1,76 @@
+---
+title: "Banner"
+description: "Full-width announcement banner"
+---
+
+<ComponentPreview base="ink" name="banner-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/banner
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="banner" title="components/ui/banner.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Banner } from "@/components/ui/banner";
+```
+
+```tsx
+<Banner variant="info" title="Update">
+  A new version is available. Run npx update to upgrade.
+</Banner>
+```
+
+## Examples
+
+### Success Banner
+
+<ComponentPreview base="ink" name="banner-success" />
+
+### Error with Custom Icon
+
+<ComponentPreview base="ink" name="banner-error" />
+
+## API Reference
+
+### Banner
+
+| Prop          | Type                                                       | Default     |
+| ------------- | ---------------------------------------------------------- | ----------- |
+| `children`    | `ReactNode`                                                | `required`  |
+| `variant`     | `"info" \| "warning" \| "error" \| "success" \| "neutral"` | `"info"`    |
+| `icon`        | `string`                                                   | `undefined` |
+| `title`       | `string`                                                   | `undefined` |
+| `dismissible` | `boolean`                                                  | `false`     |
+| `onDismiss`   | `() => void`                                               | `undefined` |
+| `color`       | `string`                                                   | `undefined` |
+| `accentChar`  | `string`                                                   | `"┃"`       |
+| `gap`         | `number`                                                   | `1`         |

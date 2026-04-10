@@ -1,1 +1,1 @@
-export { useClipboard } from "@/registry/hooks/use-clipboard";
+export { useClipboard } from "@/registry/bases/ink/hooks/use-clipboard";

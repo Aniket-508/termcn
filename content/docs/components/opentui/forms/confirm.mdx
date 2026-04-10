@@ -1,0 +1,70 @@
+---
+title: "Confirm"
+description: "Yes/No confirmation prompt"
+---
+
+<ComponentPreview base="opentui" name="confirm-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/confirm
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="confirm"
+  title="components/ui/confirm.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Confirm } from "@/components/ui/confirm";
+```
+
+```tsx
+<Confirm
+  message="Are you sure you want to continue?"
+  onConfirm={() => console.log("Confirmed")}
+  onCancel={() => console.log("Cancelled")}
+/>
+```
+
+## API Reference
+
+### Confirm
+
+| Prop           | Type                    | Default     |
+| -------------- | ----------------------- | ----------- |
+| `message`      | `string`                | `required`  |
+| `onConfirm`    | `() => void`            | `undefined` |
+| `onCancel`     | `() => void`            | `undefined` |
+| `confirmLabel` | `string`                | `"Yes"`     |
+| `cancelLabel`  | `string`                | `"No"`      |
+| `defaultValue` | `boolean`               | `false`     |
+| `variant`      | `"default" \| "danger"` | `"default"` |

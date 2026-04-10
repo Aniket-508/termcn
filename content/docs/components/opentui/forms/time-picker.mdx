@@ -1,0 +1,71 @@
+---
+title: "Time Picker"
+description: "Time picker with hour/minute/second spinners"
+---
+
+<ComponentPreview base="opentui" name="time-picker-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/time-picker
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="time-picker"
+  title="components/ui/time-picker.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { TimePicker } from "@/components/ui/time-picker";
+```
+
+```tsx
+<TimePicker
+  label="Meeting time"
+  value={{ hours: 14, minutes: 30 }}
+  onChange={(time) => console.log("Changed:", time)}
+  onSubmit={(time) => console.log("Submitted:", time)}
+/>
+```
+
+## API Reference
+
+### TimePicker
+
+| Prop        | Type                                                 | Default     |
+| ----------- | ---------------------------------------------------- | ----------- |
+| `value`     | `{ hours: number; minutes: number }`                 | `undefined` |
+| `onChange`  | `(time: { hours: number; minutes: number }) => void` | `undefined` |
+| `onSubmit`  | `(time: { hours: number; minutes: number }) => void` | `undefined` |
+| `label`     | `string`                                             | `undefined` |
+| `format`    | `12 \| 24`                                           | `24`        |
+| `autoFocus` | `boolean`                                            | `false`     |
+| `id`        | `string`                                             | `undefined` |

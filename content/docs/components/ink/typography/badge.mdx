@@ -1,0 +1,82 @@
+---
+title: "Badge"
+description: "Semantic status indicator badge (success/error/warning/info)"
+---
+
+<ComponentPreview base="ink" name="badge-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/badge
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="badge" title="components/ui/badge.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Badge } from "@/components/ui/badge";
+```
+
+```tsx
+<Badge variant="success">Active</Badge>
+```
+
+## Examples
+
+### Basic
+
+A basic default badge.
+
+<ComponentPreview base="ink" name="badge-basic" />
+
+### Bold Without Border
+
+Use `bold` and `bordered={false}` for an inline label style.
+
+<ComponentPreview base="ink" name="badge-bold" />
+
+### Custom Border Style
+
+Customize the border style and padding.
+
+<ComponentPreview base="ink" name="badge-custom-border" />
+
+## API Reference
+
+### Badge
+
+| Prop          | Type                                                                                         | Default     |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `children`    | `string`                                                                                     | `required`  |
+| `variant`     | `"default" \| "success" \| "warning" \| "error" \| "info" \| "secondary"`                    | `"default"` |
+| `color`       | `string`                                                                                     | `undefined` |
+| `bold`        | `boolean`                                                                                    | `false`     |
+| `bordered`    | `boolean`                                                                                    | `true`      |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   |
+| `paddingX`    | `number`                                                                                     | `1`         |

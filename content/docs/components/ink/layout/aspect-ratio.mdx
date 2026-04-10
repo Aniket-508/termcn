@@ -1,0 +1,64 @@
+---
+title: "Aspect Ratio"
+description: "Constrains children to a given aspect ratio"
+---
+
+<ComponentPreview base="ink" name="aspect-ratio-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/aspect-ratio
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="aspect-ratio"
+  title="components/ui/aspect-ratio.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+```
+
+```tsx
+<AspectRatio ratio={16 / 9} width={60}>
+  <Text>Widescreen content</Text>
+</AspectRatio>
+```
+
+## API Reference
+
+### AspectRatio
+
+| Prop       | Type        | Default  |
+| ---------- | ----------- | -------- |
+| `children` | `ReactNode` | required |
+| `ratio`    | `number`    | `16 / 9` |
+| `width`    | `number`    | `80`     |

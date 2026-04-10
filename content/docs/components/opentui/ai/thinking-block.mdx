@@ -1,0 +1,69 @@
+---
+title: "Thinking Block"
+description: "Collapsible block for displaying extended thinking / reasoning content from an AI model"
+---
+
+<ComponentPreview base="opentui" name="thinking-block-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/thinking-block
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="thinking-block"
+  title="components/ui/thinking-block.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ThinkingBlock } from "@/components/ui/thinking-block";
+```
+
+```tsx
+<ThinkingBlock
+  content="The user wants to refactor the function. I should split it into smaller helpers..."
+  tokenCount={1284}
+  duration={3200}
+/>
+```
+
+## API Reference
+
+### ThinkingBlock
+
+| Prop               | Type      | Default       |
+| ------------------ | --------- | ------------- |
+| `content`          | `string`  | `required`    |
+| `streaming`        | `boolean` | `false`       |
+| `defaultCollapsed` | `boolean` | `true`        |
+| `label`            | `string`  | `"Reasoning"` |
+| `tokenCount`       | `number`  | `undefined`   |
+| `duration`         | `number`  | `undefined`   |

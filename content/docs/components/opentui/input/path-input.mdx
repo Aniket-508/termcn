@@ -1,0 +1,78 @@
+---
+title: "Path Input"
+description: "Filesystem path input with tab autocomplete"
+---
+
+<ComponentPreview base="opentui" name="path-input-demo" hideCode />
+
+<Callout type="info">
+  Path input requires Node.js filesystem access and may not render in the
+  browser preview.
+</Callout>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/path-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="path-input"
+  title="components/ui/path-input.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { PathInput } from "@/components/ui/path-input";
+```
+
+```tsx
+<PathInput
+  label="Project Directory"
+  placeholder="/home/user/projects"
+  onSubmit={(path) => console.log("Selected:", path)}
+/>
+```
+
+## API Reference
+
+### PathInput
+
+| Prop          | Type                      | Default     |
+| ------------- | ------------------------- | ----------- |
+| `value`       | `string`                  | `undefined` |
+| `onChange`    | `(value: string) => void` | `undefined` |
+| `onSubmit`    | `(value: string) => void` | `undefined` |
+| `label`       | `string`                  | `undefined` |
+| `placeholder` | `string`                  | `"/"`       |
+| `autoFocus`   | `boolean`                 | `false`     |
+| `id`          | `string`                  | `undefined` |
+| `width`       | `number`                  | `40`        |
+| `filter`      | `string`                  | `undefined` |
+| `dirsOnly`    | `boolean`                 | `false`     |

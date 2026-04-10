@@ -1,0 +1,64 @@
+---
+title: "Tag Input"
+description: "Add and remove tags inline"
+---
+
+<ComponentPreview base="opentui" name="tag-input-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/tag-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="tag-input"
+  title="components/ui/tag-input.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { TagInput } from "@/components/ui/tag-input";
+```
+
+```tsx
+<TagInput placeholder="Add a tag…" onChange={(tags) => {}} />
+```
+
+## API Reference
+
+### TagInput
+
+| Prop          | Type                       | Default                   |
+| ------------- | -------------------------- | ------------------------- |
+| `value`       | `string[]`                 | `undefined`               |
+| `onChange`    | `(tags: string[]) => void` | `undefined`               |
+| `placeholder` | `string`                   | `"Type and press Enter…"` |
+| `maxTags`     | `number`                   | `undefined`               |
+| `delimiter`   | `string`                   | `undefined`               |

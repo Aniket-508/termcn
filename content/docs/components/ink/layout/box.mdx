@@ -1,0 +1,62 @@
+---
+title: "Box"
+description: "Enhanced flexbox container with theme-aware borders"
+---
+
+<ComponentPreview base="ink" name="box-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/box
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="box" title="components/ui/box.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Box } from "@/components/ui/box";
+```
+
+```tsx
+<Box border borderVariant="focus" padding={1}>
+  <Text>Focused container</Text>
+</Box>
+```
+
+## API Reference
+
+### Box
+
+| Prop            | Type                                                                   | Default     |
+| --------------- | ---------------------------------------------------------------------- | ----------- |
+| `border`        | `boolean`                                                              | `undefined` |
+| `borderVariant` | `"default" \| "muted" \| "focus" \| "success" \| "error" \| "warning"` | `"default"` |
+| `borderColor`   | `string`                                                               | `undefined` |
+| `children`      | `ReactNode`                                                            | `undefined` |
+| `...props`      | `InkBoxProps`                                                          | —           |

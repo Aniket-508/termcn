@@ -1,0 +1,74 @@
+---
+title: "Text Area"
+description: "Multi-line text editor with word wrap"
+---
+
+<ComponentPreview base="ink" name="text-area-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/text-area
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="text-area"
+  title="components/ui/text-area.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { TextArea } from "@/components/ui/text-area";
+```
+
+```tsx
+<TextArea
+  label="Description"
+  placeholder="Enter a description..."
+  rows={4}
+  onSubmit={(value) => console.log("Submitted:", value)}
+/>
+```
+
+## API Reference
+
+### TextArea
+
+| Prop          | Type                                                                                         | Default     |
+| ------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `value`       | `string`                                                                                     | `undefined` |
+| `onChange`    | `(value: string) => void`                                                                    | `undefined` |
+| `onSubmit`    | `(value: string) => void`                                                                    | `undefined` |
+| `placeholder` | `string`                                                                                     | `""`        |
+| `rows`        | `number`                                                                                     | `4`         |
+| `label`       | `string`                                                                                     | `undefined` |
+| `id`          | `string`                                                                                     | `undefined` |
+| `borderStyle` | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   |
+| `paddingX`    | `number`                                                                                     | `1`         |
+| `cursor`      | `string`                                                                                     | `"█"`       |

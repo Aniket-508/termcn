@@ -1,0 +1,72 @@
+---
+title: "Tool Call"
+description: "Displays an AI tool invocation with status indicator, args, result, and elapsed time"
+---
+
+<ComponentPreview base="ink" name="tool-call-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/tool-call
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="tool-call"
+  title="components/ui/tool-call.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ToolCall } from "@/components/ui/tool-call";
+```
+
+```tsx
+<ToolCall
+  name="search_codebase"
+  args={{ query: "handleSubmit", maxResults: 10 }}
+  status="success"
+  result="Found 3 matches in src/components/"
+  duration={245}
+/>
+```
+
+## API Reference
+
+### ToolCall
+
+| Prop               | Type                                             | Default     |
+| ------------------ | ------------------------------------------------ | ----------- |
+| `name`             | `string`                                         | `required`  |
+| `args`             | `Record<string, unknown>`                        | `undefined` |
+| `status`           | `"pending" \| "running" \| "success" \| "error"` | `required`  |
+| `result`           | `unknown`                                        | `undefined` |
+| `duration`         | `number`                                         | `undefined` |
+| `collapsible`      | `boolean`                                        | `true`      |
+| `defaultCollapsed` | `boolean`                                        | `true`      |

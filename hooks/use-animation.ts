@@ -1,1 +1,1 @@
-export { useAnimation } from "@/registry/hooks/use-animation";
+export { useAnimation } from "@/registry/bases/ink/hooks/use-animation";

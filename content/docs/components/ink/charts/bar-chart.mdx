@@ -1,0 +1,73 @@
+---
+title: "Bar Chart"
+description: "Horizontal and vertical bar chart with labels"
+---
+
+<ComponentPreview base="ink" name="bar-chart-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/bar-chart
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="bar-chart"
+  title="components/ui/bar-chart.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { BarChart } from "@/components/ui/bar-chart";
+```
+
+```tsx
+<BarChart
+  data={[
+    { label: "Mon", value: 12 },
+    { label: "Tue", value: 28 },
+  ]}
+  width={40}
+  showValues
+  title="Weekly Traffic"
+/>
+```
+
+## API Reference
+
+### BarChart
+
+| Prop         | Type                         | Default        |
+| ------------ | ---------------------------- | -------------- |
+| `data`       | `BarChartItem[]`             | `required`     |
+| `direction`  | `"horizontal" \| "vertical"` | `"horizontal"` |
+| `width`      | `number`                     | `30`           |
+| `height`     | `number`                     | `10`           |
+| `showValues` | `boolean`                    | `true`         |
+| `title`      | `string`                     | `undefined`    |

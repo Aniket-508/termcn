@@ -1,0 +1,67 @@
+---
+title: "Card"
+description: "Card with header, body, and footer slots"
+---
+
+<ComponentPreview base="opentui" name="card-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/card
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="opentui" name="card" title="components/ui/card.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Card } from "@/components/ui/card";
+```
+
+```tsx
+<Card title="System Info" subtitle="Local machine">
+  <Text>CPU: 4 cores @ 3.2 GHz</Text>
+</Card>
+```
+
+## API Reference
+
+### Card
+
+| Prop                | Type                                                                                         | Default     |
+| ------------------- | -------------------------------------------------------------------------------------------- | ----------- |
+| `title`             | `string`                                                                                     | `undefined` |
+| `subtitle`          | `string`                                                                                     | `undefined` |
+| `children`          | `ReactNode`                                                                                  | `required`  |
+| `footer`            | `ReactNode`                                                                                  | `undefined` |
+| `borderColor`       | `string`                                                                                     | `undefined` |
+| `width`             | `number`                                                                                     | `undefined` |
+| `borderStyle`       | `"single" \| "double" \| "round" \| "bold" \| "singleDouble" \| "doubleSingle" \| "classic"` | `"round"`   |
+| `paddingX`          | `number`                                                                                     | `1`         |
+| `paddingY`          | `number`                                                                                     | `0`         |
+| `footerDividerChar` | `string`                                                                                     | `"─"`       |

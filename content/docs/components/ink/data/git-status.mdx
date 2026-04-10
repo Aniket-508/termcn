@@ -1,0 +1,64 @@
+---
+title: "Git Status"
+description: "Git status display (branch, staged, modified, ahead/behind)"
+---
+
+<ComponentPreview base="ink" name="git-status-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/git-status
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="git-status"
+  title="components/ui/git-status.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { GitStatus } from "@/components/ui/git-status";
+```
+
+```tsx
+<GitStatus branch="main" staged={2} modified={5} ahead={1} behind={0} />
+```
+
+## API Reference
+
+### GitStatus
+
+| Prop       | Type     | Default    |
+| ---------- | -------- | ---------- |
+| `branch`   | `string` | `required` |
+| `staged`   | `number` | `0`        |
+| `modified` | `number` | `0`        |
+| `ahead`    | `number` | `0`        |
+| `behind`   | `number` | `0`        |

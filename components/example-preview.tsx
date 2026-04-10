@@ -5,8 +5,10 @@ import { Component as ReactComponent, Suspense } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
 import { ExamplesIndex } from "@/examples/__index__";
+import { isPublicBaseName, PUBLIC_BASE_NAME } from "@/registry/bases";
+import type { BaseName } from "@/registry/bases";
 
-const PreviewPlaceholder = ({
+const InkPreviewPlaceholder = ({
   componentName,
   description,
 }: {
@@ -33,13 +35,54 @@ const PreviewPlaceholder = ({
   );
 };
 
+const OpenTuiPreviewPlaceholder = ({
+  componentName,
+  description,
+}: {
+  componentName: string;
+  description: string;
+}) => (
+  <div className="flex min-h-72 items-center justify-center p-6 text-center text-sm text-muted-foreground">
+    <div className="space-y-2">
+      <div className="font-medium text-foreground">{componentName}</div>
+      <div>{description}</div>
+    </div>
+  </div>
+);
+
+const PreviewPlaceholder = ({
+  componentName,
+  description,
+  base,
+}: {
+  componentName: string;
+  description: string;
+  base: BaseName;
+}) =>
+  isPublicBaseName(base) ? (
+    <InkPreviewPlaceholder
+      componentName={componentName}
+      description={description}
+    />
+  ) : (
+    <OpenTuiPreviewPlaceholder
+      componentName={componentName}
+      description={description}
+    />
+  );
+
 class PreviewErrorBoundary extends ReactComponent<
-  { children: React.ReactNode; componentName: string },
+  {
+    children: React.ReactNode;
+    componentName: string;
+    base: BaseName;
+  },
   { hasError: boolean; message?: string }
 > {
   public constructor(props: {
     children: React.ReactNode;
     componentName: string;
+    base: BaseName;
   }) {
     super(props);
     this.state = { hasError: false };
@@ -59,6 +102,7 @@ class PreviewErrorBoundary extends ReactComponent<
               ? `Live preview fallback: ${this.state.message}`
               : "Live preview fallback."
           }
+          base={this.props.base}
         />
       );
     }
@@ -67,18 +111,34 @@ class PreviewErrorBoundary extends ReactComponent<
   }
 }
 
-export const ExamplePreview = ({ name }: { name: string }) => {
-  const example = ExamplesIndex[name];
+export const ExamplePreview = ({
+  base = PUBLIC_BASE_NAME,
+  name,
+}: {
+  base?: BaseName;
+  name: string;
+}) => {
+  const example = ExamplesIndex[base]?.[name];
+  if (!example) {
+    return (
+      <PreviewPlaceholder
+        componentName={name}
+        description={`No ${base} live preview is registered for this example yet.`}
+        base={base}
+      />
+    );
+  }
 
   const ExampleComponent = example.component;
 
   return (
-    <PreviewErrorBoundary componentName={name}>
+    <PreviewErrorBoundary componentName={name} base={base}>
       <Suspense
         fallback={
           <PreviewPlaceholder
             componentName={name}
             description="Loading preview..."
+            base={base}
           />
         }
       >

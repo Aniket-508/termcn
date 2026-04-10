@@ -1,0 +1,76 @@
+---
+title: "List"
+description: "Navigable list with optional filtering"
+---
+
+<ComponentPreview base="ink" name="list-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/list
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="list" title="components/ui/list.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { List } from "@/components/ui/list";
+```
+
+```tsx
+<List
+  items={[
+    { key: "ts", label: "TypeScript", description: "Typed JavaScript" },
+    { key: "rs", label: "Rust", description: "Systems language" },
+    { key: "go", label: "Go", description: "Cloud-native language" },
+  ]}
+  onSelect={(item) => console.log(item.key)}
+/>
+```
+
+## API Reference
+
+### List
+
+| Prop         | Type                       | Default     |
+| ------------ | -------------------------- | ----------- |
+| `items`      | `ListItem[]`               | `required`  |
+| `onSelect`   | `(item: ListItem) => void` | `undefined` |
+| `filterable` | `boolean`                  | `false`     |
+| `height`     | `number`                   | `10`        |
+| `cursor`     | `string`                   | `"›"`       |
+
+### ListItem
+
+| Prop          | Type     | Default     |
+| ------------- | -------- | ----------- |
+| `key`         | `string` | `required`  |
+| `label`       | `string` | `required`  |
+| `description` | `string` | `undefined` |
+| `color`       | `string` | `undefined` |

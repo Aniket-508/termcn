@@ -1,0 +1,72 @@
+---
+title: "Date Picker"
+description: "Calendar date picker with keyboard navigation"
+---
+
+<ComponentPreview base="ink" name="date-picker-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/date-picker
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="date-picker"
+  title="components/ui/date-picker.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DatePicker } from "@/components/ui/date-picker";
+```
+
+```tsx
+<DatePicker
+  label="Birth date"
+  value={new Date(2026, 0, 15)}
+  onChange={(date) => console.log("Selected:", date)}
+  onSubmit={(date) => console.log("Submitted:", date)}
+/>
+```
+
+## API Reference
+
+### DatePicker
+
+| Prop        | Type                   | Default     |
+| ----------- | ---------------------- | ----------- |
+| `value`     | `Date`                 | `undefined` |
+| `onChange`  | `(date: Date) => void` | `undefined` |
+| `onSubmit`  | `(date: Date) => void` | `undefined` |
+| `label`     | `string`               | `undefined` |
+| `minDate`   | `Date`                 | `undefined` |
+| `maxDate`   | `Date`                 | `undefined` |
+| `autoFocus` | `boolean`              | `false`     |
+| `id`        | `string`               | `undefined` |

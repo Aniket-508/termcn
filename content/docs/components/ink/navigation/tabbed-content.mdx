@@ -1,0 +1,83 @@
+---
+title: "Tabbed Content"
+description: "Tab bar wired to content panels"
+---
+
+<ComponentPreview base="ink" name="tabbed-content-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/tabbed-content
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="tabbed-content"
+  title="components/ui/tabbed-content.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { TabbedContent } from "@/components/ui/tabbed-content";
+```
+
+```tsx
+<TabbedContent
+  defaultTab="overview"
+  tabs={[
+    {
+      id: "overview",
+      label: "Overview",
+      content: <Text>Overview content.</Text>,
+    },
+    { id: "logs", label: "Logs", content: <Text>Logs content.</Text> },
+  ]}
+/>
+```
+
+## API Reference
+
+### TabbedContent
+
+| Prop          | Type                                | Default       |
+| ------------- | ----------------------------------- | ------------- |
+| `tabs`        | `TabbedContentTab[]`                | `required`    |
+| `defaultTab`  | `string`                            | `undefined`   |
+| `activeTab`   | `string`                            | `undefined`   |
+| `onChange`    | `(id: string) => void`              | `undefined`   |
+| `tabBarStyle` | `"underline" \| "box" \| "minimal"` | `"underline"` |
+
+### TabbedContentTab
+
+| Prop       | Type        | Default     |
+| ---------- | ----------- | ----------- |
+| `id`       | `string`    | `required`  |
+| `label`    | `string`    | `required`  |
+| `content`  | `ReactNode` | `required`  |
+| `disabled` | `boolean`   | `undefined` |

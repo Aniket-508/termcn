@@ -1,0 +1,70 @@
+---
+title: "Progress Circle"
+description: "Circular progress indicator using Unicode braille"
+---
+
+<ComponentPreview base="ink" name="progress-circle-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/progress-circle
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="progress-circle"
+  title="components/ui/progress-circle.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ProgressCircle } from "@/components/ui/progress-circle";
+```
+
+```tsx
+<ProgressCircle value={75} size="sm" label="Memory" showPercent />
+```
+
+## Examples
+
+### Sizes
+
+<ComponentPreview base="ink" name="progress-circle-sizes" />
+
+## API Reference
+
+### ProgressCircle
+
+| Prop          | Type                   | Default     |
+| ------------- | ---------------------- | ----------- |
+| `value`       | `number`               | `required`  |
+| `size`        | `"sm" \| "md" \| "lg"` | `"sm"`      |
+| `color`       | `string`               | `undefined` |
+| `label`       | `string`               | `undefined` |
+| `showPercent` | `boolean`              | `false`     |

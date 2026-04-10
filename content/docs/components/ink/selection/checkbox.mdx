@@ -1,0 +1,68 @@
+---
+title: "Checkbox"
+description: "Checkbox with indeterminate state"
+---
+
+<ComponentPreview base="ink" name="checkbox-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/checkbox
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="checkbox"
+  title="components/ui/checkbox.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Checkbox } from "@/components/ui/checkbox";
+```
+
+```tsx
+<Checkbox checked label="Enable telemetry" onChange={(checked) => {}} />
+```
+
+## API Reference
+
+### Checkbox
+
+| Prop                | Type                         | Default     |
+| ------------------- | ---------------------------- | ----------- |
+| `checked`           | `boolean`                    | `undefined` |
+| `onChange`          | `(checked: boolean) => void` | `undefined` |
+| `label`             | `string`                     | `undefined` |
+| `indeterminate`     | `boolean`                    | `false`     |
+| `disabled`          | `boolean`                    | `false`     |
+| `id`                | `string`                     | `undefined` |
+| `checkedIcon`       | `string`                     | `"■"`       |
+| `uncheckedIcon`     | `string`                     | `"□"`       |
+| `indeterminateIcon` | `string`                     | `"▪"`       |

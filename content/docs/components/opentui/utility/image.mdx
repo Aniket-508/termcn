@@ -1,0 +1,65 @@
+---
+title: "Image"
+description: "Image renderer with iTerm2/Kitty protocol and ASCII fallback"
+---
+
+<ComponentPreview base="opentui" name="image-demo" hideCode />
+
+<Callout type="info">
+  Image rendering uses terminal-specific protocols (iTerm2, Kitty) and falls
+  back to ASCII art. Results vary by terminal emulator.
+</Callout>
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/image
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="opentui" name="image" title="components/ui/image.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Image } from "@/components/ui/image";
+```
+
+```tsx
+<Image src="./screenshot.png" width={40} alt="Application screenshot" />
+```
+
+## API Reference
+
+### Image
+
+| Prop       | Type                                       | Default     |
+| ---------- | ------------------------------------------ | ----------- |
+| `src`      | `string`                                   | `required`  |
+| `width`    | `number`                                   | `20`        |
+| `height`   | `number`                                   | `undefined` |
+| `protocol` | `"auto" \| "iterm2" \| "kitty" \| "ascii"` | `"auto"`    |
+| `alt`      | `string`                                   | `undefined` |

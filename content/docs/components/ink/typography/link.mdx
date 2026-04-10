@@ -1,0 +1,68 @@
+---
+title: "Link"
+description: "OSC 8 clickable hyperlink"
+---
+
+<ComponentPreview base="ink" name="link-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/link
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="link" title="components/ui/link.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Link } from "@/components/ui/link";
+```
+
+```tsx
+<Link href="https://github.com">GitHub</Link>
+```
+
+## Examples
+
+### Show URL and terminals without OSC 8
+
+`showHref` appends the URL in dim text. When the terminal does not support OSC 8 hyperlinks, the same fallback is used unless you set `fallback={false}` or pass a custom `fallback` function.
+
+<ComponentPreview base="ink" name="link-show-href" />
+
+## API Reference
+
+### Link
+
+| Prop       | Type                                                 | Default     |
+| ---------- | ---------------------------------------------------- | ----------- |
+| `children` | `ReactNode`                                          | `required`  |
+| `href`     | `string`                                             | `required`  |
+| `color`    | `string`                                             | `undefined` |
+| `showHref` | `boolean`                                            | `false`     |
+| `fallback` | `boolean \| ((text: string, url: string) => string)` | `true`      |

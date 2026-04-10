@@ -1,0 +1,77 @@
+---
+title: "Keyboard Shortcuts"
+description: "Formatted keyboard shortcut reference table"
+---
+
+<ComponentPreview base="opentui" name="keyboard-shortcuts-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/keyboard-shortcuts
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="keyboard-shortcuts"
+  title="components/ui/keyboard-shortcuts.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { KeyboardShortcuts } from "@/components/ui/keyboard-shortcuts";
+```
+
+```tsx
+<KeyboardShortcuts
+  title="Editor Shortcuts"
+  shortcuts={[
+    { key: "Ctrl+S", description: "Save file" },
+    { key: "Ctrl+Z", description: "Undo" },
+    { key: "Ctrl+F", description: "Find" },
+  ]}
+/>
+```
+
+## API Reference
+
+### KeyboardShortcuts
+
+| Prop        | Type         | Default     |
+| ----------- | ------------ | ----------- |
+| `shortcuts` | `Shortcut[]` | `required`  |
+| `columns`   | `number`     | `1`         |
+| `title`     | `string`     | `undefined` |
+
+### Shortcut
+
+| Prop          | Type     | Default     |
+| ------------- | -------- | ----------- |
+| `key`         | `string` | `required`  |
+| `description` | `string` | `required`  |
+| `category`    | `string` | `undefined` |

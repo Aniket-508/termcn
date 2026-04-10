@@ -1,0 +1,69 @@
+---
+title: "Virtual List"
+description: "Virtualized list for 10k+ items"
+---
+
+<ComponentPreview base="ink" name="virtual-list-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/virtual-list
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="virtual-list"
+  title="components/ui/virtual-list.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { VirtualList } from "@/components/ui/virtual-list";
+```
+
+```tsx
+<VirtualList
+  items={Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`)}
+  height={10}
+  renderItem={(item, index, isActive) => <Text bold={isActive}>{item}</Text>}
+/>
+```
+
+## API Reference
+
+### VirtualList
+
+| Prop         | Type                                                       | Default     |
+| ------------ | ---------------------------------------------------------- | ----------- |
+| `items`      | `T[]`                                                      | `required`  |
+| `renderItem` | `(item: T, index: number, isActive: boolean) => ReactNode` | `required`  |
+| `height`     | `number`                                                   | `required`  |
+| `onSelect`   | `(item: T, index: number) => void`                         | `undefined` |
+| `cursor`     | `string`                                                   | `undefined` |
+| `overscan`   | `number`                                                   | `2`         |

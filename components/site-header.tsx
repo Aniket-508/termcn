@@ -10,6 +10,7 @@ import { SponsorLink } from "@/components/sponsor-link";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
+import { source } from "@/lib/source";
 
 const navItems = [
   { href: ROUTES.DOCS, label: "Docs" },
@@ -21,7 +22,11 @@ export const SiteHeader = () => (
   <header className="bg-background sticky top-0 z-50 w-full">
     <div className="container-wrapper 3xl:fixed:px-0 px-6">
       <div className="3xl:fixed:container flex h-(--header-height) items-center gap-2">
-        <MobileNav items={navItems} className="flex lg:hidden" />
+        <MobileNav
+          items={navItems}
+          tree={source.pageTree}
+          className="flex lg:hidden"
+        />
         <Button
           asChild
           variant="ghost"
@@ -36,7 +41,7 @@ export const SiteHeader = () => (
         <MainNav items={navItems} className="hidden lg:flex" />
         <div className="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
           <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
-            <CommandMenu navItems={navItems} />
+            <CommandMenu navItems={navItems} tree={source.pageTree} />
           </div>
           <GitHubLink />
           <SponsorLink />

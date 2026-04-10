@@ -1,8 +1,9 @@
 "use client";
 
+import type { Root as PageTreeRoot } from "fumadocs-core/page-tree";
 import type { LinkProps } from "next/link";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ROUTES } from "@/constants/routes";
-import { docsConfig } from "@/lib/docs";
+import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
+import {
+  getCategoryFoldersForBase,
+  getCurrentBase,
+  getPagesFromFolder,
+} from "@/lib/page-tree";
 import { cn } from "@/lib/utils";
 
 const MobileLink = ({
@@ -44,14 +50,44 @@ const MobileLink = ({
   );
 };
 
+const MobileNavGroup = ({
+  label,
+  pages,
+  setOpen,
+}: {
+  label: React.ReactNode;
+  pages: { url: string; name: React.ReactNode }[];
+  setOpen: (open: boolean) => void;
+}) => {
+  if (pages.length === 0) {
+    return null;
+  }
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="text-muted-foreground text-sm font-medium">{label}</div>
+      <div className="flex flex-col gap-3">
+        {pages.map((page) => (
+          <MobileLink key={page.url} href={page.url} onOpenChange={setOpen}>
+            {page.name}
+          </MobileLink>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export const MobileNav = ({
   items,
+  tree,
   className,
 }: {
   items: { href: string; label: string }[];
+  tree: PageTreeRoot;
   className?: string;
 }) => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const currentBase = getCurrentBase(pathname);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -112,37 +148,36 @@ export const MobileNav = ({
               ))}
             </div>
           </div>
-          {docsConfig.sidebarNav.map((group) => (
-            <div key={group.title} className="flex flex-col gap-4">
-              <div className="text-muted-foreground text-sm font-medium">
-                {group.title}
-              </div>
-              <div className="flex flex-col gap-3">
-                {group.items.map((item) => (
-                  <div
-                    key={item.href ?? item.title}
-                    className="flex flex-col gap-3"
-                  >
-                    {item.href && (
-                      <MobileLink href={item.href} onOpenChange={setOpen}>
-                        {item.title}
-                      </MobileLink>
-                    )}
-                    {item.items?.map((subItem) => (
-                      <MobileLink
-                        key={subItem.href ?? subItem.title}
-                        href={subItem.href ?? "#"}
-                        onOpenChange={setOpen}
-                        className="ml-4 text-muted-foreground"
-                      >
-                        {subItem.title}
-                      </MobileLink>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          {tree.children.map((item) => {
+            if (item.type !== "folder") {
+              return null;
+            }
+            if (EXCLUDED_SECTIONS.has(item.$id ?? "")) {
+              return null;
+            }
+
+            if (isComponentsFolder(item)) {
+              return getCategoryFoldersForBase(item, currentBase).map(
+                (category) => (
+                  <MobileNavGroup
+                    key={category.$id}
+                    label={category.name}
+                    pages={getPagesFromFolder(category)}
+                    setOpen={setOpen}
+                  />
+                )
+              );
+            }
+
+            return (
+              <MobileNavGroup
+                key={item.$id}
+                label={item.name}
+                pages={getPagesFromFolder(item)}
+                setOpen={setOpen}
+              />
+            );
+          })}
         </div>
       </PopoverContent>
     </Popover>

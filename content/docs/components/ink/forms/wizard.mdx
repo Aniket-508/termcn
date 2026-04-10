@@ -1,0 +1,88 @@
+---
+title: "Wizard"
+description: "Multi-step wizard with per-step validation"
+---
+
+<ComponentPreview base="ink" name="wizard-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/wizard
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="wizard" title="components/ui/wizard.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Wizard } from "@/components/ui/wizard";
+```
+
+```tsx
+<Wizard
+  steps={[
+    {
+      key: "install",
+      title: "Install",
+      content: <Text>Install dependencies</Text>,
+    },
+    {
+      key: "configure",
+      title: "Configure",
+      content: <Text>Set up your preferences</Text>,
+    },
+    {
+      key: "finish",
+      title: "Finish",
+      content: <Text>Review and confirm your settings</Text>,
+    },
+  ]}
+  onComplete={(keys) => console.log("Completed:", keys)}
+  onCancel={() => console.log("Cancelled")}
+/>
+```
+
+## API Reference
+
+### Wizard
+
+| Prop           | Type                                 | Default     |
+| -------------- | ------------------------------------ | ----------- |
+| `steps`        | `WizardStep[]`                       | `required`  |
+| `onComplete`   | `(completedSteps: string[]) => void` | `undefined` |
+| `onCancel`     | `() => void`                         | `undefined` |
+| `showProgress` | `boolean`                            | `true`      |
+
+### WizardStep
+
+| Prop       | Type                      | Default     |
+| ---------- | ------------------------- | ----------- |
+| `key`      | `string`                  | `required`  |
+| `title`    | `string`                  | `required`  |
+| `content`  | `ReactNode`               | `required`  |
+| `validate` | `() => boolean \| string` | `undefined` |

@@ -1,0 +1,97 @@
+---
+title: "Table"
+description: "Sortable, selectable, paginated data table"
+---
+
+<ComponentPreview base="ink" name="table-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/table
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="table" title="components/ui/table.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Table } from "@/components/ui/table";
+```
+
+```tsx
+<Table
+  data={[
+    { name: "api-server", cpu: "24%", memory: "512 MB" },
+    { name: "worker", cpu: "58%", memory: "1.2 GB" },
+  ]}
+  columns={[
+    { key: "name", header: "Service" },
+    { key: "cpu", header: "CPU", align: "right" },
+    { key: "memory", header: "Memory", align: "right" },
+  ]}
+/>
+```
+
+## Examples
+
+### Sortable
+
+Enable keyboard-driven column sorting with `sortable`. Use arrow keys to navigate columns and press `s` to sort.
+
+<ComponentPreview base="ink" name="table-sortable" />
+
+### Selectable rows
+
+Use `selectable` with `onSelect` to choose a row with the arrow keys and Enter.
+
+<ComponentPreview base="ink" name="table-selectable" />
+
+## API Reference
+
+### Table
+
+The table draws a fixed-width grid with Unicode box-drawing characters (`╭`, `├`, `│`, …). Width follows column content; it does not stretch to the full terminal width.
+
+| Prop          | Type               | Default     |
+| ------------- | ------------------ | ----------- |
+| `data`        | `T[]`              | `required`  |
+| `columns`     | `Column<T>[]`      | `required`  |
+| `sortable`    | `boolean`          | `false`     |
+| `selectable`  | `boolean`          | `false`     |
+| `onSelect`    | `(row: T) => void` | `undefined` |
+| `maxRows`     | `number`           | `20`        |
+| `borderColor` | `string`           | `undefined` |
+
+### Column
+
+| Prop     | Type                            | Default     |
+| -------- | ------------------------------- | ----------- |
+| `key`    | `keyof T & string`              | `required`  |
+| `header` | `string`                        | `required`  |
+| `width`  | `number`                        | `undefined` |
+| `align`  | `"left" \| "right" \| "center"` | `"left"`    |

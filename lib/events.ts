@@ -1,25 +1,35 @@
 import { track } from "@vercel/analytics";
+import { z } from "zod";
 
-type EventName =
-  | "copy_npm_command"
-  | "copy_usage_import_code"
-  | "copy_usage_code"
-  | "copy_primitive_code"
-  | "copy_theme_code"
-  | "copy_block_code"
-  | "copy_chunk_code"
-  | "enable_lift_mode"
-  | "copy_chart_code"
-  | "copy_chart_theme"
-  | "copy_chart_data"
-  | "copy_color"
-  | "set_layout";
+const eventSchema = z.object({
+  name: z.enum([
+    "copy_npm_command",
+    "copy_usage_import_code",
+    "copy_usage_code",
+    "copy_primitive_code",
+    "copy_theme_code",
+    "copy_block_code",
+    "copy_chunk_code",
+    "enable_lift_mode",
+    "copy_chart_code",
+    "copy_chart_theme",
+    "copy_chart_data",
+    "copy_color",
+    "set_layout",
+  ]),
+  properties: z
+    .record(
+      z.string(),
+      z.union([z.string(), z.number(), z.boolean(), z.null()])
+    )
+    .optional(),
+});
 
-export interface Event {
-  name: EventName;
-  properties?: Record<string, string | number | boolean | null>;
-}
+export type Event = z.infer<typeof eventSchema>;
 
 export const trackEvent = (input: Event): void => {
-  track(input.name, input.properties);
+  const event = eventSchema.parse(input);
+  if (event) {
+    track(event.name, event.properties);
+  }
 };

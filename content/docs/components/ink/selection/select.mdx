@@ -1,0 +1,70 @@
+---
+title: "Select"
+description: "Single-select dropdown with arrow-key navigation"
+---
+
+<ComponentPreview base="ink" name="select-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/select
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="select" title="components/ui/select.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Select } from "@/components/ui/select";
+```
+
+```tsx
+<Select
+  label="Choose a framework"
+  options={[
+    { value: "next", label: "Next.js" },
+    { value: "remix", label: "Remix" },
+    { value: "astro", label: "Astro" },
+  ]}
+  onChange={(value) => {}}
+/>
+```
+
+## API Reference
+
+### Select
+
+| Prop          | Type                 | Default     |
+| ------------- | -------------------- | ----------- |
+| `options`     | `SelectOption<T>[]`  | `required`  |
+| `value`       | `T`                  | `undefined` |
+| `onChange`    | `(value: T) => void` | `undefined` |
+| `onSubmit`    | `(value: T) => void` | `undefined` |
+| `label`       | `string`             | `undefined` |
+| `cursor`      | `string`             | `"›"`       |
+| `cursorColor` | `string`             | `undefined` |

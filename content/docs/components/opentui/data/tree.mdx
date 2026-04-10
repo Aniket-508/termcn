@@ -1,0 +1,83 @@
+---
+title: "Tree"
+description: "Expandable/collapsible tree view"
+---
+
+<ComponentPreview base="opentui" name="tree-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/tree
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="opentui" name="tree" title="components/ui/tree.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Tree } from "@/components/ui/tree";
+```
+
+```tsx
+<Tree
+  defaultExpanded={["src"]}
+  nodes={[
+    {
+      key: "src",
+      label: "src",
+      children: [
+        { key: "index", label: "index.ts" },
+        { key: "utils", label: "utils.ts" },
+      ],
+    },
+    { key: "pkg", label: "package.json" },
+  ]}
+/>
+```
+
+## API Reference
+
+### Tree
+
+| Prop              | Type                       | Default     |
+| ----------------- | -------------------------- | ----------- |
+| `nodes`           | `TreeNode[]`               | `required`  |
+| `onSelect`        | `(node: TreeNode) => void` | `undefined` |
+| `defaultExpanded` | `string[]`                 | `[]`        |
+| `expandedIcon`    | `string`                   | `"▼"`       |
+| `collapsedIcon`   | `string`                   | `"▶"`       |
+| `leafIcon`        | `string`                   | `"•"`       |
+
+### TreeNode
+
+| Prop       | Type         | Default     |
+| ---------- | ------------ | ----------- |
+| `key`      | `string`     | `required`  |
+| `label`    | `string`     | `required`  |
+| `children` | `TreeNode[]` | `undefined` |
+| `icon`     | `string`     | `undefined` |

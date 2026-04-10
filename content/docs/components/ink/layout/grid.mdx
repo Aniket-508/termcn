@@ -1,0 +1,65 @@
+---
+title: "Grid"
+description: "Rows × columns grid layout"
+---
+
+<ComponentPreview base="ink" name="grid-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/grid
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource base="ink" name="grid" title="components/ui/grid.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Grid } from "@/components/ui/grid";
+```
+
+```tsx
+<Grid columns={3} gap={1}>
+  <Text>A</Text>
+  <Text>B</Text>
+  <Text>C</Text>
+  <Text>D</Text>
+  <Text>E</Text>
+  <Text>F</Text>
+</Grid>
+```
+
+## API Reference
+
+### Grid
+
+| Prop       | Type        | Default  |
+| ---------- | ----------- | -------- |
+| `columns`  | `number`    | required |
+| `gap`      | `number`    | `0`      |
+| `children` | `ReactNode` | required |

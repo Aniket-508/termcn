@@ -1,0 +1,75 @@
+---
+title: "Tool Approval"
+description: "Interactive approval prompt for AI tool calls with risk-level badge, args display, and auto-deny timeout"
+---
+
+<ComponentPreview base="ink" name="tool-approval-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/tool-approval
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="tool-approval"
+  title="components/ui/tool-approval.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ToolApproval } from "@/components/ui/tool-approval";
+```
+
+```tsx
+<ToolApproval
+  name="execute_shell"
+  description="Run a shell command on the host machine"
+  args={{ command: "rm -rf ./dist" }}
+  risk="high"
+  onApprove={() => console.log("approved")}
+  onDeny={() => console.log("denied")}
+  timeout={30}
+/>
+```
+
+## API Reference
+
+### ToolApproval
+
+| Prop            | Type                          | Default     |
+| --------------- | ----------------------------- | ----------- |
+| `name`          | `string`                      | `required`  |
+| `description`   | `string`                      | `undefined` |
+| `args`          | `Record<string, unknown>`     | `undefined` |
+| `risk`          | `"low" \| "medium" \| "high"` | `"low"`     |
+| `onApprove`     | `() => void`                  | `required`  |
+| `onDeny`        | `() => void`                  | `required`  |
+| `onAlwaysAllow` | `() => void`                  | `undefined` |
+| `timeout`       | `number`                      | `undefined` |

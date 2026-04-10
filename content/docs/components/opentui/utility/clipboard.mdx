@@ -1,0 +1,63 @@
+---
+title: "Clipboard"
+description: "Copy-to-clipboard button with success feedback"
+---
+
+<ComponentPreview base="opentui" name="clipboard-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/clipboard
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="clipboard"
+  title="components/ui/clipboard.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Clipboard } from "@/components/ui/clipboard";
+```
+
+```tsx
+<Clipboard value="npm install termcn" label="Install command" />
+```
+
+## API Reference
+
+### Clipboard
+
+| Prop             | Type     | Default     |
+| ---------------- | -------- | ----------- |
+| `value`          | `string` | `required`  |
+| `label`          | `string` | `undefined` |
+| `successMessage` | `string` | `"Copied!"` |
+| `timeout`        | `number` | `2000`      |

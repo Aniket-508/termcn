@@ -1,0 +1,75 @@
+---
+title: "Token Usage"
+description: "Compact token counter showing prompt and completion usage with optional cost estimate; also exports ContextMeter for visualising context window fill"
+---
+
+<ComponentPreview base="opentui" name="token-usage-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/token-usage
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="token-usage"
+  title="components/ui/token-usage.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { TokenUsage, ContextMeter } from "@/components/ui/token-usage";
+```
+
+```tsx
+<TokenUsage prompt={2450} completion={890} model="gpt-4o" showCost />
+```
+
+## API Reference
+
+### TokenUsage
+
+| Prop         | Type      | Default     |
+| ------------ | --------- | ----------- |
+| `prompt`     | `number`  | `required`  |
+| `completion` | `number`  | `required`  |
+| `model`      | `string`  | `undefined` |
+| `showCost`   | `boolean` | `false`     |
+
+### ContextMeter
+
+| Prop          | Type      | Default     |
+| ------------- | --------- | ----------- |
+| `used`        | `number`  | `required`  |
+| `limit`       | `number`  | `required`  |
+| `label`       | `string`  | `undefined` |
+| `showPercent` | `boolean` | `true`      |
+| `warnAt`      | `number`  | `75`        |
+| `criticalAt`  | `number`  | `90`        |
+| `width`       | `number`  | `20`        |

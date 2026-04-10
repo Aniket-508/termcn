@@ -1,0 +1,70 @@
+---
+title: "Notification Center"
+description: "Persistent queue-based notification panel with useNotifications hook"
+---
+
+<ComponentPreview base="ink" name="notification-center-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/notification-center
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="notification-center"
+  title="components/ui/notification-center.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { NotificationCenter } from "@/components/ui/notification-center";
+import { useNotifications } from "@/hooks/use-notifications";
+```
+
+```tsx
+const { notify } = useNotifications();
+
+notify({
+  title: "Build complete",
+  body: "All checks passed",
+  variant: "success",
+});
+
+<NotificationCenter maxVisible={5} width={40} />;
+```
+
+## API Reference
+
+### NotificationCenter
+
+| Prop         | Type     | Default |
+| ------------ | -------- | ------- |
+| `maxVisible` | `number` | `5`     |
+| `width`      | `number` | `40`    |

@@ -1,0 +1,78 @@
+---
+title: "Key Value"
+description: "Aligned key–value pairs"
+---
+
+<ComponentPreview base="opentui" name="key-value-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/key-value
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="key-value"
+  title="components/ui/key-value.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { KeyValue } from "@/components/ui/key-value";
+```
+
+```tsx
+<KeyValue
+  items={[
+    { key: "Name", value: "my-app" },
+    { key: "Version", value: "2.1.0" },
+    { key: "License", value: "MIT" },
+  ]}
+/>
+```
+
+## API Reference
+
+### KeyValue
+
+| Prop         | Type             | Default     |
+| ------------ | ---------------- | ----------- |
+| `items`      | `KeyValueItem[]` | `required`  |
+| `keyWidth`   | `number`         | `undefined` |
+| `separator`  | `string`         | `":"`       |
+| `keyColor`   | `string`         | `undefined` |
+| `valueColor` | `string`         | `undefined` |
+
+### KeyValueItem
+
+| Prop    | Type        | Default     |
+| ------- | ----------- | ----------- |
+| `key`   | `string`    | `required`  |
+| `value` | `ReactNode` | `required`  |
+| `color` | `string`    | `undefined` |

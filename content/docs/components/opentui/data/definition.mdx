@@ -1,0 +1,73 @@
+---
+title: "Definition"
+description: "Term–description definition list"
+---
+
+<ComponentPreview base="opentui" name="definition-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/definition
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="definition"
+  title="components/ui/definition.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Definition } from "@/components/ui/definition";
+```
+
+```tsx
+<Definition
+  items={[
+    { term: "CLI", description: "Command Line Interface" },
+    { term: "TUI", description: "Terminal User Interface" },
+  ]}
+/>
+```
+
+## API Reference
+
+### Definition
+
+| Prop        | Type               | Default     |
+| ----------- | ------------------ | ----------- |
+| `items`     | `DefinitionItem[]` | `required`  |
+| `termColor` | `string`           | `undefined` |
+
+### DefinitionItem
+
+| Prop          | Type     | Default    |
+| ------------- | -------- | ---------- |
+| `term`        | `string` | `required` |
+| `description` | `string` | `required` |

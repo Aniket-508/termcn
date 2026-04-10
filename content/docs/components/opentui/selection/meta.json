@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "checkbox",
+    "checkbox-group",
+    "color-picker",
+    "multi-select",
+    "radio-group",
+    "select",
+    "tag-input",
+    "tree-select"
+  ],
+  "title": "Selection"
+}

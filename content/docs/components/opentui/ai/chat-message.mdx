@@ -1,0 +1,67 @@
+---
+title: "Chat Message"
+description: "Chat message bubble with role label, streaming indicator, and collapsible content"
+---
+
+<ComponentPreview base="opentui" name="chat-message-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/chat-message
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="chat-message"
+  title="components/ui/chat-message.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ChatMessage } from "@/components/ui/chat-message";
+```
+
+```tsx
+<ChatMessage sender="assistant" name="Claude" timestamp={new Date()}>
+  Here is the refactored version of your function.
+</ChatMessage>
+```
+
+## API Reference
+
+### ChatMessage
+
+| Prop        | Type                                           | Default     |
+| ----------- | ---------------------------------------------- | ----------- |
+| `sender`    | `"user" \| "assistant" \| "system" \| "error"` | `required`  |
+| `name`      | `string`                                       | `undefined` |
+| `timestamp` | `Date`                                         | `undefined` |
+| `streaming` | `boolean`                                      | `false`     |
+| `collapsed` | `boolean`                                      | `undefined` |
+| `children`  | `ReactNode`                                    | `undefined` |

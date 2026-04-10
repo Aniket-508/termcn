@@ -1,0 +1,72 @@
+---
+title: "Masked Input"
+description: "Masked input for phone, date, credit card formats"
+---
+
+<ComponentPreview base="opentui" name="masked-input-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/masked-input
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="masked-input"
+  title="components/ui/masked-input.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { MaskedInput } from "@/components/ui/masked-input";
+```
+
+```tsx
+<MaskedInput
+  mask="(###) ###-####"
+  label="Phone Number"
+  placeholder="(555) 123-4567"
+/>
+```
+
+## API Reference
+
+### MaskedInput
+
+| Prop          | Type                      | Default      |
+| ------------- | ------------------------- | ------------ |
+| `mask`        | `string`                  | **required** |
+| `value`       | `string`                  | `undefined`  |
+| `onChange`    | `(value: string) => void` | `undefined`  |
+| `onSubmit`    | `(value: string) => void` | `undefined`  |
+| `label`       | `string`                  | `undefined`  |
+| `placeholder` | `string`                  | `undefined`  |
+| `autoFocus`   | `boolean`                 | `false`      |
+| `id`          | `string`                  | `undefined`  |
+| `width`       | `number`                  | `40`         |

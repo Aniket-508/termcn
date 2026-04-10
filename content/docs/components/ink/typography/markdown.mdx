@@ -1,0 +1,61 @@
+---
+title: "Markdown"
+description: "Full markdown renderer for terminal"
+---
+
+<ComponentPreview base="ink" name="markdown-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/markdown
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="markdown"
+  title="components/ui/markdown.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Markdown } from "@/components/ui/markdown";
+```
+
+```tsx
+<Markdown>{`# Welcome\n\nThis is **bold** and *italic* text.`}</Markdown>
+```
+
+## API Reference
+
+### Markdown
+
+| Prop       | Type     | Default     |
+| ---------- | -------- | ----------- |
+| `children` | `string` | `required`  |
+| `width`    | `number` | `undefined` |

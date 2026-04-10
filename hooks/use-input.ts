@@ -2,4 +2,4 @@ export {
   useInput,
   type InputHandler,
   type Key,
-} from "@/registry/hooks/use-input";
+} from "@/registry/bases/ink/hooks/use-input";

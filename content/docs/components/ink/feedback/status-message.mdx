@@ -1,0 +1,68 @@
+---
+title: "Status Message"
+description: "Inline status message with icon and color"
+---
+
+<ComponentPreview base="ink" name="status-message-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/status-message
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="status-message"
+  title="components/ui/status-message.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { StatusMessage } from "@/components/ui/status-message";
+```
+
+```tsx
+<StatusMessage variant="success">All tests passed.</StatusMessage>
+```
+
+## Examples
+
+### Variants
+
+<ComponentPreview base="ink" name="status-message-variants" />
+
+## API Reference
+
+### StatusMessage
+
+| Prop       | Type                                                                    | Default     |
+| ---------- | ----------------------------------------------------------------------- | ----------- |
+| `variant`  | `"success" \| "error" \| "warning" \| "info" \| "loading" \| "pending"` | `"info"`    |
+| `children` | `ReactNode`                                                             | `required`  |
+| `icon`     | `string`                                                                | `undefined` |

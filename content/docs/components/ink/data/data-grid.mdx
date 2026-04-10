@@ -1,0 +1,90 @@
+---
+title: "Data Grid"
+description: "Advanced data grid with sorting, filtering, pagination, and cell editing"
+---
+
+<ComponentPreview base="ink" name="data-grid-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/data-grid
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="data-grid"
+  title="components/ui/data-grid.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { DataGrid } from "@/components/ui/data-grid";
+```
+
+```tsx
+<DataGrid
+  data={[
+    { name: "Alice", role: "Engineer", status: "Active" },
+    { name: "Bob", role: "Designer", status: "Away" },
+  ]}
+  columns={[
+    { key: "name", header: "Name", width: 12 },
+    { key: "role", header: "Role", width: 12 },
+    { key: "status", header: "Status", width: 10 },
+  ]}
+/>
+```
+
+## API Reference
+
+### DataGrid
+
+| Prop                | Type                                           | Default     |
+| ------------------- | ---------------------------------------------- | ----------- |
+| `data`              | `T[]`                                          | `required`  |
+| `columns`           | `DataGridColumn<T>[]`                          | `required`  |
+| `pageSize`          | `number`                                       | `10`        |
+| `onRowSelect`       | `(row: T) => void`                             | `undefined` |
+| `onCellEdit`        | `(row: T, key: string, value: string) => void` | `undefined` |
+| `borderColor`       | `string`                                       | `undefined` |
+| `borderStyle`       | `"single" \| "double" \| "round" \| "bold"`    | `"single"`  |
+| `showRowNumbers`    | `boolean`                                      | `false`     |
+| `filterPlaceholder` | `string`                                       | `undefined` |
+
+### DataGridColumn
+
+| Prop         | Type                                 | Default     |
+| ------------ | ------------------------------------ | ----------- |
+| `key`        | `keyof T & string`                   | `required`  |
+| `header`     | `string`                             | `required`  |
+| `width`      | `number`                             | `undefined` |
+| `align`      | `"left" \| "right" \| "center"`      | `"left"`    |
+| `render`     | `(value: unknown, row: T) => string` | `undefined` |
+| `filterable` | `boolean`                            | `undefined` |
+| `sortable`   | `boolean`                            | `undefined` |
