@@ -1358,19 +1358,6 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: "examples/ink/spinner-demo.tsx",
       name: "spinner-demo",
     },
-    "spinner-label": {
-      component: React.lazy(async () => {
-        const mod = await import("./ink/spinner-label");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object"
-          ) || "spinner-label";
-        return { default: mod.default || mod[exportName] };
-      }),
-      filePath: "examples/ink/spinner-label.tsx",
-      name: "spinner-label",
-    },
     "spinner-styles": {
       component: React.lazy(async () => {
         const mod = await import("./ink/spinner-styles");
@@ -1853,19 +1840,6 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       }),
       filePath: "examples/opentui/spinner-demo.tsx",
       name: "spinner-demo",
-    },
-    "spinner-label": {
-      component: React.lazy(async () => {
-        const mod = await import("./opentui/spinner-label");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object"
-          ) || "spinner-label";
-        return { default: mod.default || mod[exportName] };
-      }),
-      filePath: "examples/opentui/spinner-label.tsx",
-      name: "spinner-label",
     },
     "spinner-styles": {
       component: React.lazy(async () => {
