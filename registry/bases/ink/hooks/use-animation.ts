@@ -40,16 +40,19 @@ const unsubscribe = (milliseconds: number, subscriber: Subscriber) => {
   }
 };
 
-export const useAnimation = (fps = 12): number => {
+export const useAnimation = (
+  rate: number | { intervalMs: number } = 12
+): number => {
   const [frame, setFrame] = React.useState(0);
+  const milliseconds =
+    typeof rate === "number" ? Math.round(1000 / rate) : rate.intervalMs;
 
   React.useEffect(() => {
-    const milliseconds = Math.round(1000 / fps);
     const callback: Subscriber = (tick) => setFrame(tick);
     subscribe(milliseconds, callback);
 
     return () => unsubscribe(milliseconds, callback);
-  }, [fps]);
+  }, [milliseconds]);
 
   return frame;
 };

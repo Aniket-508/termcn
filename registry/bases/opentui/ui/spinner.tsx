@@ -1,107 +1,42 @@
 /* @jsxImportSource @opentui/react */
-import { useEffect, useState } from "react";
-const BUILTIN_SPINNERS = {
-  arc: {
-    frames: ["◜", "◠", "◝", "◞", "◡", "◟"],
-    interval: 80,
-  },
-  bouncingBall: {
-    frames: [
-      "( ●    )",
-      "(  ●   )",
-      "(   ●  )",
-      "(    ● )",
-      "(     ●)",
-      "(    ● )",
-      "(   ●  )",
-      "(  ●   )",
-    ],
-    interval: 90,
-  },
-  dots: {
-    frames: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"],
-    interval: 80,
-  },
-  line: {
-    frames: ["-", "\\", "|", "/"],
-    interval: 130,
-  },
-} as const;
-export type SpinnerName = keyof typeof BUILTIN_SPINNERS;
-export interface SpinnerOptions {
-  autoplay?: boolean;
-  backgroundColor?: string;
-  color?: string;
-  frames?: string[];
-  interval?: number;
-  name?: SpinnerName;
-}
-export interface SpinnerProps extends SpinnerOptions {
+import cliSpinners from "cli-spinners";
+import type { SpinnerName } from "cli-spinners";
+
+import { useTheme } from "@/components/ui/theme-provider";
+import { useAnimation } from "@/hooks/use-animation";
+
+export type SpinnerType = SpinnerName;
+
+export const spinnerNames = Object.keys(cliSpinners) as SpinnerName[];
+
+export interface SpinnerProps {
+  type?: SpinnerType;
   label?: string;
+  color?: string;
+  fps?: number;
+  frames?: string[];
 }
-export interface ResolvedSpinner {
-  autoplay: boolean;
-  backgroundColor?: string;
-  color: string;
-  frames: string[];
-  interval: number;
-}
-export const spinnerNames = Object.keys(BUILTIN_SPINNERS) as SpinnerName[];
-export const resolveSpinner = ({
-  autoplay = true,
-  backgroundColor,
-  color = "white",
-  frames,
-  interval,
-  name = "dots",
-}: SpinnerOptions = {}): ResolvedSpinner => {
-  const builtin = BUILTIN_SPINNERS[name];
-  return {
-    autoplay,
-    backgroundColor,
-    color,
-    frames: frames ?? [...builtin.frames],
-    interval: interval ?? builtin.interval,
-  };
-};
-export const Spinner = ({
-  autoplay,
-  backgroundColor,
-  color,
-  frames,
-  interval,
+
+export const Spinner = function Spinner({
+  type: spinnerType = "dots",
   label,
-  name,
-}: SpinnerProps) => {
-  const resolved = resolveSpinner({
-    autoplay,
-    backgroundColor,
-    color,
-    frames,
-    interval,
-    name,
-  });
-  const [frameIndex, setFrameIndex] = useState(0);
-  useEffect(() => {
-    setFrameIndex(0);
-  }, [resolved.frames]);
-  useEffect(() => {
-    if (!resolved.autoplay || resolved.frames.length <= 1) {
-      return;
-    }
-    const timer = setInterval(() => {
-      setFrameIndex((current) => (current + 1) % resolved.frames.length);
-    }, resolved.interval);
-    return () => {
-      clearInterval(timer);
-    };
-  }, [resolved.autoplay, resolved.frames, resolved.interval]);
-  const frame = resolved.frames[frameIndex % resolved.frames.length];
+  color,
+  fps = 12,
+  frames: customFrames,
+}: SpinnerProps) {
+  const theme = useTheme();
+  const builtin = cliSpinners[spinnerType] ?? cliSpinners.dots;
+  const useCustomFrames = customFrames !== undefined;
+  const frames = useCustomFrames ? customFrames : builtin.frames;
+  const frame = useAnimation(
+    useCustomFrames ? fps : { intervalMs: builtin.interval }
+  );
+  const icon = frames[frame % frames.length];
+  const resolvedColor = color ?? theme.colors.primary;
+
   return (
     <box alignItems="center" flexDirection="row">
-      <text bg={resolved.backgroundColor} fg={resolved.color}>
-        {frame}
-      </text>
+      <text fg={resolvedColor}>{icon}</text>
       {label ? <text marginLeft={1}>{label}</text> : null}
     </box>
   );

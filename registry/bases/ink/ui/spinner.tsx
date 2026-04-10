@@ -1,49 +1,13 @@
+import cliSpinners from "cli-spinners";
+import type { SpinnerName } from "cli-spinners";
 import { Text } from "ink";
 
 import { useTheme } from "@/components/ui/theme-provider";
 import { useAnimation } from "@/hooks/use-animation";
 
-export type SpinnerType =
-  | "dots"
-  | "line"
-  | "star"
-  | "clock"
-  | "bounce"
-  | "bar"
-  | "arc"
-  | "arrow"
-  | "toggle"
-  | "box"
-  | "pipe"
-  | "earth";
+export type SpinnerType = SpinnerName;
 
-const FRAMES: Record<SpinnerType, string[]> = {
-  arc: ["◜", "◠", "◝", "◞", "◡", "◟"],
-  arrow: ["←", "↖", "↑", "↗", "→", "↘", "↓", "↙"],
-  bar: ["▏", "▎", "▍", "▌", "▋", "▊", "▉", "█", "▉", "▊", "▋", "▌", "▍", "▎"],
-  bounce: ["⠁", "⠂", "⠄", "⡀", "⡈", "⠠", "⠐", "⠈"],
-  box: ["▖", "▘", "▝", "▗"],
-  clock: [
-    "🕐",
-    "🕑",
-    "🕒",
-    "🕓",
-    "🕔",
-    "🕕",
-    "🕖",
-    "🕗",
-    "🕘",
-    "🕙",
-    "🕚",
-    "🕛",
-  ],
-  dots: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"],
-  earth: ["🌍", "🌎", "🌏"],
-  line: ["—", "\\", "|", "/"],
-  pipe: ["┤", "┘", "┴", "└", "├", "┌", "┬", "┐"],
-  star: ["✶", "✸", "✹", "✺", "✹", "✸"],
-  toggle: ["⊶", "⊷"],
-};
+export const spinnerNames = Object.keys(cliSpinners) as SpinnerName[];
 
 export interface SpinnerProps {
   type?: SpinnerType;
@@ -61,8 +25,12 @@ export const Spinner = function Spinner({
   frames: customFrames,
 }: SpinnerProps) {
   const theme = useTheme();
-  const frame = useAnimation(fps);
-  const frames = customFrames ?? FRAMES[spinnerType];
+  const builtin = cliSpinners[spinnerType] ?? cliSpinners.dots;
+  const useCustomFrames = customFrames !== undefined;
+  const frames = useCustomFrames ? customFrames : builtin.frames;
+  const frame = useAnimation(
+    useCustomFrames ? fps : { intervalMs: builtin.interval }
+  );
   const icon = frames[frame % frames.length];
   const resolvedColor = color ?? theme.colors.primary;
 
