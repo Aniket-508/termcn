@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ModalProps {
   open: boolean;
   onClose?: () => void;
@@ -30,6 +31,7 @@ export interface ModalProps {
     | "classic";
   closeHint?: string | false;
 }
+
 export const Modal = function Modal({
   open,
   onClose,
@@ -45,6 +47,7 @@ export const Modal = function Modal({
 }: ModalProps) {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.primary;
+
   useKeyboard((key) => {
     if (!open) {
       return;
@@ -53,9 +56,11 @@ export const Modal = function Modal({
       onClose?.();
     }
   });
+
   if (!open) {
     return null;
   }
+
   return (
     <box
       flexDirection="column"

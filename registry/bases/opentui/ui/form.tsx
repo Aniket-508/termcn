@@ -11,6 +11,7 @@ import {
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 interface FormContextValue {
   values: Record<string, unknown>;
   errors: Record<string, string>;
@@ -18,6 +19,7 @@ interface FormContextValue {
   setFieldValue: (name: string, value: unknown) => void;
   setFieldError: (name: string, error: string) => void;
 }
+
 const FormContext = createContext<FormContextValue>({
   errors: {},
   isDirty: false,
@@ -29,19 +31,23 @@ const FormContext = createContext<FormContextValue>({
   },
   values: {},
 });
+
 export const useFormContext = function useFormContext() {
   return useContext(FormContext);
 };
+
 export interface FormField {
   name: string;
   validate?: (value: unknown) => string | null;
 }
+
 export interface FormProps {
   onSubmit?: (values: Record<string, unknown>) => void;
   initialValues?: Record<string, unknown>;
   fields?: FormField[];
   children: ReactNode;
 }
+
 export const Form = function Form({
   onSubmit,
   initialValues = {},
@@ -52,13 +58,16 @@ export const Form = function Form({
   const [values, setValues] = useState<Record<string, unknown>>(initialValues);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isDirty, setIsDirty] = useState(false);
+
   const setFieldValue = useCallback((name: string, value: unknown) => {
     setValues((v) => ({ ...v, [name]: value }));
     setIsDirty(true);
   }, []);
+
   const setFieldError = useCallback((name: string, error: string) => {
     setErrors((e) => ({ ...e, [name]: error }));
   }, []);
+
   useKeyboard((key) => {
     if (key.ctrl && key.name === "s") {
       const newErrors: Record<string, string> = {};
@@ -75,10 +84,12 @@ export const Form = function Form({
       onSubmit?.(values);
     }
   });
+
   const contextValue = useMemo(
     () => ({ errors, isDirty, setFieldError, setFieldValue, values }),
     [errors, isDirty, setFieldError, setFieldValue, values]
   );
+
   return createElement(
     FormContext.Provider,
     { value: contextValue },

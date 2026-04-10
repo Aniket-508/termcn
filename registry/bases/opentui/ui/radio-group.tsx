@@ -3,12 +3,14 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface RadioOption<T = string> {
   value: T;
   label: string;
   hint?: string;
   disabled?: boolean;
 }
+
 export interface RadioGroupProps<T = string> {
   options: RadioOption<T>[];
   value?: T;
@@ -16,6 +18,7 @@ export interface RadioGroupProps<T = string> {
   name?: string;
   cursor?: string;
 }
+
 const getOptionColor = (
   disabled: boolean | undefined,
   isHighlighted: boolean,
@@ -29,6 +32,7 @@ const getOptionColor = (
   }
   return theme.colors.foreground;
 };
+
 export const RadioGroup = <T = string>({
   options,
   value: controlledValue,
@@ -47,7 +51,9 @@ export const RadioGroup = <T = string>({
   const [internalValue, setInternalValue] = useState<T | undefined>(
     controlledValue
   );
+
   const selected = controlledValue ?? internalValue;
+
   const select = (idx: number) => {
     const opt = options[idx];
     if (!opt || opt.disabled) {
@@ -58,6 +64,7 @@ export const RadioGroup = <T = string>({
     }
     onChange?.(opt.value);
   };
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((i) => {
@@ -79,6 +86,7 @@ export const RadioGroup = <T = string>({
       select(activeIndex);
     }
   });
+
   return (
     <box flexDirection="column">
       {options.map((opt, idx) => {

@@ -6,6 +6,7 @@ import { useTheme } from "@/components/ui/theme-provider";
 
 import { BigText } from "./big-text";
 import type { BigTextFont } from "./big-text";
+
 export interface HelpScreenProps {
   title: string;
   font?: BigTextFont;
@@ -17,17 +18,20 @@ export interface HelpScreenProps {
   flagWidth?: number;
   children: ReactNode;
 }
+
 export interface HelpScreenSectionProps {
   label: string;
   labelColor?: string;
   children: ReactNode;
 }
+
 export interface HelpScreenRowProps {
   flag: string;
   description: string;
   flagColor?: string;
   descriptionColor?: string;
 }
+
 const computeFlagWidth = function computeFlagWidth(
   children: ReactNode
 ): number {
@@ -53,6 +57,7 @@ const computeFlagWidth = function computeFlagWidth(
   });
   return max;
 };
+
 const HelpScreenRoot = function HelpScreenRoot({
   title,
   font = "block",
@@ -66,7 +71,9 @@ const HelpScreenRoot = function HelpScreenRoot({
 }: HelpScreenProps) {
   const theme = useTheme();
   const resolvedColor = titleColor ?? theme.colors.primary;
+
   const resolvedFlagWidth = flagWidth ?? computeFlagWidth(children);
+
   const enrichedChildren = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       return React.cloneElement(
@@ -79,16 +86,19 @@ const HelpScreenRoot = function HelpScreenRoot({
     }
     return child;
   });
+
   return (
     <box flexDirection="column" paddingLeft={2}>
       <box marginBottom={1}>
         <BigText color={resolvedColor}>{title}</BigText>
       </box>
+
       {tagline && (
         <box marginBottom={1}>
           <text fg="#666">{tagline}</text>
         </box>
       )}
+
       {usage && (
         <box marginBottom={1}>
           <text>
@@ -97,15 +107,18 @@ const HelpScreenRoot = function HelpScreenRoot({
           </text>
         </box>
       )}
+
       {description && (
         <box marginBottom={1}>
           <text>{description}</text>
         </box>
       )}
+
       {enrichedChildren}
     </box>
   );
 };
+
 const HelpScreenSection = function HelpScreenSection({
   label,
   labelColor,
@@ -117,6 +130,7 @@ const HelpScreenSection = function HelpScreenSection({
   _columnGap?: number;
 }) {
   const theme = useTheme();
+
   const enrichedRows = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       return React.cloneElement(
@@ -129,6 +143,7 @@ const HelpScreenSection = function HelpScreenSection({
     }
     return child;
   });
+
   return (
     <box flexDirection="column" marginBottom={1}>
       <text fg={labelColor ?? theme.colors.foreground}>
@@ -138,6 +153,7 @@ const HelpScreenSection = function HelpScreenSection({
     </box>
   );
 };
+
 const HelpScreenRow = function HelpScreenRow({
   flag,
   description,
@@ -151,6 +167,7 @@ const HelpScreenRow = function HelpScreenRow({
 }) {
   const theme = useTheme();
   const paddedFlag = flag.padEnd(_flagWidth + _columnGap);
+
   return (
     <box flexDirection="row" paddingLeft={2}>
       <text fg={flagColor ?? theme.colors.mutedForeground}>{paddedFlag}</text>
@@ -158,6 +175,7 @@ const HelpScreenRow = function HelpScreenRow({
     </box>
   );
 };
+
 export const HelpScreen = Object.assign(HelpScreenRoot, {
   Row: HelpScreenRow,
   Section: HelpScreenSection,

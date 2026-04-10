@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { useTheme } from "@/components/ui/theme-provider";
 
 import { Spinner } from "./spinner";
+
 export type StatusVariant =
   | "success"
   | "error"
@@ -11,6 +12,7 @@ export type StatusVariant =
   | "info"
   | "loading"
   | "pending";
+
 const ICONS: Record<Exclude<StatusVariant, "loading">, string> = {
   error: "✗",
   info: "ℹ",
@@ -18,17 +20,20 @@ const ICONS: Record<Exclude<StatusVariant, "loading">, string> = {
   success: "✓",
   warning: "⚠",
 };
+
 export interface StatusMessageProps {
   variant?: StatusVariant;
   children: ReactNode;
   icon?: string;
 }
+
 export const StatusMessage = function StatusMessage({
   variant = "info",
   children,
   icon,
 }: StatusMessageProps) {
   const theme = useTheme();
+
   const variantColor = (() => {
     switch (variant) {
       case "success": {
@@ -51,6 +56,7 @@ export const StatusMessage = function StatusMessage({
       }
     }
   })();
+
   return (
     <box gap={1} flexDirection="row">
       {variant === "loading" ? (

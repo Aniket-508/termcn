@@ -4,12 +4,14 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TabbedContentTab {
   id: string;
   label: string;
   content: ReactNode;
   disabled?: boolean;
 }
+
 export interface TabbedContentProps {
   tabs: TabbedContentTab[];
   defaultTab?: string;
@@ -17,6 +19,7 @@ export interface TabbedContentProps {
   onChange?: (id: string) => void;
   tabBarStyle?: "underline" | "box" | "minimal";
 }
+
 export const TabbedContent = function TabbedContent({
   tabs,
   defaultTab,
@@ -30,6 +33,7 @@ export const TabbedContent = function TabbedContent({
   );
   const activeId = controlledTab ?? internalTab;
   const activeIndex = tabs.findIndex((t) => t.id === activeId);
+
   const switchTab = (id: string) => {
     if (onChange) {
       onChange(id);
@@ -37,6 +41,7 @@ export const TabbedContent = function TabbedContent({
       setInternalTab(id);
     }
   };
+
   useKeyboard((key) => {
     if (key.name === "left" || (key.shift && key.name === "tab")) {
       let prev = activeIndex - 1;
@@ -56,7 +61,9 @@ export const TabbedContent = function TabbedContent({
       }
     }
   });
+
   const activeTab = tabs.find((t) => t.id === activeId);
+
   const renderTabBar = () => {
     if (tabBarStyle === "box") {
       return (
@@ -85,6 +92,7 @@ export const TabbedContent = function TabbedContent({
         </box>
       );
     }
+
     if (tabBarStyle === "minimal") {
       return (
         <box gap={2}>
@@ -107,6 +115,7 @@ export const TabbedContent = function TabbedContent({
         </box>
       );
     }
+
     return (
       <box>
         {tabs.map((tab, idx) => {
@@ -139,6 +148,7 @@ export const TabbedContent = function TabbedContent({
       </box>
     );
   };
+
   return (
     <box flexDirection="column">
       {renderTabBar()}

@@ -1,6 +1,7 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface CodeProps {
   children: string;
   language?: string;
@@ -22,6 +23,7 @@ export interface CodeProps {
   operatorColor?: string;
   plainColor?: string;
 }
+
 const KEYWORDS = new Set([
   "const",
   "let",
@@ -73,23 +75,29 @@ const KEYWORDS = new Set([
   "yield",
   "super",
 ]);
+
 const OPERATORS = /^[=+\-*/<>!&|?%^~]+$/;
+
 interface Token {
   text: string;
   kind: "keyword" | "string" | "number" | "comment" | "operator" | "plain";
 }
+
 const tokenizeLine = function tokenizeLine(line: string): Token[] {
   const trimmed = line.trimStart();
   if (trimmed.startsWith("//")) {
     return [{ kind: "comment", text: line }];
   }
+
   const tokens: Token[] = [];
   let i = 0;
+
   while (i < line.length) {
     if (line[i] === "/" && line[i + 1] === "/") {
       tokens.push({ kind: "comment", text: line.slice(i) });
       break;
     }
+
     const quote = line[i];
     if (quote === '"' || quote === "'" || quote === "`") {
       let j = i + 1;
@@ -104,6 +112,7 @@ const tokenizeLine = function tokenizeLine(line: string): Token[] {
       i = j;
       continue;
     }
+
     if (/[0-9]/.test(line[i])) {
       let j = i;
       while (j < line.length && /[0-9._xXa-fA-FbBoO]/.test(line[j])) {
@@ -113,6 +122,7 @@ const tokenizeLine = function tokenizeLine(line: string): Token[] {
       i = j;
       continue;
     }
+
     if (/[a-zA-Z_$]/.test(line[i])) {
       let j = i;
       while (j < line.length && /[a-zA-Z0-9_$]/.test(line[j])) {
@@ -126,6 +136,7 @@ const tokenizeLine = function tokenizeLine(line: string): Token[] {
       i = j;
       continue;
     }
+
     if (/[=+\-*/<>!&|?%^~]/.test(line[i])) {
       let j = i;
       while (j < line.length && OPERATORS.test(line[j])) {
@@ -135,11 +146,14 @@ const tokenizeLine = function tokenizeLine(line: string): Token[] {
       i = j;
       continue;
     }
+
     tokens.push({ kind: "plain", text: line[i] });
     i += 1;
   }
+
   return tokens;
 };
+
 const CodeLine = function CodeLine({
   line,
   keywordColor,
@@ -158,6 +172,7 @@ const CodeLine = function CodeLine({
   plainColor: string;
 }) {
   const tokens = tokenizeLine(line);
+
   return (
     <box flexDirection="row">
       {tokens.map((token, idx) => {
@@ -209,6 +224,7 @@ const CodeLine = function CodeLine({
     </box>
   );
 };
+
 export const Code = function Code({
   children,
   language,
@@ -224,13 +240,16 @@ export const Code = function Code({
   plainColor: plainColorProp,
 }: CodeProps) {
   const theme = useTheme();
+
   const keywordColor = keywordColorProp ?? theme.colors.accent;
   const stringColor = stringColorProp ?? theme.colors.success;
   const numberColor = numberColorProp ?? theme.colors.warning;
   const commentColor = commentColorProp ?? theme.colors.mutedForeground;
   const operatorColor = operatorColorProp ?? theme.colors.info;
   const plainColor = plainColorProp ?? theme.colors.foreground;
+
   const lines = children.split("\n");
+
   if (inline) {
     const displayLine = lines[0] ?? "";
     return (
@@ -252,7 +271,9 @@ export const Code = function Code({
       </box>
     );
   }
+
   const lineNumberWidth = String(lines.length).length;
+
   return (
     <box
       borderColor={theme.colors.border}

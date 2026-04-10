@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface MenuItem {
   key: string;
   label: string;
@@ -12,20 +13,25 @@ export interface MenuItem {
   separator?: boolean;
   children?: MenuItem[];
 }
+
 export interface MenuProps {
   items: MenuItem[];
   onSelect?: (item: MenuItem) => void;
   title?: string;
 }
+
 export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
   const theme = useTheme();
   const [focusIndex, setFocusIndex] = useState(0);
   const [submenuStack, setSubmenuStack] = useState<MenuItem[][]>([]);
+
   const activeItems = submenuStack.at(-1) ?? items;
+
   const selectableIndices = activeItems
     .map((item, idx) => ({ idx, item }))
     .filter(({ item }) => !item.separator && !item.disabled)
     .map(({ idx }) => idx);
+
   const moveFocus = (direction: 1 | -1) => {
     const currentPos = selectableIndices.indexOf(focusIndex);
     const nextPos = currentPos + direction;
@@ -33,6 +39,7 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
       setFocusIndex(selectableIndices[nextPos]);
     }
   };
+
   const openSubmenu = (item: MenuItem) => {
     if (item.children && item.children.length > 0) {
       const { children } = item;
@@ -40,12 +47,14 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
       setFocusIndex(0);
     }
   };
+
   const closeSubmenu = () => {
     if (submenuStack.length > 0) {
       setSubmenuStack((prev) => prev.slice(0, -1));
       setFocusIndex(0);
     }
   };
+
   const activateItem = (item: MenuItem) => {
     if (item.disabled || item.separator) {
       return;
@@ -56,6 +65,7 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
       onSelect?.(item);
     }
   };
+
   useKeyboard((key) => {
     if (key.name === "up") {
       moveFocus(-1);
@@ -77,7 +87,9 @@ export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
       closeSubmenu();
     }
   });
+
   const depth = submenuStack.length;
+
   return (
     <box
       flexDirection="column"

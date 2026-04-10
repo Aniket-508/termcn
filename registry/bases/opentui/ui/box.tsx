@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type BorderVariant =
   | "default"
   | "muted"
@@ -9,6 +10,7 @@ export type BorderVariant =
   | "success"
   | "error"
   | "warning";
+
 export interface BoxProps {
   border?: boolean;
   borderVariant?: BorderVariant;
@@ -48,6 +50,7 @@ export interface BoxProps {
   gap?: number;
   [key: string]: unknown;
 }
+
 export const Box = function Box({
   border,
   borderVariant = "default",
@@ -56,6 +59,7 @@ export const Box = function Box({
   ...props
 }: BoxProps) {
   const theme = useTheme();
+
   const resolvedBorderColor =
     borderColor ??
     (() => {
@@ -80,6 +84,7 @@ export const Box = function Box({
         }
       }
     })();
+
   return (
     <box
       borderStyle={

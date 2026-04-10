@@ -3,11 +3,13 @@ import { useMemo } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface KeyValueItem {
   key: string;
   value: ReactNode;
   color?: string;
 }
+
 export interface KeyValueProps {
   items: KeyValueItem[];
   keyWidth?: number;
@@ -15,6 +17,7 @@ export interface KeyValueProps {
   keyColor?: string;
   valueColor?: string;
 }
+
 export const KeyValue = function KeyValue({
   items,
   keyWidth,
@@ -23,6 +26,7 @@ export const KeyValue = function KeyValue({
   valueColor,
 }: KeyValueProps) {
   const theme = useTheme();
+
   const resolvedKeyWidth = useMemo(() => {
     if (keyWidth !== undefined) {
       return keyWidth;
@@ -33,8 +37,10 @@ export const KeyValue = function KeyValue({
     }
     return max + 1;
   }, [items, keyWidth]);
+
   const resolvedKeyColor = keyColor ?? theme.colors.mutedForeground;
   const resolvedValueColor = valueColor ?? theme.colors.foreground;
+
   return (
     <box flexDirection="column">
       {items.map((item, idx) => {

@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface InfoBoxProps {
   borderStyle?: "single" | "round" | "double" | "bold";
   borderColor?: string;
@@ -9,6 +10,7 @@ export interface InfoBoxProps {
   width?: number | "full";
   children: ReactNode;
 }
+
 export interface InfoBoxHeaderProps {
   icon?: string;
   iconColor?: string;
@@ -17,6 +19,7 @@ export interface InfoBoxHeaderProps {
   version?: string;
   versionColor?: string;
 }
+
 export interface InfoBoxRowProps {
   label: string;
   value?: string;
@@ -26,6 +29,7 @@ export interface InfoBoxRowProps {
   tree?: boolean;
   color?: string;
 }
+
 const InfoBoxRoot = function InfoBoxRoot({
   borderStyle = "single",
   borderColor,
@@ -35,6 +39,7 @@ const InfoBoxRoot = function InfoBoxRoot({
 }: InfoBoxProps) {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.border;
+
   return (
     <box
       borderColor={resolvedBorderColor}
@@ -50,6 +55,7 @@ const InfoBoxRoot = function InfoBoxRoot({
     </box>
   );
 };
+
 const InfoBoxHeader = function InfoBoxHeader({
   icon,
   iconColor = "green",
@@ -69,6 +75,7 @@ const InfoBoxHeader = function InfoBoxHeader({
     </box>
   );
 };
+
 const InfoBoxRow = function InfoBoxRow({
   label,
   value,
@@ -80,6 +87,7 @@ const InfoBoxRow = function InfoBoxRow({
 }: InfoBoxRowProps) {
   const theme = useTheme();
   const prefix = tree ? "└ " : "";
+
   return (
     <box flexDirection="row">
       <text
@@ -100,11 +108,13 @@ const InfoBoxRow = function InfoBoxRow({
     </box>
   );
 };
+
 const InfoBoxTreeRow = function InfoBoxTreeRow(
   props: Omit<InfoBoxRowProps, "tree">
 ) {
   return <InfoBoxRow {...props} tree={true} />;
 };
+
 export const InfoBox = Object.assign(InfoBoxRoot, {
   Header: InfoBoxHeader,
   Row: InfoBoxRow,

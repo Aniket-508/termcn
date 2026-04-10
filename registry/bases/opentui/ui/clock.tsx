@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ClockProps {
   format?: "12h" | "24h";
   showSeconds?: boolean;
@@ -10,6 +11,7 @@ export interface ClockProps {
   color?: string;
   size?: "sm" | "lg";
 }
+
 const BIG_DIGITS: Record<string, string[]> = {
   " ": ["   ", "   ", "   ", "   ", "   "],
   "0": ["╔═╗", "║ ║", "║ ║", "║ ║", "╚═╝"],
@@ -24,6 +26,7 @@ const BIG_DIGITS: Record<string, string[]> = {
   "9": ["╔═╗", "║ ║", "╚═╣", "  ║", "╚═╝"],
   ":": ["   ", " ● ", "   ", " ● ", "   "],
 };
+
 const renderBigText = function renderBigText(
   str: string,
   color: string
@@ -45,7 +48,9 @@ const renderBigText = function renderBigText(
     </box>
   );
 };
+
 const padNum = (n: number) => String(n).padStart(2, "0");
+
 const getTimeParts = function getTimeParts(
   format: "12h" | "24h",
   showSeconds: boolean,
@@ -54,19 +59,24 @@ const getTimeParts = function getTimeParts(
   const now = timezone
     ? new Date(new Date().toLocaleString("en-US", { timeZone: timezone }))
     : new Date();
+
   let hours = now.getHours();
   const minutes = now.getMinutes();
   const seconds = now.getSeconds();
   let ampm = "";
+
   if (format === "12h") {
     ampm = hours >= 12 ? " PM" : " AM";
     hours = hours % 12 || 12;
   }
+
   const time = showSeconds
     ? `${padNum(hours)}:${padNum(minutes)}:${padNum(seconds)}`
     : `${padNum(hours)}:${padNum(minutes)}`;
+
   return { ampm, time };
 };
+
 const getDateString = function getDateString(timezone?: string): string {
   const now = timezone
     ? new Date(new Date().toLocaleString("en-US", { timeZone: timezone }))
@@ -78,6 +88,7 @@ const getDateString = function getDateString(timezone?: string): string {
     year: "numeric",
   });
 };
+
 export const Clock = function Clock({
   format = "24h",
   showSeconds = true,
@@ -88,13 +99,16 @@ export const Clock = function Clock({
 }: ClockProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
+
   const [_tick, setTick] = useState(0);
   const tick = useCallback(() => setTick((t) => t + 1), []);
   useEffect(() => {
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, [tick]);
+
   const { time, ampm } = getTimeParts(format, showSeconds, timezone);
+
   if (size === "lg") {
     return (
       <box flexDirection="column" gap={0}>
@@ -114,6 +128,7 @@ export const Clock = function Clock({
       </box>
     );
   }
+
   return (
     <box flexDirection="column" gap={0}>
       {showDate && (

@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import React, { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TimePickerProps {
   value?: {
     hours: number;
@@ -15,6 +16,7 @@ export interface TimePickerProps {
   autoFocus?: boolean;
   id?: string;
 }
+
 export const TimePicker = function TimePicker({
   value: controlledValue,
   onChange,
@@ -26,17 +28,21 @@ export const TimePicker = function TimePicker({
 }: TimePickerProps) {
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const now = new Date();
   const initialHours = controlledValue?.hours ?? now.getHours();
   const initialMinutes = controlledValue?.minutes ?? now.getMinutes();
+
   const [hours, setHours] = useState(initialHours);
   const [minutes, setMinutes] = useState(initialMinutes);
   const [ampm, setAmPm] = useState<"AM" | "PM">(
     initialHours < 12 ? "AM" : "PM"
   );
   const [field, setField] = useState<"hours" | "minutes" | "ampm">("hours");
+
   const maxHours = format === 12 ? 12 : 23;
   const minHours = format === 12 ? 1 : 0;
+
   const notify = (h: number, m: number, ap: "AM" | "PM") => {
     let actualHours = h;
     if (format === 12) {
@@ -48,6 +54,7 @@ export const TimePicker = function TimePicker({
     }
     onChange?.({ hours: actualHours, minutes: m });
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -110,10 +117,13 @@ export const TimePicker = function TimePicker({
       }
     }
   });
+
   const fieldColor = (f: typeof field): string =>
     field === f && isFocused ? theme.colors.primary : theme.colors.foreground;
+
   const fieldBg = (f: typeof field): string | undefined =>
     field === f && isFocused ? theme.colors.selection : undefined;
+
   let displayHours: number;
   if (format !== 12) {
     displayHours = hours;
@@ -124,6 +134,7 @@ export const TimePicker = function TimePicker({
   } else {
     displayHours = hours;
   }
+
   return (
     <box flexDirection="column">
       {label && (
@@ -149,6 +160,7 @@ export const TimePicker = function TimePicker({
           </text>
           <text fg={fieldColor("hours")}>▼</text>
         </box>
+
         <box flexDirection="column" alignItems="center" justifyContent="center">
           <text fg={theme.colors.border}> </text>
           <text fg={theme.colors.foreground}>
@@ -156,6 +168,7 @@ export const TimePicker = function TimePicker({
           </text>
           <text fg={theme.colors.border}> </text>
         </box>
+
         <box flexDirection="column" alignItems="center">
           <text fg={fieldColor("minutes")}>▲</text>
           <text fg={fieldColor("minutes")} bg={fieldBg("minutes")}>
@@ -167,6 +180,7 @@ export const TimePicker = function TimePicker({
           </text>
           <text fg={fieldColor("minutes")}>▼</text>
         </box>
+
         {format === 12 && (
           <>
             <box

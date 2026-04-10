@@ -4,12 +4,14 @@ import type { Key } from "react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ModelOption {
   id: string;
   name: string;
   provider: string;
   context?: number;
 }
+
 export interface ModelSelectorProps {
   models: ModelOption[];
   selected: string;
@@ -18,6 +20,7 @@ export interface ModelSelectorProps {
   showProvider?: boolean;
   groupByProvider?: boolean;
 }
+
 const formatContext = function formatContext(ctx: number): string {
   if (ctx >= 1_000_000) {
     return `${(ctx / 1_000_000).toFixed(0)}M ctx`;
@@ -27,6 +30,7 @@ const formatContext = function formatContext(ctx: number): string {
   }
   return `${ctx} ctx`;
 };
+
 interface ModelRowProps {
   key?: Key | null;
   model: ModelOption;
@@ -36,6 +40,7 @@ interface ModelRowProps {
   showProvider: boolean;
   theme: ReturnType<typeof useTheme>;
 }
+
 const getModelColor = (
   isSelected: boolean,
   isActive: boolean,
@@ -49,6 +54,7 @@ const getModelColor = (
   }
   return theme.colors.foreground;
 };
+
 const ModelRow = function ModelRow({
   model,
   isActive,
@@ -77,6 +83,7 @@ const ModelRow = function ModelRow({
     </box>
   );
 };
+
 export const ModelSelector = function ModelSelector({
   models,
   selected,
@@ -90,6 +97,7 @@ export const ModelSelector = function ModelSelector({
     const idx = models.findIndex((m) => m.id === selected);
     return Math.max(idx, 0);
   });
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((i) => Math.max(0, i - 1));
@@ -102,6 +110,7 @@ export const ModelSelector = function ModelSelector({
       }
     }
   });
+
   if (groupByProvider) {
     const providerGroups: Record<string, ModelOption[]> = {};
     for (const m of models) {
@@ -110,6 +119,7 @@ export const ModelSelector = function ModelSelector({
       }
       providerGroups[m.provider]?.push(m);
     }
+
     return (
       <box flexDirection="column">
         {Object.entries(providerGroups).map(([provider, group]) => (
@@ -138,6 +148,7 @@ export const ModelSelector = function ModelSelector({
       </box>
     );
   }
+
   return (
     <box flexDirection="column">
       {models.map((model, idx) => {

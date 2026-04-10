@@ -4,12 +4,14 @@ import { useState, useCallback, useEffect } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
 import { useClipboard } from "@/hooks/use-clipboard";
+
 export interface ClipboardProps {
   value: string;
   label?: string;
   successMessage?: string;
   timeout?: number;
 }
+
 export const Clipboard = function Clipboard({
   value,
   label,
@@ -19,10 +21,12 @@ export const Clipboard = function Clipboard({
   const theme = useTheme();
   const { write } = useClipboard();
   const [copied, setCopied] = useState(false);
+
   const doCopy = useCallback(() => {
     write(value);
     setCopied(true);
   }, [write, value]);
+
   useEffect(() => {
     if (!copied) {
       return;
@@ -30,11 +34,13 @@ export const Clipboard = function Clipboard({
     const timer = setTimeout(() => setCopied(false), timeout);
     return () => clearTimeout(timer);
   }, [copied, timeout]);
+
   useKeyboard((key) => {
     if (key.name === "c" || key.name === " ") {
       doCopy();
     }
   });
+
   return (
     <box flexDirection="column" gap={0}>
       {label && <text fg={theme.colors.mutedForeground}>{label}</text>}

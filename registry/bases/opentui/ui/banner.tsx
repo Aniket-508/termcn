@@ -4,12 +4,14 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type BannerVariant =
   | "info"
   | "warning"
   | "error"
   | "success"
   | "neutral";
+
 const ICONS: Record<BannerVariant, string> = {
   error: "✗",
   info: "ℹ",
@@ -17,6 +19,7 @@ const ICONS: Record<BannerVariant, string> = {
   success: "✓",
   warning: "⚠",
 };
+
 export interface BannerProps {
   children: ReactNode;
   variant?: BannerVariant;
@@ -28,6 +31,7 @@ export interface BannerProps {
   accentChar?: string;
   gap?: number;
 }
+
 export const Banner = function Banner({
   children,
   variant = "info",
@@ -41,6 +45,7 @@ export const Banner = function Banner({
 }: BannerProps) {
   const theme = useTheme();
   const [dismissed, setDismissed] = useState(false);
+
   const variantColor =
     color ??
     (() => {
@@ -62,16 +67,20 @@ export const Banner = function Banner({
         }
       }
     })();
+
   useKeyboard((key) => {
     if (dismissible && key.name === "escape") {
       setDismissed(true);
       onDismiss?.();
     }
   });
+
   if (dismissed) {
     return null;
   }
+
   const resolvedIcon = icon ?? ICONS[variant];
+
   return (
     <box flexDirection="column">
       <box flexDirection="row">

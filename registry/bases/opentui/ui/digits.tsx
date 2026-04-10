@@ -1,12 +1,15 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type DigitSize = "sm" | "md" | "lg";
+
 export interface DigitsProps {
   value: string | number;
   color?: string;
   size?: DigitSize;
 }
+
 const SEGMENTS_MD: Record<string, string[]> = {
   " ": ["   ", "   ", "   ", "   ", "   "],
   "-": ["   ", "   ", " ─ ", "   ", "   "],
@@ -23,6 +26,7 @@ const SEGMENTS_MD: Record<string, string[]> = {
   "9": ["╭─╮", "│ │", "╰─┤", "  │", "╰─╯"],
   ":": ["   ", " ● ", "   ", " ● ", "   "],
 };
+
 const SEGMENTS_LG: Record<string, string[]> = {
   " ": ["     ", "     ", "     ", "     ", "     "],
   "-": ["     ", "     ", " ─── ", "     ", "     "],
@@ -39,17 +43,20 @@ const SEGMENTS_LG: Record<string, string[]> = {
   "9": ["╭───╮", "│   │", "╰───┤", "    │", "╰───╯"],
   ":": ["     ", "  ●  ", "     ", "  ●  ", "     "],
 };
+
 const getSegmentMap = function getSegmentMap(
   size: DigitSize
 ): Record<string, string[]> {
   return size === "lg" ? SEGMENTS_LG : SEGMENTS_MD;
 };
+
 const getFallback = function getFallback(size: DigitSize): string[] {
   const w = size === "lg" ? 5 : 3;
   const bar = "─".repeat(w - 2);
   const side = `│${" ".repeat(w - 2)}│`;
   return [`╭${bar}╮`, side, side, side, `╰${bar}╯`];
 };
+
 export const Digits = function Digits({
   value,
   color,
@@ -58,6 +65,7 @@ export const Digits = function Digits({
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
   const str = String(value);
+
   if (size === "sm") {
     return (
       <text fg={resolvedColor}>
@@ -65,10 +73,12 @@ export const Digits = function Digits({
       </text>
     );
   }
+
   const segMap = getSegmentMap(size);
   const fallback = getFallback(size);
   const chars = [...str];
   const rows = 5;
+
   return (
     <box flexDirection="column">
       {Array.from({ length: rows }, (_, rowIdx) => (

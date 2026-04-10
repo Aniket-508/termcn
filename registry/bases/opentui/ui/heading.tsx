@@ -2,7 +2,9 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type HeadingLevel = 1 | 2 | 3 | 4;
+
 export interface HeadingProps {
   level?: HeadingLevel;
   children: ReactNode;
@@ -12,6 +14,7 @@ export interface HeadingProps {
   prefix3?: string;
   uppercase?: boolean;
 }
+
 export const Heading = function Heading({
   level = 1,
   children,
@@ -23,6 +26,7 @@ export const Heading = function Heading({
 }: HeadingProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
+
   switch (level) {
     case 1: {
       return (

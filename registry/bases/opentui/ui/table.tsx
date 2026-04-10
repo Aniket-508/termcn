@@ -4,12 +4,14 @@ import type { Key } from "react";
 import { useMemo, useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface Column<T = Record<string, unknown>> {
   key: keyof T & string;
   header: string;
   width?: number;
   align?: "left" | "right" | "center";
 }
+
 export interface TableProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > {
@@ -21,6 +23,7 @@ export interface TableProps<
   maxRows?: number;
   borderColor?: string;
 }
+
 const BORDER = {
   bottom: { cross: "┴", left: "╰", line: "─", right: "╯" },
   data: { cross: "│", left: "│", line: " ", right: "│" },
@@ -28,6 +31,7 @@ const BORDER = {
   separator: { cross: "┼", left: "├", line: "─", right: "┤" },
   top: { cross: "┬", left: "╭", line: "─", right: "╮" },
 } as const;
+
 const pad = (
   str: string,
   width: number,
@@ -47,6 +51,7 @@ const pad = (
   }
   return s + " ".repeat(diff);
 };
+
 const intersperse = <T,>(items: T[], separator: (index: number) => T): T[] => {
   const result: T[] = [];
   for (let i = 0; i < items.length; i += 1) {
@@ -60,12 +65,14 @@ const intersperse = <T,>(items: T[], separator: (index: number) => T): T[] => {
   }
   return result;
 };
+
 interface SkeletonChars {
   left: string;
   right: string;
   cross: string;
   line: string;
 }
+
 const SkeletonRow = ({
   widths,
   skeleton,
@@ -92,6 +99,7 @@ const SkeletonRow = ({
     <text fg={color}>{skeleton.right}</text>
   </box>
 );
+
 const CellRow = ({
   widths,
   cells,
@@ -137,6 +145,7 @@ const CellRow = ({
     <text fg={borderColor}>{skeleton.right}</text>
   </box>
 );
+
 export const Table = <
   T extends Record<string, unknown> = Record<string, unknown>,
 >({
@@ -153,7 +162,9 @@ export const Table = <
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
   const [activeRow, setActiveRow] = useState(0);
   const [sortColIdx, setSortColIdx] = useState(0);
+
   const resolvedBorderColor = borderColor ?? theme.colors.border;
+
   const sorted = useMemo(() => {
     if (!sortKey) {
       return data;
@@ -163,7 +174,9 @@ export const Table = <
       return sortDir === "asc" ? cmp : -cmp;
     });
   }, [data, sortKey, sortDir]);
+
   const visible = sorted.slice(0, maxRows);
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveRow((r) => Math.max(0, r - 1));
@@ -188,6 +201,7 @@ export const Table = <
       }
     }
   });
+
   const colWidths = columns.map((col) => {
     let dataMax = 0;
     for (const row of data) {
@@ -195,10 +209,12 @@ export const Table = <
     }
     return col.width ?? Math.max(col.header.length, dataMax);
   });
+
   const headerCells = columns.map((col) => ({
     align: col.align ?? ("left" as const),
     text: col.header,
   }));
+
   return (
     <box flexDirection="column">
       <SkeletonRow

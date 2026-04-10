@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TooltipProps {
   children: ReactNode;
   content: string;
@@ -22,6 +23,7 @@ export interface TooltipProps {
   arrowDown?: string;
   arrowUp?: string;
 }
+
 export const Tooltip = function Tooltip({
   children,
   content,
@@ -37,6 +39,7 @@ export const Tooltip = function Tooltip({
 }: TooltipProps) {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.border;
+
   const tooltipBox = (
     <box
       borderColor={resolvedBorderColor}
@@ -48,9 +51,11 @@ export const Tooltip = function Tooltip({
       <text fg={theme.colors.foreground}>{content}</text>
     </box>
   );
+
   if (!isVisible) {
     return <box>{children}</box>;
   }
+
   if (position === "top") {
     return (
       <box flexDirection="column" alignItems="flex-start">
@@ -60,6 +65,7 @@ export const Tooltip = function Tooltip({
       </box>
     );
   }
+
   if (position === "bottom") {
     return (
       <box flexDirection="column" alignItems="flex-start">
@@ -69,6 +75,7 @@ export const Tooltip = function Tooltip({
       </box>
     );
   }
+
   if (position === "left") {
     return (
       <box flexDirection="row" alignItems="center">
@@ -77,6 +84,7 @@ export const Tooltip = function Tooltip({
       </box>
     );
   }
+
   return (
     <box flexDirection="row" alignItems="center">
       <box>{children}</box>

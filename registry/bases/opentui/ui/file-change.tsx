@@ -5,24 +5,29 @@ import { useState } from "react";
 import { useTheme } from "@/components/ui/theme-provider";
 
 import { DiffView } from "./diff-view";
+
 export type FileChangeType = "modify" | "create" | "delete";
+
 export interface FileChangeItem {
   path: string;
   type: FileChangeType;
   diff?: string;
   content?: string;
 }
+
 export interface FileChangeProps {
   changes: FileChangeItem[];
   onAccept?: (path: string) => void;
   onReject?: (path: string) => void;
   onAcceptAll?: () => void;
 }
+
 const TYPE_ICON: Record<FileChangeType, string> = {
   create: "A",
   delete: "D",
   modify: "M",
 };
+
 const parseDiff = (
   diff: string
 ): {
@@ -32,6 +37,7 @@ const parseDiff = (
   const lines = diff.split("\n");
   const oldLines: string[] = [];
   const newLines: string[] = [];
+
   for (const line of lines) {
     if (
       line.startsWith("---") ||
@@ -53,8 +59,10 @@ const parseDiff = (
       newLines.push(line);
     }
   }
+
   return { newText: newLines.join("\n"), oldText: oldLines.join("\n") };
 };
+
 export const FileChange = ({
   changes,
   onAccept,
@@ -66,6 +74,7 @@ export const FileChange = ({
   const [expandedPaths, setExpandedPaths] = useState<Set<string>>(new Set());
   const [acceptedPaths, setAcceptedPaths] = useState<Set<string>>(new Set());
   const [rejectedPaths, setRejectedPaths] = useState<Set<string>>(new Set());
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((i) => Math.max(0, i - 1));
@@ -113,6 +122,7 @@ export const FileChange = ({
       onAcceptAll?.();
     }
   });
+
   const typeColor = (type: FileChangeType): string => {
     switch (type) {
       case "create": {
@@ -129,6 +139,7 @@ export const FileChange = ({
       }
     }
   };
+
   return (
     <box flexDirection="column">
       <box gap={2} marginBottom={1}>
@@ -140,6 +151,7 @@ export const FileChange = ({
           all
         </text>
       </box>
+
       {changes.map((item, idx) => {
         const isActive = idx === activeIndex;
         const isExpanded = expandedPaths.has(item.path);

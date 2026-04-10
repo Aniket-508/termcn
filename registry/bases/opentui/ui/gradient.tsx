@@ -13,6 +13,7 @@ export type GradientName =
   | "summer"
   | "pastel"
   | "rainbow";
+
 const GRADIENT_PRESETS: Record<GradientName, string[]> = {
   atlas: ["#feac5e", "#c779d0", "#4bc0c8"],
   cristal: ["#bdfff3", "#4ac29a"],
@@ -38,17 +39,20 @@ const GRADIENT_PRESETS: Record<GradientName, string[]> = {
   teen: ["#77a1d3", "#79cbca", "#e684ae"],
   vice: ["#5ee7df", "#b490ca"],
 };
+
 export interface GradientProps {
   children: string;
   name?: GradientName;
   colors?: string[];
   bold?: boolean;
 }
+
 interface RGB {
   r: number;
   g: number;
   b: number;
 }
+
 const parseHex = function parseHex(hex: string): RGB {
   const clean = hex.replace("#", "");
   const full =
@@ -59,6 +63,7 @@ const parseHex = function parseHex(hex: string): RGB {
     r: Number.parseInt(full.slice(0, 2), 16),
   };
 };
+
 const toHex = function toHex({ r, g, b }: RGB): string {
   return `#${[r, g, b]
     .map((v) =>
@@ -68,6 +73,7 @@ const toHex = function toHex({ r, g, b }: RGB): string {
     )
     .join("")}`;
 };
+
 const lerpColor = function lerpColor(a: RGB, b: RGB, t: number): RGB {
   return {
     b: a.b + (b.b - a.b) * t,
@@ -75,10 +81,12 @@ const lerpColor = function lerpColor(a: RGB, b: RGB, t: number): RGB {
     r: a.r + (b.r - a.r) * t,
   };
 };
+
 export interface GradientChar {
   char: string;
   color: string;
 }
+
 export const gradientText = function gradientText(
   text: string,
   colors: string[]
@@ -89,9 +97,11 @@ export const gradientText = function gradientText(
   if (colors.length === 1) {
     return [...text].map((char) => ({ char, color: colors[0] }));
   }
+
   const parsedColors = colors.map(parseHex);
   const segments = colors.length - 1;
   const len = text.length;
+
   return [...text].map((char, i) => {
     if (len <= 1) {
       return { char, color: colors[0] };
@@ -105,6 +115,7 @@ export const gradientText = function gradientText(
     return { char, color };
   });
 };
+
 export const Gradient = function Gradient({
   children,
   name,
@@ -113,6 +124,7 @@ export const Gradient = function Gradient({
 }: GradientProps) {
   const resolvedColors = colors ?? (name ? GRADIENT_PRESETS[name] : []);
   const chars = gradientText(children, resolvedColors);
+
   return (
     <box flexDirection="row">
       {chars.map((item, idx) =>

@@ -5,7 +5,9 @@ import * as path from "node:path";
 import { useEffect, useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type ImageProtocol = "auto" | "iterm2" | "kitty" | "ascii";
+
 export interface ImageProps {
   src: string;
   width?: number;
@@ -13,12 +15,14 @@ export interface ImageProps {
   protocol?: ImageProtocol;
   alt?: string;
 }
+
 const detectProtocol = function detectProtocol(): Exclude<
   ImageProtocol,
   "auto"
 > {
   const termProgram = process.env["TERM_PROGRAM"] ?? "";
   const term = process.env["TERM"] ?? "";
+
   if (termProgram === "iTerm.app") {
     return "iterm2";
   }
@@ -27,6 +31,7 @@ const detectProtocol = function detectProtocol(): Exclude<
   }
   return "ascii";
 };
+
 const writeIterm2 = function writeIterm2(
   src: string,
   width?: number,
@@ -49,6 +54,7 @@ const writeIterm2 = function writeIterm2(
     /* noop */
   }
 };
+
 const writeKitty = function writeKitty(
   src: string,
   width?: number,
@@ -79,6 +85,7 @@ const writeKitty = function writeKitty(
     /* noop */
   }
 };
+
 export const Image = function Image({
   src,
   width = 20,
@@ -89,9 +96,11 @@ export const Image = function Image({
   const theme = useTheme();
   const [, setRendered] = useState(false);
   const [renderError, setRenderError] = useState<string | null>(null);
+
   const resolvedProtocol = protocol === "auto" ? detectProtocol() : protocol;
   const filename = path.basename(src);
   const ext = path.extname(src).toLowerCase();
+
   useEffect(() => {
     if (resolvedProtocol === "ascii") {
       setRendered(true);
@@ -109,6 +118,7 @@ export const Image = function Image({
       setRenderError(error instanceof Error ? error.message : String(error));
     }
   }, [src, resolvedProtocol, width, height]);
+
   if (resolvedProtocol === "ascii" || renderError) {
     const boxWidth = width ?? 20;
     const topBottom = "─".repeat(boxWidth - 2);
@@ -119,6 +129,7 @@ export const Image = function Image({
         Math.floor((boxWidth - 2) / 2) +
           Math.floor((alt ?? filename).slice(0, boxWidth - 4).length / 2)
       );
+
     const innerRows = 3;
     const displayLines: string[] = [
       `┌${topBottom}┐`,
@@ -127,6 +138,7 @@ export const Image = function Image({
       ...Array.from({ length: Math.ceil(innerRows / 2) }, () => `│${empty}│`),
       `└${topBottom}┘`,
     ];
+
     return (
       <box flexDirection="column" gap={0}>
         {displayLines.map((line, i) => (
@@ -139,6 +151,7 @@ export const Image = function Image({
       </box>
     );
   }
+
   return (
     <box flexDirection="column" gap={0}>
       <text fg="#666">{`${alt ?? filename} [${resolvedProtocol}]`}</text>

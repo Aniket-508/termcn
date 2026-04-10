@@ -2,21 +2,25 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface BulletListItemProps {
   label: string;
   bold?: boolean;
   color?: string;
   children?: ReactNode;
 }
+
 export interface BulletListTreeItemProps {
   label: string;
   color?: string;
 }
+
 export interface BulletListCheckItemProps {
   label: string;
   done?: boolean;
   color?: string;
 }
+
 const BulletListRoot = function BulletListRoot({
   children,
 }: {
@@ -24,6 +28,7 @@ const BulletListRoot = function BulletListRoot({
 }) {
   return <box flexDirection="column">{children}</box>;
 };
+
 const BulletListItem = function BulletListItem({
   label,
   bold: boldText = false,
@@ -47,6 +52,7 @@ const BulletListItem = function BulletListItem({
     </box>
   );
 };
+
 const BulletListSub = function BulletListSub({
   children,
 }: {
@@ -58,6 +64,7 @@ const BulletListSub = function BulletListSub({
     </box>
   );
 };
+
 const BulletListTreeItem = function BulletListTreeItem({
   label,
   color,
@@ -70,6 +77,7 @@ const BulletListTreeItem = function BulletListTreeItem({
     </box>
   );
 };
+
 const BulletListCheckItem = function BulletListCheckItem({
   label,
   done = false,
@@ -86,6 +94,7 @@ const BulletListCheckItem = function BulletListCheckItem({
     </box>
   );
 };
+
 export const BulletList = Object.assign(BulletListRoot, {
   CheckItem: BulletListCheckItem,
   Item: BulletListItem,

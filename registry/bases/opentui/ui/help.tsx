@@ -1,11 +1,13 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface HelpProps {
   keymap: Record<string, string>;
   title?: string;
   compact?: boolean;
 }
+
 export const Help = function Help({
   keymap,
   title,
@@ -13,6 +15,7 @@ export const Help = function Help({
 }: HelpProps) {
   const theme = useTheme();
   const entries = Object.entries(keymap);
+
   if (compact) {
     const parts = entries.map(([key, action]) => `${key}: ${action}`);
     return (
@@ -26,7 +29,9 @@ export const Help = function Help({
       </box>
     );
   }
+
   const keyWidth = Math.max(...entries.map(([k]) => k.length), 3);
+
   return (
     <box
       flexDirection="column"

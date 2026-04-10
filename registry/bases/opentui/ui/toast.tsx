@@ -2,13 +2,16 @@
 import { useState, useEffect } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type ToastVariant = "success" | "error" | "warning" | "info";
+
 const ICONS: Record<ToastVariant, string> = {
   error: "✗",
   info: "ℹ",
   success: "✓",
   warning: "⚠",
 };
+
 export interface ToastProps {
   message: string;
   variant?: ToastVariant;
@@ -16,8 +19,10 @@ export interface ToastProps {
   onDismiss?: () => void;
   icon?: string;
 }
+
 const BAR_WIDTH = 20;
 const TICK_MS = 100;
+
 export const Toast = function Toast({
   message,
   variant = "info",
@@ -28,6 +33,7 @@ export const Toast = function Toast({
   const theme = useTheme();
   const [elapsed, setElapsed] = useState(0);
   const [dismissed, setDismissed] = useState(false);
+
   const variantColor = (() => {
     switch (variant) {
       case "success": {
@@ -44,6 +50,7 @@ export const Toast = function Toast({
       }
     }
   })();
+
   useEffect(() => {
     const id = setTimeout(() => {
       setDismissed(true);
@@ -51,6 +58,7 @@ export const Toast = function Toast({
     }, duration);
     return () => clearTimeout(id);
   }, [duration, onDismiss]);
+
   useEffect(() => {
     if (dismissed) {
       return;
@@ -60,16 +68,20 @@ export const Toast = function Toast({
     }, TICK_MS);
     return () => clearInterval(id);
   }, [dismissed, duration]);
+
   if (dismissed) {
     return null;
   }
+
   const remaining = Math.max(0, duration - elapsed);
   const remainingSeconds = (remaining / 1000).toFixed(1);
   const progress = remaining / duration;
   const filledChars = Math.round(progress * BAR_WIDTH);
   const emptyChars = BAR_WIDTH - filledChars;
   const bar = "█".repeat(filledChars) + "░".repeat(emptyChars);
+
   const resolvedIcon = icon ?? ICONS[variant];
+
   return (
     <box
       borderStyle="round"

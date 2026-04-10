@@ -1,13 +1,16 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface SparklineProps {
   data: number[];
   width?: number;
   color?: string;
   label?: string;
 }
+
 const BRAILLE_LEVELS = ["⣀", "⣄", "⣤", "⣦", "⣶", "⣷", "⣿", "⣿"];
+
 const normalize = function normalize(data: number[], levels: number): number[] {
   if (data.length === 0) {
     return [];
@@ -20,6 +23,7 @@ const normalize = function normalize(data: number[], levels: number): number[] {
   }
   return data.map((v) => Math.round(((v - min) / range) * (levels - 1)));
 };
+
 export const Sparkline = function Sparkline({
   data,
   width = 20,
@@ -28,6 +32,7 @@ export const Sparkline = function Sparkline({
 }: SparklineProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
+
   if (data.length === 0) {
     return (
       <box>
@@ -36,6 +41,7 @@ export const Sparkline = function Sparkline({
       </box>
     );
   }
+
   const sampled =
     data.length > width
       ? Array.from(
@@ -43,10 +49,12 @@ export const Sparkline = function Sparkline({
           (_, i) => data[Math.round((i / (width - 1)) * (data.length - 1))] ?? 0
         )
       : data;
+
   const levels = normalize(sampled, BRAILLE_LEVELS.length);
   const sparkStr = levels
     .map((l) => BRAILLE_LEVELS[l] ?? BRAILLE_LEVELS[0])
     .join("");
+
   return (
     <box flexDirection="row" gap={1}>
       {label && <text fg={theme.colors.mutedForeground}>{label}</text>}

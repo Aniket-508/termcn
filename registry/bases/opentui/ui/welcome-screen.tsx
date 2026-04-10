@@ -3,6 +3,7 @@ import React from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface WelcomeScreenProps {
   appName: string;
   appNameColor?: string;
@@ -12,16 +13,19 @@ export interface WelcomeScreenProps {
   leftWidth?: number;
   children: ReactNode;
 }
+
 export interface WelcomeScreenGreetingProps {
   children: ReactNode;
   bold?: boolean;
   align?: "left" | "center";
   color?: string;
 }
+
 export interface WelcomeScreenLogoProps {
   children: ReactNode;
   align?: "left" | "center";
 }
+
 export interface WelcomeScreenMetaProps {
   items: string[];
   separator?: string;
@@ -30,12 +34,14 @@ export interface WelcomeScreenMetaProps {
   color?: string;
   stack?: boolean;
 }
+
 export interface WelcomeScreenSectionProps {
   title: string;
   titleColor?: string;
   titleBold?: boolean;
   children: ReactNode;
 }
+
 const WelcomeScreenLeft = function WelcomeScreenLeft({
   children,
 }: {
@@ -44,6 +50,7 @@ const WelcomeScreenLeft = function WelcomeScreenLeft({
   return children;
 };
 WelcomeScreenLeft.displayName = "WelcomeScreen.Left";
+
 const WelcomeScreenRight = function WelcomeScreenRight({
   children,
 }: {
@@ -52,6 +59,7 @@ const WelcomeScreenRight = function WelcomeScreenRight({
   return children;
 };
 WelcomeScreenRight.displayName = "WelcomeScreen.Right";
+
 const WelcomeScreenGreeting = function WelcomeScreenGreeting({
   children,
   bold: boldText = true,
@@ -63,6 +71,7 @@ const WelcomeScreenGreeting = function WelcomeScreenGreeting({
     </box>
   );
 };
+
 const WelcomeScreenLogo = function WelcomeScreenLogo({
   children,
   align = "left",
@@ -80,6 +89,7 @@ const WelcomeScreenLogo = function WelcomeScreenLogo({
     </box>
   );
 };
+
 const WelcomeScreenMeta = function WelcomeScreenMeta({
   items,
   separator = " · ",
@@ -103,6 +113,7 @@ const WelcomeScreenMeta = function WelcomeScreenMeta({
       </box>
     );
   }
+
   return (
     <box
       flexDirection="row"
@@ -119,6 +130,7 @@ const WelcomeScreenMeta = function WelcomeScreenMeta({
     </box>
   );
 };
+
 const WelcomeScreenSection = function WelcomeScreenSection({
   title,
   titleColor,
@@ -135,6 +147,7 @@ const WelcomeScreenSection = function WelcomeScreenSection({
     </box>
   );
 };
+
 const WelcomeScreenRoot = function WelcomeScreenRoot({
   appName,
   appNameColor,
@@ -147,6 +160,7 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.border;
   const resolvedAppNameColor = appNameColor ?? theme.colors.primary;
+
   const childArray = React.Children.toArray(children);
   const leftChildren = childArray.filter(
     (c) =>
@@ -166,6 +180,7 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
         }
       ).displayName === "WelcomeScreen.Right"
   );
+
   const leftContent = leftChildren.flatMap((c) =>
     React.isValidElement(c)
       ? React.Children.toArray(
@@ -188,7 +203,9 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
         )
       : []
   );
+
   const titleStr = version ? `${appName} ${version}` : appName;
+
   return (
     <box flexDirection="column">
       <box flexDirection="row">
@@ -230,6 +247,7 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
     </box>
   );
 };
+
 export const WelcomeScreen = Object.assign(WelcomeScreenRoot, {
   Greeting: WelcomeScreenGreeting,
   Left: WelcomeScreenLeft,

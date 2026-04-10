@@ -3,12 +3,14 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface SelectOption<T = string> {
   value: T;
   label: string;
   hint?: string;
   disabled?: boolean;
 }
+
 export interface SelectProps<T = string> {
   options: SelectOption<T>[];
   value?: T;
@@ -18,6 +20,7 @@ export interface SelectProps<T = string> {
   cursor?: string;
   cursorColor?: string;
 }
+
 export const Select = <T = string>({
   options,
   value: controlledValue,
@@ -29,7 +32,9 @@ export const Select = <T = string>({
 }: SelectProps<T>) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
+
   const resolvedCursorColor = cursorColor ?? theme.colors.primary;
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((i) => {
@@ -55,6 +60,7 @@ export const Select = <T = string>({
       }
     }
   });
+
   return (
     <box flexDirection="column">
       {label && (

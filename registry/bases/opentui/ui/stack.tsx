@@ -1,5 +1,6 @@
 /* @jsxImportSource @opentui/react */
 import type { ReactNode } from "react";
+
 export interface StackProps {
   direction?: "vertical" | "horizontal";
   gap?: number;
@@ -14,6 +15,7 @@ export interface StackProps {
     | "space-between"
     | "space-around";
 }
+
 export const Stack = function Stack({
   direction = "vertical",
   gap = 0,

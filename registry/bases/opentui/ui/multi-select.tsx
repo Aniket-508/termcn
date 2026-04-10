@@ -3,12 +3,14 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface MultiSelectOption<T = string> {
   value: T;
   label: string;
   hint?: string;
   disabled?: boolean;
 }
+
 export interface MultiSelectProps<T = string> {
   options: MultiSelectOption<T>[];
   value?: T[];
@@ -18,6 +20,7 @@ export interface MultiSelectProps<T = string> {
   checkmark?: string;
   height?: number;
 }
+
 export const MultiSelect = <T = string>({
   options,
   value: controlledValue,
@@ -30,7 +33,9 @@ export const MultiSelect = <T = string>({
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [internalSelected, setInternalSelected] = useState<T[]>([]);
+
   const selected = controlledValue ?? internalSelected;
+
   const scrollOffset = (() => {
     if (!height) {
       return 0;
@@ -46,9 +51,11 @@ export const MultiSelect = <T = string>({
     }
     return offset;
   })();
+
   const visibleOptions = height
     ? options.slice(scrollOffset, scrollOffset + height)
     : options;
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((i) => {
@@ -83,6 +90,7 @@ export const MultiSelect = <T = string>({
       onSubmit?.(selected);
     }
   });
+
   return (
     <box flexDirection="column">
       {visibleOptions.map((opt, visibleIdx) => {

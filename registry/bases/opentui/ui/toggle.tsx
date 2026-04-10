@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ToggleProps {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
@@ -23,6 +24,7 @@ export interface ToggleProps {
     | "classic";
   paddingX?: number;
 }
+
 export const Toggle = function Toggle({
   checked: controlledChecked,
   onChange,
@@ -40,6 +42,7 @@ export const Toggle = function Toggle({
   const [isFocused] = useState(true);
   const [internalChecked, setInternalChecked] = useState(false);
   const checked = controlledChecked ?? internalChecked;
+
   useKeyboard((key) => {
     if (!isFocused || disabled) {
       return;
@@ -53,11 +56,13 @@ export const Toggle = function Toggle({
       }
     }
   });
+
   const trackColor = checked
     ? theme.colors.success
     : theme.colors.mutedForeground;
   const focusColor = isFocused ? theme.colors.focusRing : trackColor;
   const stateLabel = checked ? onLabel : offLabel;
+
   return (
     <box gap={1} alignItems="center">
       <box

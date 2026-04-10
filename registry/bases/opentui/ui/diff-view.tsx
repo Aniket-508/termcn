@@ -2,7 +2,9 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type DiffMode = "unified" | "split" | "inline";
+
 export interface DiffViewProps {
   oldText: string;
   newText: string;
@@ -12,16 +14,19 @@ export interface DiffViewProps {
   context?: number;
   showLineNumbers?: boolean;
 }
+
 interface DiffOp {
   type: "equal" | "insert" | "delete";
   line: string;
 }
+
 const computeDiff = function computeDiff(
   oldLines: string[],
   newLines: string[]
 ): DiffOp[] {
   const m = oldLines.length;
   const n = newLines.length;
+
   const dp: number[][] = Array.from({ length: m + 1 }, () =>
     Array.from({ length: n + 1 }, () => 0)
   );
@@ -33,6 +38,7 @@ const computeDiff = function computeDiff(
           : Math.max(dp[i - 1]?.[j] ?? 0, dp[i]?.[j - 1] ?? 0);
     }
   }
+
   const ops: DiffOp[] = [];
   let i = m;
   let j = n;
@@ -52,13 +58,16 @@ const computeDiff = function computeDiff(
       i -= 1;
     }
   }
+
   return ops;
 };
+
 interface Hunk {
   oldStart: number;
   newStart: number;
   ops: DiffOp[];
 }
+
 const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
   let oldLine = 1;
   let newLine = 1;
@@ -73,15 +82,18 @@ const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
     }
     return { ...op, newLine: n, oldLine: o };
   });
+
   const changed = new Set<number>();
   for (const [idx, op] of numbered.entries()) {
     if (op.type !== "equal") {
       changed.add(idx);
     }
   }
+
   if (changed.size === 0) {
     return [];
   }
+
   const included = new Set<number>();
   for (const idx of changed) {
     for (let d = -context; d <= context; d += 1) {
@@ -91,6 +103,7 @@ const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
       }
     }
   }
+
   const indices = [...included].toSorted((a, b) => a - b);
   const hunks: Hunk[] = [];
   let start = 0;
@@ -110,19 +123,23 @@ const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
     hunks.push({ newStart: firstNew, oldStart: firstOld, ops: slice });
     start = end + 1;
   }
+
   return hunks;
 };
+
 interface ViewProps {
   hunks: Hunk[];
   showLineNumbers: boolean;
   theme: ReturnType<typeof useTheme>;
 }
+
 const UnifiedView = function UnifiedView({
   hunks,
   showLineNumbers,
   theme,
 }: ViewProps) {
   const rows: ReactNode[] = [];
+
   for (const hunk of hunks) {
     const oldCount = hunk.ops.filter((op) => op.type !== "insert").length;
     const newCount = hunk.ops.filter((op) => op.type !== "delete").length;
@@ -179,14 +196,17 @@ const UnifiedView = function UnifiedView({
       }
     }
   }
+
   return <box flexDirection="column">{rows}</box>;
 };
+
 const SplitView = function SplitView({
   hunks,
   showLineNumbers,
   theme,
 }: ViewProps) {
   const rows: ReactNode[] = [];
+
   for (const hunk of hunks) {
     const oldCount = hunk.ops.filter((op) => op.type !== "insert").length;
     const newCount = hunk.ops.filter((op) => op.type !== "delete").length;
@@ -254,13 +274,16 @@ const SplitView = function SplitView({
       }
     }
   }
+
   return <box flexDirection="column">{rows}</box>;
 };
+
 interface InlineViewProps {
   ops: DiffOp[];
   showLineNumbers: boolean;
   theme: ReturnType<typeof useTheme>;
 }
+
 const InlineView = function InlineView({
   ops,
   showLineNumbers,
@@ -269,6 +292,7 @@ const InlineView = function InlineView({
   const rows: ReactNode[] = [];
   let oldLine = 1;
   let newLine = 1;
+
   for (const op of ops) {
     const currentOl = op.type === "insert" ? null : oldLine;
     const currentNl = op.type === "delete" ? null : newLine;
@@ -314,8 +338,10 @@ const InlineView = function InlineView({
       );
     }
   }
+
   return <box flexDirection="column">{rows}</box>;
 };
+
 export const DiffView = function DiffView({
   oldText,
   newText,
@@ -325,11 +351,13 @@ export const DiffView = function DiffView({
   showLineNumbers = false,
 }: DiffViewProps) {
   const theme = useTheme();
+
   const oldLines = oldText.split("\n");
   const newLines = newText.split("\n");
   const ops = computeDiff(oldLines, newLines);
   const hunks = buildHunks(ops, context);
   const hasChanges = ops.some((op) => op.type !== "equal");
+
   if (!hasChanges) {
     return (
       <box flexDirection="column">
@@ -342,6 +370,7 @@ export const DiffView = function DiffView({
       </box>
     );
   }
+
   let content: ReactNode;
   if (mode === "split") {
     content = (
@@ -364,6 +393,7 @@ export const DiffView = function DiffView({
       />
     );
   }
+
   return (
     <box flexDirection="column">
       {filename && (

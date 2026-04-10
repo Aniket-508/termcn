@@ -1,11 +1,13 @@
 /* @jsxImportSource @opentui/react */
 import { useEffect, useMemo, useState } from "react";
 import stripAnsi from "strip-ansi";
+
 interface IPty {
   kill: () => void;
   onData: (cb: (data: string) => void) => void;
   onExit: (cb: (e: { exitCode: number }) => void) => void;
 }
+
 interface NodePtyModule {
   spawn: (
     command: string,
@@ -18,6 +20,7 @@ interface NodePtyModule {
     }
   ) => IPty;
 }
+
 export interface EmbeddedTerminalProps {
   command: string;
   args?: string[];
@@ -26,6 +29,7 @@ export interface EmbeddedTerminalProps {
   height?: number;
   onExit?: (code: number) => void;
 }
+
 /**
  * Renders a pseudo-terminal session inside the TUI.
  * Requires optional dependency `node-pty` (native build).
@@ -40,6 +44,7 @@ export const EmbeddedTerminal = function EmbeddedTerminal({
 }: EmbeddedTerminalProps) {
   const [raw, setRaw] = useState("");
   const [err, setErr] = useState<string | null>(null);
+
   useEffect(() => {
     let p: IPty | null = null;
     let cancelled = false;
@@ -78,10 +83,12 @@ export const EmbeddedTerminal = function EmbeddedTerminal({
       }
     };
   }, [command, args, cwd, width, height, onExit]);
+
   const lines = useMemo(
     () => stripAnsi(raw).split("\n").slice(-height),
     [raw, height]
   );
+
   return (
     <box flexDirection="column" borderStyle="round" borderColor="cyan">
       {err ? (

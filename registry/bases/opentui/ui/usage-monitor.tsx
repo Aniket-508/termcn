@@ -1,11 +1,13 @@
 /* @jsxImportSource @opentui/react */
 import React, { useEffect, useState } from "react";
 import type { ReactNode } from "react";
+
 export interface UsageMonitorProps {
   refreshInterval?: number;
   separatorChar?: string;
   children: ReactNode;
 }
+
 export interface UsageMonitorHeaderProps {
   title: string;
   titleColor?: string;
@@ -13,17 +15,20 @@ export interface UsageMonitorHeaderProps {
   separatorChar?: string;
   separatorColor?: string;
 }
+
 export interface UsageMonitorTagsProps {
   items: string[];
   bracketColor?: string;
   separatorColor?: string;
 }
+
 export interface UsageMonitorSectionProps {
   icon?: string;
   title?: string;
   subtitle?: string;
   children: ReactNode;
 }
+
 export interface UsageMonitorMetricProps {
   icon?: string;
   label: string;
@@ -40,6 +45,7 @@ export interface UsageMonitorMetricProps {
   maxDim?: boolean;
   showMax?: boolean;
 }
+
 export interface UsageMonitorDistributionMetricProps {
   icon?: string;
   label: string;
@@ -50,6 +56,7 @@ export interface UsageMonitorDistributionMetricProps {
   }[];
   barWidth?: number;
 }
+
 export interface UsageMonitorStatRowProps {
   icon?: string;
   label: string;
@@ -57,11 +64,13 @@ export interface UsageMonitorStatRowProps {
   valueSuffix?: string;
   valueColor?: string;
 }
+
 export interface UsageMonitorPredictionProps {
   label: string;
   value: string;
   valueColor?: string;
 }
+
 export interface UsageMonitorStatusBarProps {
   clock?: boolean;
   clockColor?: string;
@@ -71,6 +80,7 @@ export interface UsageMonitorStatusBarProps {
   statusDot?: "green" | "yellow" | "red";
   separator?: string;
 }
+
 const formatValue = function formatValue(
   value: number,
   max: number,
@@ -118,6 +128,7 @@ const formatValue = function formatValue(
     }
   }
 };
+
 const statusDotChar = function statusDotChar(
   status: "green" | "yellow" | "red"
 ): {
@@ -139,6 +150,7 @@ const statusDotChar = function statusDotChar(
     }
   }
 };
+
 const UsageMonitorRoot = function UsageMonitorRoot({
   refreshInterval = 1000,
   separatorChar = "─",
@@ -149,6 +161,7 @@ const UsageMonitorRoot = function UsageMonitorRoot({
     const id = setInterval(() => setTick((t) => t + 1), refreshInterval);
     return () => clearInterval(id);
   }, [refreshInterval]);
+
   return (
     <box flexDirection="column">
       {React.Children.toArray(children).map((child, i, arr) => (
@@ -168,6 +181,7 @@ const UsageMonitorRoot = function UsageMonitorRoot({
     </box>
   );
 };
+
 const UsageMonitorHeader = function UsageMonitorHeader({
   title,
   titleColor = "cyan",
@@ -189,6 +203,7 @@ const UsageMonitorHeader = function UsageMonitorHeader({
   );
 };
 UsageMonitorHeader.displayName = "UsageMonitor.Header";
+
 const UsageMonitorTags = function UsageMonitorTags({
   items,
   bracketColor,
@@ -209,6 +224,7 @@ const UsageMonitorTags = function UsageMonitorTags({
     </box>
   );
 };
+
 const UsageMonitorSection = function UsageMonitorSection({
   icon,
   title,
@@ -234,6 +250,7 @@ const UsageMonitorSection = function UsageMonitorSection({
     </box>
   );
 };
+
 const UsageMonitorMetric = function UsageMonitorMetric({
   icon,
   label,
@@ -255,6 +272,7 @@ const UsageMonitorMetric = function UsageMonitorMetric({
   const bar = barFillChar.repeat(filled) + barEmptyChar.repeat(empty);
   const dot = statusDotChar(status as "green" | "yellow" | "red");
   const { current, maxStr } = formatValue(value, max, format, formatFn);
+
   return (
     <box flexDirection="row" gap={1}>
       {icon && <text>{icon}</text>}
@@ -269,6 +287,7 @@ const UsageMonitorMetric = function UsageMonitorMetric({
     </box>
   );
 };
+
 const UsageMonitorDistributionMetric = function UsageMonitorDistributionMetric({
   icon,
   label,
@@ -279,6 +298,7 @@ const UsageMonitorDistributionMetric = function UsageMonitorDistributionMetric({
     const count = Math.round((seg.percent / 100) * barWidth);
     return { ...seg, count };
   });
+
   return (
     <box flexDirection="row" gap={1}>
       {icon && <text>{icon}</text>}
@@ -299,6 +319,7 @@ const UsageMonitorDistributionMetric = function UsageMonitorDistributionMetric({
     </box>
   );
 };
+
 const UsageMonitorStats = function UsageMonitorStats({
   children,
 }: {
@@ -306,6 +327,7 @@ const UsageMonitorStats = function UsageMonitorStats({
 }) {
   return <box flexDirection="column">{children}</box>;
 };
+
 const UsageMonitorStatRow = function UsageMonitorStatRow({
   icon,
   label,
@@ -322,6 +344,7 @@ const UsageMonitorStatRow = function UsageMonitorStatRow({
     </box>
   );
 };
+
 const UsageMonitorPredictions = function UsageMonitorPredictions({
   children,
 }: {
@@ -338,6 +361,7 @@ const UsageMonitorPredictions = function UsageMonitorPredictions({
     </box>
   );
 };
+
 const UsageMonitorPrediction = function UsageMonitorPrediction({
   label,
   value,
@@ -350,6 +374,7 @@ const UsageMonitorPrediction = function UsageMonitorPrediction({
     </box>
   );
 };
+
 const UsageMonitorStatusBar = function UsageMonitorStatusBar({
   clock = false,
   clockColor,
@@ -367,7 +392,9 @@ const UsageMonitorStatusBar = function UsageMonitorStatusBar({
     );
     return () => clearInterval(id);
   }, []);
+
   const dotInfo = statusDotChar(dot);
+
   return (
     <box flexDirection="row" paddingTop={1}>
       {clock && <text fg={clockColor ?? "cyan"}>{`⏰ ${time}`}</text>}
@@ -380,6 +407,7 @@ const UsageMonitorStatusBar = function UsageMonitorStatusBar({
   );
 };
 UsageMonitorStatusBar.displayName = "UsageMonitor.StatusBar";
+
 export const UsageMonitor = Object.assign(UsageMonitorRoot, {
   DistributionMetric: UsageMonitorDistributionMetric,
   Header: UsageMonitorHeader,

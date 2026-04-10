@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface StreamingTextProps {
   text?: string;
   stream?: AsyncIterable<string>;
@@ -11,6 +12,7 @@ export interface StreamingTextProps {
   onComplete?: (fullText: string) => void;
   cursorColor?: string;
 }
+
 export const StreamingText = function StreamingText({
   text: controlledText,
   stream,
@@ -26,9 +28,11 @@ export const StreamingText = function StreamingText({
   const [cursorVisible, setCursorVisible] = useState(true);
   const [animatedIndex, setAnimatedIndex] = useState(0);
   const onCompleteRef = useRef(onComplete);
+
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
+
   useEffect(() => {
     if (!cursor) {
       return;
@@ -38,6 +42,7 @@ export const StreamingText = function StreamingText({
     }, 530);
     return () => clearInterval(id);
   }, [cursor]);
+
   useEffect(() => {
     if (!stream) {
       return;
@@ -67,6 +72,7 @@ export const StreamingText = function StreamingText({
       cancelled = true;
     };
   }, [stream]);
+
   useEffect(() => {
     if (!animate || !controlledText || stream) {
       return;
@@ -85,6 +91,7 @@ export const StreamingText = function StreamingText({
     }, speed);
     return () => clearInterval(id);
   }, [controlledText, animate, speed, stream]);
+
   let displayText: string;
   if (stream) {
     displayText = internalText;
@@ -93,8 +100,10 @@ export const StreamingText = function StreamingText({
   } else {
     displayText = controlledText ?? "";
   }
+
   const showCursor = cursor && isStreaming && cursorVisible;
   const resolvedCursorColor = cursorColor ?? theme.colors.primary;
+
   return (
     <text>
       {displayText}

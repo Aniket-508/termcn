@@ -6,6 +6,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface FilePickerProps {
   value?: string;
   onChange?: (path: string) => void;
@@ -19,11 +20,13 @@ export interface FilePickerProps {
   width?: number;
   maxVisible?: number;
 }
+
 interface FileEntry {
   name: string;
   path: string;
   isDir: boolean;
 }
+
 const readDir = (
   dir: string,
   extensions?: string[],
@@ -66,6 +69,7 @@ const readDir = (
     return [];
   }
 };
+
 export const FilePicker = ({
   value: controlledValue,
   onChange,
@@ -84,16 +88,20 @@ export const FilePicker = ({
   const [currentDir, setCurrentDir] = useState(resolve(startDir));
   const [cursor, setCursor] = useState(0);
   const [internalValue, setInternalValue] = useState("");
+
   const selected = controlledValue ?? internalValue;
   const entries = readDir(currentDir, extensions, dirsOnly);
+
   const parentEntry: FileEntry = {
     isDir: true,
     name: "..",
     path: resolve(currentDir, ".."),
   };
   const allEntries: FileEntry[] = [parentEntry, ...entries];
+
   const visibleStart = Math.max(0, cursor - maxVisible + 1);
   const visible = allEntries.slice(visibleStart, visibleStart + maxVisible);
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -132,6 +140,7 @@ export const FilePicker = ({
       setCursor(0);
     }
   });
+
   return (
     <box flexDirection="column">
       {label && (
@@ -139,6 +148,7 @@ export const FilePicker = ({
           <b>{label}</b>
         </text>
       )}
+
       <box
         borderStyle="single"
         borderColor={isFocused ? theme.colors.focusRing : theme.colors.border}
@@ -149,6 +159,7 @@ export const FilePicker = ({
           <b>{currentDir}</b>
         </text>
       </box>
+
       <box
         flexDirection="column"
         borderStyle="single"
@@ -190,12 +201,14 @@ export const FilePicker = ({
           </box>
         )}
       </box>
+
       {selected && (
         <box paddingLeft={1} paddingRight={1}>
           <text fg={theme.colors.mutedForeground}>{"Selected: "}</text>
           <text fg={theme.colors.success}>{selected}</text>
         </box>
       )}
+
       {isFocused && (
         <text fg="#666">↑↓: navigate · Enter: open/select · Esc: up</text>
       )}

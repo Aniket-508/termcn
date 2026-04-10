@@ -3,12 +3,14 @@ import { useKeyboard } from "@opentui/react";
 import { useState, useMemo } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TreeNode {
   key: string;
   label: string;
   children?: TreeNode[];
   icon?: string;
 }
+
 export interface TreeProps {
   nodes: TreeNode[];
   onSelect?: (node: TreeNode) => void;
@@ -17,11 +19,13 @@ export interface TreeProps {
   collapsedIcon?: string;
   leafIcon?: string;
 }
+
 interface FlatNode {
   node: TreeNode;
   depth: number;
   hasChildren: boolean;
 }
+
 const flattenTree = function flattenTree(
   nodes: TreeNode[],
   expandedKeys: Set<string>,
@@ -42,6 +46,7 @@ const flattenTree = function flattenTree(
   }
   return result;
 };
+
 export const Tree = function Tree({
   nodes,
   onSelect,
@@ -55,10 +60,12 @@ export const Tree = function Tree({
     new Set(defaultExpanded)
   );
   const [activeIndex, setActiveIndex] = useState(0);
+
   const flatNodes = useMemo(
     () => flattenTree(nodes, expandedKeys),
     [nodes, expandedKeys]
   );
+
   useKeyboard((key) => {
     const current = flatNodes[activeIndex];
     if (key.name === "up") {
@@ -81,6 +88,7 @@ export const Tree = function Tree({
       onSelect?.(current.node);
     }
   });
+
   return (
     <box flexDirection="column">
       {flatNodes.map(({ node, depth, hasChildren }, idx) => {

@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface DatePickerProps {
   value?: Date;
   onChange?: (date: Date) => void;
@@ -13,6 +14,7 @@ export interface DatePickerProps {
   autoFocus?: boolean;
   id?: string;
 }
+
 const MONTHS = [
   "January",
   "February",
@@ -27,13 +29,17 @@ const MONTHS = [
   "November",
   "December",
 ];
+
 const daysInMonth = function daysInMonth(month: number, year: number): number {
   return new Date(year, month + 1, 0).getDate();
 };
+
 const clamp = function clamp(val: number, min: number, max: number): number {
   return Math.min(Math.max(val, min), max);
 };
+
 const buildDate = (m: number, d: number, y: number): Date => new Date(y, m, d);
+
 const getNextField = (
   f: "month" | "day" | "year"
 ): "month" | "day" | "year" => {
@@ -45,6 +51,7 @@ const getNextField = (
   }
   return "month";
 };
+
 export const DatePicker = function DatePicker({
   value: controlledValue,
   onChange,
@@ -57,12 +64,15 @@ export const DatePicker = function DatePicker({
 }: DatePickerProps) {
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const now = new Date();
   const initial = controlledValue ?? now;
+
   const [month, setMonth] = useState(initial.getMonth());
   const [day, setDay] = useState(initial.getDate());
   const [year, setYear] = useState(initial.getFullYear());
   const [field, setField] = useState<"month" | "day" | "year">("month");
+
   const notify = (m: number, d: number, y: number) => {
     const date = buildDate(m, d, y);
     if (minDate && date < minDate) {
@@ -73,6 +83,7 @@ export const DatePicker = function DatePicker({
     }
     onChange?.(date);
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -130,10 +141,13 @@ export const DatePicker = function DatePicker({
       }
     }
   });
+
   const fieldColor = (f: typeof field): string =>
     field === f && isFocused ? theme.colors.primary : theme.colors.foreground;
+
   const fieldBg = (f: typeof field): string | undefined =>
     field === f && isFocused ? theme.colors.selection : undefined;
+
   return (
     <box flexDirection="column">
       {label && (
@@ -159,7 +173,9 @@ export const DatePicker = function DatePicker({
           </text>
           <text fg={fieldColor("month")}>▼</text>
         </box>
+
         <text fg={theme.colors.border}>/</text>
+
         <box flexDirection="column" alignItems="center">
           <text fg={fieldColor("day")}>▲</text>
           <text fg={fieldColor("day")} bg={fieldBg("day")}>
@@ -171,7 +187,9 @@ export const DatePicker = function DatePicker({
           </text>
           <text fg={fieldColor("day")}>▼</text>
         </box>
+
         <text fg={theme.colors.border}>/</text>
+
         <box flexDirection="column" alignItems="center">
           <text fg={fieldColor("year")}>▲</text>
           <text fg={fieldColor("year")} bg={fieldBg("year")}>

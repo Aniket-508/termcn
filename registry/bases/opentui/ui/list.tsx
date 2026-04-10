@@ -3,12 +3,14 @@ import { useKeyboard } from "@opentui/react";
 import { useState, useMemo } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ListItem {
   key: string;
   label: string;
   description?: string;
   color?: string;
 }
+
 export interface ListProps {
   items: ListItem[];
   onSelect?: (item: ListItem) => void;
@@ -16,6 +18,7 @@ export interface ListProps {
   height?: number;
   cursor?: string;
 }
+
 export const List = function List({
   items,
   onSelect,
@@ -26,6 +29,7 @@ export const List = function List({
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [filter, setFilter] = useState("");
+
   const filtered = useMemo(() => {
     if (!filter) {
       return items;
@@ -33,6 +37,7 @@ export const List = function List({
     const q = filter.toLowerCase();
     return items.filter((item) => item.label.toLowerCase().includes(q));
   }, [items, filter]);
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((i) => Math.max(0, i - 1));
@@ -56,7 +61,9 @@ export const List = function List({
       setFilter((f) => f + key.name);
     }
   });
+
   const visible = filtered.slice(0, height);
+
   return (
     <box flexDirection="column">
       {filterable ? (

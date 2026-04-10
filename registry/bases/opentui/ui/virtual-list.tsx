@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface VirtualListProps<T> {
   items: T[];
   renderItem: (item: T, index: number, isActive: boolean) => ReactNode;
@@ -12,6 +13,7 @@ export interface VirtualListProps<T> {
   cursor?: string;
   overscan?: number;
 }
+
 export const VirtualList = <T,>({
   items,
   renderItem,
@@ -22,6 +24,7 @@ export const VirtualList = <T,>({
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowStart, setWindowStart] = useState(0);
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((prev) => {
@@ -47,17 +50,20 @@ export const VirtualList = <T,>({
       }
     }
   });
+
   const visibleStart = Math.max(0, windowStart - overscan);
   const visibleEnd = Math.min(items.length, windowStart + height + overscan);
   const visibleItems = useMemo(
     () => items.slice(visibleStart, visibleEnd),
     [items, visibleStart, visibleEnd]
   );
+
   const thumbSize = Math.max(1, Math.floor((height * height) / items.length));
   const thumbPosition =
     items.length <= height
       ? 0
       : Math.floor((activeIndex / (items.length - 1)) * (height - thumbSize));
+
   const scrollbar = useMemo(
     () =>
       Array.from({ length: height }, (_, i) => {
@@ -68,6 +74,7 @@ export const VirtualList = <T,>({
       }),
     [height, thumbPosition, thumbSize]
   );
+
   return (
     <box flexDirection="row">
       <box flexDirection="column" flexGrow={1}>

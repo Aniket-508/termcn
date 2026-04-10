@@ -8,10 +8,12 @@ import {
   NotificationsContext,
 } from "@/hooks/use-notifications";
 import type { NotificationVariant } from "@/hooks/use-notifications";
+
 export interface NotificationCenterProps {
   maxVisible?: number;
   width?: number;
 }
+
 const variantIcon = function variantIcon(v: NotificationVariant): string {
   switch (v) {
     case "success": {
@@ -28,6 +30,7 @@ const variantIcon = function variantIcon(v: NotificationVariant): string {
     }
   }
 };
+
 const variantColor = function variantColor(
   v: NotificationVariant,
   colors: {
@@ -52,6 +55,7 @@ const variantColor = function variantColor(
     }
   }
 };
+
 export const NotificationCenter = function NotificationCenter({
   maxVisible = 5,
   width = 40,
@@ -59,8 +63,10 @@ export const NotificationCenter = function NotificationCenter({
   const ctx = useNotificationsProvider();
   const theme = useTheme();
   const { notifications, dismiss, clear } = ctx;
+
   const visible = notifications.slice(-maxVisible);
   const unread = notifications.filter((n) => !n.read).length;
+
   useEffect(() => {
     for (const n of notifications) {
       if (!n.persistent) {
@@ -76,14 +82,17 @@ export const NotificationCenter = function NotificationCenter({
       }
     }
   }, [notifications, dismiss]);
+
   useKeyboard((key) => {
     if (key.name === "escape") {
       clear();
     }
   });
+
   if (visible.length === 0) {
     return null;
   }
+
   return createElement(
     NotificationsContext.Provider,
     { value: ctx },

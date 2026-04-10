@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface MaskedInputProps {
   mask: string;
   value?: string;
@@ -14,6 +15,7 @@ export interface MaskedInputProps {
   id?: string;
   width?: number;
 }
+
 const isClosingLiteral = (mask: string, pos: number): boolean => {
   for (let j = pos - 1; j >= 0; j -= 1) {
     if (mask[j] === "#") {
@@ -24,9 +26,11 @@ const isClosingLiteral = (mask: string, pos: number): boolean => {
   }
   return false;
 };
+
 const applyMask = (raw: string, mask: string): string => {
   let rawIdx = 0;
   let result = "";
+
   for (let i = 0; i < mask.length; i += 1) {
     const maskChar = mask[i];
     if (rawIdx >= raw.length) {
@@ -42,10 +46,13 @@ const applyMask = (raw: string, mask: string): string => {
       result += maskChar;
     }
   }
+
   return result;
 };
+
 const maxDigits = (mask: string): number =>
   [...mask].filter((c) => c === "#").length;
+
 export const MaskedInput = ({
   mask,
   value: controlledValue,
@@ -60,8 +67,10 @@ export const MaskedInput = ({
   const [internalValue, setInternalValue] = useState("");
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const raw = controlledValue ?? internalValue;
   const max = maxDigits(mask);
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -96,9 +105,12 @@ export const MaskedInput = ({
       }
     }
   });
+
   const display = raw.length > 0 ? applyMask(raw, mask) : "";
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
+
   const remainingMask = mask.slice(display.length);
+
   return (
     <box flexDirection="column">
       {label && (

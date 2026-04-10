@@ -4,11 +4,13 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface Tab {
   key: string;
   label: string;
   content: ReactNode;
 }
+
 export interface TabsProps {
   tabs: Tab[];
   defaultTab?: string;
@@ -28,6 +30,7 @@ export interface TabsProps {
   paddingX?: number;
   paddingY?: number;
 }
+
 export const Tabs = function Tabs({
   tabs,
   defaultTab,
@@ -46,7 +49,9 @@ export const Tabs = function Tabs({
   );
   const activeKey = controlledTab ?? internalTab;
   const activeIndex = tabs.findIndex((t) => t.key === activeKey);
+
   const resolvedBorderColor = borderColor ?? theme.colors.border;
+
   const switchTab = (nextKey: string | undefined) => {
     if (!nextKey || nextKey === activeKey) {
       return;
@@ -58,6 +63,7 @@ export const Tabs = function Tabs({
       setInternalTab(nextKey);
     }
   };
+
   useKeyboard((key) => {
     if (key.name === "left" || (key.shift && key.name === "tab")) {
       switchTab(tabs[Math.max(0, activeIndex - 1)]?.key);
@@ -65,7 +71,9 @@ export const Tabs = function Tabs({
       switchTab(tabs[Math.min(tabs.length - 1, activeIndex + 1)]?.key);
     }
   });
+
   const activeTab = tabs.find((t) => t.key === activeKey);
+
   return (
     <box flexDirection="column">
       <box paddingLeft={tabBarPaddingX} paddingRight={tabBarPaddingX} gap={0}>

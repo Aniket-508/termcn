@@ -1,5 +1,6 @@
 /* @jsxImportSource @opentui/react */
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type BadgeVariant =
   | "default"
   | "success"
@@ -7,6 +8,7 @@ export type BadgeVariant =
   | "error"
   | "info"
   | "secondary";
+
 export interface BadgeProps {
   children: string;
   variant?: BadgeVariant;
@@ -23,6 +25,7 @@ export interface BadgeProps {
     | "classic";
   paddingX?: number;
 }
+
 export const Badge = function Badge({
   children,
   variant = "default",
@@ -33,6 +36,7 @@ export const Badge = function Badge({
   paddingX = 1,
 }: BadgeProps) {
   const theme = useTheme();
+
   const variantColor =
     color ??
     (() => {
@@ -57,6 +61,7 @@ export const Badge = function Badge({
         }
       }
     })();
+
   const textContent = bold ? (
     <text fg={variantColor}>
       <b>{children}</b>
@@ -64,9 +69,11 @@ export const Badge = function Badge({
   ) : (
     <text fg={variantColor}>{children}</text>
   );
+
   if (!bordered) {
     return textContent;
   }
+
   return (
     <box
       borderColor={variantColor}

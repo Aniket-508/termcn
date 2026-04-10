@@ -1,6 +1,7 @@
 /* @jsxImportSource @opentui/react */
 import React, { Component } from "react";
 import type { ReactNode } from "react";
+
 export interface ErrorBoundaryProps {
   children: ReactNode;
   fallback?: ReactNode;
@@ -12,11 +13,13 @@ export interface ErrorBoundaryProps {
   ) => void;
   title?: string;
 }
+
 interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
   componentStack: string;
 }
+
 export class ErrorBoundary extends Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
@@ -37,10 +40,12 @@ export class ErrorBoundary extends Component<
   render() {
     const { hasError, error, componentStack } = this.state;
     const { children, fallback, title = "Error" } = this.props;
+
     if (hasError) {
       if (fallback) {
         return fallback;
       }
+
       const message = error?.message ?? "An unknown error occurred";
       const stackLines = componentStack
         .split("\n")
@@ -84,6 +89,7 @@ export class ErrorBoundary extends Component<
         </box>
       );
     }
+
     return children;
   }
 }

@@ -2,10 +2,12 @@
 import React from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface MarkdownProps {
   children: string;
   width?: number;
 }
+
 interface InlineSegment {
   text: string;
   bold?: boolean;
@@ -14,15 +16,18 @@ interface InlineSegment {
   link?: boolean;
   url?: string;
 }
+
 const parseInline = (line: string): InlineSegment[] => {
   const segments: InlineSegment[] = [];
   const re = /(\*\*(.+?)\*\*|\*(.+?)\*|`(.+?)`|\[(.+?)\]\((.+?)\))/g;
   let last = 0;
   let match: RegExpExecArray | null;
+
   while ((match = re.exec(line)) !== null) {
     if (match.index > last) {
       segments.push({ text: line.slice(last, match.index) });
     }
+
     const [full] = match;
     if (full.startsWith("**")) {
       segments.push({ bold: true, text: match[2] });
@@ -33,15 +38,20 @@ const parseInline = (line: string): InlineSegment[] => {
     } else if (full.startsWith("[")) {
       segments.push({ link: true, text: match[5], url: match[6] });
     }
+
     last = match.index + full.length;
   }
+
   if (last < line.length) {
     segments.push({ text: line.slice(last) });
   }
+
   return segments;
 };
+
 const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
   const theme = useTheme();
+
   return (
     <box>
       {segments.map((seg, i) => {
@@ -79,17 +89,22 @@ const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
     </box>
   );
 };
+
 export const Markdown = ({ children, width }: MarkdownProps) => {
   const theme = useTheme();
   const lines = children.split("\n");
+
   const elements: React.ReactNode[] = [];
   let i = 0;
+
   while (i < lines.length) {
     const line = lines[i];
+
     const h4 = line.match(/^####\s+(.*)/);
     const h3 = line.match(/^###\s+(.*)/);
     const h2 = line.match(/^##\s+(.*)/);
     const h1 = line.match(/^#\s+(.*)/);
+
     if (h1) {
       elements.push(
         <text key={i} fg={theme.colors.primary}>
@@ -145,7 +160,9 @@ export const Markdown = ({ children, width }: MarkdownProps) => {
         </box>
       );
     }
+
     i += 1;
   }
+
   return <box flexDirection="column">{elements}</box>;
 };

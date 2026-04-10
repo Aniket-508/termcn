@@ -3,7 +3,9 @@ import { useKeyboard } from "@opentui/react";
 import { useEffect, useRef, useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type RiskLevel = "low" | "medium" | "high";
+
 export interface ToolApprovalProps {
   name: string;
   description?: string;
@@ -14,6 +16,7 @@ export interface ToolApprovalProps {
   onAlwaysAllow?: () => void;
   timeout?: number;
 }
+
 export const ToolApproval = function ToolApproval({
   name,
   description,
@@ -27,9 +30,11 @@ export const ToolApproval = function ToolApproval({
   const theme = useTheme();
   const [remaining, setRemaining] = useState(timeout ?? 0);
   const onDenyRef = useRef(onDeny);
+
   useEffect(() => {
     onDenyRef.current = onDeny;
   }, [onDeny]);
+
   useEffect(() => {
     if (!timeout) {
       return;
@@ -47,6 +52,7 @@ export const ToolApproval = function ToolApproval({
     }, 1000);
     return () => clearInterval(id);
   }, [timeout]);
+
   useKeyboard((key) => {
     if (key.name === "y" || key.name === "Y") {
       onApprove?.();
@@ -56,22 +62,27 @@ export const ToolApproval = function ToolApproval({
       onAlwaysAllow();
     }
   });
+
   const riskBorderColor: Record<RiskLevel, string> = {
     high: theme.colors.error ?? "red",
     low: theme.colors.success ?? "green",
     medium: theme.colors.warning ?? "yellow",
   };
+
   const riskLabel: Record<RiskLevel, string> = {
     high: "HIGH",
     low: "LOW",
     medium: "MEDIUM",
   };
+
   const riskLabelColor: Record<RiskLevel, string> = {
     high: theme.colors.error ?? "red",
     low: theme.colors.success ?? "green",
     medium: theme.colors.warning ?? "yellow",
   };
+
   const borderColor = riskBorderColor[risk];
+
   return (
     <box
       flexDirection="column"
@@ -94,6 +105,7 @@ export const ToolApproval = function ToolApproval({
           >{`Auto-deny in ${remaining}s`}</text>
         )}
       </box>
+
       <box flexDirection="column" marginTop={1}>
         <box gap={1}>
           <text fg={theme.colors.mutedForeground}>Tool:</text>
@@ -108,6 +120,7 @@ export const ToolApproval = function ToolApproval({
           </box>
         )}
       </box>
+
       {args && Object.keys(args).length > 0 && (
         <box flexDirection="column" marginTop={1}>
           <text fg="#666">Arguments:</text>
@@ -119,6 +132,7 @@ export const ToolApproval = function ToolApproval({
           ))}
         </box>
       )}
+
       <box gap={2} marginTop={1}>
         <text fg={theme.colors.success ?? "green"}>
           <b>[y] Approve</b>

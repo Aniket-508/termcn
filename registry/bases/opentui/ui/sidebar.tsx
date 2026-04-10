@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface SidebarItem {
   key: string;
   label: string;
@@ -10,6 +11,7 @@ export interface SidebarItem {
   badge?: string | number;
   children?: SidebarItem[];
 }
+
 export interface SidebarProps {
   items: SidebarItem[];
   activeKey?: string;
@@ -18,6 +20,7 @@ export interface SidebarProps {
   width?: number;
   title?: string;
 }
+
 const flattenItems = (
   items: SidebarItem[],
   expandedKeys: Set<string>,
@@ -38,6 +41,7 @@ const flattenItems = (
   }
   return result;
 };
+
 export const Sidebar = ({
   items,
   activeKey,
@@ -49,8 +53,10 @@ export const Sidebar = ({
   const theme = useTheme();
   const [focusIndex, setFocusIndex] = useState(0);
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(new Set());
+
   const effectiveWidth = collapsed ? 3 : width;
   const flatItems = flattenItems(items, expandedKeys);
+
   const toggleExpand = (key: string) => {
     setExpandedKeys((prev) => {
       const next = new Set(prev);
@@ -62,6 +68,7 @@ export const Sidebar = ({
       return next;
     });
   };
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setFocusIndex((prev) => Math.max(0, prev - 1));
@@ -93,6 +100,7 @@ export const Sidebar = ({
       }
     }
   });
+
   return (
     <box
       flexDirection="column"

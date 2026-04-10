@@ -2,11 +2,13 @@
 import { useState, useEffect } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface SkeletonProps {
   width?: number;
   height?: number;
   animated?: boolean;
 }
+
 export const Skeleton = function Skeleton({
   width = 20,
   height = 1,
@@ -23,6 +25,7 @@ export const Skeleton = function Skeleton({
     }, 80);
     return () => clearInterval(id);
   }, [animated]);
+
   const rows = Array.from({ length: height }, (_, rowIndex) => {
     const rowOffset = animated ? (frame + rowIndex * 2) % (width + 6) : -1;
     let row = "";
@@ -32,6 +35,7 @@ export const Skeleton = function Skeleton({
     }
     return row;
   });
+
   return (
     <box flexDirection="column">
       {rows.map((row, i) => (

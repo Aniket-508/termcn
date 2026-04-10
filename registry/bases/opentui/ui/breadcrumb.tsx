@@ -2,26 +2,31 @@
 import { useKeyboard } from "@opentui/react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface BreadcrumbItem {
   label: string;
   key: string;
   onSelect?: () => void;
 }
+
 export interface BreadcrumbProps {
   items: BreadcrumbItem[];
   separator?: string;
   activeKey?: string;
 }
+
 export const Breadcrumb = function Breadcrumb({
   items,
   separator = "›",
   activeKey,
 }: BreadcrumbProps) {
   const theme = useTheme();
+
   const activeIndex =
     activeKey === undefined
       ? items.length - 1
       : items.findIndex((i) => i.key === activeKey);
+
   useKeyboard((key) => {
     if (key.name === "left" && activeIndex > 0) {
       const prev = items[activeIndex - 1];
@@ -30,6 +35,7 @@ export const Breadcrumb = function Breadcrumb({
       }
     }
   });
+
   return (
     <box flexDirection="row" alignItems="center">
       {items.map((item, idx) => {

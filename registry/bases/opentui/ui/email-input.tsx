@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface EmailInputProps {
   value?: string;
   onChange?: (value: string) => void;
@@ -14,6 +15,7 @@ export interface EmailInputProps {
   width?: number;
   suggestions?: string[];
 }
+
 const isValidEmail = function isValidEmail(email: string): boolean {
   const atIdx = email.indexOf("@");
   if (atIdx < 1) {
@@ -22,6 +24,7 @@ const isValidEmail = function isValidEmail(email: string): boolean {
   const domain = email.slice(atIdx + 1);
   return domain.includes(".");
 };
+
 const getBorderColor = (
   error: string | null,
   isFocused: boolean,
@@ -35,6 +38,7 @@ const getBorderColor = (
   }
   return theme.colors.border;
 };
+
 export const EmailInput = function EmailInput({
   value: controlledValue,
   onChange,
@@ -50,7 +54,9 @@ export const EmailInput = function EmailInput({
   const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const value = controlledValue ?? internalValue;
+
   const applyChange = (newVal: string) => {
     if (onChange) {
       onChange(newVal);
@@ -58,6 +64,7 @@ export const EmailInput = function EmailInput({
       setInternalValue(newVal);
     }
   };
+
   const getSuggestion = (val: string): string | null => {
     const atIdx = val.indexOf("@");
     if (atIdx === -1) {
@@ -75,6 +82,7 @@ export const EmailInput = function EmailInput({
     }
     return match.slice(afterAt.length);
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -111,8 +119,11 @@ export const EmailInput = function EmailInput({
       applyChange(newVal);
     }
   });
+
   const borderColor = getBorderColor(error, isFocused, theme);
+
   const suggestion = getSuggestion(value);
+
   return (
     <box flexDirection="column">
       {label && (

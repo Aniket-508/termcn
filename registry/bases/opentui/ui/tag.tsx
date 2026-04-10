@@ -2,13 +2,16 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type TagVariant = "default" | "outline";
+
 export interface TagProps {
   children: ReactNode;
   onRemove?: () => void;
   color?: string;
   variant?: TagVariant;
 }
+
 export const Tag = function Tag({
   children,
   onRemove,
@@ -19,6 +22,7 @@ export const Tag = function Tag({
   const resolvedColor = color ?? theme.colors.primary;
   const borderColor =
     variant === "outline" ? theme.colors.mutedForeground : resolvedColor;
+
   return (
     <box
       borderStyle="round"

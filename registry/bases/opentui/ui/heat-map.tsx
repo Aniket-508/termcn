@@ -1,6 +1,7 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface HeatMapProps {
   data: number[][];
   rowLabels?: string[];
@@ -9,6 +10,7 @@ export interface HeatMapProps {
   cellWidth?: number;
   showValues?: boolean;
 }
+
 const DEFAULT_COLOR_SCALE = [
   "#1e3a5f",
   "#1a5276",
@@ -20,7 +22,9 @@ const DEFAULT_COLOR_SCALE = [
   "#e74c3c",
   "#c0392b",
 ];
+
 const SHADE_CHARS = [" ", "░", "▒", "▓", "█"];
+
 const getColorForValue = function getColorForValue(
   value: number,
   min: number,
@@ -34,6 +38,7 @@ const getColorForValue = function getColorForValue(
   const idx = Math.min(scale.length - 1, Math.round(t * (scale.length - 1)));
   return scale[idx] ?? scale[0] ?? "#888888";
 };
+
 const getShadeForValue = function getShadeForValue(
   value: number,
   min: number,
@@ -49,6 +54,7 @@ const getShadeForValue = function getShadeForValue(
   );
   return SHADE_CHARS[idx] ?? SHADE_CHARS[0] ?? " ";
 };
+
 const padCenter = function padCenter(str: string, width: number): string {
   if (str.length >= width) {
     return str.slice(0, width);
@@ -58,12 +64,14 @@ const padCenter = function padCenter(str: string, width: number): string {
   const right = total - left;
   return " ".repeat(left) + `${str} `.repeat(right);
 };
+
 const padStart = function padStart(str: string, width: number): string {
   if (str.length >= width) {
     return str.slice(0, width);
   }
   return " ".repeat(width - str.length) + str;
 };
+
 export const HeatMap = function HeatMap({
   data,
   rowLabels,
@@ -73,17 +81,22 @@ export const HeatMap = function HeatMap({
   showValues = false,
 }: HeatMapProps) {
   const theme = useTheme();
+
   if (data.length === 0 || data[0].length === 0) {
     return <text fg={theme.colors.mutedForeground}>No data</text>;
   }
+
   const _numRows = data.length;
   const numCols = data[0].length;
+
   const allValues = data.flat();
   const min = Math.min(...allValues);
   const max = Math.max(...allValues);
+
   const rowLabelWidth = rowLabels
     ? Math.max(...rowLabels.map((l) => l.length)) + 1
     : 0;
+
   return (
     <box flexDirection="column">
       {colLabels && (
@@ -96,6 +109,7 @@ export const HeatMap = function HeatMap({
           ))}
         </box>
       )}
+
       {data.map((row, ri) => (
         <box key={ri} flexDirection="row">
           {rowLabels && (
@@ -117,6 +131,7 @@ export const HeatMap = function HeatMap({
           })}
         </box>
       ))}
+
       <box flexDirection="row" gap={1} marginTop={1}>
         <text fg={theme.colors.mutedForeground}>Low</text>
         {colorScale.map((c, idx) => (

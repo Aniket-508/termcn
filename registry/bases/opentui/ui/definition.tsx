@@ -1,20 +1,23 @@
 /* @jsxImportSource @opentui/react */
-
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface DefinitionItem {
   term: string;
   description: string;
 }
+
 export interface DefinitionProps {
   items: DefinitionItem[];
   termColor?: string;
 }
+
 export const Definition = function Definition({
   items,
   termColor,
 }: DefinitionProps) {
   const theme = useTheme();
   const resolvedTermColor = termColor ?? theme.colors.primary;
+
   return (
     <box flexDirection="column">
       {items.map((item, idx) => (

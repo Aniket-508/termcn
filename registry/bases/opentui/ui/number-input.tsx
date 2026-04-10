@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface NumberInputProps {
   value?: number;
   onChange?: (value: number) => void;
@@ -26,6 +27,7 @@ export interface NumberInputProps {
   cursor?: string;
   stepHint?: string;
 }
+
 export const NumberInput = function NumberInput({
   value: controlledValue,
   onChange,
@@ -46,7 +48,9 @@ export const NumberInput = function NumberInput({
   const [buffer, setBuffer] = useState<string>("");
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const value = controlledValue ?? internalValue;
+
   const clamp = (n: number): number => {
     let result = n;
     if (min !== undefined) {
@@ -57,6 +61,7 @@ export const NumberInput = function NumberInput({
     }
     return result;
   };
+
   const applyValue = (clamped: number) => {
     if (onChange) {
       onChange(clamped);
@@ -64,11 +69,13 @@ export const NumberInput = function NumberInput({
       setInternalValue(clamped);
     }
   };
+
   const commitValue = (n: number) => {
     const clamped = clamp(n);
     applyValue(clamped);
     setBuffer(String(clamped));
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -121,14 +128,18 @@ export const NumberInput = function NumberInput({
       }
     }
   });
+
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
+
   let displayValue = "";
   if (isFocused && buffer !== "") {
     displayValue = buffer;
   } else if (value !== undefined) {
     displayValue = format ? format(value) : String(value);
   }
+
   const resolvedStepHint = stepHint ?? `↑ +${step}  ↓ -${step}`;
+
   return (
     <box flexDirection="column">
       {label && (

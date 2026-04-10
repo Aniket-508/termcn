@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState, useMemo, useCallback } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface SearchInputProps<T = string> {
   options?: T[];
   getValue?: (item: T) => string;
@@ -26,6 +27,7 @@ export interface SearchInputProps<T = string> {
   searchIcon?: string;
   resultCursor?: string;
 }
+
 export const SearchInput = <T = string>({
   options,
   getValue,
@@ -47,7 +49,9 @@ export const SearchInput = <T = string>({
   const [showResults, setShowResults] = useState(false);
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const query = controlledValue ?? internalValue;
+
   const getItemValue = useCallback(
     (item: T): string => {
       if (getValue) {
@@ -57,6 +61,7 @@ export const SearchInput = <T = string>({
     },
     [getValue]
   );
+
   const setQuery = (newQuery: string) => {
     if (onChange) {
       onChange(newQuery);
@@ -64,6 +69,7 @@ export const SearchInput = <T = string>({
       setInternalValue(newQuery);
     }
   };
+
   const filteredResults = useMemo(() => {
     if (!options || options.length === 0) {
       return [];
@@ -76,6 +82,7 @@ export const SearchInput = <T = string>({
       .filter((item) => getItemValue(item).toLowerCase().includes(lower))
       .slice(0, maxResults);
   }, [options, query, maxResults, getItemValue]);
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -129,8 +136,10 @@ export const SearchInput = <T = string>({
       }
     }
   });
+
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
   const hasResults = showResults && filteredResults.length > 0;
+
   return (
     <box flexDirection="column">
       {label && (

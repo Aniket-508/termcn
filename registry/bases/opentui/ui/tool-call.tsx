@@ -3,7 +3,9 @@ import { useKeyboard } from "@opentui/react";
 import { useEffect, useRef, useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type ToolCallStatus = "pending" | "running" | "success" | "error";
+
 export interface ToolCallProps {
   name: string;
   args?: Record<string, unknown>;
@@ -13,6 +15,7 @@ export interface ToolCallProps {
   collapsible?: boolean;
   defaultCollapsed?: boolean;
 }
+
 export const ToolCall = function ToolCall({
   name,
   args,
@@ -27,12 +30,14 @@ export const ToolCall = function ToolCall({
   const [elapsed, setElapsed] = useState(0);
   const startRef = useRef(Date.now());
   const [frame, setFrame] = useState(0);
+
   const spinnerFrames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
   const spinnerIcon = spinnerFrames[frame % spinnerFrames.length] ?? "⠋";
   useEffect(() => {
     const id = setInterval(() => setFrame((f) => f + 1), Math.round(1000 / 12));
     return () => clearInterval(id);
   }, []);
+
   useEffect(() => {
     if (status !== "running") {
       return;
@@ -43,11 +48,13 @@ export const ToolCall = function ToolCall({
     }, 100);
     return () => clearInterval(id);
   }, [status]);
+
   useKeyboard((key) => {
     if (collapsible && (key.name === "return" || key.name === " ")) {
       setCollapsed((c) => !c);
     }
   });
+
   const statusIcon = () => {
     switch (status) {
       case "pending": {
@@ -67,12 +74,14 @@ export const ToolCall = function ToolCall({
       }
     }
   };
+
   let durationText: string | null;
   if (duration === undefined) {
     durationText = status === "running" ? `${elapsed}ms` : null;
   } else {
     durationText = `${duration}ms`;
   }
+
   let nameColor: string;
   if (status === "error") {
     nameColor = theme.colors.error ?? "red";
@@ -83,6 +92,7 @@ export const ToolCall = function ToolCall({
   } else {
     nameColor = theme.colors.mutedForeground;
   }
+
   return (
     <box flexDirection="column">
       <box gap={1}>
@@ -95,6 +105,7 @@ export const ToolCall = function ToolCall({
         )}
         {collapsible && <text fg="#666">{collapsed ? "▶" : "▼"}</text>}
       </box>
+
       {!collapsed && (
         <box flexDirection="column" paddingLeft={2}>
           {args && Object.keys(args).length > 0 && (

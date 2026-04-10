@@ -1,6 +1,7 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface DividerProps {
   variant?: "single" | "double" | "bold";
   orientation?: "horizontal" | "vertical";
@@ -13,11 +14,13 @@ export interface DividerProps {
   height?: number;
   width?: number | "auto";
 }
+
 const DIVIDER_CHARS: Record<NonNullable<DividerProps["variant"]>, string> = {
   bold: "┃",
   double: "║",
   single: "│",
 };
+
 export const Divider = function Divider({
   variant = "single",
   orientation = "horizontal",
@@ -33,6 +36,7 @@ export const Divider = function Divider({
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.border;
   const vChar = dividerChar ?? DIVIDER_CHARS[variant];
+
   if (orientation === "vertical") {
     const lines = Array.from({ length: height }, (_, i) => i);
     return (
@@ -45,6 +49,7 @@ export const Divider = function Divider({
       </box>
     );
   }
+
   const paddingStr = " ".repeat(padding);
   const titlePad = " ".repeat(titlePadding);
   const hrBox = (
@@ -58,6 +63,7 @@ export const Divider = function Divider({
       borderTop={true}
     />
   );
+
   if (label) {
     const resolvedLabelColor = labelColor ?? resolvedColor;
     return (
@@ -78,6 +84,7 @@ export const Divider = function Divider({
       </box>
     );
   }
+
   return (
     <box flexDirection="row" width={width === "auto" ? undefined : width}>
       {padding > 0 && <text>{paddingStr}</text>}

@@ -1,6 +1,7 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ProgressBarProps {
   value: number;
   total?: number;
@@ -12,6 +13,7 @@ export interface ProgressBarProps {
   color?: string;
   label?: string;
 }
+
 export const ProgressBar = function ProgressBar({
   value,
   total,
@@ -25,13 +27,16 @@ export const ProgressBar = function ProgressBar({
 }: ProgressBarProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
+
   const percent =
     total === undefined
       ? Math.min(100, Math.round(value))
       : Math.min(100, Math.round((value / total) * 100));
   const filled = Math.round((percent / 100) * width);
   const empty = width - filled;
+
   const bar = fillChar.repeat(filled) + emptyChar.repeat(empty);
+
   return (
     <box flexDirection="column">
       {label && <text>{label}</text>}

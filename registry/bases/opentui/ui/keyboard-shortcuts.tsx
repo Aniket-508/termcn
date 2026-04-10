@@ -3,16 +3,19 @@
 import type { Key } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface Shortcut {
   key: string;
   description: string;
   category?: string;
 }
+
 export interface KeyboardShortcutsProps {
   shortcuts: Shortcut[];
   columns?: number;
   title?: string;
 }
+
 const KeyLabel = function KeyLabel({
   label,
   color,
@@ -33,6 +36,7 @@ const KeyLabel = function KeyLabel({
     </box>
   );
 };
+
 const ShortcutRow = function ShortcutRow({
   shortcut,
   keyColor,
@@ -50,6 +54,7 @@ const ShortcutRow = function ShortcutRow({
     </box>
   );
 };
+
 const ShortcutGrid = function ShortcutGrid({
   items,
   columns,
@@ -63,6 +68,7 @@ const ShortcutGrid = function ShortcutGrid({
   for (let i = 0; i < items.length; i += columns) {
     rows.push(items.slice(i, i + columns));
   }
+
   return (
     <box flexDirection="column" gap={0}>
       {rows.map((row, ri) => (
@@ -80,13 +86,16 @@ const ShortcutGrid = function ShortcutGrid({
     </box>
   );
 };
+
 export const KeyboardShortcuts = function KeyboardShortcuts({
   shortcuts,
   columns = 1,
   title,
 }: KeyboardShortcutsProps) {
   const theme = useTheme();
+
   const hasCategories = shortcuts.some((s) => s.category);
+
   if (hasCategories) {
     const grouped: Record<string, Shortcut[]> = {};
     for (const s of shortcuts) {
@@ -96,6 +105,7 @@ export const KeyboardShortcuts = function KeyboardShortcuts({
       }
       grouped[cat].push(s);
     }
+
     return (
       <box flexDirection="column" gap={1}>
         {title && (
@@ -127,6 +137,7 @@ export const KeyboardShortcuts = function KeyboardShortcuts({
       </box>
     );
   }
+
   return (
     <box flexDirection="column" gap={1}>
       {title && (

@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useEffect, useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TextInputProps {
   value?: string;
   onChange?: (value: string) => void;
@@ -28,6 +29,7 @@ export interface TextInputProps {
   paddingX?: number;
   cursor?: string;
 }
+
 export const TextInput = ({
   value: controlledValue,
   onChange,
@@ -52,12 +54,15 @@ export const TextInput = ({
   const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const value = controlledValue ?? internalValue;
+
   useEffect(() => {
     if (cursorOffset > value.length) {
       setCursorOffset(value.length);
     }
   }, [value, cursorOffset]);
+
   const setValue = (next: string) => {
     if (onChange) {
       onChange(next);
@@ -65,6 +70,7 @@ export const TextInput = ({
       setInternalValue(next);
     }
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -121,7 +127,9 @@ export const TextInput = ({
       setValue(nextValue);
     }
   });
+
   const displayValue = mask ? mask.repeat(value.length) : value;
+
   let borderColor: string;
   if (error) {
     borderColor = theme.colors.error;
@@ -130,7 +138,9 @@ export const TextInput = ({
   } else {
     borderColor = theme.colors.border;
   }
+
   const pasteWidth = highlightPastedText ? cursorWidth : 0;
+
   const renderValue = () => {
     if (!value && placeholder) {
       if (showCursor && isFocused) {
@@ -143,9 +153,11 @@ export const TextInput = ({
       }
       return <text fg={theme.colors.mutedForeground}>{placeholder}</text>;
     }
+
     if (!showCursor || !isFocused) {
       return <text fg={theme.colors.foreground}>{displayValue}</text>;
     }
+
     const before = displayValue.slice(0, cursorOffset - pasteWidth);
     const highlighted = displayValue.slice(
       cursorOffset - pasteWidth,
@@ -154,6 +166,7 @@ export const TextInput = ({
     const cursorChar =
       cursorOffset < displayValue.length ? displayValue[cursorOffset] : cursor;
     const after = displayValue.slice(cursorOffset + 1);
+
     return (
       <text fg={theme.colors.foreground}>
         {before}
@@ -174,6 +187,7 @@ export const TextInput = ({
         width,
       }
     : { paddingLeft: paddingX, paddingRight: paddingX, width };
+
   return (
     <box flexDirection="column">
       {label && (

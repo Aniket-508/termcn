@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface FormFieldProps {
   label: string;
   children: ReactNode;
@@ -12,6 +13,7 @@ export interface FormFieldProps {
   errorIcon?: string;
   labelColor?: string;
 }
+
 export const FormField = function FormField({
   label,
   children,
@@ -24,6 +26,7 @@ export const FormField = function FormField({
 }: FormFieldProps) {
   const theme = useTheme();
   const resolvedLabelColor = labelColor ?? theme.colors.foreground;
+
   return (
     <box flexDirection="column">
       <box gap={0}>

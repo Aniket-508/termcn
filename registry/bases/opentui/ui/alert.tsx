@@ -2,13 +2,16 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type AlertVariant = "success" | "error" | "warning" | "info";
+
 const ICONS: Record<AlertVariant, string> = {
   error: "✗",
   info: "ℹ",
   success: "✓",
   warning: "⚠",
 };
+
 export interface AlertProps {
   variant?: AlertVariant;
   title?: string;
@@ -27,6 +30,7 @@ export interface AlertProps {
   paddingX?: number;
   paddingY?: number;
 }
+
 export const Alert = function Alert({
   variant = "info",
   title,
@@ -39,6 +43,7 @@ export const Alert = function Alert({
   paddingY = 0,
 }: AlertProps) {
   const theme = useTheme();
+
   const variantColor =
     color ??
     (() => {
@@ -57,7 +62,9 @@ export const Alert = function Alert({
         }
       }
     })();
+
   const resolvedIcon = icon ?? ICONS[variant];
+
   const inner = (
     <>
       <box gap={1}>
@@ -73,6 +80,7 @@ export const Alert = function Alert({
       {children && <text>{children}</text>}
     </>
   );
+
   if (!bordered) {
     return (
       <box
@@ -86,6 +94,7 @@ export const Alert = function Alert({
       </box>
     );
   }
+
   return (
     <box
       borderColor={variantColor}

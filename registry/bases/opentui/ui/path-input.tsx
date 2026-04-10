@@ -6,6 +6,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface PathInputProps {
   value?: string;
   onChange?: (value: string) => void;
@@ -18,6 +19,7 @@ export interface PathInputProps {
   filter?: string;
   dirsOnly?: boolean;
 }
+
 const getCompletions = function getCompletions(
   inputPath: string,
   filter?: string,
@@ -65,6 +67,7 @@ const getCompletions = function getCompletions(
     return [];
   }
 };
+
 export const PathInput = function PathInput({
   value: controlledValue,
   onChange,
@@ -81,11 +84,13 @@ export const PathInput = function PathInput({
   const [completionIndex, setCompletionIndex] = useState(0);
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const value = controlledValue ?? internalValue;
   const completions =
     isFocused && value.length > 0
       ? getCompletions(value, filter, dirsOnly)
       : [];
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -137,7 +142,9 @@ export const PathInput = function PathInput({
       }
     }
   });
+
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
+
   return (
     <box flexDirection="column">
       {label && (

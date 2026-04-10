@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 const DEFAULT_PALETTE = [
   "#000000",
   "#800000",
@@ -21,7 +22,9 @@ const DEFAULT_PALETTE = [
   "#00ffff",
   "#ffffff",
 ];
+
 const COLS = 8;
+
 export interface ColorPickerProps {
   value?: string;
   onChange?: (color: string) => void;
@@ -31,6 +34,7 @@ export interface ColorPickerProps {
   autoFocus?: boolean;
   id?: string;
 }
+
 export const ColorPicker = ({
   value: controlledValue,
   onChange,
@@ -47,10 +51,12 @@ export const ColorPicker = ({
   const [hexInput, setHexInput] = useState("");
   const [mode, setMode] = useState<"palette" | "hex">("palette");
   const [internalValue, setInternalValue] = useState(palette[0] ?? "#000000");
+
   const rows = Math.ceil(palette.length / COLS);
   const currentPaletteColor =
     palette[paletteRow * COLS + paletteCol] ?? palette[0] ?? "#000000";
   const currentColor = controlledValue ?? internalValue;
+
   const applyColor = (color: string) => {
     if (onChange) {
       onChange(color);
@@ -58,6 +64,7 @@ export const ColorPicker = ({
       setInternalValue(color);
     }
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -91,6 +98,7 @@ export const ColorPicker = ({
       setHexInput((h) => h + key.name);
     }
   });
+
   return (
     <box flexDirection="column">
       {label && (
@@ -98,6 +106,7 @@ export const ColorPicker = ({
           <b>{label}</b>
         </text>
       )}
+
       <box flexDirection="column">
         {Array.from({ length: rows }, (_, r) => (
           <box key={r}>
@@ -123,6 +132,7 @@ export const ColorPicker = ({
           </box>
         ))}
       </box>
+
       <box marginTop={1} gap={1}>
         <text fg={theme.colors.mutedForeground}>Selected:</text>
         <text bg={currentColor} fg={currentColor}>
@@ -130,6 +140,7 @@ export const ColorPicker = ({
         </text>
         <text fg={theme.colors.foreground}>{currentColor}</text>
       </box>
+
       <box
         borderStyle="round"
         borderColor={
@@ -145,6 +156,7 @@ export const ColorPicker = ({
           <text fg={theme.colors.focusRing}>█</text>
         )}
       </box>
+
       <text fg="#666">
         {mode === "palette"
           ? "↑↓←→: navigate · Enter: select · Tab: hex input"

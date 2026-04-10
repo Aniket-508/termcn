@@ -1,12 +1,14 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type LineChartDataPoint =
   | number
   | {
       label?: string;
       value: number;
     };
+
 export interface LineChartProps {
   data: LineChartDataPoint[];
   width?: number;
@@ -15,10 +17,13 @@ export interface LineChartProps {
   color?: string;
   showAxes?: boolean;
 }
+
 const getValue = (d: LineChartDataPoint): number =>
   typeof d === "number" ? d : d.value;
+
 const getLabel = (d: LineChartDataPoint): string =>
   typeof d === "number" ? "" : (d.label ?? "");
+
 const normalize = (
   value: number,
   min: number,
@@ -30,6 +35,7 @@ const normalize = (
   }
   return Math.round(((value - min) / (max - min)) * (rows - 1));
 };
+
 const PLOT_CHAR = "●";
 const _CONNECT_H = "─";
 const CONNECT_UP = "╱";
@@ -40,6 +46,7 @@ const AXIS_H = "─";
 const AXIS_CORNER = "└";
 const AXIS_TICK_V = "┤";
 const _AXIS_TICK_H = "┬";
+
 export const LineChart = ({
   data,
   width = 40,
@@ -50,26 +57,33 @@ export const LineChart = ({
 }: LineChartProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
+
   if (data.length === 0) {
     return <text fg={theme.colors.mutedForeground}>No data</text>;
   }
+
   const values = data.map(getValue);
   const minVal = Math.min(...values);
   const maxVal = Math.max(...values);
+
   const yAxisWidth = showAxes ? String(Math.round(maxVal)).length + 2 : 0;
   const chartWidth = Math.max(4, width - yAxisWidth);
+
   const numPoints = data.length;
   const sampledIndices = Array.from({ length: chartWidth }, (_, i) =>
     Math.round((i / (chartWidth - 1)) * (numPoints - 1))
   );
   const sampledValues = sampledIndices.map((si) => values[si] ?? 0);
   const sampledData = sampledIndices.map((si) => data[si]);
+
   const grid: string[][] = Array.from({ length: height }, () =>
     Array.from({ length: chartWidth }, () => " ")
   );
+
   const normalizedRows = sampledValues.map(
     (v) => height - 1 - normalize(v, minVal, maxVal, height)
   );
+
   for (let col = 0; col < chartWidth; col += 1) {
     const row = normalizedRows[col];
     grid[row][col] = PLOT_CHAR;
@@ -96,6 +110,7 @@ export const LineChart = ({
       }
     }
   }
+
   const yLabels = Array.from({ length: height }, (_, i) => {
     const rowVal =
       minVal + ((height - 1 - i) / (height - 1)) * (maxVal - minVal);
@@ -104,6 +119,7 @@ export const LineChart = ({
     }
     return "";
   });
+
   return (
     <box flexDirection="column">
       {title && (

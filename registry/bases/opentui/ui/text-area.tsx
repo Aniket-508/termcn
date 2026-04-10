@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TextAreaProps {
   value?: string;
   onChange?: (value: string) => void;
@@ -22,8 +23,11 @@ export interface TextAreaProps {
   paddingX?: number;
   cursor?: string;
 }
+
 const getLines = (v: string): string[] => v.split("\n");
+
 const joinLines = (lines: string[]): string => lines.join("\n");
+
 export const TextArea = function TextArea({
   value: controlledValue,
   onChange,
@@ -42,7 +46,9 @@ export const TextArea = function TextArea({
   const [scrollOffset, setScrollOffset] = useState(0);
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const value = controlledValue ?? internalValue;
+
   const setValue = (newVal: string) => {
     if (onChange) {
       onChange(newVal);
@@ -50,6 +56,7 @@ export const TextArea = function TextArea({
       setInternalValue(newVal);
     }
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -182,14 +189,18 @@ export const TextArea = function TextArea({
       setCursorCol(cursorCol + key.name.length);
     }
   });
+
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
   const lines = getLines(value);
   const visibleLines = lines.slice(scrollOffset, scrollOffset + rows);
+
   const paddedLines: string[] = [...visibleLines];
   while (paddedLines.length < rows) {
     paddedLines.push("");
   }
+
   const isEmpty = value.length === 0;
+
   return (
     <box flexDirection="column">
       {label && (

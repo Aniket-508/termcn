@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TagInputProps {
   value?: string[];
   onChange?: (tags: string[]) => void;
@@ -10,6 +11,7 @@ export interface TagInputProps {
   maxTags?: number;
   delimiter?: string;
 }
+
 export const TagInput = function TagInput({
   value: controlledValue,
   onChange,
@@ -19,13 +21,16 @@ export const TagInput = function TagInput({
   const theme = useTheme();
   const [internalTags, setInternalTags] = useState<string[]>([]);
   const [inputText, setInputText] = useState("");
+
   const tags = controlledValue ?? internalTags;
+
   const updateTags = (next: string[]) => {
     if (controlledValue === undefined) {
       setInternalTags(next);
     }
     onChange?.(next);
   };
+
   const addTag = () => {
     const trimmed = inputText.trim();
     if (!trimmed) {
@@ -37,12 +42,14 @@ export const TagInput = function TagInput({
     updateTags([...tags, trimmed]);
     setInputText("");
   };
+
   const removeLastTag = () => {
     if (tags.length === 0) {
       return;
     }
     updateTags(tags.slice(0, -1));
   };
+
   useKeyboard((key) => {
     if (key.name === "return") {
       addTag();
@@ -56,7 +63,9 @@ export const TagInput = function TagInput({
       setInputText((t) => t + key.name);
     }
   });
+
   const atMax = maxTags !== undefined && tags.length >= maxTags;
+
   return (
     <box flexDirection="column" gap={1}>
       <box flexWrap="wrap" gap={1}>

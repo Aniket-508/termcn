@@ -1,7 +1,8 @@
 /* @jsxImportSource @opentui/react */
-
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type ProgressCircleSize = "sm" | "md" | "lg";
+
 export interface ProgressCircleProps {
   value: number;
   size?: ProgressCircleSize;
@@ -9,16 +10,20 @@ export interface ProgressCircleProps {
   label?: string;
   showPercent?: boolean;
 }
+
 const BRAILLE_CHARS = ["○", "◔", "◑", "◕", "●", "◉", "⬤", "●"];
+
 const _MD_TOP = ["▄▄▄", "▄██▄"];
 const _MD_MID_EMPTY = "█   █";
 const _MD_MID_FILL = "█████";
 const _MD_BOT = ["▀▀▀", "▀██▀"];
+
 const getSmChar = function getSmChar(value: number): string {
   const clamped = Math.max(0, Math.min(100, value));
   const step = Math.floor((clamped / 100) * 7);
   return BRAILLE_CHARS[step];
 };
+
 export const ProgressCircle = function ProgressCircle({
   value,
   size = "sm",
@@ -29,6 +34,7 @@ export const ProgressCircle = function ProgressCircle({
   const theme = useTheme();
   const clamped = Math.max(0, Math.min(100, value));
   const resolvedColor = color ?? theme.colors.primary;
+
   if (size === "sm") {
     const char = getSmChar(clamped);
     return (
@@ -43,7 +49,9 @@ export const ProgressCircle = function ProgressCircle({
       </box>
     );
   }
+
   const percentLabel = `${Math.round(clamped)}%`;
+
   if (size === "md") {
     return (
       <box flexDirection="column" alignItems="flex-start">
@@ -58,12 +66,14 @@ export const ProgressCircle = function ProgressCircle({
       </box>
     );
   }
+
   const fillLevel = clamped / 100;
   const topArc = " ▄█▄";
   const midLeft = "█";
   const midRight = "█";
   const midInner = fillLevel >= 0.5 ? "███" : "   ";
   const botArc = " ▀█▀";
+
   return (
     <box flexDirection="column" alignItems="flex-start">
       <text fg={resolvedColor}>{topArc}</text>

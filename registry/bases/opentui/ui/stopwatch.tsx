@@ -3,20 +3,25 @@ import { useKeyboard } from "@opentui/react";
 import { useState, useCallback, useRef, useEffect } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface StopwatchProps {
   autoStart?: boolean;
   color?: string;
   showLaps?: boolean;
 }
+
 const pad = (n: number, len = 2) => String(n).padStart(len, "0");
+
 const formatElapsed = (ms: number): string => {
   const totalSeconds = Math.floor(ms / 1000);
   const h = Math.floor(totalSeconds / 3600);
   const m = Math.floor((totalSeconds % 3600) / 60);
   const s = totalSeconds % 60;
   const centis = Math.floor((ms % 1000) / 10);
+
   return `${pad(h)}:${pad(m)}:${pad(s)}.${pad(centis)}`;
 };
+
 const getStatus = (running: boolean, elapsed: number): string => {
   if (running) {
     return "Running";
@@ -26,6 +31,7 @@ const getStatus = (running: boolean, elapsed: number): string => {
   }
   return "Stopped";
 };
+
 const getStatusColor = (
   running: boolean,
   elapsed: number,
@@ -40,6 +46,7 @@ const getStatusColor = (
   }
   return theme.colors.warning;
 };
+
 export const Stopwatch = function Stopwatch({
   autoStart = false,
   color,
@@ -47,11 +54,13 @@ export const Stopwatch = function Stopwatch({
 }: StopwatchProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
+
   const [running, setRunning] = useState(autoStart);
   const [elapsed, setElapsed] = useState(0);
   const [laps, setLaps] = useState<number[]>([]);
   const lastTickRef = useRef<number>(autoStart ? Date.now() : 0);
   const elapsedRef = useRef(0);
+
   const tick = useCallback(() => {
     const now = Date.now();
     const delta = now - lastTickRef.current;
@@ -59,6 +68,7 @@ export const Stopwatch = function Stopwatch({
     elapsedRef.current += delta;
     setElapsed(elapsedRef.current);
   }, []);
+
   useEffect(() => {
     if (!running) {
       return;
@@ -66,6 +76,7 @@ export const Stopwatch = function Stopwatch({
     const id = setInterval(tick, 50);
     return () => clearInterval(id);
   }, [running, tick]);
+
   useKeyboard((key) => {
     if (key.name === " ") {
       if (!running) {
@@ -81,8 +92,10 @@ export const Stopwatch = function Stopwatch({
       setLaps([]);
     }
   });
+
   const status = getStatus(running, elapsed);
   const statusColor = getStatusColor(running, elapsed, resolvedColor, theme);
+
   return (
     <box flexDirection="column" gap={0}>
       <box gap={2} alignItems="center">

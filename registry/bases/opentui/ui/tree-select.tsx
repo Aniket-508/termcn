@@ -3,12 +3,14 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TreeSelectNode<T = string> {
   value: T;
   label: string;
   children?: TreeSelectNode<T>[];
   disabled?: boolean;
 }
+
 export interface TreeSelectProps<T = string> {
   nodes: TreeSelectNode<T>[];
   value?: T;
@@ -17,12 +19,14 @@ export interface TreeSelectProps<T = string> {
   label?: string;
   expandedByDefault?: boolean;
 }
+
 interface FlatNode<T> {
   node: TreeSelectNode<T>;
   depth: number;
   path: string;
   hasChildren: boolean;
 }
+
 const flatten = <T,>(
   nodes: TreeSelectNode<T>[],
   depth: number,
@@ -31,6 +35,7 @@ const flatten = <T,>(
   expandedByDefault: boolean
 ): FlatNode<T>[] => {
   const result: FlatNode<T>[] = [];
+
   for (let i = 0; i < nodes.length; i += 1) {
     const node = nodes[i];
     const path = `${pathPrefix}/${i}`;
@@ -53,8 +58,10 @@ const flatten = <T,>(
       }
     }
   }
+
   return result;
 };
+
 const getNodeColor = (
   disabled: boolean | undefined,
   isCursor: boolean,
@@ -72,6 +79,7 @@ const getNodeColor = (
   }
   return theme.colors.foreground;
 };
+
 export const TreeSelect = <T = string>({
   nodes,
   value: controlledValue,
@@ -84,8 +92,10 @@ export const TreeSelect = <T = string>({
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [cursor, setCursor] = useState(0);
   const [internalValue, setInternalValue] = useState<T | undefined>();
+
   const selected = controlledValue ?? internalValue;
   const flat = flatten(nodes, 0, expanded, "", expandedByDefault);
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setCursor((c) => Math.max(0, c - 1));
@@ -137,6 +147,7 @@ export const TreeSelect = <T = string>({
       }
     }
   });
+
   return (
     <box flexDirection="column">
       {label && (

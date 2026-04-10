@@ -1,9 +1,11 @@
 /* @jsxImportSource @opentui/react */
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface NotificationBadgeProps {
   count: number;
   color?: string;
 }
+
 export const NotificationBadge = function NotificationBadge({
   count,
   color,

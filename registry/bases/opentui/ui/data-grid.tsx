@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState, useMemo } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface DataGridColumn<T = Record<string, unknown>> {
   key: keyof T & string;
   header: string;
@@ -12,6 +13,7 @@ export interface DataGridColumn<T = Record<string, unknown>> {
   filterable?: boolean;
   sortable?: boolean;
 }
+
 export interface DataGridProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > {
@@ -25,6 +27,7 @@ export interface DataGridProps<
   showRowNumbers?: boolean;
   filterPlaceholder?: string;
 }
+
 const pad = (
   str: string,
   width: number,
@@ -44,6 +47,7 @@ const pad = (
   }
   return `${s} `.repeat(diff);
 };
+
 export const DataGrid = <
   T extends Record<string, unknown> = Record<string, unknown>,
 >({
@@ -62,7 +66,9 @@ export const DataGrid = <
   const [sortDir, _setSortDir] = useState<"asc" | "desc">("asc");
   const [filter, setFilter] = useState("");
   const [filterMode, setFilterMode] = useState(false);
+
   const resolvedBorderColor = borderColor ?? theme.colors.border;
+
   const colWidths = useMemo(
     () =>
       columns.map((col) => {
@@ -77,6 +83,7 @@ export const DataGrid = <
       }),
     [columns, data]
   );
+
   const filtered = useMemo(() => {
     if (!filter) {
       return data;
@@ -90,6 +97,7 @@ export const DataGrid = <
       )
     );
   }, [data, filter, columns]);
+
   const sorted = useMemo(() => {
     if (!sortKey) {
       return filtered;
@@ -101,8 +109,10 @@ export const DataGrid = <
       return sortDir === "asc" ? cmp : -cmp;
     });
   }, [filtered, sortKey, sortDir]);
+
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
   const pageData = sorted.slice(page * pageSize, (page + 1) * pageSize);
+
   useKeyboard((key) => {
     if (filterMode) {
       if (key.name === "escape") {
@@ -136,7 +146,9 @@ export const DataGrid = <
       setSortKey(columns[0]?.key ?? null);
     }
   });
+
   const colSep = " │ ";
+
   const renderRow = (row: T, rowIdx: number, isSelected: boolean) => {
     const cells = columns.map((col, ci) => {
       const raw = col.render
@@ -144,9 +156,11 @@ export const DataGrid = <
         : String(row[col.key] ?? "");
       return pad(raw, colWidths[ci], col.align);
     });
+
     const rowNumStr = showRowNumbers
       ? `${String(page * pageSize + rowIdx + 1).padStart(3)} `
       : "";
+
     return (
       <box key={rowIdx} flexDirection="row">
         {rowNumStr && <text fg="#666">{rowNumStr}</text>}
@@ -159,13 +173,16 @@ export const DataGrid = <
       </box>
     );
   };
+
   const headerCells = columns.map((col, ci) => {
     const isSorted = sortKey === col.key;
     const sortArrow = sortDir === "asc" ? " ↑" : " ↓";
     const indicator = isSorted ? sortArrow : "";
     return pad(col.header + indicator, colWidths[ci], col.align);
   });
+
   const rowNumHeader = showRowNumbers ? "    " : "";
+
   return (
     <box flexDirection="column">
       {(filterMode || filter) && (
@@ -175,6 +192,7 @@ export const DataGrid = <
           {filterMode && <text fg={theme.colors.focusRing}>█</text>}
         </box>
       )}
+
       <box borderColor={resolvedBorderColor} flexDirection="column">
         <box flexDirection="row" paddingLeft={1} paddingRight={1}>
           {rowNumHeader && <text fg="#666">{rowNumHeader}</text>}
@@ -185,6 +203,7 @@ export const DataGrid = <
         <text fg={resolvedBorderColor}>
           {"─".repeat(headerCells.join(colSep).length + 2)}
         </text>
+
         {pageData.length > 0 ? (
           pageData.map((row, i) => (
             <box key={i} paddingLeft={1} paddingRight={1}>
@@ -197,6 +216,7 @@ export const DataGrid = <
           </box>
         )}
       </box>
+
       <box flexDirection="row" gap={2} marginTop={1}>
         <text fg="#666">{`Page ${page + 1}/${totalPages} (${sorted.length} rows)`}</text>
         <text fg="#666">↑↓ navigate n/p page / filter Enter select</text>

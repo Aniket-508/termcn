@@ -6,6 +6,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface DirectoryTreeProps {
   rootPath?: string;
   onSelect?: (path: string) => void;
@@ -13,6 +14,7 @@ export interface DirectoryTreeProps {
   showHidden?: boolean;
   label?: string;
 }
+
 interface TreeEntry {
   path: string;
   name: string;
@@ -20,6 +22,7 @@ interface TreeEntry {
   isDir: boolean;
   isLast: boolean;
 }
+
 const readEntries = function readEntries(
   dir: string,
   depth: number,
@@ -29,6 +32,7 @@ const readEntries = function readEntries(
 ): TreeEntry[] {
   const result: TreeEntry[] = [];
   let entries: string[];
+
   try {
     entries = readdirSync(dir).filter((e) =>
       showHidden ? true : !e.startsWith(".")
@@ -36,6 +40,7 @@ const readEntries = function readEntries(
   } catch {
     return result;
   }
+
   entries.sort((a, b) => {
     try {
       const aIsDir = statSync(join(dir, a)).isDirectory();
@@ -51,6 +56,7 @@ const readEntries = function readEntries(
     }
     return a.localeCompare(b);
   });
+
   for (let i = 0; i < entries.length; i += 1) {
     const name = entries[i];
     const fullPath = join(dir, name);
@@ -68,8 +74,10 @@ const readEntries = function readEntries(
       );
     }
   }
+
   return result;
 };
+
 export const DirectoryTree = function DirectoryTree({
   rootPath = process.cwd(),
   onSelect,
@@ -80,7 +88,9 @@ export const DirectoryTree = function DirectoryTree({
   const theme = useTheme();
   const [expanded, setExpanded] = useState<Set<string>>(new Set([rootPath]));
   const [cursor, setCursor] = useState(0);
+
   const entries = readEntries(rootPath, 0, maxDepth + 1, expanded, showHidden);
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setCursor((c) => Math.max(0, c - 1));
@@ -106,6 +116,7 @@ export const DirectoryTree = function DirectoryTree({
       }
     }
   });
+
   return (
     <box flexDirection="column">
       {label && (

@@ -1,17 +1,20 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface PieChartItem {
   label: string;
   value: number;
   color?: string;
 }
+
 export interface PieChartProps {
   data: PieChartItem[];
   radius?: number;
   showLegend?: boolean;
   showPercentages?: boolean;
 }
+
 const DEFAULT_COLORS = [
   "#7c3aed",
   "#2563eb",
@@ -22,9 +25,11 @@ const DEFAULT_COLORS = [
   "#be185d",
   "#65a30d",
 ];
+
 const FULL_BLOCK = "█";
 const _HALF_BLOCK = "▌";
 const LEGEND_SQUARE = "■";
+
 const buildPieGrid = (
   data: PieChartItem[],
   radius: number
@@ -36,16 +41,19 @@ const buildPieGrid = (
   if (total === 0) {
     return [];
   }
+
   const cols = radius * 4;
   const rows = radius * 2;
   const cx = cols / 2;
   const cy = rows / 2;
+
   const grid: {
     char: string;
     color: string;
   }[][] = Array.from({ length: rows }, () =>
     Array.from({ length: cols }, () => ({ char: " ", color: "" }))
   );
+
   const angles: {
     color: string;
     end: number;
@@ -61,6 +69,7 @@ const buildPieGrid = (
     });
     cumulative += slice;
   }
+
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
       const dx = (col - cx) / 2;
@@ -80,8 +89,10 @@ const buildPieGrid = (
       }
     }
   }
+
   return grid;
 };
+
 export const PieChart = ({
   data,
   radius = 5,
@@ -89,10 +100,13 @@ export const PieChart = ({
   showPercentages = true,
 }: PieChartProps) => {
   const theme = useTheme();
+
   if (data.length === 0) {
     return <text fg={theme.colors.mutedForeground}>No data</text>;
   }
+
   const total = data.reduce((s, d) => s + d.value, 0);
+
   const itemsWithColors = data.map((item, idx) => ({
     ...item,
     color:
@@ -100,7 +114,9 @@ export const PieChart = ({
       DEFAULT_COLORS[idx % DEFAULT_COLORS.length] ??
       theme.colors.primary,
   }));
+
   const grid = buildPieGrid(itemsWithColors, radius);
+
   return (
     <box flexDirection="row" gap={2}>
       <box flexDirection="column">
@@ -118,6 +134,7 @@ export const PieChart = ({
           </box>
         ))}
       </box>
+
       {showLegend && (
         <box flexDirection="column" justifyContent="center">
           {itemsWithColors.map((item, idx) => {

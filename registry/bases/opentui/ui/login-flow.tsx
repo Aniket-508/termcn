@@ -7,6 +7,7 @@ import { useTheme } from "@/components/ui/theme-provider";
 
 import { BigText } from "./big-text";
 import type { BigTextFont } from "./big-text";
+
 export interface LoginFlowProps {
   title?: string;
   titleFont?: BigTextFont;
@@ -15,6 +16,7 @@ export interface LoginFlowProps {
   onSelect?: (index: number) => void;
   children: ReactNode;
 }
+
 export interface LoginFlowAnnouncementProps {
   icon?: string;
   iconColor?: string;
@@ -22,12 +24,14 @@ export interface LoginFlowAnnouncementProps {
   borderColor?: string;
   children: ReactNode;
 }
+
 export interface LoginFlowDescriptionProps {
   bold?: boolean;
   dim?: boolean;
   color?: string;
   children: ReactNode;
 }
+
 export interface LoginFlowSelectProps {
   label?: string;
   labelBold?: boolean;
@@ -40,6 +44,7 @@ export interface LoginFlowSelectProps {
   onSelect?: (index: number) => void;
   keyboardNav?: boolean;
 }
+
 const LoginFlowRoot = function LoginFlowRoot({
   title,
   titleFont = "block",
@@ -49,6 +54,7 @@ const LoginFlowRoot = function LoginFlowRoot({
 }: LoginFlowProps) {
   const theme = useTheme();
   const resolvedColor = titleColor ?? theme.colors.primary;
+
   return (
     <box flexDirection="column" paddingLeft={padding}>
       {title && (
@@ -74,6 +80,7 @@ const LoginFlowRoot = function LoginFlowRoot({
     </box>
   );
 };
+
 const LoginFlowAnnouncement = function LoginFlowAnnouncement({
   icon = "*",
   iconColor,
@@ -95,6 +102,7 @@ const LoginFlowAnnouncement = function LoginFlowAnnouncement({
     </box>
   );
 };
+
 const LoginFlowDescription = function LoginFlowDescription({
   bold: boldText = false,
   dim = false,
@@ -109,6 +117,7 @@ const LoginFlowDescription = function LoginFlowDescription({
     </box>
   );
 };
+
 const LoginFlowSelect = function LoginFlowSelect({
   label,
   labelBold = false,
@@ -123,6 +132,7 @@ const LoginFlowSelect = function LoginFlowSelect({
 }: LoginFlowSelectProps) {
   const [internalIndex, setInternalIndex] = useState(defaultIndex);
   const activeIdx = controlledIndex ?? internalIndex;
+
   useKeyboard((key) => {
     if (!keyboardNav) {
       return;
@@ -150,6 +160,7 @@ const LoginFlowSelect = function LoginFlowSelect({
       }
     }
   });
+
   return (
     <box flexDirection="column" marginTop={1}>
       {label && (
@@ -172,6 +183,7 @@ const LoginFlowSelect = function LoginFlowSelect({
     </box>
   );
 };
+
 export const LoginFlow = Object.assign(LoginFlowRoot, {
   Announcement: LoginFlowAnnouncement,
   Description: LoginFlowDescription,

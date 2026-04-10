@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ThinkingBlockProps {
   content: string;
   streaming?: boolean;
@@ -11,6 +12,7 @@ export interface ThinkingBlockProps {
   tokenCount?: number;
   duration?: number;
 }
+
 export const ThinkingBlock = function ThinkingBlock({
   content,
   streaming = false,
@@ -21,21 +23,26 @@ export const ThinkingBlock = function ThinkingBlock({
 }: ThinkingBlockProps) {
   const theme = useTheme();
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
+
   useKeyboard((key) => {
     if (key.name === "return" || key.name === " ") {
       setCollapsed((c) => !c);
     }
   });
+
   const tokenStr =
     tokenCount === undefined ? null : `${tokenCount.toLocaleString()} tokens`;
   const durationStr =
     duration === undefined ? null : `${(duration / 1000).toFixed(1)}s`;
+
   const headerParts = [
     streaming ? "Thinking..." : label,
     tokenStr,
     durationStr,
   ].filter(Boolean);
+
   const headerText = headerParts.join(" · ");
+
   return (
     <box
       flexDirection="column"
@@ -52,6 +59,7 @@ export const ThinkingBlock = function ThinkingBlock({
           {headerText}
         </text>
       </box>
+
       {!collapsed && (
         <box flexDirection="column" paddingTop={1}>
           <text fg={theme.colors.mutedForeground}>{content}</text>

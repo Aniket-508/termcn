@@ -3,12 +3,15 @@ import { useKeyboard } from "@opentui/react";
 import { useState, useMemo, useEffect } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type LogLevel = "debug" | "info" | "warn" | "error";
+
 export interface LogEntry {
   level: LogLevel;
   message: string;
   timestamp?: Date;
 }
+
 export interface LogProps {
   entries: LogEntry[];
   height?: number;
@@ -16,24 +19,28 @@ export interface LogProps {
   filter?: string;
   follow?: boolean;
 }
+
 const LEVEL_COLORS: Record<LogLevel, string> = {
   debug: "gray",
   error: "red",
   info: "cyan",
   warn: "yellow",
 };
+
 const LEVEL_LABELS: Record<LogLevel, string> = {
   debug: "DBG",
   error: "ERR",
   info: "INF",
   warn: "WRN",
 };
+
 const formatTimestamp = function formatTimestamp(date: Date): string {
   const h = String(date.getHours()).padStart(2, "0");
   const m = String(date.getMinutes()).padStart(2, "0");
   const s = String(date.getSeconds()).padStart(2, "0");
   return `${h}:${m}:${s}`;
 };
+
 export const Log = function Log({
   entries,
   height = 10,
@@ -44,6 +51,7 @@ export const Log = function Log({
   const theme = useTheme();
   const [scrollOffset, setScrollOffset] = useState(0);
   const [follow, setFollow] = useState(followProp);
+
   const filtered = useMemo(() => {
     if (!filter) {
       return entries;
@@ -55,12 +63,15 @@ export const Log = function Log({
         e.level.toLowerCase().includes(lower)
     );
   }, [entries, filter]);
+
   const maxOffset = Math.max(0, filtered.length - height);
+
   useEffect(() => {
     if (follow) {
       setScrollOffset(maxOffset);
     }
   }, [follow, maxOffset]);
+
   useKeyboard((key) => {
     if (key.name === "j" || key.name === "down") {
       setScrollOffset((o) => Math.min(maxOffset, o + 1));
@@ -76,7 +87,9 @@ export const Log = function Log({
       setFollow((f) => !f);
     }
   });
+
   const visible = filtered.slice(scrollOffset, scrollOffset + height);
+
   return (
     <box flexDirection="column" gap={0}>
       <box flexDirection="column">

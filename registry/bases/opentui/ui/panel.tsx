@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface PanelProps {
   title?: string;
   titleColor?: string;
@@ -21,6 +22,7 @@ export interface PanelProps {
   paddingY?: number;
   children?: ReactNode;
 }
+
 export const Panel = function Panel({
   title,
   titleColor,
@@ -34,6 +36,7 @@ export const Panel = function Panel({
   children,
 }: PanelProps) {
   const theme = useTheme();
+
   const inner = (
     <>
       {title ? (
@@ -59,9 +62,11 @@ export const Panel = function Panel({
       </box>
     </>
   );
+
   if (!bordered) {
     return <box flexDirection="column">{inner}</box>;
   }
+
   return (
     <box
       flexDirection="column"

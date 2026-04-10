@@ -4,12 +4,14 @@ import React, { useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface JSONViewProps {
   data: unknown;
   indent?: number;
   collapsed?: boolean;
   label?: string;
 }
+
 interface JSONLine {
   path: string;
   depth: number;
@@ -21,6 +23,7 @@ interface JSONLine {
   isLast: boolean;
   collapsible: boolean;
 }
+
 const buildLines = function buildLines(
   data: unknown,
   depth: number,
@@ -29,6 +32,7 @@ const buildLines = function buildLines(
   pathPrefix: string
 ): JSONLine[] {
   const path = key === undefined ? pathPrefix : `${pathPrefix}.${key}`;
+
   if (Array.isArray(data)) {
     const lines: JSONLine[] = [
       {
@@ -62,6 +66,7 @@ const buildLines = function buildLines(
     });
     return lines;
   }
+
   if (data !== null && typeof data === "object") {
     const entries = Object.entries(data as Record<string, unknown>);
     const lines: JSONLine[] = [
@@ -96,6 +101,7 @@ const buildLines = function buildLines(
     });
     return lines;
   }
+
   return [
     {
       collapsible: false,
@@ -108,6 +114,7 @@ const buildLines = function buildLines(
     },
   ];
 };
+
 export const JSONView = function JSONView({
   data,
   indent = 2,
@@ -117,9 +124,12 @@ export const JSONView = function JSONView({
   const theme = useTheme();
   const [collapsedPaths, setCollapsedPaths] = useState<Set<string>>(new Set());
   const [cursor, setCursor] = useState(0);
+
   const lines = buildLines(data, 0, undefined, true, "root");
+
   const visibleLines: JSONLine[] = [];
   const collapsedOpenPaths = new Set<string>();
+
   for (const line of lines) {
     const isHidden = [...collapsedOpenPaths].some(
       (cp) =>
@@ -143,6 +153,7 @@ export const JSONView = function JSONView({
       collapsedOpenPaths.add(line.path);
     }
   }
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setCursor((c) => Math.max(0, c - 1));
@@ -163,6 +174,7 @@ export const JSONView = function JSONView({
       }
     }
   });
+
   const renderValue = (value: unknown): ReactNode => {
     if (value === null) {
       return <text fg={theme.colors.mutedForeground}>null</text>;
@@ -175,6 +187,7 @@ export const JSONView = function JSONView({
     }
     return <text fg={theme.colors.foreground}>{String(value)}</text>;
   };
+
   return (
     <box flexDirection="column">
       {label && (

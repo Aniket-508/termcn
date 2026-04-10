@@ -7,6 +7,7 @@ import { useTheme } from "@/components/ui/theme-provider";
 
 import { BigText } from "./big-text";
 import type { BigTextFont } from "./big-text";
+
 export interface SetupFlowProps {
   title?: string;
   titleFont?: BigTextFont;
@@ -16,27 +17,32 @@ export interface SetupFlowProps {
   connectorColor?: string;
   children: ReactNode;
 }
+
 export interface SetupFlowBadgeProps {
   label: string;
   bg?: string;
   color?: string;
 }
+
 export type SetupFlowStepStatus =
   | "done"
   | "active"
   | "pending"
   | "success"
   | "error";
+
 export interface SetupFlowStepProps {
   icon?: string;
   iconColor?: string;
   status?: SetupFlowStepStatus;
   children: ReactNode;
 }
+
 export interface SetupFlowSpinnerProps {
   label: string;
   onComplete?: () => void;
 }
+
 export interface SetupFlowMultiSelectProps {
   label: string;
   hint?: string;
@@ -52,6 +58,7 @@ export interface SetupFlowMultiSelectProps {
   uncheckedChar?: string;
   checkedColor?: string;
 }
+
 const STATUS_ICONS: Record<
   SetupFlowStepStatus,
   {
@@ -66,6 +73,7 @@ const STATUS_ICONS: Record<
   pending: { color: "white", dim: true, icon: "◇" },
   success: { color: "green", dim: false, icon: "✓" },
 };
+
 const SetupFlowRoot = function SetupFlowRoot({
   title,
   titleFont = "block",
@@ -75,6 +83,7 @@ const SetupFlowRoot = function SetupFlowRoot({
   children,
 }: SetupFlowProps) {
   const theme = useTheme();
+
   return (
     <box flexDirection="column" paddingLeft={2}>
       {title && (
@@ -97,6 +106,7 @@ const SetupFlowRoot = function SetupFlowRoot({
     </box>
   );
 };
+
 const SetupFlowBadge = function SetupFlowBadge({
   label,
   bg = "cyan",
@@ -108,6 +118,7 @@ const SetupFlowBadge = function SetupFlowBadge({
     </box>
   );
 };
+
 const SetupFlowStep = function SetupFlowStep({
   icon,
   iconColor,
@@ -117,6 +128,7 @@ const SetupFlowStep = function SetupFlowStep({
   const { icon: defaultIcon, color, dim } = STATUS_ICONS[status];
   const resolvedIcon = icon ?? defaultIcon;
   const resolvedColor = iconColor ?? color;
+
   return (
     <box flexDirection="row" gap={1}>
       <text fg={dim ? "#666" : resolvedColor}>{resolvedIcon}</text>
@@ -124,6 +136,7 @@ const SetupFlowStep = function SetupFlowStep({
     </box>
   );
 };
+
 const SetupFlowSpinner = function SetupFlowSpinner({
   label,
 }: SetupFlowSpinnerProps) {
@@ -135,6 +148,7 @@ const SetupFlowSpinner = function SetupFlowSpinner({
   }, []);
   const frames = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
   const icon = frames[frame % frames.length];
+
   return (
     <box flexDirection="row" gap={1}>
       <text fg={theme.colors.primary}>◆</text>
@@ -143,6 +157,7 @@ const SetupFlowSpinner = function SetupFlowSpinner({
     </box>
   );
 };
+
 const SetupFlowMultiSelect = function SetupFlowMultiSelect({
   label,
   hint,
@@ -157,7 +172,9 @@ const SetupFlowMultiSelect = function SetupFlowMultiSelect({
   const theme = useTheme();
   const [internalValues, setInternalValues] = useState<string[]>([]);
   const [cursor, setCursor] = useState(0);
+
   const selectedValues = controlledValues ?? internalValues;
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setCursor((c) => Math.max(0, c - 1));
@@ -177,6 +194,7 @@ const SetupFlowMultiSelect = function SetupFlowMultiSelect({
       onSubmit?.(selectedValues);
     }
   });
+
   return (
     <box flexDirection="column">
       <box flexDirection="row" gap={1}>
@@ -205,6 +223,7 @@ const SetupFlowMultiSelect = function SetupFlowMultiSelect({
     </box>
   );
 };
+
 export const SetupFlow = Object.assign(SetupFlowRoot, {
   Badge: SetupFlowBadge,
   MultiSelect: SetupFlowMultiSelect,

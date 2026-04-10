@@ -1,12 +1,14 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface TokenUsageProps {
   prompt: number;
   completion: number;
   model?: string;
   showCost?: boolean;
 }
+
 const MODEL_PRICING: Record<
   string,
   {
@@ -21,6 +23,7 @@ const MODEL_PRICING: Record<
   "gpt-4o": { input: 5, output: 15 },
   "gpt-4o-mini": { input: 0.15, output: 0.6 },
 };
+
 const formatTokens = function formatTokens(n: number): string {
   if (n >= 1_000_000) {
     return `${(n / 1_000_000).toFixed(1)}M`;
@@ -30,6 +33,7 @@ const formatTokens = function formatTokens(n: number): string {
   }
   return String(n);
 };
+
 const estimateCost = function estimateCost(
   prompt: number,
   completion: number,
@@ -50,6 +54,7 @@ const estimateCost = function estimateCost(
     (completion / 1_000_000) * pricing.output
   );
 };
+
 export const TokenUsage = function TokenUsage({
   prompt,
   completion,
@@ -58,6 +63,7 @@ export const TokenUsage = function TokenUsage({
 }: TokenUsageProps) {
   const theme = useTheme();
   const cost = showCost ? estimateCost(prompt, completion, model) : null;
+
   return (
     <box gap={0}>
       <text fg={theme.colors.mutedForeground}>{"⟨ "}</text>
@@ -77,6 +83,7 @@ export const TokenUsage = function TokenUsage({
     </box>
   );
 };
+
 export interface ContextMeterProps {
   used: number;
   limit: number;
@@ -86,6 +93,7 @@ export interface ContextMeterProps {
   criticalAt?: number;
   width?: number;
 }
+
 export const ContextMeter = function ContextMeter({
   used,
   limit,
@@ -99,6 +107,7 @@ export const ContextMeter = function ContextMeter({
   const percent = Math.min(100, Math.round((used / limit) * 100));
   const filled = Math.round((percent / 100) * width);
   const empty = width - filled;
+
   let barColor: string;
   if (percent >= criticalAt) {
     barColor = theme.colors.error ?? "red";
@@ -107,7 +116,9 @@ export const ContextMeter = function ContextMeter({
   } else {
     barColor = theme.colors.success ?? "green";
   }
+
   const bar = "█".repeat(filled) + "░".repeat(empty);
+
   return (
     <box gap={1}>
       {label && <text fg={theme.colors.mutedForeground}>{label}</text>}

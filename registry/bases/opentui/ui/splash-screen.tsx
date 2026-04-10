@@ -4,7 +4,9 @@ import type { ReactNode } from "react";
 import { useTheme } from "@/components/ui/theme-provider";
 
 import { BigText } from "./big-text";
+
 export type FigletFont = "block" | "simple";
+
 export interface SplashScreenProps {
   title: string;
   font?: FigletFont;
@@ -21,6 +23,7 @@ export interface SplashScreenProps {
   padding?: number;
   align?: "left" | "center";
 }
+
 const AltColorBigText = ({
   text,
   font,
@@ -34,6 +37,7 @@ const AltColorBigText = ({
 }) => {
   const onChar = font === "block" ? "█" : "▓";
   const offChar = " ";
+
   const FONT: Record<string, number[][]> = {
     " ": [
       [0, 0, 0],
@@ -225,6 +229,7 @@ const AltColorBigText = ({
       [1, 1, 1],
     ],
   };
+
   const FALLBACK: number[][] = [
     [1, 1, 1],
     [1, 0, 1],
@@ -232,8 +237,10 @@ const AltColorBigText = ({
     [1, 0, 1],
     [1, 1, 1],
   ];
+
   const chars = [...text];
   const rows = 5;
+
   return (
     <box flexDirection="column">
       {Array.from({ length: rows }, (_, rowIdx) => {
@@ -255,6 +262,7 @@ const AltColorBigText = ({
     </box>
   );
 };
+
 export const SplashScreen = ({
   title,
   font = "block",
@@ -269,10 +277,12 @@ export const SplashScreen = ({
 }: SplashScreenProps) => {
   const theme = useTheme();
   const resolvedTitleColor = titleColor ?? theme.colors.primary;
+
   const authorHref = author?.href
     ? `\u001B]8;;${author.href}\u001B\\${author.name}\u001B]8;;\u001B\\`
     : null;
   const authorNode = author ? (authorHref ?? author.name) : null;
+
   return (
     <box flexDirection="column" paddingLeft={padding}>
       {titleColorAlt ? (
@@ -285,17 +295,20 @@ export const SplashScreen = ({
       ) : (
         <BigText color={resolvedTitleColor}>{title}</BigText>
       )}
+
       {subtitle && (
         <box marginTop={1}>
           <text fg={subtitleDim ? "#666" : undefined}>{subtitle}</text>
         </box>
       )}
+
       {authorNode && (
         <box marginTop={1}>
           <text fg="#666">{"Made with ♥ by "}</text>
           <text>{authorNode}</text>
         </box>
       )}
+
       {statusLine && <box marginTop={1}>{statusLine}</box>}
     </box>
   );

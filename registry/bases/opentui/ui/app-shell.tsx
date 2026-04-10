@@ -4,16 +4,20 @@ import React, { useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface AppShellProps {
   children: ReactNode;
   fullscreen?: boolean;
 }
+
 export interface AppShellHeaderProps {
   children: ReactNode;
 }
+
 export interface AppShellTipProps {
   children: ReactNode;
 }
+
 export interface AppShellInputProps {
   value?: string;
   onChange?: (value: string) => void;
@@ -23,15 +27,18 @@ export interface AppShellInputProps {
   borderColor?: string;
   prefix?: string;
 }
+
 export interface AppShellContentProps {
   children: ReactNode;
   autoscroll?: boolean;
   height?: number;
 }
+
 export interface AppShellHintsProps {
   items?: string[];
   children?: ReactNode;
 }
+
 const AppShellRoot = function AppShellRoot({ children }: AppShellProps) {
   return (
     <box flexDirection="column" flexGrow={1}>
@@ -39,11 +46,13 @@ const AppShellRoot = function AppShellRoot({ children }: AppShellProps) {
     </box>
   );
 };
+
 const AppShellHeader = function AppShellHeader({
   children,
 }: AppShellHeaderProps) {
   return <box flexDirection="column">{children}</box>;
 };
+
 const AppShellTip = function AppShellTip({ children }: AppShellTipProps) {
   return (
     <box paddingLeft={2} paddingTop={0} paddingBottom={0}>
@@ -52,6 +61,7 @@ const AppShellTip = function AppShellTip({ children }: AppShellTipProps) {
     </box>
   );
 };
+
 const AppShellInput = function AppShellInput({
   value: controlledValue,
   onChange,
@@ -64,6 +74,7 @@ const AppShellInput = function AppShellInput({
   const [internalValue, setInternalValue] = useState("");
   const theme = useTheme();
   const value = controlledValue ?? internalValue;
+
   useKeyboard((key) => {
     if (key.name === "return") {
       onSubmit?.(value);
@@ -99,6 +110,7 @@ const AppShellInput = function AppShellInput({
       setInternalValue(next);
     }
   });
+
   return (
     <box
       borderColor={borderColor ?? theme.colors.border}
@@ -116,11 +128,13 @@ const AppShellInput = function AppShellInput({
     </box>
   );
 };
+
 const AppShellContent = function AppShellContent({
   children,
   height = 20,
 }: AppShellContentProps) {
   const [scrollTop, setScrollTop] = useState(0);
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setScrollTop((s) => Math.max(0, s - 1));
@@ -128,6 +142,7 @@ const AppShellContent = function AppShellContent({
       setScrollTop((s) => s + 1);
     }
   });
+
   return (
     <box flexDirection="row" overflow="hidden">
       <box flexGrow={1} flexDirection="column" marginTop={-scrollTop as number}>
@@ -136,6 +151,7 @@ const AppShellContent = function AppShellContent({
     </box>
   );
 };
+
 const AppShellHints = function AppShellHints({
   items,
   children,
@@ -148,6 +164,7 @@ const AppShellHints = function AppShellHints({
     </box>
   );
 };
+
 export const AppShell = Object.assign(AppShellRoot, {
   Content: AppShellContent,
   Header: AppShellHeader,

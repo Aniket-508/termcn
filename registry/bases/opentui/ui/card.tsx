@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface CardProps {
   title?: string;
   subtitle?: string;
@@ -21,6 +22,7 @@ export interface CardProps {
   paddingY?: number;
   footerDividerChar?: string;
 }
+
 export const Card = function Card({
   title,
   subtitle,
@@ -35,6 +37,7 @@ export const Card = function Card({
 }: CardProps) {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.border;
+
   return (
     <box
       flexDirection="column"

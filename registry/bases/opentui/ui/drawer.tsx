@@ -3,7 +3,9 @@ import { useKeyboard } from "@opentui/react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type DrawerEdge = "left" | "right" | "top" | "bottom";
+
 export interface DrawerProps {
   isOpen?: boolean;
   edge?: DrawerEdge;
@@ -13,6 +15,7 @@ export interface DrawerProps {
   width?: number;
   height?: number;
 }
+
 export const Drawer = function Drawer({
   isOpen = false,
   edge = "right",
@@ -23,6 +26,7 @@ export const Drawer = function Drawer({
   height = 10,
 }: DrawerProps) {
   const theme = useTheme();
+
   useKeyboard((key) => {
     if (!isOpen) {
       return;
@@ -31,10 +35,13 @@ export const Drawer = function Drawer({
       onClose?.();
     }
   });
+
   if (!isOpen) {
     return null;
   }
+
   const isHorizontal = edge === "left" || edge === "right";
+
   return (
     <box
       flexDirection="column"

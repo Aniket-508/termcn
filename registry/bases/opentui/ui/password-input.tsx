@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface PasswordInputProps {
   value?: string;
   onChange?: (value: string) => void;
@@ -24,6 +25,7 @@ export interface PasswordInputProps {
   width?: number;
   cursor?: string;
 }
+
 export const PasswordInput = function PasswordInput({
   value: controlledValue,
   onChange,
@@ -42,7 +44,9 @@ export const PasswordInput = function PasswordInput({
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();
   const [isFocused] = useState(true);
+
   const value = controlledValue ?? internalValue;
+
   const setValue = (newVal: string) => {
     if (onChange) {
       onChange(newVal);
@@ -50,6 +54,7 @@ export const PasswordInput = function PasswordInput({
       setInternalValue(newVal);
     }
   };
+
   useKeyboard((key) => {
     if (!isFocused) {
       return;
@@ -78,8 +83,10 @@ export const PasswordInput = function PasswordInput({
       setValue(value + key.name);
     }
   });
+
   const displayValue = isVisible ? value : mask.repeat(value.length);
   const borderColor = isFocused ? theme.colors.focusRing : theme.colors.border;
+
   return (
     <box flexDirection="column">
       {label && (

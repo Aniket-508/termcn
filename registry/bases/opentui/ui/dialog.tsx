@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface DialogProps {
   title?: string;
   children: ReactNode;
@@ -14,6 +15,7 @@ export interface DialogProps {
   variant?: "default" | "danger";
   isOpen?: boolean;
 }
+
 export const Dialog = function Dialog({
   title,
   children,
@@ -26,6 +28,7 @@ export const Dialog = function Dialog({
 }: DialogProps) {
   const theme = useTheme();
   const [focusedButton, setFocusedButton] = useState<0 | 1>(0);
+
   useKeyboard((key) => {
     if (!isOpen) {
       return;
@@ -42,11 +45,14 @@ export const Dialog = function Dialog({
       onCancel?.();
     }
   });
+
   if (!isOpen) {
     return null;
   }
+
   const confirmColor =
     variant === "danger" ? (theme.colors.error ?? "red") : theme.colors.primary;
+
   return (
     <box
       flexDirection="column"

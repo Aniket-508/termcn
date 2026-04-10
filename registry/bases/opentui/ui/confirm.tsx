@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ConfirmProps {
   message: string;
   onConfirm?: () => void;
@@ -12,6 +13,7 @@ export interface ConfirmProps {
   defaultValue?: boolean;
   variant?: "default" | "danger";
 }
+
 export const Confirm = function Confirm({
   message,
   onConfirm,
@@ -23,6 +25,7 @@ export const Confirm = function Confirm({
 }: ConfirmProps) {
   const theme = useTheme();
   const [selected, setSelected] = useState<boolean>(defaultValue);
+
   useKeyboard((key) => {
     if (key.name === "left" || key.name === "right") {
       setSelected((s) => !s);
@@ -38,8 +41,10 @@ export const Confirm = function Confirm({
       onCancel?.();
     }
   });
+
   const yesColor =
     variant === "danger" ? theme.colors.error : theme.colors.primary;
+
   return (
     <box flexDirection="column" gap={0}>
       <text>

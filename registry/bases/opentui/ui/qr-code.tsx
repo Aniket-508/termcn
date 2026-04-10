@@ -2,12 +2,14 @@
 import React from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface QRCodeProps {
   value: string;
   size?: "sm" | "md" | "lg";
   color?: string;
   label?: string;
 }
+
 const GF_EXP = new Uint8Array(512);
 const GF_LOG = new Uint8Array(256);
 (function initGF() {
@@ -24,12 +26,14 @@ const GF_LOG = new Uint8Array(256);
     GF_EXP[i] = GF_EXP[i - 255];
   }
 })();
+
 const gfMul = function gfMul(a: number, b: number): number {
   if (a === 0 || b === 0) {
     return 0;
   }
   return GF_EXP[(GF_LOG[a] + GF_LOG[b]) % 255] ?? 0;
 };
+
 const gfPoly = function gfPoly(degree: number): Uint8Array {
   let p = new Uint8Array([1]);
   for (let i = 0; i < degree; i += 1) {
@@ -43,6 +47,7 @@ const gfPoly = function gfPoly(degree: number): Uint8Array {
   }
   return p;
 };
+
 const rsEncode = function rsEncode(
   data: Uint8Array,
   ecCount: number
@@ -60,20 +65,26 @@ const rsEncode = function rsEncode(
   }
   return msg.slice(data.length);
 };
+
 const VERSION = 1;
 const SIZE = 17 + VERSION * 4;
 const DATA_CODEWORDS = 14;
 const EC_CODEWORDS = 10;
+
 const encodeData = function encodeData(text: string): Uint8Array {
   const ALNUM_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
+
   const isNumeric = /^[0-9]*$/.test(text);
   const isAlphanumeric = [...text].every((c) => ALNUM_CHARS.includes(c));
+
   const bits: number[] = [];
+
   const pushBits = (value: number, count: number) => {
     for (let i = count - 1; i >= 0; i -= 1) {
       bits.push((value >> i) & 1);
     }
   };
+
   if (isNumeric) {
     pushBits(0b0001, 4);
     pushBits(text.length, 10);
@@ -109,18 +120,22 @@ const encodeData = function encodeData(text: string): Uint8Array {
       pushBits(b, 8);
     }
   }
+
   for (let i = 0; i < 4 && bits.length < DATA_CODEWORDS * 8; i += 1) {
     bits.push(0);
   }
+
   while (bits.length % 8 !== 0) {
     bits.push(0);
   }
+
   const padBytes = [0xec, 0x11];
   let padIdx = 0;
   while (bits.length < DATA_CODEWORDS * 8) {
     const b = padBytes[(padIdx += 1 % 2)] ?? 0;
     pushBits(b, 8);
   }
+
   const codewords = new Uint8Array(DATA_CODEWORDS);
   for (let i = 0; i < DATA_CODEWORDS; i += 1) {
     let byte = 0;
@@ -131,12 +146,15 @@ const encodeData = function encodeData(text: string): Uint8Array {
   }
   return codewords;
 };
+
 type Matrix = boolean[][];
+
 const makeMatrix = function makeMatrix(): Matrix {
   return Array.from({ length: SIZE }, () =>
     Array.from<boolean>({ length: SIZE }).fill(false)
   );
 };
+
 const placeFinderPattern = function placeFinderPattern(
   matrix: Matrix,
   row: number,
@@ -161,22 +179,26 @@ const placeFinderPattern = function placeFinderPattern(
     }
   }
 };
+
 const placeTimingPatterns = function placeTimingPatterns(matrix: Matrix) {
   for (let i = 8; i < SIZE - 8; i += 1) {
     matrix[6][i] = i % 2 === 0;
     matrix[i][6] = i % 2 === 0;
   }
 };
+
 const placeDarkModule = function placeDarkModule(matrix: Matrix) {
   const row = matrix[SIZE - 8];
   if (row) {
     row[8] = true;
   }
 };
+
 const buildFunctionMask = function buildFunctionMask(
   _matrix: Matrix
 ): boolean[][] {
   const mask = makeMatrix();
+
   const setRegion = (r: number, c: number, h: number, w: number) => {
     for (let dr = 0; dr < h; dr += 1) {
       for (let dc = 0; dc < w; dc += 1) {
@@ -189,13 +211,16 @@ const buildFunctionMask = function buildFunctionMask(
       }
     }
   };
+
   setRegion(0, 0, 8, 8);
   setRegion(0, SIZE - 8, 8, 8);
   setRegion(SIZE - 8, 0, 8, 8);
+
   for (let i = 0; i < SIZE; i += 1) {
     mask[6][i] = true;
     mask[i][6] = true;
   }
+
   for (let i = 0; i < 9; i += 1) {
     mask[i][8] = true;
     mask[8][i] = true;
@@ -204,8 +229,10 @@ const buildFunctionMask = function buildFunctionMask(
     mask[8][i] = true;
     mask[i][8] = true;
   }
+
   return mask;
 };
+
 const FORMAT_STRINGS: Record<number, number> = {
   0: 21_522,
   1: 20_773,
@@ -216,11 +243,13 @@ const FORMAT_STRINGS: Record<number, number> = {
   6: 20_375,
   7: 19_104,
 };
+
 const placeFormatInfo = function placeFormatInfo(
   matrix: Matrix,
   maskPattern: number
 ) {
   const fmt = FORMAT_STRINGS[maskPattern] ?? FORMAT_STRINGS[0];
+
   const bits15 = Array.from({ length: 15 }, (_, i) => (fmt >> (14 - i)) & 1);
   const positions = [
     [0, 8],
@@ -248,6 +277,7 @@ const placeFormatInfo = function placeFormatInfo(
       }
     }
   }
+
   const positions2 = [
     [8, SIZE - 1],
     [8, SIZE - 2],
@@ -267,6 +297,7 @@ const placeFormatInfo = function placeFormatInfo(
       }
     }
   }
+
   const positions3 = [
     [SIZE - 7, 8],
     [SIZE - 6, 8],
@@ -286,6 +317,7 @@ const placeFormatInfo = function placeFormatInfo(
     }
   }
 };
+
 const placeData = function placeData(
   matrix: Matrix,
   funcMask: boolean[][],
@@ -311,6 +343,7 @@ const placeData = function placeData(
     goingUp = !goingUp;
   }
 };
+
 const applyMask = function applyMask(
   matrix: Matrix,
   funcMask: boolean[][],
@@ -365,8 +398,10 @@ const applyMask = function applyMask(
     }
   }
 };
+
 const scorePenalty = function scorePenalty(matrix: Matrix): number {
   let penalty = 0;
+
   for (let r = 0; r < SIZE; r += 1) {
     for (const isRow of [true, false]) {
       let run = 1;
@@ -386,6 +421,7 @@ const scorePenalty = function scorePenalty(matrix: Matrix): number {
       }
     }
   }
+
   for (let r = 0; r < SIZE - 1; r += 1) {
     for (let c = 0; c < SIZE - 1; c += 1) {
       const v = matrix[r][c];
@@ -398,12 +434,16 @@ const scorePenalty = function scorePenalty(matrix: Matrix): number {
       }
     }
   }
+
   return penalty;
 };
+
 const generateQR = function generateQR(text: string): Matrix {
   const capped = text.slice(0, 17);
+
   const dataBytes = encodeData(capped);
   const ecBytes = rsEncode(dataBytes, EC_CODEWORDS);
+
   const allBytes = new Uint8Array([...dataBytes, ...ecBytes]);
   const bits: number[] = [];
   for (const b of allBytes) {
@@ -411,8 +451,10 @@ const generateQR = function generateQR(text: string): Matrix {
       bits.push((b >> i) & 1);
     }
   }
+
   let bestMatrix: Matrix | null = null;
   let bestPenalty = Infinity;
+
   for (let maskPattern = 0; maskPattern < 8; maskPattern += 1) {
     const matrix = makeMatrix();
     placeFinderPattern(matrix, 0, 0);
@@ -430,9 +472,12 @@ const generateQR = function generateQR(text: string): Matrix {
       bestMatrix = matrix;
     }
   }
+
   return bestMatrix ?? makeMatrix();
 };
+
 const QUIET_ZONE = 2;
+
 export const QRCode = function QRCode({
   value,
   size = "md",
@@ -441,6 +486,7 @@ export const QRCode = function QRCode({
 }: QRCodeProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.foreground;
+
   let matrix: Matrix;
   try {
     matrix = generateQR(value);
@@ -452,6 +498,7 @@ export const QRCode = function QRCode({
       </box>
     );
   }
+
   const qzMatrix: Matrix = [];
   const totalSize = SIZE + QUIET_ZONE * 2;
   for (let r = 0; r < totalSize; r += 1) {
@@ -465,7 +512,9 @@ export const QRCode = function QRCode({
     }
     qzMatrix.push(row);
   }
+
   const scale = size === "lg" ? 2 : 1;
+
   if (size === "sm") {
     const lines: React.ReactElement[] = [];
     for (let r = 0; r < totalSize; r += 2) {
@@ -496,6 +545,7 @@ export const QRCode = function QRCode({
       </box>
     );
   }
+
   const lines: React.ReactElement[] = [];
   for (let r = 0; r < totalSize; r += 1) {
     const chars: string[] = [];
@@ -511,6 +561,7 @@ export const QRCode = function QRCode({
       );
     }
   }
+
   return (
     <box flexDirection="column" gap={0}>
       {lines}

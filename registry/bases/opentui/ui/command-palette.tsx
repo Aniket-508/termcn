@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import React, { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface Command {
   id: string;
   label: string;
@@ -11,6 +12,7 @@ export interface Command {
   onSelect?: () => void;
   group?: string;
 }
+
 export interface CommandPaletteProps {
   commands: Command[];
   isOpen: boolean;
@@ -18,6 +20,7 @@ export interface CommandPaletteProps {
   placeholder?: string;
   maxItems?: number;
 }
+
 const fuzzyMatch = function fuzzyMatch(str: string, query: string): boolean {
   if (!query) {
     return true;
@@ -32,6 +35,7 @@ const fuzzyMatch = function fuzzyMatch(str: string, query: string): boolean {
   }
   return qi === q.length;
 };
+
 const fuzzyScore = function fuzzyScore(str: string, query: string): number {
   if (!query) {
     return 0;
@@ -41,6 +45,7 @@ const fuzzyScore = function fuzzyScore(str: string, query: string): number {
   let score = 0;
   let qi = 0;
   let lastMatchIdx = -1;
+
   for (let i = 0; i < s.length && qi < q.length; i += 1) {
     if (s[i] === q[qi]) {
       score += i - lastMatchIdx - 1;
@@ -48,8 +53,10 @@ const fuzzyScore = function fuzzyScore(str: string, query: string): number {
       qi += 1;
     }
   }
+
   return score;
 };
+
 export const CommandPalette = function CommandPalette({
   commands,
   isOpen,
@@ -60,10 +67,12 @@ export const CommandPalette = function CommandPalette({
   const theme = useTheme();
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);
+
   const filtered = commands
     .filter((c) => fuzzyMatch(c.label, query))
     .toSorted((a, b) => fuzzyScore(a.label, query) - fuzzyScore(b.label, query))
     .slice(0, maxItems);
+
   useKeyboard((key) => {
     if (!isOpen) {
       return;
@@ -106,9 +115,11 @@ export const CommandPalette = function CommandPalette({
     setQuery((q) => q + key.name);
     setCursor(0);
   });
+
   if (!isOpen) {
     return null;
   }
+
   const groups = new Map<string | undefined, typeof filtered>();
   for (const cmd of filtered) {
     const g = cmd.group;
@@ -117,7 +128,9 @@ export const CommandPalette = function CommandPalette({
     }
     groups.get(g)?.push(cmd);
   }
+
   let flatIdx = 0;
+
   return (
     <box
       flexDirection="column"
@@ -140,6 +153,7 @@ export const CommandPalette = function CommandPalette({
         </text>
         <text fg={theme.colors.focusRing}>█</text>
       </box>
+
       {filtered.length === 0 ? (
         <box paddingLeft={1} paddingRight={1} paddingTop={0} paddingBottom={0}>
           <text fg="#666">No commands found</text>
@@ -185,6 +199,7 @@ export const CommandPalette = function CommandPalette({
           ))}
         </box>
       )}
+
       <text fg="#666">↑↓: navigate · Enter: run · Esc: close</text>
     </box>
   );

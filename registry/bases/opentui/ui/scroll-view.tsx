@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface ScrollViewProps {
   height: number;
   children: ReactNode;
@@ -14,6 +15,7 @@ export interface ScrollViewProps {
   trackChar?: string;
   thumbChar?: string;
 }
+
 export const ScrollView = function ScrollView({
   height,
   children,
@@ -26,10 +28,14 @@ export const ScrollView = function ScrollView({
 }: ScrollViewProps) {
   const theme = useTheme();
   const [scrollTop, setScrollTop] = useState(0);
+
   const resolvedTrackColor = scrollbarColor ?? theme.colors.mutedForeground;
   const resolvedThumbColor = thumbColor ?? theme.colors.primary;
+
   const maxScroll = Math.max(0, contentHeight - height);
+
   const clampedScroll = Math.min(scrollTop, maxScroll);
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setScrollTop((s) => Math.max(0, s - 1));
@@ -47,18 +53,21 @@ export const ScrollView = function ScrollView({
       setScrollTop(maxScroll);
     }
   });
+
   const thumbSize = useMemo(() => {
     if (contentHeight <= height) {
       return height;
     }
     return Math.max(1, Math.round((height / contentHeight) * height));
   }, [contentHeight, height]);
+
   const thumbPosition = useMemo(() => {
     if (contentHeight <= height || maxScroll === 0) {
       return 0;
     }
     return Math.round((clampedScroll / maxScroll) * (height - thumbSize));
   }, [clampedScroll, maxScroll, height, thumbSize, contentHeight]);
+
   const scrollbar = useMemo(
     () =>
       Array.from({ length: height }, (_, i) => {
@@ -67,6 +76,7 @@ export const ScrollView = function ScrollView({
       }),
     [height, thumbPosition, thumbSize, thumbChar, trackChar]
   );
+
   return (
     <box flexDirection="row" overflow="hidden">
       <box

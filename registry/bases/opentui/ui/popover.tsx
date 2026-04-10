@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface PopoverProps {
   trigger: ReactNode;
   children: ReactNode;
@@ -10,6 +11,7 @@ export interface PopoverProps {
   onClose?: () => void;
   title?: string;
 }
+
 export const Popover = function Popover({
   trigger,
   children,
@@ -18,6 +20,7 @@ export const Popover = function Popover({
   title,
 }: PopoverProps) {
   const theme = useTheme();
+
   useKeyboard((key) => {
     if (!isOpen) {
       return;
@@ -26,6 +29,7 @@ export const Popover = function Popover({
       onClose?.();
     }
   });
+
   if (!isOpen) {
     return (
       <box flexDirection="column" alignItems="flex-start">
@@ -33,6 +37,7 @@ export const Popover = function Popover({
       </box>
     );
   }
+
   return (
     <box flexDirection="column" alignItems="flex-start">
       <box>{trigger}</box>

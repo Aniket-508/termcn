@@ -3,11 +3,13 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface CheckboxGroupOption {
   value: string;
   label: string;
   disabled?: boolean;
 }
+
 export interface CheckboxGroupProps {
   label?: string;
   options: CheckboxGroupOption[];
@@ -16,6 +18,7 @@ export interface CheckboxGroupProps {
   min?: number;
   max?: number;
 }
+
 export const CheckboxGroup = ({
   label,
   options,
@@ -28,7 +31,9 @@ export const CheckboxGroup = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [internalSelected, setInternalSelected] = useState<string[]>([]);
   const [error, setError] = useState<string | undefined>();
+
   const selected = controlledValue ?? internalSelected;
+
   const validateAndUpdate = (next: string[]) => {
     if (min !== undefined && next.length < min) {
       setError(`Select at least ${min} option${min === 1 ? "" : "s"}.`);
@@ -43,6 +48,7 @@ export const CheckboxGroup = ({
     }
     onChange?.(next);
   };
+
   useKeyboard((key) => {
     if (key.name === "up") {
       setActiveIndex((i) => {
@@ -72,6 +78,7 @@ export const CheckboxGroup = ({
       validateAndUpdate(next);
     }
   });
+
   return (
     <box flexDirection="column">
       {label && (

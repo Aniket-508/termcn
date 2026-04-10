@@ -1,12 +1,15 @@
 /* @jsxImportSource @opentui/react */
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export type BigTextFont = "block" | "simple" | "shade" | "slim";
+
 export interface BigTextProps {
   children: string;
   color?: string;
   font?: BigTextFont;
 }
+
 const FONT: Record<string, number[][]> = {
   " ": [
     [0, 0, 0],
@@ -303,6 +306,7 @@ const FONT: Record<string, number[][]> = {
     [1, 1, 1],
   ],
 };
+
 const SLIM_FONT: Record<string, string[]> = {
   " ": ["   ", "   ", "   "],
   "!": ["║", "║", "╩"],
@@ -347,6 +351,7 @@ const SLIM_FONT: Record<string, string[]> = {
   Y: ["╦ ╦", " ╦ ", " ╩ "],
   Z: ["══╦", "╔═╝", "╚══"],
 };
+
 const FALLBACK: number[][] = [
   [1, 1, 1],
   [1, 0, 1],
@@ -354,10 +359,12 @@ const FALLBACK: number[][] = [
   [1, 0, 1],
   [1, 1, 1],
 ];
+
 const getCharRows = function getCharRows(ch: string): number[][] {
   const upper = ch.toUpperCase();
   return FONT[upper] ?? FONT[ch] ?? FALLBACK;
 };
+
 const SHADE_CHARS: Record<number, string> = {
   0: " ",
   1: "░",
@@ -365,8 +372,10 @@ const SHADE_CHARS: Record<number, string> = {
   3: "▓",
   4: "█",
 };
+
 const renderShadeRow = (row: number[]): string =>
   row.map((p) => (p ? (SHADE_CHARS[3] ?? "▓") : " ")).join("");
+
 export const BigText = function BigText({
   children,
   color,
@@ -374,7 +383,9 @@ export const BigText = function BigText({
 }: BigTextProps) {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
+
   const chars = [...children];
+
   if (font === "slim") {
     const rowCount = 3;
     return (
@@ -392,12 +403,14 @@ export const BigText = function BigText({
       </box>
     );
   }
+
   let onChar = "▓";
   if (font === "block") {
     onChar = "█";
   }
   const offChar = " ";
   const rows = 5;
+
   return (
     <box flexDirection="column">
       {Array.from({ length: rows }, (_, rowIdx) => (

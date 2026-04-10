@@ -1,5 +1,6 @@
 /* @jsxImportSource @opentui/react */
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface GitStatusProps {
   branch: string;
   staged?: number;
@@ -7,6 +8,7 @@ export interface GitStatusProps {
   ahead?: number;
   behind?: number;
 }
+
 export const GitStatus = function GitStatus({
   branch,
   staged = 0,

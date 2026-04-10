@@ -3,6 +3,7 @@ import { useKeyboard } from "@opentui/react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface PaginationProps {
   total: number;
   current: number;
@@ -10,6 +11,7 @@ export interface PaginationProps {
   showEdges?: boolean;
   siblings?: number;
 }
+
 const buildPages = function buildPages(
   total: number,
   current: number,
@@ -18,21 +20,29 @@ const buildPages = function buildPages(
   if (total <= 7) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
+
   const pages: (number | "...")[] = [1];
+
   const leftSibling = Math.max(2, current - siblings);
   const rightSibling = Math.min(total - 1, current + siblings);
+
   if (leftSibling > 2) {
     pages.push("...");
   }
+
   for (let i = leftSibling; i <= rightSibling; i += 1) {
     pages.push(i);
   }
+
   if (rightSibling < total - 1) {
     pages.push("...");
   }
+
   pages.push(total);
+
   return pages;
 };
+
 export const Pagination = function Pagination({
   total,
   current,
@@ -43,6 +53,7 @@ export const Pagination = function Pagination({
   const theme = useTheme();
   const [internalPage, setInternalPage] = useState(current);
   const activePage = current ?? internalPage;
+
   const goTo = (page: number) => {
     const clamped = Math.min(Math.max(1, page), total);
     if (clamped === activePage) {
@@ -54,6 +65,7 @@ export const Pagination = function Pagination({
       setInternalPage(clamped);
     }
   };
+
   useKeyboard((key) => {
     if (key.name === "left") {
       goTo(activePage - 1);
@@ -62,7 +74,9 @@ export const Pagination = function Pagination({
       goTo(activePage + 1);
     }
   });
+
   const pages = buildPages(total, activePage, siblings);
+
   return (
     <box flexDirection="row" alignItems="center" gap={1}>
       <text
@@ -72,6 +86,7 @@ export const Pagination = function Pagination({
       >
         {activePage === 1 ? <text fg="#666">‹</text> : "‹"}
       </text>
+
       {pages.map((p, idx) => {
         if (p === "...") {
           return (
@@ -90,6 +105,7 @@ export const Pagination = function Pagination({
           </text>
         );
       })}
+
       <text
         fg={
           activePage === total

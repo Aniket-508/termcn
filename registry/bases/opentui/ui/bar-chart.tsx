@@ -1,11 +1,12 @@
 /* @jsxImportSource @opentui/react */
-
 import { useTheme } from "@/components/ui/theme-provider";
+
 export interface BarChartItem {
   label: string;
   value: number;
   color?: string;
 }
+
 export interface BarChartProps {
   data: BarChartItem[];
   direction?: "horizontal" | "vertical";
@@ -14,20 +15,24 @@ export interface BarChartProps {
   showValues?: boolean;
   title?: string;
 }
+
 const BAR_CHAR = "█";
 const EMPTY_CHAR = "░";
+
 const pad = (str: string, length: number): string => {
   if (str.length >= length) {
     return str.slice(0, length);
   }
   return `${str} `.repeat(length - str.length);
 };
+
 const padStart = (str: string, length: number): string => {
   if (str.length >= length) {
     return str.slice(0, length);
   }
   return " ".repeat(length - str.length) + str;
 };
+
 export const BarChart = ({
   data,
   direction = "horizontal",
@@ -37,14 +42,18 @@ export const BarChart = ({
   title,
 }: BarChartProps) => {
   const theme = useTheme();
+
   if (data.length === 0) {
     return <text fg={theme.colors.mutedForeground}>No data</text>;
   }
+
   const maxValue = Math.max(...data.map((d) => d.value));
+
   if (direction === "horizontal") {
     const maxLabelLen = Math.max(...data.map((d) => d.label.length));
     const maxValLen = Math.max(...data.map((d) => String(d.value).length));
     const barWidth = width - maxLabelLen - maxValLen - 3;
+
     return (
       <box flexDirection="column">
         {title && (
@@ -77,8 +86,10 @@ export const BarChart = ({
       </box>
     );
   }
+
   const barW = Math.max(3, Math.floor(width / data.length));
   const rows: string[][] = [];
+
   for (let row = height - 1; row >= 0; row -= 1) {
     const threshold = (row / (height - 1)) * maxValue;
     const cells = data.map((item) => {
@@ -87,6 +98,7 @@ export const BarChart = ({
     });
     rows.push(cells);
   }
+
   return (
     <box flexDirection="column">
       {title && (
