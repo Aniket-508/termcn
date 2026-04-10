@@ -3,7 +3,7 @@ import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { DocsBaseSwitcher } from "@/components/docs-base-switcher";
+// import { DocsBaseSwitcher } from "@/components/docs-base-switcher";
 import { DocsCopyPage } from "@/components/docs-copy-page";
 import { DocsTableOfContents } from "@/components/docs-toc";
 import { Badge } from "@/components/ui/badge";
@@ -159,7 +159,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
               ) : null}
             </div>
             <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-              {params.slug &&
+              {/* {params.slug &&
                 params.slug[0] === "components" &&
                 params.slug[1] &&
                 params.slug[2] && (
@@ -168,7 +168,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                     component={params.slug.slice(2).join("/")}
                     className="mb-4"
                   />
-                )}
+                )} */}
               <MdxContent components={mdxComponents} />
             </div>
           </div>
