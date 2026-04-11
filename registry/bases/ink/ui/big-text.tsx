@@ -362,7 +362,7 @@ const FALLBACK: number[][] = [
 
 const getCharRows = (ch: string): number[][] => {
   const upper = ch.toUpperCase();
-  return FONT[upper] ?? FONT[ch] ?? ALLBACK;
+  return FONT[upper] ?? FONT[ch] ?? FALLBACK;
 };
 
 const SHADE_CHARS: Record<number, string> = {
