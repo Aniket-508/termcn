@@ -227,13 +227,13 @@ export const CommandMenu = ({
       const parsed = parseDocPageUrl(item.url);
       if (parsed.kind === "theme") {
         setCopyPayload(
-          `${packageManager} dlx shadcn@latest add ${SITE.URL}/r/theme-${parsed.slug}.json`
+          `${packageManager} dlx shadcn@latest add ${SITE.REGISTRY}/theme-${parsed.slug}`
         );
         return;
       }
       if (parsed.kind === "component" || parsed.kind === "template") {
         setCopyPayload(
-          `${packageManager} dlx shadcn@latest add ${SITE.URL}/r/${parsed.slug}.json`
+          `${packageManager} dlx shadcn@latest add ${SITE.REGISTRY}/${parsed.slug}`
         );
         return;
       }

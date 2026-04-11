@@ -32,5 +32,6 @@ export const SITE = {
   ] as const,
   NAME: "termcn",
   OG_IMAGE: `${getBaseUrl()}/og.png`,
+  REGISTRY: "@termcn",
   URL: getBaseUrl(),
 };
