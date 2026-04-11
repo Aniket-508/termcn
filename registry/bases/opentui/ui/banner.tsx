@@ -32,7 +32,7 @@ export interface BannerProps {
   gap?: number;
 }
 
-export const Banner = function Banner({
+export const Banner = ({
   children,
   variant = "info",
   icon,
@@ -42,7 +42,7 @@ export const Banner = function Banner({
   color,
   accentChar = "┃",
   gap = 1,
-}: BannerProps) {
+}: BannerProps) => {
   const theme = useTheme();
   const [dismissed, setDismissed] = useState(false);
 

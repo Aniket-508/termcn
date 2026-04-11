@@ -7,11 +7,11 @@ export interface ChatThreadProps {
   children?: ReactNode;
 }
 
-export const ChatThread = function ChatThread({
+export const ChatThread = ({
   maxHeight,
   autoScroll = true,
   children,
-}: ChatThreadProps) {
+}: ChatThreadProps) => {
   void autoScroll;
 
   const containerProps = maxHeight

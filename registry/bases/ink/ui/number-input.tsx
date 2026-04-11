@@ -29,7 +29,7 @@ export interface NumberInputProps {
   stepHint?: string;
 }
 
-export const NumberInput = function NumberInput({
+export const NumberInput = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -44,7 +44,7 @@ export const NumberInput = function NumberInput({
   paddingX = 1,
   cursor = "█",
   stepHint,
-}: NumberInputProps) {
+}: NumberInputProps) => {
   const [internalValue, setInternalValue] = useState<number | undefined>();
   const [buffer, setBuffer] = useState<string>("");
   const theme = useTheme();

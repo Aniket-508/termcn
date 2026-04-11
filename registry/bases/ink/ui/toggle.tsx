@@ -26,7 +26,7 @@ export interface ToggleProps {
   paddingX?: number;
 }
 
-export const Toggle = function Toggle({
+export const Toggle = ({
   checked: controlledChecked,
   onChange,
   label,
@@ -38,7 +38,7 @@ export const Toggle = function Toggle({
   uncheckedIcon = "○",
   borderStyle = "round",
   paddingX = 1,
-}: ToggleProps) {
+}: ToggleProps) => {
   const theme = useTheme();
   const { isFocused } = useFocus({ id });
   const [internalChecked, setInternalChecked] = useState(false);

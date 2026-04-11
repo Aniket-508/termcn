@@ -20,7 +20,7 @@ export interface MenuProps {
   title?: string;
 }
 
-export const Menu = function Menu({ items, onSelect, title }: MenuProps) {
+export const Menu = ({ items, onSelect, title }: MenuProps) => {
   const theme = useTheme();
   const [focusIndex, setFocusIndex] = useState(0);
   const [submenuStack, setSubmenuStack] = useState<MenuItem[][]>([]);

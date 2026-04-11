@@ -11,10 +11,7 @@ export interface DefinitionProps {
   termColor?: string;
 }
 
-export const Definition = function Definition({
-  items,
-  termColor,
-}: DefinitionProps) {
+export const Definition = ({ items, termColor }: DefinitionProps) => {
   const theme = useTheme();
   const resolvedTermColor = termColor ?? theme.colors.primary;
 

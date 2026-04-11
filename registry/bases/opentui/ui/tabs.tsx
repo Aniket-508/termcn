@@ -31,7 +31,7 @@ export interface TabsProps {
   paddingY?: number;
 }
 
-export const Tabs = function Tabs({
+export const Tabs = ({
   tabs,
   defaultTab,
   activeTab: controlledTab,
@@ -42,7 +42,7 @@ export const Tabs = function Tabs({
   tabBarPaddingX = 2,
   paddingX = 1,
   paddingY = 0,
-}: TabsProps) {
+}: TabsProps) => {
   const theme = useTheme();
   const [internalTab, setInternalTab] = useState(
     defaultTab ?? tabs[0]?.key ?? ""

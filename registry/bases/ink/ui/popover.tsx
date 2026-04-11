@@ -12,13 +12,13 @@ export interface PopoverProps {
   title?: string;
 }
 
-export const Popover = function Popover({
+export const Popover = ({
   trigger,
   children,
   isOpen = false,
   onClose,
   title,
-}: PopoverProps) {
+}: PopoverProps) => {
   const theme = useTheme();
 
   useInput(

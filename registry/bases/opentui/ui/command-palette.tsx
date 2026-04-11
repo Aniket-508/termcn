@@ -21,7 +21,7 @@ export interface CommandPaletteProps {
   maxItems?: number;
 }
 
-const fuzzyMatch = function fuzzyMatch(str: string, query: string): boolean {
+const fuzzyMatch = (str: string, query: string): boolean => {
   if (!query) {
     return true;
   }
@@ -36,7 +36,7 @@ const fuzzyMatch = function fuzzyMatch(str: string, query: string): boolean {
   return qi === q.length;
 };
 
-const fuzzyScore = function fuzzyScore(str: string, query: string): number {
+const fuzzyScore = (str: string, query: string): number => {
   if (!query) {
     return 0;
   }
@@ -57,13 +57,13 @@ const fuzzyScore = function fuzzyScore(str: string, query: string): number {
   return score;
 };
 
-export const CommandPalette = function CommandPalette({
+export const CommandPalette = ({
   commands,
   isOpen,
   onClose,
   placeholder = "Type a command...",
   maxItems = 8,
-}: CommandPaletteProps) {
+}: CommandPaletteProps) => {
   const theme = useTheme();
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);

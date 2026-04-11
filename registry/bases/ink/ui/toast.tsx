@@ -24,13 +24,13 @@ export interface ToastProps {
 const BAR_WIDTH = 20;
 const TICK_MS = 100;
 
-export const Toast = function Toast({
+export const Toast = ({
   message,
   variant = "info",
   duration = 3000,
   onDismiss,
   icon,
-}: ToastProps) {
+}: ToastProps) => {
   const theme = useTheme();
   const [elapsed, setElapsed] = useState(0);
   const [dismissed, setDismissed] = useState(false);

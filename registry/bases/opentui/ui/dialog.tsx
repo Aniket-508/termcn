@@ -16,7 +16,7 @@ export interface DialogProps {
   isOpen?: boolean;
 }
 
-export const Dialog = function Dialog({
+export const Dialog = ({
   title,
   children,
   confirmLabel = "OK",
@@ -25,7 +25,7 @@ export const Dialog = function Dialog({
   onCancel,
   variant = "default",
   isOpen = false,
-}: DialogProps) {
+}: DialogProps) => {
   const theme = useTheme();
   const [focusedButton, setFocusedButton] = useState<0 | 1>(0);
 

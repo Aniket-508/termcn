@@ -53,7 +53,7 @@ interface RGB {
   b: number;
 }
 
-const parseHex = function parseHex(hex: string): RGB {
+const parseHex = (hex: string): RGB => {
   const clean = hex.replace("#", "");
   const full =
     clean.length === 3 ? [...clean].map((c) => c + c).join("") : clean;
@@ -64,33 +64,30 @@ const parseHex = function parseHex(hex: string): RGB {
   };
 };
 
-const toHex = function toHex({ r, g, b }: RGB): string {
-  return `#${[r, g, b]
+const toHex = ({ r, g, b }: RGB): string =>
+  `#${[r, g, b]
     .map((v) =>
       Math.round(Math.max(0, Math.min(255, v)))
         .toString(16)
         .padStart(2, "0")
     )
     .join("")}`;
-};
 
-const lerpColor = function lerpColor(a: RGB, b: RGB, t: number): RGB {
-  return {
-    b: a.b + (b.b - a.b) * t,
-    g: a.g + (b.g - a.g) * t,
-    r: a.r + (b.r - a.r) * t,
-  };
-};
+const lerpColor = (a: RGB, b: RGB, t: number): RGB => ({
+  b: a.b + (b.b - a.b) * t,
+  g: a.g + (b.g - a.g) * t,
+  r: a.r + (b.r - a.r) * t,
+});
 
 export interface GradientChar {
   char: string;
   color: string;
 }
 
-export const gradientText = function gradientText(
+export const gradientText = (
   text: string,
   colors: string[]
-): GradientChar[] {
+): GradientChar[] => {
   if (colors.length === 0) {
     return [...text].map((char) => ({ char, color: "" }));
   }
@@ -116,12 +113,12 @@ export const gradientText = function gradientText(
   });
 };
 
-export const Gradient = function Gradient({
+export const Gradient = ({
   children,
   name,
   colors,
   bold = false,
-}: GradientProps) {
+}: GradientProps) => {
   const resolvedColors = colors ?? (name ? GRADIENT_PRESETS[name] : []);
   const chars = gradientText(children, resolvedColors);
 

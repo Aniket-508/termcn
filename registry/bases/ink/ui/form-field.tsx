@@ -14,7 +14,7 @@ export interface FormFieldProps {
   labelColor?: string;
 }
 
-export const FormField = function FormField({
+export const FormField = ({
   label,
   children,
   error,
@@ -23,7 +23,7 @@ export const FormField = function FormField({
   gap = 0,
   errorIcon = "✗",
   labelColor,
-}: FormFieldProps) {
+}: FormFieldProps) => {
   const theme = useTheme();
   const resolvedLabelColor = labelColor ?? theme.colors.foreground;
 

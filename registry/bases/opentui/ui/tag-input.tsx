@@ -12,12 +12,12 @@ export interface TagInputProps {
   delimiter?: string;
 }
 
-export const TagInput = function TagInput({
+export const TagInput = ({
   value: controlledValue,
   onChange,
   placeholder = "Type and press Enter…",
   maxTags,
-}: TagInputProps) {
+}: TagInputProps) => {
   const theme = useTheme();
   const [internalTags, setInternalTags] = useState<string[]>([]);
   const [inputText, setInputText] = useState("");

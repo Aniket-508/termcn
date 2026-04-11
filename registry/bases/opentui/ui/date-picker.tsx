@@ -30,13 +30,11 @@ const MONTHS = [
   "December",
 ];
 
-const daysInMonth = function daysInMonth(month: number, year: number): number {
-  return new Date(year, month + 1, 0).getDate();
-};
+const daysInMonth = (month: number, year: number): number =>
+  new Date(year, month + 1, 0).getDate();
 
-const clamp = function clamp(val: number, min: number, max: number): number {
-  return Math.min(Math.max(val, min), max);
-};
+const clamp = (val: number, min: number, max: number): number =>
+  Math.min(Math.max(val, min), max);
 
 const buildDate = (m: number, d: number, y: number): Date => new Date(y, m, d);
 
@@ -52,7 +50,7 @@ const getNextField = (
   return "month";
 };
 
-export const DatePicker = function DatePicker({
+export const DatePicker = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -61,7 +59,7 @@ export const DatePicker = function DatePicker({
   maxDate,
   autoFocus: _autoFocus = false,
   id: _id,
-}: DatePickerProps) {
+}: DatePickerProps) => {
   const theme = useTheme();
   const [isFocused] = useState(true);
 

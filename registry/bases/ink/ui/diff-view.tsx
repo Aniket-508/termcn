@@ -19,10 +19,7 @@ interface DiffOp {
   line: string;
 }
 
-const computeDiff = function computeDiff(
-  oldLines: string[],
-  newLines: string[]
-): DiffOp[] {
+const computeDiff = (oldLines: string[], newLines: string[]): DiffOp[] => {
   const m = oldLines.length;
   const n = newLines.length;
 
@@ -67,7 +64,7 @@ interface Hunk {
   ops: DiffOp[];
 }
 
-const buildHunks = function buildHunks(ops: DiffOp[], context: number): Hunk[] {
+const buildHunks = (ops: DiffOp[], context: number): Hunk[] => {
   let oldLine = 1;
   let newLine = 1;
   const numbered = ops.map((op) => {
@@ -132,11 +129,7 @@ interface ViewProps {
   theme: ReturnType<typeof useTheme>;
 }
 
-const UnifiedView = function UnifiedView({
-  hunks,
-  showLineNumbers,
-  theme,
-}: ViewProps) {
+const UnifiedView = ({ hunks, showLineNumbers, theme }: ViewProps) => {
   const rows: React.ReactNode[] = [];
 
   for (const hunk of hunks) {
@@ -206,11 +199,7 @@ const UnifiedView = function UnifiedView({
   return <Box flexDirection="column">{rows}</Box>;
 };
 
-const SplitView = function SplitView({
-  hunks,
-  showLineNumbers,
-  theme,
-}: ViewProps) {
+const SplitView = ({ hunks, showLineNumbers, theme }: ViewProps) => {
   const rows: React.ReactNode[] = [];
 
   for (const hunk of hunks) {
@@ -296,11 +285,7 @@ interface InlineViewProps {
   theme: ReturnType<typeof useTheme>;
 }
 
-const InlineView = function InlineView({
-  ops,
-  showLineNumbers,
-  theme,
-}: InlineViewProps) {
+const InlineView = ({ ops, showLineNumbers, theme }: InlineViewProps) => {
   const rows: React.ReactNode[] = [];
   let oldLine = 1;
   let newLine = 1;
@@ -359,14 +344,14 @@ const InlineView = function InlineView({
   return <Box flexDirection="column">{rows}</Box>;
 };
 
-export const DiffView = function DiffView({
+export const DiffView = ({
   oldText,
   newText,
   filename,
   mode = "unified",
   context = 3,
   showLineNumbers = false,
-}: DiffViewProps) {
+}: DiffViewProps) => {
   const theme = useTheme();
 
   const oldLines = oldText.split("\n");

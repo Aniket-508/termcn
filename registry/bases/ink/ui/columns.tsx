@@ -17,11 +17,7 @@ const ALIGN_MAP: Record<
   top: "flex-start",
 };
 
-export const Columns = function Columns({
-  children,
-  gap = 0,
-  align = "top",
-}: ColumnsProps) {
+export const Columns = ({ children, gap = 0, align = "top" }: ColumnsProps) => {
   const items = React.Children.toArray(children);
 
   return (

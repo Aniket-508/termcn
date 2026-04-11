@@ -28,11 +28,8 @@ const BIG_DIGITS: Record<string, string[]> = {
   ":": ["   ", " ● ", "   ", " ● ", "   "],
 };
 
-const renderBigText = function renderBigText(
-  str: string,
-  color: string
-): React.ReactElement {
-  const rows: string[] = ["", "", "", "", ""];
+const renderBigText = (str: string, color: string): React.ReactElement => {
+  const rows: string[] = ["", "", "", ""];
   for (const ch of str) {
     const segs = BIG_DIGITS[ch] ?? BIG_DIGITS[" "] ?? [];
     for (let r = 0; r < 5; r += 1) {
@@ -52,11 +49,11 @@ const renderBigText = function renderBigText(
 
 const padNum = (n: number) => String(n).padStart(2, "0");
 
-const getTimeParts = function getTimeParts(
+const getTimeParts = (
   format: "12h" | "24h",
   showSeconds: boolean,
   timezone?: string
-) {
+) => {
   const now = timezone
     ? new Date(new Date().toLocaleString("en-US", { timeZone: timezone }))
     : new Date();
@@ -78,7 +75,7 @@ const getTimeParts = function getTimeParts(
   return { ampm, time };
 };
 
-const getDateString = function getDateString(timezone?: string): string {
+const getDateString = (timezone?: string): string => {
   const now = timezone
     ? new Date(new Date().toLocaleString("en-US", { timeZone: timezone }))
     : new Date();
@@ -90,14 +87,14 @@ const getDateString = function getDateString(timezone?: string): string {
   });
 };
 
-export const Clock = function Clock({
+export const Clock = ({
   format = "24h",
   showSeconds = true,
   showDate = false,
   timezone,
   color,
   size = "sm",
-}: ClockProps) {
+}: ClockProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 

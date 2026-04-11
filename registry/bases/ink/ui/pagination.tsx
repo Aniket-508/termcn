@@ -12,11 +12,11 @@ export interface PaginationProps {
   siblings?: number;
 }
 
-const buildPages = function buildPages(
+const buildPages = (
   total: number,
   current: number,
   siblings: number
-): (number | "...")[] {
+): (number | "...")[] => {
   if (total <= 7) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
@@ -43,13 +43,13 @@ const buildPages = function buildPages(
   return pages;
 };
 
-export const Pagination = function Pagination({
+export const Pagination = ({
   total,
   current,
   onChange,
   showEdges = true,
   siblings = 1,
-}: PaginationProps) {
+}: PaginationProps) => {
   const theme = useTheme();
   const [internalPage, setInternalPage] = useState(current);
   const activePage = current ?? internalPage;

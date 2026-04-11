@@ -32,7 +32,7 @@ export interface ModalProps {
   closeHint?: string | false;
 }
 
-export const Modal = function Modal({
+export const Modal = ({
   open,
   onClose,
   title,
@@ -44,7 +44,7 @@ export const Modal = function Modal({
   paddingY = 0,
   titleBorderStyle = "single",
   closeHint = "Press Esc to close",
-}: ModalProps) {
+}: ModalProps) => {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.primary;
 

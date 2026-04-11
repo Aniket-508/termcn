@@ -32,9 +32,7 @@ export interface HelpScreenRowProps {
   descriptionColor?: string;
 }
 
-const computeFlagWidth = function computeFlagWidth(
-  children: ReactNode
-): number {
+const computeFlagWidth = (children: ReactNode): number => {
   let max = 0;
   React.Children.forEach(children, (section) => {
     if (React.isValidElement(section)) {
@@ -58,7 +56,7 @@ const computeFlagWidth = function computeFlagWidth(
   return max;
 };
 
-const HelpScreenRoot = function HelpScreenRoot({
+const HelpScreenRoot = ({
   title,
   font = "block",
   titleColor,
@@ -68,7 +66,7 @@ const HelpScreenRoot = function HelpScreenRoot({
   columnGap = 4,
   flagWidth,
   children,
-}: HelpScreenProps) {
+}: HelpScreenProps) => {
   const theme = useTheme();
   const resolvedColor = titleColor ?? theme.colors.primary;
 
@@ -119,7 +117,7 @@ const HelpScreenRoot = function HelpScreenRoot({
   );
 };
 
-const HelpScreenSection = function HelpScreenSection({
+const HelpScreenSection = ({
   label,
   labelColor,
   children,
@@ -128,7 +126,7 @@ const HelpScreenSection = function HelpScreenSection({
 }: HelpScreenSectionProps & {
   _flagWidth?: number;
   _columnGap?: number;
-}) {
+}) => {
   const theme = useTheme();
 
   const enrichedRows = React.Children.map(children, (child) => {
@@ -154,7 +152,7 @@ const HelpScreenSection = function HelpScreenSection({
   );
 };
 
-const HelpScreenRow = function HelpScreenRow({
+const HelpScreenRow = ({
   flag,
   description,
   flagColor,
@@ -164,7 +162,7 @@ const HelpScreenRow = function HelpScreenRow({
 }: HelpScreenRowProps & {
   _flagWidth?: number;
   _columnGap?: number;
-}) {
+}) => {
   const theme = useTheme();
   const paddedFlag = flag.padEnd(_flagWidth + _columnGap);
 

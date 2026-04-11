@@ -23,7 +23,7 @@ export interface PanelProps {
   children?: ReactNode;
 }
 
-export const Panel = function Panel({
+export const Panel = ({
   title,
   titleColor,
   borderColor,
@@ -34,7 +34,7 @@ export const Panel = function Panel({
   paddingX = 1,
   paddingY = 0,
   children,
-}: PanelProps) {
+}: PanelProps) => {
   const theme = useTheme();
 
   const inner = (

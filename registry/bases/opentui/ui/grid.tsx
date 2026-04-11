@@ -8,7 +8,7 @@ export interface GridProps {
   children: ReactNode;
 }
 
-export const Grid = function Grid({ columns, gap = 0, children }: GridProps) {
+export const Grid = ({ columns, gap = 0, children }: GridProps) => {
   const items = React.Children.toArray(children);
   const rows: ReactNode[][] = [];
 

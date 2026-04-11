@@ -14,7 +14,7 @@ export interface NotificationCenterProps {
   width?: number;
 }
 
-const variantIcon = function variantIcon(v: NotificationVariant): string {
+const variantIcon = (v: NotificationVariant): string => {
   switch (v) {
     case "success": {
       return "✓";
@@ -31,10 +31,10 @@ const variantIcon = function variantIcon(v: NotificationVariant): string {
   }
 };
 
-const variantColor = function variantColor(
+const variantColor = (
   v: NotificationVariant,
   colors: { success: string; warning: string; error: string; info: string }
-): string {
+): string => {
   switch (v) {
     case "success": {
       return colors.success;
@@ -51,10 +51,10 @@ const variantColor = function variantColor(
   }
 };
 
-export const NotificationCenter = function NotificationCenter({
+export const NotificationCenter = ({
   maxVisible = 5,
   width = 40,
-}: NotificationCenterProps) {
+}: NotificationCenterProps) => {
   const ctx = useNotificationsProvider();
   const theme = useTheme();
   const { notifications, dismiss, clear } = ctx;

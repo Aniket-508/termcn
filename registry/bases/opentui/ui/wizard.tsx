@@ -19,12 +19,12 @@ export interface WizardProps {
   showProgress?: boolean;
 }
 
-export const Wizard = function Wizard({
+export const Wizard = ({
   steps,
   onComplete,
   onCancel,
   showProgress = true,
-}: WizardProps) {
+}: WizardProps) => {
   const theme = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
   const [validationError, setValidationError] = useState<string | null>(null);

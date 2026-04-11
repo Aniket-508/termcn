@@ -10,13 +10,13 @@ export interface GitStatusProps {
   behind?: number;
 }
 
-export const GitStatus = function GitStatus({
+export const GitStatus = ({
   branch,
   staged = 0,
   modified = 0,
   ahead = 0,
   behind = 0,
-}: GitStatusProps) {
+}: GitStatusProps) => {
   const theme = useTheme();
   return (
     <Box flexDirection="column" gap={0}>

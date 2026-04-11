@@ -27,7 +27,7 @@ export interface BadgeProps {
   paddingX?: number;
 }
 
-export const Badge = function Badge({
+export const Badge = ({
   children,
   variant = "default",
   color,
@@ -35,7 +35,7 @@ export const Badge = function Badge({
   bordered = true,
   borderStyle = "round",
   paddingX = 1,
-}: BadgeProps) {
+}: BadgeProps) => {
   const theme = useTheme();
 
   const variantColor =

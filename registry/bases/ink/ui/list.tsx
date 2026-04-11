@@ -19,13 +19,13 @@ export interface ListProps {
   cursor?: string;
 }
 
-export const List = function List({
+export const List = ({
   items,
   onSelect,
   filterable = false,
   height = 10,
   cursor = "›",
-}: ListProps) {
+}: ListProps) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const [filter, setFilter] = useState("");

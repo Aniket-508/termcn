@@ -31,7 +31,7 @@ export interface AlertProps {
   paddingY?: number;
 }
 
-export const Alert = function Alert({
+export const Alert = ({
   variant = "info",
   title,
   children,
@@ -41,7 +41,7 @@ export const Alert = function Alert({
   color,
   paddingX = 1,
   paddingY = 0,
-}: AlertProps) {
+}: AlertProps) => {
   const theme = useTheme();
 
   const variantColor =

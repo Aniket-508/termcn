@@ -29,7 +29,7 @@ const getLines = (v: string): string[] => v.split("\n");
 
 const joinLines = (lines: string[]): string => lines.join("\n");
 
-export const TextArea = function TextArea({
+export const TextArea = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -40,7 +40,7 @@ export const TextArea = function TextArea({
   borderStyle = "round",
   paddingX = 1,
   cursor = "█",
-}: TextAreaProps) {
+}: TextAreaProps) => {
   const [internalValue, setInternalValue] = useState("");
   const [cursorLine, setCursorLine] = useState(0);
   const [cursorCol, setCursorCol] = useState(0);

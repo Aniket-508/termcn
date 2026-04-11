@@ -13,7 +13,7 @@ export interface StreamingTextProps {
   cursorColor?: string;
 }
 
-export const StreamingText = function StreamingText({
+export const StreamingText = ({
   text: controlledText,
   stream,
   cursor = true,
@@ -21,7 +21,7 @@ export const StreamingText = function StreamingText({
   speed = 30,
   onComplete,
   cursorColor,
-}: StreamingTextProps) {
+}: StreamingTextProps) => {
   const theme = useTheme();
   const [internalText, setInternalText] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);

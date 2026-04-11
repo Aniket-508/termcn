@@ -47,11 +47,11 @@ const getStatusColor = (
   return theme.colors.warning;
 };
 
-export const Stopwatch = function Stopwatch({
+export const Stopwatch = ({
   autoStart = false,
   color,
   showLaps = true,
-}: StopwatchProps) {
+}: StopwatchProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 

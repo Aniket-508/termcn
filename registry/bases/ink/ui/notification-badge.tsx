@@ -7,10 +7,7 @@ export interface NotificationBadgeProps {
   color?: string;
 }
 
-export const NotificationBadge = function NotificationBadge({
-  count,
-  color,
-}: NotificationBadgeProps) {
+export const NotificationBadge = ({ count, color }: NotificationBadgeProps) => {
   const theme = useTheme();
   if (count === 0) {
     return null;

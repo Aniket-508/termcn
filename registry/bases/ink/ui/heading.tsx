@@ -15,7 +15,7 @@ export interface HeadingProps {
   uppercase?: boolean;
 }
 
-export const Heading = function Heading({
+export const Heading = ({
   level = 1,
   children,
   color,
@@ -23,7 +23,7 @@ export const Heading = function Heading({
   prefix2 = "▌ ",
   prefix3 = "› ",
   uppercase = true,
-}: HeadingProps) {
+}: HeadingProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 

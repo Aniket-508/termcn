@@ -32,9 +32,7 @@ const FormContext = createContext<FormContextValue>({
   values: {},
 });
 
-export const useFormContext = function useFormContext() {
-  return useContext(FormContext);
-};
+export const useFormContext = () => useContext(FormContext);
 
 export interface FormField {
   name: string;
@@ -48,12 +46,12 @@ export interface FormProps {
   children: ReactNode;
 }
 
-export const Form = function Form({
+export const Form = ({
   onSubmit,
   initialValues = {},
   fields = [],
   children,
-}: FormProps) {
+}: FormProps) => {
   const theme = useTheme();
   const [values, setValues] = useState<Record<string, unknown>>(initialValues);
   const [errors, setErrors] = useState<Record<string, string>>({});

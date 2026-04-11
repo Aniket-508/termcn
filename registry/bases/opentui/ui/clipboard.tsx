@@ -12,12 +12,12 @@ export interface ClipboardProps {
   timeout?: number;
 }
 
-export const Clipboard = function Clipboard({
+export const Clipboard = ({
   value,
   label,
   successMessage = "Copied!",
   timeout = 2000,
-}: ClipboardProps) {
+}: ClipboardProps) => {
   const theme = useTheme();
   const { write } = useClipboard();
   const [copied, setCopied] = useState(false);

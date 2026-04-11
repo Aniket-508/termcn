@@ -360,7 +360,7 @@ const FALLBACK: number[][] = [
   [1, 1, 1],
 ];
 
-const getCharRows = function getCharRows(ch: string): number[][] {
+const getCharRows = (ch: string): number[][] => {
   const upper = ch.toUpperCase();
   return FONT[upper] ?? FONT[ch] ?? FALLBACK;
 };
@@ -376,11 +376,7 @@ const SHADE_CHARS: Record<number, string> = {
 const renderShadeRow = (row: number[]): string =>
   row.map((p) => (p ? (SHADE_CHARS[3] ?? "▓") : " ")).join("");
 
-export const BigText = function BigText({
-  children,
-  color,
-  font = "block",
-}: BigTextProps) {
+export const BigText = ({ children, color, font = "block" }: BigTextProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 

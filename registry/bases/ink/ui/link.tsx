@@ -34,13 +34,13 @@ export interface LinkProps {
   fallback?: boolean | ((text: string, url: string) => string);
 }
 
-export const Link = function Link({
+export const Link = ({
   children,
   href,
   color,
   showHref = false,
   fallback = true,
-}: LinkProps) {
+}: LinkProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.info;
   const hasSupport = supportsHyperlinks();

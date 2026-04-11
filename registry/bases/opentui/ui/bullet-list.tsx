@@ -21,20 +21,16 @@ export interface BulletListCheckItemProps {
   color?: string;
 }
 
-const BulletListRoot = function BulletListRoot({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return <box flexDirection="column">{children}</box>;
-};
+const BulletListRoot = ({ children }: { children: ReactNode }) => (
+  <box flexDirection="column">{children}</box>
+);
 
-const BulletListItem = function BulletListItem({
+const BulletListItem = ({
   label,
   bold: boldText = false,
   color,
   children,
-}: BulletListItemProps) {
+}: BulletListItemProps) => {
   const theme = useTheme();
   return (
     <box flexDirection="column">
@@ -53,22 +49,13 @@ const BulletListItem = function BulletListItem({
   );
 };
 
-const BulletListSub = function BulletListSub({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return (
-    <box flexDirection="column" paddingLeft={2}>
-      {children}
-    </box>
-  );
-};
+const BulletListSub = ({ children }: { children: ReactNode }) => (
+  <box flexDirection="column" paddingLeft={2}>
+    {children}
+  </box>
+);
 
-const BulletListTreeItem = function BulletListTreeItem({
-  label,
-  color,
-}: BulletListTreeItemProps) {
+const BulletListTreeItem = ({ label, color }: BulletListTreeItemProps) => {
   const theme = useTheme();
   return (
     <box flexDirection="row">
@@ -78,11 +65,11 @@ const BulletListTreeItem = function BulletListTreeItem({
   );
 };
 
-const BulletListCheckItem = function BulletListCheckItem({
+const BulletListCheckItem = ({
   label,
   done = false,
   color,
-}: BulletListCheckItemProps) {
+}: BulletListCheckItemProps) => {
   const theme = useTheme();
   const icon = done ? "■" : "□";
   const resolvedColor =

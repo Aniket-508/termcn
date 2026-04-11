@@ -74,14 +74,14 @@ const STATUS_ICONS: Record<
   success: { color: "green", dim: false, icon: "✓" },
 };
 
-const SetupFlowRoot = function SetupFlowRoot({
+const SetupFlowRoot = ({
   title,
   titleFont = "block",
   titleColor = "#888888",
   connectorChar = "│",
   connectorColor,
   children,
-}: SetupFlowProps) {
+}: SetupFlowProps) => {
   const theme = useTheme();
 
   return (
@@ -107,24 +107,22 @@ const SetupFlowRoot = function SetupFlowRoot({
   );
 };
 
-const SetupFlowBadge = function SetupFlowBadge({
+const SetupFlowBadge = ({
   label,
   bg = "cyan",
   color = "black",
-}: SetupFlowBadgeProps) {
-  return (
-    <box marginBottom={1}>
-      <text fg={color}>{` ┌ ${label} ┐ `}</text>
-    </box>
-  );
-};
+}: SetupFlowBadgeProps) => (
+  <box marginBottom={1}>
+    <text fg={color}>{` ┌ ${label} ┐ `}</text>
+  </box>
+);
 
-const SetupFlowStep = function SetupFlowStep({
+const SetupFlowStep = ({
   icon,
   iconColor,
   status = "done",
   children,
-}: SetupFlowStepProps) {
+}: SetupFlowStepProps) => {
   const { icon: defaultIcon, color, dim } = STATUS_ICONS[status];
   const resolvedIcon = icon ?? defaultIcon;
   const resolvedColor = iconColor ?? color;
@@ -137,9 +135,7 @@ const SetupFlowStep = function SetupFlowStep({
   );
 };
 
-const SetupFlowSpinner = function SetupFlowSpinner({
-  label,
-}: SetupFlowSpinnerProps) {
+const SetupFlowSpinner = ({ label }: SetupFlowSpinnerProps) => {
   const theme = useTheme();
   const [frame, setFrame] = useState(0);
   useEffect(() => {
@@ -158,7 +154,7 @@ const SetupFlowSpinner = function SetupFlowSpinner({
   );
 };
 
-const SetupFlowMultiSelect = function SetupFlowMultiSelect({
+const SetupFlowMultiSelect = ({
   label,
   hint,
   options,
@@ -168,7 +164,7 @@ const SetupFlowMultiSelect = function SetupFlowMultiSelect({
   checkedChar = "■",
   uncheckedChar = "□",
   checkedColor = "green",
-}: SetupFlowMultiSelectProps) {
+}: SetupFlowMultiSelectProps) => {
   const theme = useTheme();
   const [internalValues, setInternalValues] = useState<string[]>([]);
   const [cursor, setCursor] = useState(0);

@@ -16,10 +16,7 @@ export interface ImageProps {
   alt?: string;
 }
 
-const detectProtocol = function detectProtocol(): Exclude<
-  ImageProtocol,
-  "auto"
-> {
+const detectProtocol = (): Exclude<ImageProtocol, "auto"> => {
   const termProgram = process.env["TERM_PROGRAM"] ?? "";
   const term = process.env["TERM"] ?? "";
 
@@ -32,11 +29,7 @@ const detectProtocol = function detectProtocol(): Exclude<
   return "ascii";
 };
 
-const writeIterm2 = function writeIterm2(
-  src: string,
-  width?: number,
-  height?: number
-): void {
+const writeIterm2 = (src: string, width?: number, height?: number): void => {
   try {
     const data = fs.readFileSync(src);
     const base64 = data.toString("base64");
@@ -57,11 +50,7 @@ const writeIterm2 = function writeIterm2(
   }
 };
 
-const writeKitty = function writeKitty(
-  src: string,
-  width?: number,
-  height?: number
-): void {
+const writeKitty = (src: string, width?: number, height?: number): void => {
   try {
     const data = fs.readFileSync(src);
     const base64 = data.toString("base64");
@@ -92,13 +81,13 @@ const writeKitty = function writeKitty(
   }
 };
 
-export const Image = function Image({
+export const Image = ({
   src,
   width = 20,
   height,
   protocol = "auto",
   alt,
-}: ImageProps) {
+}: ImageProps) => {
   const theme = useTheme();
   const [, setRendered] = useState(false);
   const [renderError, setRenderError] = useState<string | null>(null);

@@ -16,7 +16,7 @@ export interface ScrollViewProps {
   thumbChar?: string;
 }
 
-export const ScrollView = function ScrollView({
+export const ScrollView = ({
   height,
   children,
   contentHeight = 0,
@@ -25,7 +25,7 @@ export const ScrollView = function ScrollView({
   thumbColor,
   trackChar = "│",
   thumbChar = "█",
-}: ScrollViewProps) {
+}: ScrollViewProps) => {
   const theme = useTheme();
   const [scrollTop, setScrollTop] = useState(0);
 

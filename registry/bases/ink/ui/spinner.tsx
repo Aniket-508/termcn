@@ -17,13 +17,13 @@ export interface SpinnerProps {
   frames?: string[];
 }
 
-export const Spinner = function Spinner({
+export const Spinner = ({
   type: spinnerType = "dots",
   label,
   color,
   fps = 12,
   frames: customFrames,
-}: SpinnerProps) {
+}: SpinnerProps) => {
   const theme = useTheme();
   const builtin = cliSpinners[spinnerType] ?? cliSpinners.dots;
   const useCustomFrames = customFrames !== undefined;

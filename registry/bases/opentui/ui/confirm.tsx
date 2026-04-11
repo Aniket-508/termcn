@@ -14,7 +14,7 @@ export interface ConfirmProps {
   variant?: "default" | "danger";
 }
 
-export const Confirm = function Confirm({
+export const Confirm = ({
   message,
   onConfirm,
   onCancel,
@@ -22,7 +22,7 @@ export const Confirm = function Confirm({
   cancelLabel = "No",
   defaultValue = false,
   variant = "default",
-}: ConfirmProps) {
+}: ConfirmProps) => {
   const theme = useTheme();
   const [selected, setSelected] = useState<boolean>(defaultValue);
 

@@ -8,11 +8,7 @@ export interface HelpProps {
   compact?: boolean;
 }
 
-export const Help = function Help({
-  keymap,
-  title,
-  compact = false,
-}: HelpProps) {
+export const Help = ({ keymap, title, compact = false }: HelpProps) => {
   const theme = useTheme();
   const entries = Object.entries(keymap);
 

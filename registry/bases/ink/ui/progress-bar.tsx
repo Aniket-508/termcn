@@ -14,7 +14,7 @@ export interface ProgressBarProps {
   label?: string;
 }
 
-export const ProgressBar = function ProgressBar({
+export const ProgressBar = ({
   value,
   total,
   width = 30,
@@ -24,7 +24,7 @@ export const ProgressBar = function ProgressBar({
   emptyChar = "░",
   color,
   label,
-}: ProgressBarProps) {
+}: ProgressBarProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 

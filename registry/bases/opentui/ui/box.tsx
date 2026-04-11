@@ -51,13 +51,13 @@ export interface BoxProps {
   [key: string]: unknown;
 }
 
-export const Box = function Box({
+export const Box = ({
   border,
   borderVariant = "default",
   borderColor,
   children,
   ...props
-}: BoxProps) {
+}: BoxProps) => {
   const theme = useTheme();
 
   const resolvedBorderColor =

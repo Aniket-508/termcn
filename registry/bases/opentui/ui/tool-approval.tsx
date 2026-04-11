@@ -17,7 +17,7 @@ export interface ToolApprovalProps {
   timeout?: number;
 }
 
-export const ToolApproval = function ToolApproval({
+export const ToolApproval = ({
   name,
   description,
   args,
@@ -26,7 +26,7 @@ export const ToolApproval = function ToolApproval({
   onDeny,
   onAlwaysAllow,
   timeout,
-}: ToolApprovalProps) {
+}: ToolApprovalProps) => {
   const theme = useTheme();
   const [remaining, setRemaining] = useState(timeout ?? 0);
   const onDenyRef = useRef(onDeny);

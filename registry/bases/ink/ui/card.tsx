@@ -23,7 +23,7 @@ export interface CardProps {
   footerDividerChar?: string;
 }
 
-export const Card = function Card({
+export const Card = ({
   title,
   subtitle,
   children,
@@ -34,7 +34,7 @@ export const Card = function Card({
   paddingX = 1,
   paddingY = 0,
   footerDividerChar = "─",
-}: CardProps) {
+}: CardProps) => {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.border;
 

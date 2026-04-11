@@ -15,7 +15,7 @@ export interface TimePickerProps {
   id?: string;
 }
 
-export const TimePicker = function TimePicker({
+export const TimePicker = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -23,7 +23,7 @@ export const TimePicker = function TimePicker({
   format = 24,
   autoFocus = false,
   id,
-}: TimePickerProps) {
+}: TimePickerProps) => {
   const theme = useTheme();
   const { isFocused } = useFocus({ autoFocus, id });
 

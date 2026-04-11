@@ -24,7 +24,7 @@ export interface CommandPaletteProps {
 /**
  * Fuzzy match: returns true if query is a subsequence of str (case insensitive).
  */
-const fuzzyMatch = function fuzzyMatch(str: string, query: string): boolean {
+const fuzzyMatch = (str: string, query: string): boolean => {
   if (!query) {
     return true;
   }
@@ -42,7 +42,7 @@ const fuzzyMatch = function fuzzyMatch(str: string, query: string): boolean {
 /**
  * Score fuzzy match: lower = better. Consecutive matches score better.
  */
-const fuzzyScore = function fuzzyScore(str: string, query: string): number {
+const fuzzyScore = (str: string, query: string): number => {
   if (!query) {
     return 0;
   }
@@ -63,13 +63,13 @@ const fuzzyScore = function fuzzyScore(str: string, query: string): number {
   return score;
 };
 
-export const CommandPalette = function CommandPalette({
+export const CommandPalette = ({
   commands,
   isOpen,
   onClose,
   placeholder = "Type a command...",
   maxItems = 8,
-}: CommandPaletteProps) {
+}: CommandPaletteProps) => {
   const theme = useTheme();
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);

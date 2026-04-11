@@ -26,11 +26,11 @@ interface FlatNode {
   hasChildren: boolean;
 }
 
-const flattenTree = function flattenTree(
+const flattenTree = (
   nodes: TreeNode[],
   expandedKeys: Set<string>,
   depth = 0
-): FlatNode[] {
+): FlatNode[] => {
   const result: FlatNode[] = [];
   for (const node of nodes) {
     const hasChildren = Boolean(node.children && node.children.length > 0);
@@ -47,14 +47,14 @@ const flattenTree = function flattenTree(
   return result;
 };
 
-export const Tree = function Tree({
+export const Tree = ({
   nodes,
   onSelect,
   defaultExpanded = [],
   expandedIcon = "▼",
   collapsedIcon = "▶",
   leafIcon = "•",
-}: TreeProps) {
+}: TreeProps) => {
   const theme = useTheme();
   const [expandedKeys, setExpandedKeys] = useState<Set<string>>(
     new Set(defaultExpanded)

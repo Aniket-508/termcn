@@ -81,7 +81,7 @@ export interface UsageMonitorStatusBarProps {
   separator?: string;
 }
 
-const formatValue = function formatValue(
+const formatValue = (
   value: number,
   max: number,
   format: UsageMonitorMetricProps["format"],
@@ -89,7 +89,7 @@ const formatValue = function formatValue(
 ): {
   current: string;
   maxStr: string;
-} {
+} => {
   if (format === "custom" && formatFn) {
     const result = formatFn(value, max);
     return { current: result, maxStr: "" };
@@ -129,12 +129,12 @@ const formatValue = function formatValue(
   }
 };
 
-const statusDotChar = function statusDotChar(
+const statusDotChar = (
   status: "green" | "yellow" | "red"
 ): {
   char: string;
   color: string;
-} {
+} => {
   switch (status) {
     case "green": {
       return { char: "●", color: "green" };
@@ -151,11 +151,11 @@ const statusDotChar = function statusDotChar(
   }
 };
 
-const UsageMonitorRoot = function UsageMonitorRoot({
+const UsageMonitorRoot = ({
   refreshInterval = 1000,
   separatorChar = "─",
   children,
-}: UsageMonitorProps) {
+}: UsageMonitorProps) => {
   const [, setTick] = useState(0);
   useEffect(() => {
     const id = setInterval(() => setTick((t) => t + 1), refreshInterval);
@@ -182,76 +182,70 @@ const UsageMonitorRoot = function UsageMonitorRoot({
   );
 };
 
-const UsageMonitorHeader = function UsageMonitorHeader({
+const UsageMonitorHeader = ({
   title,
   titleColor = "cyan",
   decorator = "◆ ✦ ◆ ✦",
   separatorChar = "═",
   separatorColor,
-}: UsageMonitorHeaderProps) {
-  return (
-    <box flexDirection="column">
-      <box flexDirection="row" justifyContent="center">
-        <text fg="#666">{`${decorator}  `}</text>
-        <text fg={titleColor}>
-          <b>{title}</b>
-        </text>
-        <text fg="#666">{`  ${decorator}`}</text>
-      </box>
-      <text fg={separatorColor ?? "#666"}>{separatorChar.repeat(44)}</text>
+}: UsageMonitorHeaderProps) => (
+  <box flexDirection="column">
+    <box flexDirection="row" justifyContent="center">
+      <text fg="#666">{`${decorator}  `}</text>
+      <text fg={titleColor}>
+        <b>{title}</b>
+      </text>
+      <text fg="#666">{`  ${decorator}`}</text>
     </box>
-  );
-};
+    <text fg={separatorColor ?? "#666"}>{separatorChar.repeat(44)}</text>
+  </box>
+);
 UsageMonitorHeader.displayName = "UsageMonitor.Header";
 
-const UsageMonitorTags = function UsageMonitorTags({
+const UsageMonitorTags = ({
   items,
   bracketColor,
   separatorColor,
-}: UsageMonitorTagsProps) {
-  return (
-    <box flexDirection="row" marginBottom={1}>
-      <text fg={bracketColor ?? "cyan"}>{"[ "}</text>
-      {items.map((item, i) => (
-        <>
-          <text>{item}</text>
-          {i < items.length - 1 && (
-            <text fg={separatorColor ?? "cyan"}>{" | "}</text>
-          )}
-        </>
-      ))}
-      <text fg={bracketColor ?? "cyan"}>{" ]"}</text>
-    </box>
-  );
-};
+}: UsageMonitorTagsProps) => (
+  <box flexDirection="row" marginBottom={1}>
+    <text fg={bracketColor ?? "cyan"}>{"[ "}</text>
+    {items.map((item, i) => (
+      <>
+        <text>{item}</text>
+        {i < items.length - 1 && (
+          <text fg={separatorColor ?? "cyan"}>{" | "}</text>
+        )}
+      </>
+    ))}
+    <text fg={bracketColor ?? "cyan"}>{" ]"}</text>
+  </box>
+);
 
-const UsageMonitorSection = function UsageMonitorSection({
+const UsageMonitorSection = ({
   icon,
   title,
   subtitle,
   children,
-}: UsageMonitorSectionProps) {
-  return (
-    <box flexDirection="column" marginBottom={1}>
-      {(icon || title) && (
-        <box flexDirection="row" gap={1}>
-          {icon && <text>{icon}</text>}
-          {title && (
-            <text>
-              <b>{title}</b>
-            </text>
-          )}
-        </box>
-      )}
-      {subtitle && <text fg="#666">{`    ${subtitle}`}</text>}
-      <box flexDirection="column" paddingTop={1}>
-        {children}
+}: UsageMonitorSectionProps) => (
+  <box flexDirection="column" marginBottom={1}>
+    {(icon || title) && (
+      <box flexDirection="row" gap={1}>
+        {icon && <text>{icon}</text>}
+        {title && (
+          <text>
+            <b>{title}</b>
+          </text>
+        )}
       </box>
+    )}
+    {subtitle && <text fg="#666">{`    ${subtitle}`}</text>}
+    <box flexDirection="column" paddingTop={1}>
+      {children}
     </box>
-  );
-};
+  </box>
+);
 
-const UsageMonitorMetric = function UsageMonitorMetric({
+const UsageMonitorMetric = ({
   icon,
   label,
   value,
@@ -266,7 +260,7 @@ const UsageMonitorMetric = function UsageMonitorMetric({
   barColor = "white",
   maxDim = false,
   showMax = true,
-}: UsageMonitorMetricProps) {
+}: UsageMonitorMetricProps) => {
   const filled = Math.round((percent / 100) * barWidth);
   const empty = barWidth - filled;
   const bar = barFillChar.repeat(filled) + barEmptyChar.repeat(empty);
@@ -288,12 +282,12 @@ const UsageMonitorMetric = function UsageMonitorMetric({
   );
 };
 
-const UsageMonitorDistributionMetric = function UsageMonitorDistributionMetric({
+const UsageMonitorDistributionMetric = ({
   icon,
   label,
   segments,
   barWidth = 22,
-}: UsageMonitorDistributionMetricProps) {
+}: UsageMonitorDistributionMetricProps) => {
   const bars = segments.map((seg) => {
     const count = Math.round((seg.percent / 100) * barWidth);
     return { ...seg, count };
@@ -320,62 +314,48 @@ const UsageMonitorDistributionMetric = function UsageMonitorDistributionMetric({
   );
 };
 
-const UsageMonitorStats = function UsageMonitorStats({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return <box flexDirection="column">{children}</box>;
-};
+const UsageMonitorStats = ({ children }: { children: ReactNode }) => (
+  <box flexDirection="column">{children}</box>
+);
 
-const UsageMonitorStatRow = function UsageMonitorStatRow({
+const UsageMonitorStatRow = ({
   icon,
   label,
   value,
   valueSuffix,
   valueColor = "white",
-}: UsageMonitorStatRowProps) {
-  return (
-    <box flexDirection="row" gap={1}>
-      {icon && <text>{icon}</text>}
-      <text fg="#666">{label.padEnd(16)}</text>
-      <text fg={valueColor}>{value}</text>
-      {valueSuffix && <text>{` ${valueSuffix}`}</text>}
-    </box>
-  );
-};
+}: UsageMonitorStatRowProps) => (
+  <box flexDirection="row" gap={1}>
+    {icon && <text>{icon}</text>}
+    <text fg="#666">{label.padEnd(16)}</text>
+    <text fg={valueColor}>{value}</text>
+    {valueSuffix && <text>{` ${valueSuffix}`}</text>}
+  </box>
+);
 
-const UsageMonitorPredictions = function UsageMonitorPredictions({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return (
-    <box flexDirection="column">
-      <text>
-        <b>🔮 Predictions:</b>
-      </text>
-      <box flexDirection="column" paddingLeft={4}>
-        {children}
-      </box>
+const UsageMonitorPredictions = ({ children }: { children: ReactNode }) => (
+  <box flexDirection="column">
+    <text>
+      <b>🔮 Predictions:</b>
+    </text>
+    <box flexDirection="column" paddingLeft={4}>
+      {children}
     </box>
-  );
-};
+  </box>
+);
 
-const UsageMonitorPrediction = function UsageMonitorPrediction({
+const UsageMonitorPrediction = ({
   label,
   value,
   valueColor = "yellow",
-}: UsageMonitorPredictionProps) {
-  return (
-    <box flexDirection="row">
-      <text fg="#666">{label.padEnd(24)}</text>
-      <text fg={valueColor}>{value}</text>
-    </box>
-  );
-};
+}: UsageMonitorPredictionProps) => (
+  <box flexDirection="row">
+    <text fg="#666">{label.padEnd(24)}</text>
+    <text fg={valueColor}>{value}</text>
+  </box>
+);
 
-const UsageMonitorStatusBar = function UsageMonitorStatusBar({
+const UsageMonitorStatusBar = ({
   clock = false,
   clockColor,
   sessionLabel,
@@ -383,7 +363,7 @@ const UsageMonitorStatusBar = function UsageMonitorStatusBar({
   exitHint,
   statusDot: dot = "green",
   separator = " | ",
-}: UsageMonitorStatusBarProps) {
+}: UsageMonitorStatusBarProps) => {
   const [time, setTime] = useState(() => new Date().toTimeString().slice(0, 8));
   useEffect(() => {
     const id = setInterval(

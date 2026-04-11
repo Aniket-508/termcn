@@ -23,13 +23,13 @@ interface TreeEntry {
   isLast: boolean;
 }
 
-const readEntries = function readEntries(
+const readEntries = (
   dir: string,
   depth: number,
   maxDepth: number,
   expanded: Set<string>,
   showHidden: boolean
-): TreeEntry[] {
+): TreeEntry[] => {
   const result: TreeEntry[] = [];
   let entries: string[];
 
@@ -81,13 +81,13 @@ const readEntries = function readEntries(
   return result;
 };
 
-export const DirectoryTree = function DirectoryTree({
+export const DirectoryTree = ({
   rootPath = process.cwd(),
   onSelect,
   maxDepth = 2,
   showHidden = false,
   label,
-}: DirectoryTreeProps) {
+}: DirectoryTreeProps) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState<Set<string>>(new Set([rootPath]));
   const [cursor, setCursor] = useState(0);

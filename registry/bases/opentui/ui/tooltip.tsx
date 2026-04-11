@@ -24,7 +24,7 @@ export interface TooltipProps {
   arrowUp?: string;
 }
 
-export const Tooltip = function Tooltip({
+export const Tooltip = ({
   children,
   content,
   position = "top",
@@ -36,7 +36,7 @@ export const Tooltip = function Tooltip({
   gap = 1,
   arrowDown = "↓",
   arrowUp = "↑",
-}: TooltipProps) {
+}: TooltipProps) => {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.border;
 

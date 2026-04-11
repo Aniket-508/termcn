@@ -21,11 +21,11 @@ export interface PathInputProps {
   dirsOnly?: boolean;
 }
 
-const getCompletions = function getCompletions(
+const getCompletions = (
   inputPath: string,
   filter?: string,
   dirsOnly?: boolean
-): string[] {
+): string[] => {
   try {
     let dir: string;
     let prefix: string;
@@ -71,7 +71,7 @@ const getCompletions = function getCompletions(
   }
 };
 
-export const PathInput = function PathInput({
+export const PathInput = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -82,7 +82,7 @@ export const PathInput = function PathInput({
   width = 40,
   filter,
   dirsOnly = false,
-}: PathInputProps) {
+}: PathInputProps) => {
   const [internalValue, setInternalValue] = useState("");
   const [completionIndex, setCompletionIndex] = useState(0);
   const theme = useTheme();

@@ -27,11 +27,11 @@ export interface StatusMessageProps {
   icon?: string;
 }
 
-export const StatusMessage = function StatusMessage({
+export const StatusMessage = ({
   variant = "info",
   children,
   icon,
-}: StatusMessageProps) {
+}: StatusMessageProps) => {
   const theme = useTheme();
 
   const variantColor = (() => {

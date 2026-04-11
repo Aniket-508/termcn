@@ -24,13 +24,13 @@ interface JSONLine {
   collapsible: boolean;
 }
 
-const buildLines = function buildLines(
+const buildLines = (
   data: unknown,
   depth: number,
   key: string | undefined,
   isLast: boolean,
   pathPrefix: string
-): JSONLine[] {
+): JSONLine[] => {
   const path = key === undefined ? pathPrefix : `${pathPrefix}.${key}`;
 
   if (Array.isArray(data)) {
@@ -115,12 +115,12 @@ const buildLines = function buildLines(
   ];
 };
 
-export const JSONView = function JSONView({
+export const JSONView = ({
   data,
   indent = 2,
   collapsed = false,
   label,
-}: JSONViewProps) {
+}: JSONViewProps) => {
   const theme = useTheme();
   const [collapsedPaths, setCollapsedPaths] = useState<Set<string>>(new Set());
   const [cursor, setCursor] = useState(0);

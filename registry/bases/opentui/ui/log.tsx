@@ -34,20 +34,20 @@ const LEVEL_LABELS: Record<LogLevel, string> = {
   warn: "WRN",
 };
 
-const formatTimestamp = function formatTimestamp(date: Date): string {
+const formatTimestamp = (date: Date): string => {
   const h = String(date.getHours()).padStart(2, "0");
   const m = String(date.getMinutes()).padStart(2, "0");
   const s = String(date.getSeconds()).padStart(2, "0");
   return `${h}:${m}:${s}`;
 };
 
-export const Log = function Log({
+export const Log = ({
   entries,
   height = 10,
   showTimestamp = true,
   filter,
   follow: followProp = false,
-}: LogProps) {
+}: LogProps) => {
   const theme = useTheme();
   const [scrollOffset, setScrollOffset] = useState(0);
   const [follow, setFollow] = useState(followProp);

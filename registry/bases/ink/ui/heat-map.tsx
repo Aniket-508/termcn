@@ -25,12 +25,12 @@ const DEFAULT_COLOR_SCALE = [
 
 const SHADE_CHARS = [" ", "░", "▒", "▓", "█"];
 
-const getColorForValue = function getColorForValue(
+const getColorForValue = (
   value: number,
   min: number,
   max: number,
   scale: string[]
-): string {
+): string => {
   if (max === min) {
     return scale[Math.floor(scale.length / 2)] ?? "#888888";
   }
@@ -39,11 +39,7 @@ const getColorForValue = function getColorForValue(
   return scale[idx] ?? scale[0] ?? "#888888";
 };
 
-const getShadeForValue = function getShadeForValue(
-  value: number,
-  min: number,
-  max: number
-): string {
+const getShadeForValue = (value: number, min: number, max: number): string => {
   if (max === min) {
     return SHADE_CHARS[2] ?? "▒";
   }
@@ -55,7 +51,7 @@ const getShadeForValue = function getShadeForValue(
   return SHADE_CHARS[idx] ?? SHADE_CHARS[0] ?? " ";
 };
 
-const padCenter = function padCenter(str: string, width: number): string {
+const padCenter = (str: string, width: number): string => {
   if (str.length >= width) {
     return str.slice(0, width);
   }
@@ -65,21 +61,21 @@ const padCenter = function padCenter(str: string, width: number): string {
   return " ".repeat(left) + `${str} `.repeat(right);
 };
 
-const padStart = function padStart(str: string, width: number): string {
+const padStart = (str: string, width: number): string => {
   if (str.length >= width) {
     return str.slice(0, width);
   }
   return " ".repeat(width - str.length) + str;
 };
 
-export const HeatMap = function HeatMap({
+export const HeatMap = ({
   data,
   rowLabels,
   colLabels,
   colorScale = DEFAULT_COLOR_SCALE,
   cellWidth = 5,
   showValues = false,
-}: HeatMapProps) {
+}: HeatMapProps) => {
   const theme = useTheme();
 
   if (data.length === 0 || data[0].length === 0) {

@@ -18,13 +18,13 @@ export interface KeyValueProps {
   valueColor?: string;
 }
 
-export const KeyValue = function KeyValue({
+export const KeyValue = ({
   items,
   keyWidth,
   separator = ":",
   keyColor,
   valueColor,
-}: KeyValueProps) {
+}: KeyValueProps) => {
   const theme = useTheme();
 
   const resolvedKeyWidth = useMemo(() => {

@@ -17,15 +17,14 @@ export interface GaugeProps {
 const ARC_CHARS_FILL = "█";
 const ARC_CHARS_EMPTY = "░";
 
-const clamp = function clamp(value: number, min: number, max: number): number {
-  return Math.max(min, Math.min(max, value));
-};
+const clamp = (value: number, min: number, max: number): number =>
+  Math.max(min, Math.min(max, value));
 
-const renderSmGauge = function renderSmGauge(
+const renderSmGauge = (
   pct: number,
   color: string,
   mutedColor: string
-): ReactNode {
+): ReactNode => {
   const width = 10;
   const filled = Math.round(pct * width);
   const empty = width - filled;
@@ -41,12 +40,12 @@ const renderSmGauge = function renderSmGauge(
   );
 };
 
-const renderMdGauge = function renderMdGauge(
+const renderMdGauge = (
   pct: number,
   color: string,
   mutedColor: string,
   fgColor: string
-): ReactNode {
+): ReactNode => {
   const arcWidth = 14;
   const filled = Math.round(pct * arcWidth);
   const empty = arcWidth - filled;
@@ -70,12 +69,12 @@ const renderMdGauge = function renderMdGauge(
   );
 };
 
-const renderLgGauge = function renderLgGauge(
+const renderLgGauge = (
   pct: number,
   color: string,
   mutedColor: string,
   fgColor: string
-): ReactNode {
+): ReactNode => {
   const arcWidth = 22;
   const filled = Math.round(pct * arcWidth);
   const empty = arcWidth - filled;
@@ -106,14 +105,14 @@ const renderLgGauge = function renderLgGauge(
   );
 };
 
-export const Gauge = function Gauge({
+export const Gauge = ({
   value,
   min = 0,
   max = 100,
   label,
   color,
   size = "md",
-}: GaugeProps) {
+}: GaugeProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
   const clamped = clamp(value, min, max);

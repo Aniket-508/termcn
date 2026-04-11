@@ -24,7 +24,7 @@ const MODEL_PRICING: Record<
   "gpt-4o-mini": { input: 0.15, output: 0.6 },
 };
 
-const formatTokens = function formatTokens(n: number): string {
+const formatTokens = (n: number): string => {
   if (n >= 1_000_000) {
     return `${(n / 1_000_000).toFixed(1)}M`;
   }
@@ -34,11 +34,11 @@ const formatTokens = function formatTokens(n: number): string {
   return String(n);
 };
 
-const estimateCost = function estimateCost(
+const estimateCost = (
   prompt: number,
   completion: number,
   model?: string
-): number | null {
+): number | null => {
   if (!model) {
     return null;
   }
@@ -55,12 +55,12 @@ const estimateCost = function estimateCost(
   );
 };
 
-export const TokenUsage = function TokenUsage({
+export const TokenUsage = ({
   prompt,
   completion,
   model,
   showCost = false,
-}: TokenUsageProps) {
+}: TokenUsageProps) => {
   const theme = useTheme();
   const cost = showCost ? estimateCost(prompt, completion, model) : null;
 
@@ -94,7 +94,7 @@ export interface ContextMeterProps {
   width?: number;
 }
 
-export const ContextMeter = function ContextMeter({
+export const ContextMeter = ({
   used,
   limit,
   label,
@@ -102,7 +102,7 @@ export const ContextMeter = function ContextMeter({
   warnAt = 75,
   criticalAt = 90,
   width = 20,
-}: ContextMeterProps) {
+}: ContextMeterProps) => {
   const theme = useTheme();
   const percent = Math.min(100, Math.round((used / limit) * 100));
   const filled = Math.round((percent / 100) * width);

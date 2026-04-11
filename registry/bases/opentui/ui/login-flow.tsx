@@ -45,13 +45,13 @@ export interface LoginFlowSelectProps {
   keyboardNav?: boolean;
 }
 
-const LoginFlowRoot = function LoginFlowRoot({
+const LoginFlowRoot = ({
   title,
   titleFont = "block",
   titleColor,
   padding = 2,
   children,
-}: LoginFlowProps) {
+}: LoginFlowProps) => {
   const theme = useTheme();
   const resolvedColor = titleColor ?? theme.colors.primary;
 
@@ -81,13 +81,13 @@ const LoginFlowRoot = function LoginFlowRoot({
   );
 };
 
-const LoginFlowAnnouncement = function LoginFlowAnnouncement({
+const LoginFlowAnnouncement = ({
   icon = "*",
   iconColor,
   borderStyle = "single",
   borderColor,
   children,
-}: LoginFlowAnnouncementProps) {
+}: LoginFlowAnnouncementProps) => {
   const theme = useTheme();
   return (
     <box
@@ -103,22 +103,20 @@ const LoginFlowAnnouncement = function LoginFlowAnnouncement({
   );
 };
 
-const LoginFlowDescription = function LoginFlowDescription({
+const LoginFlowDescription = ({
   bold: boldText = false,
   dim = false,
   color,
   children,
-}: LoginFlowDescriptionProps) {
-  return (
-    <box marginBottom={1}>
-      <text fg={dim ? "#666" : color}>
-        {boldText ? <b>{children}</b> : children}
-      </text>
-    </box>
-  );
-};
+}: LoginFlowDescriptionProps) => (
+  <box marginBottom={1}>
+    <text fg={dim ? "#666" : color}>
+      {boldText ? <b>{children}</b> : children}
+    </text>
+  </box>
+);
 
-const LoginFlowSelect = function LoginFlowSelect({
+const LoginFlowSelect = ({
   label,
   labelBold = false,
   options,
@@ -129,7 +127,7 @@ const LoginFlowSelect = function LoginFlowSelect({
   activeColor = "cyan",
   onSelect,
   keyboardNav = true,
-}: LoginFlowSelectProps) {
+}: LoginFlowSelectProps) => {
   const [internalIndex, setInternalIndex] = useState(defaultIndex);
   const activeIdx = controlledIndex ?? internalIndex;
 

@@ -20,7 +20,7 @@ export interface ModelSelectorProps {
   groupByProvider?: boolean;
 }
 
-const formatContext = function formatContext(ctx: number): string {
+const formatContext = (ctx: number): string => {
   if (ctx >= 1_000_000) {
     return `${(ctx / 1_000_000).toFixed(0)}M ctx`;
   }
@@ -53,48 +53,46 @@ const getModelColor = (
   return theme.colors.foreground;
 };
 
-const ModelRow = function ModelRow({
+const ModelRow = ({
   model,
   isActive,
   isSelected,
   showContext,
   showProvider,
   theme,
-}: ModelRowProps) {
-  return (
-    <Box gap={1}>
-      <Text color={isActive ? theme.colors.primary : undefined}>
-        {isActive ? "›" : " "}
+}: ModelRowProps) => (
+  <Box gap={1}>
+    <Text color={isActive ? theme.colors.primary : undefined}>
+      {isActive ? "›" : " "}
+    </Text>
+    <Text
+      bold={isActive || isSelected}
+      color={getModelColor(isSelected, isActive, theme)}
+    >
+      {model.name}
+    </Text>
+    {isSelected && <Text color={theme.colors.success ?? "green"}>✓</Text>}
+    {showProvider && (
+      <Text dimColor color={theme.colors.mutedForeground}>
+        {model.provider}
       </Text>
-      <Text
-        bold={isActive || isSelected}
-        color={getModelColor(isSelected, isActive, theme)}
-      >
-        {model.name}
+    )}
+    {showContext && model.context !== undefined && (
+      <Text dimColor color={theme.colors.mutedForeground}>
+        {formatContext(model.context)}
       </Text>
-      {isSelected && <Text color={theme.colors.success ?? "green"}>✓</Text>}
-      {showProvider && (
-        <Text dimColor color={theme.colors.mutedForeground}>
-          {model.provider}
-        </Text>
-      )}
-      {showContext && model.context !== undefined && (
-        <Text dimColor color={theme.colors.mutedForeground}>
-          {formatContext(model.context)}
-        </Text>
-      )}
-    </Box>
-  );
-};
+    )}
+  </Box>
+);
 
-export const ModelSelector = function ModelSelector({
+export const ModelSelector = ({
   models,
   selected,
   onSelect,
   showContext = true,
   showProvider = true,
   groupByProvider = false,
-}: ModelSelectorProps) {
+}: ModelSelectorProps) => {
   const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(() => {
     const idx = models.findIndex((m) => m.id === selected);

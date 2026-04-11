@@ -21,7 +21,7 @@ const DIVIDER_CHARS: Record<NonNullable<DividerProps["variant"]>, string> = {
   single: "│",
 };
 
-export const Divider = function Divider({
+export const Divider = ({
   variant = "single",
   orientation = "horizontal",
   color,
@@ -32,7 +32,7 @@ export const Divider = function Divider({
   padding = 0,
   height = 1,
   width = "auto",
-}: DividerProps) {
+}: DividerProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.border;
   const vChar = dividerChar ?? DIVIDER_CHARS[variant];

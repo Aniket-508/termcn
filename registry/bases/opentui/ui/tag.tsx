@@ -12,12 +12,12 @@ export interface TagProps {
   variant?: TagVariant;
 }
 
-export const Tag = function Tag({
+export const Tag = ({
   children,
   onRemove,
   color,
   variant = "default",
-}: TagProps) {
+}: TagProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
   const borderColor =

@@ -27,14 +27,14 @@ const GF_LOG = new Uint8Array(256);
   }
 })();
 
-const gfMul = function gfMul(a: number, b: number): number {
+const gfMul = (a: number, b: number): number => {
   if (a === 0 || b === 0) {
     return 0;
   }
   return GF_EXP[(GF_LOG[a] + GF_LOG[b]) % 255] ?? 0;
 };
 
-const gfPoly = function gfPoly(degree: number): Uint8Array {
+const gfPoly = (degree: number): Uint8Array => {
   let p = new Uint8Array([1]);
   for (let i = 0; i < degree; i += 1) {
     const q = new Uint8Array(p.length + 1);
@@ -48,10 +48,7 @@ const gfPoly = function gfPoly(degree: number): Uint8Array {
   return p;
 };
 
-const rsEncode = function rsEncode(
-  data: Uint8Array,
-  ecCount: number
-): Uint8Array {
+const rsEncode = (data: Uint8Array, ecCount: number): Uint8Array => {
   const gen = gfPoly(ecCount);
   const msg = new Uint8Array(data.length + ecCount);
   msg.set(data);
@@ -71,7 +68,7 @@ const SIZE = 17 + VERSION * 4;
 const DATA_CODEWORDS = 14;
 const EC_CODEWORDS = 10;
 
-const encodeData = function encodeData(text: string): Uint8Array {
+const encodeData = (text: string): Uint8Array => {
   const ALNUM_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
 
   const isNumeric = /^[0-9]*$/.test(text);
@@ -149,17 +146,12 @@ const encodeData = function encodeData(text: string): Uint8Array {
 
 type Matrix = boolean[][];
 
-const makeMatrix = function makeMatrix(): Matrix {
-  return Array.from({ length: SIZE }, () =>
+const makeMatrix = (): Matrix =>
+  Array.from({ length: SIZE }, () =>
     Array.from<boolean>({ length: SIZE }).fill(false)
   );
-};
 
-const placeFinderPattern = function placeFinderPattern(
-  matrix: Matrix,
-  row: number,
-  col: number
-) {
+const placeFinderPattern = (matrix: Matrix, row: number, col: number) => {
   const finder = [
     [1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 1],
@@ -180,23 +172,21 @@ const placeFinderPattern = function placeFinderPattern(
   }
 };
 
-const placeTimingPatterns = function placeTimingPatterns(matrix: Matrix) {
+const placeTimingPatterns = (matrix: Matrix) => {
   for (let i = 8; i < SIZE - 8; i += 1) {
     matrix[6][i] = i % 2 === 0;
     matrix[i][6] = i % 2 === 0;
   }
 };
 
-const placeDarkModule = function placeDarkModule(matrix: Matrix) {
+const placeDarkModule = (matrix: Matrix) => {
   const row = matrix[SIZE - 8];
   if (row) {
     row[8] = true;
   }
 };
 
-const buildFunctionMask = function buildFunctionMask(
-  _matrix: Matrix
-): boolean[][] {
+const buildFunctionMask = (_matrix: Matrix): boolean[][] => {
   const mask = makeMatrix();
 
   const setRegion = (r: number, c: number, h: number, w: number) => {
@@ -244,10 +234,7 @@ const FORMAT_STRINGS: Record<number, number> = {
   7: 19_104,
 };
 
-const placeFormatInfo = function placeFormatInfo(
-  matrix: Matrix,
-  maskPattern: number
-) {
+const placeFormatInfo = (matrix: Matrix, maskPattern: number) => {
   const fmt = FORMAT_STRINGS[maskPattern] ?? FORMAT_STRINGS[0];
 
   const bits15 = Array.from({ length: 15 }, (_, i) => (fmt >> (14 - i)) & 1);
@@ -318,11 +305,7 @@ const placeFormatInfo = function placeFormatInfo(
   }
 };
 
-const placeData = function placeData(
-  matrix: Matrix,
-  funcMask: boolean[][],
-  bits: number[]
-) {
+const placeData = (matrix: Matrix, funcMask: boolean[][], bits: number[]) => {
   let idx = 0;
   let goingUp = true;
   for (let col = SIZE - 1; col >= 1; col -= 2) {
@@ -344,11 +327,7 @@ const placeData = function placeData(
   }
 };
 
-const applyMask = function applyMask(
-  matrix: Matrix,
-  funcMask: boolean[][],
-  pattern: number
-) {
+const applyMask = (matrix: Matrix, funcMask: boolean[][], pattern: number) => {
   for (let r = 0; r < SIZE; r += 1) {
     for (let c = 0; c < SIZE; c += 1) {
       if (funcMask[r][c]) {
@@ -399,7 +378,7 @@ const applyMask = function applyMask(
   }
 };
 
-const scorePenalty = function scorePenalty(matrix: Matrix): number {
+const scorePenalty = (matrix: Matrix): number => {
   let penalty = 0;
 
   for (let r = 0; r < SIZE; r += 1) {
@@ -438,7 +417,7 @@ const scorePenalty = function scorePenalty(matrix: Matrix): number {
   return penalty;
 };
 
-const generateQR = function generateQR(text: string): Matrix {
+const generateQR = (text: string): Matrix => {
   const capped = text.slice(0, 17);
 
   const dataBytes = encodeData(capped);
@@ -478,12 +457,7 @@ const generateQR = function generateQR(text: string): Matrix {
 
 const QUIET_ZONE = 2;
 
-export const QRCode = function QRCode({
-  value,
-  size = "md",
-  color,
-  label,
-}: QRCodeProps) {
+export const QRCode = ({ value, size = "md", color, label }: QRCodeProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.foreground;
 

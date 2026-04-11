@@ -4,10 +4,7 @@ export interface SpacerProps {
   direction?: "horizontal" | "vertical";
 }
 
-export const Spacer = function Spacer({
-  size,
-  direction = "horizontal",
-}: SpacerProps) {
+export const Spacer = ({ size, direction = "horizontal" }: SpacerProps) => {
   if (size === undefined) {
     return <box flexGrow={1} />;
   }

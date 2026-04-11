@@ -34,14 +34,14 @@ export interface EmbeddedTerminalProps {
  * Renders a pseudo-terminal session inside the TUI.
  * Requires optional dependency `node-pty` (native build).
  */
-export const EmbeddedTerminal = function EmbeddedTerminal({
+export const EmbeddedTerminal = ({
   command,
   args = [],
   cwd,
   width = 80,
   height = 24,
   onExit,
-}: EmbeddedTerminalProps) {
+}: EmbeddedTerminalProps) => {
   const [raw, setRaw] = useState("");
   const [err, setErr] = useState<string | null>(null);
 

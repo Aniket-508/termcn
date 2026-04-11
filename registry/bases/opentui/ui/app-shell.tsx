@@ -39,30 +39,24 @@ export interface AppShellHintsProps {
   children?: ReactNode;
 }
 
-const AppShellRoot = function AppShellRoot({ children }: AppShellProps) {
-  return (
-    <box flexDirection="column" flexGrow={1}>
-      {children}
-    </box>
-  );
-};
+const AppShellRoot = ({ children }: AppShellProps) => (
+  <box flexDirection="column" flexGrow={1}>
+    {children}
+  </box>
+);
 
-const AppShellHeader = function AppShellHeader({
-  children,
-}: AppShellHeaderProps) {
-  return <box flexDirection="column">{children}</box>;
-};
+const AppShellHeader = ({ children }: AppShellHeaderProps) => (
+  <box flexDirection="column">{children}</box>
+);
 
-const AppShellTip = function AppShellTip({ children }: AppShellTipProps) {
-  return (
-    <box paddingLeft={2} paddingTop={0} paddingBottom={0}>
-      <text fg="#666">{"  Tip: "}</text>
-      <text fg="#666">{children}</text>
-    </box>
-  );
-};
+const AppShellTip = ({ children }: AppShellTipProps) => (
+  <box paddingLeft={2} paddingTop={0} paddingBottom={0}>
+    <text fg="#666">{"  Tip: "}</text>
+    <text fg="#666">{children}</text>
+  </box>
+);
 
-const AppShellInput = function AppShellInput({
+const AppShellInput = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -70,7 +64,7 @@ const AppShellInput = function AppShellInput({
   borderStyle = "single",
   borderColor,
   prefix = ">",
-}: AppShellInputProps) {
+}: AppShellInputProps) => {
   const [internalValue, setInternalValue] = useState("");
   const theme = useTheme();
   const value = controlledValue ?? internalValue;
@@ -129,10 +123,7 @@ const AppShellInput = function AppShellInput({
   );
 };
 
-const AppShellContent = function AppShellContent({
-  children,
-  height = 20,
-}: AppShellContentProps) {
+const AppShellContent = ({ children, height = 20 }: AppShellContentProps) => {
   const [scrollTop, setScrollTop] = useState(0);
 
   useKeyboard((key) => {
@@ -152,10 +143,7 @@ const AppShellContent = function AppShellContent({
   );
 };
 
-const AppShellHints = function AppShellHints({
-  items,
-  children,
-}: AppShellHintsProps) {
+const AppShellHints = ({ items, children }: AppShellHintsProps) => {
   const theme = useTheme();
   const content = items ? items.join(" | ") : children;
   return (

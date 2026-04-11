@@ -16,7 +16,7 @@ export interface StackProps {
     | "space-around";
 }
 
-export const Stack = function Stack({
+export const Stack = ({
   direction = "vertical",
   gap = 0,
   children,
@@ -24,14 +24,12 @@ export const Stack = function Stack({
   height,
   alignItems,
   justifyContent,
-}: StackProps) {
-  return (
-    <box
-      flexDirection={direction === "vertical" ? "column" : "row"}
-      width={width as number}
-      height={height as number}
-    >
-      {children}
-    </box>
-  );
-};
+}: StackProps) => (
+  <box
+    flexDirection={direction === "vertical" ? "column" : "row"}
+    width={width as number}
+    height={height as number}
+  >
+    {children}
+  </box>
+);

@@ -26,7 +26,7 @@ export interface PasswordInputProps {
   cursor?: string;
 }
 
-export const PasswordInput = function PasswordInput({
+export const PasswordInput = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -39,7 +39,7 @@ export const PasswordInput = function PasswordInput({
   paddingX = 1,
   width,
   cursor = "█",
-}: PasswordInputProps) {
+}: PasswordInputProps) => {
   const [internalValue, setInternalValue] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();

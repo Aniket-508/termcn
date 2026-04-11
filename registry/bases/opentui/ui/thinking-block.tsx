@@ -13,14 +13,14 @@ export interface ThinkingBlockProps {
   duration?: number;
 }
 
-export const ThinkingBlock = function ThinkingBlock({
+export const ThinkingBlock = ({
   content,
   streaming = false,
   defaultCollapsed = true,
   label = "Reasoning",
   tokenCount,
   duration,
-}: ThinkingBlockProps) {
+}: ThinkingBlockProps) => {
   const theme = useTheme();
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
 

@@ -17,7 +17,7 @@ export interface ToolCallProps {
   defaultCollapsed?: boolean;
 }
 
-export const ToolCall = function ToolCall({
+export const ToolCall = ({
   name,
   args,
   status,
@@ -25,7 +25,7 @@ export const ToolCall = function ToolCall({
   duration,
   collapsible = true,
   defaultCollapsed = true,
-}: ToolCallProps) {
+}: ToolCallProps) => {
   const theme = useTheme();
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [elapsed, setElapsed] = useState(0);

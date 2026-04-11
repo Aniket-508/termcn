@@ -16,7 +16,7 @@ export interface DrawerProps {
   height?: number;
 }
 
-export const Drawer = function Drawer({
+export const Drawer = ({
   isOpen = false,
   edge = "right",
   title,
@@ -24,7 +24,7 @@ export const Drawer = function Drawer({
   onClose,
   width = 40,
   height = 10,
-}: DrawerProps) {
+}: DrawerProps) => {
   const theme = useTheme();
 
   useKeyboard((key) => {

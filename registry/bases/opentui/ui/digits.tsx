@@ -44,24 +44,17 @@ const SEGMENTS_LG: Record<string, string[]> = {
   ":": ["     ", "  ●  ", "     ", "  ●  ", "     "],
 };
 
-const getSegmentMap = function getSegmentMap(
-  size: DigitSize
-): Record<string, string[]> {
-  return size === "lg" ? SEGMENTS_LG : SEGMENTS_MD;
-};
+const getSegmentMap = (size: DigitSize): Record<string, string[]> =>
+  size === "lg" ? SEGMENTS_LG : SEGMENTS_MD;
 
-const getFallback = function getFallback(size: DigitSize): string[] {
+const getFallback = (size: DigitSize): string[] => {
   const w = size === "lg" ? 5 : 3;
   const bar = "─".repeat(w - 2);
   const side = `│${" ".repeat(w - 2)}│`;
   return [`╭${bar}╮`, side, side, side, `╰${bar}╯`];
 };
 
-export const Digits = function Digits({
-  value,
-  color,
-  size = "md",
-}: DigitsProps) {
+export const Digits = ({ value, color, size = "md" }: DigitsProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
   const str = String(value);

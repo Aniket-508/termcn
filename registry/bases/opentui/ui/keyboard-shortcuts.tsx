@@ -16,28 +16,20 @@ export interface KeyboardShortcutsProps {
   title?: string;
 }
 
-const KeyLabel = function KeyLabel({
-  label,
-  color,
-}: {
-  label: string;
-  color: string;
-}) {
-  return (
-    <box
-      borderStyle="single"
-      borderColor={color}
-      paddingLeft={1}
-      paddingRight={1}
-    >
-      <text fg={color}>
-        <b>{label}</b>
-      </text>
-    </box>
-  );
-};
+const KeyLabel = ({ label, color }: { label: string; color: string }) => (
+  <box
+    borderStyle="single"
+    borderColor={color}
+    paddingLeft={1}
+    paddingRight={1}
+  >
+    <text fg={color}>
+      <b>{label}</b>
+    </text>
+  </box>
+);
 
-const ShortcutRow = function ShortcutRow({
+const ShortcutRow = ({
   shortcut,
   keyColor,
   descColor,
@@ -46,16 +38,14 @@ const ShortcutRow = function ShortcutRow({
   shortcut: Shortcut;
   keyColor: string;
   descColor: string;
-}) {
-  return (
-    <box gap={1} alignItems="center">
-      <KeyLabel label={shortcut.key} color={keyColor} />
-      <text fg={descColor}>{shortcut.description}</text>
-    </box>
-  );
-};
+}) => (
+  <box gap={1} alignItems="center">
+    <KeyLabel label={shortcut.key} color={keyColor} />
+    <text fg={descColor}>{shortcut.description}</text>
+  </box>
+);
 
-const ShortcutGrid = function ShortcutGrid({
+const ShortcutGrid = ({
   items,
   columns,
   theme,
@@ -63,7 +53,7 @@ const ShortcutGrid = function ShortcutGrid({
   items: Shortcut[];
   columns: number;
   theme: ReturnType<typeof useTheme>;
-}) {
+}) => {
   const rows: Shortcut[][] = [];
   for (let i = 0; i < items.length; i += columns) {
     rows.push(items.slice(i, i + columns));
@@ -87,11 +77,11 @@ const ShortcutGrid = function ShortcutGrid({
   );
 };
 
-export const KeyboardShortcuts = function KeyboardShortcuts({
+export const KeyboardShortcuts = ({
   shortcuts,
   columns = 1,
   title,
-}: KeyboardShortcutsProps) {
+}: KeyboardShortcutsProps) => {
   const theme = useTheme();
 
   const hasCategories = shortcuts.some((s) => s.category);

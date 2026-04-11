@@ -83,7 +83,7 @@ interface Token {
   kind: "keyword" | "string" | "number" | "comment" | "operator" | "plain";
 }
 
-const tokenizeLine = function tokenizeLine(line: string): Token[] {
+const tokenizeLine = (line: string): Token[] => {
   const trimmed = line.trimStart();
   if (trimmed.startsWith("//")) {
     return [{ kind: "comment", text: line }];
@@ -154,7 +154,7 @@ const tokenizeLine = function tokenizeLine(line: string): Token[] {
   return tokens;
 };
 
-const CodeLine = function CodeLine({
+const CodeLine = ({
   line,
   keywordColor,
   stringColor,
@@ -170,7 +170,7 @@ const CodeLine = function CodeLine({
   commentColor: string;
   operatorColor: string;
   plainColor: string;
-}) {
+}) => {
   const tokens = tokenizeLine(line);
 
   return (
@@ -225,7 +225,7 @@ const CodeLine = function CodeLine({
   );
 };
 
-export const Code = function Code({
+export const Code = ({
   children,
   language,
   inline = false,
@@ -238,7 +238,7 @@ export const Code = function Code({
   commentColor: commentColorProp,
   operatorColor: operatorColorProp,
   plainColor: plainColorProp,
-}: CodeProps) {
+}: CodeProps) => {
   const theme = useTheme();
 
   const keywordColor = keywordColorProp ?? theme.colors.accent;

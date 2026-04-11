@@ -42,63 +42,47 @@ export interface WelcomeScreenSectionProps {
   children: ReactNode;
 }
 
-const WelcomeScreenLeft = function WelcomeScreenLeft({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return children;
-};
+const WelcomeScreenLeft = ({ children }: { children: ReactNode }) => children;
 WelcomeScreenLeft.displayName = "WelcomeScreen.Left";
 
-const WelcomeScreenRight = function WelcomeScreenRight({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return children;
-};
+const WelcomeScreenRight = ({ children }: { children: ReactNode }) => children;
 WelcomeScreenRight.displayName = "WelcomeScreen.Right";
 
-const WelcomeScreenGreeting = function WelcomeScreenGreeting({
+const WelcomeScreenGreeting = ({
   children,
   bold: boldText = true,
   color,
-}: WelcomeScreenGreetingProps) {
-  return (
-    <Box paddingBottom={1}>
-      <Text bold={boldText} color={color}>
-        {children}
-      </Text>
-    </Box>
-  );
-};
+}: WelcomeScreenGreetingProps) => (
+  <Box paddingBottom={1}>
+    <Text bold={boldText} color={color}>
+      {children}
+    </Text>
+  </Box>
+);
 
-const WelcomeScreenLogo = function WelcomeScreenLogo({
+const WelcomeScreenLogo = ({
   children,
   align = "left",
-}: WelcomeScreenLogoProps) {
-  return (
-    <Box
-      flexDirection="column"
-      alignItems={align === "center" ? "center" : "flex-start"}
-      paddingY={1}
-    >
-      {typeof children === "string"
-        ? children.split("\n").map((line, i) => <Text key={i}>{line}</Text>)
-        : children}
-    </Box>
-  );
-};
+}: WelcomeScreenLogoProps) => (
+  <Box
+    flexDirection="column"
+    alignItems={align === "center" ? "center" : "flex-start"}
+    paddingY={1}
+  >
+    {typeof children === "string"
+      ? children.split("\n").map((line, i) => <Text key={i}>{line}</Text>)
+      : children}
+  </Box>
+);
 
-const WelcomeScreenMeta = function WelcomeScreenMeta({
+const WelcomeScreenMeta = ({
   items,
   separator = " · ",
   align = "center",
   dim = false,
   color,
   stack = false,
-}: WelcomeScreenMetaProps) {
+}: WelcomeScreenMetaProps) => {
   if (stack) {
     return (
       <Box
@@ -132,12 +116,12 @@ const WelcomeScreenMeta = function WelcomeScreenMeta({
   );
 };
 
-const WelcomeScreenSection = function WelcomeScreenSection({
+const WelcomeScreenSection = ({
   title,
   titleColor,
   titleBold = true,
   children,
-}: WelcomeScreenSectionProps) {
+}: WelcomeScreenSectionProps) => {
   const theme = useTheme();
   return (
     <Box flexDirection="column" paddingBottom={1}>
@@ -149,7 +133,7 @@ const WelcomeScreenSection = function WelcomeScreenSection({
   );
 };
 
-const WelcomeScreenRoot = function WelcomeScreenRoot({
+const WelcomeScreenRoot = ({
   appName,
   appNameColor,
   version,
@@ -157,7 +141,7 @@ const WelcomeScreenRoot = function WelcomeScreenRoot({
   borderStyle = "single",
   leftWidth = 26,
   children,
-}: WelcomeScreenProps) {
+}: WelcomeScreenProps) => {
   const theme = useTheme();
   const resolvedBorderColor = borderColor ?? theme.colors.border;
   const resolvedAppNameColor = appNameColor ?? theme.colors.primary;

@@ -11,7 +11,7 @@ export interface SparklineProps {
 
 const BRAILLE_LEVELS = ["⣀", "⣄", "⣤", "⣦", "⣶", "⣷", "⣿", "⣿"];
 
-const normalize = function normalize(data: number[], levels: number): number[] {
+const normalize = (data: number[], levels: number): number[] => {
   if (data.length === 0) {
     return [];
   }
@@ -24,12 +24,12 @@ const normalize = function normalize(data: number[], levels: number): number[] {
   return data.map((v) => Math.round(((v - min) / range) * (levels - 1)));
 };
 
-export const Sparkline = function Sparkline({
+export const Sparkline = ({
   data,
   width = 20,
   color,
   label,
-}: SparklineProps) {
+}: SparklineProps) => {
   const theme = useTheme();
   const resolvedColor = color ?? theme.colors.primary;
 

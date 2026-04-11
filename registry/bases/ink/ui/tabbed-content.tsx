@@ -20,13 +20,13 @@ export interface TabbedContentProps {
   tabBarStyle?: "underline" | "box" | "minimal";
 }
 
-export const TabbedContent = function TabbedContent({
+export const TabbedContent = ({
   tabs,
   defaultTab,
   activeTab: controlledTab,
   onChange,
   tabBarStyle = "underline",
-}: TabbedContentProps) {
+}: TabbedContentProps) => {
   const theme = useTheme();
   const [internalTab, setInternalTab] = useState(
     defaultTab ?? tabs[0]?.id ?? ""

@@ -9,11 +9,11 @@ export interface SkeletonProps {
   animated?: boolean;
 }
 
-export const Skeleton = function Skeleton({
+export const Skeleton = ({
   width = 20,
   height = 1,
   animated = true,
-}: SkeletonProps) {
+}: SkeletonProps) => {
   const theme = useTheme();
   const [frame, setFrame] = useState(0);
   useEffect(() => {

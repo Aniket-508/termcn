@@ -19,19 +19,19 @@ const _MD_MID_EMPTY = "█   █";
 const _MD_MID_FILL = "█████";
 const _MD_BOT = ["▀▀▀", "▀██▀"];
 
-const getSmChar = function getSmChar(value: number): string {
+const getSmChar = (value: number): string => {
   const clamped = Math.max(0, Math.min(100, value));
   const step = Math.floor((clamped / 100) * 7);
   return BRAILLE_CHARS[step];
 };
 
-export const ProgressCircle = function ProgressCircle({
+export const ProgressCircle = ({
   value,
   size = "sm",
   color,
   label,
   showPercent = false,
-}: ProgressCircleProps) {
+}: ProgressCircleProps) => {
   const theme = useTheme();
   const clamped = Math.max(0, Math.min(100, value));
   const resolvedColor = color ?? theme.colors.primary;

@@ -17,7 +17,7 @@ export interface EmailInputProps {
   suggestions?: string[];
 }
 
-const isValidEmail = function isValidEmail(email: string): boolean {
+const isValidEmail = (email: string): boolean => {
   const atIdx = email.indexOf("@");
   if (atIdx < 1) {
     return false;
@@ -40,7 +40,7 @@ const getBorderColor = (
   return theme.colors.border;
 };
 
-export const EmailInput = function EmailInput({
+export const EmailInput = ({
   value: controlledValue,
   onChange,
   onSubmit,
@@ -50,7 +50,7 @@ export const EmailInput = function EmailInput({
   id,
   width = 40,
   suggestions = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"],
-}: EmailInputProps) {
+}: EmailInputProps) => {
   const [internalValue, setInternalValue] = useState("");
   const [error, setError] = useState<string | null>(null);
   const theme = useTheme();

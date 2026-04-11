@@ -15,11 +15,11 @@ export interface BreadcrumbProps {
   activeKey?: string;
 }
 
-export const Breadcrumb = function Breadcrumb({
+export const Breadcrumb = ({
   items,
   separator = "›",
   activeKey,
-}: BreadcrumbProps) {
+}: BreadcrumbProps) => {
   const theme = useTheme();
 
   const activeIndex =
