@@ -1689,7 +1689,13 @@
     {
       "categories": ["themes"],
       "description": "AMOLED - high contrast dark theme with pure black.",
-      "files": [{ "path": "registry/themes/amoled.ts", "target": "lib/terminal-themes/amoled.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/amoled.ts",
+          "target": "lib/terminal-themes/amoled.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-amoled",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "AMOLED",
@@ -1698,7 +1704,13 @@
     {
       "categories": ["themes"],
       "description": "Aura - soft elegant theme with pastel purple.",
-      "files": [{ "path": "registry/themes/aura.ts", "target": "lib/terminal-themes/aura.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/aura.ts",
+          "target": "lib/terminal-themes/aura.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-aura",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Aura",
@@ -1707,7 +1719,13 @@
     {
       "categories": ["themes"],
       "description": "Ayu - clean modern terminal theme.",
-      "files": [{ "path": "registry/themes/ayu.ts", "target": "lib/terminal-themes/ayu.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/ayu.ts",
+          "target": "lib/terminal-themes/ayu.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-ayu",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Ayu",
@@ -1716,7 +1734,13 @@
     {
       "categories": ["themes"],
       "description": "Carbonfox - minimal dark theme.",
-      "files": [{ "path": "registry/themes/carbonfox.ts", "target": "lib/terminal-themes/carbonfox.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/carbonfox.ts",
+          "target": "lib/terminal-themes/carbonfox.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-carbonfox",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Carbonfox",
@@ -1725,7 +1749,13 @@
     {
       "categories": ["themes"],
       "description": "Catppuccin Frappe - soothing pastel.",
-      "files": [{ "path": "registry/themes/catppuccin-frappe.ts", "target": "lib/terminal-themes/catppuccin-frappe.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/catppuccin-frappe.ts",
+          "target": "lib/terminal-themes/catppuccin-frappe.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-catppuccin-frappe",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Catppuccin Frappe",
@@ -1734,7 +1764,13 @@
     {
       "categories": ["themes"],
       "description": "Catppuccin Macchiato - deeper pastel tones.",
-      "files": [{ "path": "registry/themes/catppuccin-macchiato.ts", "target": "lib/terminal-themes/catppuccin-macchiato.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/catppuccin-macchiato.ts",
+          "target": "lib/terminal-themes/catppuccin-macchiato.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-catppuccin-macchiato",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Catppuccin Macchiato",
@@ -1743,7 +1779,13 @@
     {
       "categories": ["themes"],
       "description": "Cobalt2 - vibrant blue and gold.",
-      "files": [{ "path": "registry/themes/cobalt2.ts", "target": "lib/terminal-themes/cobalt2.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/cobalt2.ts",
+          "target": "lib/terminal-themes/cobalt2.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-cobalt2",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Cobalt2",
@@ -1752,7 +1794,13 @@
     {
       "categories": ["themes"],
       "description": "Cursor IDE theme.",
-      "files": [{ "path": "registry/themes/cursor.ts", "target": "lib/terminal-themes/cursor.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/cursor.ts",
+          "target": "lib/terminal-themes/cursor.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-cursor",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Cursor",
@@ -1761,7 +1809,13 @@
     {
       "categories": ["themes"],
       "description": "Everforest - warm forest theme.",
-      "files": [{ "path": "registry/themes/everforest.ts", "target": "lib/terminal-themes/everforest.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/everforest.ts",
+          "target": "lib/terminal-themes/everforest.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-everforest",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Everforest",
@@ -1770,7 +1824,13 @@
     {
       "categories": ["themes"],
       "description": "Flexoki - versatile theme.",
-      "files": [{ "path": "registry/themes/flexoki.ts", "target": "lib/terminal-themes/flexoki.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/flexoki.ts",
+          "target": "lib/terminal-themes/flexoki.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-flexoki",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Flexoki",
@@ -1779,7 +1839,13 @@
     {
       "categories": ["themes"],
       "description": "GitHub official dark theme.",
-      "files": [{ "path": "registry/themes/github.ts", "target": "lib/terminal-themes/github.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/github.ts",
+          "target": "lib/terminal-themes/github.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-github",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "GitHub",
@@ -1788,7 +1854,13 @@
     {
       "categories": ["themes"],
       "description": "Gruvbox - retro earth tones.",
-      "files": [{ "path": "registry/themes/gruvbox.ts", "target": "lib/terminal-themes/gruvbox.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/gruvbox.ts",
+          "target": "lib/terminal-themes/gruvbox.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-gruvbox",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Gruvbox",
@@ -1797,7 +1869,13 @@
     {
       "categories": ["themes"],
       "description": "Kanagawa - Japanese wave theme.",
-      "files": [{ "path": "registry/themes/kanagawa.ts", "target": "lib/terminal-themes/kanagawa.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/kanagawa.ts",
+          "target": "lib/terminal-themes/kanagawa.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-kanagawa",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Kanagawa",
@@ -1806,7 +1884,13 @@
     {
       "categories": ["themes"],
       "description": "Lucent Orng - warm orange theme.",
-      "files": [{ "path": "registry/themes/lucent-orng.ts", "target": "lib/terminal-themes/lucent-orng.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/lucent-orng.ts",
+          "target": "lib/terminal-themes/lucent-orng.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-lucent-orng",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Lucent Orng",
@@ -1815,7 +1899,13 @@
     {
       "categories": ["themes"],
       "description": "Material Design colors.",
-      "files": [{ "path": "registry/themes/material.ts", "target": "lib/terminal-themes/material.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/material.ts",
+          "target": "lib/terminal-themes/material.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-material",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Material",
@@ -1824,7 +1914,13 @@
     {
       "categories": ["themes"],
       "description": "Matrix - green code rain.",
-      "files": [{ "path": "registry/themes/matrix.ts", "target": "lib/terminal-themes/matrix.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/matrix.ts",
+          "target": "lib/terminal-themes/matrix.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-matrix",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Matrix",
@@ -1833,7 +1929,13 @@
     {
       "categories": ["themes"],
       "description": "Mercury - clean minimal theme.",
-      "files": [{ "path": "registry/themes/mercury.ts", "target": "lib/terminal-themes/mercury.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/mercury.ts",
+          "target": "lib/terminal-themes/mercury.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-mercury",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Mercury",
@@ -1842,7 +1944,13 @@
     {
       "categories": ["themes"],
       "description": "Night Owl - late night coding.",
-      "files": [{ "path": "registry/themes/nightowl.ts", "target": "lib/terminal-themes/nightowl.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/nightowl.ts",
+          "target": "lib/terminal-themes/nightowl.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-nightowl",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Night Owl",
@@ -1851,7 +1959,13 @@
     {
       "categories": ["themes"],
       "description": "OC-2 - clean minimal theme.",
-      "files": [{ "path": "registry/themes/oc-2.ts", "target": "lib/terminal-themes/oc-2.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/oc-2.ts",
+          "target": "lib/terminal-themes/oc-2.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-oc-2",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "OC-2",
@@ -1860,7 +1974,13 @@
     {
       "categories": ["themes"],
       "description": "One Dark Pro - VS Code version.",
-      "files": [{ "path": "registry/themes/onedarkpro.ts", "target": "lib/terminal-themes/onedarkpro.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/onedarkpro.ts",
+          "target": "lib/terminal-themes/onedarkpro.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-onedarkpro",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "One Dark Pro",
@@ -1869,7 +1989,13 @@
     {
       "categories": ["themes"],
       "description": "OpenCode official theme.",
-      "files": [{ "path": "registry/themes/opencode.ts", "target": "lib/terminal-themes/opencode.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/opencode.ts",
+          "target": "lib/terminal-themes/opencode.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-opencode",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "OpenCode",
@@ -1878,7 +2004,13 @@
     {
       "categories": ["themes"],
       "description": "Orng - vibrant orange theme.",
-      "files": [{ "path": "registry/themes/orng.ts", "target": "lib/terminal-themes/orng.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/orng.ts",
+          "target": "lib/terminal-themes/orng.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-orng",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Orng",
@@ -1887,7 +2019,13 @@
     {
       "categories": ["themes"],
       "description": "Osaka Jade - Japanese jade theme.",
-      "files": [{ "path": "registry/themes/osaka-jade.ts", "target": "lib/terminal-themes/osaka-jade.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/osaka-jade.ts",
+          "target": "lib/terminal-themes/osaka-jade.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-osaka-jade",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Osaka Jade",
@@ -1896,7 +2034,13 @@
     {
       "categories": ["themes"],
       "description": "Palenight - React Native purple.",
-      "files": [{ "path": "registry/themes/palenight.ts", "target": "lib/terminal-themes/palenight.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/palenight.ts",
+          "target": "lib/terminal-themes/palenight.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-palenight",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Palenight",
@@ -1905,7 +2049,13 @@
     {
       "categories": ["themes"],
       "description": "Rose Pine - warm rose tones.",
-      "files": [{ "path": "registry/themes/rosepine.ts", "target": "lib/terminal-themes/rosepine.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/rosepine.ts",
+          "target": "lib/terminal-themes/rosepine.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-rosepine",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Rose Pine",
@@ -1914,7 +2064,13 @@
     {
       "categories": ["themes"],
       "description": "Shades of Purple - bold purple.",
-      "files": [{ "path": "registry/themes/shadesofpurple.ts", "target": "lib/terminal-themes/shadesofpurple.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/shadesofpurple.ts",
+          "target": "lib/terminal-themes/shadesofpurple.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-shadesofpurple",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Shades of Purple",
@@ -1923,7 +2079,13 @@
     {
       "categories": ["themes"],
       "description": "Synthwave '84 - retro neon.",
-      "files": [{ "path": "registry/themes/synthwave84.ts", "target": "lib/terminal-themes/synthwave84.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/synthwave84.ts",
+          "target": "lib/terminal-themes/synthwave84.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-synthwave84",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Synthwave '84",
@@ -1932,7 +2094,13 @@
     {
       "categories": ["themes"],
       "description": "Vercel brand colors.",
-      "files": [{ "path": "registry/themes/vercel.ts", "target": "lib/terminal-themes/vercel.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/vercel.ts",
+          "target": "lib/terminal-themes/vercel.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-vercel",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Vercel",
@@ -1941,7 +2109,13 @@
     {
       "categories": ["themes"],
       "description": "Vesper - minimal high contrast.",
-      "files": [{ "path": "registry/themes/vesper.ts", "target": "lib/terminal-themes/vesper.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/vesper.ts",
+          "target": "lib/terminal-themes/vesper.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-vesper",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Vesper",
@@ -1950,7 +2124,13 @@
     {
       "categories": ["themes"],
       "description": "Zenburn - low contrast for long sessions.",
-      "files": [{ "path": "registry/themes/zenburn.ts", "target": "lib/terminal-themes/zenburn.ts", "type": "registry:file" }],
+      "files": [
+        {
+          "path": "registry/themes/zenburn.ts",
+          "target": "lib/terminal-themes/zenburn.ts",
+          "type": "registry:file"
+        }
+      ],
       "name": "theme-zenburn",
       "registryDependencies": ["https://termcn.dev/r/theme-provider.json"],
       "title": "Zenburn",
