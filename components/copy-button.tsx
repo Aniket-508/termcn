@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon, CopyIcon } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,16 +9,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import type { Event } from "@/lib/events";
 import { trackEvent } from "@/lib/events";
 import { cn } from "@/lib/utils";
-
-export const copyToClipboardWithMeta = (value: string, event?: Event) => {
-  navigator.clipboard.writeText(value);
-  if (event) {
-    trackEvent(event);
-  }
-};
 
 export const CopyButton = ({
   value,
@@ -32,26 +26,23 @@ export const CopyButton = ({
   src?: string;
   event?: Event["name"];
 }) => {
-  const [hasCopied, setHasCopied] = useState(false);
+  const { copyToClipboard, isCopied } = useCopyToClipboard({
+    onCopy: () => {
+      if (event) {
+        trackEvent({
+          name: event,
+          properties: {
+            code: value,
+          },
+        });
+      }
+    },
+    timeout: 1000,
+  });
 
-  useEffect(() => {
-    setTimeout(() => setHasCopied(false), 1000);
-  }, []);
-
-  const handleCopy = useCallback(() => {
-    copyToClipboardWithMeta(
-      value,
-      event
-        ? {
-            name: event,
-            properties: {
-              code: value,
-            },
-          }
-        : undefined
-    );
-    setHasCopied(true);
-  }, [value, event]);
+  const handleCopy = useCallback(async () => {
+    await copyToClipboard(value);
+  }, [value, copyToClipboard]);
 
   return (
     <Tooltip>
@@ -70,7 +61,7 @@ export const CopyButton = ({
           {...props}
         >
           <span className="sr-only">Copy</span>
-          {hasCopied ? (
+          {isCopied ? (
             <CheckIcon className="size-4" />
           ) : (
             <CopyIcon className="size-4" />
@@ -79,7 +70,7 @@ export const CopyButton = ({
         </Button>
       </TooltipTrigger>
       <TooltipContent>
-        {hasCopied ? "Copied" : "Copy to Clipboard"}
+        {isCopied ? "Copied" : "Copy to Clipboard"}
       </TooltipContent>
     </Tooltip>
   );

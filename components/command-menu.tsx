@@ -11,7 +11,6 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { copyToClipboardWithMeta } from "@/components/copy-button";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -32,9 +31,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SITE } from "@/constants/site";
 import { useConfig } from "@/hooks/use-config";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
+import { trackEvent } from "@/lib/events";
 import {
   getCategoryFoldersForBase,
   getCurrentBase,
@@ -177,6 +178,17 @@ export const CommandMenu = ({
   const packageManager = config.packageManager || "pnpm";
   const currentBase = getCurrentBase(pathname);
 
+  const { copyToClipboard } = useCopyToClipboard({
+    onCopy: () => {
+      if (copyPayload) {
+        trackEvent({
+          name: "copy_npm_command",
+          properties: { command: copyPayload, pm: packageManager },
+        });
+      }
+    },
+  });
+
   const treeGroups = useMemo(() => {
     const groups: { label: string; pages: { url: string; name: string }[] }[] =
       [];
@@ -305,20 +317,13 @@ export const CommandMenu = ({
       }
 
       if (e.key === "c" && (e.metaKey || e.ctrlKey)) {
-        runCommand(() => {
-          if (copyPayload) {
-            copyToClipboardWithMeta(copyPayload, {
-              name: "copy_npm_command",
-              properties: { command: copyPayload, pm: packageManager },
-            });
-          }
-        });
+        runCommand(() => copyToClipboard(copyPayload));
       }
     };
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, [copyPayload, runCommand, packageManager]);
+  }, [copyPayload, runCommand, copyToClipboard]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
