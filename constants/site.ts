@@ -35,3 +35,8 @@ export const SITE = {
   REGISTRY: "@termcn",
   URL: getBaseUrl(),
 };
+
+export const META_THEME_COLORS = {
+  dark: "#0a0a0a",
+  light: "#ffffff",
+};
