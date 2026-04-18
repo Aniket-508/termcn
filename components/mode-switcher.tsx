@@ -1,16 +1,10 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useCallback } from "react";
-
 import { Button } from "@/components/ui/button";
+import { useThemeToggle } from "@/hooks/use-theme-toggle";
 
 export const ModeSwitcher = () => {
-  const { setTheme, resolvedTheme } = useTheme();
-
-  const toggleTheme = useCallback(() => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  }, [resolvedTheme, setTheme]);
+  const { toggleTheme } = useThemeToggle();
 
   return (
     <Button
