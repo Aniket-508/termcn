@@ -70,7 +70,7 @@ export const CodeBlockCommand = ({
             {Object.entries(commandTabs).map(([key]) => (
               <TabsTrigger
                 key={key}
-                className="data-[state=active]:bg-accent data-[state=active]:border-input h-7 border border-transparent pt-0.5 data-[state=active]:shadow-none"
+                className="data-[state=active]:border-input h-7 border border-transparent pt-0.5 data-[state=active]:shadow-none"
                 value={key}
               >
                 {key}
