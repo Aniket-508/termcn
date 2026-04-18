@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 
 const legacyCopyToClipboard = (value: string) => {
   const textArea = document.createElement("textarea");
@@ -33,7 +33,7 @@ export const useCopyToClipboard = ({
   timeout?: number;
   onCopy?: () => void;
 } = {}) => {
-  const [isCopied, setIsCopied] = React.useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = async (value: string) => {
     if (typeof window === "undefined") {
