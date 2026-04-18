@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon, ChevronDownIcon, CopyIcon } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
 import {
   ChatGptIcon,
@@ -24,7 +24,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { useClipboard } from "@/hooks/use-clipboard";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 
 const getPromptUrl = (baseURL: string, url: string) =>
   `${baseURL}?q=${encodeURIComponent(
@@ -99,21 +99,11 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
 ];
 
 export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
-  const { write } = useClipboard();
-  const [isCopied, setIsCopied] = useState(false);
-
-  useEffect(() => {
-    if (!isCopied) {
-      return;
-    }
-    const id = setTimeout(() => setIsCopied(false), 2000);
-    return () => clearTimeout(id);
-  }, [isCopied]);
+  const { copyToClipboard, isCopied } = useCopyToClipboard();
 
   const handleCopyPage = useCallback(async () => {
-    await write(page);
-    setIsCopied(true);
-  }, [page, write]);
+    await copyToClipboard(page);
+  }, [page, copyToClipboard]);
 
   const trigger = (
     <Button
