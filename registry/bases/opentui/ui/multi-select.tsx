@@ -21,7 +21,7 @@ export interface MultiSelectProps<T = string> {
   height?: number;
 }
 
-export const MultiSelect = <T = string>({
+export const MultiSelect = <T = string,>({
   options,
   value: controlledValue,
   onChange,

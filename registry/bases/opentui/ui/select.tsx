@@ -21,7 +21,7 @@ export interface SelectProps<T = string> {
   cursorColor?: string;
 }
 
-export const Select = <T = string>({
+export const Select = <T = string,>({
   options,
   value: controlledValue,
   onChange,

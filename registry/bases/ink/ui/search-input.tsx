@@ -29,7 +29,7 @@ export interface SearchInputProps<T = string> {
   resultCursor?: string;
 }
 
-export const SearchInput = <T = string>({
+export const SearchInput = <T = string,>({
   options,
   getValue,
   value: controlledValue,
