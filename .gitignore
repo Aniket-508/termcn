@@ -21,7 +21,7 @@
 /build
 
 # misc
-tmp/
+testsprite_tests/tmp/config.json
 .DS_Store
 *.pem
 
