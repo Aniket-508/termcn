@@ -16,16 +16,6 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
-    "@radix-ui/react-accordion": "^1.2.12",
-    "@radix-ui/react-aspect-ratio": "^1.1.8",
-    "@radix-ui/react-collapsible": "^1.1.12",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-popover": "^1.1.15",
-    "@radix-ui/react-separator": "^1.1.8",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@radix-ui/react-tooltip": "^1.2.8",
     "@vercel/analytics": "^2.0.1",
     "@xterm/xterm": "6.0.0",
     "class-variance-authority": "^0.7.1",

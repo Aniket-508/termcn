@@ -1,6 +1,5 @@
 "use client";
 
-import type { DialogProps } from "@radix-ui/react-dialog";
 import type { Root as PageTreeRoot } from "fumadocs-core/page-tree";
 import {
   ArrowRightIcon,
@@ -163,7 +162,7 @@ export const CommandMenu = ({
   navItems,
   tree,
   ...props
-}: DialogProps & {
+}: React.ComponentProps<typeof Dialog> & {
   blocks?: { name: string; description: string; categories: string[] }[];
   navItems: { href: string; label: string }[];
   tree: PageTreeRoot;
