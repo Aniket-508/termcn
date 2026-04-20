@@ -6,6 +6,8 @@ import { useCallback } from "react";
 import {
   ChatGptIcon,
   ClaudeIcon,
+  CursorIcon,
+  GrokIcon,
   MarkdownDocIcon,
   SciraIcon,
   V0Icon,
@@ -26,8 +28,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 
-const getPromptUrl = (baseURL: string, url: string) =>
-  `${baseURL}?q=${encodeURIComponent(
+const getPromptUrl = (baseURL: string, url: string, param = "q") =>
+  `${baseURL}?${param}=${encodeURIComponent(
     `I'm looking at this termcn documentation: ${url}.
 Help me understand how to use it. Be ready to explain concepts, give examples, or help debug based on it.
 `
@@ -83,6 +85,32 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
     ),
   ],
   [
+    "cursor",
+    (url) => (
+      <a
+        href={getPromptUrl("https://cursor.com/link/prompt", url, "text")}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <CursorIcon />
+        Open in Cursor
+      </a>
+    ),
+  ],
+  [
+    "grok",
+    (url) => (
+      <a
+        href={getPromptUrl("https://grok.com/new", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <GrokIcon />
+        Open in Grok
+      </a>
+    ),
+  ],
+  [
     "scira",
     (url) => (
       <a
@@ -92,7 +120,7 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
         target="_blank"
       >
         <SciraIcon />
-        Open in Scira
+        Open in Scira AI
       </a>
     ),
   ],

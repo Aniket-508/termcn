@@ -16,6 +16,7 @@ const eventSchema = z.object({
     "copy_chart_data",
     "copy_color",
     "set_layout",
+    "keyboard_shortcut_navigate",
   ]),
   properties: z
     .record(

@@ -1,5 +1,6 @@
 import { LINK } from "@/constants/links";
-import { SITE } from "@/constants/site";
+import { SITE, UTM_PARAMS } from "@/constants/site";
+import { addQueryParams } from "@/lib/url";
 
 export const SiteFooter = () => (
   <footer className="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent group-has-[.docs-nav]/body:pb-20 group-has-[.docs-nav]/body:sm:pb-0 dark:bg-transparent">
@@ -8,7 +9,7 @@ export const SiteFooter = () => (
         <div className="text-muted-foreground w-full px-1 text-center text-xs leading-loose sm:text-sm">
           Built by{" "}
           <a
-            href={LINK.PORTFOLIO}
+            href={addQueryParams(LINK.PORTFOLIO, UTM_PARAMS)}
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4"
@@ -17,7 +18,7 @@ export const SiteFooter = () => (
           </a>
           . The source code is available on{" "}
           <a
-            href={LINK.GITHUB}
+            href={addQueryParams(LINK.GITHUB, UTM_PARAMS)}
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4"

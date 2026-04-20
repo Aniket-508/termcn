@@ -10,6 +10,8 @@ const getBaseUrl = () => {
   return process.env.SITE_URL ?? FALLBACK_SITE_ORIGIN;
 };
 
+const baseUrl = getBaseUrl();
+
 export const SITE = {
   AUTHOR: {
     NAME: "Aniket Pawar",
@@ -31,12 +33,16 @@ export const SITE = {
     "npx shadcn add",
   ] as const,
   NAME: "termcn",
-  OG_IMAGE: `${getBaseUrl()}/og.png`,
+  OG_IMAGE: `${baseUrl}/og.png`,
   REGISTRY: "@termcn",
-  URL: getBaseUrl(),
+  URL: baseUrl,
 };
 
 export const META_THEME_COLORS = {
   dark: "#0a0a0a",
   light: "#ffffff",
+};
+
+export const UTM_PARAMS = {
+  utm_source: new URL(baseUrl).hostname,
 };

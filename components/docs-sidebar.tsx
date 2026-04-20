@@ -13,6 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ROUTES } from "@/constants/routes";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
 import {
   getCategoryFoldersForBase,
@@ -22,14 +23,14 @@ import {
 import type { source } from "@/lib/source";
 
 const TOP_LEVEL_SECTIONS = [
-  { href: "/docs", name: "Introduction" },
-  { href: "/docs/installation", name: "Installation" },
-  { href: "/docs/components", name: "Components" },
-  { href: "/docs/templates", name: "Templates" },
-  { href: "/docs/theming", name: "Theming" },
-  { href: "/docs/mcp", name: "MCP" },
-  { href: "/docs/registry", name: "Registry" },
-  { href: "/llms.txt", name: "llms.txt" },
+  { href: ROUTES.DOCS, name: "Introduction" },
+  { href: ROUTES.DOCS_INSTALLATION, name: "Installation" },
+  { href: ROUTES.DOCS_COMPONENTS, name: "Components" },
+  { href: ROUTES.DOCS_TEMPLATES, name: "Templates" },
+  { href: ROUTES.DOCS_THEMING, name: "Theming" },
+  { href: ROUTES.DOCS_MCP, name: "MCP" },
+  { href: ROUTES.DOCS_REGISTRY, name: "Registry" },
+  { href: ROUTES.LLMS, name: "llms.txt" },
 ];
 
 const MENU_BUTTON_CLS =
