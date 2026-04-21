@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
+    "@web-kits/audio": "^0.1.0",
     "@xterm/xterm": "6.0.0",
     "class-variance-authority": "^0.7.1",
     "cli-spinners": "^3.4.0",
@@ -45,6 +46,7 @@
     "sonner": "^2.0.7",
     "strip-ansi": "7.2.0",
     "tailwind-merge": "^3.5.0",
+    "web-haptics": "^0.0.6",
     "zod": "^4.0.0"
   },
   "devDependencies": {

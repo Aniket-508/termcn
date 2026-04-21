@@ -19,6 +19,8 @@ export default defineConfig({
     ".cursor/**",
     ".changeset/**",
     ".claude/**",
+    ".web-kits/**",
+    "audio/**",
   ],
   jsxSingleQuote: false,
   printWidth: 80,

@@ -12,6 +12,8 @@ export default defineConfig({
     ".cursor/**",
     ".changeset/**",
     ".claude/**",
+    ".web-kits/**",
+    "audio/**",
     "types/opentui-react.d.ts",
   ],
   overrides: [
