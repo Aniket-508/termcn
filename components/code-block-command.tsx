@@ -83,9 +83,11 @@ export const CodeBlockCommand = ({
             <TabsContent key={key} className="mt-0 px-4 py-3.5" value={key}>
               <pre>
                 <code
-                  className="relative font-mono text-sm leading-none"
+                  data-slot="code-block"
                   data-language="bash"
+                  className="font-mono text-sm/none text-muted-foreground"
                 >
+                  <span className="select-none">$ </span>
                   {value}
                 </code>
               </pre>
