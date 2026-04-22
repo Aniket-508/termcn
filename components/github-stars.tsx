@@ -13,7 +13,7 @@ export const GitHubStars = ({
 }) => (
   <Tooltip>
     <TooltipTrigger asChild>
-      <Button asChild size="sm" variant="ghost" sound="click">
+      <Button asChild size="sm" variant="ghost" sound="star">
         <a
           href={addQueryParams(LINK.GITHUB, UTM_PARAMS)}
           target="_blank"

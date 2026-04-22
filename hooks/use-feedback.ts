@@ -1,44 +1,31 @@
 "use client";
 
 import { defineSound } from "@web-kits/audio";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useWebHaptics } from "web-haptics/react";
 
-import * as core from "@/audio/core";
+import * as audio from "@/audio/core";
 
-/**
- * Public feedback names (camelCase) mapped to their `SoundDefinition`.
- * Using the named exports from `audio/core` keeps the casing consistent
- * with JSX props like `sound="tabSwitch"` (the `_patch.sounds` keys are
- * kebab-case and would resolve to `undefined` at runtime).
- */
-const soundByType = {
-  blur: core.blur,
-  checkbox: core.checkbox,
-  click: core.click,
-  copy: core.copy,
-  deselect: core.deselect,
-  error: core.error,
-  focus: core.focus,
-  hover: core.hover,
-  keyPress: core.keyPress,
-  notification: core.notification,
-  pop: core.pop,
-  radio: core.radio,
-  scrollSnap: core.scrollSnap,
-  select: core.select,
-  success: core.success,
-  tabSwitch: core.tabSwitch,
-  tap: core.tap,
-  tick: core.tick,
-  toggleOff: core.toggleOff,
-  toggleOn: core.toggleOn,
-  warning: core.warning,
-} as const;
+type PatchSoundKey = keyof typeof audio._patch.sounds;
+type KebabToCamel<K extends string> = K extends `${infer A}-${infer B}`
+  ? `${A}${Capitalize<KebabToCamel<B>>}`
+  : K;
 
-export type FeedbackType = keyof typeof soundByType;
+export type FeedbackType = {
+  [K in PatchSoundKey]: KebabToCamel<K>;
+}[PatchSoundKey];
 
-const hapticPresetByType: Record<FeedbackType, string> = {
+const toFeedbackKey = (k: string): FeedbackType =>
+  k.replaceAll(/-([a-z])/g, (_, c: string) => c.toUpperCase()) as FeedbackType;
+
+const patchKeyByFeedback = Object.fromEntries(
+  (Object.keys(audio._patch.sounds) as PatchSoundKey[]).map((k) => [
+    toFeedbackKey(k),
+    k,
+  ])
+) as Record<FeedbackType, PatchSoundKey>;
+
+const hapticPresetByType: Partial<Record<FeedbackType, string>> = {
   blur: "light",
   checkbox: "light",
   click: "medium",
@@ -46,6 +33,7 @@ const hapticPresetByType: Record<FeedbackType, string> = {
   deselect: "light",
   error: "error",
   focus: "light",
+  heart: "light",
   hover: "soft",
   keyPress: "light",
   notification: "nudge",
@@ -53,6 +41,7 @@ const hapticPresetByType: Record<FeedbackType, string> = {
   radio: "medium",
   scrollSnap: "selection",
   select: "selection",
+  star: "medium",
   success: "success",
   tabSwitch: "selection",
   tap: "light",
@@ -67,23 +56,16 @@ export interface UseFeedbackOptions {
   haptic?: boolean;
 }
 
-export const useFeedback = ({ sound, haptic = false }: UseFeedbackOptions) => {
+export const useFeedback = ({ sound, haptic = true }: UseFeedbackOptions) => {
   const { trigger: hapticTrigger } = useWebHaptics();
 
-  const play = useMemo(
-    () => (sound ? defineSound(soundByType[sound]) : null),
-    [sound]
-  );
-
-  const preset = sound ? hapticPresetByType[sound] : undefined;
-
   return useCallback(() => {
-    if (!sound || !play) {
+    if (!sound) {
       return;
     }
-    play();
-    if (haptic && preset) {
-      void hapticTrigger(preset);
+    defineSound(audio._patch.sounds[patchKeyByFeedback[sound]])();
+    if (haptic) {
+      void hapticTrigger(hapticPresetByType[sound] ?? "light");
     }
-  }, [sound, play, haptic, preset, hapticTrigger]);
+  }, [sound, haptic, hapticTrigger]);
 };
