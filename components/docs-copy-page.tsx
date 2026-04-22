@@ -144,19 +144,20 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
   );
 
   return (
-    <Popover>
+    <Popover sounds>
       <div className="group/buttons relative flex rounded-lg bg-secondary *:data-[slot=button]:focus-visible:relative *:data-[slot=button]:focus-visible:z-10">
         <PopoverAnchor />
         <Button
           variant="secondary"
           size="sm"
           className="md:h-7 md:text-[0.8rem]"
+          sound="copy"
           onClick={handleCopyPage}
         >
           {isCopied ? <CheckIcon /> : <CopyIcon />}
           Copy Page
         </Button>
-        <DropdownMenu>
+        <DropdownMenu sounds>
           <DropdownMenuTrigger asChild className="hidden sm:flex">
             {trigger}
           </DropdownMenuTrigger>
@@ -165,7 +166,7 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
             className="animate-none! rounded-lg shadow-none"
           >
             {MENU_ITEMS.map(([key, render]) => (
-              <DropdownMenuItem key={key} asChild>
+              <DropdownMenuItem key={key} asChild sound="click">
                 {render(url)}
               </DropdownMenuItem>
             ))}
@@ -188,6 +189,7 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
               size="lg"
               asChild
               key={key}
+              sound="click"
               className="w-full justify-start text-base font-normal *:[svg]:text-muted-foreground"
             >
               {render(url)}

@@ -134,6 +134,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                                 size="icon"
                                 className="extend-touch-target size-8 shadow-none md:size-7"
                                 asChild
+                                sound="click"
                               >
                                 <Link
                                   href={neighbours.previous.url}
@@ -162,6 +163,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                                 size="icon"
                                 className="extend-touch-target size-8 shadow-none md:size-7"
                                 asChild
+                                sound="click"
                               >
                                 <Link
                                   href={neighbours.next.url}
@@ -231,6 +233,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                   size="sm"
                   asChild
                   className="shadow-none"
+                  sound="click"
                 >
                   <Link
                     href={neighbours.previous.url}
@@ -246,6 +249,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                   size="sm"
                   className="ml-auto shadow-none"
                   asChild
+                  sound="click"
                 >
                   <Link
                     href={neighbours.next.url}

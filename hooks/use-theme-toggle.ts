@@ -5,17 +5,29 @@ import { useCallback, useEffect } from "react";
 
 import { useMetaColor } from "@/hooks/use-meta-color";
 
+import { useFeedback } from "./use-feedback";
+
 export const useThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const { setMetaColor, metaColor } = useMetaColor();
+  const feedbackOn = useFeedback({ sound: "toggleOn" });
+  const feedbackOff = useFeedback({ sound: "toggleOff" });
 
   useEffect(() => {
     setMetaColor(metaColor);
   }, [metaColor, setMetaColor]);
 
   const toggleTheme = useCallback(() => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  }, [resolvedTheme, setTheme]);
+    const nextResolved = resolvedTheme === "dark" ? "light" : "dark";
+    if (nextResolved === "dark") {
+      feedbackOff();
+    } else if (nextResolved === "light") {
+      feedbackOn();
+    } else {
+      feedbackOn();
+    }
+    setTheme(nextResolved);
+  }, [resolvedTheme, setTheme, feedbackOn, feedbackOff]);
 
   // Listen for the D key to toggle theme.
   useEffect(() => {

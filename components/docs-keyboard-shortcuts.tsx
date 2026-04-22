@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { startTransition, addTransitionType } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
+import { useFeedback } from "@/hooks/use-feedback";
 import { trackEvent } from "@/lib/events";
 
 export const DocsKeyboardShortcuts = ({
@@ -14,6 +15,7 @@ export const DocsKeyboardShortcuts = ({
   next: string | null;
 }) => {
   const router = useRouter();
+  const playClick = useFeedback({ sound: "click" });
 
   const navigate = (
     href: string | null,
@@ -21,6 +23,7 @@ export const DocsKeyboardShortcuts = ({
     keys: string
   ) => {
     if (href) {
+      playClick();
       trackEvent({
         name: "keyboard_shortcut_navigate",
         properties: { direction, keys, path: href },

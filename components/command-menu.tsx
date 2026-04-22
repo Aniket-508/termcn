@@ -31,6 +31,7 @@ import { Separator } from "@/components/ui/separator";
 import { SITE } from "@/constants/site";
 import { useConfig } from "@/hooks/use-config";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { useFeedback } from "@/hooks/use-feedback";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
@@ -176,6 +177,7 @@ export const CommandMenu = ({
   const [copyPayload, setCopyPayload] = useState("");
   const packageManager = config.packageManager || "pnpm";
   const currentBase = getCurrentBase(pathname);
+  const selectFeedback = useFeedback({ sound: "select" });
 
   const { copyToClipboard } = useCopyToClipboard({
     onCopy: () => {
@@ -261,10 +263,14 @@ export const CommandMenu = ({
     [packageManager]
   );
 
-  const runCommand = useCallback((command: () => unknown) => {
-    setOpen(false);
-    command();
-  }, []);
+  const runCommand = useCallback(
+    (command: () => unknown) => {
+      selectFeedback();
+      setOpen(false);
+      command();
+    },
+    [selectFeedback]
+  );
 
   const handleOpenClick = useCallback(() => setOpen(true), []);
 
@@ -325,13 +331,14 @@ export const CommandMenu = ({
   }, [copyPayload, runCommand, copyToClipboard]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} sounds>
       <DialogTrigger asChild>
         <Button
           variant="secondary"
           className={cn(
             "bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
           )}
+          sound="click"
           onClick={handleOpenClick}
           {...props}
         >

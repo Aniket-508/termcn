@@ -61,6 +61,7 @@ const SidebarPageGroup = ({
                 asChild
                 isActive={page.url === pathname}
                 className={MENU_BUTTON_CLS}
+                sound="click"
               >
                 <Link href={page.url} transitionTypes={["nav-forward"]}>
                   {page.name}
@@ -107,6 +108,7 @@ export const DocsSidebar = ({
                         : pathname.startsWith(href)
                     }
                     className={MENU_BUTTON_CLS}
+                    sound="click"
                   >
                     <Link href={href} transitionTypes={["nav-forward"]}>
                       {name}

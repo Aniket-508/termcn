@@ -1,3 +1,4 @@
+import { SoundProvider } from "@web-kits/audio/react";
 import type { Metadata } from "next";
 
 import { Analytics } from "@/components/analytics";
@@ -40,11 +41,13 @@ const RootLayout = ({
         fontVariables
       )}
     >
-      <ThemeProvider>
-        {children}
-        <Toaster position="top-center" />
-        <Analytics />
-      </ThemeProvider>
+      <SoundProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster position="top-center" />
+          <Analytics />
+        </ThemeProvider>
+      </SoundProvider>
     </body>
   </html>
 );

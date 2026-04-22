@@ -1,15 +1,57 @@
 "use client";
 
+import { useSound } from "@web-kits/audio/react";
 import { XIcon } from "lucide-react";
 import { Dialog as DialogPrimitive } from "radix-ui";
+import { useCallback, useRef } from "react";
 
+import { modalOpen, modalClose } from "@/audio/core";
 import { cn } from "@/lib/utils";
 
 const Dialog = ({
+  onOpenChange,
+  sounds = false,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) => (
-  <DialogPrimitive.Root data-slot="dialog" {...props} />
-);
+}: React.ComponentProps<typeof DialogPrimitive.Root> & {
+  sounds?: boolean;
+}) => {
+  const playOpen = useSound(modalOpen);
+  const playClose = useSound(modalClose);
+  const wasOpen = useRef(false);
+
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      if (sounds) {
+        if (open && !wasOpen.current) {
+          playOpen();
+        } else if (!open && wasOpen.current) {
+          playClose();
+        }
+        wasOpen.current = open;
+      }
+      onOpenChange?.(open);
+    },
+    [onOpenChange, playClose, playOpen, sounds]
+  );
+
+  if (!sounds) {
+    return (
+      <DialogPrimitive.Root
+        data-slot="dialog"
+        onOpenChange={onOpenChange}
+        {...props}
+      />
+    );
+  }
+
+  return (
+    <DialogPrimitive.Root
+      data-slot="dialog"
+      onOpenChange={handleOpenChange}
+      {...props}
+    />
+  );
+};
 
 const DialogTrigger = ({
   ...props

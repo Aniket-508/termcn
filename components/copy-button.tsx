@@ -57,15 +57,12 @@ export const CopyButton = ({
               : "bg-code absolute top-3 right-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
             className
           )}
+          sound="copy"
           onClick={handleCopy}
           {...props}
         >
           <span className="sr-only">Copy</span>
-          {isCopied ? (
-            <CheckIcon className="size-4" />
-          ) : (
-            <CopyIcon className="size-4" />
-          )}
+          {isCopied ? <CheckIcon /> : <CopyIcon />}
           {children}
         </Button>
       </TooltipTrigger>

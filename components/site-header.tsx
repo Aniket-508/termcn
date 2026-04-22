@@ -2,11 +2,11 @@ import Link from "next/link";
 
 import { BrandContextMenu } from "@/components/brand-context-menu";
 import { CommandMenu } from "@/components/command-menu";
-import { GitHubLink } from "@/components/github-link";
 import { LogoMark } from "@/components/logo";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModeSwitcher } from "@/components/mode-switcher";
+import { NavItemGithub } from "@/components/nav-item-github";
 import { SponsorLink } from "@/components/sponsor-link";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
@@ -37,6 +37,7 @@ export const SiteHeader = () => (
             variant="ghost"
             size="icon"
             className="hidden size-8 lg:flex"
+            sound="click"
           >
             <Link href="/" transitionTypes={["nav-back"]}>
               <LogoMark className="size-5" />
@@ -49,7 +50,7 @@ export const SiteHeader = () => (
           <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
             <CommandMenu navItems={navItems} tree={source.pageTree} />
           </div>
-          <GitHubLink />
+          <NavItemGithub />
           <SponsorLink />
           <ModeSwitcher />
         </div>

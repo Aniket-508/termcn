@@ -59,7 +59,7 @@ export default function IndexPage() {
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
-                <Button asChild size="lg">
+                <Button asChild size="lg" sound="click">
                   <Link
                     href={ROUTES.DOCS_INSTALLATION}
                     transitionTypes={["nav-forward"]}
@@ -68,7 +68,7 @@ export default function IndexPage() {
                     <ArrowRightIcon className="ml-2 size-4" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline">
+                <Button asChild size="lg" variant="outline" sound="click">
                   <Link
                     href={ROUTES.DOCS_COMPONENTS}
                     transitionTypes={["nav-forward"]}
