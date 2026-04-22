@@ -85,7 +85,7 @@ export const CodeBlockCommand = ({
                 <code
                   data-slot="code-block"
                   data-language="bash"
-                  className="font-mono text-sm/none text-muted-foreground"
+                  className="font-mono text-sm/none"
                 >
                   <span className="select-none">$ </span>
                   {value}

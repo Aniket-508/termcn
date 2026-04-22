@@ -62,7 +62,9 @@ const SidebarPageGroup = ({
                 isActive={page.url === pathname}
                 className={MENU_BUTTON_CLS}
               >
-                <Link href={page.url}>{page.name}</Link>
+                <Link href={page.url} transitionTypes={["nav-forward"]}>
+                  {page.name}
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
@@ -106,7 +108,9 @@ export const DocsSidebar = ({
                     }
                     className={MENU_BUTTON_CLS}
                   >
-                    <Link href={href}>{name}</Link>
+                    <Link href={href} transitionTypes={["nav-forward"]}>
+                      {name}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

@@ -22,6 +22,7 @@ export const MainNav = ({
           <Link
             href={item.href}
             className={cn(pathname === item.href && "text-primary")}
+            transitionTypes={["nav-forward"]}
           >
             {item.label}
           </Link>

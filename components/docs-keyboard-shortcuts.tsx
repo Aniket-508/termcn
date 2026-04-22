@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { startTransition, addTransitionType } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import { trackEvent } from "@/lib/events";
@@ -24,12 +25,14 @@ export const DocsKeyboardShortcuts = ({
         name: "keyboard_shortcut_navigate",
         properties: { direction, keys, path: href },
       });
-      router.push(href);
+      startTransition(() => {
+        addTransitionType(direction === "next" ? "nav-forward" : "nav-back");
+        router.push(href);
+      });
     }
   };
 
   useHotkeys("ArrowRight", (event) => {
-    // A native interaction was prevented on this event, someone else took ownership of it, ignore.
     if (event.defaultPrevented) {
       return;
     }
@@ -38,7 +41,6 @@ export const DocsKeyboardShortcuts = ({
   });
 
   useHotkeys("ArrowLeft", (event) => {
-    // A native interaction was prevented on this event, someone else took ownership of it, ignore.
     if (event.defaultPrevented) {
       return;
     }

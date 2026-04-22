@@ -20,7 +20,10 @@ const navItems = [
 ];
 
 export const SiteHeader = () => (
-  <header className="bg-background sticky top-0 z-50 w-full">
+  <header
+    className="bg-background sticky top-0 z-50 w-full"
+    style={{ viewTransitionName: "site-header" }}
+  >
     <div className="container-wrapper 3xl:fixed:px-0 px-6">
       <div className="3xl:fixed:container flex h-(--header-height) items-center gap-2">
         <MobileNav
