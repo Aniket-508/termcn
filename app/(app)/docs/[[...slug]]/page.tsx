@@ -232,7 +232,10 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                   asChild
                   className="shadow-none"
                 >
-                  <Link href={neighbours.previous.url}>
+                  <Link
+                    href={neighbours.previous.url}
+                    transitionTypes={["nav-back"]}
+                  >
                     <ArrowLeftIcon /> {neighbours.previous.name}
                   </Link>
                 </Button>
@@ -244,7 +247,10 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                   className="ml-auto shadow-none"
                   asChild
                 >
-                  <Link href={neighbours.next.url}>
+                  <Link
+                    href={neighbours.next.url}
+                    transitionTypes={["nav-forward"]}
+                  >
                     {neighbours.next.name} <ArrowRightIcon />
                   </Link>
                 </Button>
