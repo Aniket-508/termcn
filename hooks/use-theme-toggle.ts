@@ -2,10 +2,10 @@
 
 import { useTheme } from "next-themes";
 import { useCallback, useEffect } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 
+import { useFeedback } from "@/hooks/use-feedback";
 import { useMetaColor } from "@/hooks/use-meta-color";
-
-import { useFeedback } from "./use-feedback";
 
 export const useThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -29,32 +29,7 @@ export const useThemeToggle = () => {
     setTheme(nextResolved);
   }, [resolvedTheme, setTheme, feedbackOn, feedbackOff]);
 
-  // Listen for the D key to toggle theme.
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (
-        (e.key === "d" || e.key === "D") &&
-        !e.metaKey &&
-        !e.ctrlKey &&
-        !e.altKey
-      ) {
-        if (
-          (e.target instanceof HTMLElement && e.target.isContentEditable) ||
-          e.target instanceof HTMLInputElement ||
-          e.target instanceof HTMLTextAreaElement ||
-          e.target instanceof HTMLSelectElement
-        ) {
-          return;
-        }
-
-        e.preventDefault();
-        toggleTheme();
-      }
-    };
-
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, [toggleTheme]);
+  useHotkeys("d", () => toggleTheme());
 
   return { toggleTheme };
 };
