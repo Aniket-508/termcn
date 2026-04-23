@@ -214,7 +214,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
             <div className="h-(--top-spacing) shrink-0" />
             {doc.toc?.length ? (
               <div className="no-scrollbar overflow-y-auto px-8">
-                <DocsTableOfContents toc={doc.toc} />
+                <DocsTableOfContents toc={doc.toc} docId={page.path} />
               </div>
             ) : null}
             {/* <div className="hidden flex-col gap-6 px-6 xl:flex">

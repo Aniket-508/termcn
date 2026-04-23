@@ -3,6 +3,7 @@ import path from "node:path";
 
 import fm from "front-matter";
 
+import { DOCS_DIR } from "@/lib/docs";
 import { source } from "@/lib/source";
 
 export interface ChangelogPageData {
@@ -18,7 +19,7 @@ export type ChangelogPage = ReturnType<typeof source.getPages>[number] & {
 export const getDateFromFile = (slugs: string[]) => {
   const filePath = path.join(
     process.cwd(),
-    "content/docs",
+    DOCS_DIR,
     ...slugs.slice(0, -1),
     `${slugs.at(-1)}.mdx`
   );

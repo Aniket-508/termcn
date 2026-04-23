@@ -3,6 +3,8 @@ import { ROUTES } from "@/constants/routes";
 import type { PageTreeFolder } from "./page-tree";
 import { formatLabelFromSlug } from "./utils";
 
+export const DOCS_DIR = `content${ROUTES.DOCS}`;
+
 export const EXCLUDED_SECTIONS = new Set([
   "installation",
   "changelog",
