@@ -1,3 +1,4 @@
+import { CommandBox } from "@/components/command-box";
 import { ComponentPreview } from "@/components/component-preview";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { HomeCtas } from "@/components/home-ctas";
@@ -54,7 +55,9 @@ export default function IndexPage() {
                 Built on Ink. Distributed via shadcn.
               </p>
 
-              <HomeCtas />
+              <CommandBox className="mt-4 w-full max-w-xl" />
+
+              <HomeCtas className="mt-4" />
             </div>
           </div>
         </section>
