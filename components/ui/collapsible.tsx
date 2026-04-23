@@ -2,7 +2,7 @@
 
 import { useSound } from "@web-kits/audio/react";
 import { Collapsible as CollapsiblePrimitive } from "radix-ui";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { collapse, expand } from "@/audio/core";
 
@@ -15,21 +15,40 @@ const Collapsible = ({
 }) => {
   const playExpand = useSound(expand);
   const playCollapse = useSound(collapse);
-  const wasOpen = useRef(false);
+  const isControlled = props.open !== undefined;
+  const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
+
+  const playStateSound = useCallback(
+    (open: boolean) => {
+      if (!sounds || open === lastOpen.current) {
+        return;
+      }
+
+      if (open) {
+        playExpand();
+      } else {
+        playCollapse();
+      }
+
+      lastOpen.current = open;
+    },
+    [playCollapse, playExpand, sounds]
+  );
+
+  useEffect(() => {
+    if (!isControlled) {
+      return;
+    }
+
+    playStateSound(props.open ?? false);
+  }, [isControlled, playStateSound, props.open]);
 
   const handleOpenChange = useCallback(
     (open: boolean) => {
-      if (sounds) {
-        if (open && !wasOpen.current) {
-          playExpand();
-        } else if (!open && wasOpen.current) {
-          playCollapse();
-        }
-        wasOpen.current = open;
-      }
+      playStateSound(open);
       onOpenChange?.(open);
     },
-    [onOpenChange, playCollapse, playExpand, sounds]
+    [onOpenChange, playStateSound]
   );
 
   if (!sounds) {

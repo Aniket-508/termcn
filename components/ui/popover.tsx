@@ -2,7 +2,7 @@
 
 import { useSound } from "@web-kits/audio/react";
 import { Popover as PopoverPrimitive } from "radix-ui";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { dropdownClose, dropdownOpen } from "@/audio/core";
 import { cn } from "@/lib/utils";
@@ -16,21 +16,40 @@ const Popover = ({
 }) => {
   const playOpen = useSound(dropdownOpen);
   const playClose = useSound(dropdownClose);
-  const wasOpen = useRef(false);
+  const isControlled = props.open !== undefined;
+  const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
+
+  const playStateSound = useCallback(
+    (open: boolean) => {
+      if (!sounds || open === lastOpen.current) {
+        return;
+      }
+
+      if (open) {
+        playOpen();
+      } else {
+        playClose();
+      }
+
+      lastOpen.current = open;
+    },
+    [playClose, playOpen, sounds]
+  );
+
+  useEffect(() => {
+    if (!isControlled) {
+      return;
+    }
+
+    playStateSound(props.open ?? false);
+  }, [isControlled, playStateSound, props.open]);
 
   const handleOpenChange = useCallback(
     (open: boolean) => {
-      if (sounds) {
-        if (open && !wasOpen.current) {
-          playOpen();
-        } else if (!open && wasOpen.current) {
-          playClose();
-        }
-        wasOpen.current = open;
-      }
+      playStateSound(open);
       onOpenChange?.(open);
     },
-    [onOpenChange, playClose, playOpen, sounds]
+    [onOpenChange, playStateSound]
   );
 
   if (!sounds) {

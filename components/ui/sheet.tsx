@@ -3,7 +3,7 @@
 import { useSound } from "@web-kits/audio/react";
 import { XIcon } from "lucide-react";
 import { Dialog as SheetPrimitive } from "radix-ui";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { drawerOpen, drawerClose } from "@/audio/core";
 import { cn } from "@/lib/utils";
@@ -17,21 +17,40 @@ const Sheet = ({
 }) => {
   const playOpen = useSound(drawerOpen);
   const playClose = useSound(drawerClose);
-  const wasOpen = useRef(false);
+  const isControlled = props.open !== undefined;
+  const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
+
+  const playStateSound = useCallback(
+    (open: boolean) => {
+      if (!sounds || open === lastOpen.current) {
+        return;
+      }
+
+      if (open) {
+        playOpen();
+      } else {
+        playClose();
+      }
+
+      lastOpen.current = open;
+    },
+    [playClose, playOpen, sounds]
+  );
+
+  useEffect(() => {
+    if (!isControlled) {
+      return;
+    }
+
+    playStateSound(props.open ?? false);
+  }, [isControlled, playStateSound, props.open]);
 
   const handleOpenChange = useCallback(
     (open: boolean) => {
-      if (sounds) {
-        if (open && !wasOpen.current) {
-          playOpen();
-        } else if (!open && wasOpen.current) {
-          playClose();
-        }
-        wasOpen.current = open;
-      }
+      playStateSound(open);
       onOpenChange?.(open);
     },
-    [onOpenChange, playClose, playOpen, sounds]
+    [onOpenChange, playStateSound]
   );
 
   if (!sounds) {
