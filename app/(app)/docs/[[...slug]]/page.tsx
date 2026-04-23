@@ -127,7 +127,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                             className="extend-touch-target size-8 md:size-7"
                             tooltip={{
                               icon: <ArrowLeftIcon />,
-                              title: "Previous Component",
+                              title: "Previous Page",
                             }}
                           >
                             <span className="sr-only">Previous</span>
@@ -140,7 +140,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                             className="extend-touch-target size-8 md:size-7"
                             tooltip={{
                               icon: <ArrowRightIcon />,
-                              title: "Next Component",
+                              title: "Next Page",
                             }}
                           >
                             <span className="sr-only">Next</span>

@@ -1,9 +1,11 @@
 "use client";
 
-import { EllipsisIcon, LinkIcon, ShareIcon } from "lucide-react";
-import { useMemo } from "react";
+import { EllipsisIcon, LinkIcon } from "lucide-react";
+import { useCallback, useMemo, useRef } from "react";
 import { toast } from "sonner";
 
+import type { ShareIconHandle } from "@/components/animated-icons/share";
+import { ShareIcon } from "@/components/animated-icons/share";
 import { XIcon, LinkedInIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +23,7 @@ export const DocsShareMenu = ({
   title: string;
   url: string;
 }) => {
+  const shareIconRef = useRef<ShareIconHandle>(null);
   const { copyToClipboard } = useCopyToClipboard();
 
   const absoluteUrl = useMemo(() => {
@@ -33,6 +36,14 @@ export const DocsShareMenu = ({
     return url;
   }, [url]);
 
+  const handleMouseEnter = useCallback(() => {
+    shareIconRef.current?.startAnimation();
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    shareIconRef.current?.stopAnimation();
+  }, []);
+
   const urlEncoded = encodeURIComponent(absoluteUrl);
 
   return (
@@ -42,8 +53,10 @@ export const DocsShareMenu = ({
           className="hidden sm:flex size-7 border-none active:scale-none"
           variant="secondary"
           size="icon-sm"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <ShareIcon />
+          <ShareIcon ref={shareIconRef} />
         </Button>
       </DropdownMenuTrigger>
 
