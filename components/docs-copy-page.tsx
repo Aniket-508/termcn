@@ -6,8 +6,10 @@ import {
   ChatGptIcon,
   ClaudeIcon,
   CursorIcon,
+  GeminiIcon,
   GrokIcon,
   MarkdownDocIcon,
+  PerplexityIcon,
   SciraIcon,
   V0Icon,
 } from "@/components/icons";
@@ -59,6 +61,19 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
     ),
   ],
   [
+    "cursor",
+    (url) => (
+      <a
+        href={getPromptUrl("https://cursor.com/link/prompt", url, "text")}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <CursorIcon />
+        Open in Cursor
+      </a>
+    ),
+  ],
+  [
     "chatgpt",
     (url) => (
       <a
@@ -85,15 +100,28 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
     ),
   ],
   [
-    "cursor",
+    "perplexity",
     (url) => (
       <a
-        href={getPromptUrl("https://cursor.com/link/prompt", url, "text")}
+        href={getPromptUrl("https://perplexity.ai", url)}
         rel="noopener noreferrer"
         target="_blank"
       >
-        <CursorIcon />
-        Open in Cursor
+        <PerplexityIcon />
+        Open in Perplexity
+      </a>
+    ),
+  ],
+  [
+    "gemini",
+    (url) => (
+      <a
+        href={getPromptUrl("https://gemini.google.com/app", url)}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <GeminiIcon />
+        Open in Gemini
       </a>
     ),
   ],
@@ -101,7 +129,7 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
     "grok",
     (url) => (
       <a
-        href={getPromptUrl("https://grok.com/new", url)}
+        href={getPromptUrl("https://grok.com", url)}
         rel="noopener noreferrer"
         target="_blank"
       >
