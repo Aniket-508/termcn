@@ -1,7 +1,6 @@
 "use client";
 
-import { CheckIcon, ChevronDownIcon, CopyIcon } from "lucide-react";
-import { useCallback } from "react";
+import { ChevronDownIcon } from "lucide-react";
 
 import {
   ChatGptIcon,
@@ -26,7 +25,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+
+import { CopyButton } from "./copy-button";
 
 const getPromptUrl = (baseURL: string, url: string, param = "q") =>
   `${baseURL}?${param}=${encodeURIComponent(
@@ -127,12 +127,6 @@ const MENU_ITEMS: [string, (url: string) => React.ReactNode][] = [
 ];
 
 export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
-  const { copyToClipboard, isCopied } = useCopyToClipboard();
-
-  const handleCopyPage = useCallback(async () => {
-    await copyToClipboard(page);
-  }, [page, copyToClipboard]);
-
   const trigger = (
     <Button
       variant="secondary"
@@ -147,16 +141,15 @@ export const DocsCopyPage = ({ page, url }: { page: string; url: string }) => {
     <Popover sounds>
       <div className="group/buttons relative flex rounded-lg bg-secondary *:data-[slot=button]:focus-visible:relative *:data-[slot=button]:focus-visible:z-10">
         <PopoverAnchor />
-        <Button
-          variant="secondary"
-          size="sm"
-          className="md:h-7 md:text-[0.8rem]"
+        <CopyButton
+          value={page}
+          showTooltip={false}
           sound="copy"
-          onClick={handleCopyPage}
+          variant="secondary"
+          className="md:h-7 md:text-[0.8rem]"
         >
-          {isCopied ? <CheckIcon /> : <CopyIcon />}
           Copy Page
-        </Button>
+        </CopyButton>
         <DropdownMenu sounds>
           <DropdownMenuTrigger asChild className="hidden sm:flex">
             {trigger}
