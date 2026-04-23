@@ -148,7 +148,7 @@ const CommandMenuItem = ({
     <CommandItem
       ref={ref}
       className={cn(
-        "data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-medium",
+        "data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent px-3! font-medium",
         className
       )}
       {...props}
@@ -177,7 +177,7 @@ export const CommandMenu = ({
   const [copyPayload, setCopyPayload] = useState("");
   const packageManager = config.packageManager || "pnpm";
   const currentBase = getCurrentBase(pathname);
-  const selectFeedback = useFeedback({ sound: "select" });
+  const copyFeedback = useFeedback({ sound: "copy" });
 
   const { copyToClipboard } = useCopyToClipboard({
     onCopy: () => {
@@ -263,14 +263,10 @@ export const CommandMenu = ({
     [packageManager]
   );
 
-  const runCommand = useCallback(
-    (command: () => unknown) => {
-      selectFeedback();
-      setOpen(false);
-      command();
-    },
-    [selectFeedback]
-  );
+  const runCommand = useCallback((command: () => unknown) => {
+    setOpen(false);
+    command();
+  }, []);
 
   const handleOpenClick = useCallback(() => setOpen(true), []);
 
@@ -318,17 +314,36 @@ export const CommandMenu = ({
         }
 
         e.preventDefault();
-        setOpen((prev) => !prev);
+        setOpen((prev) => {
+          if (!prev) {
+            const metaKeyPressed = e.metaKey ? "cmd+k" : "ctrl+k";
+            trackEvent({
+              name: "open_command_menu",
+              properties: {
+                key: e.key === "/" ? "/" : metaKeyPressed,
+                method: "keyboard",
+              },
+            });
+          }
+          return !prev;
+        });
       }
 
-      if (e.key === "c" && (e.metaKey || e.ctrlKey)) {
-        runCommand(() => copyToClipboard(copyPayload));
+      if (
+        e.key === "c" &&
+        (e.metaKey || e.ctrlKey) &&
+        copyPayload.includes("shadcn@latest")
+      ) {
+        runCommand(() => {
+          copyFeedback();
+          copyToClipboard(copyPayload);
+        });
       }
     };
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, [copyPayload, runCommand, copyToClipboard]);
+  }, [copyPayload, runCommand, copyToClipboard, copyFeedback]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen} sounds>
@@ -338,7 +353,6 @@ export const CommandMenu = ({
           className={cn(
             "bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
           )}
-          sound="click"
           onClick={handleOpenClick}
           {...props}
         >
@@ -359,7 +373,7 @@ export const CommandMenu = ({
           <DialogDescription>Search for a command to run...</DialogDescription>
         </DialogHeader>
         <Command
-          className="**:data-[slot=command-input-wrapper]:bg-input/50 **:data-[slot=command-input-wrapper]:border-input rounded-none bg-transparent **:data-[slot=command-input]:!h-9 **:data-[slot=command-input]:py-0 **:data-[slot=command-input-wrapper]:mb-0 **:data-[slot=command-input-wrapper]:!h-9 **:data-[slot=command-input-wrapper]:rounded-md **:data-[slot=command-input-wrapper]:border"
+          className="**:data-[slot=command-input-wrapper]:bg-input/50 **:data-[slot=command-input-wrapper]:border-input rounded-none bg-transparent **:data-[slot=command-input]:h-9! **:data-[slot=command-input]:py-0 **:data-[slot=command-input-wrapper]:mb-0 **:data-[slot=command-input-wrapper]:h-9! **:data-[slot=command-input-wrapper]:rounded-md **:data-[slot=command-input-wrapper]:border"
           filter={handleFilter}
         >
           <CommandInput placeholder="Search documentation..." />
