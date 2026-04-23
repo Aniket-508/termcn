@@ -39,7 +39,7 @@ export const DocsShareMenu = ({
     <DropdownMenu sounds>
       <DropdownMenuTrigger asChild>
         <Button
-          className="size-7 border-none active:scale-none"
+          className="hidden sm:flex size-7 border-none active:scale-none"
           variant="secondary"
           size="icon-sm"
         >

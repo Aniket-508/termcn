@@ -1,10 +1,6 @@
-import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
-
 import { ComponentPreview } from "@/components/component-preview";
 import { DirectionalTransition } from "@/components/directional-transition";
-import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/constants/routes";
+import { HomeCtas } from "@/components/home-ctas";
 import { cn } from "@/lib/utils";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 
@@ -58,25 +54,7 @@ export default function IndexPage() {
                 Built on Ink. Distributed via shadcn.
               </p>
 
-              <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
-                <Button asChild size="lg" sound="click">
-                  <Link
-                    href={ROUTES.DOCS_INSTALLATION}
-                    transitionTypes={["nav-forward"]}
-                  >
-                    Get Started
-                    <ArrowRightIcon className="ml-2 size-4" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" sound="click">
-                  <Link
-                    href={ROUTES.DOCS_COMPONENTS}
-                    transitionTypes={["nav-forward"]}
-                  >
-                    Browse Components
-                  </Link>
-                </Button>
-              </div>
+              <HomeCtas />
             </div>
           </div>
         </section>

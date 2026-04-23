@@ -7,17 +7,11 @@ import { DirectionalTransition } from "@/components/directional-transition";
 // import { DocsBaseSwitcher } from "@/components/docs-base-switcher";
 import { DocsCopyPage } from "@/components/docs-copy-page";
 import { DocsKeyboardShortcuts } from "@/components/docs-keyboard-shortcuts";
+import { DocsNavLink } from "@/components/docs-nav-link";
 import { DocsShareMenu } from "@/components/docs-share-menu";
 import { DocsTableOfContents } from "@/components/docs-toc";
 // import { DocsTocFooter } from "@/components/docs-toc-footer";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Kbd } from "@/components/ui/kbd";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { ROUTES } from "@/constants/routes";
 import { formatTitleFromSlug } from "@/lib/docs";
 import { getPageImage, source } from "@/lib/source";
@@ -127,62 +121,30 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                           url={absoluteUrl(page.url)}
                         />
                         {neighbours.previous && (
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="secondary"
-                                size="icon"
-                                className="extend-touch-target size-8 shadow-none md:size-7"
-                                asChild
-                                sound="click"
-                              >
-                                <Link
-                                  href={neighbours.previous.url}
-                                  transitionTypes={["nav-back"]}
-                                >
-                                  <ArrowLeftIcon />
-                                  <span className="sr-only">Previous</span>
-                                </Link>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent className="pr-2 pl-3">
-                              <div className="flex items-center gap-3">
-                                Previous Component
-                                <Kbd>
-                                  <ArrowLeftIcon />
-                                </Kbd>
-                              </div>
-                            </TooltipContent>
-                          </Tooltip>
+                          <DocsNavLink
+                            href={neighbours.previous.url}
+                            transitionTypes={["nav-back"]}
+                            className="extend-touch-target size-8 md:size-7"
+                            tooltip={{
+                              icon: <ArrowLeftIcon />,
+                              title: "Previous Component",
+                            }}
+                          >
+                            <span className="sr-only">Previous</span>
+                          </DocsNavLink>
                         )}
                         {neighbours.next && (
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="secondary"
-                                size="icon"
-                                className="extend-touch-target size-8 shadow-none md:size-7"
-                                asChild
-                                sound="click"
-                              >
-                                <Link
-                                  href={neighbours.next.url}
-                                  transitionTypes={["nav-forward"]}
-                                >
-                                  <span className="sr-only">Next</span>
-                                  <ArrowRightIcon />
-                                </Link>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent className="pr-2 pl-3">
-                              <div className="flex items-center gap-3">
-                                Next Component
-                                <Kbd>
-                                  <ArrowRightIcon />
-                                </Kbd>
-                              </div>
-                            </TooltipContent>
-                          </Tooltip>
+                          <DocsNavLink
+                            href={neighbours.next.url}
+                            transitionTypes={["nav-forward"]}
+                            className="extend-touch-target size-8 md:size-7"
+                            tooltip={{
+                              icon: <ArrowRightIcon />,
+                              title: "Next Component",
+                            }}
+                          >
+                            <span className="sr-only">Next</span>
+                          </DocsNavLink>
                         )}
                       </div>
                     </div>
@@ -228,36 +190,23 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
             </div>
             <div className="mx-auto hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-0">
               {neighbours.previous && (
-                <Button
-                  variant="secondary"
+                <DocsNavLink
+                  href={neighbours.previous.url}
+                  transitionTypes={["nav-back"]}
                   size="sm"
-                  asChild
-                  className="shadow-none"
-                  sound="click"
                 >
-                  <Link
-                    href={neighbours.previous.url}
-                    transitionTypes={["nav-back"]}
-                  >
-                    <ArrowLeftIcon /> {neighbours.previous.name}
-                  </Link>
-                </Button>
+                  {neighbours.previous.name}
+                </DocsNavLink>
               )}
               {neighbours.next && (
-                <Button
-                  variant="secondary"
+                <DocsNavLink
+                  href={neighbours.next.url}
+                  transitionTypes={["nav-forward"]}
+                  className="ml-auto"
                   size="sm"
-                  className="ml-auto shadow-none"
-                  asChild
-                  sound="click"
                 >
-                  <Link
-                    href={neighbours.next.url}
-                    transitionTypes={["nav-forward"]}
-                  >
-                    {neighbours.next.name} <ArrowRightIcon />
-                  </Link>
-                </Button>
+                  {neighbours.next.name}
+                </DocsNavLink>
               )}
             </div>
           </div>
