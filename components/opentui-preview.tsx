@@ -4,7 +4,7 @@ import "@xterm/xterm/css/xterm.css";
 import { Terminal } from "@xterm/xterm";
 import { useEffect, useMemo, useRef } from "react";
 
-import { useConfig } from "@/hooks/use-config";
+import { useTerminalTheme } from "@/hooks/use-terminal-theme";
 import { terminalThemeMap } from "@/lib/terminal-themes";
 
 export interface OpenTuiFramePreviewProps {
@@ -47,12 +47,12 @@ export const OpenTuiPreview = ({
   interval = 80,
   rows = 18,
 }: OpenTuiFramePreviewProps) => {
-  const [config] = useConfig();
+  const [terminalThemeKey] = useTerminalTheme();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const terminalRef = useRef<Terminal | null>(null);
   const theme = useMemo(
-    () => terminalThemeMap[config.terminalThemeKey],
-    [config.terminalThemeKey]
+    () => terminalThemeMap[terminalThemeKey],
+    [terminalThemeKey]
   );
 
   useEffect(() => {

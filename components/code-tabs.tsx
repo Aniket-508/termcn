@@ -1,29 +1,17 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
-
 import { Tabs } from "@/components/ui/tabs";
 import { useConfig } from "@/hooks/use-config";
 import type { InstallationType } from "@/hooks/use-config";
 
 export const CodeTabs = ({ children }: React.ComponentProps<typeof Tabs>) => {
   const [config, setConfig] = useConfig();
-
-  const installationType = useMemo(
-    () => config.installationType || "cli",
-    [config]
-  );
-
-  const handleValueChange = useCallback(
-    (value: string) =>
-      setConfig({ ...config, installationType: value as InstallationType }),
-    [config, setConfig]
-  );
-
   return (
     <Tabs
-      value={installationType}
-      onValueChange={handleValueChange}
+      value={config.installationType}
+      onValueChange={(value: string) =>
+        setConfig({ installationType: value as InstallationType })
+      }
       className="relative mt-6 w-full"
     >
       {children}

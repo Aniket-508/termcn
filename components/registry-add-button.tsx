@@ -77,7 +77,7 @@ export const RegistryAddButton = ({
     >
       {children ?? (
         <>
-          <PlusIcon className="size-4 sm:size-3.5" />
+          <PlusIcon />
           <span className="hidden sm:inline">Add</span>
         </>
       )}

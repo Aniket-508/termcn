@@ -6,7 +6,7 @@ import { InkTerminalBox } from "ink-web";
 import { useEffect, useMemo } from "react";
 
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { useConfig } from "@/hooks/use-config";
+import { useTerminalTheme } from "@/hooks/use-terminal-theme";
 import { terminalThemeMap } from "@/lib/terminal-themes";
 
 export interface InkPreviewProps {
@@ -22,17 +22,19 @@ const InkPreview = ({
   onReady,
   rows = 18,
 }: InkPreviewProps) => {
-  const [config, setConfig] = useConfig();
-  const themeKey = config.terminalThemeKey;
+  const [terminalThemeKey, setTerminalThemeKey] = useTerminalTheme();
 
   useEffect(() => {
     if (theme === undefined) {
       return;
     }
-    setConfig((c) => ({ ...c, terminalThemeKey: theme }));
-  }, [theme, setConfig]);
+    setTerminalThemeKey(theme);
+  }, [theme, setTerminalThemeKey]);
 
-  const baseTheme = useMemo(() => terminalThemeMap[themeKey], [themeKey]);
+  const baseTheme = useMemo(
+    () => terminalThemeMap[terminalThemeKey],
+    [terminalThemeKey]
+  );
 
   const xtermTheme = useMemo(
     () => ({

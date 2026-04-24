@@ -1,6 +1,6 @@
 import { FileIcon, TerminalSquareIcon } from "lucide-react";
 
-import type { PackageManager } from "@/hooks/use-config";
+import type { PackageManager } from "@/hooks/use-package-manager";
 import { cn } from "@/lib/utils";
 
 export const ThemeIcon = ({
