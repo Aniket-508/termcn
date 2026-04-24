@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 
 import { ArrowRightIcon } from "./animated-icons/arrow-right";
 import type { ArrowRightIconHandle } from "./animated-icons/arrow-right";
+import { ComponentIcon } from "./animated-icons/component";
+import type { ComponentIconHandle } from "./animated-icons/component";
 
 const GetStartedButton = () => {
   const arrowRightRef = useRef<ArrowRightIconHandle>(null);
@@ -24,15 +26,46 @@ const GetStartedButton = () => {
   return (
     <Button
       asChild
-      size="lg"
       sound="click"
-      className="px-4 sm:px-6"
+      className="px-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Link href={ROUTES.DOCS_INSTALLATION} transitionTypes={["nav-forward"]}>
         Get Started
-        <ArrowRightIcon className="hidden sm:inline ml-2" ref={arrowRightRef} />
+        <ArrowRightIcon className="hidden sm:inline" ref={arrowRightRef} />
+      </Link>
+    </Button>
+  );
+};
+
+const BrowseComponentsButton = () => {
+  const componentIconRef = useRef<ComponentIconHandle>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    componentIconRef.current?.startAnimation();
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    componentIconRef.current?.stopAnimation();
+  }, []);
+
+  return (
+    <Button
+      asChild
+      variant="outline"
+      sound="click"
+      className="px-4"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Link href={ROUTES.DOCS_COMPONENTS} transitionTypes={["nav-forward"]}>
+        <ComponentIcon
+          className="hidden sm:inline"
+          ref={componentIconRef}
+          size={22}
+        />
+        Browse Components
       </Link>
     </Button>
   );
@@ -46,16 +79,6 @@ export const HomeCtas = ({ className }: { className?: string }) => (
     )}
   >
     <GetStartedButton />
-    <Button
-      asChild
-      size="lg"
-      variant="outline"
-      sound="click"
-      className="px-4 sm:px-6"
-    >
-      <Link href={ROUTES.DOCS_COMPONENTS} transitionTypes={["nav-forward"]}>
-        Browse Components
-      </Link>
-    </Button>
+    <BrowseComponentsButton />
   </div>
 );
