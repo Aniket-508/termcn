@@ -30,8 +30,11 @@ export const motionIconProps: HTMLMotionProps<"span"> = {
   variants: motionIconVariants,
 };
 
-export interface CopyButtonProps extends React.ComponentProps<typeof Button> {
-  value: string;
+export interface CopyButtonProps extends Omit<
+  React.ComponentProps<typeof Button>,
+  "value"
+> {
+  value: string | (() => string);
   src?: string;
   event?: Event["name"];
   showTooltip?: boolean;
@@ -46,13 +49,18 @@ export const CopyButton = ({
   showTooltip = true,
   ...props
 }: CopyButtonProps) => {
+  const getValue = useCallback(
+    () => (typeof value === "function" ? value() : value),
+    [value]
+  );
+
   const { copyToClipboard, isCopied } = useCopyToClipboard({
     onCopy: () => {
       if (event) {
         trackEvent({
           name: event,
           properties: {
-            code: value,
+            code: getValue(),
           },
         });
       }
@@ -61,8 +69,8 @@ export const CopyButton = ({
   });
 
   const handleCopy = useCallback(async () => {
-    await copyToClipboard(value);
-  }, [value, copyToClipboard]);
+    await copyToClipboard(getValue());
+  }, [copyToClipboard, getValue]);
 
   const copyButton = (
     <Button

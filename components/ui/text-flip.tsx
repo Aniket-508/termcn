@@ -28,11 +28,9 @@ export const TextFlip = ({
   as: Component = motion.p,
   className,
   children,
-
   interval = 2,
   transition = { duration: 0.3 },
   variants = defaultVariants,
-
   onIndexChange,
 }: TextFlipProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -41,15 +39,15 @@ export const TextFlip = ({
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % items.length);
+      setCurrentIndex((prev) => {
+        const next = (prev + 1) % items.length;
+        onIndexChange?.(next);
+        return next;
+      });
     }, interval * 1000);
 
     return () => clearInterval(timer);
-  }, [items.length, interval]);
-
-  useEffect(() => {
-    onIndexChange?.(currentIndex);
-  }, [currentIndex, onIndexChange]);
+  }, [items.length, interval, onIndexChange]);
 
   return (
     <AnimatePresence mode="wait" initial={false}>
