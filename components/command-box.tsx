@@ -110,7 +110,7 @@ export const CommandBox = ({ className }: { className?: string }) => {
                     {command}{" "}
                     <span className="select-none sm:hidden" aria-hidden="true">
                       \
-                    </span>{" "}
+                    </span>
                   </span>
 
                   <span>{SITE.REGISTRY}/</span>

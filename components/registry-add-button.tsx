@@ -26,6 +26,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { trackEvent } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 export const RegistryAddButton = ({
@@ -34,6 +35,7 @@ export const RegistryAddButton = ({
   registry,
   size = "sm",
   variant = "ghost",
+  onClick,
   ...props
 }: {
   registry: { name: string } | string;
@@ -55,8 +57,24 @@ export const RegistryAddButton = ({
     [registryName]
   );
 
+  const handleTriggerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    trackEvent({
+      name: "click_registry_add_button",
+      properties: {
+        registry: registryName,
+      },
+    });
+    onClick?.(e);
+  };
+
   const trigger = (
-    <Button size={size} variant={variant} className={cn(className)} {...props}>
+    <Button
+      size={size}
+      variant={variant}
+      className={cn(className)}
+      onClick={handleTriggerClick}
+      {...props}
+    >
       {children ?? (
         <>
           <PlusIcon className="size-4 sm:size-3.5" />
@@ -69,7 +87,7 @@ export const RegistryAddButton = ({
   return (
     <>
       {isMobile ? (
-        <Drawer open={isOpen} onOpenChange={setIsOpen}>
+        <Drawer open={isOpen} onOpenChange={setIsOpen} sounds>
           <DrawerTrigger asChild>{trigger}</DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
@@ -84,6 +102,7 @@ export const RegistryAddButton = ({
                 __npm__={commands.npm}
                 __pnpm__={commands.pnpm}
                 __yarn__={commands.yarn}
+                copyEvent="copy_registry_command"
               />
             </div>
             <DrawerFooter>
@@ -108,6 +127,7 @@ export const RegistryAddButton = ({
               __npm__={commands.npm}
               __pnpm__={commands.pnpm}
               __yarn__={commands.yarn}
+              copyEvent="copy_registry_command"
             />
             <DialogFooter>
               <DialogClose asChild>

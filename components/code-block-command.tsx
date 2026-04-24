@@ -7,6 +7,7 @@ import { getIconForPackageManager } from "@/components/icons";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useConfig } from "@/hooks/use-config";
 import type { PackageManager } from "@/hooks/use-config";
+import type { Event } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 export const CodeBlockCommand = ({
@@ -15,12 +16,14 @@ export const CodeBlockCommand = ({
   __pnpm__,
   __bun__,
   className,
+  copyEvent = "copy_npm_command",
 }: {
   __npm__?: string;
   __yarn__?: string;
   __pnpm__?: string;
   __bun__?: string;
   className?: string;
+  copyEvent?: Event["name"];
 }) => {
   const [config, setConfig] = useConfig();
 
@@ -99,7 +102,7 @@ export const CodeBlockCommand = ({
       <CopyButton
         className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
         value={copyValue}
-        event="copy_npm_command"
+        event={copyEvent}
       />
     </div>
   );
