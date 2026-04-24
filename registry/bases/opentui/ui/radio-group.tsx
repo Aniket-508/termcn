@@ -33,7 +33,7 @@ const getOptionColor = (
   return theme.colors.foreground;
 };
 
-export const RadioGroup = <T = string>({
+export const RadioGroup = <T = string,>({
   options,
   value: controlledValue,
   onChange,

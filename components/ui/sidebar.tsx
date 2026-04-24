@@ -1,9 +1,9 @@
 "use client";
 
-import { Slot } from "@radix-ui/react-slot";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
+import { Slot } from "radix-ui";
 import {
   createContext,
   useCallback,
@@ -30,6 +30,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import type { FeedbackType } from "@/hooks/use-feedback";
+import { useFeedback } from "@/hooks/use-feedback";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
@@ -192,7 +194,7 @@ const Sidebar = ({
 
   if (isMobile) {
     return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+      <Sheet open={openMobile} onOpenChange={setOpenMobile} sounds {...props}>
         <SheetContent
           data-sidebar="sidebar"
           data-slot="sidebar"
@@ -415,7 +417,7 @@ const SidebarGroupLabel = ({
   asChild = false,
   ...props
 }: React.ComponentProps<"div"> & { asChild?: boolean }) => {
-  const Comp = asChild ? Slot : "div";
+  const Comp = asChild ? Slot.Root : "div";
 
   return (
     <Comp
@@ -436,7 +438,7 @@ const SidebarGroupAction = ({
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> & { asChild?: boolean }) => {
-  const Comp = asChild ? Slot : "button";
+  const Comp = asChild ? Slot.Root : "button";
 
   return (
     <Comp
@@ -516,14 +518,27 @@ const SidebarMenuButton = ({
   size = "default",
   tooltip,
   className,
+  sound,
+  haptic,
+  onClick,
   ...props
 }: React.ComponentProps<"button"> & {
   asChild?: boolean;
   isActive?: boolean;
   tooltip?: string | React.ComponentProps<typeof TooltipContent>;
+  sound?: FeedbackType;
+  haptic?: boolean;
 } & VariantProps<typeof sidebarMenuButtonVariants>) => {
-  const Comp = asChild ? Slot : "button";
   const { isMobile, state } = useSidebar();
+
+  const play = useFeedback({ haptic, sound });
+
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    play();
+    onClick?.(e);
+  };
+
+  const Comp = asChild ? Slot.Root : "button";
 
   const button = (
     <Comp
@@ -532,6 +547,7 @@ const SidebarMenuButton = ({
       data-size={size}
       data-active={isActive}
       className={cn(sidebarMenuButtonVariants({ size, variant }), className)}
+      onClick={handleClick}
       {...props}
     />
   );
@@ -565,7 +581,7 @@ const SidebarMenuAction = ({
   asChild?: boolean;
   showOnHover?: boolean;
 }) => {
-  const Comp = asChild ? Slot : "button";
+  const Comp = asChild ? Slot.Root : "button";
 
   return (
     <Comp
@@ -683,7 +699,7 @@ const SidebarMenuSubButton = ({
   size?: "sm" | "md";
   isActive?: boolean;
 }) => {
-  const Comp = asChild ? Slot : "a";
+  const Comp = asChild ? Slot.Root : "a";
 
   return (
     <Comp

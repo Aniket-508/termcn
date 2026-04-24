@@ -80,7 +80,7 @@ const getNodeColor = (
   return theme.colors.foreground;
 };
 
-export const TreeSelect = <T = string>({
+export const TreeSelect = <T = string,>({
   nodes,
   value: controlledValue,
   onChange,

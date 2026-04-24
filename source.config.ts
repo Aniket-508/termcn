@@ -6,6 +6,7 @@ import {
 } from "fumadocs-mdx/config";
 import { rehypePrettyCode } from "rehype-pretty-code";
 
+import { DOCS_DIR } from "@/lib/docs";
 import { transformers } from "@/lib/highlight-code";
 
 export default defineConfig({
@@ -29,7 +30,7 @@ export default defineConfig({
 });
 
 export const docs = defineDocs({
-  dir: "content/docs",
+  dir: DOCS_DIR,
   docs: {
     postprocess: {
       includeProcessedMarkdown: true,

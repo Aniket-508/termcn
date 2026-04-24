@@ -40,7 +40,7 @@ export const GET = (request: Request) => {
       </div>
     </div>,
     {
-      height: 628,
+      height: 630,
       width: 1200,
     }
   );

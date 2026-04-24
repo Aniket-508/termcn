@@ -21,6 +21,7 @@ const ComponentGrid = ({ pages }: { pages: PageTreePage[] }) => (
         key={component.$id}
         href={component.url}
         className="inline-flex items-center gap-2 text-lg font-medium underline-offset-4 hover:underline md:text-base"
+        transitionTypes={["nav-forward"]}
       >
         {component.name}
       </Link>

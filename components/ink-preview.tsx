@@ -58,6 +58,7 @@ const InkPreview = ({
         loading={false}
         padding={10}
         rows={rows}
+        focus={false}
         termOptions={{ theme: xtermTheme }}
         onReady={onReady}
       >

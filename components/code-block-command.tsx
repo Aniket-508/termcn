@@ -7,6 +7,7 @@ import { getIconForPackageManager } from "@/components/icons";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useConfig } from "@/hooks/use-config";
 import type { PackageManager } from "@/hooks/use-config";
+import type { Event } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 export const CodeBlockCommand = ({
@@ -15,12 +16,14 @@ export const CodeBlockCommand = ({
   __pnpm__,
   __bun__,
   className,
+  copyEvent = "copy_npm_command",
 }: {
   __npm__?: string;
   __yarn__?: string;
   __pnpm__?: string;
   __bun__?: string;
   className?: string;
+  copyEvent?: Event["name"];
 }) => {
   const [config, setConfig] = useConfig();
 
@@ -70,7 +73,8 @@ export const CodeBlockCommand = ({
             {Object.entries(commandTabs).map(([key]) => (
               <TabsTrigger
                 key={key}
-                className="data-[state=active]:bg-accent data-[state=active]:border-input h-7 border border-transparent pt-0.5 data-[state=active]:shadow-none"
+                className="data-[state=active]:border-input h-7 border border-transparent pt-0.5 data-[state=active]:shadow-none"
+                sound="tabSwitch"
                 value={key}
               >
                 {key}
@@ -83,9 +87,11 @@ export const CodeBlockCommand = ({
             <TabsContent key={key} className="mt-0 px-4 py-3.5" value={key}>
               <pre>
                 <code
-                  className="relative font-mono text-sm leading-none"
+                  data-slot="code-block"
                   data-language="bash"
+                  className="font-mono text-sm/none"
                 >
+                  <span className="select-none">$ </span>
                   {value}
                 </code>
               </pre>
@@ -96,7 +102,7 @@ export const CodeBlockCommand = ({
       <CopyButton
         className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
         value={copyValue}
-        event="copy_npm_command"
+        event={copyEvent}
       />
     </div>
   );

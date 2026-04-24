@@ -23,6 +23,7 @@ export const CodeCollapsibleWrapper = ({
 
   return (
     <Collapsible
+      sounds
       open={isOpened}
       onOpenChange={setIsOpened}
       className={cn("group/collapsible relative md:-mx-1", className)}
@@ -51,9 +52,14 @@ export const CodeCollapsibleWrapper = ({
       >
         {children}
       </CollapsibleContent>
-      <CollapsibleTrigger className="absolute inset-x-0 -bottom-2 flex h-20 items-center justify-center rounded-b-lg bg-linear-to-b from-code/70 to-code text-sm text-muted-foreground group-data-[state=open]/collapsible:hidden">
-        {isOpened ? "Collapse" : "Expand"}
-      </CollapsibleTrigger>
+
+      <div className="absolute inset-x-0 -bottom-2 flex h-20 items-center justify-center rounded-b-lg bg-linear-to-b from-code/70 to-code group-data-[state=open]/collapsible:hidden">
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" size="sm">
+            Expand
+          </Button>
+        </CollapsibleTrigger>
+      </div>
     </Collapsible>
   );
 };

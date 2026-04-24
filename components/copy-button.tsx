@@ -1,7 +1,9 @@
 "use client";
 
 import { CheckIcon, CopyIcon } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import type { HTMLMotionProps, Variants } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useCallback } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,16 +11,31 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import type { Event } from "@/lib/events";
 import { trackEvent } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
-export const copyToClipboardWithMeta = (value: string, event?: Event) => {
-  navigator.clipboard.writeText(value);
-  if (event) {
-    trackEvent(event);
-  }
+export const motionIconVariants: Variants = {
+  animate: { filter: "blur(0px)", opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.8 },
+  initial: { filter: "blur(2px)", opacity: 0, scale: 0.8 },
 };
+
+export const motionIconProps: HTMLMotionProps<"span"> = {
+  animate: "animate",
+  exit: "exit",
+  initial: "initial",
+  transition: { duration: 0.15, ease: "easeOut" },
+  variants: motionIconVariants,
+};
+
+export interface CopyButtonProps extends React.ComponentProps<typeof Button> {
+  value: string;
+  src?: string;
+  event?: Event["name"];
+  showTooltip?: boolean;
+}
 
 export const CopyButton = ({
   value,
@@ -26,60 +43,67 @@ export const CopyButton = ({
   variant = "ghost",
   event,
   children,
+  showTooltip = true,
   ...props
-}: React.ComponentProps<typeof Button> & {
-  value: string;
-  src?: string;
-  event?: Event["name"];
-}) => {
-  const [hasCopied, setHasCopied] = useState(false);
+}: CopyButtonProps) => {
+  const { copyToClipboard, isCopied } = useCopyToClipboard({
+    onCopy: () => {
+      if (event) {
+        trackEvent({
+          name: event,
+          properties: {
+            code: value,
+          },
+        });
+      }
+    },
+    timeout: 1000,
+  });
 
-  useEffect(() => {
-    setTimeout(() => setHasCopied(false), 1000);
-  }, []);
+  const handleCopy = useCallback(async () => {
+    await copyToClipboard(value);
+  }, [value, copyToClipboard]);
 
-  const handleCopy = useCallback(() => {
-    copyToClipboardWithMeta(
-      value,
-      event
-        ? {
-            name: event,
-            properties: {
-              code: value,
-            },
-          }
-        : undefined
-    );
-    setHasCopied(true);
-  }, [value, event]);
+  const copyButton = (
+    <Button
+      data-slot="copy-button"
+      size={children ? "sm" : "icon"}
+      variant={variant}
+      className={cn(
+        children
+          ? ""
+          : "bg-code absolute top-3 right-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
+        className
+      )}
+      sound="copy"
+      onClick={handleCopy}
+      {...props}
+    >
+      <span className="sr-only">Copy</span>
+      <AnimatePresence mode="popLayout" initial={false}>
+        {isCopied ? (
+          <motion.span key="done" {...motionIconProps}>
+            <CheckIcon strokeWidth={3} />
+          </motion.span>
+        ) : (
+          <motion.span key="idle" {...motionIconProps}>
+            <CopyIcon />
+          </motion.span>
+        )}
+      </AnimatePresence>
+      {children}
+    </Button>
+  );
+
+  if (!showTooltip) {
+    return copyButton;
+  }
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          data-slot="copy-button"
-          size={children ? "sm" : "icon"}
-          variant={variant}
-          className={cn(
-            children
-              ? ""
-              : "bg-code absolute top-3 right-2 z-10 size-7 hover:opacity-100 focus-visible:opacity-100",
-            className
-          )}
-          onClick={handleCopy}
-          {...props}
-        >
-          <span className="sr-only">Copy</span>
-          {hasCopied ? (
-            <CheckIcon className="size-4" />
-          ) : (
-            <CopyIcon className="size-4" />
-          )}
-          {children}
-        </Button>
-      </TooltipTrigger>
+      <TooltipTrigger asChild>{copyButton}</TooltipTrigger>
       <TooltipContent>
-        {hasCopied ? "Copied" : "Copy to Clipboard"}
+        {isCopied ? "Copied" : "Copy to Clipboard"}
       </TooltipContent>
     </Tooltip>
   );

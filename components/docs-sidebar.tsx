@@ -13,6 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ROUTES } from "@/constants/routes";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
 import {
   getCategoryFoldersForBase,
@@ -22,18 +23,18 @@ import {
 import type { source } from "@/lib/source";
 
 const TOP_LEVEL_SECTIONS = [
-  { href: "/docs", name: "Introduction" },
-  { href: "/docs/installation", name: "Installation" },
-  { href: "/docs/components", name: "Components" },
-  { href: "/docs/templates", name: "Templates" },
-  { href: "/docs/theming", name: "Theming" },
-  { href: "/docs/mcp", name: "MCP" },
-  { href: "/docs/registry", name: "Registry" },
-  { href: "/llms.txt", name: "llms.txt" },
+  { href: ROUTES.DOCS, name: "Introduction" },
+  { href: ROUTES.DOCS_INSTALLATION, name: "Installation" },
+  { href: ROUTES.DOCS_COMPONENTS, name: "Components" },
+  { href: ROUTES.DOCS_TEMPLATES, name: "Templates" },
+  { href: ROUTES.DOCS_THEMING, name: "Theming" },
+  { href: ROUTES.DOCS_MCP, name: "MCP" },
+  { href: ROUTES.DOCS_REGISTRY, name: "Registry" },
+  { href: ROUTES.LLMS, name: "llms.txt" },
 ];
 
 const MENU_BUTTON_CLS =
-  "data-[active=true]:bg-accent data-[active=true]:border-accent relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md";
+  "relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48";
 
 const SidebarPageGroup = ({
   label,
@@ -53,15 +54,19 @@ const SidebarPageGroup = ({
         {label}
       </SidebarGroupLabel>
       <SidebarGroupContent>
-        <SidebarMenu className="gap-0.5">
+        <SidebarMenu>
           {pages.map((page) => (
             <SidebarMenuItem key={page.url}>
               <SidebarMenuButton
                 asChild
                 isActive={page.url === pathname}
                 className={MENU_BUTTON_CLS}
+                sound="click"
               >
-                <Link href={page.url}>{page.name}</Link>
+                <Link href={page.url} transitionTypes={["nav-forward"]}>
+                  <span className="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />
+                  {page.name}
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
@@ -82,18 +87,20 @@ export const DocsSidebar = ({
 
   return (
     <Sidebar
-      className="sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex"
+      className="flex-col text-sidebar-foreground sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] overscroll-none bg-transparent [--sidebar-menu-width:--spacing(48)] lg:flex"
       collapsible="none"
       {...props}
     >
-      <SidebarContent className="no-scrollbar px-2 pb-12">
-        <div className="h-(--top-spacing) shrink-0" />
-        <SidebarGroup>
+      <div className="h-9" />
+      <div className="absolute top-8 z-10 h-8 w-(--sidebar-menu-width) shrink-0 bg-linear-to-b from-background via-background/80 to-background/50 blur-xs" />
+      <div className="absolute top-12 right-2 bottom-0 hidden h-full w-px bg-linear-to-b from-transparent via-border to-transparent lg:flex" />
+      <SidebarContent className="mx-auto no-scrollbar w-(--sidebar-menu-width) overflow-x-hidden px-2">
+        <SidebarGroup className="pt-6">
           <SidebarGroupLabel className="text-muted-foreground font-medium">
             Sections
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="gap-0.5">
+            <SidebarMenu>
               {TOP_LEVEL_SECTIONS.map(({ name, href }) => (
                 <SidebarMenuItem key={name}>
                   <SidebarMenuButton
@@ -104,8 +111,12 @@ export const DocsSidebar = ({
                         : pathname.startsWith(href)
                     }
                     className={MENU_BUTTON_CLS}
+                    sound="click"
                   >
-                    <Link href={href}>{name}</Link>
+                    <Link href={href} transitionTypes={["nav-forward"]}>
+                      <span className="absolute inset-0 flex w-(--sidebar-menu-width) bg-transparent" />
+                      {name}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -142,6 +153,7 @@ export const DocsSidebar = ({
             />
           );
         })}
+        <div className="sticky -bottom-1 z-10 h-16 shrink-0 bg-linear-to-t from-background via-background/80 to-background/50 blur-xs" />
       </SidebarContent>
     </Sidebar>
   );

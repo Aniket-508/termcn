@@ -1,14 +1,75 @@
 "use client";
 
-import * as PopoverPrimitive from "@radix-ui/react-popover";
+import { useSound } from "@web-kits/audio/react";
+import { Popover as PopoverPrimitive } from "radix-ui";
+import { useCallback, useEffect, useRef } from "react";
 
+import { dropdownClose, dropdownOpen } from "@/audio/core";
 import { cn } from "@/lib/utils";
 
 const Popover = ({
+  onOpenChange,
+  sounds = false,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Root>) => (
-  <PopoverPrimitive.Root data-slot="popover" {...props} />
-);
+}: React.ComponentProps<typeof PopoverPrimitive.Root> & {
+  sounds?: boolean;
+}) => {
+  const playOpen = useSound(dropdownOpen);
+  const playClose = useSound(dropdownClose);
+  const isControlled = props.open !== undefined;
+  const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
+
+  const playStateSound = useCallback(
+    (open: boolean) => {
+      if (!sounds || open === lastOpen.current) {
+        return;
+      }
+
+      if (open) {
+        playOpen();
+      } else {
+        playClose();
+      }
+
+      lastOpen.current = open;
+    },
+    [playClose, playOpen, sounds]
+  );
+
+  useEffect(() => {
+    if (!isControlled) {
+      return;
+    }
+
+    playStateSound(props.open ?? false);
+  }, [isControlled, playStateSound, props.open]);
+
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      playStateSound(open);
+      onOpenChange?.(open);
+    },
+    [onOpenChange, playStateSound]
+  );
+
+  if (!sounds) {
+    return (
+      <PopoverPrimitive.Root
+        data-slot="popover"
+        onOpenChange={onOpenChange}
+        {...props}
+      />
+    );
+  }
+
+  return (
+    <PopoverPrimitive.Root
+      data-slot="popover"
+      onOpenChange={handleOpenChange}
+      {...props}
+    />
+  );
+};
 
 const PopoverTrigger = ({
   ...props

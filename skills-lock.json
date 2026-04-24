@@ -10,6 +10,16 @@
       "source": "msmps/opentui-skill",
       "sourceType": "github",
       "computedHash": "2915038bb3297e759f740f9e6bfa885ed80a4a7fe945825f5874b48db9ce0fd2"
+    },
+    "vercel-react-view-transitions": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "c8952fc9127fa0564d0cb71dccb4215a5608ac933b5831104f09173a97a46f85"
+    },
+    "web-haptics": {
+      "source": "lochie/web-haptics",
+      "sourceType": "github",
+      "computedHash": "a6dce0fce9dc37f4dac87cd9ed2dc0e32e1ec3a5d8c860e1af07fee670295b7b"
     }
   }
 }

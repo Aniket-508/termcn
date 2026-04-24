@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ROUTES } from "@/constants/routes";
+import { useFeedback } from "@/hooks/use-feedback";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
 import {
   getCategoryFoldersForBase,
@@ -33,10 +34,13 @@ const MobileLink = ({
   className?: string;
 }) => {
   const router = useRouter();
+  const playClick = useFeedback({ sound: "click" });
+
   const handleClick = useCallback(() => {
+    playClick();
     router.push(href.toString());
     onOpenChange?.(false);
-  }, [router, href, onOpenChange]);
+  }, [router, href, onOpenChange, playClick]);
 
   return (
     <Link
@@ -90,7 +94,7 @@ export const MobileNav = ({
   const currentBase = getCurrentBase(pathname);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover sounds open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="ghost"

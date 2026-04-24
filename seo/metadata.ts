@@ -87,6 +87,11 @@ export const baseMetadata: Metadata = {
   category: "technology",
   creator: SITE.AUTHOR.NAME,
   description: SITE.DESCRIPTION.LONG,
+  icons: {
+    apple: "/apple-touch-icon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+  },
   keywords: [...SITE.KEYWORDS],
   metadataBase: new URL(SITE.URL),
   openGraph: {

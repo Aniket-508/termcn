@@ -1,6 +1,5 @@
 "use client";
 
-import type { DialogProps } from "@radix-ui/react-dialog";
 import type { Root as PageTreeRoot } from "fumadocs-core/page-tree";
 import {
   ArrowRightIcon,
@@ -11,7 +10,6 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { copyToClipboardWithMeta } from "@/components/copy-button";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -32,9 +30,12 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SITE } from "@/constants/site";
 import { useConfig } from "@/hooks/use-config";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { useFeedback } from "@/hooks/use-feedback";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
+import { trackEvent } from "@/lib/events";
 import {
   getCategoryFoldersForBase,
   getCurrentBase,
@@ -147,7 +148,7 @@ const CommandMenuItem = ({
     <CommandItem
       ref={ref}
       className={cn(
-        "data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-medium",
+        "data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent px-3! font-medium",
         className
       )}
       {...props}
@@ -162,7 +163,7 @@ export const CommandMenu = ({
   navItems,
   tree,
   ...props
-}: DialogProps & {
+}: React.ComponentProps<typeof Dialog> & {
   blocks?: { name: string; description: string; categories: string[] }[];
   navItems: { href: string; label: string }[];
   tree: PageTreeRoot;
@@ -176,6 +177,18 @@ export const CommandMenu = ({
   const [copyPayload, setCopyPayload] = useState("");
   const packageManager = config.packageManager || "pnpm";
   const currentBase = getCurrentBase(pathname);
+  const copyFeedback = useFeedback({ sound: "copy" });
+
+  const { copyToClipboard } = useCopyToClipboard({
+    onCopy: () => {
+      if (copyPayload) {
+        trackEvent({
+          name: "copy_npm_command",
+          properties: { command: copyPayload, pm: packageManager },
+        });
+      }
+    },
+  });
 
   const treeGroups = useMemo(() => {
     const groups: { label: string; pages: { url: string; name: string }[] }[] =
@@ -301,27 +314,39 @@ export const CommandMenu = ({
         }
 
         e.preventDefault();
-        setOpen((prev) => !prev);
-      }
-
-      if (e.key === "c" && (e.metaKey || e.ctrlKey)) {
-        runCommand(() => {
-          if (copyPayload) {
-            copyToClipboardWithMeta(copyPayload, {
-              name: "copy_npm_command",
-              properties: { command: copyPayload, pm: packageManager },
+        setOpen((prev) => {
+          if (!prev) {
+            const metaKeyPressed = e.metaKey ? "cmd+k" : "ctrl+k";
+            trackEvent({
+              name: "open_command_menu",
+              properties: {
+                key: e.key === "/" ? "/" : metaKeyPressed,
+                method: "keyboard",
+              },
             });
           }
+          return !prev;
+        });
+      }
+
+      if (
+        e.key === "c" &&
+        (e.metaKey || e.ctrlKey) &&
+        copyPayload.includes("shadcn@latest")
+      ) {
+        runCommand(() => {
+          copyFeedback();
+          copyToClipboard(copyPayload);
         });
       }
     };
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
-  }, [copyPayload, runCommand, packageManager]);
+  }, [copyPayload, runCommand, copyToClipboard, copyFeedback]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} sounds>
       <DialogTrigger asChild>
         <Button
           variant="secondary"
@@ -348,7 +373,7 @@ export const CommandMenu = ({
           <DialogDescription>Search for a command to run...</DialogDescription>
         </DialogHeader>
         <Command
-          className="**:data-[slot=command-input-wrapper]:bg-input/50 **:data-[slot=command-input-wrapper]:border-input rounded-none bg-transparent **:data-[slot=command-input]:!h-9 **:data-[slot=command-input]:py-0 **:data-[slot=command-input-wrapper]:mb-0 **:data-[slot=command-input-wrapper]:!h-9 **:data-[slot=command-input-wrapper]:rounded-md **:data-[slot=command-input-wrapper]:border"
+          className="**:data-[slot=command-input-wrapper]:bg-input/50 **:data-[slot=command-input-wrapper]:border-input rounded-none bg-transparent **:data-[slot=command-input]:h-9! **:data-[slot=command-input]:py-0 **:data-[slot=command-input-wrapper]:mb-0 **:data-[slot=command-input-wrapper]:h-9! **:data-[slot=command-input-wrapper]:rounded-md **:data-[slot=command-input-wrapper]:border"
           filter={handleFilter}
         >
           <CommandInput placeholder="Search documentation..." />

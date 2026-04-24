@@ -14,7 +14,7 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
+  AccordionTrigger as AccordionTriggerBase,
 } from "@/components/ui/accordion";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -27,7 +27,9 @@ export const mdxComponents = {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
+  AccordionTrigger: (
+    props: React.ComponentProps<typeof AccordionTriggerBase>
+  ) => <AccordionTriggerBase sound="click" {...props} />,
   Alert,
   AlertDescription,
   AlertTitle,
@@ -149,6 +151,7 @@ export const mdxComponents = {
     ...props
   }: React.ComponentProps<typeof TabsTrigger>) => (
     <TabsTrigger
+      sound="tabSwitch"
       className={cn(
         "text-muted-foreground data-[state=active]:text-foreground data-[state=active]:border-primary dark:data-[state=active]:border-primary hover:text-primary rounded-none border-0 border-b-2 border-transparent bg-transparent px-0 pb-3 text-base data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:data-[state=active]:bg-transparent",
         className
