@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 import { ROUTES } from "@/constants/routes";
-import { docsContentRoute } from "@/lib/docs";
+import { docsContentRoute, homeContentRoute } from "@/lib/docs";
 
 const { rewrite: rewriteDocs } = rewritePath(
   `${ROUTES.DOCS}{/*path}`,
@@ -15,6 +15,17 @@ const { rewrite: rewriteSuffix } = rewritePath(
 );
 
 export default function proxy(request: NextRequest) {
+  if (
+    request.nextUrl.pathname === "/" &&
+    (request.method === "GET" || request.method === "HEAD") &&
+    isMarkdownPreferred(request)
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = homeContentRoute;
+
+    return NextResponse.rewrite(url);
+  }
+
   const result = rewriteSuffix(request.nextUrl.pathname);
   if (result) {
     return NextResponse.rewrite(new URL(result, request.nextUrl));

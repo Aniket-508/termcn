@@ -22,5 +22,6 @@ const TITLE_OVERRIDES: Record<string, string> = {
 export const formatTitleFromSlug = (slug: string): string =>
   TITLE_OVERRIDES[slug] ?? formatLabelFromSlug(slug);
 
+export const homeContentRoute = `${ROUTES.LLMS_MDX}/content.md`;
 export const docsContentRoute = `${ROUTES.LLMS_MDX}${ROUTES.DOCS}`;
 export const docsImageRoute = `${ROUTES.OG}${ROUTES.DOCS}`;

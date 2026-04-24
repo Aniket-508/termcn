@@ -11,6 +11,16 @@ const nextConfig = {
   experimental: {
     viewTransition: true,
   },
+  headers() {
+    const link = [
+      '</.well-known/api-catalog>; rel="api-catalog"',
+      '</openapi.json>; rel="service-desc"',
+      '</docs>; rel="service-doc"',
+      '</.well-known/agent-skills/index.json>; rel="describedby"',
+    ].join(", ");
+
+    return [{ headers: [{ key: "Link", value: link }], source: "/" }];
+  },
   images: {
     remotePatterns: [
       {
