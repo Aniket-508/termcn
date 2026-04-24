@@ -75,18 +75,18 @@ import { Wizard } from "@/components/ui/wizard";
 
 ### Wizard
 
-| Prop           | Type                                 | Default     |
-| -------------- | ------------------------------------ | ----------- |
-| `steps`        | `WizardStep[]`                       | `required`  |
-| `onComplete`   | `(completedSteps: string[]) => void` | `undefined` |
-| `onCancel`     | `() => void`                         | `undefined` |
-| `showProgress` | `boolean`                            | `true`      |
+| Prop           | Type                                 | Default    |
+| -------------- | ------------------------------------ | ---------- |
+| `steps`        | `WizardStep[]`                       | `required` |
+| `onComplete`   | `(completedSteps: string[]) => void` | -          |
+| `onCancel`     | `() => void`                         | -          |
+| `showProgress` | `boolean`                            | `true`     |
 
 ### WizardStep
 
-| Prop       | Type                      | Default     |
-| ---------- | ------------------------- | ----------- |
-| `key`      | `string`                  | `required`  |
-| `title`    | `string`                  | `required`  |
-| `content`  | `ReactNode`               | `required`  |
-| `validate` | `() => boolean \| string` | `undefined` |
+| Prop       | Type                      | Default    |
+| ---------- | ------------------------- | ---------- |
+| `key`      | `string`                  | `required` |
+| `title`    | `string`                  | `required` |
+| `content`  | `ReactNode`               | `required` |
+| `validate` | `() => boolean \| string` | -          |

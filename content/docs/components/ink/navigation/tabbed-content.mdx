@@ -68,16 +68,16 @@ import { TabbedContent } from "@/components/ui/tabbed-content";
 | Prop          | Type                                | Default       |
 | ------------- | ----------------------------------- | ------------- |
 | `tabs`        | `TabbedContentTab[]`                | `required`    |
-| `defaultTab`  | `string`                            | `undefined`   |
-| `activeTab`   | `string`                            | `undefined`   |
-| `onChange`    | `(id: string) => void`              | `undefined`   |
+| `defaultTab`  | `string`                            | -             |
+| `activeTab`   | `string`                            | -             |
+| `onChange`    | `(id: string) => void`              | -             |
 | `tabBarStyle` | `"underline" \| "box" \| "minimal"` | `"underline"` |
 
 ### TabbedContentTab
 
-| Prop       | Type        | Default     |
-| ---------- | ----------- | ----------- |
-| `id`       | `string`    | `required`  |
-| `label`    | `string`    | `required`  |
-| `content`  | `ReactNode` | `required`  |
-| `disabled` | `boolean`   | `undefined` |
+| Prop       | Type        | Default    |
+| ---------- | ----------- | ---------- |
+| `id`       | `string`    | `required` |
+| `label`    | `string`    | `required` |
+| `content`  | `ReactNode` | `required` |
+| `disabled` | `boolean`   | -          |

@@ -65,26 +65,26 @@ import { DataGrid } from "@/components/ui/data-grid";
 
 ### DataGrid
 
-| Prop                | Type                                           | Default     |
-| ------------------- | ---------------------------------------------- | ----------- |
-| `data`              | `T[]`                                          | `required`  |
-| `columns`           | `DataGridColumn<T>[]`                          | `required`  |
-| `pageSize`          | `number`                                       | `10`        |
-| `onRowSelect`       | `(row: T) => void`                             | `undefined` |
-| `onCellEdit`        | `(row: T, key: string, value: string) => void` | `undefined` |
-| `borderColor`       | `string`                                       | `undefined` |
-| `borderStyle`       | `"single" \| "double" \| "round" \| "bold"`    | `"single"`  |
-| `showRowNumbers`    | `boolean`                                      | `false`     |
-| `filterPlaceholder` | `string`                                       | `undefined` |
+| Prop                | Type                                           | Default    |
+| ------------------- | ---------------------------------------------- | ---------- |
+| `data`              | `T[]`                                          | `required` |
+| `columns`           | `DataGridColumn<T>[]`                          | `required` |
+| `pageSize`          | `number`                                       | `10`       |
+| `onRowSelect`       | `(row: T) => void`                             | -          |
+| `onCellEdit`        | `(row: T, key: string, value: string) => void` | -          |
+| `borderColor`       | `string`                                       | -          |
+| `borderStyle`       | `"single" \| "double" \| "round" \| "bold"`    | `"single"` |
+| `showRowNumbers`    | `boolean`                                      | `false`    |
+| `filterPlaceholder` | `string`                                       | -          |
 
 ### DataGridColumn
 
-| Prop         | Type                                 | Default     |
-| ------------ | ------------------------------------ | ----------- |
-| `key`        | `keyof T & string`                   | `required`  |
-| `header`     | `string`                             | `required`  |
-| `width`      | `number`                             | `undefined` |
-| `align`      | `"left" \| "right" \| "center"`      | `"left"`    |
-| `render`     | `(value: unknown, row: T) => string` | `undefined` |
-| `filterable` | `boolean`                            | `undefined` |
-| `sortable`   | `boolean`                            | `undefined` |
+| Prop         | Type                                 | Default    |
+| ------------ | ------------------------------------ | ---------- |
+| `key`        | `keyof T & string`                   | `required` |
+| `header`     | `string`                             | `required` |
+| `width`      | `number`                             | -          |
+| `align`      | `"left" \| "right" \| "center"`      | `"left"`   |
+| `render`     | `(value: unknown, row: T) => string` | -          |
+| `filterable` | `boolean`                            | -          |
+| `sortable`   | `boolean`                            | -          |

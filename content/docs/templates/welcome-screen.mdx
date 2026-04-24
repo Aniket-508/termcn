@@ -69,15 +69,15 @@ import { WelcomeScreen } from "@/components/ui/welcome-screen";
 
 ### WelcomeScreen
 
-| Prop           | Type                                        | Default     |
-| -------------- | ------------------------------------------- | ----------- |
-| `appName`      | `string`                                    | `required`  |
-| `appNameColor` | `string`                                    | `undefined` |
-| `version`      | `string`                                    | `undefined` |
-| `borderColor`  | `string`                                    | `undefined` |
-| `borderStyle`  | `"single" \| "round" \| "double" \| "bold"` | `"single"`  |
-| `leftWidth`    | `number`                                    | `26`        |
-| `children`     | `ReactNode`                                 | `required`  |
+| Prop           | Type                                        | Default    |
+| -------------- | ------------------------------------------- | ---------- |
+| `appName`      | `string`                                    | `required` |
+| `appNameColor` | `string`                                    | -          |
+| `version`      | `string`                                    | -          |
+| `borderColor`  | `string`                                    | -          |
+| `borderStyle`  | `"single" \| "round" \| "double" \| "bold"` | `"single"` |
+| `leftWidth`    | `number`                                    | `26`       |
+| `children`     | `ReactNode`                                 | `required` |
 
 ### WelcomeScreen.Left
 
@@ -93,12 +93,12 @@ import { WelcomeScreen } from "@/components/ui/welcome-screen";
 
 ### WelcomeScreen.Greeting
 
-| Prop       | Type                 | Default     |
-| ---------- | -------------------- | ----------- |
-| `children` | `ReactNode`          | `required`  |
-| `bold`     | `boolean`            | `true`      |
-| `align`    | `"left" \| "center"` | `"left"`    |
-| `color`    | `string`             | `undefined` |
+| Prop       | Type                 | Default    |
+| ---------- | -------------------- | ---------- |
+| `children` | `ReactNode`          | `required` |
+| `bold`     | `boolean`            | `true`     |
+| `align`    | `"left" \| "center"` | `"left"`   |
+| `color`    | `string`             | -          |
 
 ### WelcomeScreen.Logo
 
@@ -109,20 +109,20 @@ import { WelcomeScreen } from "@/components/ui/welcome-screen";
 
 ### WelcomeScreen.Meta
 
-| Prop        | Type                 | Default     |
-| ----------- | -------------------- | ----------- |
-| `items`     | `string[]`           | `required`  |
-| `separator` | `string`             | `" · "`     |
-| `align`     | `"left" \| "center"` | `"center"`  |
-| `dim`       | `boolean`            | `false`     |
-| `color`     | `string`             | `undefined` |
-| `stack`     | `boolean`            | `false`     |
+| Prop        | Type                 | Default    |
+| ----------- | -------------------- | ---------- |
+| `items`     | `string[]`           | `required` |
+| `separator` | `string`             | `" · "`    |
+| `align`     | `"left" \| "center"` | `"center"` |
+| `dim`       | `boolean`            | `false`    |
+| `color`     | `string`             | -          |
+| `stack`     | `boolean`            | `false`    |
 
 ### WelcomeScreen.Section
 
-| Prop         | Type        | Default     |
-| ------------ | ----------- | ----------- |
-| `title`      | `string`    | `required`  |
-| `titleColor` | `string`    | `undefined` |
-| `titleBold`  | `boolean`   | `true`      |
-| `children`   | `ReactNode` | `required`  |
+| Prop         | Type        | Default    |
+| ------------ | ----------- | ---------- |
+| `title`      | `string`    | `required` |
+| `titleColor` | `string`    | -          |
+| `titleBold`  | `boolean`   | `true`     |
+| `children`   | `ReactNode` | `required` |

@@ -64,20 +64,20 @@ import { Tree } from "@/components/ui/tree";
 
 ### Tree
 
-| Prop              | Type                       | Default     |
-| ----------------- | -------------------------- | ----------- |
-| `nodes`           | `TreeNode[]`               | `required`  |
-| `onSelect`        | `(node: TreeNode) => void` | `undefined` |
-| `defaultExpanded` | `string[]`                 | `[]`        |
-| `expandedIcon`    | `string`                   | `"▼"`       |
-| `collapsedIcon`   | `string`                   | `"▶"`       |
-| `leafIcon`        | `string`                   | `"•"`       |
+| Prop              | Type                       | Default    |
+| ----------------- | -------------------------- | ---------- |
+| `nodes`           | `TreeNode[]`               | `required` |
+| `onSelect`        | `(node: TreeNode) => void` | -          |
+| `defaultExpanded` | `string[]`                 | `[]`       |
+| `expandedIcon`    | `string`                   | `"▼"`      |
+| `collapsedIcon`   | `string`                   | `"▶"`      |
+| `leafIcon`        | `string`                   | `"•"`      |
 
 ### TreeNode
 
-| Prop       | Type         | Default     |
-| ---------- | ------------ | ----------- |
-| `key`      | `string`     | `required`  |
-| `label`    | `string`     | `required`  |
-| `children` | `TreeNode[]` | `undefined` |
-| `icon`     | `string`     | `undefined` |
+| Prop       | Type         | Default    |
+| ---------- | ------------ | ---------- |
+| `key`      | `string`     | `required` |
+| `label`    | `string`     | `required` |
+| `children` | `TreeNode[]` | -          |
+| `icon`     | `string`     | -          |

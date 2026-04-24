@@ -72,12 +72,12 @@ import { SetupFlow } from "@/components/ui/setup-flow";
 
 | Prop             | Type                                       | Default     |
 | ---------------- | ------------------------------------------ | ----------- |
-| `title`          | `string`                                   | `undefined` |
+| `title`          | `string`                                   | -           |
 | `titleFont`      | `"block" \| "simple" \| "shade" \| "slim"` | `"block"`   |
 | `titleColor`     | `string`                                   | `"#888888"` |
-| `titleColorAlt`  | `string`                                   | `undefined` |
+| `titleColorAlt`  | `string`                                   | -           |
 | `connectorChar`  | `string`                                   | `"│"`       |
-| `connectorColor` | `string`                                   | `undefined` |
+| `connectorColor` | `string`                                   | -           |
 | `children`       | `ReactNode`                                | `required`  |
 
 ### SetupFlow.Badge
@@ -90,30 +90,30 @@ import { SetupFlow } from "@/components/ui/setup-flow";
 
 ### SetupFlow.Step
 
-| Prop        | Type                                                      | Default     |
-| ----------- | --------------------------------------------------------- | ----------- |
-| `icon`      | `string`                                                  | `undefined` |
-| `iconColor` | `string`                                                  | `undefined` |
-| `status`    | `"done" \| "active" \| "pending" \| "success" \| "error"` | `"done"`    |
-| `children`  | `ReactNode`                                               | `required`  |
+| Prop        | Type                                                      | Default    |
+| ----------- | --------------------------------------------------------- | ---------- |
+| `icon`      | `string`                                                  | -          |
+| `iconColor` | `string`                                                  | -          |
+| `status`    | `"done" \| "active" \| "pending" \| "success" \| "error"` | `"done"`   |
+| `children`  | `ReactNode`                                               | `required` |
 
 ### SetupFlow.Spinner
 
-| Prop         | Type         | Default     |
-| ------------ | ------------ | ----------- |
-| `label`      | `string`     | `required`  |
-| `onComplete` | `() => void` | `undefined` |
+| Prop         | Type         | Default    |
+| ------------ | ------------ | ---------- |
+| `label`      | `string`     | `required` |
+| `onComplete` | `() => void` | -          |
 
 ### SetupFlow.MultiSelect
 
-| Prop            | Type                                                       | Default     |
-| --------------- | ---------------------------------------------------------- | ----------- |
-| `label`         | `string`                                                   | `required`  |
-| `hint`          | `string`                                                   | `undefined` |
-| `options`       | `{ value: string; label: string; description?: string }[]` | `required`  |
-| `values`        | `string[]`                                                 | `undefined` |
-| `onChange`      | `(values: string[]) => void`                               | `undefined` |
-| `onSubmit`      | `(values: string[]) => void`                               | `undefined` |
-| `checkedChar`   | `string`                                                   | `"■"`       |
-| `uncheckedChar` | `string`                                                   | `"□"`       |
-| `checkedColor`  | `string`                                                   | `"green"`   |
+| Prop            | Type                                                       | Default    |
+| --------------- | ---------------------------------------------------------- | ---------- |
+| `label`         | `string`                                                   | `required` |
+| `hint`          | `string`                                                   | -          |
+| `options`       | `{ value: string; label: string; description?: string }[]` | `required` |
+| `values`        | `string[]`                                                 | -          |
+| `onChange`      | `(values: string[]) => void`                               | -          |
+| `onSubmit`      | `(values: string[]) => void`                               | -          |
+| `checkedChar`   | `string`                                                   | `"■"`      |
+| `uncheckedChar` | `string`                                                   | `"□"`      |
+| `checkedColor`  | `string`                                                   | `"green"`  |

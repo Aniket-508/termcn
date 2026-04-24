@@ -63,13 +63,13 @@ import { ToolApproval } from "@/components/ui/tool-approval";
 
 ### ToolApproval
 
-| Prop            | Type                          | Default     |
-| --------------- | ----------------------------- | ----------- |
-| `name`          | `string`                      | `required`  |
-| `description`   | `string`                      | `undefined` |
-| `args`          | `Record<string, unknown>`     | `undefined` |
-| `risk`          | `"low" \| "medium" \| "high"` | `"low"`     |
-| `onApprove`     | `() => void`                  | `required`  |
-| `onDeny`        | `() => void`                  | `required`  |
-| `onAlwaysAllow` | `() => void`                  | `undefined` |
-| `timeout`       | `number`                      | `undefined` |
+| Prop            | Type                          | Default    |
+| --------------- | ----------------------------- | ---------- |
+| `name`          | `string`                      | `required` |
+| `description`   | `string`                      | -          |
+| `args`          | `Record<string, unknown>`     | -          |
+| `risk`          | `"low" \| "medium" \| "high"` | `"low"`    |
+| `onApprove`     | `() => void`                  | `required` |
+| `onDeny`        | `() => void`                  | `required` |
+| `onAlwaysAllow` | `() => void`                  | -          |
+| `timeout`       | `number`                      | -          |

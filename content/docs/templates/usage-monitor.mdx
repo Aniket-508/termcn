@@ -87,7 +87,7 @@ import { UsageMonitor } from "@/components/ui/usage-monitor";
 | `titleColor`     | `string` | `"cyan"`    |
 | `decorator`      | `string` | `"◆ ✦ ◆ ✦"` |
 | `separatorChar`  | `string` | `"═"`       |
-| `separatorColor` | `string` | `undefined` |
+| `separatorColor` | `string` | -           |
 
 ### UsageMonitor.Tags
 
@@ -99,40 +99,40 @@ import { UsageMonitor } from "@/components/ui/usage-monitor";
 
 ### UsageMonitor.Section
 
-| Prop       | Type        | Default     |
-| ---------- | ----------- | ----------- |
-| `icon`     | `string`    | `undefined` |
-| `title`    | `string`    | `undefined` |
-| `subtitle` | `string`    | `undefined` |
-| `children` | `ReactNode` | `required`  |
+| Prop       | Type        | Default    |
+| ---------- | ----------- | ---------- |
+| `icon`     | `string`    | -          |
+| `title`    | `string`    | -          |
+| `subtitle` | `string`    | -          |
+| `children` | `ReactNode` | `required` |
 
 ### UsageMonitor.Metric
 
-| Prop           | Type                                                            | Default     |
-| -------------- | --------------------------------------------------------------- | ----------- |
-| `icon`         | `string`                                                        | `undefined` |
-| `label`        | `string`                                                        | `required`  |
-| `value`        | `number`                                                        | `required`  |
-| `max`          | `number`                                                        | `required`  |
-| `percent`      | `number`                                                        | `required`  |
-| `status`       | `"green" \| "yellow" \| "red" \| "blue"`                        | `required`  |
-| `format`       | `"number" \| "currency" \| "duration" \| "percent" \| "custom"` | `required`  |
-| `formatFn`     | `(v: number, max: number) => string`                            | `undefined` |
-| `barWidth`     | `number`                                                        | `22`        |
-| `barFillChar`  | `string`                                                        | `"█"`       |
-| `barEmptyChar` | `string`                                                        | `"░"`       |
-| `barColor`     | `string`                                                        | `"white"`   |
-| `maxDim`       | `boolean`                                                       | `false`     |
-| `showMax`      | `boolean`                                                       | `true`      |
+| Prop           | Type                                                            | Default    |
+| -------------- | --------------------------------------------------------------- | ---------- |
+| `icon`         | `string`                                                        | -          |
+| `label`        | `string`                                                        | `required` |
+| `value`        | `number`                                                        | `required` |
+| `max`          | `number`                                                        | `required` |
+| `percent`      | `number`                                                        | `required` |
+| `status`       | `"green" \| "yellow" \| "red" \| "blue"`                        | `required` |
+| `format`       | `"number" \| "currency" \| "duration" \| "percent" \| "custom"` | `required` |
+| `formatFn`     | `(v: number, max: number) => string`                            | -          |
+| `barWidth`     | `number`                                                        | `22`       |
+| `barFillChar`  | `string`                                                        | `"█"`      |
+| `barEmptyChar` | `string`                                                        | `"░"`      |
+| `barColor`     | `string`                                                        | `"white"`  |
+| `maxDim`       | `boolean`                                                       | `false`    |
+| `showMax`      | `boolean`                                                       | `true`     |
 
 ### UsageMonitor.DistributionMetric
 
-| Prop       | Type                                                   | Default     |
-| ---------- | ------------------------------------------------------ | ----------- |
-| `icon`     | `string`                                               | `undefined` |
-| `label`    | `string`                                               | `required`  |
-| `segments` | `{ label: string; percent: number; color?: string }[]` | `required`  |
-| `barWidth` | `number`                                               | `22`        |
+| Prop       | Type                                                   | Default    |
+| ---------- | ------------------------------------------------------ | ---------- |
+| `icon`     | `string`                                               | -          |
+| `label`    | `string`                                               | `required` |
+| `segments` | `{ label: string; percent: number; color?: string }[]` | `required` |
+| `barWidth` | `number`                                               | `22`       |
 
 ### UsageMonitor.Stats
 
@@ -142,13 +142,13 @@ import { UsageMonitor } from "@/components/ui/usage-monitor";
 
 ### UsageMonitor.StatRow
 
-| Prop          | Type     | Default     |
-| ------------- | -------- | ----------- |
-| `icon`        | `string` | `undefined` |
-| `label`       | `string` | `required`  |
-| `value`       | `string` | `required`  |
-| `valueSuffix` | `string` | `undefined` |
-| `valueColor`  | `string` | `"white"`   |
+| Prop          | Type     | Default    |
+| ------------- | -------- | ---------- |
+| `icon`        | `string` | -          |
+| `label`       | `string` | `required` |
+| `value`       | `string` | `required` |
+| `valueSuffix` | `string` | -          |
+| `valueColor`  | `string` | `"white"`  |
 
 ### UsageMonitor.Predictions
 
@@ -166,12 +166,12 @@ import { UsageMonitor } from "@/components/ui/usage-monitor";
 
 ### UsageMonitor.StatusBar
 
-| Prop           | Type                           | Default     |
-| -------------- | ------------------------------ | ----------- |
-| `clock`        | `boolean`                      | `false`     |
-| `clockColor`   | `string`                       | `"cyan"`    |
-| `sessionLabel` | `string`                       | `undefined` |
-| `sessionColor` | `string`                       | `"green"`   |
-| `exitHint`     | `string`                       | `undefined` |
-| `statusDot`    | `"green" \| "yellow" \| "red"` | `"green"`   |
-| `separator`    | `string`                       | `" \| "`    |
+| Prop           | Type                           | Default   |
+| -------------- | ------------------------------ | --------- |
+| `clock`        | `boolean`                      | `false`   |
+| `clockColor`   | `string`                       | `"cyan"`  |
+| `sessionLabel` | `string`                       | -         |
+| `sessionColor` | `string`                       | `"green"` |
+| `exitHint`     | `string`                       | -         |
+| `statusDot`    | `"green" \| "yellow" \| "red"` | `"green"` |
+| `separator`    | `string`                       | `" \| "`  |
