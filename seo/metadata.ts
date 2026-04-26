@@ -99,11 +99,6 @@ export const baseMetadata: Metadata = {
         url: "/favicon.ico",
       },
       {
-        sizes: "96x96",
-        type: "image/png",
-        url: "/favicon-96x96.png",
-      },
-      {
         media: "(prefers-color-scheme: light)",
         sizes: "any",
         type: "image/svg+xml",

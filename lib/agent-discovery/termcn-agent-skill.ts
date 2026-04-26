@@ -17,7 +17,7 @@ Help users add **${SITE.NAME}** Ink and OpenTUI components via the shadcn CLI ag
 ## Install (shadcn)
 
 \`\`\`bash
-npx shadcn@latest add https://termcn.dev/r/badge.json
+npx shadcn@latest add ${SITE.URL}/r/badge.json
 \`\`\`
 
 Prefer following the on-site installation guide: ${ROUTES.DOCS_INSTALLATION}
