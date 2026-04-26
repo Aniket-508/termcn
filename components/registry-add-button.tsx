@@ -25,9 +25,31 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { UTM_PARAMS } from "@/constants/site";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { trackEvent } from "@/lib/events";
+import { addQueryParams } from "@/lib/url";
 import { cn } from "@/lib/utils";
+
+const title = "Add Registry";
+
+const Description = ({ registryName }: { registryName: string }) => (
+  <>
+    Run this command to add{" "}
+    <a
+      className="text-foreground underline underline-offset-4"
+      href={addQueryParams("https://ui.shadcn.com/docs/directory", {
+        q: registryName,
+        ...UTM_PARAMS,
+      })}
+      target="_blank"
+      rel="noopener"
+    >
+      {registryName}
+    </a>{" "}
+    to your project.
+  </>
+);
 
 export const RegistryAddButton = ({
   children,
@@ -91,9 +113,9 @@ export const RegistryAddButton = ({
           <DrawerTrigger asChild>{trigger}</DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
-              <DrawerTitle>Add Registry</DrawerTitle>
+              <DrawerTitle>{title}</DrawerTitle>
               <DrawerDescription>
-                Run this command to add {registryName} to your project.
+                <Description registryName={registryName} />
               </DrawerDescription>
             </DrawerHeader>
             <div className="px-4">
@@ -117,9 +139,9 @@ export const RegistryAddButton = ({
           <DialogTrigger asChild>{trigger}</DialogTrigger>
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
-              <DialogTitle>Add Registry</DialogTitle>
+              <DialogTitle>{title}</DialogTitle>
               <DialogDescription className="text-balance">
-                Run this command to add {registryName} to your project.
+                <Description registryName={registryName} />
               </DialogDescription>
             </DialogHeader>
             <CodeBlockCommand
