@@ -43,6 +43,11 @@ const nextConfig = {
         permanent: true,
         source: "/docs/components/:category((?!ink|opentui)[^/]+)/:component",
       },
+      {
+        destination: "/docs/templates/ink/:template",
+        permanent: true,
+        source: "/docs/templates/:template((?!ink|opentui)[^/]+)",
+      },
     ];
   },
   turbopack: {

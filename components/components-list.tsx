@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { isComponentsFolder } from "@/lib/docs";
 import type { PageTreeFolder, PageTreePage } from "@/lib/page-tree";
-import { getCategoryFoldersForBase, getPagesFromFolder } from "@/lib/page-tree";
+import { getCategoryFolders, getFolderPages } from "@/lib/page-tree";
 import { source } from "@/lib/source";
 import { PUBLIC_BASE_NAME } from "@/registry/bases";
 
@@ -32,7 +32,7 @@ const ComponentGrid = ({ pages }: { pages: PageTreePage[] }) => (
 const CategoryGrid = ({ categories }: { categories: PageTreeFolder[] }) => (
   <div className="flex flex-col gap-10">
     {categories.map((cat) => {
-      const pages = getPagesFromFolder(cat);
+      const pages = getFolderPages(cat);
       if (pages.length === 0) {
         return null;
       }
@@ -64,14 +64,18 @@ export const ComponentsList = ({
   }
 
   if (!isComponentsFolder(folder)) {
-    const pages = getPagesFromFolder(folder);
-    if (pages.length === 0) {
+    const pages = getFolderPages(folder, base);
+    if (pages.length > 0) {
+      return <ComponentGrid pages={pages} />;
+    }
+    const allPages = getFolderPages(folder);
+    if (allPages.length === 0) {
       return null;
     }
-    return <ComponentGrid pages={pages} />;
+    return <ComponentGrid pages={allPages} />;
   }
 
-  const categories = getCategoryFoldersForBase(folder, base);
+  const categories = getCategoryFolders(folder, base);
 
   if (category) {
     const match = categories.find(
@@ -84,7 +88,7 @@ export const ComponentsList = ({
     if (!match) {
       return null;
     }
-    return <ComponentGrid pages={getPagesFromFolder(match)} />;
+    return <ComponentGrid pages={getFolderPages(match)} />;
   }
 
   if (categories.length === 0) {

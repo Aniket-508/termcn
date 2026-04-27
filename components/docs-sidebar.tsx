@@ -16,9 +16,9 @@ import {
 import { ROUTES } from "@/constants/routes";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
 import {
-  getCategoryFoldersForBase,
+  getCategoryFolders,
   getCurrentBase,
-  getPagesFromFolder,
+  getFolderPages,
 } from "@/lib/page-tree";
 import type { source } from "@/lib/source";
 
@@ -132,23 +132,21 @@ export const DocsSidebar = ({
           }
 
           if (isComponentsFolder(item)) {
-            return getCategoryFoldersForBase(item, currentBase).map(
-              (category) => (
-                <SidebarPageGroup
-                  key={category.$id}
-                  label={category.name}
-                  pages={getPagesFromFolder(category)}
-                  pathname={pathname}
-                />
-              )
-            );
+            return getCategoryFolders(item, currentBase).map((category) => (
+              <SidebarPageGroup
+                key={category.$id}
+                label={category.name}
+                pages={getFolderPages(category)}
+                pathname={pathname}
+              />
+            ));
           }
 
           return (
             <SidebarPageGroup
               key={item.$id}
               label={item.name}
-              pages={getPagesFromFolder(item)}
+              pages={getFolderPages(item)}
               pathname={pathname}
             />
           );

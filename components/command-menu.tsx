@@ -37,9 +37,9 @@ import { usePackageManager } from "@/hooks/use-package-manager";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
 import { trackEvent } from "@/lib/events";
 import {
-  getCategoryFoldersForBase,
+  getCategoryFolders,
   getCurrentBase,
-  getPagesFromFolder,
+  getFolderPages,
 } from "@/lib/page-tree";
 import { themePrimaryBySlug } from "@/lib/terminal-themes";
 import { cn } from "@/lib/utils";
@@ -201,8 +201,8 @@ export const CommandMenu = ({
       }
 
       if (isComponentsFolder(item)) {
-        for (const category of getCategoryFoldersForBase(item, currentBase)) {
-          const pages = getPagesFromFolder(category).map((p) => ({
+        for (const category of getCategoryFolders(item, currentBase)) {
+          const pages = getFolderPages(category).map((p) => ({
             name: typeof p.name === "string" ? p.name : String(p.name),
             url: p.url,
           }));
@@ -217,7 +217,7 @@ export const CommandMenu = ({
           }
         }
       } else {
-        const pages = getPagesFromFolder(item).map((p) => ({
+        const pages = getFolderPages(item).map((p) => ({
           name: typeof p.name === "string" ? p.name : String(p.name),
           url: p.url,
         }));

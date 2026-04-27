@@ -25,27 +25,49 @@ const matchesBase = (folder: PageTreeFolder, base: string): boolean =>
   folder.$id === base ||
   (typeof folder.name === "string" && folder.name.toLowerCase() === base);
 
-export const getCategoryFoldersForBase = (
-  componentsFolder: PageTreeFolder,
-  currentBase: string
-): PageTreeFolder[] => {
-  for (const child of componentsFolder.children) {
+const findBaseFolder = (
+  folder: PageTreeFolder,
+  base: string
+): PageTreeFolder | undefined => {
+  for (const child of folder.children) {
     if (child.type !== "folder") {
       continue;
     }
-    if (matchesBase(child, currentBase)) {
-      return child.children.filter(
-        (c): c is PageTreeFolder => c.type === "folder"
-      );
+    if (matchesBase(child, base)) {
+      return child;
     }
   }
-  return [];
 };
 
-export const getPagesFromFolder = (folder: PageTreeFolder): PageTreePage[] =>
-  folder.children.filter(
-    (child): child is PageTreePage => child.type === "page"
+export const getCategoryFolders = (
+  folder: PageTreeFolder,
+  base: string
+): PageTreeFolder[] => {
+  const baseFolder = findBaseFolder(folder, base);
+  if (!baseFolder) {
+    return [];
+  }
+
+  return baseFolder.children.filter(
+    (c): c is PageTreeFolder => c.type === "folder"
   );
+};
+
+export const getFolderPages = (
+  folder: PageTreeFolder,
+  base?: string
+): PageTreePage[] => {
+  if (base) {
+    const baseFolder = findBaseFolder(folder, base);
+    if (!baseFolder) {
+      return [];
+    }
+
+    return getAllPagesFromFolder(baseFolder);
+  }
+
+  return getAllPagesFromFolder(folder);
+};
 
 export const getCurrentBase = (pathname: string): string => {
   const match = pathname.match(/\/docs\/components\/([^/]+)\//);

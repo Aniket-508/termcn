@@ -16,9 +16,9 @@ import { ROUTES } from "@/constants/routes";
 import { useFeedback } from "@/hooks/use-feedback";
 import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
 import {
-  getCategoryFoldersForBase,
+  getCategoryFolders,
   getCurrentBase,
-  getPagesFromFolder,
+  getFolderPages,
 } from "@/lib/page-tree";
 import { cn } from "@/lib/utils";
 
@@ -161,23 +161,21 @@ export const MobileNav = ({
             }
 
             if (isComponentsFolder(item)) {
-              return getCategoryFoldersForBase(item, currentBase).map(
-                (category) => (
-                  <MobileNavGroup
-                    key={category.$id}
-                    label={category.name}
-                    pages={getPagesFromFolder(category)}
-                    setOpen={setOpen}
-                  />
-                )
-              );
+              return getCategoryFolders(item, currentBase).map((category) => (
+                <MobileNavGroup
+                  key={category.$id}
+                  label={category.name}
+                  pages={getFolderPages(category)}
+                  setOpen={setOpen}
+                />
+              ));
             }
 
             return (
               <MobileNavGroup
                 key={item.$id}
                 label={item.name}
-                pages={getPagesFromFolder(item)}
+                pages={getFolderPages(item)}
                 setOpen={setOpen}
               />
             );
