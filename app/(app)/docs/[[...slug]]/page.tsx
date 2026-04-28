@@ -53,7 +53,9 @@ const buildBreadcrumbs = (
   pageTitle: string,
   pageUrl: string
 ) => {
-  const items: { name: string; path: string }[] = [{ name: "Home", path: "/" }];
+  const items: { name: string; path: string }[] = [
+    { name: "Home", path: ROUTES.HOME },
+  ];
 
   if (slugs.length === 0) {
     items.push({ name: pageTitle, path: pageUrl });

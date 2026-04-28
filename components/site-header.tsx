@@ -39,7 +39,7 @@ export const SiteHeader = () => (
             className="hidden size-8 lg:flex"
             sound="click"
           >
-            <Link href="/" transitionTypes={["nav-back"]}>
+            <Link href={ROUTES.HOME} transitionTypes={["nav-back"]}>
               <LogoMark className="size-5" />
               <span className="sr-only">{SITE.NAME}</span>
             </Link>

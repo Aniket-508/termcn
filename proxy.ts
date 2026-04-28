@@ -10,13 +10,13 @@ const { rewrite: rewriteDocs } = rewritePath(
   `${docsContentRoute}{/*path}/content.md`
 );
 const { rewrite: rewriteSuffix } = rewritePath(
-  `${ROUTES.DOCS}{/*path}.mdx`,
+  `${ROUTES.DOCS}{/*path}.md`,
   `${docsContentRoute}{/*path}/content.md`
 );
 
 export default function proxy(request: NextRequest) {
   if (
-    request.nextUrl.pathname === "/" &&
+    request.nextUrl.pathname === ROUTES.HOME &&
     (request.method === "GET" || request.method === "HEAD") &&
     isMarkdownPreferred(request)
   ) {

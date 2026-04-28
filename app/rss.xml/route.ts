@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 import { getChangelogPages } from "@/lib/changelog";
 import type { ChangelogPageData } from "@/lib/changelog";
@@ -13,7 +14,7 @@ export const GET = () => {
     .map((page) => {
       const data = page.data as ChangelogPageData;
       const date = page.date?.toUTCString() ?? new Date().toUTCString();
-      const link = `${SITE.URL}/docs/${page.slugs.join("/")}`;
+      const link = `${SITE.URL}${ROUTES.DOCS}/${page.slugs.join("/")}`;
 
       return `    <item>
       <title><![CDATA[${data.title}]]></title>

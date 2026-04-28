@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 
+import { LINK } from "@/constants/links";
 import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 
@@ -13,6 +14,7 @@ Help users add **${SITE.NAME}** Ink and OpenTUI components via the shadcn CLI ag
 
 - Registry JSON: \`/r/registry.json\` (shadcn schema)
 - Docs: ${ROUTES.DOCS_REGISTRY}
+- shadcn MCP docs: ${LINK.SHADCN_MCP_DOCS}
 
 ## Install (shadcn)
 

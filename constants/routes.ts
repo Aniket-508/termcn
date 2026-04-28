@@ -1,4 +1,8 @@
 export const ROUTES = {
+  AGENT_SKILLS_INDEX: "/.well-known/agent-skills/index.json",
+  AGENT_SKILLS_TERMCN_SKILL: "/.well-known/agent-skills/termcn-skill.md",
+  API_CATALOG: "/.well-known/api-catalog",
+  API_STATUS: "/api/status",
   DOCS: "/docs",
   DOCS_CHANGELOG: "/docs/changelog",
   DOCS_COMPONENTS: "/docs/components",
@@ -10,6 +14,9 @@ export const ROUTES = {
   HOME: "/",
   LLMS: "/llms.txt",
   LLMS_FULL: "/llms-full.txt",
+  LLMS_MD: "/llms.md",
   LLMS_MDX: "/llms.mdx",
   OG: "/og",
+  OPENAPI: "/openapi.json",
+  REGISTRY_INDEX: "/r/registry.json",
 } as const;

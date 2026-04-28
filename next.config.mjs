@@ -1,4 +1,10 @@
 import { createMDX } from "fumadocs-mdx/next";
+import { createJiti } from "jiti";
+
+const jiti = createJiti(import.meta.url);
+
+const { LINK } = await jiti.import("./constants/links");
+const { ROUTES } = await jiti.import("./constants/routes");
 
 /** Turbopack requires project-relative alias targets (not absolute paths). */
 const opentuiJsxRuntimeTurbo = "./lib/opentui-bridge/react-jsx-runtime.ts";
@@ -16,10 +22,11 @@ const nextConfig = {
       '</.well-known/api-catalog>; rel="api-catalog"',
       '</openapi.json>; rel="service-desc"',
       '</docs>; rel="service-doc"',
+      `<${LINK.SHADCN_MCP_DOCS}>; rel="service-doc"; title="shadcn MCP server"`,
       '</.well-known/agent-skills/index.json>; rel="describedby"',
     ].join(", ");
 
-    return [{ headers: [{ key: "Link", value: link }], source: "/" }];
+    return [{ headers: [{ key: "Link", value: link }], source: ROUTES.HOME }];
   },
   images: {
     remotePatterns: [
@@ -39,14 +46,24 @@ const nextConfig = {
   redirects() {
     return [
       {
-        destination: "/docs/components/ink/:category/:component",
+        destination: `${ROUTES.DOCS}.md`,
         permanent: true,
-        source: "/docs/components/:category((?!ink|opentui)[^/]+)/:component",
+        source: `${ROUTES.DOCS}.mdx`,
       },
       {
-        destination: "/docs/templates/ink/:template",
+        destination: `${ROUTES.DOCS}/:path*.md`,
         permanent: true,
-        source: "/docs/templates/:template((?!ink|opentui)[^/]+)",
+        source: `${ROUTES.DOCS}/:path*.mdx`,
+      },
+      {
+        destination: `${ROUTES.DOCS_COMPONENTS}/ink/:category/:component`,
+        permanent: true,
+        source: `${ROUTES.DOCS_COMPONENTS}/:category((?!ink|opentui)[^/]+)/:component`,
+      },
+      {
+        destination: `${ROUTES.DOCS_TEMPLATES}/ink/:template`,
+        permanent: true,
+        source: `${ROUTES.DOCS_TEMPLATES}/:template((?!ink|opentui)[^/]+)`,
       },
     ];
   },

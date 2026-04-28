@@ -2,6 +2,7 @@ import { CommandBox } from "@/components/command-box";
 import { ComponentPreview } from "@/components/component-preview";
 import { DirectionalTransition } from "@/components/directional-transition";
 import { HomeCtas } from "@/components/home-ctas";
+import { ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 
@@ -40,7 +41,7 @@ const showcaseItems = [
 export default function IndexPage() {
   return (
     <>
-      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }]} />
+      <BreadcrumbJsonLd items={[{ name: "Home", path: ROUTES.HOME }]} />
       <DirectionalTransition>
         <section className="relative overflow-hidden">
           <div className="container-wrapper relative">

@@ -1,3 +1,4 @@
+import { LINK } from "@/constants/links";
 import { ROUTES } from "@/constants/routes";
 import { requestOrigin } from "@/lib/agent-discovery/request-origin";
 import { homeContentRoute } from "@/lib/docs";
@@ -13,40 +14,49 @@ const catalogLinkset = (origin: string) => {
         anchor: `${base}/`,
         "api-catalog": [
           {
-            href: `${base}/.well-known/api-catalog`,
+            href: `${base}${ROUTES.API_CATALOG}`,
             type: `application/linkset+json; profile="${PROFILE}"`,
           },
         ],
         describedby: [
           {
-            href: `${base}/.well-known/agent-skills/index.json`,
+            href: `${base}${ROUTES.AGENT_SKILLS_INDEX}`,
             type: "application/json",
           },
           {
-            href: `${base}/.well-known/agent-skills/termcn-skill.md`,
+            href: `${base}${ROUTES.AGENT_SKILLS_TERMCN_SKILL}`,
             type: "text/markdown",
           },
         ],
         "service-desc": [
-          { href: `${base}/openapi.json`, type: "application/json" },
+          { href: `${base}${ROUTES.OPENAPI}`, type: "application/json" },
         ],
         "service-doc": [
           { href: `${base}${ROUTES.DOCS}`, type: "text/html" },
           { href: `${base}${ROUTES.LLMS}`, type: "text/plain" },
           { href: `${base}${ROUTES.LLMS_FULL}`, type: "text/plain" },
           { href: `${base}${homeContentRoute}`, type: "text/markdown" },
+          {
+            href: LINK.SHADCN_MCP_DOCS,
+            title: "shadcn MCP server",
+            type: "text/html",
+          },
         ],
-        status: [{ href: `${base}/api/status`, type: "application/json" }],
+        status: [
+          { href: `${base}${ROUTES.API_STATUS}`, type: "application/json" },
+        ],
       },
       {
-        anchor: `${base}/r/registry.json`,
+        anchor: `${base}${ROUTES.REGISTRY_INDEX}`,
         "service-desc": [
-          { href: `${base}/openapi.json`, type: "application/json" },
+          { href: `${base}${ROUTES.OPENAPI}`, type: "application/json" },
         ],
         "service-doc": [
           { href: `${base}${ROUTES.DOCS_REGISTRY}`, type: "text/html" },
         ],
-        status: [{ href: `${base}/api/status`, type: "application/json" }],
+        status: [
+          { href: `${base}${ROUTES.API_STATUS}`, type: "application/json" },
+        ],
       },
     ],
   };
@@ -70,7 +80,7 @@ export const HEAD = (_request: Request) => {
   return new Response(null, {
     headers: {
       "Content-Type": profile,
-      Link: '</.well-known/api-catalog>; rel="api-catalog"',
+      Link: `<${ROUTES.API_CATALOG}>; rel="api-catalog"`,
     },
   });
 };

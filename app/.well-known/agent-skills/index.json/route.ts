@@ -1,3 +1,4 @@
+import { ROUTES } from "@/constants/routes";
 import { requestOrigin } from "@/lib/agent-discovery/request-origin";
 import { termcnAgentSkillDigest } from "@/lib/agent-discovery/termcn-agent-skill";
 
@@ -15,7 +16,7 @@ export const GET = (request: Request) => {
           digest: termcnAgentSkillDigest(),
           name: "termcn-registry",
           type: "skill-md",
-          url: `${base}/.well-known/agent-skills/termcn-skill.md`,
+          url: `${base}${ROUTES.AGENT_SKILLS_TERMCN_SKILL}`,
         },
       ],
     },
