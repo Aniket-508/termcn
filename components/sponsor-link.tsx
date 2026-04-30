@@ -30,7 +30,7 @@ export const SponsorLink = () => {
     >
       <a href={LINK.SPONSOR} target="_blank" rel="noopener noreferrer">
         <HeartHandshakeIcon className="text-pink-500" ref={heartRef} />
-        Sponsor
+        <span className="max-sm:sr-only">Sponsor</span>
       </a>
     </Button>
   );

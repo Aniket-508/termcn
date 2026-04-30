@@ -7,6 +7,7 @@ import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { NavItemGithub } from "@/components/nav-item-github";
+import { SiteSettings } from "@/components/site-settings";
 import { SponsorLink } from "@/components/sponsor-link";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
@@ -16,7 +17,6 @@ import { source } from "@/lib/source";
 const navItems = [
   { href: ROUTES.DOCS, label: "Docs" },
   { href: ROUTES.DOCS_COMPONENTS, label: "Components" },
-  { href: ROUTES.DOCS_TEMPLATES, label: "Templates" },
 ];
 
 export const SiteHeader = () => (
@@ -53,6 +53,7 @@ export const SiteHeader = () => (
           <NavItemGithub />
           <SponsorLink />
           <ModeSwitcher />
+          <SiteSettings />
         </div>
       </div>
     </div>
