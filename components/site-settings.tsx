@@ -31,23 +31,14 @@ import { useIsMac } from "@/hooks/use-is-mac";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSoundEnabled } from "@/hooks/use-sound-toggle";
 
-const SoundToggle = ({
-  isMobile,
-  isMac,
-}: {
-  isMobile: boolean;
-  isMac: boolean;
-}) => {
+export const SiteSettings = () => {
   const volumeIconRef = useRef<Volume2IconHandle>(null);
+  const vibrateIconRef = useRef<VibrateIconHandle>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useIsMobile();
+  const isMac = useIsMac();
   const [soundEnabled, setSoundEnabled] = useSoundEnabled();
-
-  const handleMouseEnter = () => {
-    volumeIconRef.current?.startAnimation();
-  };
-
-  const handleMouseLeave = () => {
-    volumeIconRef.current?.stopAnimation();
-  };
+  const [hapticsEnabled, setHapticsEnabled] = useHapticsEnabled();
 
   useHotkeys(
     "meta+s, ctrl+s",
@@ -57,37 +48,6 @@ const SoundToggle = ({
     { preventDefault: true }
   );
 
-  return (
-    <div className="flex items-center justify-between gap-2 pl-1">
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Toggle Sound</span>
-        {!isMobile && <Kbd>{isMac ? "⌘" : "Ctrl"}+S</Kbd>}
-      </div>
-      <Toggle
-        pressed={soundEnabled}
-        onPressedChange={setSoundEnabled}
-        aria-label="Toggle sound"
-        variant="ghost"
-        size="icon-sm"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Volume2Icon ref={volumeIconRef} />
-      </Toggle>
-    </div>
-  );
-};
-
-const HapticsToggle = ({
-  isMobile,
-  isMac,
-}: {
-  isMobile: boolean;
-  isMac: boolean;
-}) => {
-  const vibrateIconRef = useRef<VibrateIconHandle>(null);
-  const [hapticsEnabled, setHapticsEnabled] = useHapticsEnabled();
-
   useHotkeys(
     "meta+h, ctrl+h",
     () => {
@@ -96,39 +56,21 @@ const HapticsToggle = ({
     { preventDefault: true }
   );
 
-  const handleMouseEnter = () => {
+  const handleSoundMouseEnter = () => {
+    volumeIconRef.current?.startAnimation();
+  };
+
+  const handleSoundMouseLeave = () => {
+    volumeIconRef.current?.stopAnimation();
+  };
+
+  const handleHapticsMouseEnter = () => {
     vibrateIconRef.current?.startAnimation();
   };
 
-  const handleMouseLeave = () => {
+  const handleHapticsMouseLeave = () => {
     vibrateIconRef.current?.stopAnimation();
   };
-
-  return (
-    <div className="flex items-center justify-between gap-2 pl-1">
-      <div className="flex items-center gap-2">
-        <span className="text-sm">Toggle Haptics</span>
-        {!isMobile && <Kbd>{isMac ? "⌘" : "Ctrl"}+H</Kbd>}
-      </div>
-      <Toggle
-        pressed={hapticsEnabled}
-        onPressedChange={setHapticsEnabled}
-        aria-label="Toggle haptics"
-        variant="ghost"
-        size="icon-sm"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <VibrateIcon ref={vibrateIconRef} />
-      </Toggle>
-    </div>
-  );
-};
-
-export const SiteSettings = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useIsMobile();
-  const isMac = useIsMac();
 
   const trigger = (
     <Button
@@ -143,8 +85,40 @@ export const SiteSettings = () => {
 
   const content = (
     <div className="flex flex-col gap-1">
-      <SoundToggle isMobile={isMobile} isMac={isMac} />
-      <HapticsToggle isMobile={isMobile} isMac={isMac} />
+      <div className="flex items-center justify-between gap-2 pl-1">
+        <div className="flex items-center gap-2">
+          <span className="text-sm">Toggle Sound</span>
+          {!isMobile && <Kbd>{isMac ? "⌘" : "Ctrl"}+S</Kbd>}
+        </div>
+        <Toggle
+          pressed={soundEnabled}
+          onPressedChange={setSoundEnabled}
+          aria-label="Toggle sound"
+          variant="ghost"
+          size="icon-sm"
+          onMouseEnter={handleSoundMouseEnter}
+          onMouseLeave={handleSoundMouseLeave}
+        >
+          <Volume2Icon ref={volumeIconRef} />
+        </Toggle>
+      </div>
+      <div className="flex items-center justify-between gap-2 pl-1">
+        <div className="flex items-center gap-2">
+          <span className="text-sm">Toggle Haptics</span>
+          {!isMobile && <Kbd>{isMac ? "⌘" : "Ctrl"}+H</Kbd>}
+        </div>
+        <Toggle
+          pressed={hapticsEnabled}
+          onPressedChange={setHapticsEnabled}
+          aria-label="Toggle haptics"
+          variant="ghost"
+          size="icon-sm"
+          onMouseEnter={handleHapticsMouseEnter}
+          onMouseLeave={handleHapticsMouseLeave}
+        >
+          <VibrateIcon ref={vibrateIconRef} />
+        </Toggle>
+      </div>
     </div>
   );
 
