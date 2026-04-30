@@ -1,6 +1,5 @@
 "use client";
 
-import { useSound } from "@web-kits/audio/react";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
 import { useCallback, useEffect, useRef } from "react";
@@ -17,8 +16,8 @@ const DropdownMenu = ({
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Root> & {
   sounds?: boolean;
 }) => {
-  const playOpen = useSound(dropdownOpen);
-  const playClose = useSound(dropdownClose);
+  const playOpen = useFeedback({ soundDef: dropdownOpen });
+  const playClose = useFeedback({ soundDef: dropdownClose });
   const isControlled = props.open !== undefined;
   const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
 

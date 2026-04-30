@@ -1,10 +1,10 @@
 "use client";
 
-import { useSound } from "@web-kits/audio/react";
 import { Collapsible as CollapsiblePrimitive } from "radix-ui";
 import { useCallback, useEffect, useRef } from "react";
 
 import { collapse, expand } from "@/audio/core";
+import { useFeedback } from "@/hooks/use-feedback";
 
 const Collapsible = ({
   onOpenChange,
@@ -13,8 +13,8 @@ const Collapsible = ({
 }: React.ComponentProps<typeof CollapsiblePrimitive.Root> & {
   sounds?: boolean;
 }) => {
-  const playExpand = useSound(expand);
-  const playCollapse = useSound(collapse);
+  const playExpand = useFeedback({ soundDef: expand });
+  const playCollapse = useFeedback({ soundDef: collapse });
   const isControlled = props.open !== undefined;
   const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
 

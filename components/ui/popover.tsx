@@ -1,10 +1,10 @@
 "use client";
 
-import { useSound } from "@web-kits/audio/react";
 import { Popover as PopoverPrimitive } from "radix-ui";
 import { useCallback, useEffect, useRef } from "react";
 
 import { dropdownClose, dropdownOpen } from "@/audio/core";
+import { useFeedback } from "@/hooks/use-feedback";
 import { cn } from "@/lib/utils";
 
 const Popover = ({
@@ -14,8 +14,8 @@ const Popover = ({
 }: React.ComponentProps<typeof PopoverPrimitive.Root> & {
   sounds?: boolean;
 }) => {
-  const playOpen = useSound(dropdownOpen);
-  const playClose = useSound(dropdownClose);
+  const playOpen = useFeedback({ soundDef: dropdownOpen });
+  const playClose = useFeedback({ soundDef: dropdownClose });
   const isControlled = props.open !== undefined;
   const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
 

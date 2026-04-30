@@ -1,11 +1,11 @@
 "use client";
 
-import { useSound } from "@web-kits/audio/react";
 import { XIcon } from "lucide-react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { useCallback, useEffect, useRef } from "react";
 
 import { modalOpen, modalClose } from "@/audio/core";
+import { useFeedback } from "@/hooks/use-feedback";
 import { cn } from "@/lib/utils";
 
 const Dialog = ({
@@ -15,8 +15,8 @@ const Dialog = ({
 }: React.ComponentProps<typeof DialogPrimitive.Root> & {
   sounds?: boolean;
 }) => {
-  const playOpen = useSound(modalOpen);
-  const playClose = useSound(modalClose);
+  const playOpen = useFeedback({ soundDef: modalOpen });
+  const playClose = useFeedback({ soundDef: modalClose });
   const isControlled = props.open !== undefined;
   const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
 

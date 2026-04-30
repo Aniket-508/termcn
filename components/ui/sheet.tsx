@@ -1,11 +1,11 @@
 "use client";
 
-import { useSound } from "@web-kits/audio/react";
 import { XIcon } from "lucide-react";
 import { Dialog as SheetPrimitive } from "radix-ui";
 import { useCallback, useEffect, useRef } from "react";
 
 import { drawerOpen, drawerClose } from "@/audio/core";
+import { useFeedback } from "@/hooks/use-feedback";
 import { cn } from "@/lib/utils";
 
 const Sheet = ({
@@ -15,8 +15,8 @@ const Sheet = ({
 }: React.ComponentProps<typeof SheetPrimitive.Root> & {
   sounds?: boolean;
 }) => {
-  const playOpen = useSound(drawerOpen);
-  const playClose = useSound(drawerClose);
+  const playOpen = useFeedback({ soundDef: drawerOpen });
+  const playClose = useFeedback({ soundDef: drawerClose });
   const isControlled = props.open !== undefined;
   const lastOpen = useRef(props.open ?? props.defaultOpen ?? false);
 
