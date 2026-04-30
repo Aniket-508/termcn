@@ -25,6 +25,7 @@ export const SponsorLink = () => {
       size="sm"
       variant="ghost"
       sound="heart"
+      className="max-sm:size-8"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
