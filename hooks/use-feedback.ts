@@ -1,10 +1,13 @@
 "use client";
 
+import type { SoundDefinition } from "@web-kits/audio";
 import { defineSound } from "@web-kits/audio";
 import { useCallback } from "react";
 import { useWebHaptics } from "web-haptics/react";
 
 import * as audio from "@/audio/core";
+import { useHapticsEnabled } from "@/hooks/use-haptic-toggle";
+import { useSoundEnabled } from "@/hooks/use-sound-toggle";
 
 type PatchSoundKey = keyof typeof audio._patch.sounds;
 type KebabToCamel<K extends string> = K extends `${infer A}-${infer B}`
@@ -53,19 +56,32 @@ const hapticPresetByType: Partial<Record<FeedbackType, string>> = {
 
 export interface UseFeedbackOptions {
   sound?: FeedbackType;
+  soundDef?: SoundDefinition;
   haptic?: boolean;
 }
 
-export const useFeedback = ({ sound, haptic = true }: UseFeedbackOptions) => {
+export const useFeedback = ({
+  sound,
+  soundDef,
+  haptic = true,
+}: UseFeedbackOptions) => {
   const { trigger: hapticTrigger } = useWebHaptics();
+  const [soundEnabled] = useSoundEnabled();
+  const [hapticsEnabled] = useHapticsEnabled();
 
   return useCallback(() => {
-    if (!sound) {
+    if (!sound && !soundDef) {
       return;
     }
-    defineSound(audio._patch.sounds[patchKeyByFeedback[sound]])();
-    if (haptic) {
+    if (soundEnabled) {
+      if (sound) {
+        defineSound(audio._patch.sounds[patchKeyByFeedback[sound]])();
+      } else if (soundDef) {
+        defineSound(soundDef)();
+      }
+    }
+    if (sound && haptic && hapticsEnabled) {
       void hapticTrigger(hapticPresetByType[sound] ?? "light");
     }
-  }, [sound, haptic, hapticTrigger]);
+  }, [sound, soundDef, haptic, hapticTrigger, soundEnabled, hapticsEnabled]);
 };
