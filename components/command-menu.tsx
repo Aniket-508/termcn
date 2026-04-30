@@ -44,6 +44,8 @@ import {
 import { themePrimaryBySlug } from "@/lib/terminal-themes";
 import { cn } from "@/lib/utils";
 
+import { Kbd } from "./ui/kbd";
+
 type DocUrlKind =
   | { kind: "theme"; slug: string }
   | { kind: "component"; slug: string }
@@ -106,19 +108,6 @@ const DocPageLeadingIcon = ({ parsed }: { parsed: DocUrlKind }) => {
   }
   return <ArrowRightIcon />;
 };
-
-const CommandMenuKbd = ({
-  className,
-  ...props
-}: React.ComponentProps<"kbd">) => (
-  <kbd
-    className={cn(
-      "bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&_svg:not([class*='size-'])]:size-3",
-      className
-    )}
-    {...props}
-  />
-);
 
 const CommandMenuItem = ({
   children,
@@ -358,8 +347,8 @@ export const CommandMenu = ({
           <span className="hidden lg:inline-flex">Search documentation...</span>
           <span className="inline-flex lg:hidden">Search...</span>
           <div className="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
-            <CommandMenuKbd>{isMac ? "⌘" : "Ctrl"}</CommandMenuKbd>
-            <CommandMenuKbd className="aspect-square">K</CommandMenuKbd>
+            <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
+            <Kbd className="aspect-square">K</Kbd>
           </div>
         </Button>
       </DialogTrigger>
@@ -447,9 +436,9 @@ export const CommandMenu = ({
         </Command>
         <div className="text-muted-foreground absolute inset-x-0 bottom-0 z-20 flex h-10 items-center gap-2 overflow-hidden rounded-b-xl border-t border-t-neutral-100 bg-neutral-50 px-4 text-xs font-medium dark:border-t-neutral-700 dark:bg-neutral-800">
           <div className="flex items-center gap-2 shrink-0">
-            <CommandMenuKbd className="shrink-0">
+            <Kbd className="shrink-0">
               <CornerDownLeftIcon />
-            </CommandMenuKbd>{" "}
+            </Kbd>{" "}
             {showGoToPage ? (
               <span className="min-w-0 truncate">Go to Page</span>
             ) : null}
@@ -458,10 +447,8 @@ export const CommandMenu = ({
             <>
               <Separator orientation="vertical" className="h-4!" />
               <div className="flex min-w-0 items-center gap-1">
-                <CommandMenuKbd className="shrink-0">
-                  {isMac ? "⌘" : "Ctrl"}
-                </CommandMenuKbd>
-                <CommandMenuKbd className="shrink-0">C</CommandMenuKbd>
+                <Kbd className="shrink-0">{isMac ? "⌘" : "Ctrl"}</Kbd>
+                <Kbd className="shrink-0">C</Kbd>
                 <span className="min-w-0 truncate">{copyPayload}</span>
               </div>
             </>
