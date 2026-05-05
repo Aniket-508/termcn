@@ -4,6 +4,7 @@ import { isComponentsFolder } from "@/lib/docs";
 import type { PageTreeFolder, PageTreePage } from "@/lib/page-tree";
 import { getCategoryFolders, getFolderPages } from "@/lib/page-tree";
 import { source } from "@/lib/source";
+import { cn } from "@/lib/utils";
 import { PUBLIC_BASE_NAME } from "@/registry/bases";
 
 const getFolder = (name: string): PageTreeFolder | undefined => {
@@ -14,8 +15,19 @@ const getFolder = (name: string): PageTreeFolder | undefined => {
   }
 };
 
-const ComponentGrid = ({ pages }: { pages: PageTreePage[] }) => (
-  <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-x-8 lg:gap-x-16 lg:gap-y-6 xl:gap-x-20">
+const ComponentGrid = ({
+  className,
+  pages,
+}: {
+  className?: string;
+  pages: PageTreePage[];
+}) => (
+  <div
+    className={cn(
+      "grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-x-8 lg:gap-x-16 lg:gap-y-6 xl:gap-x-20",
+      className
+    )}
+  >
     {pages.map((component) => (
       <Link
         key={component.$id}
@@ -29,8 +41,14 @@ const ComponentGrid = ({ pages }: { pages: PageTreePage[] }) => (
   </div>
 );
 
-const CategoryGrid = ({ categories }: { categories: PageTreeFolder[] }) => (
-  <div className="flex flex-col gap-10">
+const CategoryGrid = ({
+  className,
+  categories,
+}: {
+  className?: string;
+  categories: PageTreeFolder[];
+}) => (
+  <div className={cn("flex flex-col gap-10", className)}>
     {categories.map((cat) => {
       const pages = getFolderPages(cat);
       if (pages.length === 0) {
@@ -53,10 +71,12 @@ export const ComponentsList = ({
   folderName = "Components",
   category,
   base = PUBLIC_BASE_NAME,
+  className,
 }: {
   folderName?: string;
   category?: string;
   base?: string;
+  className?: string;
 }) => {
   const folder = getFolder(folderName);
   if (!folder) {
@@ -66,13 +86,13 @@ export const ComponentsList = ({
   if (!isComponentsFolder(folder)) {
     const pages = getFolderPages(folder, base);
     if (pages.length > 0) {
-      return <ComponentGrid pages={pages} />;
+      return <ComponentGrid className={className} pages={pages} />;
     }
     const allPages = getFolderPages(folder);
     if (allPages.length === 0) {
       return null;
     }
-    return <ComponentGrid pages={allPages} />;
+    return <ComponentGrid className={className} pages={allPages} />;
   }
 
   const categories = getCategoryFolders(folder, base);
@@ -88,12 +108,14 @@ export const ComponentsList = ({
     if (!match) {
       return null;
     }
-    return <ComponentGrid pages={getFolderPages(match)} />;
+    return (
+      <ComponentGrid className={className} pages={getFolderPages(match)} />
+    );
   }
 
   if (categories.length === 0) {
     return null;
   }
 
-  return <CategoryGrid categories={categories} />;
+  return <CategoryGrid className={className} categories={categories} />;
 };
