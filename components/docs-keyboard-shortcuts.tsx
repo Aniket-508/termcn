@@ -37,11 +37,7 @@ export const DocsKeyboardShortcuts = ({
 
   useHotkeys(
     "ArrowRight",
-    (event) => {
-      if (event.defaultPrevented) {
-        return;
-      }
-
+    () => {
       navigate(next, "next", "ArrowRight");
     },
     { preventDefault: true }
@@ -49,11 +45,7 @@ export const DocsKeyboardShortcuts = ({
 
   useHotkeys(
     "ArrowLeft",
-    (event) => {
-      if (event.defaultPrevented) {
-        return;
-      }
-
+    () => {
       navigate(previous, "previous", "ArrowLeft");
     },
     { preventDefault: true }
