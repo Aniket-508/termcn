@@ -51,11 +51,21 @@ import { Markdown } from "@/components/ui/markdown";
 <Markdown>{`# Welcome\n\nThis is **bold** and *italic* text.`}</Markdown>
 ```
 
+## Examples
+
+### Streaming
+
+While tokens arrive, enable `streaming` to blink a cursor after the last line and auto-close an odd number of Markdown fenced code blocks so partial streams still render.
+
+<ComponentPreview base="ink" name="markdown-streaming-demo" />
+
 ## API Reference
 
 ### Markdown
 
-| Prop       | Type     | Default    |
-| ---------- | -------- | ---------- |
-| `children` | `string` | `required` |
-| `width`    | `number` | -          |
+| Prop        | Type      | Default    |
+| ----------- | --------- | ---------- |
+| `children`  | `string`  | `required` |
+| `width`     | `number`  | -          |
+| `streaming` | `boolean` | `false`    |
+| `cursor`    | `string`  | `"▌"`      |

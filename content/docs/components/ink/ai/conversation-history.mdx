@@ -1,0 +1,69 @@
+---
+title: "Conversation History"
+description: "Arrow-key scrollable stack for long chat threads"
+---
+
+<ComponentPreview base="ink" name="conversation-history-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/conversation-history
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="conversation-history"
+  title="components/ui/conversation-history.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ConversationHistory } from "@/components/ui/conversation-history";
+import { Text } from "ink";
+```
+
+```tsx
+<ConversationHistory maxHeight={12} isActive>
+  <Text>user: Hello</Text>
+  <Text>assistant: Hi — how can I help?</Text>
+</ConversationHistory>
+```
+
+When `isActive` is true, **↑** / **↓** move the window over `children`. The view starts scrolled to the bottom (`maxHeight` lines visible).
+
+## API Reference
+
+### ConversationHistory
+
+| Prop             | Type        | Default |
+| ---------------- | ----------- | ------- |
+| `maxHeight`      | `number`    | `20`    |
+| `children`       | `ReactNode` | -       |
+| `showScrollHint` | `boolean`   | `true`  |
+| `isActive`       | `boolean`   | `true`  |

@@ -1,0 +1,81 @@
+---
+title: "Error Retry"
+description: "Inline error callout with retry and dismiss shortcuts"
+---
+
+<ComponentPreview base="ink" name="error-retry-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/error-retry
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="ink"
+  name="error-retry"
+  title="components/ui/error-retry.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ErrorRetry } from "@/components/ui/error-retry";
+```
+
+```tsx
+<ErrorRetry
+  error={new Error("Network error")}
+  retryCount={0}
+  maxRetries={3}
+  onRetry={() => refetch()}
+  onDismiss={() => setError(null)}
+  isActive
+/>
+```
+
+## Shortcuts
+
+When `retryCount < maxRetries` and `isActive` is true:
+
+- **Enter** or **r** — calls `onRetry`
+- **Esc** — calls `onDismiss`
+
+After `retryCount >= maxRetries`, only **Esc** dismisses; retry shortcuts are disabled.
+
+## API Reference
+
+### ErrorRetry
+
+| Prop         | Type              | Default    |
+| ------------ | ----------------- | ---------- |
+| `error`      | `Error \| string` | `required` |
+| `onRetry`    | `() => void`      | -          |
+| `onDismiss`  | `() => void`      | -          |
+| `retryCount` | `number`          | `0`        |
+| `maxRetries` | `number`          | `3`        |
+| `isActive`   | `boolean`         | `true`     |
