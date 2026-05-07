@@ -448,6 +448,19 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       filePath: "examples/ink/confirm-demo.tsx",
       name: "confirm-demo",
     },
+    "conversation-history-demo": {
+      component: React.lazy(async () => {
+        const mod = await import("./ink/conversation-history-demo");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object"
+          ) || "conversation-history-demo";
+        return { default: mod.default || mod[exportName] };
+      }),
+      filePath: "examples/ink/conversation-history-demo.tsx",
+      name: "conversation-history-demo",
+    },
     "data-grid-demo": {
       component: React.lazy(async () => {
         const mod = await import("./ink/data-grid-demo");
@@ -616,6 +629,19 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       }),
       filePath: "examples/ink/error-boundary-demo.tsx",
       name: "error-boundary-demo",
+    },
+    "error-retry-demo": {
+      component: React.lazy(async () => {
+        const mod = await import("./ink/error-retry-demo");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object"
+          ) || "error-retry-demo";
+        return { default: mod.default || mod[exportName] };
+      }),
+      filePath: "examples/ink/error-retry-demo.tsx",
+      name: "error-retry-demo",
     },
     "file-change-demo": {
       component: React.lazy(async () => {
@@ -941,6 +967,19 @@ export const ExamplesIndex: Record<string, Record<string, any>> = {
       }),
       filePath: "examples/ink/markdown-demo.tsx",
       name: "markdown-demo",
+    },
+    "markdown-streaming-demo": {
+      component: React.lazy(async () => {
+        const mod = await import("./ink/markdown-streaming-demo");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object"
+          ) || "markdown-streaming-demo";
+        return { default: mod.default || mod[exportName] };
+      }),
+      filePath: "examples/ink/markdown-streaming-demo.tsx",
+      name: "markdown-streaming-demo",
     },
     "masked-input-demo": {
       component: React.lazy(async () => {
