@@ -1,0 +1,96 @@
+---
+title: "Info Box"
+description: "Bordered info panel with header, key-value rows, and tree-prefix rows"
+---
+
+<ComponentPreview base="opentui" name="info-box-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/info-box
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="info-box"
+  title="components/ui/info-box.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { InfoBox } from "@/components/ui/info-box";
+```
+
+```tsx
+<InfoBox borderStyle="round" width={40}>
+  <InfoBox.Header icon="📦" label="my-package" version="v2.4.1" />
+  <InfoBox.Row label="License" value="MIT" />
+  <InfoBox.Row label="Engine" value="node" valueDetail=">=18.0.0" />
+  <InfoBox.TreeRow label="Platform" value="darwin-arm64" />
+</InfoBox>
+```
+
+## API Reference
+
+### InfoBox
+
+| Prop          | Type                                        | Default    |
+| ------------- | ------------------------------------------- | ---------- |
+| `borderStyle` | `"single" \| "round" \| "double" \| "bold"` | `"single"` |
+| `borderColor` | `string`                                    | -          |
+| `padding`     | `[number, number]`                          | `[0, 1]`   |
+| `width`       | `number \| "full"`                          | -          |
+| `children`    | `ReactNode`                                 | `required` |
+
+### InfoBox.Header
+
+| Prop           | Type     | Default    |
+| -------------- | -------- | ---------- |
+| `icon`         | `string` | -          |
+| `iconColor`    | `string` | `"green"`  |
+| `label`        | `string` | `required` |
+| `description`  | `string` | -          |
+| `version`      | `string` | -          |
+| `versionColor` | `string` | `"cyan"`   |
+
+### InfoBox.Row
+
+| Prop          | Type      | Default    |
+| ------------- | --------- | ---------- |
+| `label`       | `string`  | `required` |
+| `value`       | `string`  | -          |
+| `valueDetail` | `string`  | -          |
+| `valueColor`  | `string`  | -          |
+| `bold`        | `boolean` | `false`    |
+| `tree`        | `boolean` | `false`    |
+| `color`       | `string`  | -          |
+
+### InfoBox.TreeRow
+
+Same props as `InfoBox.Row` except `tree` is always `true`.

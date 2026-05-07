@@ -1,0 +1,100 @@
+---
+title: "Help Screen"
+description: "Figlet banner + tagline + aligned Options/Commands help sections"
+---
+
+<ComponentPreview base="opentui" name="help-screen-demo" hideCode />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @termcn/help-screen
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  base="opentui"
+  name="help-screen"
+  title="components/ui/help-screen.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { HelpScreen } from "@/components/ui/help-screen";
+```
+
+```tsx
+<HelpScreen
+  title="mycli"
+  tagline="A blazing-fast task runner"
+  usage="mycli <command> [options]"
+>
+  <HelpScreen.Section label="Commands">
+    <HelpScreen.Row flag="init" description="Create a new project" />
+    <HelpScreen.Row flag="build" description="Compile the source files" />
+    <HelpScreen.Row flag="test" description="Run the test suite" />
+  </HelpScreen.Section>
+  <HelpScreen.Section label="Options">
+    <HelpScreen.Row flag="--help, -h" description="Show this help message" />
+    <HelpScreen.Row flag="--version, -v" description="Print version number" />
+    <HelpScreen.Row flag="--verbose" description="Enable verbose logging" />
+  </HelpScreen.Section>
+</HelpScreen>
+```
+
+## API Reference
+
+### HelpScreen
+
+| Prop          | Type                                       | Default    |
+| ------------- | ------------------------------------------ | ---------- |
+| `title`       | `string`                                   | `required` |
+| `font`        | `"block" \| "simple" \| "shade" \| "slim"` | `"block"`  |
+| `titleColor`  | `string`                                   | -          |
+| `tagline`     | `string`                                   | -          |
+| `usage`       | `string`                                   | -          |
+| `description` | `string`                                   | -          |
+| `columnGap`   | `number`                                   | `4`        |
+| `flagWidth`   | `number`                                   | -          |
+| `children`    | `ReactNode`                                | `required` |
+
+### HelpScreen.Section
+
+| Prop         | Type        | Default    |
+| ------------ | ----------- | ---------- |
+| `label`      | `string`    | `required` |
+| `labelColor` | `string`    | -          |
+| `children`   | `ReactNode` | `required` |
+
+### HelpScreen.Row
+
+| Prop               | Type     | Default    |
+| ------------------ | -------- | ---------- |
+| `flag`             | `string` | `required` |
+| `description`      | `string` | `required` |
+| `flagColor`        | `string` | -          |
+| `descriptionColor` | `string` | -          |
