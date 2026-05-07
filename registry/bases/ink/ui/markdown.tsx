@@ -1,10 +1,13 @@
 import { Box, Text } from "ink";
+import React, { useState, useEffect } from "react";
 
 import { useTheme } from "@/components/ui/theme-provider";
 
 export interface MarkdownProps {
   children: string;
   width?: number;
+  streaming?: boolean;
+  cursor?: string;
 }
 
 interface InlineSegment {
@@ -84,9 +87,33 @@ const InlineLine = ({ segments }: { segments: InlineSegment[] }) => {
   );
 };
 
-export const Markdown = ({ children, width }: MarkdownProps) => {
+const sanitizePartialFences = (text: string): string => {
+  const fenceCount = (text.match(/```/g) ?? []).length;
+  if (fenceCount % 2 !== 0) {
+    return `${text}\n\`\`\``;
+  }
+  return text;
+};
+
+export const Markdown = ({
+  children,
+  width,
+  streaming = false,
+  cursor = "▌",
+}: MarkdownProps) => {
   const theme = useTheme();
-  const lines = children.split("\n");
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  useEffect(() => {
+    if (!streaming) {
+      return;
+    }
+    const id = setInterval(() => setCursorVisible((v) => !v), 530);
+    return () => clearInterval(id);
+  }, [streaming]);
+
+  const safeChildren = streaming ? sanitizePartialFences(children) : children;
+  const lines = safeChildren.split("\n");
 
   const elements: React.ReactNode[] = [];
   let i = 0;
@@ -156,6 +183,16 @@ export const Markdown = ({ children, width }: MarkdownProps) => {
     }
 
     i += 1;
+  }
+
+  if (streaming && cursorVisible && elements.length > 0) {
+    const last = elements.at(-1);
+    elements[elements.length - 1] = (
+      <Box key={`cursor-wrapper-${elements.length - 1}`} flexDirection="row">
+        {last}
+        <Text color={theme.colors.primary}>{cursor}</Text>
+      </Box>
+    );
   }
 
   return <Box flexDirection="column">{elements}</Box>;
