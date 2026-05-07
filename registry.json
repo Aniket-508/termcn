@@ -367,6 +367,24 @@
       "type": "registry:ui"
     },
     {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Arrow-key scrollable stack for long assistant threads with optional hint",
+      "files": [
+        {
+          "path": "registry/ui/conversation-history.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "conversation-history",
+      "registryDependencies": [
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
+      ],
+      "title": "Conversation History",
+      "type": "registry:ui"
+    },
+    {
       "categories": ["data"],
       "dependencies": ["ink"],
       "description": "Advanced data grid with sorting, filtering, pagination, and cell editing",
@@ -548,6 +566,24 @@
       ],
       "name": "error-boundary",
       "title": "Error Boundary",
+      "type": "registry:ui"
+    },
+    {
+      "categories": ["ai"],
+      "dependencies": ["ink"],
+      "description": "Inline error panel with retry, dismiss, and max-retry guard",
+      "files": [
+        {
+          "path": "registry/ui/error-retry.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "error-retry",
+      "registryDependencies": [
+        "https://termcn.dev/r/theme-provider.json",
+        "https://termcn.dev/r/use-input.json"
+      ],
+      "title": "Error Retry",
       "type": "registry:ui"
     },
     {
